@@ -9,7 +9,7 @@
         <groupId>com.percussion</groupId>
         <version>5.4.0-SNAPSHOT</version>
         <artifactId>tycho-root</artifactId>
-        <relativePath>../../modules/perc-eclipse/tycho-root/pom.xml</relativePath>
+        <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -17,7 +17,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>Windows-1252</project.build.sourceEncoding>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
-
     </properties>
 
 
