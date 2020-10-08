@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.percussion.workbench.ui.feature"
+      label="%featureName"
+      version="5.4.0.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+           id="de.byteaction.velocity.vaulttec.ui"
+           download-size="0"
+           install-size="0"
+           version="0.0.0"
+           unpack="false"/>
+
+
+
+   <plugin
+           id="com.percussion.client"
+           download-size="0"
+           install-size="0"
+           version="0.0.0"
+           unpack="false"/>
+   <plugin
+           id="com.percussion.workbench.ui"
+           download-size="0"
+           install-size="0"
+           version="0.0.0"
+           unpack="true"/>
+
+
+</feature>
