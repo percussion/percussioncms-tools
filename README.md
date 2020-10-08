@@ -3,9 +3,9 @@
 This project contains the various desktop tools that can be used for working with Percussion CM1 5.4 and Rhythmyx 7.3.2.
 
 ## Maven Toolchain Configuration 
-These projects have been updated to compile at the java 1.8 target.  Currently they cannot be run without an Oracle 1.8 JDK as OpenJDK 1.8 does not include JavaFX wich many of the projects depend on.  
+These projects have been updated to compile at the java 1.8 target.  Currently, they cannot be run without an Oracle 1.8 JDK as OpenJDK 1.8 does not include JavaFX which many of the projects depend on.  
 
-You will need to add an Oracle 1.8 to your ~/.m2/toolchains.xml file. For example:
+You will need to add an Oracle 1.8 to your ~/.m2/toolchains.xml file (C:\Users\<username>\.m2\toolchains.xml on Windows). For example:
 
 ```xml
 <toolchain>
