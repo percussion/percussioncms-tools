@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.percussion</groupId>
+    <artifactId>desktop</artifactId>
+    <version>5.4.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>CMLite-Main-PackagerUI</artifactId>
+   <packaging>jar</packaging>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <fork>true</fork>
+                        <meminitial>1024m</meminitial>
+                        <maxmem>2024m</maxmem>
+                    </configuration>
+                </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+  <dependency>
+      <groupId>com.percussion</groupId>
+      <artifactId>perc-server-ui-content</artifactId>
+      <version>5.4.0-SNAPSHOT</version>
+  </dependency>
+      <dependency>
+          <groupId>com.percussion</groupId>
+          <artifactId>perc-server-ui-cmp</artifactId>
+          <version>5.4.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>com.percussion</groupId>
+          <artifactId> perc-help</artifactId>
+          <version>5.4.0-SNAPSHOT</version>
+      </dependency>
+  <dependency>
+        <groupId>com.percussion</groupId>
+        <artifactId>CMLite-Main</artifactId>
+        <version>5.4.0-SNAPSHOT</version>
+    </dependency>
+      <dependency>
+        <groupId>com.percussion</groupId>
+        <artifactId>rxutils</artifactId>
+        <version>5.4.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>com.percussion</groupId>
+        <artifactId>CMLite-Main-Deployer</artifactId>
+        <version>5.4.0-SNAPSHOT</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.miglayout/miglayout -->
+<dependency>
+    <groupId>com.miglayout</groupId>
+    <artifactId>miglayout</artifactId>
+    <version>3.6.3</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.java.net.substance/substance -->
+<dependency>
+    <groupId>org.java.net.substance</groupId>
+    <artifactId>substance</artifactId>
+    <version>5.3</version>
+</dependency>
+
+    <dependency>
+        <groupId>org.eclipse</groupId>
+        <artifactId>org.eclipse.help.base</artifactId>
+        <version>3.3.1.v20070813_33x</version>
+    </dependency>
+  <!-- https://mvnrepository.com/artifact/org.eclipse.core/org.eclipse.core.runtime -->
+
+  </dependencies>
+</project>
