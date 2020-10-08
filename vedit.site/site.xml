@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+
+   <description url="">
+      Velocity Plugin for Eclipse
+   </description>
+   <feature url="features/de.byteaction.velocity_1.0.18.jar" id="de.byteaction.velocity" version="1.0.18"/>
+</site>
