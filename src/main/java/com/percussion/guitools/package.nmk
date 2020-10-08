@@ -1,0 +1,103 @@
+ ############################################################################
+ #
+ # $Id: package.nmk 1.2 2002/12/18 16:32:34Z SyamalaKommuru Exp $
+ #
+ # Version Labels	: $Name: $
+ #
+ ############################################################################
+ 
+PACKAGE=com.percussion.guitools
+
+#
+# These are our (internal) tests
+#
+TEST_CLASSES =
+
+# Strip export-restricted classes from the jar
+#
+.IF $(JAR_EXPORT)
+   EXCLUDED_CLASSES = \
+      $(EXCLUDED_CLASSES)
+.END
+
+#
+# Strip testing and non-essential classes from the jar
+#
+.IF $(JAR_PRODUCTION)
+   EXCLUDED_CLASSES = \
+      $(EXCLUDED_CLASSES) \
+      $(TEST_CLASSES)
+.END
+
+#
+# These will go in the default (unshared) jar file for this package.
+#
+DEFAULT_CLASSES = \
+   BitmapManager \
+   ErrorDialogs \
+   IPSCreateModelItem \
+   IPSPagingControlListener \
+   IPSPropertyPanel \
+   IPSTableModel \
+   IPSValueChangedListener \
+   PropertyTablePanel \
+   PSAboutDialog \
+   PSCalendarButton \
+   PSCalendarDialog \
+   PSCalendarField \
+   PSDialog \
+   PSEditTableModel \
+   PSEditTablePanel \
+   PSLabel \
+   PSListBox \
+   PSListPanel \
+   PSMouseAdapter \
+   PSPagingControl \
+   PSPagingControlEvent \
+   PSPropertyPanel \
+   PSResources \
+   PSSourceTargetListPanel \
+   PSJTable \
+   PSJTableWithTooltips \
+   PSStackedPropertyPanel \
+   PSTableMap \
+   PSTableModel \
+   PSTableSorter \
+   PSValueChangedEvent \
+   ResourceBundleHelper \
+   ResourceHelper \
+   StatusBar \
+   UTBrowserControl \
+   UTPropertiesTablePanel \
+   UTStandardCommandPanel \
+   PSAccessibleActionListener \
+   PSAccessibleListSelectionListener \
+   PSNameLabel \
+   PSPathLabel
+
+#
+# These will go in the shared jar file.
+#
+SHARED_CLASSES =
+
+#
+# Properties files
+#
+PROPERTIES = \
+   GuitoolsResources.properties \
+   PSEditTablePanelResources.properties
+
+#
+# Image files
+#
+IMAGES =
+
+#
+# Resource files (properties and image files combined)
+#
+RESOURCES = \
+   $(PROPERTIES) \
+   $(IMAGES)
+
+ALL_CLASSES =  $(SHARED_CLASSES) $(DEFAULT_CLASSES) $(TEST_CLASSES)
+ALL_FILES = $(ALL_CLASSES) $(RESOURCES)
