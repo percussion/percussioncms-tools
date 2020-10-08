@@ -1,0 +1,36 @@
+[submodule "Help"]
+	path = Help
+	url = https://github.com/percussion/Help.git
+[submodule "ServerUIComponents"]
+	path = ServerUIComponents
+	url = https://github.com/percussion/ServerUIComponents.git
+[submodule "ContentUI"]
+	path = ContentUI
+	url = https://github.com/percussion/ContentUI.git
+[submodule "PackagerUI"]
+	path = PackagerUI
+	url = https://github.com/percussion/PackagerUI.git
+[submodule "perc-eclipse"]
+	path = perc-eclipse
+	url = https://github.com/percussion/perc-eclipse.git
+[submodule "vedit"]
+	path = vedit
+	url = https://github.com/percussion/vedit.git
+[submodule "designer"]
+	path = designer
+	url = https://github.com/percussion/designer.git
+[submodule "perc-devtools-distribution"]
+	path = perc-devtools-distribution
+	url = https://github.com/percussion/perc-devtools-distribution.git
+[submodule "ContentExplorer"]
+	path = ContentExplorer
+	url = https://github.com/percussion/ContentExplorer.git
+[submodule "ServerPropertiesEditor"]
+	path = ServerPropertiesEditor
+	url = https://github.com/percussion/ServerPropertiesEditor.git
+[submodule "loader"]
+	path = loader
+	url = https://github.com/percussion/loader.git
+[submodule "CodeGenerator"]
+	path = CodeGenerator
+	url = https://github.com/percussion/CodeGenerator.git
