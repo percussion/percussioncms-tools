@@ -26,6 +26,9 @@ From the main IntelliJ menu pick import from source control and provide https://
 The tools are in the repository as separate sub modules.  The following commands should run before you start to work on code changes.
 
 ```shell script
+git checkout development
+git fetch
+git pull
 git submodule foreach --recursive git fetch
 git submodule foreach --recursive git checkout development
 git submodule foreach --recursive git pull
