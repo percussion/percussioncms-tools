@@ -1,0 +1,818 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+  <!-- <parent>
+    <groupId>com.percussion</groupId>
+    <artifactId>core</artifactId>
+    <version>5.4.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  -->
+    <groupId>com.percussion</groupId>
+  <artifactId>loader</artifactId>
+   <packaging>jar</packaging>
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>src</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+          
+        </resources>
+        <testResources>
+       
+        </testResources>
+        <plugins>
+            
+           
+      
+          
+            
+                <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        </plugin>
+        
+   
+            
+                <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.7.2</version>
+           <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+        </plugin>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      
+    
+    
+        </plugins>
+        <pluginManagement>
+            <plugins>
+               
+
+                <!--This plugin's configuration is used to store Eclipse 
+                    m2e settings only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                   
+                                <pluginExecution>
+                                <pluginExecutionFilter>
+                                    <groupId>org.codehaus.mojo</groupId>
+                                    <artifactId>
+                                        axistools-maven-plugin
+                                    </artifactId>
+                                    <versionRange>[1.4,)</versionRange>
+                                    <goals>
+                                        <goal>wsdl2java</goal>
+                                    </goals>
+                                </pluginExecutionFilter>
+                                <action>
+                                    <ignore></ignore>
+                                </action>
+                            </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+    <dependencies>
+    
+
+
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>rxutils</artifactId>
+            <version>5.4.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+       <dependency>
+        <groupId>com.percussion</groupId>
+        <artifactId>rxutils</artifactId>
+        <version>5.4.0-SNAPSHOT</version>
+        <classifier>tests</classifier>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>CMLite-Main</artifactId>
+            <version>5.4.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>CMLite-Main</artifactId>
+            <version>5.4.0-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+       
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+
+        </dependency>
+       <dependency>
+        <groupId>aopalliance</groupId>
+        <artifactId>aopalliance</artifactId>
+        <version>1.0</version>
+        <scope>compile</scope>
+       </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+       
+       
+        
+       
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+ 
+        </dependency>
+       
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+ 
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+
+        </dependency>
+        <!-- CXF - cxf-rt-core cxf-rt-frontend-simple cxf-rt-frontend-jaxws 
+            cxf-rt-databinding-aegis cxf-rt-transports-local cxf-rt-transports-http cxf-rt-transports-http-jetty 
+            cxf-rt-transports-jms cxf-rt-management cxf-common-utilities -->
+
+
+       
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
+
+     
+     <dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-annotations</artifactId>
+</dependency>
+-->
+   <dependency>
+    <groupId>org.hibernate.javax.persistence</groupId>
+    <artifactId>hibernate-jpa-2.1-api</artifactId>
+</dependency>
+        
+        
+       
+       
+        <!-- Commons -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+  
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+     
+        </dependency>
+        <!-- commons jexl patched 1.1.1 -->
+        <!-- https://mvnrepository.com/artifact/commons-jexl/commons-jexl -->
+        <!-- <dependency> <groupId>commons-jexl</groupId> <artifactId>commons-jexl</artifactId> 
+            <version>1.1</version> </dependency> -->
+        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <!-- logging -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+
+ 
+ 
+        <!-- https://mvnrepository.com/artifact/org.apache.geronimo.specs/geronimo-jms_1.1_spec -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
+
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+         
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.jackrabbit/jackrabbit-jcr-commons -->
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>jackrabbit-jcr-commons</artifactId>
+   
+        </dependency>
+
+      
+
+        <!-- https://mvnrepository.com/artifact/net.sf.jtidy/jtidy -->
+        <dependency>
+            <groupId>net.sf.jtidy</groupId>
+            <artifactId>jtidy</artifactId>
+   
+        </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+   
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/velocity-tools/velocity-tools-view -->
+        <dependency>
+          <groupId>velocity-tools</groupId>
+          <artifactId>velocity-tools</artifactId>
+     
+        </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+     
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/javax.jcr/jcr -->
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
+        
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.codehaus.jettison/jettison -->
+        <dependency>
+            <groupId>org.codehaus.jettison</groupId>
+            <artifactId>jettison</artifactId>
+    
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+       
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+       
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.myfaces.core/myfaces-api -->
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-api</artifactId>
+     
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-impl</artifactId>
+
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/net.sf.saxon/saxon -->
+        <!-- <dependency> package now net.sf.saxon have to be aware of license 
+            changes also. <groupId>net.sf.saxon</groupId> <artifactId>saxon</artifactId> 
+            <version>7.9.1</version> </dependency> -->
+        <!-- https://mvnrepository.com/artifact/com.icl.saxon/saxon -->
+        <!-- https://mvnrepository.com/artifact/saxon/saxon -->
+        <dependency>
+            <groupId>saxon</groupId>
+            <artifactId>saxon</artifactId>
+       
+        </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/org.openrdf.sesame/sesame-model 
+            2.4.0 not in maven dependent on old version of any23 -->
+
+        <!-- <dependency> <groupId>org.openrdf.sesame</groupId> <artifactId>sesame-model</artifactId> 
+            <version>2.6.10</version> </dependency> -->
+        <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+        
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.woodstox</groupId>
+            <artifactId>woodstox-core-asl</artifactId>
+  
+        </dependency>
+
+        <!-- rxutils aspectjrt cactus.core.framework.uberjar.javaEE.14-1.8.1.jar 
+            commons-codec-1.10.jar commons-collections-3.2.2.jar commons-io-2.0.1.jar 
+            commons-jexl-1.1.1-patched.jar commons-lang-2.4.jar commons-logging-1.1.1.jar 
+            geronimo-jms_1.1_spec-1.1.1.jar guava-r07.jar hibernate3.jar jackrabbit-jcr-commons-1.4.jar 
+            jasypt-1.8.jar jcr-1.0.jar jdbc2_0-stdext.jar jh.jar joda-time-2.5.jar jtidy-r938.jar 
+            junit-4.11.jar spring-beans-3.2.17.RELEASE.jar spring-context-3.2.17.RELEASE.jar 
+            spring-core-3.2.17.RELEASE.jar spring-test-3.2.17.RELEASE.jar spring-web-3.2.17.RELEASE.jar 
+            spring-webmvc-3.2.17.RELEASE.jar velocity-1.6.2.jar xercesImpl-2.11.0.jar 
+            xml-apis-1.4.01.jar -->
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.any23/apache-any23-core -->
+        <!-- 0.8.0 first version in maven 0.7.0-incubating exists -->
+        <!-- <dependency> <groupId>org.apache.any23</groupId> <artifactId>apache-any23-core</artifactId> 
+            <version>0.8.0</version> </dependency> -->
+        <!-- https://mvnrepository.com/artifact/org.apache.any23/apache-any23-core -->
+        <dependency>
+            <groupId>org.apache.any23</groupId>
+            <artifactId>apache-any23-core</artifactId>
+        </dependency>
+         <dependency>
+            <groupId>org.apache.any23</groupId>
+            <artifactId>apache-any23-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+        </dependency>
+     <!--    <dependency>
+              <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-model</artifactId>
+           
+        </dependency>-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        
+        </dependency>
+        
+                  <dependency>
+    <groupId>antlr</groupId>
+    <artifactId>antlr</artifactId>
+
+</dependency>
+
+        <!-- <dependency> <groupId>org.apache.any23</groupId> <artifactId>apache-any23-core</artifactId> 
+            <version>0.8.0</version> </dependency> -->
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
+        <!-- <dependency> to big fails and old version, include specific 
+            api <groupId>com.amazonaws</groupId> <artifactId>aws-java-sdk</artifactId> 
+            <version>1.11.12</version> </dependency> -->
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+        
+        </dependency>
+         <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-core</artifactId>
+         
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+          
+        </dependency>
+
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+    
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+           
+        </dependency>
+         <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+        </dependency>
+        
+        
+        <!-- https://mvnrepository.com/artifact/org.apache.myfaces.trinidad/trinidad-api -->
+        <dependency>
+            <groupId>org.apache.myfaces.trinidad</groupId>
+            <artifactId>trinidad-api</artifactId>
+       
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+      
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+           
+        </dependency>
+     
+        
+        <dependency>
+            <groupId>nl.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+        
+        </dependency>
+      
+        <!-- https://mvnrepository.com/artifact/oro/oro -->
+        <dependency>
+            <groupId>oro</groupId>
+            <artifactId>oro</artifactId>
+    
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/net.htmlparser.jericho/jericho-html 
+            unknown current + 1.2 old -->
+        <dependency>
+            <groupId>net.htmlparser.jericho</groupId>
+            <artifactId>jericho-html</artifactId>
+         
+        </dependency>
+
+        <dependency> <!-- our version 1.2 - this is old au\id\jericho\ namespace 2.6.1 last version 
+                before package change. 2.3.x-2.6.x in net.htmlparser.jericho » jericho-html 
+                maven package 2.3 last in this maven group -->
+            <groupId>net.htmlparser</groupId>
+            <artifactId>jericho-html</artifactId>
+       
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.mozilla/rhino unknown 
+            version -->
+            <!-- 
+        <dependency>
+            <groupId>org.mozilla</groupId>
+            <artifactId>rhino</artifactId>
+            <version>1.7.7.2</version>
+        </dependency>
+ -->
+        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers</artifactId>
+         
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+   
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-snowball</artifactId>
+    
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-wordnet</artifactId>
+     
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+     
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+     
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-betwixt/commons-betwixt -->
+        <dependency>
+            <groupId>commons-betwixt</groupId>
+            <artifactId>commons-betwixt</artifactId>
+        
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
+        <dependency><!-- current now org.ehcache group last in this group 
+                2.10.4 -->
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+     
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+       
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
+        <dependency><!-- current is 1.3 -->
+            <groupId>axis</groupId>
+            <artifactId>axis</artifactId>
+     
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api for 
+            axis 1.1 -->
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxrpc-api</artifactId>
+     
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.sanselan/sanselan -->
+        <dependency><!-- changing to commons-imaging in v1. -->
+            <groupId>org.apache.sanselan</groupId>
+            <artifactId>sanselan</artifactId>
+ 
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
+
+        <!-- https://mvnrepository.com/artifact/soap/soap -->
+        <dependency>
+            <groupId>soap</groupId>
+            <artifactId>soap</artifactId>
+      
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+        <!-- https://mvnrepository.com/artifact/org.apache.ant/ant-apache-oro -->
+
+
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+  
+        </dependency>
+
+       
+
+
+
+        <!-- https://mvnrepository.com/artifact/org.htmlparser/htmlparser -->
+        <dependency>
+            <groupId>org.htmlparser</groupId>
+            <artifactId>htmlparser</artifactId>
+       
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.help/javahelp -->
+        <dependency>
+            <groupId>javax.help</groupId>
+            <artifactId>javahelp</artifactId>
+       
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-jexl -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-jexl3</artifactId>
+        
+        </dependency>
+ 
+        
+                    <dependency>
+          <groupId>org.apache.derby</groupId>
+          <artifactId>derby</artifactId>
+       
+        </dependency>
+   
+     <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+   
+    </dependency>
+
+<!-- Tools/ant build -->
+<!-- contains perforce tasks -->
+<dependency>
+  <groupId>org.apache.ant</groupId>
+  <artifactId>ant</artifactId>
+
+</dependency>
+<!-- https://mvnrepository.com/artifact/ant/ant-apache-oro  old for perfoce tasks-->
+<dependency>
+    <groupId>ant</groupId>
+    <artifactId>ant-apache-oro</artifactId>
+   
+</dependency>
+
+<dependency>
+  <groupId>org.apache.ant</groupId>
+  <artifactId>ant-launcher</artifactId>
+
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/ant-contrib/ant-contrib -->
+<!-- legacy ant-contrib  old version 0.6 -->
+<!--
+<dependency>
+    <groupId>ant-contrib</groupId>
+    <artifactId>ant-contrib</artifactId>
+    <version>1.0b3</version>
+</dependency>
+  -->
+
+
+<dependency>
+  <groupId>perforce</groupId>
+  <artifactId>p4</artifactId>
+
+</dependency>
+
+<dependency>
+  <groupId>installanywhere</groupId>
+  <artifactId>services</artifactId>
+
+</dependency>
+<dependency>
+  <groupId>installanywhere</groupId>
+  <artifactId>IAClasses</artifactId>
+
+</dependency>
+<dependency>
+  <groupId>expectj</groupId>
+  <artifactId>expectj</artifactId>
+
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/jmock/jmock -->
+<dependency>
+    <groupId>jmock</groupId>
+    <artifactId>jmock</artifactId>
+
+    <scope>compile</scope>
+</dependency>
+ 
+
+    <!-- https://mvnrepository.com/artifact/javax.ws.rs/jsr311-api -->
+     <dependency>
+    <groupId>javax.ws.rs</groupId>
+    <artifactId>jsr311-api</artifactId>
+    <version>1.0</version>
+</dependency>
+
+
+  
+
+
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-1.2-api -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-1.2-api</artifactId>
+
+</dependency>
+
+<!-- Extra dependencies for Ant build remove when converted -->
+<!-- https://mvnrepository.com/artifact/com.yahoo.platform.yui/yuicompressor -->
+<dependency>
+    <groupId>com.yahoo.platform.yui</groupId>
+    <artifactId>yuicompressor</artifactId>
+
+</dependency>
+
+<!-- Not in code -->
+
+
+
+ 
+<!-- https://mvnrepository.com/artifact/org.apache.cactus/cactus.core.framework.uberjar.javaEE.15 -->
+<dependency>
+    <groupId>cactus</groupId>
+    <artifactId>cactus</artifactId>
+</dependency>
+
+ <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+ </dependency>
+
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+          
+            </dependency>
+               <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib-ext-spring</artifactId>
+            </dependency>
+
+
+ <dependency>
+                <groupId>evil.deeds</groupId>
+                <artifactId>websphinx</artifactId>
+             
+            </dependency>
+            
+    </dependencies>
+
+</project>
