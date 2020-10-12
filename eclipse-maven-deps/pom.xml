@@ -14,6 +14,11 @@
     <!-- JDOM has classes in root package,  eclipse osgi does not like this -->
     <dependencies>
         <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-server-ui-cmp</artifactId>
             <version>${project.parent.version}</version>
