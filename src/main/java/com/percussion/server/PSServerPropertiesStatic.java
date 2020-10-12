@@ -97,7 +97,7 @@ public class PSServerPropertiesStatic
          ms_recProperties.add(CASE_SENSITIVE_URL);
          ms_recProperties.add(RESPONSE_CLOSE_DELAY);
          ms_recProperties.add(PSServer.PROP_ALLOW_XSL_ENCODING_MODS);
-         ms_recProperties.add(BROKEN_MANAGED_LINK_BEHAVIOR);
+         ms_recProperties.add(PSServer.BROKEN_MANAGED_LINK_BEHAVIOR);
       }
 /**
  * gets the app param, if it is null assunme the current directory.

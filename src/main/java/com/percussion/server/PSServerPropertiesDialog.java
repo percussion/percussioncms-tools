@@ -54,7 +54,7 @@ import java.util.Set;
 import static com.percussion.utils.container.PSAbstractConnector.SCHEME_HTTPS;
 
 /**
- * The dialog to edit the Rhythmyx Server Properties.
+ * The dialog to edit the PercussionCMS Server Properties.
  */
 @SuppressWarnings(value =
 {"unchecked"})
