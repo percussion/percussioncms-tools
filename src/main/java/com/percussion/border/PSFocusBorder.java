@@ -8,8 +8,7 @@
 package com.percussion.border;
 
 import com.percussion.cx.PSDisplayOptions;
-import javafx.embed.swing.JFXPanel;
-
+import javafx.embed.swing.*;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
