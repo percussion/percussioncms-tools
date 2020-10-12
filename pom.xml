@@ -10,8 +10,8 @@
         <module>Help</module>
         <module>ServerUIComponents</module>
         <module>ContentUI</module>
-        <module>PackagerUI</module>
         <module>perc-eclipse</module>
+        <module>PackagerUI</module>
         <module>ContentExplorer</module>
         <module>perc-devtools-distribution</module>
     </modules>
