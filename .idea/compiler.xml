@@ -15,6 +15,7 @@
         <module name="com.percussion.workbench.ui" />
         <module name="CMLite-Main-PackagerUI" />
         <module name="perc-server-ui-content" />
+        <module name="perc-server-properties-editor" />
         <module name="perc-devtools-distribution" />
         <module name="helios-repository-def" />
         <module name="com.percussion.workbench.ui.feature" />
@@ -35,6 +36,7 @@
       <module name="perc-eclipse" target="1.8" />
       <module name="perc-eclipse-repository" target="1.8" />
       <module name="perc-help" target="1.8" />
+      <module name="perc-server-properties-editor" target="8" />
       <module name="perc-server-ui-cmp" target="1.8" />
       <module name="perc-server-ui-content" target="8" />
       <module name="tycho-root" target="1.8" />

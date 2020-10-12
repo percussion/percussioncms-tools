@@ -15,6 +15,7 @@
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/perc-eclipse.iml" filepath="$PROJECT_DIR$/perc-eclipse/perc-eclipse.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/perc-eclipse-repository/perc-eclipse-repository.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/perc-eclipse-repository/perc-eclipse-repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/Help/perc-help.iml" filepath="$PROJECT_DIR$/Help/perc-help.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServerPropertiesEditor/perc-server-properties-editor.iml" filepath="$PROJECT_DIR$/ServerPropertiesEditor/perc-server-properties-editor.iml" />
       <module fileurl="file://$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp.iml" filepath="$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp.iml" />
       <module fileurl="file://$PROJECT_DIR$/ContentUI/perc-server-ui-content.iml" filepath="$PROJECT_DIR$/ContentUI/perc-server-ui-content.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/tycho-root.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/tycho-root.iml" />
