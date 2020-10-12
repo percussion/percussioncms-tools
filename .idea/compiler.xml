@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="perc-help" />
+        <module name="perc-eclipse-repository" />
+        <module name="com.percussion.client" />
+        <module name="ContentExplorer" />
+        <module name="de.byteaction.velocity.vaulttec.ui" />
+        <module name="eclipse-maven-deps" />
+        <module name="com.percussion.workbench.ui" />
+        <module name="CMLite-Main-PackagerUI" />
+        <module name="perc-server-ui-content" />
+        <module name="perc-devtools-distribution" />
+        <module name="helios-repository-def" />
+        <module name="com.percussion.workbench.ui.feature" />
+        <module name="perc-server-ui-cmp" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CMLite-Main-PackagerUI" target="1.8" />
+      <module name="com.percussion.client" target="1.8" />
+      <module name="com.percussion.workbench.ui" target="1.8" />
+      <module name="com.percussion.workbench.ui.feature" target="1.8" />
+      <module name="ContentExplorer" target="8" />
+      <module name="de.byteaction.velocity.vaulttec.ui" target="1.8" />
+      <module name="desktop" target="1.8" />
+      <module name="eclipse-maven-deps" target="1.8" />
+      <module name="helios-repository-def" target="1.8" />
+      <module name="perc-devtools-distribution" target="1.8" />
+      <module name="perc-eclipse" target="1.8" />
+      <module name="perc-eclipse-repository" target="1.8" />
+      <module name="perc-help" target="1.8" />
+      <module name="perc-server-ui-cmp" target="1.8" />
+      <module name="perc-server-ui-content" target="8" />
+      <module name="tycho-root" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
