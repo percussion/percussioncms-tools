@@ -99,6 +99,10 @@
             <artifactId>rxutils</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.help</groupId>
+            <artifactId>javahelp</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
