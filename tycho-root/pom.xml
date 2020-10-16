@@ -60,6 +60,17 @@
                             <artifactId>log4j</artifactId>
                             <version>1.2.17</version>
                         </dependency>
+                        <dependency>
+                            <groupId>com.percussion</groupId>
+                            <artifactId>tablefactory</artifactId>
+                            <version>${project.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.percussion</groupId>
+                            <artifactId>eclipse-maven-deps</artifactId>
+                            <version>${project.version}</version>
+                        </dependency>
+
                     </extraClasspathElements>
                 </configuration>
             </plugin>
