@@ -13,6 +13,7 @@
         <module>perc-eclipse</module>
         <module>PackagerUI</module>
         <module>ContentExplorer</module>
+        <module>ServerPropertiesEditor</module>
         <module>perc-devtools-distribution</module>
     </modules>
 
@@ -116,6 +117,7 @@
         <tinymce.version>4.9.10</tinymce.version>
         <jfx.version>11.0.2</jfx.version>
         <twelvemonkeys.version>3.6</twelvemonkeys.version>
+        <javax.help.version>2.0.0.5</javax.help.version>
         <eclipse-manifest-location>META-INF</eclipse-manifest-location>
     </properties>
     <profiles>
@@ -2340,15 +2342,15 @@
                 <version>1.5.0</version>
             </dependency>
             <dependency>
-                <groupId>com.rometools</groupId>
-                <artifactId>rome</artifactId>
-                <version>1.5.0</version>
-            </dependency>
-            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.8</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.help</groupId>
+                <artifactId>javahelp</artifactId>
+                <version>${javax.help.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
