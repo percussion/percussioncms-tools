@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="perc-help" />
         <module name="perc-eclipse-repository" />
+        <module name="mars-repository-def" />
         <module name="com.percussion.client" />
         <module name="ContentExplorer" />
         <module name="de.byteaction.velocity.vaulttec.ui" />
@@ -32,6 +33,7 @@
       <module name="desktop" target="1.8" />
       <module name="eclipse-maven-deps" target="1.8" />
       <module name="helios-repository-def" target="1.8" />
+      <module name="mars-repository-def" target="1.8" />
       <module name="perc-devtools-distribution" target="1.8" />
       <module name="perc-eclipse" target="1.8" />
       <module name="perc-eclipse-repository" target="1.8" />
