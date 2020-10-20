@@ -24,8 +24,6 @@
            version="0.0.0"
            unpack="false"/>
 
-
-
    <plugin
            id="com.percussion.client"
            download-size="0"
