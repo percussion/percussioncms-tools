@@ -31,6 +31,3 @@
 [submodule "loader"]
 	path = loader
 	url = https://github.com/percussion/loader.git
-[submodule "CodeGenerator"]
-	path = CodeGenerator
-	url = https://github.com/percussion/CodeGenerator.git
