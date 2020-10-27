@@ -17,6 +17,7 @@
         <module name="CMLite-Main-PackagerUI" />
         <module name="perc-server-ui-content" />
         <module name="perc-server-properties-editor" />
+        <module name="neon-repository-def" />
         <module name="perc-devtools-distribution" />
         <module name="helios-repository-def" />
         <module name="com.percussion.workbench.ui.feature" />
@@ -34,6 +35,7 @@
       <module name="eclipse-maven-deps" target="1.8" />
       <module name="helios-repository-def" target="1.8" />
       <module name="mars-repository-def" target="1.8" />
+      <module name="neon-repository-def" target="1.8" />
       <module name="perc-devtools-distribution" target="1.8" />
       <module name="perc-eclipse" target="1.8" />
       <module name="perc-eclipse-repository" target="1.8" />
