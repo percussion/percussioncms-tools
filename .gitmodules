@@ -1,9 +1,6 @@
 [submodule "ServerUIComponents"]
 	path = ServerUIComponents
 	url = https://github.com/percussion/ServerUIComponents.git
-[submodule "PackagerUI"]
-	path = PackagerUI
-	url = https://github.com/percussion/PackagerUI.git
 [submodule "perc-eclipse"]
 	path = perc-eclipse
 	url = https://github.com/percussion/perc-eclipse.git
