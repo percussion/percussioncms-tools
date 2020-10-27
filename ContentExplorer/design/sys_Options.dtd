@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT PSXOption ANY>
+<!ATTLIST PSXOption
+   context CDATA #REQUIRED
+   name CDATA #REQUIRED
+>
+<!ELEMENT PSXOptions (PSXOption+)>
+<!ATTLIST PSXOptions
+   category CDATA #REQUIRED
+>
