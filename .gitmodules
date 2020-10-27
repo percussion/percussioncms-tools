@@ -7,6 +7,3 @@
 [submodule "perc-devtools-distribution"]
 	path = perc-devtools-distribution
 	url = https://github.com/percussion/perc-devtools-distribution.git
-[submodule "loader"]
-	path = loader
-	url = https://github.com/percussion/loader.git
