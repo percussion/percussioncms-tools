@@ -1,6 +1,3 @@
-[submodule "Help"]
-	path = Help
-	url = https://github.com/percussion/Help.git
 [submodule "ServerUIComponents"]
 	path = ServerUIComponents
 	url = https://github.com/percussion/ServerUIComponents.git
