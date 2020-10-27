@@ -4,9 +4,6 @@
 [submodule "ServerUIComponents"]
 	path = ServerUIComponents
 	url = https://github.com/percussion/ServerUIComponents.git
-[submodule "ContentUI"]
-	path = ContentUI
-	url = https://github.com/percussion/ContentUI.git
 [submodule "PackagerUI"]
 	path = PackagerUI
 	url = https://github.com/percussion/PackagerUI.git
