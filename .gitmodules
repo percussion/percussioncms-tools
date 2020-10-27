@@ -1,6 +1,3 @@
-[submodule "perc-eclipse"]
-	path = perc-eclipse
-	url = https://github.com/percussion/perc-eclipse.git
 [submodule "vedit"]
 	path = vedit
 	url = https://github.com/percussion/vedit.git
