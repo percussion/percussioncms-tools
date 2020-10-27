@@ -22,9 +22,6 @@
 [submodule "perc-devtools-distribution"]
 	path = perc-devtools-distribution
 	url = https://github.com/percussion/perc-devtools-distribution.git
-[submodule "ContentExplorer"]
-	path = ContentExplorer
-	url = https://github.com/percussion/ContentExplorer.git
 [submodule "ServerPropertiesEditor"]
 	path = ServerPropertiesEditor
 	url = https://github.com/percussion/ServerPropertiesEditor.git
