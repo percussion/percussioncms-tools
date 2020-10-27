@@ -1,12 +1,6 @@
-[submodule "Help"]
-	path = Help
-	url = https://github.com/percussion/Help.git
 [submodule "ServerUIComponents"]
 	path = ServerUIComponents
 	url = https://github.com/percussion/ServerUIComponents.git
-[submodule "PackagerUI"]
-	path = PackagerUI
-	url = https://github.com/percussion/PackagerUI.git
 [submodule "perc-eclipse"]
 	path = perc-eclipse
 	url = https://github.com/percussion/perc-eclipse.git
@@ -19,9 +13,6 @@
 [submodule "perc-devtools-distribution"]
 	path = perc-devtools-distribution
 	url = https://github.com/percussion/perc-devtools-distribution.git
-[submodule "ServerPropertiesEditor"]
-	path = ServerPropertiesEditor
-	url = https://github.com/percussion/ServerPropertiesEditor.git
 [submodule "loader"]
 	path = loader
 	url = https://github.com/percussion/loader.git

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="project" default="package" basedir=".">
+    <description>
+      Compiles the Packager Ui project.
+    </description>
+	 <!-- Pull in the environment variables -->
+	 <property environment="env" />
+	 <property name="thirdparty.tools.base" location="${env.THIRD_PARTY_TOOLS_BASE}" />
+	 <property name="classdir" location="${basedir}/build/classes"/>
+	 <property name="lib.dir" location="${basedir}/lib"/>
+	 <property name="is.debug" location="${basedir}/lib"/>
+	 <property name="toolsdir" location="../system/Tools"/>
+	
+	 <!-- Rx Main and RX Deployer builds need to have been ran -->	
+	 <property name="rx.lib" location="../system/build/lib" />
+	
+	<!-- Define the ant extension classpath -->
+	 <path id="class.path">
+	 	<pathelement location="${thirdparty.tools.base}/miglayout-3.6.3/lib/miglayout-3.6.3-swing.jar"/>
+	 	<pathelement location="${thirdparty.tools.base}/substance-5.1/lib/substance.jar"/>	 	
+	 	<fileset dir="${rx.lib}" includes="*.jar"/>
+	 	<fileset dir="${toolsdir}/Commons" includes="*.jar"/>
+		<pathelement location="${toolsdir}/Eclipse/org.eclipse.help.base_3.3.1.v20070813_33x.jar"/>
+	 	<pathelement location="${toolsdir}/regex/jakarta-oro-2.0.8.jar"/>
+	 	<pathelement location="src"/>
+	 </path>	 
+		
+	<!-- Build packager ui jar-->
+	<target name="package" depends="compile">
+	   <mkdir dir="${lib.dir}"/>
+		<jar destfile="${lib.dir}/pspackagerui.jar">
+		   <fileset dir="${classdir}">
+		      <include name="com/percussion/packager/ui/**" />
+		      <include name="com/percussion/packagerhelp/**" />
+		      <include name="com/percussion/packageinstaller/ui/**" />
+		   </fileset>
+		</jar> 
+	</target>
+    
+	<!-- compile the project -->
+   <target name="compile" depends="clean">
+     	<mkdir dir="${classdir}"/>
+   	<javac 
+    		destdir="${classdir}" 
+    		classpathref="class.path"
+    		debug="${is.debug}"
+   			debuglevel="vars,lines,source"
+    	   fork="yes"
+    	   target="1.6"
+    	   source="1.6"
+   		executable="${env.JAVA_HOME}/bin/javac"
+    	   encoding="utf8"
+   		nowarn="yes"
+   		srcdir="${basedir}/src"
+   	/>
+   	<copy todir="${classdir}">
+   	   <fileset dir="${basedir}/src">
+   	      <include name="**/*.properties"/>
+   	      <include name="**/*.xml"/>
+   	   	<include name="**/*.gif"/>
+   	   	<include name="**/*.jpg"/>
+   	      <include name="**/*.png"/>
+   	   </fileset>
+   	</copy>	  
+    </target>   
+	
+	<!-- clean out build file -->
+	 <target name="clean">
+	 	<delete dir="${basedir}/build"/>
+	 </target>
+
+</project>
