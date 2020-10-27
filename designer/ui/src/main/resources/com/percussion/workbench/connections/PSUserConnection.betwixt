@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="connection">
+    <element name="name" property="name"/>
+    <element name="server" property="server"/>
+    <element name="port" property="port"/>
+    <element name="userid" property="userid"/>
+    <element name="password" property="password"/>
+    <element name="useSsl" property="useSsl"/>
+    <element name="savePwd" property="savePassword"/>
+    <element name="locale" property="locale"/>
+    <element name="timeout" property="timeout"/>
+    <hide property="clearTextPassword"/>
+  </element>
+</info>

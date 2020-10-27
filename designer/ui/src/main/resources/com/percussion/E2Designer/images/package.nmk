@@ -1,0 +1,225 @@
+ ############################################################################
+ #
+ # $Id: package.nmk 1.8 2001/11/16 20:07:36Z snezanahasanovic Exp $
+ #
+ # Version Labels	: $Name: Pre_CEEditorUI $
+ #
+ # Locked By		: $Locker: $
+ #
+ # Revision History:
+ #	$Log: package.nmk $
+ #	Revision 1.8  2001/11/16 20:07:36Z  snezanahasanovic
+ #	Added two images
+ #	Revision 1.7  2001/11/05 22:26:31Z  snezanahasanovic
+ #	Added images for app and global UDFs as well as a generic image.
+ #	Revision 1.6  2001/04/03 19:53:39Z  snezanahasanovic
+ #	Added images for content editor 
+ #	Revision 1.5  2000/03/24 21:52:26Z  AlexTeng
+ #	Temp fix for object polymorph that threw off the path for image
+ #	resource locations. (see EditableListBoxBrowseEditor.m_button)
+ #	
+ #	Revision 1.4  2000/02/22 21:04:49Z  chadloder
+ #	Took images macro out of designer .nmk and updated images .nmk
+ #	Revision 1.3  2000/02/10 20:05:25  paulhoward
+ #	Added images for multi-sized resources with exits attached and the
+ #	new exit.
+ #	
+ #	Revision 1.2  2000/01/19 22:14:57Z  AlexTeng
+ #	Added obfu files for HTML Parameter cataloging, files from
+ #	DTD repeat display functionality, and new Join dialog + key
+ #	joining behavior.
+ #	
+ #	Revision 1.1  1999/09/23 14:53:16Z  chadloder
+ #	Initial revision
+ #
+ ############################################################################
+ 
+PACKAGE=com.percussion.E2Designer.images
+
+#
+# These are our (internal) tests
+#
+TEST_CLASSES =
+
+# Strip export-restricted classes from the jar
+#
+.IF $(JAR_EXPORT)
+	EXCLUDED_CLASSES = \
+		$(EXCLUDED_CLASSES)
+.END
+
+#
+# Strip testing and non-essential classes from the jar
+#
+.IF $(JAR_PRODUCTION)
+	EXCLUDED_CLASSES = \
+		$(EXCLUDED_CLASSES) \
+		$(TEST_CLASSES)
+.END
+
+#
+# These will go in the default (unshared) jar file for this package.
+#
+DEFAULT_CLASSES =
+
+#
+# These will go in the shared jar file.
+#
+SHARED_CLASSES =
+
+#
+# Properties files
+#
+PROPERTIES =
+
+#
+# Image files
+#
+IMAGES = \
+aboutRhythmyx.gif \
+appicon.gif \
+appicon_16.gif \
+appicon_running_16.gif \
+appicon_stopped_16.gif \
+applicationfile.gif \
+appsec_icon.gif \
+appUdf_icon.gif \
+betank.gif \
+betank_16.gif \
+betank_32.gif \
+biresource.gif \
+biresource_16.gif \
+browser.gif \
+ca4tank.gif \
+cdataset.gif \
+cdataset-exr.gif \
+cdataset-exl.gif \
+cdataset-ex2.gif \
+cdataset_16.gif \
+conditionals.gif \
+connect.gif \
+connect_16.gif \
+copy.gif \
+cpflex_input.gif \
+cpflex_output.gif \
+cprigid_front.gif \
+cprigid_leftside.gif \
+cprigid_rightside.gif \
+cprigid_side.gif \
+ctrlpanel.gif \
+curconn.gif \
+curnoconn.gif \
+cut.gif \
+dataset.gif \
+dataset_16.gif \
+db2tank.gif \
+disable.gif \
+down.gif \
+ds_secure.gif \
+DTDRepeatAt.gif \
+DTDRepeatOnce.gif \
+DTDRepeatOneOrMore.gif \
+DTDRepeatOptional.gif \
+DTDRepeatZeroOrMore.gif \
+dupe.gif \
+dupeButton.gif \
+dupeButton_pressed.gif \
+dupe_pressed.gif \
+empty_icon.gif \
+emptyBlue_icon.gif \
+enable.gif \
+encryptor.gif \
+encryptor_16.gif \
+encryptor_off.gif \
+errorpage.gif \
+errorpage_off.gif \
+extiface.gif \
+extiface_16.gif \
+filter.gif \
+folder.gif \
+formula.gif \
+formula_16.gif \
+generic_icon.gif \
+genobj.gif \
+genobj_16.gif \
+globalUdf_icon.gif \
+group.gif \
+group_any_16.gif \
+group_host_16.gif \
+group_odbc_16.gif \
+group_os_16.gif \
+group_web_16.gif \
+help.gif \
+inftank.gif \
+java-exit.gif \
+loginpage.gif \
+loginpage_off.gif \
+main.gif \
+mapper.gif \
+mapper_16.gif \
+new.gif \
+no_conditionals.gif \
+notifier.gif \
+notifier_off.gif \
+odbtank.gif \
+optional.gif \
+oratank.gif \
+pager.gif \
+pager_16.gif \
+pagetank.gif \
+pagetank_16.gif \
+pagetank_32.gif \
+paste.gif \
+print.gif \
+qdataset.gif \
+qdataset-exr.gif \
+qdataset-exl.gif \
+qdataset-ex2.gif \
+qdataset_16.gif \
+qrypipe.gif \
+rcptctr.gif \
+resultpage.gif \
+resultpage_16.gif \
+right.gif \
+role.gif \
+save.gif \
+selector.gif \
+selector_16.gif \
+sqltank.gif \
+startapp_16.gif \
+stopapp_16.gif \
+stylesheet_selector.gif \
+sybtank.gif \
+synchronizer.gif \
+synchronizer_16.gif \
+transaction.gif \
+transaction_16.gif \
+udataset.gif \
+udataset-exr.gif \
+udataset-exl.gif \
+udataset-ex2.gif \
+udataset_16.gif \
+udf.gif \
+up.gif \
+updpipe.gif \
+uptree.gif \
+user.gif \
+user_any_16.gif \
+user_host_16.gif \
+user_odbc_16.gif \
+user_os_16.gif \
+user_web_16.gif \
+view_br.gif \
+view_sb.gif \
+view_tb.gif \
+xml.gif
+
+#
+# Resource files (properties and image files combined)
+#
+RESOURCES = \
+	$(PROPERTIES) \
+	$(IMAGES)
+
+ALL_CLASSES =  $(SHARED_CLASSES) $(DEFAULT_CLASSES) $(TEST_CLASSES)
+ALL_FILES = $(ALL_CLASSES) $(RESOURCES)

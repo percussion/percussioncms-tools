@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="test-config">
+     <element name="key" property="key"/>
+     <element name="values">
+		<element name="value" property="values" updater="addValue" forceAccessible="true"/>
+     </element>
+  </element>
+</info>

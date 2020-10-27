@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="connection-list">
+	<element name="default" property="default"/>
+    <element name="connection" property="connections" updater="addConnection" forceAccessible="true"/>
+  </element>
+</info>

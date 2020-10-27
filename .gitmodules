@@ -4,9 +4,6 @@
 [submodule "vedit"]
 	path = vedit
 	url = https://github.com/percussion/vedit.git
-[submodule "designer"]
-	path = designer
-	url = https://github.com/percussion/designer.git
 [submodule "perc-devtools-distribution"]
 	path = perc-devtools-distribution
 	url = https://github.com/percussion/perc-devtools-distribution.git

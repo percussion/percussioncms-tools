@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file defines the structure for the Rhythmyx workbench 'Local File Explorer'
+view. This view shows local file system.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="LOCAL_FILE:FOLDER">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSLocalFileSystemNodeHandler"
+            allowedTypes="RESOURCE_FILE:FOLDER RESOURCE_FILE:FILE"
+            securable="false"
+            />
+      <Catalog type="object" name="LOCAL_FILE"/>
+   </InstanceTree>
+   <InstanceTree objectIds="LOCAL_FILE:FILE">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSLocalFileSystemNodeHandler"
+            securable="false"/>
+   </InstanceTree>
+   <Catalog type="object" name="LOCAL_FILE"/>
+</TreeDef>

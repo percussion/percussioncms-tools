@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file defines the structure for the Rhythmyx workbench 'System Design' 
+view. This view shows all system objects in a tree structure as
+described in the functional specification.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="EXTENSION" displayLabelSource="objectLabel">
+      <Handler
+            className="com.percussion.workbench.ui.handlers.PSDropNodeHandler"
+            iconPath="icons/extension16.gif"
+            securable="false"
+            renamable="false"
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="USER_FILE:WORKBENCH_FOLDER">
+      <Handler className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"/>
+      <Catalog type="object" name="USER_FILE"/>
+   </InstanceTree>
+   <InstanceTree objectIds="RESOURCE_FILE:FOLDER">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSResourceNodeHandler"
+         allowedTypes="RESOURCE_FILE:FOLDER RESOURCE_FILE:FILE LOCAL_FILE:FOLDER LOCAL_FILE:FILE"
+         securable="false"
+         />
+      <Catalog type="object" name="RESOURCE_FILE"/>
+   </InstanceTree>
+   <InstanceTree objectIds="RESOURCE_FILE:FILE">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+            securable="false"
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="SITE">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSCopyNodeHandler" 
+            iconPath="icons/site16.gif"
+            renamable="false"
+            deletable="false"
+           />
+   </InstanceTree>
+   <InstanceTree objectIds="RELATIONSHIP_TYPE">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" 
+            iconPath="icons/relationshipType16.gif"
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="WORKFLOW">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSCopyNodeHandler" 
+            iconPath="icons/workflow16.gif"
+            renamable="false"
+            deletable="false"
+            />
+         <Node labelKey="Allowed Content Types" sorting="ascending">
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSContentTypeAllowedWorkflowNodeHandler" 
+               allowedTypes="CONTENT_TYPE"
+               />
+            <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSWorkflowExpansionFactory"
+               isReference="true"
+               />
+         </Node>
+   </InstanceTree>
+   <InstanceTree objectIds="CONTENT_TYPE">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+            iconPath="icons/contentType16.gif"
+            />
+   </InstanceTree>
+   <Node labelKey="CMS Files">
+      <Description>Contains applications that have no resources in the app and their files.</Description>
+      <Catalog type="object" name="RESOURCE_FILE"/>
+   </Node>
+   <Node labelKey="Extensions" sorting="ascending">
+      <NodeProperty name="wizardShortCutType">EXTENSION</NodeProperty>
+      <Description>This tree contains all extensions that may be used by the system.</Description>
+      <Node 
+            labelKey="JavaScript" 
+            treeName="extensionsJavaScript" 
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">javascript</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">javascript</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsJavaScript</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               catalogObjectTypes="EXTENSION"
+               />
+      </Node>
+      <Node 
+            labelKey="Assemblers" 
+            treeName="extensionsIPSAssembler" 
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.services.assembly.IPSAssembler</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.services.assembly.IPSAssembler</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSAssembler</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               catalogObjectTypes="EXTENSION"
+               />
+      </Node>
+      <Node 
+            labelKey="Assembly Location Generators" 
+            treeName="extensionsIPSAssemblyLocation" 
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSAssemblyLocation</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSAssemblyLocation</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSAssemblyLocation</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content List Generators" 
+            treeName="extensionsIPSContentListGenerator" 
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.services.publisher.IPSContentListGenerator</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.services.publisher.IPSContentListGenerator</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSContentListGenerator</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               >
+         </Catalog>
+      </Node>
+      <Node
+            labelKey="JEXL Expressions"
+            treeName="extensionsIPSJexlExpression"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSJexlExpression</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSJexlExpression</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSJexlExpression</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog
+               type="class"
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory"
+               displayLabelSource="objectLabel"
+               >
+         </Catalog>
+      </Node>
+      <Node 
+            labelKey="Relationship Effects" 
+            treeName="extensionsIPSEffect" 
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.relationship.IPSEffect</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.relationship.IPSEffect</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSEffect</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Password Filters" 
+            treeName="extensionsIPSPasswordFilter" 
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.security.IPSPasswordFilter</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.security.IPSPasswordFilter</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSPasswordFilter</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+	  <Node
+            labelKey="Search Analyzers"
+            treeName="extensionsIPSLuceneAnalyzer"
+            sorting="ascending"
+			objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.search.lucene.analyzer.IPSLuceneAnalyzer</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.search.lucene.analyzer.IPSLuceneAnalyzer</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSLuceneAnalyzer</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog
+               type="class"
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory"
+               displayLabelSource="objectLabel"
+               />
+      </Node>
+      <Node 
+            labelKey="Search Result Processors" 
+            treeName="extensionsIPSSearchResultsProcessor" 
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.search.IPSSearchResultsProcessor</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.search.IPSSearchResultsProcessor</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSSearchResultsProcessor</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Slot Content Finders" 
+            treeName="extensionsIPSSlotContentFinder"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.services.assembly.IPSSlotContentFinder</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.services.assembly.IPSSlotContentFinder</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSSlotContentFinder</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Template Expanders" 
+            treeName="extensionsIPSTemplateExpander"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.services.publisher.IPSTemplateExpander</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.services.publisher.IPSTemplateExpander</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSTemplateExpander</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+	  <Node
+            labelKey="Text Converters"
+            treeName="extensionsIPSLuceneTextConverter"
+            sorting="ascending"
+			objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.search.lucene.textconverter.IPSLuceneTextConverter</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.search.lucene.textconverter.IPSLuceneTextConverter</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSLuceneTextConverter</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog
+               type="class"
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory"
+               displayLabelSource="objectLabel"
+               />
+      </Node>
+      <Node 
+            labelKey="Workflow Actions" 
+            treeName="extensionsIPSWorkflowAction"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSWorkflowAction</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSWorkflowAction</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSWorkflowAction</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Input Transformers" 
+            treeName="extensionsIPSItemInputTransformer"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSItemInputTransformer</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSItemInputTransformer</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSItemInputTransformer</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Output Transformers" 
+            treeName="extensionsIPSItemOutputTransformer"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSItemOutputTransformer</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSItemOutputTransformer</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSItemOutputTransformer</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Validators" 
+            treeName="extensionsIPSItemValidator"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSItemValidator</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSItemValidator</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSItemValidator</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Field Input Transformers" 
+            treeName="extensionsIPSFieldInputTransformer"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSFieldInputTransformer</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSFieldInputTransformer</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSFieldInputTransformer</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Field Output Transformers" 
+            treeName="extensionsIPSFieldOutputTransformer"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSFieldOutputTransformer</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSFieldOutputTransformer</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSFieldOutputTransformer</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Field Validators" 
+            treeName="extensionsIPSFieldValidator"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSFieldValidator</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSFieldValidator</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSFieldValidator</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Field Visibility Rules" 
+            treeName="extensionsIPSFieldVisibilityRule"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSFieldVisibilityRule</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSFieldVisibilityRule</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSFieldVisibilityRule</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Content Item Field Editability Rules" 
+            treeName="extensionsIPSFieldEditabilityRule"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.extension.IPSFieldEditabilityRule</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSFieldEditabilityRule</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSFieldEditabilityRule</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Item Filter Rules" 
+            treeName="extensionsIPSItemFilterRule"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.services.filter.IPSItemFilterRule</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.services.filter.IPSItemFilterRule</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSItemFilterRule</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Scheduled Tasks" 
+            treeName="extensionsIPSTask"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.services.schedule.IPSTask</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.services.schedule.IPSTask</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSTask</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node 
+            labelKey="Edition Tasks" 
+            treeName="extensionsIPSEditionTask"
+            sorting="ascending"
+            objectHomeType="EXTENSION"
+            homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+            >
+         <HomeNodeProperty name="interface">com.percussion.rx.publisher.IPSEditionTask</HomeNodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.rx.publisher.IPSEditionTask</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSEditionTask</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog 
+               type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+               displayLabelSource="objectLabel" 
+               />
+      </Node>
+      <Node labelKey="XML Server">
+         <Description>Legacy extensions.</Description>
+         <Node 
+               labelKey="Request Pre-processors" 
+               treeName="extensionsIPSRequestPreProcessor" 
+               sorting="ascending"
+               objectHomeType="EXTENSION"
+               homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+               >
+            <HomeNodeProperty name="interface">com.percussion.extension.IPSRequestPreProcessor</HomeNodeProperty>
+            <CatalogProperty name="extensionSubType">com.percussion.extension.IPSRequestPreProcessor</CatalogProperty>
+            <CatalogProperty name="userPathRootName">extensionsIPSRequestPreProcessor</CatalogProperty>
+            <Catalog type="object" name="USER_FILE"
+                  allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+            <Catalog 
+                  type="class" 
+                  name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+                  displayLabelSource="objectLabel" 
+                  />
+         </Node>
+         <Node 
+               labelKey="Result Document Processors" 
+               treeName="extensionsIPSResultDocumentProcessor" 
+               sorting="ascending"
+               objectHomeType="EXTENSION"
+               homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+               >
+            <HomeNodeProperty name="interface">com.percussion.extension.IPSResultDocumentProcessor</HomeNodeProperty>
+            <CatalogProperty name="extensionSubType">com.percussion.extension.IPSResultDocumentProcessor</CatalogProperty>
+            <CatalogProperty name="userPathRootName">extensionsIPSResultDocumentProcessor</CatalogProperty>
+            <Catalog type="object" name="USER_FILE"
+                  allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+            <Catalog 
+                  type="class" 
+                  name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+                  displayLabelSource="objectLabel" 
+                  />
+         </Node>
+         <Node 
+               labelKey="UDF Processors" 
+               treeName="extensionsIPSUdfProcessor"
+               sorting="ascending"
+               objectHomeType="EXTENSION"
+               homeTypeClassName="com.percussion.workbench.ui.views.hierarchy.categories.PSExtensionCategoryManager"
+               >
+            <HomeNodeProperty name="interface">com.percussion.extension.IPSUdfProcessor</HomeNodeProperty>
+            <CatalogProperty name="extensionSubType">com.percussion.extension.IPSUdfProcessor</CatalogProperty>
+            <CatalogProperty name="userPathRootName">extensionsIPSUdfProcessor</CatalogProperty>
+            <Catalog type="object" name="USER_FILE"
+                  allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+            <Catalog 
+                  type="class" 
+                  name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionCatalogFactory" 
+                  displayLabelSource="objectLabel" 
+                  />
+         </Node>
+      </Node>
+   </Node>
+   <Node labelKey="Configurations" sorting="ascending">
+      <Description>This node contains most server configuration files editable by the user.</Description>
+      <Node labelKey="Logging" objectId="CONFIGURATION_FILE:LOGGER_PROPERTIES">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/log_props16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+      <Node labelKey="Navigation" objectId="CONFIGURATION_FILE:NAVIGATION_PROPERTIES">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/nav_props16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+      <Node labelKey="Server Page Tags" objectId="CONFIGURATION_FILE:SERVER_PAGE_TAG_PROPERTIES">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/pagetags_props16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+      <Node labelKey="Tidy" objectId="CONFIGURATION_FILE:TIDY_PROPERTIES">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/tidy_props16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+      <Node labelKey="Thumbnail URL" objectId="CONFIGURATION_FILE:ADD_THUMBNAIL_URL_PROPERTIES">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/thumbnail_props16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+      <Node labelKey="Workflow" objectId="CONFIGURATION_FILE:WORKFLOW_PROPERTIES">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/workflow_props16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+      <Node labelKey="System Velocity Macros" objectId="CONFIGURATION_FILE:SYSTEM_VELOCITY_MACROS">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/sys_velocity_macros16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+      <Node labelKey="User Velocity Macros" objectId="CONFIGURATION_FILE:USER_VELOCITY_MACROS">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/user_velocity_macros16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+   </Node>
+   <Node labelKey="Relationship Types" sorting="ascending">
+      <NodeProperty name="wizardShortCutType">RELATIONSHIP_TYPE</NodeProperty>
+      <Description/>
+      <Node labelKey="System" sorting="ascending">
+         <Catalog type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSRelationshipTypeCatalogFactory"
+               >
+         	<CatalogProperty name="type">system</CatalogProperty>
+            <Handler 
+                  className="com.percussion.workbench.ui.handlers.PSCopyNodeHandler"
+                  iconPath="icons/relationshipType16.gif"
+                  renamable="false"
+                  deletable="false"
+                  />
+       	</Catalog>
+      </Node>
+      <Node labelKey="User" sorting="ascending" objectHomeType="RELATIONSHIP_TYPE">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler" 
+               allowedTypes="RELATIONSHIP_TYPE"
+               />
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSRelationshipTypeCatalogFactory">
+         	<CatalogProperty name="type">user</CatalogProperty>
+       	</Catalog>
+      </Node>
+   </Node>
+   <Node labelKey="Sites" sorting="ascending">
+      <Description>This node lists sites for drag and drop onto other design objects. These objects cannot be modified in any way.</Description>
+      <Catalog type="object" name="SITE"/>
+   </Node>
+   <Node labelKey="Workflows" sorting="ascending">
+      <Description>This node lists workflows for drag and drop onto other design objects. These objects cannot be modified in any way.</Description>
+      <Catalog type="object" name="WORKFLOW"/>
+   </Node>
+</TreeDef>

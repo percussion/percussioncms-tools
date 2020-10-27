@@ -1,0 +1,221 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>package</TITLE>
+<META NAME="Template" CONTENT="E:\msoffice\Office\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P><!--
+   $Id: package.html 1.1 1999/01/27 20:19:18Z PaulHoward Release $
+   Version Labels  : $Name: Pre_CEEditorUI RX_40_REL 20010618_3_5 20001027_3_0 20000724_2_0 20000522_1_1 20000501_1_1 20000327_1_1 20000111_1_0 991227_1_0 991214_1_0 991213_1_0 991202_1_0 Release_1_0_Intl Release_10_1 Release_10 $
+   Locked By       : $Locker: $
+   Revision History:
+                     $Log $
+-->
+<P>The browser is an independent, singleton window that contains lists of objects from the E2 server and back-end databases. The displayed objects are grouped by tabs; initially the following tabs may be present (the user can optionally toggle the visibility of all tabs except the Applications tab) </P>
+
+<UL>
+<LI>Applications </LI>
+<LI>ODBC </LI>
+<LI>FILE </LI>
+<LI>Security </LI></UL>
+
+<P>Unlike PWB, there will be no cache that can be used 'offline' when the database server is not available. (In the future, this could be added if found necessary.) Therefore, there won't be icons that represent the status of any query (it will always be 'live' or an error will be displayed). </P>
+<B><I><FONT FACE="Arial"><P>Functionality</P>
+</B></I></FONT><P>The browser has 2 major functions: display a hierarchical list of objects of various types grouped within various tabs and allow the designer to operate on each leaf in a context sensitive way.</P>
+<P>The browser is a window containing a static text string (indicating the E2 server) and a collection of tabs. The spec calls for the Application tab to be separate from the other tabs. This will be supported by extending JTabbedPane to support groups of tabs. Each group can be thought of as a separate entity. Each tab will have a tree (derived from JTree) that supports drag and drop and clipboard copying of certain nodes. The tree assumes all nodes it contains are DefaultBrowserNodes. The hierarchy for these classes is shown below.&nbsp;</P>
+<P><MAP NAME="BrowserMap">
+	<AREA SHAPE="RECT" COORDS="4, 404, 131, 508" HREF="BrowserTree.html">
+	<AREA SHAPE="RECT" COORDS="546, 647, 643, 679" HREF="DatabaseNode.html">
+	<AREA SHAPE="RECT" COORDS="447, 566, 604, 636" HREF="ServerNode.html">
+	<AREA SHAPE="RECT" COORDS="534, 443, 659, 498" HREF="RemovableNode.html">
+	<AREA SHAPE="RECT" COORDS="414, 446, 517, 477" HREF="TableNode.html">
+	<AREA SHAPE="RECT" COORDS="49, 563, 151, 594" HREF="ICatalogEntry.html">
+	<AREA SHAPE="RECT" COORDS="219, 719, 388, 750" HREF="SecurityHierarchyConstraints.html">
+	<AREA SHAPE="RECT" COORDS="219, 686, 388, 717" HREF="ApplicationHierarchyConstraints.html">
+	<AREA SHAPE="RECT" COORDS="219, 653, 388, 684" HREF="FileHierarchyConstraints.html">
+	<AREA SHAPE="RECT" COORDS="219, 620, 388, 651" HREF="SQLHierarchyConstraints.html">
+	<AREA SHAPE="RECT" COORDS="209, 518, 388, 609" HREF="IHierarchyConstraints.html">
+	<AREA SHAPE="RECT" COORDS="468, 109, 596, 369" HREF="DefaultBrowserNode.html">
+	<AREA SHAPE="RECT" COORDS="159, 111, 352, 275" HREF="BrowserPane.html">
+	<AREA SHAPE="RECT" COORDS="1,118, 128, 245" HREF="BrowserFrame.html">
+</MAP></P>
+
+<P ALIGN="CENTER">
+<table border="0">
+	<tr><td><IMG SRC="doc-files/browser.gif" USEMAP="#BrowserMap" ></td></tr>
+<table>
+
+<P ALIGN="CENTER">&nbsp;</P>
+<P>The browser tree will treat root nodes specially. It expects root nodes to be of the ServerNode class. The server node contains constraints that determine the order of objects within the tree. The constraints were placed at the root node level rather than the tree level because it may be desirable for the end user to display different data stores in differing hierarchies. Initially, the end-user won't be allowed to change the hierarchy. For example, Client Access has owners and tables, but no database, where SQL server can have many dbs, in addition to owners and tables (but owners are not so important).</P>
+<P>Each node in a tree will load its children either statically (when the node is created) or dynamically. Each child in a dynamically created list may be a node that has dynamically loaded children, a node that has no children or a node that is the root of a subtree.</P>
+<P>The display of objects may be dynamic in that the first time a node is expanded, the E2 server will be queried to populate the list. Once the list is filled, a new query will not be executed until the refresh button is pressed unless the 'Auto refresh catalog' is enabled (by default it is). Each of these objects may be further expanded and so on down the tree. </P>
+<P>Certain nodes may not have a name by default (for example: ODBC database for an Oracle backend). Since showing a blank space as a leaf is not very useful, the browser has a concept of the real name and the display name. There will always be text present for the display name of a node, even though the real name may be empty. Any object communicating with the browser will always get the real name, unless they specifically ask for the display name. This feature is also useful for implementing the subset feature in database tabs.</P>
+<P>Each node in the tree may need to support 2 context sensitive operations. The first is a context sensitive menu. When the designer performs a 'context-sensitive-menu gesture' the context menu should appear, containing a list of operations that apply to the clicked on node. At a minimum, the operations should include the standard editing operations (if appropriate), in addition to a properties menu item. </P>
+<P>The 2<SUP>nd</SUP> operation that may need to be supported is drag and drop. Certain objects, such as tables, must support drag and drop into a process or dataset view.</P>
+<P>In addition to the context sensitive operations, dynamic tree expansion is also supported. The first time a dynamic node is expanded, an enumeration method is called to fill the node with children. Depending on a flag, this enumeration may be done every time the node is expanded or only the first time and each time the tree is refreshed.</P>
+<P>To support these operations in a polymorphic way, the tree node class will be extended with a new interface that provides a way for the browser to determine supported operations and activate them on behalf of the designer. Each special node will derive from this class. The base class will be called DefaultBrowserNode. All of the operations are no-ops by default. </P>
+<B><I><FONT FACE="Arial"><P>Cataloging</P>
+</B></I></FONT><P>Each dynamic node in the browser has an associated cataloger. This cataloger is used to get a list of the children for the current node. The children will usually come from the E2 server, although that is not a requirement. There is a special cataloging class for each type of node that needs to have its children cataloged. The cataloger is obtained from the constraint object and is returned as an Iterator. The iterator returned by the constraint object is of a vector of browser nodes of the appropriate type, built by the constraint object, using the Iterator returned by the catalog object. The catalog classes are shown in the class hierarchy diagram below.</P>
+<P>&nbsp;</P>
+<P><MAP NAME="Cataloging">
+	<AREA SHAPE="RECT" COORDS="450,534, 565, 566" HREF="AppObjectCataloger.html">
+	<AREA SHAPE="RECT" COORDS="482,498, 598, 530" HREF="AppCataloger.html">
+	<AREA SHAPE="RECT" COORDS="269,522, 367, 553" HREF="FileCataloger.html">
+	<AREA SHAPE="RECT" COORDS="300,485, 398, 518" HREF="FileRootCataloger.html">
+	<AREA SHAPE="RECT" COORDS="3,629, 119, 660" HREF="ColumnCataloger.html">
+	<AREA SHAPE="RECT" COORDS="36,594, 151, 626" HREF="ObjectTypeCataloger.html">
+	<AREA SHAPE="RECT" COORDS="68,558, 172, 589" HREF="SchemaCataloger.html">
+	<AREA SHAPE="RECT" COORDS="99,522, 202, 554" HREF="TableCataloger.html">
+	<AREA SHAPE="RECT" COORDS="129,485, 238, 518" HREF="DatabaseCataloger.html">
+	<AREA SHAPE="RECT" COORDS="618,216, 746, 326" HREF="CatalogEntryEx.html">
+	<AREA SHAPE="RECT" COORDS="432,311, 581, 419" HREF="AppTabCataloger.html">
+	<AREA SHAPE="RECT" COORDS="251,305, 394, 425" HREF="FileTabCataloger.html">
+	<AREA SHAPE="RECT" COORDS="1,300, 146, 433" HREF="SQLTabCataloger.html">
+	<AREA SHAPE="RECT" COORDS="621,36, 747, 121" HREF="CatalogEntry.html">
+	<AREA SHAPE="RECT" COORDS="225,1, 353, 145" HREF="ICatalogEntry.html">
+	<AREA SHAPE="RECT" COORDS="6,24, 134, 121" HREF="Cataloger.html">
+</MAP></P>
+<P ALIGN="CENTER">
+<table border="0">
+	<tr><td><IMG SRC="doc-files/cataloging.gif" USEMAP="#Cataloging" ></td></tr>
+<table>
+
+<P>&nbsp;</P>
+<P>For an Application tab, all entries come from the PSObjectStore. Only the application objects are dynamically cataloged.</P>
+<P>For a FILE tab, all entries come from the PSCataloger object. There are 3 kinds of entries, Path root node, directory node and a file node.</P>
+<P>For an ODBC tab, the following nodes are possible (all nodes except <I>Drivers</I> appear in the tree), shown in default order:</P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=638>
+<TR><TD WIDTH="33%" VALIGN="TOP" BGCOLOR="#c0c0c0">
+<P>Level Type (starting at highest)</TD>
+<TD WIDTH="33%" VALIGN="TOP" BGCOLOR="#c0c0c0">
+<P>Entry data (displayed, internal)</TD>
+<TD WIDTH="33%" VALIGN="TOP" BGCOLOR="#c0c0c0">
+<P>Data source</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P>Drivers (Tab)</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>Full name, name</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>PSCataloger</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P>Servers</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>Display name, connect string</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>PSUserConfiguration</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P>Database</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>Subset name, DB name, filter data</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>PSCataloger (default entries), PSUserConfiguration</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P>Schema</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>Schema name</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>PSCataloger</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P>&lt;object type&gt;</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>Display name, Object type</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>PSCataloger</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P>&lt;object&gt;</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>Object name, schema</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P>PSCataloger</TD>
+</TR>
+</TABLE>
+
+<P>The Schema node may or may not be present, depending on the user choice of display format and it may or may not appear in the order shown above (again depending on display format).</P>
+<B><I><FONT FACE="Arial"><P>Configuration Variables</P>
+</B></I></FONT><P>Several pieces of information associated with the browser must be kept across sessions. This information is stored on the E2 server using the UserConfig object in the E2Designer package. All values are strings. The option names and their uses are shown in the following table:</P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=638>
+<TR><TD WIDTH="50%" VALIGN="TOP" BGCOLOR="#c0c0c0">
+<P>Option Name (key)</TD>
+<TD WIDTH="50%" VALIGN="TOP" BGCOLOR="#c0c0c0">
+<P>Description of value</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>SubsetNamesFor&lt;Server&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>Comma separated list of subsets that are displayed for server &lt;Server&gt; in the ODBC tab. The first time a server is expanded, a subset is built for each enumerated entry. On all successive expands, if any new databases are detected, a new subset should be built for that database.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>SubsetExcludesFor&lt;Server&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>Comma separated list of ENUMERATED subsets that are NOT displayed for server &lt;Server&gt; in the ODBC tab. If this entry is not found, all subsets are shown.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>SubsetDBFor&lt;Subset name&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>Single entry that names the real database that is cataloged for the subset entry named &lt;Subset name&gt;. There should be one of these entries for each element in the SubsetNamesFor&lt;Server&gt; entry. It is valid for this entry to be an empty string for certain servers.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>SubsetFilterFor&lt;Subset name&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>A string that is passed to the database to limit the db objects that are returned. There may be one of these entries for each element in the SubsetNamesFor&lt;Server&gt; entry. If this entry is not present for a subset, the default is "%" (all tables are returned).</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>SubsetFilterObjectTypesFor&lt;Subset name&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>A comma separated list of db object types that the user wants to see. The possible entries are server specific, but will always include an entry for tables. If this entry is not present for a subset, the default is to show all object types except system tables. This whole string can be passed straight to the cataloger. The possible entries are obtained by doing a db object catalog against the server.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>ServerNamesFor&lt;Driver&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>A comma separated list of servers that are presented in the tree for the specified driver.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>ServerConnectFor&lt;Driver&gt;:&lt;Server&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>This is the connect string that is used to establish a connection with the specified driver and server. Only used in special cases.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>ServerUIDFor&lt;Driver&gt;:&lt;Server&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>An encoded string that contains the user ID for server &lt;Server&gt; on driver &lt;Driver&gt;. The UID is optionally saved at the user's request.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>ServerPasswordFor&lt;Driver&gt;:&lt;Server&gt;</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>An encoded string that contains the password for server &lt;Server&gt; on driver &lt;Driver&gt;. The password is optionally saved at the user's request.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>DriversKnown</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>Comma separated list of all driver codes that were cataloged. This can be used to check for new drivers being added to the system.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>DriversEnabled</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>Comma separated list of all drivers that the user wants to see a tab for in the browser.</TD>
+</TR>
+<TR><TD WIDTH="50%" VALIGN="TOP">
+<P>BrowserWindowPos</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P>Comma separated list of integers specifying the position and size of the browser. Format:</P><DIR>
+<DIR>
+
+<P>&lt;left&gt;,&lt;top&gt;,&lt;width&gt;,&lt;height&gt;</P></DIR>
+</DIR>
+
+<P>Where &lt;left&gt; and &lt;top&gt; are in screen coords and</P>
+<P>&lt;width&gt; and &lt;height&gt; are in pixels.</TD>
+</TR>
+</TABLE>
+
+</BODY>
+</HTML>

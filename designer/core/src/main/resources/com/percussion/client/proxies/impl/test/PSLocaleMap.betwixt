@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="locale-list">
+    <element name="locale" property="all" updater="addLocale" forceAccessible="true"/>
+  </element>
+</info>

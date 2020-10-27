@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="Reference">
+  <element name="id" property="id">
+  	<attribute name="version" value="com.percussion.services.guidmgr.PSGuid"/>
+  	<addDefaults/>
+  </element>
+  <element name="name" property="name"/>
+  <element name="label" property="labelKey"/>
+  <element name="description" property="description"/>
+  <element name="objecttype" property="objectType"/>
+  </element>
+</info>

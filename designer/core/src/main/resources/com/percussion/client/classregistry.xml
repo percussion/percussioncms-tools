@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- This document will have all the object classes listed that need to be 
+   serialized and deserialized. For each class in this file a <classname>.betwixt 
+   file must be created if a default behavior of betwixt is not enough as far 
+   element-field mapping is concerned -->
+<registry>
+   <!-- webservices related object classes -->
+   <class name="com.percussion.client.impl.PSReference" />
+   <class name="com.percussion.services.guidmgr.data.PSGuid" />
+   <class name="com.percussion.client.PSObjectType" />
+   <class name="com.percussion.client.objectstore.PSUiAssemblyTemplate" />
+   <class name="com.percussion.client.objectstore.PSUiCommunity" />
+   <class name="com.percussion.client.objectstore.PSUiTemplateSlot" />
+   <class name="com.percussion.services.content.data.PSKeyword" />
+   <class name="com.percussion.services.ui.data.PSHierarchyNode" />
+
+   <class name="com.percussion.services.security.data.PSAclImpl" />
+   <class name="com.percussion.services.security.data.PSAclEntryImpl" />
+   <class name="com.percussion.services.security.PSTypedPrincipal" />
+   <class name="com.percussion.services.security.data.PSAccessLevelImpl" />
+   <class name="com.percussion.services.security.data.PSUserAccessLevel" />
+
+   <!-- test proxy related classes -->
+   <class name="com.percussion.client.proxies.impl.test.PSCommunityMap" />
+   <class name="com.percussion.client.proxies.impl.test.PSKeywordMap" />
+   <class name="com.percussion.client.proxies.impl.test.PSSlotMap" />
+   <class name="com.percussion.client.proxies.impl.test.PSTemplateMap" />
+   <class name="com.percussion.client.proxies.impl.test.PSUserFileMap" />
+   <class name="com.percussion.client.proxies.impl.test.PSLocaleMap" />
+
+   <!-- utility classes -->
+   <class name="com.percussion.utils.types.PSPair" />
+</registry>
