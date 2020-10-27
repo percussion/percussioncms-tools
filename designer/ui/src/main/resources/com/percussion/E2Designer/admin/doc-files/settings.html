@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 1.1a for Windows">
+	<TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY>
+
+<P><FONT SIZE="6"><B>Module: <I>Settings</I></B></FONT></P>
+
+<P><FONT SIZE="2">This module manages all the server related settings. The settings are divided into the following
+groups</FONT></P>
+
+<UL>
+	<LI><FONT SIZE="2"><EM>Performance</EM> related</FONT>
+	<LI><FONT SIZE="2"><EM>Data caching</EM> related</FONT>
+	<LI><FONT SIZE="2"><EM>Log</EM> </FONT>
+	<LI><FONT SIZE="2"><EM>Object store</EM></FONT>
+</UL>
+
+<P><FONT SIZE="2">Another <EM>symantec.itools.awt.TabPanel</EM>, with tabs to the bottom, is used to manage the
+above groups. </FONT></P>
+
+<P><FONT SIZE="2">All of these settings will be stored in E2 server configuration file (<EM>E2.ini</EM> for now).
+E2 server, when it starts, reads this configuration file and creates <EM>com.percussion.server.PSConfiguration</EM>
+object.  When Admin Applet asks for the configuration options, E2 server will send this configuration data (XML
+file?) and Applet constructs <EM>com.percussion.server.PSConfiguration </EM>class from the XML data (Or is it easier
+to send the serialized <EM>com.percussion.server.PSConfiguration</EM> class across the network)</FONT></P>
+
+<P><FONT SIZE="1"></FONT></P>
+
+<P><FONT SIZE="4"><I><B>Performance</B></I></FONT></P>
+
+<P><IMG SRC="performance.gif" WIDTH="647" HEIGHT="440" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="4"><I><B></B></I></FONT></P>
+
+<P><FONT SIZE="2">Application limits are the defaults for the new applications. Application level settings for
+Maximum allowed application threads, Application Queue depth and Application Request time out will be overridden
+by the application.</FONT></P>
+
+<P><FONT SIZE="2">Absolute application limits and Session option in this screen will override the application setting.
+If user session option is disabled, no application on this server can maintain session information. Similarly if
+the absolute maximum threads is 20, then none of the applications on this server will be allowed to sue more than
+20 threads, irrespective of the application settings.</FONT></P>
+
+<P><FONT SIZE="2">Classes like <EM>PSUserThreadPool</EM> and <EM>PSUserSession</EM> in <EM>com.percussion.server
+package</EM> reads these settings and generate appropriate exceptions if the requests are out of range.</FONT></P>
+
+<P><FONT SIZE="2">When Update button is pressed PSConfiguration object is updated with the new data from this screen
+and the new data will be sent to E2 server with update configuration file command. E2 server writes the new data
+into configuration file and updates its in memory <EM>PSServerConfiguration</EM> object. </FONT></P>
+
+<P><FONT SIZE="2"><TT>Do we need to optimize and send only the modified values in different commands? We may do
+this based on the performance issues. For V1 this sends the whole configuration object to update.</TT></FONT></P>
+
+<P><BR>
+<FONT SIZE="4"><I><B>Data caching</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><IMG SRC="data_caching.gif" WIDTH="647" HEIGHT="440" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Database Connection limit<EM> </EM>is used by the  <EM>PSDatabasePoolManger</EM> and <EM>PSDatabasePoolConnection</EM>
+objects to maintain database connections. </FONT></P>
+
+<P><FONT SIZE="2">Cache settings will be used by <EM>PSQueryCacher</EM> object to manage data and discard cache
+objects which are older than the age limit.</FONT></P>
+
+<P><FONT SIZE="2">Default Rows per page setting should be used by the result set classes like <EM>PSResultSetXmlConverter</EM>.
+The total result set should be broken down into number of pages based on this limit. First page of results will
+be displayed and the links to the rest of the pages will be sent. When user clicks the links the <EM>PSQueryCacher</EM>
+and <EM>PSResultSetXmlConverter</EM> objects work together to send the new results page.</FONT></P>
+
+<P><FONT SIZE="2">All the above settings will be stored in <EM>PSConfiguration</EM> server object.When Update button
+is pressed PSConfiguration object is updated with the new data from this screen and the new data will be sent to
+E2 server with update configuration file command. E2 server writes the new data into configuration file and updates
+its in memory <EM>PSServerConfiguration</EM> object. </FONT></P>
+
+<P><FONT SIZE="2"><BR>
+</FONT><FONT SIZE="4"><I><B>Log</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><IMG SRC="log.gif" WIDTH="647" HEIGHT="440" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">The log settings will be stored in configuration file. There will be a member of <EM>PSLogHandler</EM>
+class inside <EM>PSServerConfiguration</EM> class. Server reads them and creates <EM>com.percussion.log.PSLogHandler</EM>
+object for processing log requests by other log classes. Each application as well server will have only one <EM>PSLogHandler</EM>
+object. Update on this screen updates the in memory PSLogHandler object and write this into configuration file
+as well. </FONT></P>
+
+<P><FONT SIZE="2"><BR>
+</FONT><FONT SIZE="4"><I><B>Object store</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><IMG SRC="object_store.gif" WIDTH="647" HEIGHT="440" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Object store displays the name of configuration file (E2.ini??) and the object store settings.
+Changes to object store and configuration file will not effect the current running instance of the E2 server. You
+need to shutdown and restart E2 server to use new configuration file and object store. Update in this screen will
+write data into the configuration file.</FONT></P>
+
+<P><FONT SIZE="2">First phase of E2 development uses XML files and V1 will used ODBC tables for object store. We
+may not have admin client until V1. So this page contains the ODBC DSN and table names for the object store. Until
+V1 the E2 server may load the (hard coded) configuration file from the current location or from path.</FONT></P>
+
+<P><FONT SIZE="2"><BR>
+</FONT>
+
+</BODY>
+
+</HTML>

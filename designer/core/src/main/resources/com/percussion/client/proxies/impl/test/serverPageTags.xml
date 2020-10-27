@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	$Id: serverPageTags.xml 1.3 2000/10/04 21:30:04Z martingenhart Release $
+
+	Tidy fails on certain JSP and/or ASP tags. XSpLit processes a workaround
+	for all tags specified in this file.
+        For each tag there MUST be 3 entries: opening, closing and disableEscaping.
+        Escaping is disabled (no <xsl:text disable-output-escaping... and CDATA
+        wrappers are added) if its set to "yes" (case does not matter).
+	Remember to use the special syntax for escape characters. For example:
+	the tag '<%' has to be specified as '&lt;%'.
+
+	Copyright 1999, Percussion Software Inc.
+-->
+<JspAspTags>
+   <tag isXslTag="no">
+      <opening>&lt;%</opening>
+      <closing>%&gt;</closing>
+      <disableEscaping>no</disableEscaping>
+   </tag>
+   <tag isXslTag="no">
+      <opening>&lt;jsp:</opening>
+      <closing>&lt;/jsp:</closing>
+      <disableEscaping>no</disableEscaping>
+   </tag>
+   <tag isXslTag="yes">
+      <opening>&lt;xsl:</opening>
+      <closing>&gt;</closing>
+      <disableEscaping>yes</disableEscaping>
+   </tag>
+   <tag isXslTag="yes">
+      <opening>&lt;!-- begin XSL --&gt;</opening>
+      <closing>&lt;!-- end XSL --&gt;</closing>
+      <disableEscaping>yes</disableEscaping>
+   </tag>
+   <tag isXslTag="no">
+      <opening>&lt;!--#include </opening>
+      <closing>--&gt;</closing>
+      <disableEscaping>yes</disableEscaping>
+   </tag>
+</JspAspTags>

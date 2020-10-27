@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="slot-list">
+    <element name="templateslot" property="all" updater="addTemplateSlot" forceAccessible="true"/>
+  </element>
+</info>

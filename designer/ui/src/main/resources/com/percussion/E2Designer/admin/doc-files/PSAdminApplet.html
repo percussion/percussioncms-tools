@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 1.1a for Windows">
+	<TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+
+
+<BLOCKQUOTE>
+	<P><FONT SIZE="5"><B>com.percussion.server.admin Overview</B></FONT></P>
+	<P>This package defines the Administration client UI for E2 server. The login page will be HTML with SSL connection
+	to E2 server. Admin client will be invoked by the following URL</P>
+	<P><FONT COLOR="#0000FF">https://hostName/psxadmin.html.</FONT></P>
+	<P>This brings up the login page for E2 server administartion. Enter user name and administartion password. If
+	this is the first time the admin client is called, use 'admin' for both user name and password.</P>
+
+	<P><IMG SRC="loginpage.gif" WIDTH="633" HEIGHT="441" ALIGN="BOTTOM" BORDER="0"></P>
+
+	<P>Pressing OK on this page sends the login request for E2 server with the following options.</P>
+
+	<P><FONT COLOR="#0000FF">http://hostName/E2Hook?psxaction=adminOpen&amp;loginid=loginid&amp;loginpw=loginpw</FONT></P>
+
+	<P>When the E2 server gets the request, it first verifies the that the login information to make sure that the
+	user is indeed administrator for this server. If this is successful, E2 server send the page with admin applet.
+	From this point on all the communication will be between admin Applet and E2 server.</P>
+
+	<P><IMG SRC="adminApplet.gif" WIDTH="686" HEIGHT="553" ALIGN="BOTTOM" BORDER="0"></P>
+
+	<P><BR>
+	<FONT COLOR="#99CCFF">Note: If this is the first login into the admin client, the admin password should be chnaged
+	from 'admin' to some valid password.</FONT></P>
+
+	<P><IMG SRC="Image1.gif" WIDTH="361" HEIGHT="197" ALIGN="BOTTOM" BORDER="0"></P>
+
+	<P><FONT COLOR="#000000">This screen set the password in </FONT><FONT COLOR="#99CCFF">PSServer</FONT><FONT COLOR="#000000">
+	object of the server. There will be only one PSServer object for server. This will hold the admin password, Server
+	ACL and other server related information. See </FONT><FONT COLOR="#99CCFF">com.percussion.server.PSServer</FONT><FONT
+	COLOR="#000000"> class for details on this. Details on this dialog are shoen in </FONT><FONT COLOR="#99CCFF">com.percussion.server.admin.adminPassword</FONT><FONT
+	COLOR="#000000"> class</FONT></P>
+
+	<P>In case server is not running, an common error page will be returned to the browser.</P>
+
+	<P><BR>
+	For details on all other admin actions and screens follow the corresponding calls in this package.
+	</BLOCKQUOTE>
+
+</BODY>
+
+</HTML>

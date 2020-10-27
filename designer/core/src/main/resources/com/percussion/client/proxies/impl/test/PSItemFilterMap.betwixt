@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="item-filter-list">
+    <element name="item-filter" property="all" updater="addItemFilter" forceAccessible="true"/>
+  </element>
+</info>

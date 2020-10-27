@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file defines the structure for the Rhythmyx workbench 'UI Elements Design' 
+	view.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="UI_DISPLAY_FORMAT">
+      <Handler className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" iconPath="icons/displayFormat16.gif"/>
+   </InstanceTree>
+   <InstanceTree objectIds="UI_SEARCH:STANDARD UI_SEARCH:CUSTOM">
+      <Handler className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" iconPath="icons/search16.gif"/>
+   </InstanceTree>
+   <InstanceTree objectIds="UI_VIEW:STANDARD UI_VIEW:CUSTOM">
+      <Handler className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" iconPath="icons/view16.gif"/>
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_CASCADING_USER">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSMenuAllowedEntriesNodeHandler" 
+         allowedTypes="UI_ACTION_MENU:MENU_ENTRY_SYSTEM UI_ACTION_MENU:MENU_ENTRY_USER UI_ACTION_MENU:MENU_CASCADING_USER UI_ACTION_MENU:MENU_DYNAMIC_USER"
+         iconPath="icons/menuAction16.gif"
+         />
+      <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuExpansionFactory" 
+            isReference="true">
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+            iconPath="icons/menuActionEntry16.gif"
+            />
+      </Catalog>
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_CASCADING_SYSTEM">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSMenuAllowedEntriesNodeHandler" 
+         allowedTypes="UI_ACTION_MENU:MENU_ENTRY_SYSTEM UI_ACTION_MENU:MENU_ENTRY_USER UI_ACTION_MENU:MENU_CASCADING_USER UI_ACTION_MENU:MENU_DYNAMIC_USER"
+         iconPath="icons/menuAction16.gif"
+         renamable="false"
+         deletable="false"
+         />
+      <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuExpansionFactory" 
+            isReference="true">
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+            iconPath="icons/menuActionEntry16.gif"
+            />
+      </Catalog>
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_DYNAMIC_SYSTEM">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSCopyNodeHandler" 
+            iconPath="icons/menuAction16.gif"
+            renamable="false"
+            deletable="false"           
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_DYNAMIC_USER">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" 
+            iconPath="icons/menuAction16.gif"
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_ENTRY_USER">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" 
+            iconPath="icons/menuActionEntry16.gif"
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_ENTRY_SYSTEM">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" 
+            iconPath="icons/menuActionEntry16.gif"
+            deletable="false"
+            renamable="false"
+            />
+   </InstanceTree>
+   <Node labelKey="Content Editor">
+      <Description>Contains the design elements used to create the item editors.</Description>
+      <Node labelKey="System Controls" objectId="CONTENT_EDITOR_CONTROLS:SYSTEM">
+         <Description>Editor controls provided out of the box. Cannot be edited.</Description>
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/ce_systemControls16.gif"
+               securable="false"
+               />
+      </Node>
+      <Node labelKey="User Controls" objectId="CONTENT_EDITOR_CONTROLS:USER">
+         <Description>Editor controls created by the implementer.</Description>
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler" 
+               iconPath="icons/ce_userControls16.gif"
+               securable="false"
+               />
+      </Node>
+   </Node>
+   <Node labelKey="Content Explorer">
+      <Description/>
+      <Node labelKey="Menus">
+         <NodeProperty name="wizardShortCutType">UI_ACTION_MENU:MENU_DYNAMIC_USER</NodeProperty>
+         <Node labelKey="System" >
+            <CatalogProperty name="menuEntryType">system</CatalogProperty>
+            <Node labelKey="Cascading" sorting="ascending" objectHomeType="UI_ACTION_MENU:MENU_CASCADING_SYSTEM">
+               <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuCatalogFactory">
+                  <CatalogProperty name="menuObjectType">cascading</CatalogProperty>
+               </Catalog>
+            </Node>
+            <Node labelKey="Dynamic" sorting="ascending" objectHomeType="UI_ACTION_MENU:MENU_DYNAMIC_SYSTEM">
+               <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuCatalogFactory">
+                  <CatalogProperty name="menuObjectType">dynamic</CatalogProperty>
+               </Catalog>
+            </Node>
+         </Node>
+         <Node labelKey="User" >
+            <CatalogProperty name="menuEntryType">user</CatalogProperty>
+            <Node labelKey="Cascading" sorting="ascending" objectHomeType="UI_ACTION_MENU:MENU_CASCADING_USER">
+               <Handler 
+                     className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+                     allowedTypes="UI_ACTION_MENU:MENU_CASCADING_SYSTEM UI_ACTION_MENU:MENU_CASCADING_USER"
+                     />
+               <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuCatalogFactory">
+                  <CatalogProperty name="menuObjectType">cascading</CatalogProperty>
+               </Catalog>
+            </Node>
+            <Node labelKey="Dynamic" sorting="ascending" objectHomeType="UI_ACTION_MENU:MENU_DYNAMIC_USER">
+               <Handler 
+                     className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+                     allowedTypes="UI_ACTION_MENU:MENU_DYNAMIC_SYSTEM UI_ACTION_MENU:MENU_DYNAMIC_USER"
+                     />
+               <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuCatalogFactory">
+                  <CatalogProperty name="menuObjectType">dynamic</CatalogProperty>
+               </Catalog>
+            </Node>
+         </Node>
+      </Node>
+      <Node labelKey="Menu Entries">
+         <NodeProperty name="wizardShortCutType">UI_ACTION_MENU:MENU_ENTRY_USER</NodeProperty>
+         <CatalogProperty name="menuObjectType">entries</CatalogProperty>
+         <Node labelKey="System" sorting="ascending" objectHomeType="UI_ACTION_MENU:MENU_ENTRY_SYSTEM">
+            <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuCatalogFactory">
+               <CatalogProperty name="menuEntryType">system</CatalogProperty>
+            </Catalog>
+         </Node>
+         <Node labelKey="User" sorting="ascending" objectHomeType="UI_ACTION_MENU:MENU_ENTRY_USER">
+            <Handler 
+                  className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler" 
+                  allowedTypes="UI_ACTION_MENU:MENU_ENTRY_USER UI_ACTION_MENU:MENU_ENTRY_SYSTEM"
+                  />
+            <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSActionMenuCatalogFactory">
+               <CatalogProperty name="menuEntryType">user</CatalogProperty>
+            </Catalog>
+         </Node>
+      </Node>
+      <Node labelKey="Display Formats" sorting="ascending" objectHomeType="UI_DISPLAY_FORMAT">
+         <Handler className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler" allowedTypes="UI_DISPLAY_FORMAT"/>
+         <Catalog type="object" name="UI_DISPLAY_FORMAT"/>
+      </Node>
+      <Node labelKey="Searches">
+         <NodeProperty name="wizardShortCutType">UI_SEARCH:STANDARD</NodeProperty>
+         <Node labelKey="Standard" sorting="ascending" objectHomeType="UI_SEARCH:STANDARD">
+            <CatalogProperty name="filterType">standard</CatalogProperty>
+            <Handler className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler" allowedTypes="UI_SEARCH:STANDARD"/>
+            <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSSearchCatalogFactory">
+            </Catalog>
+         </Node>
+         <Node labelKey="Custom" sorting="ascending" objectHomeType="UI_SEARCH:CUSTOM">
+            <CatalogProperty name="filterType">url</CatalogProperty>
+            <Handler className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler" allowedTypes="UI_SEARCH:CUSTOM"/>
+            <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSSearchCatalogFactory">
+            </Catalog>
+         </Node>
+      </Node>
+      <Node labelKey="Views">
+         <NodeProperty name="wizardShortCutType">UI_VIEW:STANDARD</NodeProperty>
+         <Node labelKey="Standard" sorting="ascending" objectHomeType="UI_VIEW:STANDARD">
+            <CatalogProperty name="filterType">standard</CatalogProperty>
+            <Handler className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler" allowedTypes="UI_VIEW:STANDARD"/>
+            <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSViewCatalogFactory">
+            </Catalog>
+         </Node>
+         <Node labelKey="Custom" sorting="ascending" objectHomeType="UI_VIEW:CUSTOM">
+            <CatalogProperty name="filterType">url</CatalogProperty>
+            <Handler className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler" allowedTypes="UI_VIEW:CUSTOM"/>
+            <Catalog type="class" name="com.percussion.workbench.ui.catalogs.uielements.PSViewCatalogFactory">
+            </Catalog>
+         </Node>
+      </Node>
+   </Node>
+</TreeDef>

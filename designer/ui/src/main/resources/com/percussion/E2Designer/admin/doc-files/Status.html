@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 1.1a for Windows">
+	<TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY>
+
+<P><FONT SIZE="6"><B>Module: <I>Status</I></B></FONT></P>
+<P>This module shows the status of the E2 server as well as all the application on this E2 server. Name filed displays
+the name of the server or the application, the type filed indicates weather it is server or application and the
+status shows weather the application is running or disabled condition.</P>
+<P>Alternatively the list control will show icons the type and status. Each row will have an icon (server\application
+and disabled or enabled) list windows list control.</P>
+<P><BR>
+When server is disabled no applications will be shown, there will be only one entry for server indicating disabled
+state. Start, Stop and restart buttons will be enabled and disabled appropriately when the selected item is changed.</P>
+<P><FONT SIZE="4"><I><B>Initialization</B></I></FONT></P>
+<P>The Init() method of the applet fills the server and application details into the list control. The applet connects
+to the <EM>ObjectStoreManager</EM> on E2 server and requests for <EM>ObjectStoreClient</EM>.</P>
+<P><I>Note:For more details on <EM>ObjectStoreManager</EM> and <EM>ObjectStoreClient</EM>, please see the <EM>com.percussion.objectsore</EM>
+package in the main E2 server specification.</I></P>
+<P>Once ObjectStoreClient connection is established, call getApplicationSummaries method on ObjectStoreClient class
+to get all the running applications on this E2 server. This information will be updated in the list control.</P>
+<P><BR>
+<BR>
+<IMG SRC="status.gif" WIDTH="607" HEIGHT="348" ALIGN="BOTTOM" BORDER="0"></P>
+<P><BR>
+<FONT SIZE="4"><I><B>Admin Password</B></I></FONT></P>
+<P>Click on this button to update the admin password for E2 server. When E2 server is installed '<EM>admin</EM>'
+will be used as the default password. Use this to log into admin client for the first time. Once in Status module,
+click on this button to change the password from '<EM>admin</EM>' to some thing more secure.</P>
+<P><IMG SRC="password.gif" WIDTH="359" HEIGHT="174" ALIGN="BOTTOM" BORDER="0"></P>
+
+<P><I>Note:For more details on this Admin password dialog see PSAdminPassowrd class in <B>com.percussion.server.admin
+package.</B></I></P>
+
+<P><FONT SIZE="4"><I><B>Refresh</B></I></FONT></P>
+
+<P>This will call initialization method to fill the application and server status data again from E2 server.</P>
+
+<P><B><I><BR>
+</I></B><FONT SIZE="4"><I><B>Details</B></I></FONT></P>
+
+<P>Click on this button to see the more details about E2 server or an application. This will bring up the following
+dailog.</P>
+
+<P><IMG SRC="server_details.gif" WIDTH="484" HEIGHT="249" ALIGN="BOTTOM" BORDER="0"></P>
+
+<P>The details for the currently selected item from list control will be shown initially. To see the details for
+different application select it from the combo box labeled <EM>'Status details for:'</EM></P>
+
+<P><I>Note: For more details, see <B>PSServerEventStats</B> class in <B>com.percussion.server</B> package</I></P>
+
+<P><FONT SIZE="4"><I><B>Start</B></I></FONT></P>
+
+<P>This button will be enabled when the selected application or server is in disabled state.Click on this button
+to start selected server or application.</P>
+
+<P><B><I><BR>
+</I></B><FONT SIZE="4"><I><B>Stop</B></I></FONT></P>
+
+<P>This button will be enabled when a running server or application is selected. Click on this button to shutdown
+the server or disable a running application.</P>
+
+<P><FONT SIZE="4"><I><B>Restart</B></I></FONT></P>
+
+<P>This will only applicable to server. This will shutdown the server and restart again. (Should it try to enable
+all the applications by default???)</P>
+
+<P><BR>
+<I>Note: Start and stop buttons will be applicable to applications assuming application state can be set to enabled
+or disabled. If applications do not have any state information, these buttons will only be applied to server.</I>
+
+</BODY>
+
+</HTML>

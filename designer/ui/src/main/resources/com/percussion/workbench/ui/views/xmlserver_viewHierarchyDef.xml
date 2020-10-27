@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file defines the structure for the Rhythmyx workbench 'XML Server' 
+view. This view shows all objects in a tree structure as described in the 
+functional specification.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="EXTENSION"  displayLabelSource="objectLabel">
+      <Handler
+            className="com.percussion.workbench.ui.handlers.PSLegacyDragNodeHandler"
+            iconPath="icons/extension16.gif"
+            securable="false"
+            renamable="false"/>
+   </InstanceTree>
+
+   <InstanceTree objectIds="SLOT">
+      <Handler iconPath="icons/slot16.gif"/>
+   </InstanceTree>
+
+   <InstanceTree objectIds="CONTENT_TYPE">
+      <Handler
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+            iconPath="icons/contentType16.gif"/>
+      <Node labelKey="Associated Variants" objectHomeType="TEMPLATE:VARIANT">
+         <Catalog type="class" 
+               name="com.percussion.workbench.ui.catalogs.canonical.PSContentTypeExpansionFactory"
+               catalogObjectTypes="TEMPLATE:VARIANT">
+            <CatalogProperty name="expansionType">linkedVariantTemplates</CatalogProperty>
+         </Catalog>
+      </Node>
+   </InstanceTree>
+
+   <InstanceTree objectIds="TEMPLATE:VARIANT">
+      <Handler className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+            iconPath="icons/template16.gif"/>
+      <Node labelKey="Contained Slots" sorting="ascending">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSTemplateContainedSlotNodeHandler"
+               allowedTypes="SLOT"/>
+         <Catalog 
+               type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateExpansionFactory" 
+               defaultInstanceTree="false" 
+               isReference="true">
+            <CatalogProperty name="type">containedSlots</CatalogProperty>
+            <Handler 
+                  className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+                  iconPath="icons/slot16.gif"
+                  />
+         </Catalog>
+      </Node>
+      <Node labelKey="Associated Content Type" sorting="ascending">
+         <Catalog 
+            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateExpansionFactory" 
+            defaultInstanceTree="false" 
+            isReference="true"
+            >
+            <CatalogProperty name="linkType">contentType</CatalogProperty>
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+               iconPath="icons/contentType16.gif"
+               />
+         </Catalog>
+      </Node>
+   </InstanceTree>
+
+   <InstanceTree objectIds="USER_FILE:WORKBENCH_FOLDER">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+            securable="false"
+            />
+      <Catalog type="object" name="USER_FILE"/>
+   </InstanceTree>
+
+   <InstanceTree objectIds="XML_APPLICATION:SYSTEM">
+      <Handler
+         copyable="false"
+         deletable="true"
+         pasteable="false"
+         renamable="true"
+         securable="false"
+         className="com.percussion.workbench.ui.handlers.PSDropNodeHandler"
+         iconPath="icons/application16.gif"/>
+   </InstanceTree>
+
+   <InstanceTree objectIds="XML_APPLICATION:USER">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+            iconPath="icons/application16.gif"
+            securable="false"
+            />
+   </InstanceTree>
+
+   <Node labelKey="Applications"
+         objectHomeType="XML_APPLICATION:USER"
+         treeName="xmlApplications"
+         sorting="ascending">
+      <Description>Contains Rhythmyx XML applications.</Description>
+      <Handler
+            className="com.percussion.workbench.ui.handlers.PSDropNodeHandler"
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER XML_APPLICATION:USER"
+            deletable="true"
+            copyable="false"
+            />
+      <Node labelKey="System" objectHomeType="XML_APPLICATION:SYSTEM">
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.legacy.PSXmlApplicationsCatalogFactory">
+            <CatalogProperty name="category">system</CatalogProperty>
+            <Handler
+               copyable="false"
+               deletable="false"
+               pasteable="false"
+               renamable="false"
+               securable="false"
+               className="com.percussion.workbench.ui.handlers.PSDropNodeHandler"
+               iconPath="icons/application16.gif"/>
+         </Catalog>
+      </Node>
+      <Catalog 
+            type="object" 
+            name="USER_FILE"
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER XML_APPLICATION:USER"
+            catalogObjectTypes="USER_FILE:WORKBENCH"
+            />
+      <Catalog 
+            type="class" 
+            name="com.percussion.workbench.ui.catalogs.legacy.PSXmlApplicationsCatalogFactory"
+            catalogObjectTypes="XML_APPLICATION:USER"
+            >
+         <CatalogProperty name="category">uncategorized</CatalogProperty>
+      </Catalog>
+   </Node>
+
+   <Node labelKey="XSL Variants" 
+         objectHomeType="TEMPLATE:VARIANT"
+         sorting="ascending"
+         treeName="variants" 
+         >
+      <NodeProperty name="wizardShortCutType">TEMPLATE:VARIANT</NodeProperty>
+      <CatalogProperty name="userPathRootName">variants</CatalogProperty>
+      <Description>Shows variants useful to XML applications.</Description>
+	      <Handler
+	         className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER TEMPLATE:VARIANT"
+	         />
+         <Catalog 
+            type="object" 
+            name="USER_FILE"
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER TEMPLATE:VARIANT"
+            catalogObjectTypes="USER_FILE:WORKBENCH"
+            />
+	      <Catalog type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateCatalogFactory" catalogObjectTypes="TEMPLATE:VARIANT">
+	            <CatalogProperty name="templateType">variant</CatalogProperty>
+                <CatalogProperty name="category">uncategorized</CatalogProperty>
+	      </Catalog>
+   </Node>
+
+   <Node labelKey="Extensions" sorting="ascending">
+      <Node
+            labelKey="Request Pre-processors"
+            treeName="extensionsIPSRequestPreProcessor"
+            sorting="ascending"
+            >
+         <NodeProperty name="interface">com.percussion.extension.IPSRequestPreProcessor</NodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSRequestPreProcessor</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSRequestPreProcessor</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog
+               type="class"
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionExpansionCatalogFactory"
+               displayLabelSource="objectLabel"
+               />
+      </Node>
+      <Node
+            labelKey="Result Document Processors"
+            treeName="extensionsIPSResultDocumentProcessor"
+            sorting="ascending"
+            >
+         <NodeProperty name="interface">com.percussion.extension.IPSResultDocumentProcessor</NodeProperty>
+         <CatalogProperty name="extensionSubType">com.percussion.extension.IPSResultDocumentProcessor</CatalogProperty>
+         <CatalogProperty name="userPathRootName">extensionsIPSResultDocumentProcessor</CatalogProperty>
+         <Catalog type="object" name="USER_FILE"
+               allowedTypes="USER_FILE:WORKBENCH_FOLDER EXTENSION"/>
+         <Catalog
+               type="class"
+               name="com.percussion.workbench.ui.catalogs.canonical.PSExtensionExpansionCatalogFactory"
+               displayLabelSource="objectLabel"
+               />
+      </Node>
+   </Node>
+
+   <Node labelKey="Configurations" sorting="ascending">
+      <Description>This node contains those configurations that will eventually be removed from the product or replaced.</Description>
+      <Node labelKey="Auth Types" objectId="LEGACY_CONFIGURATION:AUTH_TYPES">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSConfigNodeHandler"
+               iconPath="icons/authtypes16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+
+      <Node labelKey="Components">
+         <Handler 
+               className="com.percussion.workbench.ui.handlers.PSComponentsConfigNodeHandler"
+               iconPath="icons/components16.gif"
+               securable="false"
+               renamable="false"
+               deletable="false"
+               />
+      </Node>
+   </Node>
+</TreeDef>

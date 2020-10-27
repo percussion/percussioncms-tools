@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 1.1a for Windows">
+	<TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1><FONT SIZE="6"><B>Module: <I>Security</I></B></FONT></H1>
+<P><FONT SIZE="2">This module handles all security related settings of E2 server. There are five different types
+of security settings for E2 server. Each one of the following are handled in a separate panel of this module UI</FONT></P>
+
+<UL>
+	<LI><FONT SIZE="2"><I>Security providers</I></FONT>
+	<LI><FONT SIZE="2"><I>Roles</I></FONT>
+	<LI><FONT SIZE="2"><I>Server ACL</I></FONT>
+	<LI><FONT SIZE="2"><I>Back end credentials</I></FONT>
+	<LI><FONT SIZE="2"><I>Encryption</I></FONT>
+</UL>
+
+<P><FONT SIZE="2">Another <EM>symantec.itools.awt.TabPanel</EM>, with tabs to the bottom, is used to manage the
+above groups. </FONT></P>
+
+<P><FONT SIZE="4"><I><B>Security providers</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Security providers form a critical piece of the E2 security system. Every user who tries to access
+the system and is required to log on (applications can define anonymous access which doesn't require authenticated
+users), must be authenticated on some security provider. These entries will usually be set up when the E2 server
+is installed</FONT></P>
+
+<P><FONT SIZE="2">Security provider data will be stored in E2 server object store. The tables for security provider
+will be created when E2 server is installed.</FONT></P>
+
+<P><FONT SIZE="2">E2 handles four different types of security providers</FONT></P>
+
+<UL>
+	<LI><FONT SIZE="2">LDAP security provider</FONT>
+	<LI><FONT SIZE="2">E2 security provider</FONT>
+	<LI><FONT SIZE="2">NT security provider</FONT>
+	<LI><FONT SIZE="2">Web security provider</FONT>
+</UL>
+
+<P><FONT SIZE="2">Admin applet manages the security providers for the E2 server. Applet requests E2 server to provide
+the available security providers. E2 server sends the <EM>com.percussion.util.PSCollection</EM> object with containing
+list of <EM>PSSecurityProvider</EM> object types. </FONT></P>
+
+<P><FONT SIZE="2"><TT>Note:This spec assumes E2 server or Designer defines PSSecurityProvider abstract class and
+PSLDAPSecurityProvider, PSE2SecurityProvider, PSNTSecurityProvider and PSWebSecurityProvider classes.</TT></FONT></P>
+
+<P><FONT SIZE="2">Admin applet displays the security providers from <EM>PSCollection</EM> object in the providers
+list control (<EM>symantec.itools.awt.MultiList</EM> object). The provider will be listed with different icons
+to indicate different types of providers.</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="security_providers.gif" WIDTH="645" HEIGHT="434" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><B>Edit security providers</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">This will allow changes to the currently selected security provider in the list. Depending on
+the provider type the the following information can be updated. </FONT></P>
+<P ALIGN="CENTER"><IMG SRC="LDAP_provider.gif" WIDTH="418" HEIGHT="236" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+
+<P ALIGN="CENTER"><FONT SIZE="2">LDAP Security provider details</FONT></P>
+<P><FONT SIZE="2">For more details on LDAP Security provider details dialog, see <EM>com.percussion.server.admin.PSLdapDetails</EM>
+class</FONT></P>
+<P ALIGN="CENTER"><FONT SIZE="2"></FONT></P>
+
+<P ALIGN="CENTER"><IMG SRC="E2_provider.gif" WIDTH="500" HEIGHT="373" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+
+<P ALIGN="CENTER"><FONT SIZE="2">E2 Security provider</FONT></P>
+<P><FONT SIZE="2">After filling the Server name, database and connection information press Lookup button to get
+the all the available attributes to select from. Alternatively you can use new button to and type the name of the
+attribute, if you know the attributes..</FONT></P>
+
+<P><FONT SIZE="2">For more details on E2 Security provider dialog, see <EM>com.percussion.server.admin.PSE2Details</EM>
+class</FONT></P>
+
+<P><FONT SIZE="2"></FONT></P>
+<P ALIGN="CENTER"><FONT SIZE="2"></FONT></P>
+
+<P ALIGN="CENTER"><IMG SRC="NT_Provider.gif" WIDTH="374" HEIGHT="246" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+
+<P ALIGN="CENTER"><FONT SIZE="2">NT Security provider</FONT></P>
+<P><FONT SIZE="2">For more details on NT Security provider dialog, see <EM>com.percussion.server.admin.PSNTDetails</EM>
+class</FONT></P>
+
+<P><FONT SIZE="2">For more details on Web Security provider dialog, see <EM>com.percussion.server.admin.PSWebDetails</EM>
+class</FONT></P>
+
+<P><FONT SIZE="2"><BR>
+After making changes to provider data press OK button to update this data in the E2 server. Admin Applet sends
+update request to E2 server with the new data for the currently edited provider only.</FONT></P>
+
+<P><FONT SIZE="2"><BR>
+</FONT><B>Add New security provider</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">New button can be used to add a new security provider into the E2 server. When New button is
+selected, it brings up a dialog to select the provider type to add. Select the provider type you want to add and
+press Next&gt;&gt; button. This will bring up one of the above dialog boxes (used to edit security providers).
+Fill the necessary data and press OK to add the provider to E2 server.  Applet send a command to add provider with
+all the data</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="provider_type.gif" WIDTH="402" HEIGHT="156" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+
+<P ALIGN="CENTER"><FONT SIZE="2">Select provider type to Add</FONT></P>
+<P><FONT SIZE="2">For more details on provider type dialog, see <EM>com.percussion.server.admin.PSNewProviderTypeDialog</EM>
+class</FONT></P>
+
+<P><B>Delete security provider</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Delete will send Delete command to E2 server with security provider name and clears the sleeted
+item from list control on successful deletion.</FONT></P>
+
+<P><FONT SIZE="2"><BR>
+</FONT><FONT SIZE="4"><I><B>Roles</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Role is collection of user or group entries. An entry in a role can be User, Group, Machine DNS
+name, IP address or a search filter. Roles provide a convenient way to manage access control list for applications.
+Each member can have security provider specified.</FONT></P>
+
+<P><FONT SIZE="2"><EM>com.percussion.design.objectstore.PSRoleSet</EM> class will be used to get roles from E2
+server. This role set contains collection of <EM>com.percussion.design.objectstore.PSRole</EM> objects. This role
+set will be enumerated and displayed in the customized MultiList control.List control will be customized to expand
+and collapse on role members.</FONT></P>
+
+<P><FONT SIZE="2">The Role name will occupy a row in the list control with an Role cons as well as +, - icons to
+represent expanded or collapsed state for its members.</FONT></P>
+
+<P><FONT SIZE="2">Each member of the role will be a child of role with member type icon and lines representing
+tree type hierarchy. member type, provider type will be shown in the extra columns.</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="roles.gif" WIDTH="647" HEIGHT="438" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2"><TT>Note:V1 will get all the roles and display them in the list. Depending on the performance
+future versions may implement virtual controls to read and show partial roles.</TT></FONT></P>
+
+<P><B>Delete</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Delete button will delete the selected item from list. If the selected item is role, all its
+members will also be deleted. Applet will send changed role data to E2 server with update command to update and
+delete command to delete Role (Delete members will be handled in update role command). Add role will send New role
+command to E2 server</FONT></P>
+
+<P><B>Add member(s)</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Adds or removes members from selected role. If selected item in the list control is not role,
+this button will be disabled. Role members will be updated in the following dialog</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="role_details.gif" WIDTH="524" HEIGHT="359" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><FONT SIZE="2">Set the provider information and press Lookup button to get the possible members. The fetch has
+to go through E2 server because Applet can not connect to the server other than where it came from. This will send
+request to E2 server and get the data.</FONT></P>
+
+<P><FONT SIZE="2">If you know the member names you can enter it by pressing new button. &lt; and &lt;&lt; buttons
+will remove members from this role. &lt;, &lt;&lt;, &gt; and &gt;&gt; buttons will be replaced by bitmap buttons
+with better icons.</FONT></P>
+
+<P><FONT SIZE="2">If the member type if Filter the members list box will be grayed out and Filter string text box
+will be enabled to accept filter string.</FONT></P>
+
+<P><FONT SIZE="2">For more details on Role members dialog, see <EM>com.percussion.server.admin.PSAddRoleMembers</EM>
+class</FONT></P>
+
+<P><B>Add role</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Add a new role by clicking on this button.</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="newRole.gif" WIDTH="386" HEIGHT="120" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><FONT SIZE="2">Once the role is entered select Add Members button to add members to this new role.</FONT><FONT
+SIZE="4"><I><B> </B></I></FONT><FONT SIZE="2">For more details on add role dialog, see <EM>com.percussion.server.admin.PSAddRole</EM>
+class</FONT><FONT SIZE="4"><I><B></B></I></FONT></P>
+
+<P><FONT SIZE="4"><I><B>Server ACL</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Applet requests ACL from server and constructs <EM>com.percussion.design.objectstore.PSAcl</EM>
+class from the data server sends in.getEntries method of this object gives the collection of <EM>com.percussion.design.objectstore.PSAclEntry</EM>
+objects. These objects will be shown in symantec.itools.awt.MultiList control as shown here</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="serverACL.gif" WIDTH="647" HEIGHT="443" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2">&nbsp;</FONT></P>
+<P><FONT SIZE="2">The *s in this dialog will be replaced with check mark bitmap and image list be included for
+the items in this list control.</FONT></P>
+
+<P><FONT SIZE="2">There will be only one Server ACL object for each E2 server in the object store.When E2 server
+is installed the server ACL will be created in the object store with default access entry.</FONT></P>
+
+<P><B>Edit</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Select an item in the list and click Edit button to update an ACL entry. The selected item will
+be shown the dialog</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="entryDetails.gif" WIDTH="396" HEIGHT="237" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><FONT SIZE="2">Pressing OK will update the entry into E2 server. Cancel will close this dialog without updating
+the ACL Entry. For more details on ACL Entry details dialog, see <EM>com.percussion.server.admin.PSAclEntryDetails</EM>
+class</FONT></P>
+
+<P><FONT SIZE="2"><TT>Note: There are some differences in ACL entry properties between E2 designer and this dialog
+(Query access etc.). Some of them may not be relevant to server ACL</TT></FONT></P>
+
+<P><B>Delete</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Deletes the selected entries from server ACL and updates this list control.</FONT></P>
+
+<P><B>New</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Creates new ACL Entry object and sends request for E2 server to update its ACL. This will bring
+the same dialog that is shown in the Edit option with empty fields. Enter the appropriate values and press OK to
+add new entry into ACL.</FONT></P>
+
+<P><FONT SIZE="2"><BR>
+</FONT><FONT SIZE="4"><I><B>Back end credentials</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Credentials contain information needed to logging to a back-end data source. Both public (server
+level) and private (application level) credential aliases exist. Only public aliases can be added / edited via
+the administration client. Designer uses these credentials when creating applications.</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="credentials.gif" WIDTH="644" HEIGHT="443" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><FONT SIZE="2"><EM>com.percussion.design.objectstore.PSBackEndCredential</EM> class is designed to handle credentials.
+We may need a collection class (extension of <EM>PSCollection</EM>) to handle all the server level credentials.
+Credentials will be stored in the object store. When E2 server is installed it will create table in object store
+for credentials.</FONT></P>
+
+<P><B>Edit</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">This will allow to make changes to a selected credential. The following credential details screen
+comes up with details. Make changes and press OK to update the credential. This will send a update request to E2
+server with new credential data and old credential name.</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="credential_details.gif" WIDTH="436" HEIGHT="295" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><FONT SIZE="2">For more details on credential alias details dialog, see <EM>com.percussion.server.admin.PSAliasDetails</EM>
+class</FONT></P>
+
+<P><B>Delete</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">Deletes the current selection from credential list. This will send delete command with credential
+name to E2 server.</FONT></P>
+
+<P><B>New</B><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">This brings up the same dialog shown in Edit operation without any data. Enter the credential
+data and press OK to add new credential to E2 server. The server will send Add credential command with the data
+to add credential to the object store.</FONT></P>
+
+<P><FONT SIZE="2"><BR>
+</FONT><FONT SIZE="4"><I><B>Encryption</B></I></FONT><FONT SIZE="2"></FONT></P>
+
+<P><FONT SIZE="2">This screen defines default encryption level and key length for applications and administration
+client. V1 does not use this because we can not support SSL through Java easily. Admin client uses SSL for first
+logging screen (HTML screen) but all the actions done in applet will not be SSL complient.</FONT></P>
+<P ALIGN="CENTER"><IMG SRC="encryption.gif" WIDTH="644" HEIGHT="443" ALIGN="BOTTOM" BORDER="0"><FONT SIZE="2"></FONT></P>
+<P><FONT SIZE="2">These settings will go as part of <EM>PSServerConfiguration</EM> object on E2 server.</FONT></P>
+
+<P><FONT SIZE="2"><BR>
+<TT>Note: As per Paul's comments the error pages are removed from encryption screen. So this screen looks different
+from the one shown in functional specification</TT></FONT>
+
+</BODY>
+
+</HTML>

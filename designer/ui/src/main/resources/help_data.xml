@@ -1,0 +1,6 @@
+<extensions>
+<!--  This is how you can hide a help toc that is installed.     
+   <hidden>
+      <toc id="/org.eclipse.wst.doc.user/toc.xml"/>
+   </hidden> -->
+</extensions>

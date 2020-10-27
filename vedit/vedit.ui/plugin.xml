@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="de.byteaction.velocity.ui"
+   name="%pluginName"
+   version="2.0.2"
+   provider-name="%providerName"
+   class="de.byteaction.velocity.vaulttec.ui.VelocityPlugin">
+
+ <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%editorName"
+            extensions="%fileExtensions"
+            icon="icons/full/obj16/vsl_file.gif"
+            class="de.byteaction.velocity.editor.MultiPageEditor"
+            contributorClass="de.byteaction.velocity.editor.VelocityEditorActionContributor"
+            id="de.byteaction.velocity.editor.Editor">
+      </editor>
+   </extension>
+   <extension
+	point="org.eclipse.ui.ide.markerResolution">
+	<markerResolutionGenerator
+		markerType="org.eclipse.core.resources.problemmarker"
+		class="de.byteaction.velocity.editor.VelocityMarkerResolutionGenerator">
+	</markerResolutionGenerator>
+</extension>
+  <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            objectClass="org.eclipse.core.resources.IResource"
+            nameFilter="*.vm"
+            id="de.byteaction.velocity.vaulttec.ui.edit.format">
+         <action
+               label="VeloFormat ..."
+               icon="icons/full/obj16/vsl_file.gif"
+               class="de.byteaction.velocity.vaulttec.ui.editor.actions.FormatResourceAction"
+               menubarPath="additions"
+               enablesFor="*"
+               id="de.byteaction.velocity.vaulttec.ui.edit.format">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            objectClass="org.eclipse.core.resources.IFolder"
+           
+            id="de.byteaction.velocity.vaulttec.ui.edit.format2">
+         <action
+               label="VeloFormat ..."
+               icon="icons/full/obj16/vsl_file.gif"
+               class="de.byteaction.velocity.vaulttec.ui.editor.actions.FormatResourceAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="de.byteaction.velocity.vaulttec.ui.edit.format">
+         </action>
+      </objectContribution>
+   </extension>
+ 
+   <extension
+         point="org.eclipse.ui.commands">
+  
+       <command
+            name="(Veloeclipse)Toggle Comment"
+            category="org.eclipse.ui.category.textEditor"
+            description="%command.togglecomment.description"
+            id="de.byteaction.velocity.vaulttec.ui.edit.toggle.comment">
+      </command>
+      <command
+            name="(Veloeclipse)Format"
+            category="org.eclipse.ui.category.textEditor"
+            description="%command.format.description"
+            id="de.byteaction.velocity.vaulttec.ui.edit.format">
+      </command>
+     <keyBinding
+            string="Ctrl+Alt+f"
+            scope="de.byteaction.velocity.vaulttec.ui.velocityEditorScope"
+            command="de.byteaction.velocity.vaulttec.ui.edit.format"
+            configuration="org.eclipse.ui.defaultAcceleratorConfiguration"
+			keyConfigurationId="de.byteaction.formatkey">
+      </keyBinding>
+      <keyBinding
+            string="Ctrl+7"
+            scope="de.byteaction.velocity.vaulttec.ui.velocityEditorScope"
+            command="de.byteaction.velocity.vaulttec.ui.edit.toggle.comment"
+            configuration="org.eclipse.ui.defaultAcceleratorConfiguration"
+			keyConfigurationId="de.byteaction.togglecommentkey2">
+      </keyBinding>
+       <command
+            name="(Veloeclipse)JTidy"
+            category="org.eclipse.ui.category.textEditor"
+            description="%command.jtidy.description"
+            id="de.byteaction.velocity.vaulttec.ui.edit.jtidy">
+      </command>
+
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="General Preferences"
+            category="de.byteaction.velocity.preferences"
+            class="de.byteaction.velocity.preferences.GeneralPreferencePage"
+            id="de.byteaction.velocity.preferences.general">
+      </page>
+      <page
+            name="Tidy Preferences"
+            category="de.byteaction.velocity.preferences"
+            class="de.byteaction.velocity.preferences.JtidyPreferencePage"
+            id="de.byteaction.velocity.preferences.jtidy">
+      </page>
+      <page
+            name="%mainPreferencesName"
+            class="de.byteaction.velocity.preferences.VelocityPreferencePage"
+            id="de.byteaction.velocity.preferences">
+      </page>
+      <page
+            name="%libraryPreferencesName"
+            category="de.byteaction.velocity.preferences"
+            class="de.byteaction.velocity.preferences.LibraryPreferencePage"
+            id="de.byteaction.velocity.preferences.library">
+      </page>
+      <page
+            name="%editorPreferencesName"
+            category="de.byteaction.velocity.preferences"
+            class="de.byteaction.velocity.preferences.EditorPreferencePage"
+            id="de.byteaction.velocity.preferences.editor">
+      </page>
+      <page
+            name="Veloeclipse Templates"
+            category="de.byteaction.velocity.preferences"
+            class="de.byteaction.velocity.preferences.TemplatesPreferencePage"
+            id="de.byteaction.velocity.ui.page1">
+      </page>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.templates">
+      <contextType
+            name="%vm.contextType.name"
+            class="de.byteaction.velocity.ui.VeloContextType"
+            id="de.byteaction.velocity.ui.contextType1">
+      </contextType>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+   </extension>
+</plugin>

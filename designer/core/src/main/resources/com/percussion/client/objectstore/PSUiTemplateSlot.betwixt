@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="templateslot">
+  	<hide property="type"/>
+  	<hide property="slotAssociations"/>
+    <element name="slotTypeAssociations">
+       <element name="slotTypeAssociation" property="slotTypeAssociations" updater="addSlotTypeAssociation" forceAccessible="true"/>
+    </element>
+  	<addDefaults/>
+  </element>
+</info>

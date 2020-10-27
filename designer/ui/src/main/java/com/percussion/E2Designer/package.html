@@ -1,0 +1,194 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+<title>E2 Designer</title>
+<meta NAME="Template" CONTENT="E:\msoffice\Office\html.dot">
+</head>
+
+<body LINK="#0000ff" VLINK="#800080">
+
+<p><!--
+   $Id: package.html 1.1 1999/01/27 20:19:32Z PaulHoward Release $
+   Version Labels  : $Name: Pre_CEEditorUI RX_40_REL 20010618_3_5 20001027_3_0 20000724_2_0 20000522_1_1 20000501_1_1 20000327_1_1 20000111_1_0 991227_1_0 991214_1_0 991213_1_0 991202_1_0 Release_1_0_Intl Release_10_1 Release_10 $
+   Locked By       : $Locker: $
+   Revision History:
+                     $Log $
+--> </p>
+
+<p>The E2Designer is a program that allows a designer to create applications visually. The
+first thing we need to do is look at the overall system so we can see how it all fits
+together. The Framework is the main program that ties everything together, but doesn't
+provide any useful information to the designer. There are 3 key components that provide
+content interesting to the designer: the Process view, Pipe view and Browser. Each of
+these objects is a container for other objects that actually do the work. A representation
+of these objects is shown in the following picture. Every box in this figure represents an
+object that will be implemented as a class. Let's look at each of them in turn.</p>
+
+<p ALIGN="CENTER"><img SRC="doc-files/system.gif" width="373" height="301"></p>
+<font SIZE="2">
+
+<p ALIGN="CENTER">System Diagram</p>
+</font>
+
+<p>Note: <i>designer</i> and <i>user</i> will be used interchangeably in this document to
+mean the same thing, the person using the program. <i>End-user</i> will be used to mean
+the person using the application designed with this program.</p>
+<font FACE="Arial"><i><b>
+
+<p>Framework</p>
+</b></i></font>
+
+<p>The framework is the main frame window for the program. It contains the process views
+and pipe views as child windows in a JDesktopPane window. Swing supports the concept of
+MDI via the JInternalFrame object.</p>
+
+<p>The main menu is defined at compile time except for the Insert menu, which includes a
+list of objects that can be inserted into a view. To make it easier to add objects in the
+future, the dropdown menu for this item will be created dynamically by querying the
+currently active window to see if it has anything to insert. If no items are available,
+and the main menu item doesn't have any items by default, the main menu item will be
+removed from the main menu while this window is active. </p>
+
+<p>The class hierarchy diagram showing the main frame, views and related diagrams is shown
+in the following picture.</p>
+
+<MAP NAME="MainFrame">
+	<AREA SHAPE="RECT" COORDS="238,371, 464, 684" HREF="UIFigureFrame.html">
+	<AREA SHAPE="RECT" COORDS="361,861, 533, 940" HREF="FigureFactoryManager.html">
+	<AREA SHAPE="RECT" COORDS="35,820, 156, 888" HREF="Pipe.html">
+	<AREA SHAPE="RECT" COORDS="651,763, 780, 831" HREF="PipeFigureFactory.html">
+	<AREA SHAPE="RECT" COORDS="596,682, 725, 749" HREF="AppFigureFactory.html">
+	<AREA SHAPE="RECT" COORDS="339,744, 471, 833" HREF="UIAppFrame.html">
+	<AREA SHAPE="RECT" COORDS="74,741, 195, 809" HREF="Application.html">
+	<AREA SHAPE="RECT" COORDS="70,589, 191, 656" HREF="Data.html">
+	<AREA SHAPE="RECT" COORDS="590,478, 775, 612" HREF="FigureFactory.html">
+	<AREA SHAPE="RECT" COORDS="198,744, 326, 834" HREF="UIPipeFrame.html">
+	<AREA SHAPE="RECT" COORDS="71,522, 191, 581" HREF="IPersist.html">
+	<AREA SHAPE="RECT" COORDS="70,463, 191, 495" HREF="AutoCreateConnector.html">
+	<AREA SHAPE="RECT" COORDS="71,425, 191, 456" HREF="AutoCreatePipe.html">
+	<AREA SHAPE="RECT" COORDS="550,354, 671, 458" HREF="IEditor.html">
+	<AREA SHAPE="RECT" COORDS="550,285, 671, 345" HREF="IDynamicActions.html">
+	<AREA SHAPE="RECT" COORDS="70,300, 197, 389" HREF="ICustomDropAction.html">
+	<AREA SHAPE="RECT" COORDS="592,94, 714, 157" HREF="UIConnectableFigure.html">
+	<AREA SHAPE="RECT" COORDS="70,112, 276, 270" HREF="UIMainFrame.html">
+</MAP>
+<p ALIGN="CENTER">
+<TABLE border="0">
+<tr><td><IMG SRC="doc-files/mainframe.gif" USEMAP="#MainFrame"></td></tr>
+</TABLE>
+
+
+<p>&nbsp;</p>
+<font FACE="Arial"><i><b>
+
+<p>Process and Pipe Views</p>
+</b></i></font>
+
+<p>Both views in this application are visual editors. The process view is an editor for
+the application while the pipe view is an editor for the dataset object. </p>
+
+<p>On initial inspection, it may be thought that each view and the objects associated with
+that view vary enough that different classes would be called for. However, after reviewing
+the properties for each one, it became apparent that they are fundamentally the same.
+Thus, a common base class will be created for both views. </p>
+
+<p>Both editors have the same basic operations: 
+
+<ul>
+  <li>Inserting and removing objects </li>
+  <li>Selection operations, including drag box selection </li>
+  <li>Editing: cut, copy and paste </li>
+  <li>Drag and drop, including custom drop actions </li>
+  <li>Connecting 2 figures </li>
+  <li>Allowing custom intra-window drag operations (for example to support resizing)</li>
+</ul>
+
+<p>All of these operations can be supported for any object in either window. </p>
+
+<p>Many different objects are displayed and edited in either view, but the frame has no
+specific knowledge about any object. To support this capability, a figure factory will be
+created that knows about all the objects that a certain type of view supports. This
+factory will be obtained by the base class via an abstract protected call,
+getFigureFactory(). The derived class will return the appropriate factory for the view
+instance. </p>
+
+<p>Since a figure factory is required for each view, a common base class was created to
+create an interface for the factories. Then the derived instance of each factory will have
+the information specific to that factory. Since only a single instance of a particular
+factory is ever needed, to conserve memory only a single instance is created (singleton
+pattern). This is implemented by creating a figure factory that creates the first instance
+and caches it for each successive request. Again, the singleton pattern is appropriate for
+the factory manager and is enforced by a static method in the manager that returns the
+single instance (creating it the first time).</p>
+<font FACE="Arial"><i><b>
+
+<p>UIObjects</p>
+</b></i></font>
+
+<p>All objects appearing on the screen will be represented by an image (GIF file) by
+default. (To customize appearance, the custom object would need to derive from the base
+object.) They will have an associated data object and an editor for modifying the data.
+The data and the editor will be treated polymorphically. The creator of this object is
+responsible for supplying a data object and editor that are compatible.</p>
+
+<p>Initially, each object will display a single image when it is attached to another
+object and a possibly different image when it is not attached. This could be extended in a
+future version to support images that are dependent on the state of the data.</p>
+
+<p>If we look at all the objects in any of the views (except the connector), they are the
+same except for 4 traits: 
+
+<ul>
+  <li>Object name </li>
+  <li>Associated data object </li>
+  <li>The editor for the data object </li>
+  <li>Bitmap image(s) used for display of the object</li>
+</ul>
+
+<p>This implies a common base class can be used for all of the objects. As we did in PWB,
+we could have derived a separate class for each of the desired objects, but I thought it
+more efficient if we created a factory that knew how to create each object by maintaining
+a table that stored the varying information for all of the objects (a different factory
+will be used for each view). The figure class would store the data and its editor in each
+of their base class forms. The class hierarchy diagram is shown in the following picture.</p>
+
+<MAP NAME="Figure">
+	<AREA SHAPE="RECT" COORDS="149,698, 248, 758" HREF=" UIPipe.html">
+	<AREA SHAPE="RECT" COORDS="0,697, 98, 758" HREF=" UIConnector.html">
+	<AREA SHAPE="RECT" COORDS="612,383, 726, 435" HREF=" ISelectable.html">
+	<AREA SHAPE="RECT" COORDS="413,467, 643, 691" HREF=" UIConnectionPoint.html">
+	<AREA SHAPE="RECT" COORDS="30,407, 332, 621" HREF=" UIConnectableFigure.html">
+	<AREA SHAPE="RECT" COORDS="408,236, 505, 297" HREF=" FigureTransfer.html">
+	<AREA SHAPE="RECT" COORDS="158,91, 320, 322" HREF=" UIFigure.html">
+</MAP>
+
+<p ALIGN="CENTER">
+<table border="0">
+	<tr><td><IMG SRC="doc-files/figure.gif" USEMAP="#Figure"></td></tr>
+</table>
+
+<p>Objects will maintain a Selected property, which will be used by the containing frame
+to manage user selection operations.</p>
+
+<p>To support selective connectivity between objects, a UIConnectionPoint class will be
+created. A figure can have 0 or more connection points. Each connection point is visible
+to the end user to indicate an attachment point. Unlike PWB, when another figure is
+attached, no connection point is created in the attaching figure, it just maintains a list
+of the connection points that it is attached to.</p>
+
+<p>To minimize resource usage, a bitmap manager will be designed. All objects will load
+their bitmaps through this manager, thus allowing sharing of bitmaps. The bitmap manager
+will maintain a reference to each loaded bitmap and will return that reference when the
+image is requested. If needed, we could add a timeout to the cache.</p>
+<font FACE="Arial"><i><b>
+
+<p>E2 Server Proxy </p>
+</b></i></font>
+
+<p>The server proxy is implemented by using local copies of various classes that are
+provided by the server.&nbsp;These include the com.percussion.design.objectstore and
+com.percussion.design.catalog packages.</p>
+</body>
+</html>

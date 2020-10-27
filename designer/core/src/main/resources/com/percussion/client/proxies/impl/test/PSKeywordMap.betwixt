@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="keyword-list">
+    <element name="keyword" property="all" updater="addKeyword" forceAccessible="true"/>
+  </element>
+</info>
