@@ -629,7 +629,7 @@ public class PSCoreFactory
          Error err = (Error) error;
          return err.getErrorMessage();
       }
-      String msg = ((Throwable) error).getLocalizedMessage();
+      String msg = ((Throwable) error).toString();
       if (msg.trim().length() > 0)
          return msg;
       return null;
