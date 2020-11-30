@@ -4,14 +4,11 @@
 <product name="Percussion Workbench Product" uid="com.percussion.workbench.ui.product.id" id="com.percussion.workbench.ui.product" application="com.percussion.workbench.ui.application" version="5.4.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
-   -vmargs
-   -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8056
    </configIni>
 
    <launcherArgs>
         <!--<programArgs>-clearPersistedState</programArgs>-->
           <vmArgs>-Dosgi.requiredJavaVersion=1.8
-        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8056
         -Xms128m
         -Xmx384m</vmArgs>
           <vmArgsMac></vmArgsMac>
