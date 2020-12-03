@@ -27,6 +27,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.apache.sanselan:sanselan:0.97-incubator" level="project" />
     <orderEntry type="module" module-name="perc-server-ui-cmp" />
     <orderEntry type="library" name="Maven: com.percussion:CMLite-Main:5.4.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.percussion:perc-simple:5.4.0-SNAPSHOT" level="project" />
@@ -242,7 +243,7 @@
     <orderEntry type="library" name="Maven: axis:axis-saaj:1.3" level="project" />
     <orderEntry type="library" name="Maven: wsdl4j:wsdl4j:1.6.3" level="project" />
     <orderEntry type="library" name="Maven: javax.xml:jaxrpc-api:1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.sanselan:sanselan:0.97-incubator" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-imaging:1.0-alpha2" level="project" />
     <orderEntry type="library" name="Maven: soap:soap:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.htmlparser:htmlparser:1.6" level="project" />

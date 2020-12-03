@@ -2,17 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/CodeGenerator" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ContentExplorer" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ContentUI" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Help" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/PackagerUI" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ServerPropertiesEditor" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ServerUIComponents" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/designer" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/loader" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/perc-devtools-distribution" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/perc-eclipse" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vedit" vcs="Git" />
   </component>
 </project>
