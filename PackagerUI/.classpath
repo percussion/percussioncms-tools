@@ -194,7 +194,7 @@
   <classpathentry kind="var" path="M2_REPO/tomcat/jasper-runtime/5.5.9/jasper-runtime-5.5.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/cargo/cargo-core-uberjar/1.0-beta-2/cargo-core-uberjar-1.0-beta-2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/cargo/cargo-ant/1.0-beta-2/cargo-ant-1.0-beta-2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-discovery/commons-discovery/0.4/commons-discovery-0.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-discovery/commons-discovery/0.5/commons-discovery-0.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/cargo/cargo-core-container-jonas/1.0-beta-2/cargo-core-container-jonas-1.0-beta-2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-j2ee-management_1.0_spec/1.1/geronimo-j2ee-management_1.0_spec-1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-ejb_2.1_spec/1.1/geronimo-ejb_2.1_spec-1.1.jar"/>

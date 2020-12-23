@@ -186,7 +186,7 @@
   <classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache/1.6.1/ehcache-1.6.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/quartz-scheduler/quartz/2.0.2/quartz-2.0.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/axis/axis/1.4/axis-1.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/axis/axis/1.4.1/axis-1.4.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/sanselan/sanselan/0.97-incubator/sanselan-0.97-incubator.jar"/>
   <classpathentry kind="var" path="M2_REPO/soap/soap/2.3.1/soap-2.3.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
@@ -214,7 +214,7 @@
   <classpathentry kind="var" path="M2_REPO/tomcat/jasper-runtime/5.5.9/jasper-runtime-5.5.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/cargo/cargo-core-uberjar/1.0-beta-2/cargo-core-uberjar-1.0-beta-2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/cargo/cargo-ant/1.0-beta-2/cargo-ant-1.0-beta-2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-discovery/commons-discovery/0.4/commons-discovery-0.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-discovery/commons-discovery/0.5/commons-discovery-0.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/cargo/cargo-core-container-jonas/1.0-beta-2/cargo-core-container-jonas-1.0-beta-2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-j2ee-management_1.0_spec/1.1/geronimo-j2ee-management_1.0_spec-1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-ejb_2.1_spec/1.1/geronimo-ejb_2.1_spec-1.1.jar"/>
