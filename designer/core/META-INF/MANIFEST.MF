@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Rhythmyx Designer Core Plug-in
-Bundle-SymbolicName: com.percussion.client
+Bundle-SymbolicName: com.percussion.client;singleton:=true
 Bundle-Version: 5.4.0.qualifier
 Require-Bundle: org.eclipse.core.runtime
 Export-Package: com.percussion.client,
