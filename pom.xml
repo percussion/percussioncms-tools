@@ -87,7 +87,7 @@
         <jackson.version>2.10.1</jackson.version>
         <jsoup.version>1.11.3</jsoup.version>
         <json.version>20180813</json.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <cactus.version>13-1.7.1</cactus.version>
         <cactus.sysproperties>cactus.contextURL</cactus.sysproperties>
         <cactus.contextURL>http://localhost:9992/Rhythmyx</cactus.contextURL>
