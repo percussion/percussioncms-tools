@@ -1,0 +1,98 @@
+ ############################################################################
+ #
+ # $Id: package.nmk 1.5 2001/09/27 13:38:46Z martingenhart Release $
+ #
+ # Version Labels	: $Name: Pre_CEEditorUI RX_40_REL $
+ #
+ # Locked By		: $Locker: $
+ #
+ # Revision History:
+ #	$Log: package.nmk $
+ #	Revision 1.5  2001/09/27 13:38:46Z  martingenhart
+ #	added new editResetError.gif
+ #	
+ #	Revision 1.4  2000/06/28 20:18:01Z  martingenhart
+ #	Revision 1.3  2000/06/08 19:47:51Z  martingenhart
+ #	Revision 1.2  2000/06/06 19:23:03Z  martingenhart
+ #	Revision 1.1  1999/12/28 17:20:12Z  markdandrea
+ #	Initial revision
+ #	Revision 1.1  1999/09/23 14:53:16Z  chadloder
+ #	Initial revision
+ #
+ ############################################################################
+ 
+PACKAGE=com.percussion.htmlConverter.images
+
+#
+# These are our (internal) tests
+#
+TEST_CLASSES =
+
+# Strip export-restricted classes from the jar
+#
+.IF $(JAR_EXPORT)
+	EXCLUDED_CLASSES = \
+		$(EXCLUDED_CLASSES)
+.END
+
+#
+# Strip testing and non-essential classes from the jar
+#
+.IF $(JAR_PRODUCTION)
+	EXCLUDED_CLASSES = \
+		$(EXCLUDED_CLASSES) \
+		$(TEST_CLASSES)
+.END
+
+#
+# These will go in the default (unshared) jar file for this package.
+#
+DEFAULT_CLASSES =
+
+#
+# These will go in the shared jar file.
+#
+SHARED_CLASSES =
+
+#
+# Properties files
+#
+PROPERTIES =
+
+#
+# Image files
+#
+IMAGES = \
+about.gif \
+aboutrhythmyx.gif \
+fileSaveAllAs.gif \
+fileSaveAs.gif \
+help.gif \
+newFile.gif \
+openFile.gif \
+optionsFile.gif \
+rxsl16.gif \
+rxsl32.gif \
+XSpLit.gif \
+editFind.gif \
+editRedo.gif \
+editUndo.gif \
+editCut.gif \
+editCopy.gif \
+editPaste.gif \
+editDelete.gif \
+editResetError.gif \
+toolsBrowser.gif \
+toolsMerge.gif \
+toolsSplit.gif \
+empty.gif
+
+#
+# Resource files (properties and image files combined)
+#
+RESOURCES = \
+	$(PROPERTIES) \
+	$(IMAGES)
+
+ALL_CLASSES =  $(SHARED_CLASSES) $(DEFAULT_CLASSES) $(TEST_CLASSES)
+ALL_FILES = $(ALL_CLASSES) $(RESOURCES)

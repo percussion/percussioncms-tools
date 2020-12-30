@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<gizmos>
+  <product>
+    <name>Gizmo</name>
+    <comment>Slightly more mo than giz.</comment>
+    <feature>
+			Low maintenance!
+		</feature>
+    <feature>
+			Trouble free!
+		</feature>
+  </product>
+</gizmos>

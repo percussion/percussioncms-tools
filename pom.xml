@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.percussion</groupId>
     <artifactId>desktop</artifactId>
-    <version>5.4.0-SNAPSHOT</version>
+    <version>8.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>Help</module>
@@ -14,6 +14,7 @@
         <module>PackagerUI</module>
         <module>ContentExplorer</module>
         <module>ServerPropertiesEditor</module>
+        <module>htmlconverter</module>
         <module>perc-devtools-distribution</module>
     </modules>
 
@@ -546,7 +547,7 @@
                         <dependency>
                             <groupId>com.percussion</groupId>
                             <artifactId>rxutils</artifactId>
-                            <version>5.4.0-SNAPSHOT</version>
+                            <version>8.0.0-SNAPSHOT</version>
                         </dependency>
                         <dependency>
                             <groupId>xerces</groupId>
