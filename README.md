@@ -22,17 +22,6 @@ You will need to add an Oracle 1.8 to your ~/.m2/toolchains.xml file (C:\Users\<
 ## Importing into IntelliJ
 From the main IntelliJ menu pick import from source control and provide https://github.com/percussion/percussioncms-tools.git as the URL for the repository.
 
-## Sub Modules
-The tools are in the repository as separate sub modules.  The following commands should run before you start to work on code changes.
-
-```shell script
-git checkout development
-git fetch
-git pull
-git submodule foreach --recursive git fetch
-git submodule foreach --recursive git checkout development
-git submodule foreach --recursive git pull
-```
 
 ## Building the projects
 ```shell script
