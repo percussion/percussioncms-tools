@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<features>
+  <item>
+    <feature>It's cheap!</feature>
+  </item>
+  <item>
+    <feature>It's easy!</feature>
+    <feature>It's fun!</feature>
+  </item>
+  <item>
+    <feature>Low maintenance</feature>
+  </item>
+</features>

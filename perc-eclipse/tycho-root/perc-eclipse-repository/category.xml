@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.percussion.workbench.ui.feature_5.4.0.qualifier.jar" id="com.percussion.workbench.ui.feature" version="5.4.0.qualifier">
+   <feature url="features/com.percussion.workbench.ui.feature_8.0.0.qualifier.jar" id="com.percussion.workbench.ui.feature" version="8.0.0.qualifier">
       <category name="percussion_category_id"/>
    </feature>
 

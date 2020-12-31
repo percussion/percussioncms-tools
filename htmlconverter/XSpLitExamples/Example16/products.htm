@@ -1,0 +1,79 @@
+<html>
+
+<head>
+<title>Example 16</title>
+</head>
+
+<body>
+
+<table border="1" width="60%">
+  <tr bgcolor="lightgrey">
+    <th>Product</th>
+    <th>Select Your Favorite Features</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <!-- Main context is widget's -->
+    <td>psx-product/name</td>
+    <td>
+      <form method="POST">
+        <table>
+          <tr>
+            <td>
+              <input type="checkbox" id="1" name="widget">psx-product/feature
+            </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+    <td>
+      <form method="POST">
+        <textarea rows="2" name="S1" cols="20">psx-product/comment</textarea>
+      </form>
+    </td>
+  </tr>
+  <tr>
+    <!-- psx-docalias="gadgets" psx-docref="gadgets.xml" -->
+    <td>psx-/gadgets/product/name</td>
+    <td>
+      <form method="POST" id=form1 name=form1>
+        <table>
+          <tr>
+            <td>
+              <input type="checkbox" id="2" name="gadget">psx-/gadgets/product/feature
+            </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+    <td>
+      <form method="POST" id=form2 name=form2>
+        <textarea rows="2" name="S1" cols="20">psx-/gadgets/product/comment</textarea>
+      </form>
+    </td>
+  </tr>
+  <tr>
+    <!-- psx-docalias="gizmos" psx-docref="gizmo/gizmos.xml" -->
+    <td>psx-/gizmos/product/name</td>
+    <td>
+      <form method="POST" id=form3 name=form3>
+        <table>
+          <tr>
+            <td>
+              <input type="checkbox" id="2" name="gizmo">psx-/gizmos/product/feature
+            </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+    <td>
+      <form method="POST" id=form4 name=form4>
+        <textarea rows="2" name="S1" cols="20">psx-/gizmos/product/comment</textarea>
+      </form>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+</html>

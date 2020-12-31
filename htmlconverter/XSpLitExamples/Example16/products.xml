@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<products>
+  <product>
+    <name>Widget</name>
+    <comment>Grade AA widging device.</comment>
+    <feature>
+			It's cheap!
+		</feature>
+    <feature>
+			It's easy!
+		</feature>
+    <feature>
+			It's fun!
+		</feature>
+  </product>
+</products>

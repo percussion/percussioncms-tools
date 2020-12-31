@@ -4,10 +4,10 @@
     <parent>
         <groupId>com.percussion</groupId>
         <artifactId>tycho-root</artifactId>
-        <version>5.4.0-SNAPSHOT</version>
+        <version>8.0.0-SNAPSHOT</version>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
-    <version>5.4.0-SNAPSHOT</version>
+    <version>8.0.0-SNAPSHOT</version>
     <artifactId>com.percussion.client</artifactId>
     <packaging>eclipse-plugin</packaging>
     <build>
@@ -72,7 +72,7 @@
                 <artifactItem>
                     <groupId>com.percussion</groupId>
                     <artifactId>eclipse-maven-deps</artifactId>
-                    <version>5.4.0-SNAPSHOT</version>
+                    <version>8.0.0-SNAPSHOT</version>
                     <type>jar</type>
                     <overWrite>false</overWrite>
 
@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>eclipse-maven-deps</artifactId>
-            <version>5.4.0-SNAPSHOT</version>
+            <version>8.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.core</groupId>
@@ -117,7 +117,7 @@
                     <groupId>aspectjrt</groupId>
                 </exclusion>
             </exclusions>
-            <version>5.4.0-SNAPSHOT</version>
+            <version>8.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>

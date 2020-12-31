@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE AssemblerConfig SYSTEM "/Rhythmyx/DTD/sys_AssemblerConfig.dtd">
+<AssemblerConfig>
+	<Globals>
+		<System>file:sys_resources/stylesheets/assemblers/sys_Globals.xsl</System>
+		<Rhythmyx>file:rx_resources/stylesheets/assemblers/rx_Globals.xsl</Rhythmyx>
+	</Globals>
+	<GlobalTemplates>
+		<System>file:sys_resources/stylesheets/assemblers/sys_GlobalTemplates.xsl</System>
+		<Rhythmyx>file:rx_resources/stylesheets/assemblers/rx_GlobalTemplates.xsl</Rhythmyx>
+	</GlobalTemplates>
+	<ContextTemplates>
+		<System>file:sys_resources/stylesheets/assemblers/sys_ContextTemplates.xsl</System>
+	</ContextTemplates>
+	<SlotTemplates>
+		<System>file:sys_resources/stylesheets/assemblers/sys_Slots.xsl</System>
+		<Rhythmyx>file:rx_resources/stylesheets/assemblers/rx_Slots.xsl</Rhythmyx>
+	</SlotTemplates>
+	<InlineLinkTemplates>
+		<System>file:sys_resources/stylesheets/assemblers/sys_InlineLinks.xsl</System>
+		<Rhythmyx>file:rx_resources/stylesheets/assemblers/rx_InlineLinks.xsl</Rhythmyx>
+	</InlineLinkTemplates>
+</AssemblerConfig>
