@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/desktop.iml" filepath="$PROJECT_DIR$/desktop.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/eclipse-maven-deps/eclipse-maven-deps.iml" filepath="$PROJECT_DIR$/perc-eclipse/eclipse-maven-deps/eclipse-maven-deps.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/helios-repository-def/helios-repository-def.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/helios-repository-def/helios-repository-def.iml" />
+      <module fileurl="file://$PROJECT_DIR$/htmlconverter/htmlConverter.iml" filepath="$PROJECT_DIR$/htmlconverter/htmlConverter.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/mars-repository-def/mars-repository-def.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/mars-repository-def/mars-repository-def.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/neon-repository-def.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/neon-repository-def.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-devtools-distribution/perc-devtools-distribution.iml" filepath="$PROJECT_DIR$/perc-devtools-distribution/perc-devtools-distribution.iml" />

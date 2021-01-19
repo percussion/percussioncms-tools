@@ -10,7 +10,7 @@
 package com.percussion.client;
 
 import com.percussion.i18n.PSI18nUtils;
-import com.percussion.utils.security.PSEncrypter;
+import com.percussion.utils.security.deprecated.PSLegacyEncrypter;
 import org.apache.commons.lang.StringUtils;
 
 
@@ -105,7 +105,7 @@ public class PSConnectionInfo
       else
          pwd = m_password;
       
-      return PSEncrypter.encrypt(pwd, ENC_KEY);
+      return PSLegacyEncrypter.getInstance().encrypt(pwd, ENC_KEY);
    }
 
    /**
@@ -131,7 +131,7 @@ public class PSConnectionInfo
       pwd = (pwd == null) ? StringUtils.EMPTY : pwd;
       try
       {
-         pwd = PSEncrypter.decrypt(pwd, ENC_KEY);
+         pwd = PSLegacyEncrypter.getInstance().decrypt(pwd, ENC_KEY);
       }
       catch (Exception e)
       {
@@ -379,10 +379,12 @@ public class PSConnectionInfo
     * {@link com.percussion.i18n.PSI18nUtils#DEFAULT_LANG}
     */
    private String m_locale = PSI18nUtils.DEFAULT_LANG;
+
    /**
     * Key to encrypt and decrypt the password. Do not change unless it is
     * required. It will invalidate the persisted passwords.
     */
+   @Deprecated
    private static final String ENC_KEY = "MaSaLa-MiTsUbIsHi-RaDiO-louisiana";
 
    /**

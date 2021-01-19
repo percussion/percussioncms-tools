@@ -13,7 +13,7 @@ import com.percussion.E2Designer.SecurityProviderMetaData;
 import com.percussion.design.objectstore.PSSecurityProviderInstance;
 import com.percussion.error.PSIllegalArgumentException;
 import com.percussion.security.PSSecurityProvider;
-import com.percussion.util.PSCryptographer;
+import com.percussion.utils.security.deprecated.PSCryptographer;
 import com.percussion.validation.ListMemberConstraint;
 import com.percussion.validation.StringConstraint;
 import com.percussion.validation.StringLengthConstraint;
@@ -444,7 +444,8 @@ public class PSSpnegoProviderDialog extends PSDialog
             getTextField().setText(PSCryptographer.decrypt("spnego", u, p));
          }
       }
-      
+
+
       public void save(boolean force)
       {
          String s = getTextField().getText().trim();

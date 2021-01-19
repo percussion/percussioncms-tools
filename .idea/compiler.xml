@@ -22,6 +22,7 @@
         <module name="helios-repository-def" />
         <module name="com.percussion.workbench.ui.feature" />
         <module name="perc-server-ui-cmp" />
+        <module name="htmlConverter" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -34,6 +35,7 @@
       <module name="desktop" target="1.8" />
       <module name="eclipse-maven-deps" target="1.8" />
       <module name="helios-repository-def" target="1.8" />
+      <module name="htmlConverter" target="1.8" />
       <module name="mars-repository-def" target="1.8" />
       <module name="neon-repository-def" target="1.8" />
       <module name="perc-devtools-distribution" target="1.8" />

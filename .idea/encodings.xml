@@ -14,6 +14,8 @@
     <file url="file://$PROJECT_DIR$/designer/ui" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/designer/ui/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/designer/ui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/htmlconverter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/htmlconverter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-devtools-distribution/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/vedit/vedit.ui/src" charset="windows-1252" />
   </component>
