@@ -118,7 +118,7 @@
         <tinymce.version>4.9.10</tinymce.version>
         <jfx.version>11.0.2</jfx.version>
         <twelvemonkeys.version>3.6</twelvemonkeys.version>
-        <javax.help.version>2.0.0.5</javax.help.version>
+        <javax.help.version>2.0.05</javax.help.version>
         <eclipse-manifest-location>META-INF</eclipse-manifest-location>
     </properties>
     <profiles>
@@ -1857,12 +1857,6 @@
                 <groupId>org.htmlparser</groupId>
                 <artifactId>htmlparser</artifactId>
                 <version>1.6</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/javax.help/javahelp -->
-            <dependency>
-                <groupId>javax.help</groupId>
-                <artifactId>javahelp</artifactId>
-                <version>2.0.05</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-jexl -->
