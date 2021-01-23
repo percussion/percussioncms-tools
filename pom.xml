@@ -115,6 +115,7 @@
         <hikari.version>3.4.1</hikari.version>
         <commons-email.version>1.5</commons-email.version>
         <commons.codec.version>1.14</commons.codec.version>
+        <commons.beanutils.version>1.94</commons.beanutils.version>
         <tinymce.version>4.9.10</tinymce.version>
         <jfx.version>11.0.2</jfx.version>
         <twelvemonkeys.version>3.6</twelvemonkeys.version>
@@ -1474,7 +1475,7 @@
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.7.0</version>
+                <version>${commons.beanutils.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
