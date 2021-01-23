@@ -72,7 +72,7 @@
         <servlet.spec>3.1.0</servlet.spec>
         <hibernate.version>5.1.14.Final</hibernate.version>
         <commons-logging.version>1.2</commons-logging.version>
-        <lucene.version>2.2.0</lucene.version>
+        <lucene.version>8.7.0</lucene.version>
         <myfaces.version>1.1.5</myfaces.version>
         <ehcache.version>2.10.5</ehcache.version>
         <stax.version>1.0.1</stax.version>
@@ -115,6 +115,7 @@
         <hikari.version>3.4.1</hikari.version>
         <commons-email.version>1.5</commons-email.version>
         <commons.codec.version>1.14</commons.codec.version>
+        <commons.beanutils.version>1.94</commons.beanutils.version>
         <tinymce.version>4.9.10</tinymce.version>
         <jfx.version>11.0.2</jfx.version>
         <twelvemonkeys.version>3.6</twelvemonkeys.version>
@@ -554,8 +555,6 @@
                             <artifactId>xercesImpl</artifactId>
                             <version>2.12.0</version>
                         </dependency>
-
-                        <!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
                         <dependency>
                             <groupId>xml-apis</groupId>
                             <artifactId>xml-apis</artifactId>
@@ -628,36 +627,46 @@
 
         </pluginManagement>
     </build>
+
     <repositories>
         <repository>
-            <id>perc-java-repo</id>
-            <url>http://repo-man.cloud.percussion.com:8081/nexus/content/groups/public</url>
+            <id>perc-release-repo</id>
+            <url>https://mvn.percussion.com/repositories/releases/</url>
             <snapshots>
                 <enabled>false</enabled>
-                <updatePolicy>always</updatePolicy>
+                <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
-        <!--       <repository>
-                   <id>snapshots</id>
-                   <name>Internal Snapshots</name>
-                   <url>http://repo-man.cloud.percussion.com:8081/nexus/content/repositories/snapshots/</url>
-                   <snapshots>
-                       <enabled>true</enabled>
-                       <updatePolicy>always</updatePolicy>
-                   </snapshots>
-               </repository>
-               <repository>
-                       <id>maven-central</id>
-                       <url>http://repo1.maven.org/maven2</url>
-               </repository> -->
+        <repository>
+           <id>perc-snapshots-repo</id>
+           <name>Perc Snapshots</name>
+           <url>https://mvn.percussion.com/repositories/snapshots/</url>
+           <snapshots>
+               <enabled>true</enabled>
+               <updatePolicy>never</updatePolicy>
+           </snapshots>
+       </repository>
+        <repository>
+            <id>perc-thirdparty-repo</id>
+            <name>third party packages</name>
+            <url>https://mvn.percussion.com/repositories/thirdparty/</url>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </repository>
+       <repository>
+               <id>maven-central</id>
+               <url>https://repo1.maven.org/maven2</url>
+       </repository>
     </repositories>
 
 
     <pluginRepositories>
         <pluginRepository>
-            <id>perc-java-repo</id>
+            <id>perc-release-repo</id>
             <name>Perc Plugin Repository</name>
-            <url>http://repo-man.cloud.percussion.com:8081/nexus/content/groups/public</url>
+            <url>https://mvn.percussion.com/repositories/releases/</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>false</enabled>
@@ -666,8 +675,23 @@
                 <updatePolicy>never</updatePolicy>
             </releases>
         </pluginRepository>
+        <pluginRepository>
+            <id>perc-snapshots-repo</id>
+            <name>Perc Plugin Repository</name>
+            <url>https://mvn.percussion.com/repositories/snapshots/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>maven-central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </pluginRepository>
     </pluginRepositories>
-
 
     <dependencyManagement>
         <dependencies>
@@ -1451,7 +1475,7 @@
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.7.0</version>
+                <version>${commons.beanutils.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
@@ -1668,30 +1692,52 @@
             </dependency>
 
 
-            <!-- https://mvnrepository.com/artifact/org.mozilla/rhino unknown
-                version -->
-            <!-- <dependency> <groupId>org.mozilla</groupId> <artifactId>rhino</artifactId>
-                <version>1.7.7.2</version> </dependency> -->
-            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers -->
-            <dependency>
-                <groupId>org.apache.lucene</groupId>
-                <artifactId>lucene-analyzers</artifactId>
-                <version>${lucene.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.apache.lucene</groupId>
                 <artifactId>lucene-core</artifactId>
                 <version>${lucene.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.lucene</groupId>
-                <artifactId>lucene-snowball</artifactId>
+                <artifactId>lucene-analyzers-common</artifactId>
                 <version>${lucene.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.lucene</groupId>
-                <artifactId>lucene-wordnet</artifactId>
+                <artifactId>lucene-queryparser</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-highlighter</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-queries</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-test-framework</artifactId>
+                <version>${lucene.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-misc</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-suggest</artifactId>
                 <version>${lucene.version}</version>
             </dependency>
 
@@ -1800,14 +1846,6 @@
                 <groupId>javax.xml</groupId>
                 <artifactId>jaxrpc-api</artifactId>
                 <version>1.1</version>
-            </dependency>
-
-
-            <!-- https://mvnrepository.com/artifact/org.apache.sanselan/sanselan -->
-            <dependency><!-- changing to commons-imaging in v1. -->
-                <groupId>org.apache.sanselan</groupId>
-                <artifactId>sanselan</artifactId>
-                <version>0.97-incubator</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/soap/soap -->
@@ -2350,16 +2388,15 @@
         </dependencies>
     </dependencyManagement>
 
+
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-            <url>http://repo-man.cloud.percussion.com:8081/nexus/content/repositories/releases/</url>
-        </repository>
         <snapshotRepository>
-            <id>snapshots</id>
-            <name>Internal Snapshots</name>
-            <url>http://repo-man.cloud.percussion.com:8081/nexus/content/repositories/snapshots/</url>
+            <id>percussion.s3.repo</id>
+            <url>s3://percussion-maven-repo/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>percussion.s3.repo</id>
+            <url>s3://percussion-maven-repo/repositories/releases/</url>
+        </repository>
     </distributionManagement>
 </project>
