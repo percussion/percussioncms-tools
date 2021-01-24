@@ -15,7 +15,8 @@ Contributors:
 	<parent>
 		<groupId>com.percussion</groupId>
 		<artifactId>tycho-root</artifactId>
-		<version>8.0.0-SNAPSHOT</version>
+		<version>8.0.2-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<packaging>eclipse-feature</packaging>
 	<artifactId>com.percussion.workbench.ui.feature</artifactId>

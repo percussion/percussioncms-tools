@@ -1,14 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
       <modelVersion>4.0.0</modelVersion>
-  <!-- <parent>
+  <parent>
     <groupId>com.percussion</groupId>
-    <artifactId>core</artifactId>
-    <version>8.0.0-SNAPSHOT</version>
-    <relativePath>../../pom.xml</relativePath>
+    <artifactId>desktop</artifactId>
+    <version>8.0.2-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  -->
-    <groupId>com.percussion</groupId>
+  <groupId>com.percussion</groupId>
   <artifactId>loader</artifactId>
    <packaging>jar</packaging>
     <build>
@@ -101,21 +100,18 @@
         </pluginManagement>
     </build>
     <dependencies>
-    
-
 
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>8.0.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
-
 
        <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>rxutils</artifactId>
-        <version>8.0.0-SNAPSHOT</version>
+        <version>${project.parent.version}</version>
         <classifier>tests</classifier>
       <type>test-jar</type>
       <scope>test</scope>
@@ -125,14 +121,14 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>CMLite-Main</artifactId>
-            <version>8.0.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
 
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>CMLite-Main</artifactId>
-            <version>8.0.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>
@@ -187,65 +183,36 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
- 
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-
         </dependency>
-        <!-- CXF - cxf-rt-core cxf-rt-frontend-simple cxf-rt-frontend-jaxws 
-            cxf-rt-databinding-aegis cxf-rt-transports-local cxf-rt-transports-http cxf-rt-transports-http-jetty 
-            cxf-rt-transports-jms cxf-rt-management cxf-common-utilities -->
-
-
-       
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
-
-     
      <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-annotations</artifactId>
-</dependency>
--->
-   <dependency>
-    <groupId>org.hibernate.javax.persistence</groupId>
-    <artifactId>hibernate-jpa-2.1-api</artifactId>
-</dependency>
-        
-        
-       
-       
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+     </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+        </dependency>
         <!-- Commons -->
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-  
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-     
         </dependency>
-        <!-- commons jexl patched 1.1.1 -->
-        <!-- https://mvnrepository.com/artifact/commons-jexl/commons-jexl -->
-        <!-- <dependency> <groupId>commons-jexl</groupId> <artifactId>commons-jexl</artifactId> 
-            <version>1.1</version> </dependency> -->
-        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.4</version>
+            <version>${commons.lang.version}</version>
         </dependency>
         <!-- logging -->
         <dependency>
@@ -594,7 +561,6 @@
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            
         </dependency>
         <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
         <dependency><!-- current now org.ehcache group last in this group 

@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.percussion</groupId>
         <artifactId>perc-eclipse</artifactId>
-        <version>8.0.0-SNAPSHOT</version>
+        <version>8.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <packaging>jar</packaging>
@@ -205,8 +205,6 @@
             <artifactId>axis-jaxrpc</artifactId>
             <version>${axis.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api
-            for axis 1.1 -->
         <dependency>
             <groupId>javax.xml</groupId>
             <artifactId>jaxrpc-api</artifactId>
@@ -217,15 +215,13 @@
             <artifactId>commons-discovery</artifactId>
             <version>0.5</version>
         </dependency>
-
-
     </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-toolchains-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven.toolchains.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -245,7 +241,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
+                <version>${maven.shade.plugin.version}</version>
                 <executions>
                     <!-- Run shade goal on package phase -->
                     <execution>
@@ -268,34 +264,14 @@
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
                                         <Manifest-Version>1.0</Manifest-Version>
-
-                                       <!-- <Manifest-Version>1.0</Manifest-Version>
-                                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                                        <Bundle-Name>Rhythmyx Designer Core Plug-in</Bundle-Name>
-                                        <Bundle-SymbolicName>com.percussion.client</Bundle-SymbolicName>
-                                        <Bundle-SymbolicName>1.0.0</Bundle-SymbolicName>
-                                        <Bundle-SymbolicName>Percussion Software</Bundle-SymbolicName>
-                                        <Export-Package>com.percussion.client,com.percussion.client.catalogers,com.percussion.client.error,com.percussion.client.impl,com.percussion.client.models,com.percussion.client.models.impl,com.percussion.client.objectstore,com.percussion.client.preferences,com.percussion.client.proxies,com.percussion.cms,com.percussion.cms.objectstore,com.percussion.cms.objectstore.client,com.percussion.conn,com.percussion.content,com.percussion.debug,com.percussion.design.catalog,com.percussion.design.catalog.exit,com.percussion.design.catalog.function,com.percussion.design.objectstore,com.percussion.error,com.percussion.extension,com.percussion.i18n,com.percussion.i18n.tmxdom,com.percussion.security,com.percussion.server,com.percussion.services,com.percussion.services.assembly,com.percussion.services.assembly.data,com.percussion.services.catalog,com.percussion.services.catalog.data,com.percussion.services.content.data,com.percussion.services.filter,com.percussion.services.filter.data,com.percussion.services.guidmgr.data,com.percussion.services.security,com.percussion.services.security.data,com.percussion.services.system.data,com.percussion.services.ui.data,com.percussion.services.utils.xml,com.percussion.util,com.percussion.utils.exceptions,com.percussion.utils.guid,com.percussion.utils.jboss,com.percussion.utils.security,com.percussion.utils.types,com.percussion.utils.xml,com.percussion.xml,com.thoughtworks.xstream,com.thoughtworks.xstream.io,com.thoughtworks.xstream.io.xml,org.apache.commons.betwixt,org.apache.commons.betwixt.digester,org.apache.commons.betwixt.expression,org.apache.commons.betwixt.io,org.apache.commons.betwixt.io.id,org.apache.commons.betwixt.io.read,org.apache.commons.betwixt.registry,org.apache.commons.betwixt.schema,org.apache.commons.betwixt.strategy,org.apache.commons.collections,org.apache.commons.collections.map,org.apache.commons.io,org.apache.commons.io.filefilter,org.apache.commons.io.input,org.apache.commons.io.output,org.apache.commons.jexl,org.apache.commons.jexl.context,org.apache.commons.jexl.junit,org.apache.commons.jexl.parser,org.apache.commons.jexl.resolver,org.apache.commons.jexl.util,org.apache.commons.jexl.util.introspection,org.apache.commons.lang,org.apache.commons.lang.builder,org.apache.commons.lang.exception,org.apache.commons.logging,org.apache.log4j</Export-Package>
-                                        <Bundle-ClassPath>.</Bundle-ClassPath>
-                                        <Require-Bundle>org.eclipse.core.runtime,org.eclipse.core.runtime.compatibility</Require-Bundle>
-                                        -->
                                     </manifestEntries>
                                 </transformer>
 
                             </transformers>
-                            <!--
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.mkyong.core.utils.App</mainClass>
-                                </transformer>
-                            </transformers>
-                            -->
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
-
         </plugins>
     </build>
 
