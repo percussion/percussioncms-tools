@@ -38,7 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Singleton class that handles persistance of the server registrations
+ * Singleton class that handles persistence of the server registrations
  * and creation and access to deployer server connection objects.
  */
 public class PSServerConnectionManager
@@ -570,7 +570,7 @@ public class PSServerConnectionManager
    
    /**
     * Server registration list. Initialized in
-    * {@link #loadServerRegistrations()}. Never <code>null</code> after that.
+    * {@link #loadServerRegistrations(String)}. Never <code>null</code> after that.
     */
    protected List<PSServerRegistration> m_servers;
    
