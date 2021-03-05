@@ -1,3 +1,19 @@
+<!--
+  ~ Copyright 1999-$year Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
       <modelVersion>4.0.0</modelVersion>
@@ -8,40 +24,33 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.percussion</groupId>
-  <artifactId>loader</artifactId>
+  <artifactId>perc-loader</artifactId>
    <packaging>jar</packaging>
     <build>
         <plugins>
-                <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        </plugin>
-        
-   
-            
-                <plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+               <configuration>
+                    <skipTests>false</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
             <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.7.2</version>
-           <configuration>
-          <skipTests>true</skipTests>
-        </configuration>
-        </plugin>
-        <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>test-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      
-    
-    
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>test-jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -476,39 +485,6 @@
        
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/org.mozilla/rhino unknown 
-            version -->
-            <!-- 
-        <dependency>
-            <groupId>org.mozilla</groupId>
-            <artifactId>rhino</artifactId>
-            <version>1.7.7.2</version>
-        </dependency>
- -->
-        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers -->
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers</artifactId>
-         
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-   
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-snowball</artifactId>
-    
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-wordnet</artifactId>
-     
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
@@ -595,18 +571,6 @@
             <artifactId>wsdl4j</artifactId>
             <version>1.6.2</version>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.apache.sanselan/sanselan -->
-        <dependency><!-- changing to commons-imaging in v1. -->
-            <groupId>org.apache.sanselan</groupId>
-            <artifactId>sanselan</artifactId>
- 
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
-
-        <!-- https://mvnrepository.com/artifact/soap/soap -->
         <dependency>
             <groupId>soap</groupId>
             <artifactId>soap</artifactId>
@@ -672,26 +636,12 @@
 <dependency>
     <groupId>ant</groupId>
     <artifactId>ant-apache-oro</artifactId>
-   
 </dependency>
 
 <dependency>
   <groupId>org.apache.ant</groupId>
   <artifactId>ant-launcher</artifactId>
-
 </dependency>
-
-
-<!-- https://mvnrepository.com/artifact/ant-contrib/ant-contrib -->
-<!-- legacy ant-contrib  old version 0.6 -->
-<!--
-<dependency>
-    <groupId>ant-contrib</groupId>
-    <artifactId>ant-contrib</artifactId>
-    <version>1.0b3</version>
-</dependency>
-  -->
-
 
 <dependency>
   <groupId>perforce</groupId>
@@ -703,86 +653,61 @@
   <artifactId>services</artifactId>
 </dependency>
 <dependency>
-  <groupId>installanywhere</groupId>
-  <artifactId>IAClasses</artifactId>
-
-</dependency>
-<dependency>
   <groupId>expectj</groupId>
   <artifactId>expectj</artifactId>
-
 </dependency>
 
-
-<!-- https://mvnrepository.com/artifact/jmock/jmock -->
 <dependency>
     <groupId>jmock</groupId>
     <artifactId>jmock</artifactId>
-
     <scope>compile</scope>
 </dependency>
-
-     <dependency>
-    <groupId>javax.ws.rs</groupId>
-    <artifactId>jsr311-api</artifactId>
-</dependency>
-
-
-  
-
-
-<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-1.2-api -->
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-1.2-api</artifactId>
-
 </dependency>
 
-<!-- Extra dependencies for Ant build remove when converted -->
-<!-- https://mvnrepository.com/artifact/com.yahoo.platform.yui/yuicompressor -->
 <dependency>
     <groupId>com.yahoo.platform.yui</groupId>
     <artifactId>yuicompressor</artifactId>
-
 </dependency>
-
-<!-- Not in code -->
-
-
-
- 
-<!-- https://mvnrepository.com/artifact/org.apache.cactus/cactus.core.framework.uberjar.javaEE.15 -->
 <dependency>
     <groupId>cactus</groupId>
     <artifactId>cactus</artifactId>
 </dependency>
-
+<dependency>
+    <groupId>cglib</groupId>
+    <artifactId>cglib</artifactId>
+</dependency>
+   <dependency>
+    <groupId>net.sf.json-lib</groupId>
+    <artifactId>json-lib-ext-spring</artifactId>
+</dependency>
  <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
+    <groupId>evil.deeds</groupId>
+    <artifactId>websphinx</artifactId>
  </dependency>
-
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib</artifactId>
-          
-            </dependency>
-               <dependency>
-                <groupId>net.sf.json-lib</groupId>
-                <artifactId>json-lib-ext-spring</artifactId>
-            </dependency>
-
-
- <dependency>
-                <groupId>evil.deeds</groupId>
-                <artifactId>websphinx</artifactId>
-             
-            </dependency>
 
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-help</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>CMLite-Main</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-server-ui-cmp</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
         </dependency>
     </dependencies>
 

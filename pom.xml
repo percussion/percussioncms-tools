@@ -15,6 +15,7 @@
         <module>ServerPropertiesEditor</module>
         <module>htmlconverter</module>
         <module>ContentExplorer</module>
+        <module>loader</module>
         <module>perc-devtools-distribution</module>
     </modules>
 
@@ -1169,22 +1170,16 @@
                 <artifactId>commons-logging</artifactId>
                 <version>1.2</version>
             </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt
-                1.5.2 no longer on maven -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
                 <version>1.5.4</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>1.5.4</version>
             </dependency>
-
-
             <dependency>
                 <groupId>cactus</groupId>
                 <artifactId>cactus</artifactId>

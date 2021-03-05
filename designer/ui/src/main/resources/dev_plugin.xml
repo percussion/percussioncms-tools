@@ -14,10 +14,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="com.percussion.workbench.ui.RhythmyxWorkbench"
-            name="Percussion Workbench">
+            name="Percussion CMS Workbench">
          <property
                name="aboutImage"
-               value="icons/aboutRhythmyx.jpg"/>
+               value="icons/aboutRhythmyx.png"/>
          <property
                name="aboutText"
                value="%product_blurb"/>
