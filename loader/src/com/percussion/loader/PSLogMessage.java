@@ -521,7 +521,7 @@ public class PSLogMessage
     * The resource bundle containing message formats.  <code>null</code>
     * until the first call to {@link #getErrorStringBundle(Locale)
     * getErrorStringBundle}, never <code>null</code> or modified after that
-    * unless an exception occured loading the bundle.
+    * unless an exception occurred loading the bundle.
     */
    private static ResourceBundle ms_bundle = null;
 

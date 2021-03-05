@@ -285,7 +285,7 @@ public class PSGetUrlAction extends PSAAActionBase
     		  objectId.getFieldName());
       if(dmapping == null)
       {
-    	  throw new PSAAClientActionException("Error occured while preparing the field for edit, " +
+    	  throw new PSAAClientActionException("Error occurred while preparing the field for edit, " +
     	  		"falied to find the display mapper for the given field '" 
     			  + objectId.getFieldName() +"'");
       }

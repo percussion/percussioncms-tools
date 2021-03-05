@@ -791,7 +791,7 @@ public class PSExtractorConfigContext
        * @return <code>true</code> if the context variable in the
        *    extractor definition are valid; <code>false</code> otherwise.
        *
-       * @throws PSLoaderException if an error occured.
+       * @throws PSLoaderException if an error occurred.
        */
       private boolean populateExtractorDef()
          throws PSLoaderException
@@ -917,7 +917,7 @@ public class PSExtractorConfigContext
        * @return <code>true</code> if the data in the extractor definition are
        *    valid; <code>false</code> otherwise.
        *
-       * @throws PSLoaderException if an error occured while communicating to
+       * @throws PSLoaderException if an error occurred while communicating to
        *    the remote server.
        */
       private boolean populateExtractorDef()
@@ -1154,7 +1154,7 @@ public class PSExtractorConfigContext
        *    <code>false</code> if the content type of the extractor definition
        *    is invalid.
        *
-       * @throws PSLoaderException if an error occured while communicating with
+       * @throws PSLoaderException if an error occurred while communicating with
        *    the remote server.
        */
       private boolean populateContentType()
@@ -1200,7 +1200,7 @@ public class PSExtractorConfigContext
        *    <code>false</code> if the extractor definition contains an invalid
        *    workflow id.
        *
-       * @throws PSRemoteException if an error occured while communicating with
+       * @throws PSRemoteException if an error occurred while communicating with
        *    the remote server.
        */
       private boolean populateWorkflow()
@@ -1275,7 +1275,7 @@ public class PSExtractorConfigContext
        *    without error; <code>false</code> if the extractor definition
        *    contains an invalid tarnsitions, which will be ignored.
        *
-       * @throws PSRemoteException if an error occured while communicating with
+       * @throws PSRemoteException if an error occurred while communicating with
        *    the remote server.
        */
       private boolean populateTransitions()
@@ -1313,7 +1313,7 @@ public class PSExtractorConfigContext
        *    without error; <code>false</code> if the extractor definition
        *    contains an invalid tarnsitions, which will be ignored.
        *
-       * @throws PSRemoteException if an error occured while communicating with
+       * @throws PSRemoteException if an error occurred while communicating with
        *    the remote server.
        */
       private boolean populateTransitions(List transitions,

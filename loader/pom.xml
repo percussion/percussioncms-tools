@@ -11,26 +11,7 @@
   <artifactId>loader</artifactId>
    <packaging>jar</packaging>
     <build>
-        <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>test</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>src</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-          
-        </resources>
-        <testResources>
-       
-        </testResources>
         <plugins>
-            
-           
-      
-          
-            
                 <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -71,7 +52,6 @@
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
                     <configuration>
                         <lifecycleMappingMetadata>
                             <pluginExecutions>
@@ -716,13 +696,11 @@
 <dependency>
   <groupId>perforce</groupId>
   <artifactId>p4</artifactId>
-
 </dependency>
 
 <dependency>
   <groupId>installanywhere</groupId>
   <artifactId>services</artifactId>
-
 </dependency>
 <dependency>
   <groupId>installanywhere</groupId>
@@ -743,13 +721,10 @@
 
     <scope>compile</scope>
 </dependency>
- 
 
-    <!-- https://mvnrepository.com/artifact/javax.ws.rs/jsr311-api -->
      <dependency>
     <groupId>javax.ws.rs</groupId>
     <artifactId>jsr311-api</artifactId>
-    <version>1.0</version>
 </dependency>
 
 
@@ -803,7 +778,12 @@
                 <artifactId>websphinx</artifactId>
              
             </dependency>
-            
+
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-help</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

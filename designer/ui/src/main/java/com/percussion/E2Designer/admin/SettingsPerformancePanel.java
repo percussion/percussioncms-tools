@@ -418,7 +418,7 @@ public class SettingsPerformancePanel extends JPanel implements ITabDataHelper
     *  was encountered.
     * @param strerror an error message.  If strerror is null or empty an error 
     * message displayed is a general error message.
-    * @param comp a component where an error occured, a comp must not be
+    * @param comp a component where an error occurred, a comp must not be
     * <CODE>null</CODE>
    */
 

@@ -91,7 +91,7 @@ public class PSControlMainTabComposite extends Composite
                .handleException(
                      "Control Editor",
                      "Missing control definition",
-                     "The following error occured while getting the definition for the control.",
+                     "The following error occurred while getting the definition for the control.",
                      e);
          return;
       }

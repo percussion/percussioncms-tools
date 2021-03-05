@@ -7,7 +7,7 @@
 * work including confidential and proprietary information of Percussion.
 *
 ******************************************************************************/
-package com.percussion.guitools;
+package com.percussion.cx.guitools;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

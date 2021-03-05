@@ -1842,7 +1842,7 @@ public class PSCEFieldsCommonComposite extends Composite
       catch (PSModelException e)
       {
          String errTitle = "Failed to get the control information"; //$NON-NLS-1$
-         String errMsg = "The following error occured catalogging the controls"; //$NON-NLS-1$
+         String errMsg = "The following error occurred catalogging the controls"; //$NON-NLS-1$
          PSWorkbenchPlugin.handleException(
                "CE getControl Data", errTitle, errMsg, e); //$NON-NLS-1$
       }

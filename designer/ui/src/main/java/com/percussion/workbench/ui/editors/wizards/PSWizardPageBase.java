@@ -193,7 +193,7 @@ public abstract class PSWizardPageBase extends WizardPage
       
       
       // Now we need to add the appropriate listeners to determine if
-      // change really occured on the control in question.
+      // change really occurred on the control in question.
       // We will use reflection to determine if the add listener methods
       // exist for the passed in control. We also invoke using reflection.
       Class clazz = widget.getClass();

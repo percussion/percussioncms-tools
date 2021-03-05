@@ -109,7 +109,7 @@ public class PSValueSelectorCellEditor extends DialogCellEditor
       });
       // We really want a selection listener but it is not supported so we
       // use a key listener and a mouse listener to know when selection changes
-      // may have occured
+      // may have occurred
       m_text.addMouseListener(new MouseAdapter() {
          public void mouseUp(@SuppressWarnings("unused") MouseEvent e) {
             checkSelection();

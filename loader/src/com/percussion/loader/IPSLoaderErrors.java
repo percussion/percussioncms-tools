@@ -39,7 +39,7 @@ public interface IPSLoaderErrors
    public static final int INIT_PLUGIN_ERROR = 2;
 
    /**
-    * Error occured during loading configuration information
+    * Error occurred during loading configuration information
     * <p>
     * The arguments passed in for this message are:
     * <TABLE BORDER="1">

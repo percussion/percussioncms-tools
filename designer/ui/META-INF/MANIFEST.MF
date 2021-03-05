@@ -21,7 +21,7 @@ Require-Bundle: de.byteaction.velocity.vaulttec.ui,
  org.eclipse.jface.text,
  org.eclipse.ui.forms,
  org.eclipse.core.expressions
-Bundle-ClassPath: .,target/dependency/eclipse-maven-deps.jar
+Bundle-ClassPath: ., target/dependency/eclipse-maven-deps.jar
 Eclipse-AutoStart: true
 Export-Package: com.percussion.workbench.ui,
  com.percussion.workbench.connections,
@@ -31,4 +31,4 @@ Export-Package: com.percussion.workbench.ui,
  com.percussion.workbench.ui.editors.wizards,
  com.percussion.workbench.ui.preferences,
  com.percussion.workbench.ui.views
- 
+Eclipse-BundleShape: dir

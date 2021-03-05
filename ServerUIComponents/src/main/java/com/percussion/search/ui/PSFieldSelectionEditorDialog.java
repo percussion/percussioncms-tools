@@ -2037,7 +2037,7 @@ public class PSFieldSelectionEditorDialog extends PSDialog
    private boolean m_inWorkbench;
    
    /**
-    * Flag indicating that a change has occured since this 
+    * Flag indicating that a change has occurred since this
     * dialog was initialized.
     */
    private boolean m_changeOccured;

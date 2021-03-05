@@ -5,9 +5,11 @@
  * work including confidential and proprietary information of Percussion.
  *
  ******************************************************************************/
-package com.percussion.guitools;
+package com.percussion.cx.guitools;
 
 import com.percussion.border.PSFocusBorder;
+import com.percussion.guitools.ErrorDialogs;
+import com.percussion.guitools.PSDialog;
 import com.percussion.i18n.ui.PSI18NTranslationKeyValues;
 
 import java.awt.BorderLayout;
@@ -68,7 +70,7 @@ public class UTPropertiesTablePanel extends JPanel
       /**
        * Border to use when cell has focus
        */
-      private Border mi_focusBorder = 
+      private final Border mi_focusBorder =
          new PSFocusBorder(1, m_tableCellFocusColor, true);
          
       /* (non-Javadoc)

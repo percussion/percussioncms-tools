@@ -214,13 +214,13 @@ public class PSSysAndSharedFieldTreeComposite extends Composite
             }
             catch (PSValidationException e)
             {
-               String msg = "Validation error occured while getting the system field definitions";
+               String msg = "Validation error occurred while getting the system field definitions";
                PSWorkbenchPlugin.handleException(m_logContext, m_logTitle, msg,
                      e);
             }
             catch (Exception e)
             {
-               String msg = "Exception occured while getting the system field definitions";
+               String msg = "Exception occurred while getting the system field definitions";
                PSWorkbenchPlugin.handleException(m_logContext, m_logTitle, msg,
                      e);
             }

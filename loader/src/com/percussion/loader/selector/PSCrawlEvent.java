@@ -45,7 +45,7 @@ public class PSCrawlEvent
    public static final int PAUSED = 3004;
 
    /**
-    * No event occured on this link yet. 
+    * No event occurred on this link yet.
     */
    public static final int NONE = 4000;
     
@@ -337,7 +337,7 @@ public class PSCrawlEvent
     *       ERROR
     *    </td>
     *    <td>
-    *       An error occured while processing this node
+    *       An error occurred while processing this node
     *    </td>
     * </tr>
     * <tr>

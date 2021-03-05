@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.percussion:perc-server-ui-cmp:8.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ServerUIComponents/pom.xml!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp-8.0.0-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp-8.0.0-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

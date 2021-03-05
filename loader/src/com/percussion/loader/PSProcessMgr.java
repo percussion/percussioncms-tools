@@ -468,7 +468,7 @@ public abstract class PSProcessMgr extends Thread
    }
 
    /**
-    * Recording an error has occured.
+    * Recording an error has occurred.
     */
    public void setErrorOccured()
    {
@@ -476,9 +476,9 @@ public abstract class PSProcessMgr extends Thread
    }
 
    /**
-    * Determines whether an error has occured.
+    * Determines whether an error has occurred.
     *
-    * @return <code>true</code> if an error has occured; otherwise return
+    * @return <code>true</code> if an error has occurred; otherwise return
     *    <code>false</code>.
     */
    public boolean hasErrorOccured()
@@ -919,7 +919,7 @@ public abstract class PSProcessMgr extends Thread
 
 
    /**
-    * <code>true</code> if error occured during one of the operations. Only
+    * <code>true</code> if error occurred during one of the operations. Only
     * modified by <code>setErrorOccured()</code>. Default to <code>false</code>.
     */
    private boolean m_hasErrorOccured = false;

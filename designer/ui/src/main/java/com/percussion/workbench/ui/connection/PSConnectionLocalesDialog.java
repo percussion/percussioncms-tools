@@ -250,7 +250,7 @@ public class PSConnectionLocalesDialog extends PSDialog
    
    /**
     * the current locale being selected from the combo, return it on okPressed
-    * may be empty if no selection occured.
+    * may be empty if no selection occurred.
     */
    private String m_curLocale = "";
    

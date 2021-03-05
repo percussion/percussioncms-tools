@@ -44,7 +44,7 @@ public class PSControlComposite extends Composite
       catch (PSModelException e)
       {
          String title = "Failed to get the control";
-         String msg = "The following error occured while getting the control";
+         String msg = "The following error occurred while getting the control";
          PSWorkbenchPlugin.handleException("Control Choices Dialog",title, msg,e);
       }
       setLayout(new FormLayout());
@@ -85,7 +85,7 @@ public class PSControlComposite extends Composite
       catch (PSModelException e)
       {
          String title = "Failed to get the control";
-         String msg = "The following error occured while getting the control";
+         String msg = "The following error occurred while getting the control";
          PSWorkbenchPlugin.handleException("Control Choices Dialog",title, msg,e);
       }
    }

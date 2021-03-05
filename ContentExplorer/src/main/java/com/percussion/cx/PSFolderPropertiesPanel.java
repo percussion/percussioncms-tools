@@ -13,7 +13,7 @@ package com.percussion.cx;
 
 import com.percussion.cms.objectstore.PSFolder;
 import com.percussion.cms.objectstore.PSFolderProperty;
-import com.percussion.guitools.UTPropertiesTablePanel;
+import com.percussion.cx.guitools.UTPropertiesTablePanel;
 
 import java.awt.Dimension;
 import java.util.HashMap;
