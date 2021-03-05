@@ -47,7 +47,7 @@ public class PSContentLoaderMgr extends PSProcessMgr
     * @param contentTree The content tree which contains the uploaded nodes,
     *    may not <code>null</code>.
     *    
-    * @param errorOccuredInSelectMgr <code>true</code> if error has occured in
+    * @param errorOccuredInSelectMgr <code>true</code> if error has occurred in
     *    selector manager, the previous operation.
     *
     * @throws IllegalArgumentException If any parameter is invalid.
@@ -63,7 +63,7 @@ public class PSContentLoaderMgr extends PSProcessMgr
          
       m_contentTree = contentTree;
 
-      if (errorOccuredInSelectMgr) // remember error has occured,
+      if (errorOccuredInSelectMgr) // remember error has occurred,
          setErrorOccured();        // used to send email at the end if needed
 
       PSLoaderDef loaderDef = desc.getLoaderDef();

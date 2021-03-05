@@ -27,7 +27,7 @@ public class VelocityEditorEnvironment
     private static int                      fgRefCount = 0;
 
     /**
-     * A connection has occured - initialize all resources if it is the first
+     * A connection has occurred - initialize all resources if it is the first
      * activation.
      */
     public static void connect()
@@ -63,7 +63,7 @@ public class VelocityEditorEnvironment
     }
 
     /**
-     * A disconnection has occured - clear all resources if it is the last
+     * A disconnection has occurred - clear all resources if it is the last
      * deactivation.
      */
     public static void disconnect()

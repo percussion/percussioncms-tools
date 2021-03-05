@@ -400,7 +400,7 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
    /**
     * Pops up a dialog just like the error dialog, except a warning icon is
     * displayed instead. See that
-    * {@link #handleException(String, String, String, Throwable[]) method} for a
+    * {@link #handleException(String, String, String, Throwable)} for a
     * description of the params.
     */
    public static void displayWarning(String context, String title,

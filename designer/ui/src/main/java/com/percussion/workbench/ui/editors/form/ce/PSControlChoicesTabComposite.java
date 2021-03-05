@@ -182,7 +182,7 @@ public class PSControlChoicesTabComposite extends Composite
       catch (PSModelException e1)
       {
          String title = "Failed to get the keyword list";
-         String msg = "The following error occured while catalogging keyword list";
+         String msg = "The following error occurred while catalogging keyword list";
          PSWorkbenchPlugin.handleException("Control Choices Dialog",title, msg,e1);
       }
       
@@ -1339,7 +1339,7 @@ public class PSControlChoicesTabComposite extends Composite
       catch (Exception e)
       {
          String title = "Failed to catalog the table columns";
-         String msg = "The following error occured while updating the data";
+         String msg = "The following error occurred while updating the data";
          PSWorkbenchPlugin.handleException("Control Choices Dialog",title, msg,e);
       }
       return new String[0];

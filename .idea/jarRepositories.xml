@@ -17,9 +17,9 @@
       <option name="url" value="http://repo-man.cloud.percussion.com:8081/nexus/content/repositories/thirdparty/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="2_maven.apache.org" />
-      <option name="name" value="2_maven.apache.org" />
-      <option name="url" value="https://repo.maven.apache.org/maven2" />
+      <option name="id" value="WSO2" />
+      <option name="name" value="WSO2" />
+      <option name="url" value="https://dist.wso2.org/maven2" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="1_repoman" />
@@ -32,6 +32,36 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="redhat" />
+      <option name="name" value="redhat" />
+      <option name="url" value="https://maven.repository.redhat.com/ga/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="central" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="perc-snapshots-repo" />
+      <option name="name" value="Perc Snapshots" />
+      <option name="url" value="https://mvn.percussion.com/repositories/snapshots/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github" />
+      <option name="name" value="GitHub PercussionCMS Apache Maven Packages" />
+      <option name="url" value="https://maven.pkg.github.com/percussion/percussioncms" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="2_maven.apache.org" />
+      <option name="name" value="2_maven.apache.org" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="perc-thirdparty-repo" />
+      <option name="name" value="third party packages" />
+      <option name="url" value="https://mvn.percussion.com/repositories/thirdparty/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
@@ -40,6 +70,11 @@
       <option name="id" value="perc-java-repo" />
       <option name="name" value="perc-java-repo" />
       <option name="url" value="http://repo-man.cloud.percussion.com:8081/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="perc-release-repo" />
+      <option name="name" value="perc-release-repo" />
+      <option name="url" value="https://mvn.percussion.com/repositories/releases/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven-central" />

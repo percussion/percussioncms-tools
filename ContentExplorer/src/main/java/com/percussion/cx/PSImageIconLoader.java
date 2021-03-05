@@ -34,7 +34,7 @@ public class PSImageIconLoader extends UIManager
    /**
     * Loads the icon with the supplied key from the UI manager/archive/server.If
     * not found in UI Manager cache, loads from the archive or server.
-    * @param iconKey. If it starts with ".." or "http" or "https", it is loaded
+    * @param iconKey If it starts with ".." or "http" or "https", it is loaded
     * from the server otherwise from the JAR file. For the latter case, it must
     * not include the extension ".gif" which will be added by default. Must not
     * be <code>null</code> or empty.

@@ -80,7 +80,7 @@ import com.percussion.cms.objectstore.PSDisplayFormat;
 import com.percussion.cx.error.PSContentExplorerException;
 import com.percussion.cx.objectstore.PSMenuAction;
 import com.percussion.cx.objectstore.PSNode;
-import com.percussion.guitools.PSMouseAdapter;
+import com.percussion.cx.guitools.PSMouseAdapter;
 import com.percussion.guitools.PSTableSorter;
 import com.percussion.util.PSIteratorUtils;
 import com.percussion.util.PSStringOperation;

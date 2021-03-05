@@ -46,7 +46,7 @@ public interface IPSLogCodes
     * <TR><TH>Arg</TH><TH>Description</TH></TR>
     * <TR><TD>0</TD><TD>A node description</TD></TR>
     * <TR><TD>1</TD><TD>The node's current status</TD></TR>
-    * <TR><TD>2</TD><TD>Exception Message if an error occured</TD></TR>
+    * <TR><TD>2</TD><TD>Exception Message if an error occurred</TD></TR>
     * </TABLE>
     */
    public static final int LOG_SELECTORINFO = 3;
@@ -58,7 +58,7 @@ public interface IPSLogCodes
     * <TABLE BORDER="1">
     * <TR><TH>Arg</TH><TH>Description</TH></TR>
     * <TR><TD>0</TD><TD>A node description</TD></TR>
-    * <TR><TD>1</TD><TD>Exception Message if an error occured</TD></TR>
+    * <TR><TD>1</TD><TD>Exception Message if an error occurred</TD></TR>
     * </TABLE>
     */
    public static final int LOG_SELECTORERROR = 4;
@@ -109,7 +109,7 @@ public interface IPSLogCodes
    public static final int PERFORM_ACTIONS_4_NODE = 21;
 
    /**
-    * Error occured while processing a <code>IPSContentTreeNode</code>
+    * Error occurred while processing a <code>IPSContentTreeNode</code>
     * <p>
     * The arguments passed in for this message are:
     * <TABLE BORDER="1">

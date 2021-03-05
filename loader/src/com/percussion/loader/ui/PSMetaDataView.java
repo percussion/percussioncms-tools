@@ -154,7 +154,7 @@ public class PSMetaDataView extends JPanel implements TreeSelectionListener,
             if (item.getLastScan() != null)
                strLastScan = item.getLastScan().toString();            
          }
-         catch (Exception ignore) // if any exception occured, it will simply
+         catch (Exception ignore) // if any exception occurred, it will simply
          {}                       // display BLANK info, hence no harm to ignore
             
          if (item.getLocator() != null)

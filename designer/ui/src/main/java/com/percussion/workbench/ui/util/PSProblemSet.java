@@ -107,7 +107,7 @@ public class PSProblemSet
        * Create a new problem object
        * @param type one of the TYPE_XXX constants
        * @param fieldname the name of the field where the problem
-       * occured.
+       * occurred.
        * @param description the description of the problem.
        * @param pagename the name of the page the error occurred on.
        * May be <code>null</code> or empty.

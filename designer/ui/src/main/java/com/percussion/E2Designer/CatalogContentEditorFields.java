@@ -106,7 +106,7 @@ public class CatalogContentEditorFields
     {
        PSWorkbenchPlugin.handleException("Content editor field cataloger",
                "Content editor field cataloger error",
-               "Error occured while cataloging content editor fields", e);
+               "Error occurred while cataloging content editor fields", e);
     }
     return m_catalog;
   }

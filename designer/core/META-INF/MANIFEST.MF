@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Rhythmyx Designer Core Plug-in
+Bundle-Name: Percussion CMS Designer Core Plug-in
 Bundle-SymbolicName: com.percussion.client;singleton:=true
 Bundle-Version: 8.0.2.qualifier
 Require-Bundle: org.eclipse.core.runtime
@@ -82,5 +82,6 @@ Export-Package: com.percussion.client,
                 org.apache.commons.lang.exception,
                 org.apache.commons.logging,
                 org.apache.log4j
-Bundle-ClassPath: .,target/dependency/eclipse-maven-deps.jar
+Bundle-ClassPath: ., target/dependency/eclipse-maven-deps.jar
 Bundle-Vendor: Percussion Software
+Eclipse-BundleShape: dir

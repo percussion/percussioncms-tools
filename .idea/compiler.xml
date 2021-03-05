@@ -8,17 +8,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="perc-help" />
         <module name="perc-eclipse-repository" />
-        <module name="mars-repository-def" />
         <module name="com.percussion.client" />
+        <module name="loader" />
         <module name="ContentExplorer" />
         <module name="de.byteaction.velocity.vaulttec.ui" />
         <module name="eclipse-maven-deps" />
         <module name="com.percussion.workbench.ui" />
-        <module name="CMLite-Main-PackagerUI" />
-        <module name="perc-server-ui-content" />
-        <module name="perc-server-properties-editor" />
         <module name="neon-repository-def" />
-        <module name="perc-devtools-distribution" />
+        <module name="perc-server-ui-content" />
+        <module name="CMLite-Main-PackagerUI" />
+        <module name="perc-server-properties-editor" />
         <module name="helios-repository-def" />
         <module name="com.percussion.workbench.ui.feature" />
         <module name="perc-server-ui-cmp" />
@@ -36,6 +35,7 @@
       <module name="eclipse-maven-deps" target="1.8" />
       <module name="helios-repository-def" target="1.8" />
       <module name="htmlConverter" target="1.8" />
+      <module name="loader" target="1.8" />
       <module name="mars-repository-def" target="1.8" />
       <module name="neon-repository-def" target="1.8" />
       <module name="perc-devtools-distribution" target="1.8" />

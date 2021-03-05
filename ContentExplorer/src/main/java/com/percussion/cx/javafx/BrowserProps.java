@@ -81,7 +81,7 @@ public class BrowserProps
    private boolean booleanValue(String value)
    {
        value = value.toLowerCase();
-       return value.toLowerCase().equals("yes")|| value.toLowerCase().equals("1");
+       return value.equalsIgnoreCase("yes")|| value.equalsIgnoreCase("1");
    }
 
    public boolean isToolbar()

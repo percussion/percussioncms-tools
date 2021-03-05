@@ -83,7 +83,6 @@
             <groupId>com.percussion</groupId>
             <artifactId>eclipse-maven-deps</artifactId>
             <version>${project.parent.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
@@ -133,6 +132,6 @@
             <scope>provided</scope>
         </dependency>
 
-
     </dependencies>
+
 </project>

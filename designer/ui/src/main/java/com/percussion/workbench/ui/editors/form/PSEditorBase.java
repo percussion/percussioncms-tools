@@ -309,7 +309,6 @@ public abstract class PSEditorBase extends EditorPart implements IReusableEditor
 
    /**
     * Get the name validator for the current UI component.
-    * @param ref the UI component, assumed not <code>null</code>. 
     * @return the id validator. Never <code>null</code>.
     */
    private PSControlValueTextIdValidator getIdValidator()
@@ -987,7 +986,7 @@ public abstract class PSEditorBase extends EditorPart implements IReusableEditor
          return;
 
       // Now we need to add the appropriate listeners to determine if
-      // change really occured on the control in question.
+      // change really occurred on the control in question.
       // We will use reflection to determine if the add listener methods
       // exist for the passed in control. We also invoke using reflection.
       Class clazz = widget.getClass();
@@ -1139,7 +1138,7 @@ public abstract class PSEditorBase extends EditorPart implements IReusableEditor
          if(((control instanceof Text) || (control instanceof StyledText)
             || (control instanceof Combo) || (control instanceof CCombo))
             && !m_textControlModified)
-            return; // skip notification if no modification occured
+            return; // skip notification if no modification occurred
          // Run validators if any
          runValidation(true);
          // to the text control.

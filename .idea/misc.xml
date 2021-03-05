@@ -7,12 +7,16 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/ServerPropertiesEditor/pom.xml" />
         <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/mars-respository-def/pom.xml" />
         <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/pom.xml" />
-        <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/mars-repository-def/pom.xml" />
+        <option value="$PROJECT_DIR$/loader/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/perc-devtools-distribution/pom.xml" />
+      </set>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="Oracle 1.8 (161)" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="Oracle 1.8 (161)" project-jdk-type="JavaSDK" />
 </project>

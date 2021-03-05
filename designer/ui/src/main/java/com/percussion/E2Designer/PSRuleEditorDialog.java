@@ -447,7 +447,7 @@ public class PSRuleEditorDialog extends PSDialog
       }
 
       /**
-       * This is where we determine if a mouse double click occured on a table
+       * This is where we determine if a mouse double click occurred on a table
        * cell.
        * @param event the EventObject captured.
        * @return <code>true</code> if cell is Editable, else <code>false</code>.

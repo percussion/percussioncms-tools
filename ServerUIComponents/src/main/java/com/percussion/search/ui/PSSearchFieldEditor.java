@@ -580,7 +580,7 @@ public class PSSearchFieldEditor extends JPanel
 
       /**
        * Adds a listener to the list of field panels interested in the selection
-       * change notification occured in this custom field.
+       * change notification occurred in this custom field.
        *
        * @param listener an instace of the field change listener,
        * never <code>null</code>.

@@ -9,27 +9,17 @@
  *****************************************************************************/
 package com.percussion.cx;
 
-import com.percussion.border.PSFocusBorder;
-
 import com.percussion.cx.objectstore.PSMenuAction;
 import com.percussion.cx.objectstore.PSNode;
 
-import com.percussion.guitools.PSMouseAdapter;
+import com.percussion.cx.guitools.PSMouseAdapter;
 
 import com.percussion.util.PSIteratorUtils;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.SystemColor;
-import java.awt.Toolkit;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
@@ -37,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;

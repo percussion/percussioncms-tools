@@ -244,7 +244,7 @@ public class PSUiUtils
    
    /**
     * Determines the table cell that the passed in event occurred on. 
-    * @param table the table where the event occured, cannot be 
+    * @param table the table where the event occurred, cannot be
     * <code>null</code>.
     * @param x 
     * @param y
@@ -281,7 +281,7 @@ public class PSUiUtils
    
    /**
     * Determines the table cell that the passed in event occurred on. 
-    * @param table the table where the event occured, cannot be 
+    * @param table the table where the event occurred, cannot be
     * <code>null</code>.
     * @param e the event that was captured, cannot be <code>null</code>.
     * @return an <code>int</code> array with the row and column index values or

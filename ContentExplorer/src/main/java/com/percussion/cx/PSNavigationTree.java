@@ -12,7 +12,7 @@ package com.percussion.cx;
 
 import com.percussion.cx.objectstore.PSMenuAction;
 import com.percussion.cx.objectstore.PSNode;
-import com.percussion.guitools.PSMouseAdapter;
+import com.percussion.cx.guitools.PSMouseAdapter;
 import com.percussion.util.PSIteratorUtils;
 
 import java.awt.Component;
@@ -64,8 +64,8 @@ import org.apache.log4j.Logger;
 
 /**
  * The tree that builds tree model as per 'sys_Node.dtd'. See {@link
- * com.percussion.cx.objectstore#PSNode PSNode} for more information. Uses
- * {@link PSNavTreeNodeRenderer} to render the nodes of the tree. Displays
+ * com.percussion.cx.objectstore.PSNode } for more information. Uses
+ * {@link com.percussion.cx.PSNavTreeNodeRenderer } to render the nodes of the tree. Displays
  * pop-up menu for right-click on a node.
  */
 public class PSNavigationTree
