@@ -1,4 +1,4 @@
-<!-- Build file for Rhythmyx repository install -->
+
 <project name="install" default="install" basedir="..\..\..">
 
     <target name="install">

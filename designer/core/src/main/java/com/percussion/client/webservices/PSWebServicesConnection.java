@@ -71,22 +71,26 @@ public class PSWebServicesConnection
       {
          ms_log.error(e);
       }
-      m_securityBinding = (SecuritySOAPStub) new SecurityLocator()
-         .getsecuritySOAP(servicePortAddress);
-      //convert timeout to milliseconds
-      m_securityBinding.setTimeout(m_connectionInfo.getTimeout() * 1000);
-      login();
 
-      // interval is 90% of the server session timeout
-      long sessionTimeOut = m_loginInfo.getSessionTimeout() * 9 / 10;
-      if(sessionTimeOut < 1)
-      {
-         ms_log.warn("Server returned session timeout period of 0 ms");
-         ms_log.warn("Assuming a default session timeout period of 30 minutes");
-         sessionTimeOut = 1800000;
+      try {
+         m_securityBinding = (SecuritySOAPStub) new SecurityLocator()
+                 .getsecuritySOAP(servicePortAddress);
+         //convert timeout to milliseconds
+         m_securityBinding.setTimeout(m_connectionInfo.getTimeout() * 1000);
+         login();
+
+         // interval is 90% of the server session timeout
+         long sessionTimeOut = m_loginInfo.getSessionTimeout() * 9 / 10;
+         if (sessionTimeOut < 1) {
+            ms_log.warn("Server returned session timeout period of 0 ms");
+            ms_log.warn("Assuming a default session timeout period of 30 minutes");
+            sessionTimeOut = 1800000;
+         }
+         m_timer = new Timer();
+         m_timer.schedule(new SessionKeeper(), sessionTimeOut, sessionTimeOut);
+      } catch (ServiceException | RemoteException e) {
+         ms_log.error(e.getMessage(),e);
       }
-      m_timer = new Timer();
-      m_timer.schedule(new SessionKeeper(), sessionTimeOut, sessionTimeOut);
    }
 
    /**

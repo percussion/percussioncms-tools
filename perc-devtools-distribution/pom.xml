@@ -21,8 +21,8 @@
     <dependencies>
         <dependency>
             <groupId>com.percussion</groupId>
-            <artifactId>CMLite-Main-PackagerUI</artifactId>
-            <version>${project.parent.version}</version>
+            <artifactId>perc-ant</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
 <build>

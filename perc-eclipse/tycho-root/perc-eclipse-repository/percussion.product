@@ -10,7 +10,9 @@
         <!--<programArgs>-clearPersistedState</programArgs>-->
           <vmArgs>-Dosgi.requiredJavaVersion=1.8
         -Xms128m
-        -Xmx384m</vmArgs>
+        -Xmx384m
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8052
+        </vmArgs>
           <vmArgsMac></vmArgsMac>
           <vmArgsWin></vmArgsWin>
           <vmArgsLin></vmArgsLin>

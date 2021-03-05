@@ -546,12 +546,7 @@
             <artifactId>jaxrpc-api</artifactId>
      
         </dependency>
-        <dependency><!-- current is 1.4.1-->
-            <groupId>axis</groupId>
-            <artifactId>axis</artifactId>
-            <version>${axis.version}</version>
-        </dependency>
-        <dependency><!-- current is 1.4.1 -->
+        <dependency>
             <groupId>axis</groupId>
             <artifactId>axis-saaj</artifactId>
             <version>${axis.version}</version>
