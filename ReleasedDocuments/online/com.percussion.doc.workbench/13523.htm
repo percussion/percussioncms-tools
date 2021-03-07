@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Fields and Field Sets Editor </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13519.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="14142.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Fields and Field Sets Editor</h2>
+<p class="bodytext">Using the Fields and Field Sets Editor you can:</p>
+<ul class="listbullet"><li class="listbullet"><a id="h13525" class="jumptemplate" title="Creating Fields and Field Sets" href="13520.htm" target="_self">Create new fields and field sets</a>.</li><li class="listbullet"><a id="h13060" class="jumptemplate" title="Configuring Additional Properties" href="17340.htm" target="_self">Configure additional search and display properties</a></li><li class="listbullet"><a id="h13526" class="jumptemplate" title="Editing Fields and Field Sets" href="13521.htm" target="_self">Edit fields</a></li></ul><p class="bodytext">To access the Fields and Field Sets Editor:</p>
+<ul class="listbullet"><li class="listbullet">To edit Content Type fields, open the <a id="h13171" class="jumptemplate" title="Content Type Editor" href="13034.htm" target="_self">Content Type editor</a> and click the <a id="h13053" class="jumptemplate" title="Content Type Editor - Content Type Tab" href="13035.htm" target="_self">Content Type tab</a> or click any <a id="h13058" class="jumptemplate" title="Content Type Editor - Field Set Tabs" href="13036.htm" target="_self">field set tabs</a>. On these tabs, the editor includes buttons for changing the order of fields. On the Content Type tab, the editor also includes a list of shared and system fields, and shows a <strong class="specialbold">Source</strong> column that specifies <em class="emphasis">Local</em>, <em class="emphasis">Shared</em>, or <em class="emphasis">System</em> for each field.</li><li class="listbullet">To view system fields, in <a id="h13110" class="jumptemplate" title="CMS Navigator - Content Design" href="13099.htm" target="_self">Content Design View</a>, right-click on the <em class="emphasis">Content Types Global Configuration</em> node and choose <em class="emphasis">Open</em>. This version of the editor does not allow deletion of fields or addition of field sets.</li><li class="listbullet">To edit shared fields, In <a id="h13110_2" class="jumptemplate" title="CMS Navigator - Content Design" href="13099.htm" target="_self">Content Design View</a>, right-click on a shared field object and choose <em class="emphasis">Open</em>. </li></ul><p class="bodytext">The following graphic shows the editor as it appears when you are creating shared field sets. </p>
+<p class="expandinghtmlblock"><a id="h14736" class="expandinghtmlblocklink" title="Screenshot of Field and Field Sets Editor" href="javascript:toggleBlock('14736')" target="_self"><img id="i14736" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Field and Field Sets Editor</a></p>
+<div id="d14736" class="widegraphic" style="display:none"><p class="widegraphic"><img src="wb_1120.gif" alt="Field Editor" height="481" width="620" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="subheading">Field Definitions</p>
+<p class="fielddescription"><strong class="fieldname">Fields</strong>  - Fields or field sets in the Content Type, shared field file, or system field file. Add local or shared fields by entering a name in a cell under Name. </p>
+<p class="fielddescription"><strong class="fieldname">Name</strong> - Required. The system name of the field.</p>
+<p class="fielddescription"><strong class="fieldname">Label</strong> - The display name for the field.</p>
+<p class="fielddescription"><strong class="fieldname">Control</strong> - Required. The mechanism for displaying the field in the Content Editor, such as drop-list or text box. Rhythmyx supplies a set of <a id="h13024" class="jumptemplate" title="Default Content Editor Controls" href="17847.htm" target="_self">default controls</a>. If you specify a sys_table control in a Content Type, you are creating a child field set, and a new tab for the child field set appears at the bottom of the editor. </p>
+<p class="fielddescription"><strong class="specialbold">Source</strong> - Read-only field for Content Editor parent fields only. Specifies <em class="emphasis">Local</em>, <em class="emphasis">Shared</em>, or <em class="emphasis">System</em> for each field</p>
+<p class="fielddescription"><strong class="fieldname">Field Properties</strong> - These properties define a field or field set selected in the Fields table.</p>
+<p class="fielddescription"><strong class="fieldname">Data type</strong> - Required. The type of data that the field stores, such as text or binary. Default is data type associated with the <strong class="specialbold">Control</strong>. See <a id="h13024_2" class="jumptemplate" title="Default Content Editor Controls" href="17847.htm" target="_self">Default Content Editor Controls</a> for the default data type associated with each control. This field cannot be edited in the System field editor.</p>
+<p class="fielddescription"><strong class="fieldname">Storage size</strong> - Required. The storage size of the field in the backend table. Default is <strong class="specialbold">Storage size</strong> associated with the <strong class="specialbold">Control</strong>. See <a id="h13024_3" class="jumptemplate" title="Default Content Editor Controls" href="17847.htm" target="_self">Default Content Editor Controls</a> for the default storage size associated with each control. This field cannot be edited in the System field editor.</p>
+<p class="fielddescription"><strong class="fieldname">Default value</strong> - The default value of the field, if any. Click [...] to set the value using a <a id="h13495" class="jumptemplate" title="Function Properties Dialog" href="13494.htm" target="_self">user-defined function</a> or the Value Selector.</p>
+<p class="fielddescription"><strong class="fieldname">Enable searching for this field</strong> - Allows search mechanism to search the contents of this field. Default is checked.</p>
+<p class="bodytext"><strong class="specialbold">Display:</strong></p>
+<p class="fielddescription"><strong class="fieldname">Mnemonic</strong> - The key used in the ALT + key sequence for moving the cursor to this field; drop list includes all unused letters for fields in the Content Type.</p>
+<p class="fielddescription"><strong class="fieldname">Show in preview</strong> - Specifies whether or not to display this field in a preview of a Content Item. Default is checked.</p>
+<p class="bodytext">[<strong class="buttons">All Properties</strong>] - Opens the <a id="h13043" class="jumptemplate" title="Field Properties Editor" href="17284.htm" target="_self">Field Properties Editor</a>.</p>
+<p class="bodytext">[<strong class="buttons">Validation</strong>] - Opens the <a id="h13044" class="jumptemplate" title="Adding Extensions and Disabling Searching" href="13013.htm" target="_self">Field Validation Editor</a>.</p>
+<p class="fielddescription"><strong class="fieldname">Field Set</strong> - This section only appears on the Shared Field editor.  It allows users to add another field set to the shared field file.</p>
+<p class="fielddescription"><strong class="fieldname">Field set name</strong> - Name of additional field set.  A tab for the field set appears when you click [<strong class="buttons">Add Field Set</strong>].</p>
+<p class="bodytext">If a field set is selected, the <strong class="specialbold">Field Properties</strong> section appears as:</p>
+<p class="expandinghtmlblock"><a id="h14738" class="expandinghtmlblocklink" title="Screenshot of Field Properties" href="javascript:toggleBlock('14738')" target="_self"><img id="i14738" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Field Properties section</a></p>
+<div id="d14738" class="widegraphic" style="display:none"><p class="widegraphic"><img src="wb1102b.gif" alt="Field Properties section for field set" height="193" width="363" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="bodytext">The fields have the following definitions:</p>
+<p class="fielddescription"><strong class="fieldname">Mnemonic (Field Set Properties)</strong> - The key used in the ALT + key sequence for moving the cursor to this field; drop list includes all unused letters for fields in the Content Type.</p>
+<p class="fielddescription"><strong class="fieldname">Enable searching for this field set</strong> - Allows search mechanism to search the contents of the fields in this field set. Default is checked.</p>
+<p class="fielddescription"><strong class="fieldname">Allow user to order entries</strong> - Lets users change the order of fields in the field set. Default is checked.</p>
+<p class="bodytext"><strong class="specialbold">Validation on Workflow Transition:</strong></p>
+<p class="fielddescription"><strong class="fieldname">Occurrence</strong><strong class="specialbold">:</strong> A value that tells the editor how to validate the child field set during a Workflow Transition. Possible values are <em class="emphasis">Optional</em>, <em class="emphasis">Required</em>, and <em class="emphasis">Count</em>. If the value is <em class="emphasis">Required</em>, the editor checks to see if at least one entry for the field set is entered and returns an error message if it is not. If the value is <em class="emphasis">Count</em>, the editor checks to see if the number of entries specified in <strong class="specialbold">Count</strong> are entered and returns an error message if they are not.</p>
+<p class="fielddescription"><strong class="fieldname">Count</strong>: Enabled if the value of Occurrence is Count. The required number of entries for the child field set. During a Workflow Transition, if the value of Occurrence is Count, the editor checks to see if the number of entries specified in Count are entered in the child field set and returns an error message if they are not.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "227">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13519.htm" target="_self">Maintaining Content Type Fields</a></p><p class="relateditem"><a href="14142.htm" target="_self">Default System Fields</a></p><p class="relateditem"><a href="17284.htm" target="_self">Field Properties Editor</a></p><p class="relateditem"><a href="13520.htm" target="_self">Creating Fields and Field Sets</a></p><p class="relateditem"><a href="17314.htm" target="_self">Quick Field Creation</a></p><p class="relateditem"><a href="17340.htm" target="_self">Configuring Additional Properties</a></p><p class="relateditem"><a href="13521.htm" target="_self">Editing Fields and Field Sets</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

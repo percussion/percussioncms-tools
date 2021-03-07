@@ -34,7 +34,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>htmlConverter</artifactId>
+    <artifactId>perc-html-converter</artifactId>
     <packaging>jar</packaging>
     <build>
         <plugins>
@@ -67,7 +67,13 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <forceCreation>true</forceCreation>
-                </configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>false</addClasspath>
+                                <mainClass>com.percussion.htmlConverter.htmlConverter</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -122,7 +128,7 @@
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
-            <artifactId>CMLite-Main</artifactId>
+            <artifactId>perc-system</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

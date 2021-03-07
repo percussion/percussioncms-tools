@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Help Plug-in
+Bundle-SymbolicName: com.percussion.doc.help.workbench; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.percussion.doc.workbench.WorkbenchHelpPlugin
+Bundle-Vendor: Percussion Software
+Bundle-Localization: plugin
+Eclipse-AutoStart: true
+

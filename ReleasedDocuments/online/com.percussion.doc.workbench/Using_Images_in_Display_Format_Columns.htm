@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> Using Images in Display Format Columns </title>
+<meta name="Generator" content="AITPublish">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="Keywords" content="">
+<script type="text/javascript" src="dhtml_toc.js"></script>
+<script type="text/javascript" src="open_parent.js"></script>
+<link rel="stylesheet" href="stylesheet.css">
+<!-- <link rel="stylesheet" href="44.css"> -->
+<base target="BODY">
+</head>
+
+<body onload="loadParent()" text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000">
+<table border="0" width="100%">
+  <tr valign="top"><td height="100%" > 
+    <table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="12843.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="12842.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Using Images in Display Format Columns</h3>
+<p class="bodytext">In some cases, you may prefer to use images rather than text in certain columns of your Display Format.  For example, if your Display Format includes Locale, you might want to use images of flags to indicate the Locales in the Display Format rather than using text. </p>
+<p class="bodytext">You can use either .gif or .jpg files to provide these images.  You cannot use bitmaps (.bmp) as your image files because Java does not render bitmaps.  </p>
+<p class="bodytext">If you choose to store your graphic files in your Rhythmyx installation directory, do not store them in a directory with &quot;sys_&quot; prefix.  Directories with this prefix are overwritten on upgrade, and your graphics will be lost.  A good option is to store your graphic files in the rx_resources\images directory.  Since this directory has an &quot;rx_&quot; prefix, it will not be overwritten on upgrade and you will not lose your graphics.</p>
+<p class="bodytext">To render a Display Format column as an image:</p>
+<ol class="listnumber"><li class="listnumber">If the field does not already exist, add it to a Content Editor Definition.<p class="listcontinue">Often when you want to use an image, you need to use a computed field rather than a field bound to a backend database column.  A computed field uses a UDF (specified in the PSXExtensionCall node) to generate the value of the column.  The computed value might be a single word or it might be the URL of the location of the graphic file.  If you define a computed field, be sure you specify Image as the &lt;DataType&gt; of the field.</p>
+</li><li class="listnumber">Add an XSLT template to the file <code class="monospace">&lt;rxroot&gt;\rx_config\rx_DisplayFieldTemplates.xsl</code> to override or modify the value of the field computed by the Content Editor.  For details, see the comments in the file <code class="monospace">rx_DisplayFieldTemplates.xsl</code>. <p class="listcontinue">For example, the following template substitutes images for the text of Checkout Status:</p>
+<p class="listcontinue"><code class="monospace">&lt;xsl:template match=&quot;ResultField[@name='sys_locale']&quot; mode=&quot;rc_res_displayfield&quot;&gt;</code></p>
+<p class="listcontinue"><code class="monospace">		&lt;xsl:param name=&quot;sys_contentid&quot;/&gt;</code></p>
+<p class="listcontinue"><code class="monospace">		&lt;xsl:param name=&quot;sys_revision&quot;/&gt;</code></p>
+<p class="listcontinue"><code class="monospace">		&lt;xsl:param name=&quot;sys_contenttypeid&quot;/&gt;</code></p>
+<p class="listcontinue"><code class="monospace">		&lt;xsl:param name=&quot;sys_variantid&quot;/&gt;</code></p>
+<p class="listcontinue"><code class="monospace">		&lt;ResultField name=&quot;{@name}&quot;&gt;</code></p>
+<p class="listcontinue"><code class="monospace">			&lt;xsl:choose&gt;</code></p>
+<p class="listcontinue"><code class="monospace">				&lt;xsl:when test=&quot;(.='en-us')&quot;&gt;../rx_resources/images/usflag.gif&lt;/xsl:when&gt;</code></p>
+<p class="listcontinue"><code class="monospace">				&lt;xsl:when test=&quot;(.='en-uk')&quot;&gt;../ rx_resources/images/ukflag.gif &lt;/xsl:when&gt;</code></p>
+<p class="listcontinue"><code class="monospace">				&lt;xsl:when test=&quot;(.='fr-fr')&quot;&gt;../sys_resources/images/frtricolor.gif&lt;/xsl:when&gt;</code></p>
+<p class="listcontinue"><code class="monospace">				&lt;xsl:when test=&quot;(.='fr-ca')&quot;&gt;../sys_resources/images/quebec.gif&lt;/xsl:when&gt;</code></p>
+<p class="listcontinue"><code class="monospace">			&lt;/xsl:choose&gt;</code></p>
+<p class="listcontinue"><code class="monospace">		&lt;/ResultField&gt;</code></p>
+<p class="listcontinue"><code class="monospace">	&lt;/xsl:template&gt;</code></p>
+<p class="listcontinue">Modify the field if the Content Editor itself does not include enough to compute the field.  For example, suppose you want to render a thumbnail in a Display Format for Related Content Search results.  To render the correct image, you would need the Variant ID that assembles the thumbnail image.  You would first use a UDF to compute the value of the field, then modify it in the XSLT template to retrieve the correct image.  If you do not override the template, Rhythmyx will display the value computed by the UDF rather than the thumbnail image.  </p>
+</li><li class="listnumber">Add the field to the Display Format, or create a Display Format that includes it. </li></ol><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "227">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="12843.htm" target="_self">Adding Graphics to Display Formats</a></p><p class="relateditem"><a href="12842.htm" target="_self">Adding Thumbnail Previews to Display Formats</a></p></td>
+</tr>
+</table>
+
+
+
+  </td></tr>
+  <tr valign="bottom"><td>
+    <!-- Insert Your Footer Here -->
+  </td></tr>
+</table>
+</body>
+</html>
+

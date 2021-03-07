@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Default Validations and their Parameters </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13080.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13081.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Default Validations and their Parameters</h2>
+<table width="846" cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse">
+<tr align="left" valign="top">
+<td width="162"><p class="tableheading">Name and Definition</p>
+</td>
+<td width="474"><p class="tableheading">Rule Details box</p>
+</td>
+<td width="210"><p class="tableheading">Parameter definitions</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="tablebodytext">Required - A value for the field must be entered.</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+</td>
+<td width="474"><p class="tablebodytext"><img src="wb1115arule.gif" alt="Required validation type" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="210"><p class="tablebodytext">None</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="tablebodytext">Number Range - Numeric value must fall within the specified number range</p>
+</td>
+<td width="474"><p class="tablebodytext"><img src="wb1115b.gif" alt="Number Range field validation" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="210"><p class="tablebodytext">Together, the parameters define a range.  For example:</p>
+<p class="tablebodytext">0 &lt; [selected field] &lt; 999999</p>
+<p class="tablebodytext">In the upper and lower drop lists, enter numbers or choose variables that store numbers.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="tablebodytext">Date Range - The value in the field must fall within the specified date range.</p>
+</td>
+<td width="474"><p class="tablebodytext"><img src="wb1115c.gif" alt="Number Range validation type" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="210"><p class="tablebodytext">Together, the parameters define a date range.  For example:</p>
+<p class="tablebodytext">05012005 &lt;= [selected field] &lt;=05302005</p>
+<p class="tablebodytext">In the upper and lower drop lists, enter dates, choose the <em class="emphasis">today </em>variable, or choose other variables that store dates.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="tablebodytext">String Length - The length of the string value in the field must  fall within the valid length range.</p>
+</td>
+<td width="474"><p class="tablebodytext"><img src="wb1115d.gif" alt="String Length validation type" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="210"><p class="tablebodytext"><strong class="specialbold">Minimum length </strong>- minimum valid length of string. Enter a number or choose a variable that stores a length value.</p>
+<p class="tablebodytext"><strong class="specialbold">Maximum length </strong>- maximum valid length of string. Enter a number or choose a variable that stores a length value.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="tablebodytext">Regular Expression - The value in the field must conform to the format of the regular expression.  </p>
+</td>
+<td width="474"><p class="tablebodytext"><img src="wb1115e.gif" alt="Regular Expression validation type" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="210"><p class="tablebodytext">Choose a <strong class="specialbold">Predefined</strong> format or enter a regular expression defining a format in <strong class="specialbold">Regular expression</strong>.</p>
+<p class="tablebodytext"><strong class="specialbold">Predefined</strong> - values are:</p>
+<p class="listcontinue"><em class="emphasis">no whitespace</em></p>
+<p class="listcontinue"><em class="emphasis">phone</em></p>
+<p class="listcontinue"><em class="emphasis">email</em></p>
+<p class="listcontinue"><em class="emphasis">url</em></p>
+<p class="listcontinue"><em class="emphasis">isNumber</em></p>
+<p class="listcontinue"><em class="emphasis">isAlpha</em></p>
+<p class="bodytext"><strong class="specialbold">Regular expression</strong><em class="emphasis"> - </em>Enter a regular expression.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="bodytext">JEXL Expression - </p>
+</td>
+<td width="474"><p class="bodytext"><img src="wb1115f.gif" alt="JEXL Expression validation type" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="210"><p class="bodytext">Enter a JEXL expression that defines that validation rule for the field.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="bodytext">Conditionals - The value of the field must conform to the manually entered conditions.</p>
+</td>
+<td width="474"><p class="bodytext"><img src="wb1115g.gif" alt="Conditionals validation type" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="210"><p class="bodytext"><strong class="specialbold">Variable </strong>- Click on [<strong class="buttons">...</strong>] to open the <a id="h13497" class="jumptemplate" title="Selecting Values" href="13496.htm" target="_self">Value Selector</a> and choose a value.</p>
+<p class="bodytext"><strong class="specialbold">Op - </strong>Choose a conditional operator in the drop list.</p>
+<p class="bodytext"><strong class="specialbold">Value - </strong>Click on [<strong class="buttons">...</strong>] to open the <a id="h13497_2" class="jumptemplate" title="Selecting Values" href="13496.htm" target="_self">Value Selector</a> and choose a value.</p>
+<p class="bodytext"><strong class="specialbold">Boolean - </strong>Enter AND or OR to show the relationship to the condition in the next row.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="162"><p class="bodytext">Extension - The extension evaluates the field for validity.</p>
+</td>
+<td width="474"><p class="bodytext"><strong class="specialbold"><img src="wb1115h.gif" alt="Extension field validation" height="122" width="450" vspace="2" hspace="2" align="bottom" border="0"></strong></p>
+</td>
+<td width="210"><p class="tablebodytext"><strong class="specialbold">Name</strong> <strong class="specialbold">- </strong>Extension that will validate value of field.</p>
+<p class="tablebodytext"><a id="h13656" class="jumptemplate" title="Adding Extension Parameters" href="13240.htm" target="_self">[</a><strong class="specialbold"><a id="h13656_2" class="jumptemplate" title="Adding Extension Parameters" href="13240.htm" target="_self">...</a></strong><a id="h13656_3" class="jumptemplate" title="Adding Extension Parameters" href="13240.htm" target="_self">] - Opens Extensions Parameters dialog</a></p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="bodytext">&nbsp;</p>
+</td>
+</tr>
+
+</table>
+<p class="bodytext"></p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13072.htm" target="_self">Maintaining Field Validations</a></p><p class="relateditem"><a href="13080.htm" target="_self">Field Validation Editor</a></p><p class="relateditem"><a href="13081.htm" target="_self">Adding a Field Validation</a></p><p class="relateditem"><a href="13082.htm" target="_self">Editing a Field Validation</a></p><p class="relateditem"><a href="13083.htm" target="_self">Removing a Field Validation</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

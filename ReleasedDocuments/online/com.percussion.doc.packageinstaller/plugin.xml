@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="com.percussion.doc.help.PackageInstaller"
+   name="Help Plug-in"
+   version="1.0.0"
+   provider-name="PERCUSSION"
+   class="com.percussion.doc.packageinstaller.PackageInstallerHelpPlugin">
+
+   <runtime>
+      <library name="doc.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+   </requires>
+   
+   <extension
+         id="Installer"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.percussion.doc.help.PackageInstaller"
+            name="Percussion Development Tools">
+      </product>
+   </extension>
+   <extension point="org.eclipse.help.toc">
+   		<toc file="toc.xml" primary="true"/>
+   </extension>
+
+</plugin>

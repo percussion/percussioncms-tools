@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> General Tab </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="14519.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13146.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">General Tab</h3>
+<p class="bodytext">Use the General tab to maintain general data about the Template.</p>
+<p class="bodytext">The Workbench includes two different versions of the General tab.</p>
+<p class="expandinghtmlblock"><a id="h19746" class="expandinghtmlblocklink" title="General Tab for Local and Shared Templates" href="javascript:toggleBlock('19746')" target="_self"><img id="i19746" class="expandicon" src="arrowright.gif" alt="" border="0">General Tab for Local and Shared Templates</a></p>
+<div id="d19746" class="widegraphic" style="display:none"><p class="bodytext">The Workbench displays this version of the General tab if you have specified that the Template is a local or a shared template (in other words, you selected either the Local or Shared radio button on the New Template wizard Output dialog).  Use it to specify general data for the Template.</p>
+<p class="widegraphic"><img src="wb_1202.gif" alt="WB-1202:  Template Editor General Tab for Local" height="544" width="643" vspace="2" hspace="2" align="bottom" border="0"></p>
+<p class="subheading">Field Descriptions</p>
+<p class="fielddescription"><strong class="fieldname">Template name</strong>  Read-only.  Displays the name of the Template.</p>
+<p class="fielddescription"><strong class="fieldname">Template label</strong>  Label displayed for the Template in Content Explorer.  </p>
+<p class="fielddescription"><strong class="fieldname">Description</strong>  Free-form description of the Template.</p>
+<p class="fielddescription"><strong class="fieldname">Assembler</strong>  Specifies the assembler extension to use when assembling the output.  Options include:</p>
+<ul class="listbullet"><li class="listbullet">Velocity Assembler<p class="listcontinue">Generates text output (including both HTML and XML) using the Apache Velocity technology.  For details about Velocity, see <a class="jumptemplate" title="jakarta.apache.org/velocity" href="http://" target="_self">http://jakarta.apache.org/velocity</a>, or the following books:</p>
+<ul class="listbullet2"><li class="listbullet2">Joseph D. Gradeck, <em class="emphasis">Mastering Apache Velocity</em></li><li class="listbullet2">Rob Harrop, <em class="emphasis">Pro Jakarta Veolcity</em></li></ul></li><li class="listbullet">Binary Assembler<p class="listcontinue">Extracts binary files from the Repository.  </p>
+</li><li class="listbullet">Dispatch Assembler<p class="listcontinue">Used to calculate which Template to use when more than one Template could be used.</p>
+</li></ul><p class="fielddescription"><strong class="fieldname">Active Assembly format</strong>  Format type for this Template in Active Assembly.  Options are:</p>
+<ul class="listbullet"><li class="listbullet"><em class="emphasis">Normal</em> - Default. The Template does not require special treatment for Active Assembly. </li><li class="listbullet"><em class="emphasis">Auto Index</em> - Use this option if you are configuring a legacy Auto Index Variant.</li><li class="listbullet"><em class="emphasis">Non-HTML</em> - The Template should not be formatted for Active Assembly.  Use this with Content Types that store images, file attachments, JavaScript files, and other file types that are not compatible with Active Assembly<strong class="specialbold">.<br></strong><p class="listnote"><em class="emphasis">Note: Auto Index Slots are not rendered in Active Assembly regardless of the Active Assembly format chosen.</em></p>
+</li></ul><p class="fielddescription"><strong class="specialbold">Output</strong>  Specifies the output form of the Template.  Options include:</p>
+<ul class="listbullet"><li class="listbullet">Snippet<p class="listcontinue">The Template produces a Snippet, which will be merged into another output.</p>
+</li><li class="listbullet">Text Page<p class="listcontinue">The Template produces a complete text page, such as an HTML page.  If you select this option, you must specify the global template option to be used for the output pages.  Options include:</p>
+<ul class="listbullet2"><li class="listbullet2">Default<p class="listcontinue2">Search up the Folder tree and use the first global template found; otherwise, use the global template specified for the Site.</p>
+</li><li class="listbullet2">Specified<p class="listcontinue2">Always use the specified global template with this Template.</p>
+</li><li class="listbullet2">None<p class="listcontinue2">Do not use a global template with this Template.</p>
+</li></ul></li><li class="listbullet">Binary<p class="listcontinue">The Template produces a binary output.</p>
+</li></ul><p class="fielddescription"><strong class="fieldname">Mime Type</strong>  Specifies the MIME type of the Template output if the Binary radio button is selected under Output.  </p>
+<p class="fielddescription"><strong class="fieldname">Character set</strong>  Specifies the character set output by the template if either the Snippet or Text Page radio buttons are selected under output.  </p>
+<p class="fielddescription"><strong class="fieldname">Location Prefix</strong>  Optional prefix for the filename of the published Template.  Useful when relying on a single Location Scheme, which could result in multiple output pages with the same filename.</p>
+<p class="fielddescription"><strong class="fieldname">Location Suffix</strong>  Optional prefix for the filename of the published Template.  Useful when relying on a single Location Scheme, which could result in multiple output pages with the same filename.</p>
+<p class="fielddescription"><strong class="fieldname">Publish</strong>  Specifies the circumstances when the Template should be published when publishing to a Site Folder.  Options are:</p>
+<ul class="listbullet"><li class="listbullet">Always:  Always publish this Template.</li><li class="listbullet">Default:  Publish this Template if it is the Default Template for the Content Type.</li><li class="listbullet">Never:  Never publish this Template.  <p class="listcontinue"></p>
+</li></ul><p class="bodytext"></p>
+</div><p class="expandinghtmlblock"><a id="h13163" class="expandinghtmlblocklink" title="General Tab for Global Templates" href="javascript:toggleBlock('13163')" target="_self"><img id="i13163" class="expandicon" src="arrowright.gif" alt="" border="0">General Tab for Global Templates</a></p>
+<div id="d13163" class="widegraphic" style="display:none"><p class="bodytext">The Workbench displays this version of the General tab if you have specified that the Template is a Global template (in other words, if you selected the Global radio button on the New Template Wizard Output dialog).</p>
+<p class="widegraphic"><img src="wb_1237.gif" alt="WB-1237:" height="544" width="643" vspace="2" hspace="2" align="bottom" border="0"></p>
+<p class="subheading">Field Descriptions</p>
+<p class="fielddescription"><strong class="fieldname">Global Template name</strong>  Read-only.  Displays the name of the Template.</p>
+<p class="fielddescription"><strong class="fieldname">Global template label</strong>  Label displayed for the Template in Content Explorer.  </p>
+<p class="fielddescription"><strong class="fieldname">Description</strong>  Free-form description of the Template.</p>
+<p class="fielddescription"><strong class="fieldname">Mime Type</strong>  Specifies the MIME type of the Template output if the Binary radio button is selected under Output.</p>
+<p class="fielddescription"><strong class="fieldname">Character set</strong>  Specifies the character set output by the template if either the Snippet or Text Page radio buttons are selected under output.</p>
+</div><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "227">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="18033.htm" target="_self">Template Editor</a></p><p class="relateditem"><a href="13142.htm" target="_self">Source Tab</a></p><p class="relateditem"><a href="13146.htm" target="_self">Bindings Tab</a></p><p class="relateditem"><a href="13147.htm" target="_self">Template Editor Slots Tab</a></p><p class="relateditem"><a href="13148.htm" target="_self">Template Editor Sites Tab</a></p><p class="relateditem"><a href="18022.htm" target="_self">Template Editor Target Table Tab</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

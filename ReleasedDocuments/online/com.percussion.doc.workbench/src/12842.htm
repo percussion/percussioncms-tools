@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> Adding Thumbnail Previews to Display Formats </title>
+<meta name="Generator" content="AITPublish">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="Keywords" content="">
+<script type="text/javascript" src="dhtml_toc.js"></script>
+<script type="text/javascript" src="open_parent.js"></script>
+<link rel="stylesheet" href="stylesheet.css">
+<!-- <link rel="stylesheet" href="44.css"> -->
+<base target="BODY">
+</head>
+
+<body onload="loadParent()" text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000">
+<table border="0" width="100%">
+  <tr valign="top"><td height="100%" > 
+    <table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="Using_Images_in_Display_Format_Columns.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13267.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Adding Thumbnail Previews to Display Formats</h3>
+<p class="bodytext">To add a thumbnail preview of an Image Content Item to a Display Format:</p>
+<ol class="listnumber"><li class="listnumber">Add a new entry to the file &lt;Rhythmyxroot&gt;/rxconfig/server/addThumbnailURL.properties for each image Content Type, mapping the Content Type ID to the ID of the thumbnail Template you want to use to preview the Content Type in the Display Format.  For example, if you had a Content Type with an ID of 350, and you wanted to use a Template with an ID of 324 to preview it in Display Formats, you would add the following entry to the addThumbnailURL.properties file:<p class="listcontinue2"><code class="monospace">350=324</code></p>
+<p class="listcontinue">Note that only one mapping per Content Type is supported.  If the file contains more than one entry for a Content Type ID, only the last entry will be used.</p>
+</li><li class="listnumber">Add the column sys_thumbnail to the Display Format.</li></ol><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "227">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="12843.htm" target="_self">Adding Graphics to Display Formats</a></p><p class="relateditem"><a href="Using_Images_in_Display_Format_Columns.htm" target="_self">Using Images in Display Format Columns</a></p></td>
+</tr>
+</table>
+
+
+
+  </td></tr>
+  <tr valign="bottom"><td>
+    <!-- Insert Your Footer Here -->
+  </td></tr>
+</table>
+</body>
+</html>
+

@@ -6,7 +6,7 @@
         <version>8.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-  <artifactId>ContentExplorer</artifactId>
+  <artifactId>perc-content-explorer</artifactId>
    <packaging>jar</packaging>
   <build>
     <plugins>
@@ -39,25 +39,20 @@
             </configuration>
         </plugin>
         <plugin>
-            <!-- Build an executable JAR -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <mainClass>com.percussion.cx.PSContentExplorerApplication</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <configuration>
-                <outputDirectory>
-                    ${project.build.directory}/lib
-                </outputDirectory>
-            </configuration>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                    <configuration>
+                        <mainClass>
+                            com.percussion.cx.PSContentExplorerApplication
+                        </mainClass>
+                    </configuration>
+                </execution>
+            </executions>
         </plugin>
     </plugins>
   </build>
@@ -76,7 +71,7 @@
   </dependency>
   <dependency>
         <groupId>com.percussion</groupId>
-        <artifactId>CMLite-Main</artifactId>
+        <artifactId>perc-system</artifactId>
         <version>${project.parent.version}</version>
     </dependency>
       <dependency>

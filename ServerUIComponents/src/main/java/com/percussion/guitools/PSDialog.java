@@ -127,8 +127,10 @@ public class PSDialog extends JDialog
    {
       Rectangle bounds = getScreenBoundsAt(this.getLocation());
       Dimension size = getSize();
-      setLocation(bounds.x + (( bounds.width - size.width ) / 2),
-            bounds.y + (( bounds.height - size.height ) / 2 ));
+      if(bounds != null) {
+          setLocation(bounds.x + ((bounds.width - size.width) / 2),
+                  bounds.y + ((bounds.height - size.height) / 2));
+      }
    }
 
    public static Rectangle getScreenBoundsAt(Point pos) {

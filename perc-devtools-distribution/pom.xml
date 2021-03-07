@@ -12,16 +12,51 @@
 
     <artifactId>perc-devtools-distribution</artifactId>
     <properties>
-        <assembly-directory>${basedir}/target/distribution</assembly-directory>
+        <assembly-directory>${project.build.outputDirectory}/distribution</assembly-directory>
+        <ant-installer>${assembly-directory}/rxconfig/Installer</ant-installer>
         <devtools-directory>${assembly-directory}/devtools</devtools-directory>
-        <packaging-directory>${devtools-directory}/packaging</packaging-directory>
-        <workbench-directory>${devtools-directory}/workbench</workbench-directory>
+        <lib-directory>${assembly-directory}/devtools/lib</lib-directory>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-ant</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-content-explorer</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-package-builder</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-package-installer</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-server-admin</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-html-converter</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-server-properties-editor</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-loader</artifactId>
             <version>8.0.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -49,40 +84,73 @@
                 </execution>
             </executions>
         </plugin>
-    <plugin>
-
-    <artifactId>maven-dependency-plugin</artifactId>
-    <executions>
-    <!--
-    The jetty-home artifact is the starting point for the jetty-distribution
-    and must happen early in the build process
-    -->
-    <execution>
-        <id>copy</id>
-        <phase>generate-resources</phase>
-        <goals>
-            <goal>copy-dependencies</goal>
-            <goal>copy</goal>
-        </goals>
-        <configuration>
-            <artifactItems>
-                <artifactItem>
-                    <groupId>com.percussion</groupId>
-                    <artifactId>CMLite-Main-PackagerUI</artifactId>
-                    <version>${project.parent.version}</version>
-                    <type>jar</type>
-                    <overWrite>true</overWrite>
-                    <outputDirectory>${packaging-directory}</outputDirectory>
-                    <destFileName>perc-packaging-tools.jar</destFileName>
-                </artifactItem>
-            </artifactItems>
-            <outputDirectory>${packaging-directory}/lib</outputDirectory>
-            <overWriteReleases>false</overWriteReleases>
-            <overWriteSnapshots>true</overWriteSnapshots>
-        </configuration>
-    </execution>
-    </executions>
-    </plugin>
+        <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${lib-directory}</outputDirectory>
+                        <overWriteReleases>true</overWriteReleases>
+                        <overWriteSnapshots>true</overWriteSnapshots>
+                        <overWriteIfNewer>true</overWriteIfNewer>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copy</id>
+                    <phase>generate-resources</phase>
+                    <goals>
+                        <goal>copy</goal>
+                    </goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-ant</artifactId>
+                                <version>${project.version}</version>
+                                <type>jar</type>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${ant-installer}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-eclipse-repository</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <classifier>com.percussion.workbench.ui.product.id.executable.cocoa.macosx.x86_64</classifier>
+                                <type>zip</type>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${ant-installer}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-eclipse-repository</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <classifier>com.percussion.workbench.ui.product.id.executable.win32.win32.x86_64</classifier>
+                                <type>zip</type>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${ant-installer}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-eclipse-repository</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <classifier>com.percussion.workbench.ui.product.id.executable.gtk.linux.x86_64</classifier>
+                                <type>zip</type>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${ant-installer}</outputDirectory>
+                            </artifactItem>
+                        </artifactItems>
+                        <outputDirectory>${project.build.directory}</outputDirectory>
+                        <overWriteReleases>false</overWriteReleases>
+                        <overWriteSnapshots>true</overWriteSnapshots>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
 </build>
 </project>

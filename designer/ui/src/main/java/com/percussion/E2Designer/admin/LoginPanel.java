@@ -391,13 +391,14 @@ public class LoginPanel extends JPanel
          if (m_connection.login(serverName, m_userId.getText(),
              m_password.getText(), protocol))
          {
+            //**************** Do not check version compatibility ********************
             // check the version to be sure we support it
-            PSFormatVersion serverVersion =
-               m_connection.getConnection().getServerVersion();
-            PSFormatVersion clientVersion =
-               new PSFormatVersion("com.percussion.E2Designer");
+ //           PSFormatVersion serverVersion =
+ //              m_connection.getConnection().getServerVersion();
+ //           PSFormatVersion clientVersion =
+ //              new PSFormatVersion("com.percussion.E2Designer");
 
-//**************** Do not check version compatibility ********************
+
 //            if (serverVersion == null ||
 //               !m_connection.getConnection().checkVersionCompatibility(
 //                  clientVersion))

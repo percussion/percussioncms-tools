@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> Accessing Object Properties </title>
+<meta name="Generator" content="AITPublish">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="Keywords" content="">
+<script type="text/javascript" src="dhtml_toc.js"></script>
+<script type="text/javascript" src="open_parent.js"></script>
+<link rel="stylesheet" href="stylesheet.css">
+<!-- <link rel="stylesheet" href="44.css"> -->
+<base target="BODY">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+
+<body onload="loadParent()" text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000">
+<table border="0" width="100%">
+  <tr valign="top"><td height="100%" > 
+    <h1 class="heading1">Accessing Object Properties</h1>
+<p class="bodytext">When implementing Rhythmyx, you may sometimes need to know an object's ID or some other property of the object.  You can view and access these properties on the Properties view in the Rhythmyx Workbench.  The Properties view is located in the lower left corner of the Workbench, under the Navigation views, with the Snippet Drawer:</p>
+<p class="expandinghtmlblock"><a id="h17534" class="expandinghtmlblocklink" title="Screenshot of Snippet Drawer with Properties" href="javascript:toggleBlock('17534')" target="_self"><img id="i17534" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Snippet Drawer with Properties tab called out</a></p>
+<div id="d17534" class="widegraphic" style="display:none"><p class="widegraphic"><img src="wkb_propertiestab.gif" alt="Wkb_Properties View" height="575" width="677" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="bodytext">You can copy these properties to the clipboard for use elsewhere in your implementation.  To copy a property, select the property you want to copy, right-click, and from the popup menu choose <em class="emphasis">Copy</em>.  This action copies the entire row.  For example, if you copied the ID property in the graphic above, when you pasted the value, the result would be:</p>
+<p class="codeexample">ID	0-4-505 (17179869689)</p>
+<p class="bodytext">You should remove extraneous data from the pasted value (for example, <em class="emphasis">ID</em> would not be necessary).</p>
+<p class="bodytext">The most common property to use is the ID property.  In Rhythmyx, IDs are Generic Universal IDs (GUIDs).  A Rhythmyx GUID consists of three parts separated by hyphens:</p>
+<ul class="listbullet"><li class="listbullet">host ID<p class="listcontinue">The host ID is a randomly-generated value that identifies the host machine on which the object was created.  Each machine on which Rhythmyx is installed has a unique host ID.  In the example above, the host ID is <em class="emphasis">0</em>.</p>
+</li><li class="listbullet">object type ID<p class="listcontinue">The object type ID specifies the type of object.  In the example above, the object ID (<em class="emphasis">4</em>) indicates that the object is a Template.  Object Type ID values are defined by Percussion Software.</p>
+</li><li class="listbullet">object ID<p class="listcontinue">The object ID is a unique identifier of the specific object of that type on that host.  In the example above, the object ID is <em class="emphasis">505</em>.</p>
+</li></ul><p class="bodytext">The numeric value in parentheses following the GUID is a binary representation of the GUID.  This value is usually also extraneous data and can be removed.</p>
+<p class="bodytext">When using a GUID, you may use either the complete GUID (0-4-505 in this example) or the object ID (505 in this example).  When a ID is used, Rhythmyx documentation will specify whether to use the GUID or the object ID.  In no case should you use the binary representation of the GUID.</p>
+
+
+  </td></tr>
+  <tr valign="bottom"><td>
+    <!-- Insert Your Footer Here -->
+  </td></tr>
+</table>
+</body>
+</html>
+

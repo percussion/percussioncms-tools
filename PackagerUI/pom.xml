@@ -6,7 +6,7 @@
     <version>8.0.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>CMLite-Main-PackagerUI</artifactId>
+  <artifactId>perc-packaging-client</artifactId>
    <packaging>jar</packaging>
   <build>
     <plugins>
@@ -40,17 +40,12 @@
       </dependency>
   <dependency>
         <groupId>com.percussion</groupId>
-        <artifactId>CMLite-Main</artifactId>
-        <version>${project.parent.version}</version>
-    </dependency>
-      <dependency>
-        <groupId>com.percussion</groupId>
-        <artifactId>rxutils</artifactId>
+        <artifactId>perc-system</artifactId>
         <version>${project.parent.version}</version>
     </dependency>
     <dependency>
         <groupId>com.percussion</groupId>
-        <artifactId>CMLite-Main-Deployer</artifactId>
+        <artifactId>perc-deployer</artifactId>
         <version>${project.parent.version}</version>
     </dependency>
 

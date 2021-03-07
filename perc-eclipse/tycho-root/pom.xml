@@ -27,6 +27,8 @@
         <module>../../vedit/vedit.ui</module>
         <module>../../designer/core</module>
         <module>../../designer/ui</module>
+        <!-- <module>../../com.percussion.doc.packagebuilder</module>
+        <module>../../com.percussion.doc.packageinstaller</module> -->
         <module>com.percussion.workbench.ui.feature</module>
         <module>perc-eclipse-repository</module>
     </modules>

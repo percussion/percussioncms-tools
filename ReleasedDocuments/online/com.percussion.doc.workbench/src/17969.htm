@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> Field Properties Editor  </title>
+<meta name="Generator" content="AITPublish">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="Keywords" content="">
+<script type="text/javascript" src="dhtml_toc.js"></script>
+<script type="text/javascript" src="open_parent.js"></script>
+<link rel="stylesheet" href="stylesheet.css">
+<!-- <link rel="stylesheet" href="44.css"> -->
+<base target="BODY">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+
+<body onload="loadParent()" text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000">
+<table border="0" width="100%">
+  <tr valign="top"><td height="100%" > 
+    <table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="17968.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="14142.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Field Properties Editor </h2>
+<p class="bodytext">The Field Properties editor allows you to configure field properties that are set or modified less frequently than those on the main Field and Field Set editor. </p>
+<p class="bodytext">To access the Field Properties editor:</p>
+<ul class="listbullet"><li class="listbullet">In the <a id="h13524" class="jumptemplate" title="Fields and Field Sets Editor" href="17968.htm" target="_self">Field and Field Set editor</a>, select a field in the table and click [<strong class="buttons">All Properties</strong>].</li></ul><p class="bodytext">Using the Field Properties Editor you can:</p>
+<ul class="listbullet"><li class="listbullet"><a id="h13060" class="jumptemplate" title="Configuring Additional Properties" href="17974.htm" target="_self">Configure additional properties</a></li><li class="listbullet"><a id="h13526" class="jumptemplate" title="Editing Fields and Field Sets" href="17970.htm" target="_self">Edit properties</a><p class="expandinghtmlblock"><a id="h19402" class="expandinghtmlblocklink" title="Screenshot of Field Properties Editor 6.6" href="javascript:toggleBlock('19402')" target="_self"><img id="i19402" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Field Properties Editor</a></p>
+<div id="d19402" class="widegraphic" style="display:none"><p class="bodytext"><img src="fieldpropertieswb66.gif" alt="Field Properties" height="576" width="576" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div></li></ul><p class="subheading">Field Definitions</p>
+<p class="fielddescription"><strong class="fieldname">Field name</strong> - Read-only. The system name of the field.</p>
+<p class="fielddescription"><strong class="fieldname">Data type</strong> - Read-only. The type of data that the field stores, such as text or binary; see <a id="h13024" class="jumptemplate" title="Default Content Editor Controls" href="17847.htm" target="_self">Default Content Editor Controls</a> for the default data type associated with each control.</p>
+<p class="fielddescription"><strong class="fieldname">Storage size</strong> - The storage size of the field in the backend table; see <a id="h13024_2" class="jumptemplate" title="Default Content Editor Controls" href="17847.htm" target="_self">Default Content Editor Controls</a> for the default storage size associated with each control.</p>
+<p class="fielddescription"><strong class="fieldname">Default value</strong> - The default value of the field, if any (entered from the previous screen).</p>
+<p class="fielddescription"><strong class="specialbold">Mime type mode</strong> - Indicates how the mime type to be associated with the field is chosen. The full-text search engine uses the mime type to correctly extract text from the field. The possible values for <strong class="specialbold">Mime type mode</strong> are:</p>
+<p class="listcontinue"><em class="emphasis">Default - </em>When you choose <em class="emphasis">Default</em>,<em class="emphasis"> </em>the system sets the field's mime type according to the <strong class="specialbold">Data Type</strong> and <strong class="specialbold">Storage size</strong>.  When the <strong class="specialbold">Data Type</strong> is <em class="emphasis">binary</em>, Rhythmyx maps the uploaded file's extension to a Mime type value. (Mappings are stored in the file &lt;RxRoot&gt;/rxconfig/Server/mimemap.properties.  You can add your own mappings to this file)</p>
+<p class="listcontinue">The default values that Rhythmyx provides for Data Type/Storage size combinations are the following:</p>
+<table width="534" cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse">
+<tr align="left" valign="top">
+<td width="126"><p class="tableheading">Data Type</p>
+</td>
+<td width="126"><p class="tableheading">Storage size</p>
+</td>
+<td width="282"><p class="tableheading">Mime Type</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="126"><p class="fielddescription">binary</p>
+</td>
+<td width="126"><p class="fielddescription">n/a</p>
+</td>
+<td width="282"><p class="fielddescription">Rhythmyx maps the uploaded file's extension to a mime type. </p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="126"><p class="tablebodytext">text</p>
+</td>
+<td width="126"><p class="tablebodytext">max</p>
+</td>
+<td width="282"><p class="tablebodytext">text/html</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="126"><p class="fielddescription">other</p>
+</td>
+<td width="126"><p class="fielddescription">n/a</p>
+</td>
+<td width="282"><p class="fielddescription">text/plain</p>
+</td>
+</tr>
+
+</table>
+<p class="listcontinue"></p>
+<p class="listcontinue"><em class="emphasis">From Selection - </em>When you choose <em class="emphasis">From Selection</em>, the <strong class="specialbold">Mime type value</strong> field becomes a drop list of all mime types included with the full-text search engine and any added to your system through extensions. This option lets you choose any of the mime types in the drop list to associate with the field.</p>
+<p class="listcontinue"><em class="emphasis">From Extension Field - </em>Only choose <em class="emphasis">From Extension Field</em> for binary Content types. When you choose this option, the <strong class="specialbold">Mime type value</strong> field becomes a drop list of text fields in the Content Type. This option lets you choose the field that holds the uploaded file's extension so Rhythmyx can map it to a mime type.</p>
+<p class="listcontinue"><em class="emphasis">From Mime Type Field - </em>When you choose <em class="emphasis">From Mime Type Field</em>, the <strong class="specialbold">Mime type value</strong> field becomes a drop list of text fields in the Content Type. This option lets you choose the field that holds the mime type.</p>
+<p class="fielddescription"><strong class="specialbold">Mime type value</strong> - If you choose <em class="emphasis">Default</em> in the <strong class="specialbold">Mime type mode</strong> field, <strong class="specialbold">Mime type value</strong> is grayed out.  If you choose any of the other choices, <strong class="specialbold">Mime type value</strong> becomes a drop list of values. See the descriptions of each <strong class="specialbold">Mime type mode</strong> choice in the preceding definition for a description of the options in the drop list associated with each choice.</p>
+<p class="fielddescription">For more information about how the search engine uses mime types in determining how to extract text, see the Rhythmyx Server Administrator online help.</p>
+<p class="fielddescription"><strong class="fieldname">Label</strong> - The display name for the field.</p>
+<p class="fielddescription"><strong class="fieldname">Mnemonic</strong> - The key used in the ALT + key sequence for moving the cursor to this field; drop list includes all unused letters for fields in the Content Type.</p>
+<p class="fielddescription"><strong class="fieldname">Error label</strong> - Sentence or phrase to display if field entry is not valid.</p>
+<p class="fielddescription"><strong class="fieldname">Control</strong> - The mechanism for displaying the field, such as drop-list or text box. See <a id="h13024_3" class="jumptemplate" title="Default Content Editor Controls" href="17847.htm" target="_self">Default Content Editor Controls</a> for the default controls.</p>
+<p class="fielddescription"><strong class="fieldname">Show in summary</strong> - Enabled for fields in child field sets only. If you want a field name and its values to display in the main Content Editor when users open it, leave <strong class="specialbold">Show in summary</strong> checked. If you uncheck <strong class="specialbold">Show in summary</strong>, users must click [<strong class="buttons">Edit Table</strong>] in the Content Editor to view the field (and all other fields in the field set) in a table.</p>
+<p class="fielddescription"><strong class="fieldname">Show in preview</strong> - Specifies whether or not to display this field in a preview of a Content Item.  </p>
+<p class="fielddescription"><strong class="fieldname">Show &quot;clear field&quot; text box in binary control</strong> - Enabled if data type for field is binary. When checked, the editor displays a box the user can check to clear the database table column before uploading binary data. If the &quot;clear field&quot; text box is not checked, the contents of the column in the backend table are not changed if the field is left blank in the Content Editor.</p>
+<p class="bodytext"><strong class="specialbold">Search:</strong></p>
+<p class="fielddescription"><strong class="fieldname">Allow this field to be searched</strong> - Indexes the contents of the field for searching. </p>
+<p class="fielddescription"><strong class="fieldname">Include in full-text multi-field query</strong> - When checked, field is automatically searched during a user-entered search. When unchecked, field is not searched during a user-entered search unless it is specified in the Advanced Search dialog. For example, you might not want the Workflow to be included in a Search, so you might uncheck the box for the Workflow field. Checked by default.   </p>
+<p class="fielddescription">[<strong class="buttons">Read Only</strong>] - Opens the <a id="h17336" class="jumptemplate" title="Maintaining Read Only Rules" href="17324.htm" target="_self">Field Editability editor</a>. This editor lets you configure whether or not a field is read only.</p>
+<p class="bodytext">[<strong class="buttons">Visibility</strong>] - Opens the <a id="h13179" class="jumptemplate" title="Maintaining Field Visibility Rules" href="13073.htm" target="_self">Field Visibility Rule editor</a>. This editor lets you configure whether to show or hide the field in the Content Editor.</p>
+<p class="bodytext">[<strong class="buttons">Validation</strong>] - Opens the <a id="h13180" class="jumptemplate" title="Maintaining Field Validations" href="13072.htm" target="_self">Field Validation editor</a>. This editor lets you configure validity checks (validation rules) on the format and value of data entered into the field.</p>
+<p class="bodytext">[<strong class="buttons">Transforms</strong>] - Opens the <a id="h14350" class="jump-seetemplate" title="Maintaining Field Transforms" href="13391.htm" target="_self">Field Transforms editor</a>. This editor lets you specify how the Content Editor changes the format of data entered into the field. Note: In versions of Rhythmyx prior to 6.0, field transforms were referred to as field translations.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "227">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13519.htm" target="_self">Maintaining Content Type Fields</a></p><p class="relateditem"><a href="17968.htm" target="_self">Fields and Field Sets Editor</a></p><p class="relateditem"><a href="14142.htm" target="_self">Default System Fields</a></p><p class="relateditem"><a href="18662.htm" target="_self">Creating Fields and Field Sets</a></p><p class="relateditem"><a href="17971.htm" target="_self">Quick Field Creation</a></p><p class="relateditem"><a href="17974.htm" target="_self">Configuring Additional Properties</a></p><p class="relateditem"><a href="17970.htm" target="_self">Editing Fields and Field Sets</a></p></td>
+</tr>
+</table>
+
+
+
+  </td></tr>
+  <tr valign="bottom"><td>
+    <!-- Insert Your Footer Here -->
+  </td></tr>
+</table>
+</body>
+</html>
+

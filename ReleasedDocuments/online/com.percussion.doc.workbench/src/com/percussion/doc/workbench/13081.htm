@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Adding a Field Validation </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13465.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13082.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Adding a Field Validation</h2>
+<p class="bodytext">Add a field validation when you are defining a field.</p>
+<p class="bodytext">For a graphic of the Field Validation editor and definitions of the fields discussed below, see <a id="h13098" class="jumptemplate" title="Field Validation Editor" href="13080.htm" target="_self">Field Validation Editor</a>.</p>
+<p class="bodytext">To add a field validation:</p>
+<ol class="listnumber"><li class="listnumber">In the <a id="h13043" class="jumptemplate" title="Field Properties Editor" href="13038.htm" target="_self">Field Properties editor</a>, click [<strong class="buttons">Validation</strong>]<p class="listcontinue">OR</p>
+<p class="listcontinue">in the <a id="h13524" class="jumptemplate" title="Fields and Field Sets Editor" href="13523.htm" target="_self">Fields and Field Sets Editor</a>, select a field and click [<strong class="buttons">Validation</strong>].</p>
+<p class="listcontinue">The Field Validation editor opens.</p>
+<p class="listnote"><em class="emphasis">NOTE: Overriding validation rules on shared or system fields in Content Types is not a valid action. If you attempt to override validation rules for shared or system fields used in Content Types a warning appears and an error may occur when you try to save a Content Type.</em></p>
+</li><li class="listnumber">To create conditions that determine whether or not the field validation runs, click [<strong class="buttons">Prerequisites</strong>].<p class="listcontinue">A specialized version of the Rule Editor opens with a checkbox labelled <strong class="specialbold">Skip validation if field is empty</strong>. </p>
+<ol class="listalpha2"><li class="listalpha2">If you do not want the field validated unless it is filled in, check <strong class="specialbold">Skip validation if field is empty</strong>.</li><li class="listalpha2">Enter any other conditions or extensions in the Rule Editor.</li></ol></li><li class="listnumber">In the <strong class="specialbold">Rule Details</strong> box, in the <strong class="specialbold">Validation type</strong> drop list choose a validation type.<p class="listcontinue">Depending on the validation type that you choose, fields for entering parameters may appear below the drop list.</p>
+</li><li class="listnumber">Enter values for the parameters.  See <a id="h13475" class="jumptemplate" title="Default Validations and their Parameters" href="13465.htm" target="_self">Default Validations and their Parameters</a> for a list of the default validation types and descriptions of their parameters.</li><li class="listnumber">Click [<strong class="buttons">Add</strong>] to add the validation to the first available row in the <strong class="specialbold">Rule</strong> table.</li><li class="listnumber">To show the relationship between this validation and the next one, choose <em class="emphasis">AND</em> or <em class="emphasis">OR</em> in the <strong class="specialbold">Boolean </strong>drop list.</li><li class="listnumber">Repeat steps 3 through 6 to add additional validations for the field. Validations will execute in the order they are listed in the <strong class="specialbold">Rule</strong> table.</li><li class="listnumber">To change the order in which a validation is executed on a field, select the validation in the <strong class="specialbold">Rule </strong>table and click <span class="symbols">Ù</span> or <span class="symbols">Ú</span>.</li><li class="listnumber">To insert a validation between two existing validations in the <strong class="specialbold">Rule </strong>table:<ol class="listalpha2"><li class="listalpha2">Select the lower validation and click +. <p class="listcontinue2">An empty row appears between the two existing validations.</p>
+</li><li class="listalpha2">Follow steps 3 through 6 to add a validation in the empty row.</li></ol></li><li class="listnumber">In <strong class="specialbold">Validation failure message</strong>, optionally enter a message to appear in the field if the validation fails.</li><li class="listnumber">Click [<strong class="buttons">OK</strong>].<p class="listcontinue">The validations entered in the tables are applied to the field, and the Field Validation editor closes. The <a id="h13043_2" class="jumptemplate" title="Field Properties Editor" href="13038.htm" target="_self">Field Properties editor</a> or the <a id="h13058" class="jumptemplate" title="Content Type Editor - Field Set Tabs" href="13036.htm" target="_self">Field Set tab</a> of the Content Editor reopens.</p>
+</li></ol><p class="bodytext">Now you can:</p>
+<ul class="listbullet"><li class="listbullet">From a Fields and Field Sets editor, click [<strong class="buttons">Properties</strong>] to go to the <a id="h13043_3" class="jumptemplate" title="Field Properties Editor" href="13038.htm" target="_self">Field Properties editor</a>.</li><li class="listbullet">From the Field Properties editor, <a id="h13060" class="jumptemplate" title="Configuring Additional Properties" href="13059.htm" target="_self">configure additional properties</a>.</li><li class="listbullet">From the Field Properties editor, click [<strong class="buttons">Visibility</strong>] to <a id="h13179" class="jumptemplate" title="Maintaining Field Visibility Rules" href="13073.htm" target="_self">create visibility rules</a>.</li><li class="listbullet">From the Field Properties editor, click [<strong class="buttons">Transform</strong>] to <a id="h14350" class="jump-seetemplate" title="Maintaining Field Transforms" href="13391.htm" target="_self">create field transformations</a>.</li></ul><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13072.htm" target="_self">Maintaining Field Validations</a></p><p class="relateditem"><a href="13080.htm" target="_self">Field Validation Editor</a></p><p class="relateditem"><a href="13465.htm" target="_self">Default Validations and their Parameters</a></p><p class="relateditem"><a href="13082.htm" target="_self">Editing a Field Validation</a></p><p class="relateditem"><a href="13083.htm" target="_self">Removing a Field Validation</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

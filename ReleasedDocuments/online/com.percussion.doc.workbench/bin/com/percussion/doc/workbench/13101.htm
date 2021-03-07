@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> CMS Navigator - UI Elements Design  </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13100.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13102.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">CMS Navigator - UI Elements Design </h3>
+<p class="bodytext">The UI Elements Design view of CMS Navigator displays User Interface elements objects and their sub-categories.</p>
+<p class="tablebodytext">The main objects in the CMS Navigator UI Elements Design view are Content Editor and Content Explorer. Below, descriptions of these objects and their children follow the graphical representation of the view.</p>
+<p class="tablebodytext"><strong class="specialbold">UI Elements</strong></p>
+<pre class="preformatted">	Content Editor<br>		System Controls<br>			sys_checkbox<br>			sys_radiobutton<br>		User Controls<br>			rx_special<br>	Content Explorer<br>		Menus<br>			File<br>				ref to Open<br>				ref to Rename<br>		Menu Entries<br>			System<br>				Open<br>				Rename<br>			User<br>				Redial<br>		Display Formats<br>			Simple<br>			Detailed<br>		Searches<br>			Standard<br>				StandardSearch<br>			Custom<br>				Searches/special/xxx.xxx<br>		Views<br>			All Content<br>				Standard<br>					AllContent<br>				Url<br>					Views/special<br></pre>
+<p class="bodytext"><strong class="specialbold">Content Editor Folder</strong></p>
+<p class="bodytext">The Content Editor folder includes two sub nodes:</p>
+<ul class="listbullet"><li class="listbullet"><a id="h13608" class="jumptemplate" title="Maintaining Controls" href="13241.htm" target="_self">System Controls</a> - Opening the System Controls node opens the sys_templates.xsl file in a text editor in read-only mode.  The sys_templates.xsl file defines all of the Content Editor controls that Rhythmyx supplies by default. </li><li class="listbullet"><a id="h13608_2" class="jumptemplate" title="Maintaining Controls" href="13241.htm" target="_self">User Controls</a> - Opening the User Controls node opens the rx_templates.xsl file in a text editor in edit mode. Use the rx_templates.xsl file to create custom controls. </li></ul><p class="bodytext"><strong class="specialbold">Content Explorer Folder</strong></p>
+<p class="bodytext">The <a id="h13609" class="jumptemplate" title="Maintaining Content Explorer Views" href="13267.htm" target="_self">Content Explorer</a> folder includes folders representing categories of Content Explorer user interface features: </p>
+<ul class="listbullet"><li class="listbullet"><a id="h13610" class="jumptemplate" title="Maintaining Menus and Menu Entries" href="13242.htm" target="_self">Menus</a> folder - Contains two categories of Menus:<ul class="listbullet2"><li class="listbullet2">System - Includes system Content Explorer menus. You can view but not edit these menus.</li><li class="listbullet2">User - Includes user-defined Content Explorer menus. You can create, edit, and view these menus.<p class="listcontinue">System and User Menus include the following sub-folders.  All menu entries appear in one of the sub-folders:</p>
+<ul class="listbullet4"><li class="listbullet4">Cascading - A menu with entries and submenus built by an implementer or included with the Rhythmyx system. Cascading menus may include references to menu entries below them. The Menu Entries are listed under the following Menu Entry folder. To add a Menu Entry to a Cascading Menu, drag it from one of the Menu Entry folders and drop it on the Menu node.</li><li class="listbullet4">Dynamic - A menu whose entries are generated when the user accesses it. Dynamic menus cannot include references to menu entries. </li></ul></li></ul></li><li class="listbullet"><a id="h14586" class="jump-seetemplate" title="Maintaining Menus and Menu Entries" href="13242.htm" target="_self">Menu Entries</a> folder - Contains the categories System and User. System lists Rhythmyx-provided menu entries (menu choices) and User lists user-defined menu entries. </li><li class="listbullet"><a id="h13942" class="jumptemplate" title="Maintaining Display Formats" href="13252.htm" target="_self">Display Formats</a> folder - The Display Formats node lists all of the Display Formats defined for the system. </li><li class="listbullet"><a id="h13612" class="jumptemplate" title="Maintaining Searches" href="13257.htm" target="_self">Searches</a>  - Includes two categories of searches:<ul class="listbullet2"><li class="listbullet2">Standard - Lists search queries configured using search criteria provided by the system's search engine.</li><li class="listbullet2">Custom - Lists urls of custom searches configured in files and stored in the Rhythmyx root. </li></ul></li><li class="listbullet"><a id="h13609_2" class="jumptemplate" title="Maintaining Content Explorer Views" href="13267.htm" target="_self">Views</a>  - There are two types of views:<ul class="listbullet2"><li class="listbullet2">Standard - Lists view queries defined in the Rhythmyx view dialogs.  </li><li class="listbullet2">Custom - Lists urls of custom view queries configured in files and stored in the Rhythmyx root. </li></ul></li></ul><p class="bodytext"></p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13586.htm" target="_self">CMS Navigator and other Rhythmyx Views</a></p><p class="relateditem"><a href="14565.htm" target="_self">Selecting a View</a></p><p class="relateditem"><a href="13099.htm" target="_self">CMS Navigator - Content Design</a></p><p class="relateditem"><a href="13100.htm" target="_self">CMS Navigator - Assembly View</a></p><p class="relateditem"><a href="13102.htm" target="_self">CMS Navigator - Security Design</a></p><p class="relateditem"><a href="13103.htm" target="_self">CMS Navigator - System Design</a></p><p class="relateditem"><a href="13111.htm" target="_self">Adding a Sub-Folder in CMS Navigator</a></p><p class="relateditem"><a href="12988.htm" target="_self">Database Explorer</a></p><p class="relateditem"><a href="12989.htm" target="_self">Community Visibility</a></p><p class="relateditem"><a href="12991.htm" target="_self">Object Sorter</a></p><p class="relateditem"><a href="12992.htm" target="_self">File Explorer</a></p><p class="relateditem"><a href="12990.htm" target="_self">Browser</a></p><p class="relateditem"><a href="12993.htm" target="_self">XML Server View</a></p><p class="relateditem"><a href="12994.htm" target="_self">Dragging and Dropping in Views</a></p><p class="relateditem"><a href="12987.htm" target="_self">References to Objects in Views</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

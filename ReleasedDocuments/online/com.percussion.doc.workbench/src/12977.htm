@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> Connecting to a Rhythmyx Server </title>
+<meta name="Generator" content="AITPublish">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="Keywords" content="">
+<script type="text/javascript" src="dhtml_toc.js"></script>
+<script type="text/javascript" src="open_parent.js"></script>
+<link rel="stylesheet" href="stylesheet.css">
+<!-- <link rel="stylesheet" href="44.css"> -->
+<base target="BODY">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+
+<body onload="loadParent()" text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000">
+<table border="0" width="100%">
+  <tr valign="top"><td height="100%" > 
+    <table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13623.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="14548.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Connecting to a Rhythmyx Server</h2>
+<p class="bodytext">Starting a Rhythmyx Workbench session requires opening the Rhythmyx Workbench and connecting to a Rhythmyx Server. Once you are connected to the Server, you can view and edit the objects it contains.  </p>
+<p class="bodytext">The Workbench can only be connected to one Rhythmyx Server at a time; however, while working in the Rhythmyx Workbench, you can end your connection to one Rhythmyx Server and start a connection to another one.</p>
+<p class="bodytext">If you install the Rhythmyx Workbench with the Rhythmyx Server, your default connection is configured to connect to a Rhythmyx Server using the default Port and user. The default server is <em class="emphasis">localhost</em> and the default port is <em class="emphasis">9992</em>.The default <strong class="specialbold">User </strong>and <strong class="specialbold">Password </strong>are <em class="emphasis">admin1</em>/<em class="emphasis">demo</em>. You must change these values if your Rhythmyx server is not local or uses a different port, and enter your own username and password. <strong class="specialbold">Make Default Connection</strong> is checked. If you check <strong class="specialbold">Save password</strong>, this configuration checks you in automatically in the future. </p>
+<p class="expandinghtmlblock"><a id="h14868" class="expandinghtmlblocklink" title="Screenshot of Connections dialog" href="javascript:toggleBlock('14868')" target="_self"><img id="i14868" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Manage Connections dialog</a></p>
+<div id="d14868" class="widegraphic" style="display:none"><p class="widegraphic"><img src="connection.gif" alt="Connections dialog" height="447" width="529" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="bodytext">To manage connections to Rhythmyx Servers:</p>
+<ol class="listnumber"><li class="listnumber">In the Rhythmyx Workbench, in the menu bar, choose <em class="emphasis">File &gt; Connect</em>. The Connections dialog opens. <p class="listcontinue">Any existing Rhythmyx server configurations appear in the <strong class="specialbold">Name</strong> list box.</p>
+</li><li class="listnumber">To add a new Rhythmyx server configuration:<ol class="listalpha2"><li class="listalpha2">Click [<strong class="buttons">New</strong>].<p class="listcontinue2">The name <em class="emphasis">New_Connection</em> for the configuration appears in the <strong class="specialbold">Name</strong> list box and the <strong class="specialbold">Name</strong> text box.  <strong class="specialbold">Server</strong> is filled with <em class="emphasis">localhost</em>, and <strong class="specialbold">Port</strong> is automatically set to <em class="emphasis">9992</em>. The other values are filled in with <em class="emphasis">admin1</em> and <em class="emphasis">demo</em>. None of the checkboxes are checked.</p>
+<p class="widegraphic"><img src="newconnection.gif" alt="New connection added" height="447" width="529" vspace="2" hspace="2" align="bottom" border="0"></p>
+</li><li class="listalpha2">In <strong class="specialbold">Name</strong>, optionally enter a new name for the connection.</li><li class="listalpha2">In <strong class="specialbold">Server</strong>, enter the name of the Rhythmyx server that you want to connect to, or enter its IP address.</li><li class="listalpha2">In <strong class="specialbold">Port</strong>, leave 9992 or enter the Rhythmyx server's port number.</li><li class="listalpha2">In <strong class="specialbold">UID</strong>, enter your Rhythmyx user name.</li><li class="listalpha2">In <strong class="specialbold">Password</strong>, enter your Rhythmyx password.</li><li class="listalpha2">If you want the dialog to remember your Rhythmyx password for this server, check <strong class="specialbold">Save password</strong>.</li><li class="listalpha2">To make this the default connection, check <strong class="specialbold">Make this the default connection</strong>. <p class="listcontinue2">If you check both Save password and Make this the default connection, as long as you have not unchecked <em class="emphasis">Automatically connect when Rhythmyx Workbench opens</em> in the <a id="h13794" class="jumptemplate" title="Setting Rhythmyx Workbench Preferences" href="17399.htm" target="_self">Preferences</a> dialog, the Workbench will automatically log you in to this connection in the future.</p>
+</li><li class="listalpha2">To connect to the Server over SSL, check <strong class="specialbold">SSL</strong>.</li><li class="listalpha2">The default <strong class="specialbold">Timeout</strong> is 60 seconds.  The Timeout defines how long the Workbench will attempt to establish a connection to the specified server before stopping and reporting a connection error.  Change the timeout by entering a different amount of time in seconds in the Timeout field.</li><li class="listalpha2">Click [<strong class="buttons">Apply</strong>] to save the configuration without closing the dialog.</li></ol></li><li class="listnumber">To modify an existing Rhythmyx server configuration, click the name of the server configuration in the <strong class="specialbold">Names</strong> list box and change the values of any of the fields. Click [<strong class="buttons">Apply</strong>] to save the changes without closing the dialog.</li><li class="listnumber">To delete an existing Rhythmyx server configuration, click the name of the server configuration in the <strong class="specialbold">Names</strong> list box and click [<strong class="buttons">Delete</strong>]. </li><li class="listnumber">To connect to a configured Rhythmyx server, click the name of the server configuration in the <strong class="specialbold">Names</strong> list box and click [<strong class="buttons">Connect</strong>].<p class="listcontinue">The Workbench connects to the Rhythmyx server and closes the dialog. The Workbench views now display the objects and settings for the connected server.</p>
+</li></ol>
+
+
+  </td></tr>
+  <tr valign="bottom"><td>
+    <!-- Insert Your Footer Here -->
+  </td></tr>
+</table>
+</body>
+</html>
+

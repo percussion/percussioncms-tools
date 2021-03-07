@@ -273,8 +273,8 @@ public class PSContentExplorerLoginPanel extends JFrame
          String prot = m_parent.getParameter("protocol");
          String prt = m_parent.getParameter("port");
 
-         m_url.setEditable(false);
-         m_url.setBorder(null);
+         m_url.setEditable(true);
+        // m_url.setBorder(null);
 
          String user = m_adminProps.getProperty(LoginDialog.LAST_USER);
          if (user != null && user.trim().length() > 0)
@@ -282,12 +282,12 @@ public class PSContentExplorerLoginPanel extends JFrame
          else
             m_userId.setText(System.getProperty("user.name"));
 
-         if (server == null || prot == null)
-         {
+//         if (server == null || prot == null)
+ //        {
             m_url.setText("");
             m_url.setEditable(true);
-         }
-         else
+   //      }
+  /*       else
          {
             String url = prot + "://" + server;
 
@@ -298,6 +298,8 @@ public class PSContentExplorerLoginPanel extends JFrame
             }
             m_url.setText(url);
          }
+         */
+
       }
       catch (IOException e) // I don't want to show any dialog here
       {

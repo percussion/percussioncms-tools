@@ -9,6 +9,8 @@
         <module name="perc-help" />
         <module name="perc-eclipse-repository" />
         <module name="com.percussion.client" />
+        <module name="com.percussion.doc.packageinstaller" />
+        <module name="com.percussion.doc.packagebuilder" />
         <module name="loader" />
         <module name="ContentExplorer" />
         <module name="de.byteaction.velocity.vaulttec.ui" />
@@ -18,15 +20,21 @@
         <module name="perc-server-ui-content" />
         <module name="CMLite-Main-PackagerUI" />
         <module name="perc-server-properties-editor" />
+        <module name="perc-devtools-distribution" />
         <module name="helios-repository-def" />
+        <module name="perc-package-installer" />
         <module name="com.percussion.workbench.ui.feature" />
+        <module name="perc-server-admin" />
         <module name="perc-server-ui-cmp" />
         <module name="htmlConverter" />
+        <module name="perc-package-builder" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CMLite-Main-PackagerUI" target="1.8" />
       <module name="com.percussion.client" target="1.8" />
+      <module name="com.percussion.doc.packagebuilder" target="1.8" />
+      <module name="com.percussion.doc.packageinstaller" target="1.8" />
       <module name="com.percussion.workbench.ui" target="1.8" />
       <module name="com.percussion.workbench.ui.feature" target="1.8" />
       <module name="ContentExplorer" target="8" />
@@ -42,6 +50,9 @@
       <module name="perc-eclipse" target="1.8" />
       <module name="perc-eclipse-repository" target="1.8" />
       <module name="perc-help" target="1.8" />
+      <module name="perc-package-builder" target="1.8" />
+      <module name="perc-package-installer" target="1.8" />
+      <module name="perc-server-admin" target="1.8" />
       <module name="perc-server-properties-editor" target="8" />
       <module name="perc-server-ui-cmp" target="1.8" />
       <module name="perc-server-ui-content" target="8" />

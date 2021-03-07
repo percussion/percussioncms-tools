@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
-            <artifactId>CMLite-Main</artifactId>
+            <artifactId>perc-system</artifactId>
             <version>${project.version}</version>
             <exclusions><exclusion>
                 <groupId>jdom</groupId>

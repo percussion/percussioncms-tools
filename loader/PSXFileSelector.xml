@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PSXContentSelectorDef class="com.percussion.loader.selector.PSFileSelector" name="File Selector">
-   <PSXSearchRoots>
-      <PSXSearchRoot name="File Search Root">
-         <Properties>
-            <PSXProperty name="Search Root">
-               <Value>file:/C:/inetpub/wwwroot/FileSelectorTest/</Value>
-            </PSXProperty>
-            <PSXProperty name="Recurse">
-               <Value>yes</Value>
-            </PSXProperty>
-         </Properties>
-      </PSXSearchRoot>
-   </PSXSearchRoots>
+<?xml version="1.0" encoding="UTF-8"?><PSXContentSelectorDef class="com.percussion.loader.selector.PSFileSelector" name="File Selector">
+  <PSXSearchRoots>
+    <PSXSearchRoot name="File Search Root">
+      <Properties>
+        <PSXProperty name="Search Root">
+          <Value>file:/C:/inetpub/wwwroot/FileSelectorTest/</Value>
+        </PSXProperty>
+        <PSXProperty name="Recurse">
+          <Value>yes</Value>
+        </PSXProperty>
+      </Properties>
+    </PSXSearchRoot>
+  </PSXSearchRoots>
 </PSXContentSelectorDef>

@@ -98,7 +98,7 @@
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
-            <artifactId>CMLite-Main</artifactId>
+            <artifactId>perc-system</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

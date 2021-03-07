@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> Issuing Tracing Commands to the Rhythmyx Server </title>
+<meta name="Generator" content="AITPublish">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="Keywords" content="">
+<script type="text/javascript" src="dhtml_toc.js"></script>
+<script type="text/javascript" src="open_parent.js"></script>
+<link rel="stylesheet" href="stylesheet.css">
+<!-- <link rel="stylesheet" href="44.css"> -->
+<base target="BODY">
+</head>
+
+<body onload="loadParent()" text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000">
+<table border="0" width="100%">
+  <tr valign="top"><td height="100%" > 
+    <table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="Disabling_Tracing.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="Tracer_Types_and_Flags.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h5 class="heading5">Issuing Tracing Commands to the Rhythmyx Server</h5>
+<p class="bodytext">You can manage tracing by issuing tracing commands directly to the server using the admininstration page.  To access the administration page, open a browser and in the Address field, enter:</p>
+<p class="codeexample">http://&lt;host:port/Rhythmyx/admin/console.jsp</p>
+<p class="bodytext">Where</p>
+<p class="list2"><code class="monospace">host</code> is the name or IP address of the machine where the Rhythmyx server resides; and</p>
+<p class="list2"><code class="monospace">port</code> is the Rhythmyx port (9992 by default).</p>
+<p class="bodytext">You must log in to access the administration page.  </p>
+<p class="bodytext">To manage tracing, enter the following command:</p>
+<p class="codeexample"><code class="monospace">Trace [help] [[type_flags|'default'] appName]</code></p>
+<p class="bodytext">Where:</p>
+<p class="list2"><code class="monospace">[help]- </code>if specified, other parameters are ignored. &nbsp;Equivalent to specifying no parameters. &nbsp;Produces a list of all flags and the tracing they enable.</p>
+<p class="list2"><code class="monospace">[type_flags]- </code>A sequence of 1 to 4 OR'ed sets of flags that indicate the tracing options you want to turn on. &nbsp;Specify flags as hexadecimals (with a leading 0x). &nbsp;See <a id="h1017" class="jumptemplate" title="Tracer Types and Flags" href="Tracer_Types_and_Flags.htm" target="_self">Tracer Types and Flags</a> for details about the trace options associated with each flag. &nbsp;If tracing is already enabled, it is re-initialized with the new options. &nbsp;</p>
+<p class="list2"><code class="monospace">default - </code>enter &quot;default&quot; for a flag set if you want to use the trace settings already set in the application for that flag set. &nbsp;Generally, you would use &quot;default&quot; instead of type flags if you changed the trace settings and wanted to return to the original settings.</p>
+<p class="list2"><code class="monospace">AppName - </code>the name of the application you want to trace. &nbsp;If you specify one or more type_flags, Rhythmyx turns on tracing for the application. &nbsp;If you do not specify any flags, Rhythmyx displays the current state of the tracing flags; if Rhythmyx returns only zeroes, tracing is not currently enabled for this application. &nbsp;If the specified application does not exist or is not running, Rhythmyx returns an error message informing you about it. &nbsp;In that case, tracing is not enabled for the specified application.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "227">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="Tracing.htm" target="_self">Tracing</a></p><p class="relateditem"><a href="Managing_Tracing.htm" target="_self">Managing Tracing in the Rhythmyx Workbench</a></p><p class="relateditem"><a href="Tracer_Types_and_Flags.htm" target="_self">Tracer Types and Flags</a></p><p class="relateditem"><a href="Tracing_Results.htm" target="_self">Tracing Results</a></p></td>
+</tr>
+</table>
+
+
+
+  </td></tr>
+  <tr valign="bottom"><td>
+    <!-- Insert Your Footer Here -->
+  </td></tr>
+</table>
+</body>
+</html>
+

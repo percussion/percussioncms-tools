@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Default Transforms and their Parameters </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="14049.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13089.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Default Transforms and their Parameters</h2>
+<table width="762" cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse">
+<tr align="left" valign="top">
+<td width="222"><p class="tableheading">Name and Definition</p>
+</td>
+<td width="72"><p class="tableheading">Transform type</p>
+</td>
+<td width="384"><p class="tableheading">Rule Details box</p>
+</td>
+<td width="84"><p class="tableheading">Parameter definitions</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">To Lower - Converts characters in field to lowercase.<br>To Upper - Converts characters in field to uppercase.<br>ProperCase - Capitalizes the first letter of each word.</p>
+<p class="tablebodytext">Trim - Removes all leading and trailing spaces.</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+</td>
+<td width="72"><p class="tablebodytext">input</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1122a.gif" alt="Transform types without parameters" height="127" width="368" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext">None</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">Normalize Date - Converts the date to the format that you specify.<br></p>
+<p class="note">NOTE: You can use the input Normalize Date transform and the output Format Date transform in conjunction with one another to ensure that dates are always entered and displayed for viewing or editing in Content Editors in the same format.</p>
+</td>
+<td width="72"><p class="tablebodytext">input</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1122b.gif" alt="Normalize date" height="129" width="370" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext"><strong class="specialbold">Input format </strong>- Date format that you specify.</p>
+<p class="tablebodytext">&nbsp;</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">Replace - Replaces all occurrences of one string with another. (xxx is this case sensitive xxxx)</p>
+</td>
+<td width="72"><p class="tablebodytext">input</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1122c.gif" alt="replace" height="129" width="370" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext"><strong class="specialbold">Search for</strong> - The search string.</p>
+<p class="tablebodytext"><strong class="specialbold">Replace with</strong> - The string to replace the search string with.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">Set Field - Changes the value of the field according the the specified JEXL expression. The JEXL expression can use the current field or any other field in the Content Editor.</p>
+</td>
+<td width="72"><p class="tablebodytext">input</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1122d.gif" alt="set field" height="127" width="368" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext"><strong class="specialbold">JEXL expression</strong> - The JEXL expression that sets the value of the field.</p>
+<p class="tablebodytext">[<strong class="buttons">Editor</strong>] - Button for opening a JEXL editor.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">Map - Maps the value entered in the Content Editor (<strong class="specialbold">Input Value</strong>) to a value that is stored in the Rhythmyx Repository (<strong class="specialbold">Stored Value</strong>) .</p>
+<p class="note">NOTE: You can use the input Map transform and the output Map transform in conjunction with one another to ensure that certain fields are always entered and displayed for viewing or editing in Content Editors in the same format.</p>
+</td>
+<td width="72"><p class="tablebodytext">input</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1122e.gif" alt="map" height="129" width="370" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext"><strong class="specialbold">Input Value</strong> - The value the user has entered in the field.</p>
+<p class="tablebodytext"><strong class="specialbold">Stored Value</strong> - The value to store in the Rhythmyx Repository when the user enters the <strong class="specialbold">Input Value</strong> in the field.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">Format Date - Converts the date stored in the Repository back to the input format or to the format specified under <strong class="specialbold">Use this format</strong>.</p>
+<p class="note">NOTE: You can use the input Normalize Date transform and the output Format Date transform in conjunction with one another to ensure that dates are always entered and displayed for viewing or editing in Content Editors in the same format.</p>
+</td>
+<td width="72"><p class="tablebodytext">output</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1123a.gif" alt="format data" height="152" width="370" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext"><strong class="specialbold">Use inverse of input transform</strong> - Converts date retrieved from Rhythmyx Repository to format supplied in <strong class="specialbold">Input format</strong> field of Normalize date transform. </p>
+<p class="tablebodytext"><strong class="specialbold">Use this format</strong> - Converts data retrieved from Rhythmyx Repository to format you specify in the text box.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">Map - Displays a value in a Content Editor field depending on the value stored for the field in the Rhythmyx Repository. The display value is either the corresponding <strong class="specialbold">Input Value</strong> in the input Map transform, or it is the <strong class="specialbold">Output Value</strong> specified in the map for this transform.</p>
+<p class="note">NOTE: You can use the input Map transform and the output Map transform in conjunction with one another to ensure that certain fields are always entered and displayed for viewing or editing in Content Editors in the same format.</p>
+</td>
+<td width="72"><p class="tablebodytext">output</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1123b.gif" alt="map" height="139" width="368" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext"><strong class="specialbold">Use inverse of input transform</strong> - Converts value retrieved from Rhythmyx Repository to value supplied in <strong class="specialbold">Input Value </strong>field of input Map transform. </p>
+<p class="tablebodytext"><strong class="specialbold">Use this map</strong> - Converts value retrieved from Rhythmyx repository to value specified in <strong class="specialbold">Output Value</strong> in the map in the dialog.</p>
+<p class="tablebodytext"><strong class="specialbold">Stored Value </strong>- Value stored in Rhythmyx repository.</p>
+<p class="tablebodytext"><strong class="specialbold">Output Value</strong> - Value to display in Content Editor.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="222"><p class="tablebodytext">Extension - Transforms the field value according to the specified extension.</p>
+</td>
+<td width="72"><p class="tablebodytext">input, output</p>
+</td>
+<td width="384"><p class="tablebodytext"><img src="wb1123c.gif" alt="extension" height="159" width="371" vspace="2" hspace="2" align="bottom" border="0"></p>
+</td>
+<td width="84"><p class="tablebodytext"><strong class="specialbold">Name</strong> <strong class="specialbold">- </strong>Extension that will transform value of field.</p>
+<p class="tablebodytext">[<strong class="specialbold">...</strong>] - Opens <a id="h13656" class="jumptemplate" title="Adding Extension Parameters" href="13240.htm" target="_self">Parameters dialog</a></p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+<p class="tablebodytext">&nbsp;</p>
+</td>
+</tr>
+
+</table>
+<p class="bodytext"></p>
+<p class="bodytext"></p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13391.htm" target="_self">Maintaining Field Transforms</a></p><p class="relateditem"><a href="13088.htm" target="_self">Field Transform Editor</a></p><p class="relateditem"><a href="13089.htm" target="_self">Adding a Field Transform</a></p><p class="relateditem"><a href="13090.htm" target="_self">Editing a Field Transform</a></p><p class="relateditem"><a href="13091.htm" target="_self">Removing a Field Transform</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> XML Server View </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13211.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13212.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h1 class="heading1">XML Server View</h1>
+<p class="bodytext">The XML Server view contains Rhythmyx objects that are not being replaced or updated in Rhythmyx 6.0, but will continue to function after the system is upgraded.  You will be able to maintain and modify these objects, and even add new objects in most cases.  </p>
+<p class="bodytext">XML Server view is visible in the default Rhythmyx perspective for upgrade users. Users who are new to Versions 6.0 and higher of Rhythmyx must open XML Server view by choosing <em class="emphasis">Window &gt; Show view &gt; Other &gt; XML Server</em> in the Menu bar.</p>
+<p class="exapandinghtmlblock"><a id="h14865" class="expandinghtmlblocklink" title="Screenshot of XML Server View" href="javascript:toggleBlock('14865')" target="_self"><img id="i14865" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of XML Server View</a></p>
+<div id="d14865" class="widegraphic" style="display:none"><p class="bodytext"><img src="xmlserverview.gif" alt="XML Server View" height="483" width="232" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="subheading">This view contains the following top-level nodes:</p>
+<ul class="listbullet"><li class="listbullet">Applications</li><li class="listbullet">XSL Variants</li><li class="listbullet">Extensions</li><li class="listbullet">Configurations</li></ul><p class="subheading">Applications </p>
+<p class="bodytext">The Applications folder lists all Rhythmyx XML applications in your system.  It contains a System folder and any number of user-defined folders. The System folder contains all system applications.  An application is considered a system application if it includes a Type property set to <em class="emphasis">System</em>, or if it does not include a Type property and the application name begins with the string &quot;sys_&quot;</p>
+<p class="bodytext">The user-defined folders contain non-system applications.  You can define a set of user-defined folders to help you classify your applications for easier navigation. However, user applications may appear directly under the Applications node.</p>
+<p class="subheading">XSL Variants</p>
+<p class="bodytext">The XSL Variants folder lists all legacy Variants in the system.  This folder lists Content Types with which at least one Variant is associated. Each Content Type contains an Associated Variants folder that includes all of the Variants associated with that Content Type.  Each Variant contains a Contained Slots node, which lists references to all of the Slots contained in that Variant.</p>
+<p class="subheading">Extensions</p>
+<p class="bodytext">The Extensions folder lists all extensions (generally Java plugins) that apply to XML applications.  All extensions are included in one of the following sub-folders:</p>
+<ul class="listbullet"><li class="listbullet">Request Pre-processors - Extensions that execute before an application creates its output XML document.</li><li class="listbullet">Result Document Processors - Extensions that execute after an application creates its output XML document.</li></ul><p class="bodytext">Within these sub-folders, extensions may be located in sub-folders that identify their functional categories.   This node and its contents are read-only.</p>
+<p class="subheading">Configurations</p>
+<p class="bodytext">The Configurations node lists configurations that are included for backwards compatibility.  It contains two nodes:</p>
+<ul class="listbullet"><li class="listbullet">Authtypes: Clicking on this node launches opens the authtype.properties file in a text editor.</li><li class="listbullet">Components:  Click on this view launches the Components editor in the Browser.</li></ul>
+
+</body>
+</html>
+

@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Binding Functions </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13181.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13147.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h4 class="heading4">Binding Functions</h4>
+<p class="bodytext">In addition to binding variables, more complex processing of data for bindings is available through binding functions.  Rhythmyx comes with a pre-defined set of binding functions, but you can also write your own binding functions.  For details, see the Rhythmyx Technical Reference Manual.</p>
+<p class="bodytext">The following binding functions are available by default.  Note that all system binding functions begin with the prefix $rx..</p>
+<p class="subheading">asmhelper</p>
+<p class="bodytext">The methods of this function provide data for use in assembly.</p>
+<p class="list2"><strong class="specialbold">getSingleParamValue</strong></p>
+<p class="list2">Returns the value of the specified parameter.  If the specified parameter does not have a value, returns null.</p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">params</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Set of Content Item parameters.  Use $sys.params.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">name of the parameter whose value you want to return.</p>
+</td>
+</tr>
+
+</table>
+<p class="list2">Example:  <code class="monospace">$sys.asmhelper.getSingleParamValue ($sys.params, sys_title)</code> returns the value in the sys_title field for the current Content Item.</p>
+<p class="list2"><strong class="specialbold">getTitle ($sys.item.guid)</strong></p>
+<p class="list2">Returns the title of the specified Content Item.</p>
+<p class="list2"><strong class="specialbold">combine </strong></p>
+<p class="list2">Adds the parameters specified in the urlquerystring parameter to the existing set of parameters of the current Content Item.  None of the values of the existing parameters are modified.</p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">params</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Set of Content Item parameters.  Use $sys.params.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">urlquerystring</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">URL-query-style string, with names and values separated by equals, and each name and value pair separated by ampersands</p>
+</td>
+</tr>
+
+</table>
+<p class="list2">Example: <code class="monospace"> $sys.asmhelper.combine($sys.params, &quot;template='p_generic'&quot;)</code> adds the string template='p_generic' to the existing parameters of the current Content Item.</p>
+<p class="list2">Another options is available for this method that adds the results of another function to the existing parameters.  To use this option, you must develop another function extension to return the value.  For example, you could define the binding value <code class="monospace">$sys.asmhelper.combine($sys.params, $example)</code>.  You would have to define a new function extension that would generate a value for $example.  </p>
+<p class="list2"><strong class="specialbold">childValues</strong></p>
+<p class="list2">Used for database publishing.  Returns a list of the values of the specified child Fieldset.</p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">parentNode</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">The Content Item whose child Fieldset children to return.  Use $sys.item.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">childName</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Name of the child Fieldset whose values you want to return.  </p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">PropertyName</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Name of the fields to return from the child Fieldset</p>
+</td>
+</tr>
+
+</table>
+<p class="list2">Example:  <code class="monospace">$sys.asmhelper.childValues($sys.item, Location, &quot;city&quot;)</code> would return a list of the values of the field city in the Location child Fieldset of the current Content Item.</p>
+<p class="subheading">codec</p>
+<p class="bodytext">The methods of this function encode and decode data.</p>
+<p class="list2"><strong class="specialbold">base64Decoder</strong></p>
+<p class="list2">Decodes the string passed from base-64 encoding. The value to be decoded must be passed as a string.  Example:  <code class="monospace">$sys.codec.base64Decoder($sys.item.getProperty(&quot;body&quot;).String())</code> would decode the value of the body field from base-64 coding to UTF-8 coding and return the resulting string.</p>
+<p class="list2"><strong class="specialbold">base64Encoder</strong></p>
+<p class="list2">Encodes the string passed to base-64 coding. The value to be encoded must be passed as a string.  Example:  <code class="monospace">$sys.codec.base64Encoder($sys.item.getProperty(&quot;body&quot;).String())</code> would encode the value of the body field to base-64 and return the resulting string.</p>
+<p class="list2"><strong class="specialbold">escapeForXml</strong></p>
+<p class="list2">Escapes the characters in the string specified so they can be used with XML output.  Example:  <code class="monospace">$sys.codec.base64Encoder($sys.item.escapeForXml($sys.item.getProperty(&quot;body&quot;).String())</code> would escape all characters in the body field and return the string so it could be used in an XML document.</p>
+<p class="subheading">db</p>
+<p class="bodytext">The methods of this function are used in database publishing.</p>
+<p class="list2"><strong class="specialbold">get</strong></p>
+<p class="list2">Executes the specified SQL query on the specified datasource and returns the results as a list of entries.  Each entry consists of a column name and a value.  </p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">datasource</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Name of the datasource on while to execute the query</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">sqlselect</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">SQL query to execute on the specified datasource.</p>
+</td>
+</tr>
+
+</table>
+<p class="list2">Example:  <code class="monospace">$sys.db.get(&quot;RhythmyxData&quot;, &quot;select LANGUAGESTRING, DISPLAYNAME from RXLOCALES where LOCALE_ID&lt;10&quot;)</code> would return a list of the values of the LANGUAGESTRING and DISPLAYNAME columns in the database specified by the Rhythmyx Data datasource.  The results are returned as a map array.</p>
+<p class="subheading">doc</p>
+<p class="bodytext">The methods of this function are used in database publishing.</p>
+<p class="list2"><strong class="specialbold">getDocument</strong></p>
+<p class="list2">Calls the URL specified as the parameter and returns the result document data.  Use this method to call an existing Rhythmyx application.  If an error occurs, returns an empty string.  If the URL is defined as relative (../), the request is submitted internally.  </p>
+<p class="list2"><strong class="specialbold">extractBody</strong></p>
+<p class="list2">Extracts the body from the submitted data.  The parameter can be either an HTML document, or an assembly item created by a Content Finder.</p>
+<p class="subheading">ext</p>
+<p class="bodytext">The methods of this function allow you to call an extension.</p>
+<p class="list2"><strong class="specialbold">call</strong></p>
+<p class="list2">Calls the specified extension, with the specified parameters.  Returns whatever the requested extension returns.</p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Name of the extension to call</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">parameters</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Parameters to submit to the requested extension.  Up to 20 parameters can be submitted as comma-separated values..</p>
+</td>
+</tr>
+
+</table>
+<p class="subheading">guid</p>
+<p class="bodytext">The methods of this function allow you to retrieve GUID data.</p>
+<p class="list2"><strong class="specialbold">getContentId($sys.item.guid)</strong></p>
+<p class="list2">Extracts the Content Item ID from the submitted GUID.  The GUID must be the ID of a Content Item.  If the GUID is any other type of object, the method fails.</p>
+<p class="subheading">link</p>
+<p class="bodytext">The methods of this function allow you to manipulate links.</p>
+<p class="list2"><strong class="specialbold">addParams</strong></p>
+<p class="list2">Adds up to five name-value pairs to the specified URL.</p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">url</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">URL to which to add the additional parameters.</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">param1… param5</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Parameter to add to the URL.  Up to five parameters can be added.  Each parameter must be match with a value  (e.g., param1, value 1, param2,value2…param5,value5).  If any parameter is missing a corresponding value, the system returns an error.  </p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">value1… value5</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Value for the parameter.  </p>
+</td>
+</tr>
+
+</table>
+<p class="list2"><strong class="specialbold">getAbsUrl</strong></p>
+<p class="list2">Returns the absolute URL of the request path.  Can be used with the addParams method to extend the URL with additional parameters.</p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">path</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Partial path that will be appended to the Rhythmyx URL to produce an absolute URL.  </p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">secure</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">If specified as true, generates a secure link.  If omitted, defaults to false.</p>
+</td>
+</tr>
+
+</table>
+<p class="list2"><strong class="specialbold">getRelUrl</strong></p>
+<p class="list2">Returns the relative URL base for the requested path.  Can be used with the addParams method to extend the URL with additional parameters.</p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">path</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Path whose URL base you want to retrieve. </p>
+</td>
+</tr>
+
+</table>
+<p class="subheading">location</p>
+<p class="bodytext">The methods of this function allow you to generate hypertext links.</p>
+<p class="list2"><strong class="specialbold">generate($sys.assemblyitem,template)</strong></p>
+<p class="list2">Generates the target URL for the assembly item.  The template parameter should specify the page Template to which to link.  You can use either a name or an ID to specify the Template; using an ID is generally more efficient since a name must be converted to an ID internally before processing the URL.</p>
+<p class="list2"><strong class="specialbold">siteBase($sys.site)</strong></p>
+<p class="list2">Returns the base URL for the specified Site.  Can include the modify parameter.  If the modify parameters is set to yes [<code class="monospace">siteBase($sys.assemblyitem, yes)</code>], the protocol, host, and port are not included in the returned URL.</p>
+<p class="subheading">string</p>
+<p class="bodytext">The methods of this function allow you to allow you to manipulate string values.</p>
+<p class="list2"><strong class="specialbold">stringTo Map</strong></p>
+<p class="list2">Converts a URL-style parameter string to a Java map.  Used to pass parameters to Slot Content Finders.  </p>
+<table width="440" cellpadding="2" cellspacing="0" border="1" style="border-collapse:collapse; border:1px solid #010101">
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tableheading">Name</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tableheading">Description</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td style = "border:1px solid #010101;" width="91"><p class="tablebodytext">paramstring</p>
+</td>
+<td style = "border:1px solid #010101;" width="349"><p class="tablebodytext">Parameter string to convert.  If null, an empty map is returned.</p>
+</td>
+</tr>
+
+</table>
+<p class="list2"><strong class="specialbold">equalNumbers</strong></p>
+<p class="list2">Compares two parameters, each a number or a string with a numeric value (which will be converted to a number; if a parameter value cannot be converted to a number or if a parameter is of an unknown type, it is converted to 0).  If the two numbers are equal, returns true.</p>
+<p class="list2"><strong class="specialbold">extractNumber</strong></p>
+<p class="list2">Extracts the numerical value of the parameter.  If the object is of the type java.lang.Number, returns the Long value of that number.  If the object is of the type java.lang.String, the string is converted to a number; the default value in this case is 0.  If the data type of the object is unknown, returns 0.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13146.htm" target="_self">Bindings Tab</a></p><p class="relateditem"><a href="13181.htm" target="_self">System Variables</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

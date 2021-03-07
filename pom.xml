@@ -29,6 +29,9 @@
         <module>ContentExplorer</module>
         <module>loader</module>
         <module>perc-devtools-distribution</module>
+        <module>perc-server-admin</module>
+        <module>perc-package-installer</module>
+        <module>perc-package-builder</module>
     </modules>
 
     <properties>
@@ -75,7 +78,7 @@
         <lifecycle.mapping.plugin>1.0.0</lifecycle.mapping.plugin>
         <jacoco.maven.plugin.version>0.8.5</jacoco.maven.plugin.version>
         <java.version>1.8.0</java.version>
-        <skip.integration.tests>true</skip.integration.tests>
+        <skip.integration.tests>false</skip.integration.tests>
         <skip.unit.tests>false</skip.unit.tests>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -159,7 +162,7 @@
                 <build.profile.id>integration-test</build.profile.id>
                 <!-- Only integration tests are run. -->
                 <skip.integration.tests>false</skip.integration.tests>
-                <skip.unit.tests>true</skip.unit.tests>
+                <skip.unit.tests>false</skip.unit.tests>
             </properties>
         </profile>
     </profiles>
@@ -367,6 +370,11 @@
         </plugins>
         <pluginManagement>
             <plugins>
+                <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.4.3</version>
+                </plugin>
                 <plugin>
                     <groupId>org.eclipse.tycho</groupId>
                     <artifactId>tycho-versions-plugin</artifactId>

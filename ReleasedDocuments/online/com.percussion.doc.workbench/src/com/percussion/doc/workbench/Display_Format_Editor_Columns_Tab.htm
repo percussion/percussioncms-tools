@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Display Format Editor Columns Tab </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13768.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="Display_Format_Editor_Properties_Tab.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Display Format Editor Columns Tab</h3>
+<p class="bodytext">Use the Columns tab of the Display Formats Editor to specify the columns to include in the Display Format, and to organize the columns when applying the Display Format to the contents of a folder. </p>
+<p class="widegraphic"><img src="wb_displayformatseditorcolumnstab_57.gif" alt="" height="600" width="439" vspace="2" hspace="2" align="bottom" border="0"></p>
+<p class="bodytext">The Columns tab includes two tables, Categories and Columns.  </p>
+<p class="bodytext">The Categories table defines the fields that will be included when a user applies the display format to the Related Content Search results, and specifies the hierarchy of the columns in the tree view used to view the results.  Note that Categories cannot be used in a Display Format that is used in Folders.  If you attempt to specify that a Display Format will be used in Folders, the fields in the Categories table will be deleted from the Display Format (they are not simply moved to the Columns table).</p>
+<p class="bodytext">The Columns table specifies the Columns that will be included in display format when a user applies it to the results of a search or View.  The order of the fields in the table defines the order of the columns in the display format.  </p>
+<p class="bodytext">A specific field can be in one table or the other.  In other words, if a field appears in the Categorization table, it will not appear in the Columns table.  </p>
+<p class="bodytext">Display Formats that include both Categories and Columns can be applied to Views and Searches, but cannot be applied to a folder.  Only Display Formats with no entries in the Categories table can be applied to folders.</p>
+<p class="bodytext">Note that if you want to create links from Content Items under one Site node in Rhythmyx to Content Items under another Site node, you must include the following columns in the Display Format:</p>
+<ul class="listbullet"><li class="listbullet">sys_siteid</li><li class="listbullet">sys_folderid</li></ul><p class="bodytext">When there columns are included in a Display Format, you should see the following behavior:</p>
+<ul class="listbullet"><li class="listbullet">If the Display Format includes only the sys_siteid column, the results will include one listing for each Site that contains a Content Item included in the results.  If a Content Item in the listing does not exist on any Site, the Display Format will include one entry, with no value in the Site column.<ul class="listbullet2"><li class="listbullet2">Example:  Content Item 506 exists in Sites Lorem and Ipsum, while Content Item 502 does not exist in any Site.  If a Display Format listing these Content Items includes the sys_siteid column, Content Item 506 will be listed twice, once with Lorem in the Sites column and once with Ipsum in the Sites column; Content Item 502 will be listed once, but with no value in the Sites column. </li></ul></li><li class="listbullet">If the Display Format includes only the sys_folderid column, the results will include one listing for each Folder that contains a Content Item in the results.  If a Content Item in the listing does not exist in any Folder, the Display Format will include one entry, with no value in the Folder column.<ul class="listbullet2"><li class="listbullet2">Example:  Content Item 506 exists in Folders Dolor and Amet, while Content Item 502 does not exist in any Folder.  If a Display Format listing these Content Items includes the sys_folderid column, Content Item 506 will be listed twice, once with Dolor in the Folder column and once with Ipsum in the Folder column; Content Item 502 will be listed once, but with no value in the Folder column. </li></ul></li><li class="listbullet">If the Display Format includes both columns, the results will include one listing for each Site that contains a Content Item included in the results, and one listing for each Folder that contains a Content Item included in the results.  If a Content Item does not exist in any Site or Folder, it will be listed once, with no value in either the Site or Folder column.<ul class="listbullet2"><li class="listbullet2">Example:  Content Item 506 exists on Site Lorem, in Folder Dolor and Quand; it also exists on Site Ipsum in Folder Amet.  Content Item 502 does not exist in any Site or Folder.  A Display Format that included these two Content Items would resemble the following:<table width="528" cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse">
+<tr align="left" valign="top">
+<td width="214"><p class="tableheading">Content Item</p>
+</td>
+<td width="214"><p class="tableheading">Folder</p>
+</td>
+<td width="99"><p class="tableheading">Site</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="214"><p class="tablebodytext">506</p>
+</td>
+<td width="214"><p class="tablebodytext">&nbsp;</p>
+</td>
+<td width="99"><p class="tablebodytext">Lorem</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="214"><p class="tablebodytext">506</p>
+</td>
+<td width="214"><p class="tablebodytext">Dolor</p>
+</td>
+<td width="99"><p class="tablebodytext">Lorem</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="214"><p class="tablebodytext">506</p>
+</td>
+<td width="214"><p class="tablebodytext">Quand</p>
+</td>
+<td width="99"><p class="tablebodytext">Lorem</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="214"><p class="tablebodytext">506</p>
+</td>
+<td width="214"><p class="tablebodytext">&nbsp;</p>
+</td>
+<td width="99"><p class="tablebodytext">Ipsum</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="214"><p class="tablebodytext">506</p>
+</td>
+<td width="214"><p class="tablebodytext">Amet</p>
+</td>
+<td width="99"><p class="tablebodytext">Ipsum</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="214"><p class="tablebodytext">502</p>
+</td>
+<td width="214"><p class="tablebodytext">&nbsp;</p>
+</td>
+<td width="99"><p class="tablebodytext">&nbsp;</p>
+</td>
+</tr>
+
+</table>
+</li></ul></li></ul><p class="subheading">Field Descriptions</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Field</strong></strong>  The internal name of the field.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Label</strong></strong>  The label for the field displayed to the Business User.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Sort Order</strong></strong>  The sorting order of the fields.  Options are <em class="emphasis">Ascending</em> and <em class="emphasis">Descending</em>.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Column</strong></strong>  Button.  Click this button to move a selected field from the Columns table to the Category table.  This button is only enabled when a field is selected in the Category table.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Category</strong></strong>  Button.  Click this button to move a selected field from the Category table to the Columns table.  This button is only enabled when a field is selected in the Columns table.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Up</strong></strong> <img src="dfe_upbutton.gif" alt="" height="24" width="48" vspace="2" hspace="2" align="bottom" border="0"> and <strong class="specialbold">Down</strong> <img src="dfe_downbutton.gif" alt="" height="24" width="48" vspace="2" hspace="2" align="bottom" border="0"> Buttons.  In the Categories table, the Up and Down buttons modify the nesting level of fields in the Categorization.  In the Columns table, the button modify the order of columns in the display pane from  left (top field in the table) to right (bottom field in the table).   </p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Delete <img src="dfe_deletebutton.gif" alt="" height="24" width="48" vspace="2" hspace="2" align="bottom" border="0"> </strong></strong>Button  Click this button to remove a field from the associated table.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Customize</strong></strong>  Button.  Click this button to display the Field Selection Editor, which you can use to specify the fields included in the Display Format.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Folders</strong></strong>  Checkbox.  Specifies that this Display Format can be applied to Folders.  If this option is checked, you cannot add fields to the Categories table.  If you have fields in the Categories table when you check this field, Rhythmyx deletes them from the Display Format (they are not moved to the Columns table).</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Related Content Searches</strong></strong>  Checkbox.  Specifies that this Display Format can be applied to Related Content Searches.  If this options is checked, Rhythmyx automatically add the Variant (sys_variantname) and Content Type Name (sys_contenttypename) fields as columns.  These fields can be moved to the Categories table.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13718.htm" target="_self">Display Format Editor</a></p><p class="relateditem"><a href="13768.htm" target="_self">Display Format Editor General Tab</a></p><p class="relateditem"><a href="Display_Format_Editor_Properties_Tab.htm" target="_self">Display Format Editor Properties Tab</a></p><p class="relateditem"><a href="Display_Format_Editor_Communities_Tab.htm" target="_self">Display Format Editor Communities Tab</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+
