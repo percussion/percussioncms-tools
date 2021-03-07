@@ -17,6 +17,8 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Unit test class for the <code>PSLoaderDescriptor</code>
  */

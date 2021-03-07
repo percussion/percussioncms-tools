@@ -27,6 +27,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Unit test class for the <code>PSLoaderRepositoryHandler</code> class.
  */
