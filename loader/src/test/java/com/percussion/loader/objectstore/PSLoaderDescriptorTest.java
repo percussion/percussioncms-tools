@@ -13,26 +13,23 @@ import com.percussion.xml.PSXmlDocumentBuilder;
 
 import java.io.InputStream;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
  * Unit test class for the <code>PSLoaderDescriptor</code>
  */
-public class PSLoaderDescriptorTest extends TestCase
+public class PSLoaderDescriptorTest
 {
    /**
     * Construct this unit test
     *
     * @param name The name of this test.
     */
-    public PSLoaderDescriptorTest(String name)
+    public PSLoaderDescriptorTest()
    {
-      super(name);
+      //default ctor
    }
 
    /**
@@ -40,6 +37,7 @@ public class PSLoaderDescriptorTest extends TestCase
     *
     * @throws Exception if there are any errors.
     */
+   @Test
    public void testXml() throws Exception
    {
       PSContentSelectorDef slct = 
@@ -60,15 +58,6 @@ public class PSLoaderDescriptorTest extends TestCase
 
       // "src" == "tgt"
       assertTrue(src.equals(tgt));
-   }
-
-
-   // collect all tests into a TestSuite and return it
-   public static Test suite()
-   {
-      TestSuite suite = new TestSuite();
-      suite.addTest(new PSLoaderDescriptorTest("testXml"));
-      return suite;
    }
 
 }
