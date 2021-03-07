@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<project name="Percussion CMS Dev Tools Install"
+         default="install">
+
+
+    <property environment="env"/>
+    <property name="install.src" location="../.."/>
+    <property name="install.dir" location="${install.src}"/>
+
+
+    <tstamp>
+        <format property="timestamp" pattern="yyyy-MM-dd_HH-mm-ss"/>
+    </tstamp>
+
+    <condition property="isMac">
+        <os family="mac" />
+    </condition>
+    <condition property="isWindows">
+        <os family="windows" />
+    </condition>
+    <condition property="isLinux">
+        <and>
+            <not>
+            <os family="mac"/>
+            </not>
+            <os family="unix" />
+        </and>
+    </condition>
+
+    <condition property="installSameSrcDest" value="true" else="false">
+        <equals arg1="${install.dir}" arg2="${install.src}"/>
+    </condition>
+
+    <!-- Executable files that require setting execute permission on linux / osx -->
+    <patternset id="executable.files">
+        <include name="**/*.sh"/>
+    </patternset>
+
+
+    <taskdef resource="com/percussion/ant/antlib.xml"  loaderref="ant.loader.ant.deps"/>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml"  loaderref="ant.loader.ant.deps"/>
+
+
+    <target name="init" depends="setup-logging">
+        <fail message="Property &quot;install.dir&quot; needs to be set">
+            <condition>
+                <istrue value="${installSameSrcDest}"/>
+            </condition>
+        </fail>
+    </target>
+
+    <target name="setup-logging">
+        <mkdir dir="${install.dir}/rxconfig/Installer"/>
+        <touch file="${install.dir}/rxconfig/Installer/devtools-install.log" />
+        <record name="${install.dir}/rxconfig/Installer/devtools-install.log"
+                loglevel="verbose"/>
+        <echo message="Build logged to ${install.dir}/rxconfig/Installer/devtools-install.log"/>
+    </target>
+
+    <target name="install" depends="init">
+
+        <!-- pseudo code:
+        mkdir on devtools
+        mkdir devtools/backups
+        mkdir devtools/backups/{version}
+        backup inst/devtools/workbench/ eclipse.ini (different spot on each platform) to devtools/backup/version
+        unzip workbench to inst/devtools/workbench
+        copy * from src/devtools to inst/devtools not recursive
+        copy * from lib to devtools/lib
+        don't overwrite DevOptions.bat/sh
+        call it done -->
+
+        <mkdir dir="${install.dir}/devtools"/>
+        <mkdir dir="${install.dir}/backups"/>
+        <mkdir dir="${install.dir}/backups/"/>
+        <echo>Installing Version: ${project.version}</echo>
+        <echo message="OS Name is:         ${os.name}" />
+        <echo message="OS Architecture is: ${os.arch}" />
+        <echo message="OS Version is:      ${os.version}" />
+        <echo message="Install Source is:  ${install.src}" />
+        <echo message="Install Target is:  ${install.dir}" />
+
+
+        <echo message="Backing up existing eclipse.ini if present.." />
+        <copy todir="${install.dir}/backups/" file="${install.dir}/devtools/eclipse.ini" failonerror="false"/>
+
+        <!-- Unzip the workbench -->
+        <echo message="Unzipping the workbench for this platform..."/>
+        <antcall target="doLinux" />
+        <antcall target="doWindows" />
+        <antcall target="doMac" />
+
+        <!-- Copy lib dir -->
+        <echo message="Installing updated libraries..."/>
+        <mkdir dir="${install.dir}/devtools/lib" />
+        <copy todir="${install.dir}/devtools/lib">
+            <fileset dir="${install.src}/devtools/lib">
+                <include name="**.jar"/>
+            </fileset>
+        </copy>
+
+        <!-- Copy Scripts -->
+        <copy todir="${install.dir}/devtools">
+            <fileset dir="${install.src}/devtools">
+                <include name="**.sh" unless="${isWindows}"/>
+                <include name="**.bat" />
+                <include name="README.md"/>
+            </fileset>
+        </copy>
+
+        <echo message="Mark executables as executable"/>
+        <chmod dir="${install.dir}/devtools" includes="*.sh" failonerror="false" perm="ugo+rx" />
+
+    </target>
+
+    <target name="doMac" if="isMac">
+        <echo message="Installing OSX Workbench..." />
+        <gunzip src="perc-eclipse-repository-${project.version}-macosx.cocoa.x86_64.tar.gz"/>
+        <untar src="perc-eclipse-repository-${project.version}-macosx.cocoa.x86_64.tar" dest="${install.dir}/devtools/workbench" overwrite="true" />
+    </target>
+
+    <target name="doWindows" if="isWindows">
+        <echo message="Installing Windows Workbench..." />
+        <unzip overwrite="true" dest="${install.dir}/devtools/workbench"
+               src="perc-eclipse-repository-${project.version}-win32.win32.x86_64.zip"/>
+    </target>
+
+    <target name="doLinux" if="isLinux">
+        <echo message="Installing Linux Workbench..." />
+        <gunzip src="perc-eclipse-repository-${project.version}-linux.gtk.x86_64.tar.gz"/>
+        <untar src="perc-eclipse-repository-${project.version}-linux.gtk.x86_64.tar" dest="${install.dir}/devtools/workbench" overwrite="true"/>
+    </target>
+
+
+</project>

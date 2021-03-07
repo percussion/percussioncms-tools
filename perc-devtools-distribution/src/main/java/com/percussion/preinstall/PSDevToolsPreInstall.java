@@ -16,30 +16,18 @@
 
 package com.percussion.preinstall;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.tools.ant.taskdefs.Replace;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import com.percussion.utils.io.PathUtils;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -64,7 +52,33 @@ public class PSDevToolsPreInstall {
         public static Integer processCode=0;
         public static Boolean error=false;
 
-        public static void main(String[] args) {
+    /**
+     * Find the ant jar by path pattern to avoid hard coding / forcing version.
+     *
+     * @param execPath Folder containing the jar
+     * @param fileNameWithPattern A File name with a glob pattern like perc-ant-*.jar
+     * @return Path to the ant jar
+     * @throws IOException
+     */
+    private static Path getVersionLessJarFilePath(Path execPath, String fileNameWithPattern) throws IOException {
+        try (DirectoryStream<Path> ds = Files.newDirectoryStream(execPath.toAbsolutePath(), fileNameWithPattern)) {
+            List<Path> paths = new ArrayList<>();
+            for (Path path : ds) {
+                paths.add(path);
+            }
+            if (paths.isEmpty()) {
+                throw new IOException(fileNameWithPattern + " not found.");
+            } else if (paths.size() == 1) {
+                return paths.get(0);
+            } else {
+                System.out.println("Warning: Multiple " + fileNameWithPattern + " jars found, selecting the first one: " + paths.get(0).toAbsolutePath().toString());
+                return paths.get(0);
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
             try {
 
                 if (args.length < 1) {
@@ -143,7 +157,7 @@ public class PSDevToolsPreInstall {
 
 
                 Path execPath = installSrc.resolve(Paths.get("rxconfig", "Installer"));
-                Path installAntJarPath = execPath.resolve(PathUtils.getVersionLessJarFilePath(execPath,PERC_ANT_JAR + "-*.jar"));
+                Path installAntJarPath = execPath.resolve(getVersionLessJarFilePath(execPath,PERC_ANT_JAR + "-*.jar"));
                 execJar(installAntJarPath, execPath, installPath);
 
             } catch (Exception e) {

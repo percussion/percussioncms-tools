@@ -59,12 +59,16 @@
             <artifactId>perc-loader</artifactId>
             <version>8.0.2-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>rxutils</artifactId>
+            <version>8.0.2-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 <build>
     <plugins>
         <plugin>
             <artifactId>maven-resources-plugin</artifactId>
-            <version>3.1.0</version>
             <executions>
                 <execution>
                     <id>copy-resources</id>
@@ -80,6 +84,23 @@
                                 <filtering>true</filtering>
                             </resource>
                         </resources>
+                        <useBuildFilters>true</useBuildFilters>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copy-install-resources</id>
+                    <phase>generate-resources</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${ant-installer}</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>src/main/resources/distribution/rxconfig/installer</directory>
+                                <filtering>true</filtering>
+                            </resource>
+                        </resources>
                     </configuration>
                 </execution>
             </executions>
@@ -88,19 +109,6 @@
             <artifactId>maven-dependency-plugin</artifactId>
             <executions>
                 <execution>
-                    <id>copy-dependencies</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>copy-dependencies</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${lib-directory}</outputDirectory>
-                        <overWriteReleases>true</overWriteReleases>
-                        <overWriteSnapshots>true</overWriteSnapshots>
-                        <overWriteIfNewer>true</overWriteIfNewer>
-                    </configuration>
-                </execution>
-                <execution>
                     <id>copy</id>
                     <phase>generate-resources</phase>
                     <goals>
@@ -108,6 +116,14 @@
                     </goals>
                     <configuration>
                         <artifactItems>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>rxutils</artifactId>
+                                <version>${project.version}</version>
+                                <type>jar</type>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${ant-installer}</outputDirectory>
+                            </artifactItem>
                             <artifactItem>
                                 <groupId>com.percussion</groupId>
                                 <artifactId>perc-ant</artifactId>
@@ -120,7 +136,16 @@
                                 <groupId>com.percussion</groupId>
                                 <artifactId>perc-eclipse-repository</artifactId>
                                 <version>8.0.2-SNAPSHOT</version>
-                                <classifier>com.percussion.workbench.ui.product.id.executable.cocoa.macosx.x86_64</classifier>
+                                <classifier>macosx.cocoa.x86_64</classifier>
+                                <type>tar.gz</type>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${ant-installer}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-eclipse-repository</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <classifier>win32.win32.x86_64</classifier>
                                 <type>zip</type>
                                 <overWrite>true</overWrite>
                                 <outputDirectory>${ant-installer}</outputDirectory>
@@ -129,24 +154,101 @@
                                 <groupId>com.percussion</groupId>
                                 <artifactId>perc-eclipse-repository</artifactId>
                                 <version>8.0.2-SNAPSHOT</version>
-                                <classifier>com.percussion.workbench.ui.product.id.executable.win32.win32.x86_64</classifier>
-                                <type>zip</type>
+                                <classifier>linux.gtk.x86_64</classifier>
+                                <type>tar.gz</type>
                                 <overWrite>true</overWrite>
                                 <outputDirectory>${ant-installer}</outputDirectory>
                             </artifactItem>
                             <artifactItem>
                                 <groupId>com.percussion</groupId>
-                                <artifactId>perc-eclipse-repository</artifactId>
+                                <artifactId>perc-content-explorer</artifactId>
                                 <version>8.0.2-SNAPSHOT</version>
-                                <classifier>com.percussion.workbench.ui.product.id.executable.gtk.linux.x86_64</classifier>
-                                <type>zip</type>
                                 <overWrite>true</overWrite>
-                                <outputDirectory>${ant-installer}</outputDirectory>
+                                <outputDirectory>${lib-directory}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-package-builder</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${lib-directory}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-package-installer</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${lib-directory}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-server-admin</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${lib-directory}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-html-converter</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${lib-directory}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-server-properties-editor</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${lib-directory}</outputDirectory>
+                            </artifactItem>
+                            <artifactItem>
+                                <groupId>com.percussion</groupId>
+                                <artifactId>perc-loader</artifactId>
+                                <version>8.0.2-SNAPSHOT</version>
+                                <overWrite>true</overWrite>
+                                <outputDirectory>${lib-directory}</outputDirectory>
                             </artifactItem>
                         </artifactItems>
                         <outputDirectory>${project.build.directory}</outputDirectory>
                         <overWriteReleases>false</overWriteReleases>
                         <overWriteSnapshots>true</overWriteSnapshots>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>distribution/rxconfig/Installer</classpathPrefix>
+                        <mainClass>com.percussion.preinstall.PSDevToolsPreInstall</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <descriptors>
+                    <descriptor>src/assembly/zip.xml</descriptor>
+                </descriptors>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>create-my-bundle</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/assembly/zip.xml</descriptor>
+                        </descriptors>
+
+                        <appendAssemblyId>false</appendAssemblyId>
                     </configuration>
                 </execution>
             </executions>
