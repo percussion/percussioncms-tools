@@ -27,7 +27,6 @@
         <module>ServerPropertiesEditor</module>
         <module>htmlconverter</module>
         <module>ContentExplorer</module>
-        <module>loader</module>
         <module>perc-devtools-distribution</module>
         <module>perc-server-admin</module>
         <module>perc-package-installer</module>
