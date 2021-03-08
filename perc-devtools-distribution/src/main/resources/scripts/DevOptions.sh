@@ -15,4 +15,6 @@
 # limitations under the License.
 #
 # Add any additional command line options to be used when launching tools, enabling debugger etc
-#export JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8059
+# export PATH=/path/to/jre8/bin:$PATH
+# export JRE_HOME=/path/to/jre8
+# export JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8059
