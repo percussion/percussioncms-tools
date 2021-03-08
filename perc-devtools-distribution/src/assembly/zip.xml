@@ -8,11 +8,11 @@
   <files>
     <file>
       <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory></outputDirectory>
     </file>
     <file>
       <source>${project.build.directory}/classes/README.md</source>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory></outputDirectory>
       <filtered>true</filtered>
     </file>
 
