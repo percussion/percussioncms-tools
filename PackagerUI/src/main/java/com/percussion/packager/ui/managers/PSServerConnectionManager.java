@@ -267,31 +267,35 @@ public class PSServerConnectionManager
          if(dialog.isOk())
          {
             user = dialog.getUsername();
-            pass = PSDeploymentServerConnection.encryptPwd(
-               user, dialog.getPassword());
+            pass = dialog.getPassword();
          }
          else
          {
             return true;
          }
       }
-      m_conn = new PSDeploymentServerConnection(
-            server.isUseSSL() ? "https" : "http",
-            server.getServer(),
-            server.getPort(),
-            user,
-            pass,
-            true,
-            true);
-        
-        m_currentServer = server;
-        m_deploymentManager = new PSDeploymentManager(m_conn);
-        m_cataloger = m_deploymentManager.getCataloger();
-        fireServerConnectionEvent(server.toString(), true);
-        if(register)
-        {
-           addRecentConnection(server);
-        }
+
+      try {
+         m_conn = new PSDeploymentServerConnection(
+                 server.isUseSSL() ? "https" : "http",
+                 server.getServer(),
+                 server.getPort(),
+                 user,
+                 pass,
+                 false,
+                 true);
+
+         m_currentServer = server;
+         m_deploymentManager = new PSDeploymentManager(m_conn);
+         m_cataloger = m_deploymentManager.getCataloger();
+         fireServerConnectionEvent(server.toString(), true);
+         if (register) {
+            addRecentConnection(server);
+         }
+
+      }catch(NullPointerException npe){
+         npe.printStackTrace();
+      }
         return false;
       
    }  
