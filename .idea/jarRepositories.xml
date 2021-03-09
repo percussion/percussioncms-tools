@@ -32,6 +32,11 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="maven-eclipse-repo" />
+      <option name="name" value="maven-eclipse-repo" />
+      <option name="url" value="http://maven-eclipse.github.io/maven" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="redhat" />
       <option name="name" value="redhat" />
       <option name="url" value="https://maven.repository.redhat.com/ga/" />

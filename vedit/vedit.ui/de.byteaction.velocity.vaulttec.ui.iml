@@ -49,5 +49,11 @@
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.10.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.10.9" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.win32.win32.x86:debug:4.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.gtk.linux.x86:4.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.gtk.linux.x86_64:4.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:4.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.wso2.wsf:org.eclipse.ui.workbench:3.3.0" level="project" />
   </component>
 </module>

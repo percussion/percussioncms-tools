@@ -45,25 +45,171 @@
     </dependency>
     <dependency>
         <groupId>com.percussion</groupId>
-        <artifactId>perc-deployer</artifactId>
+        <artifactId>perc-deployer-client</artifactId>
         <version>${project.parent.version}</version>
     </dependency>
 
-<dependency>
-    <groupId>com.miglayout</groupId>
-    <artifactId>miglayout</artifactId>
-    <version>3.6.3</version>
-</dependency>
+    <dependency>
+        <groupId>com.miglayout</groupId>
+        <artifactId>miglayout</artifactId>
+        <version>3.6.3</version>
+    </dependency>
 
-<dependency>
-    <groupId>org.java.net.substance</groupId>
-    <artifactId>substance</artifactId>
-    <version>5.3</version>
-</dependency>
-  <dependency>
-    <groupId>org.eclipse</groupId>
-    <artifactId>org.eclipse.help.base</artifactId>
-    <version>3.3.1.v20070813_33x</version>
-</dependency>
+    <dependency>
+        <groupId>org.java.net.substance</groupId>
+        <artifactId>substance</artifactId>
+        <version>5.3</version>
+    </dependency>
+
+      <dependency>
+        <groupId>org.eclipse</groupId>
+        <artifactId>org.eclipse.help.base</artifactId>
+        <version>3.3.1.v20070813_33x</version>
+    </dependency>
+
+      <!-- Logging -->
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-api</artifactId>
+          <version>${log4j2.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-core</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-jul</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-jcl</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-1.2-api</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-slf4j-impl</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>com.lmax</groupId>
+          <artifactId>disruptor</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>javax.ws.rs-api</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>commons-lang</groupId>
+          <artifactId>commons-lang</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>saxon</groupId>
+          <artifactId>saxon</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.hibernate.javax.persistence</groupId>
+          <artifactId>hibernate-jpa-2.1-api</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-jexl3</artifactId>
+          <scope>compile</scope>
+      </dependency>
+
+
+      <dependency>
+          <groupId>com.percussion</groupId>
+          <artifactId>tablefactory</artifactId>
+          <version>${project.parent.version}</version>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>com.thoughtworks.xstream</groupId>
+          <artifactId>xstream</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>javax.jcr</groupId>
+          <artifactId>jcr</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+          <scope>compile</scope>
+          <version>${stax.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>axis</groupId>
+          <artifactId>axis-jaxrpc</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+      </dependency>
   </dependencies>
 </project>

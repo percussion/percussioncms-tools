@@ -328,9 +328,7 @@ public class PSServerManagerDialog extends PSDialog implements ActionListener,
         m_hostTextField.getText(),
         Integer.parseInt(m_portTextField.getText()),
         m_userTextField.getText(),
-        PSDeploymentServerConnection.encryptPwd(
-           m_userTextField.getText(), 
-           new String(m_passwordTextField.getPassword())),
+           new String(m_passwordTextField.getPassword()),
         m_savePassCheckBox.isSelected(),
         m_useSslCheckBox.isSelected()        
         );
