@@ -6,6 +6,7 @@
     <property environment="env"/>
     <property name="install.src" location="../.."/>
     <property name="install.dir" location="${install.src}"/>
+    <property name="project.version" value="${project.version}"/>
 
 
     <tstamp>
@@ -103,8 +104,8 @@
         <!-- Copy Scripts -->
         <copy todir="${install.dir}/devtools">
             <fileset dir="${install.src}/devtools">
-                <include name="**.sh" unless="${isWindows}"/>
-                <include name="**.bat" />
+                <include name="**/*.sh" unless="${isWindows}"/>
+                <include name="**/*.cmd" />
                 <include name="README.md"/>
             </fileset>
         </copy>
