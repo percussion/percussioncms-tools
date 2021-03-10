@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash -bm
 #
 # Copyright 1999-2021 Percussion Software, Inc.
 #
