@@ -6,7 +6,7 @@
     <property environment="env"/>
     <property name="install.src" location="../.."/>
     <property name="install.dir" location="${install.src}"/>
-    <property name="project.version" value="${project.version}"/>
+    <property name="project.version" value="${project.parent.version}"/>
 
 
     <tstamp>

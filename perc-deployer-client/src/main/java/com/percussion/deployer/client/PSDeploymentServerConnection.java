@@ -53,7 +53,8 @@ import com.percussion.util.PSPurgableTempFile;
 import com.percussion.utils.security.deprecated.PSLegacyEncrypter;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -565,7 +566,8 @@ public class PSDeploymentServerConnection
                }
                catch (UnsupportedEncodingException uee)
                {
-                  ms_log.error(uee);
+                  ms_log.error(uee.getMessage());
+                  ms_log.debug(uee.getMessage(),e);
                }
             }
             throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR,
@@ -574,7 +576,8 @@ public class PSDeploymentServerConnection
       }
       catch (Exception e)
       {
-         ms_log.error(e);
+         ms_log.error(e.getMessage());
+         ms_log.debug(e.getMessage(),e);
          if (data != null && ms_log.isDebugEnabled())
          {
             try
@@ -759,7 +762,8 @@ public class PSDeploymentServerConnection
          }
          else
          {
-            ms_log.error(ioe);
+            ms_log.error(ioe.getMessage());
+            ms_log.debug(ioe.getMessage(),ioe);
             throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR,
                ioe.getLocalizedMessage());
          }
@@ -1052,7 +1056,8 @@ public class PSDeploymentServerConnection
     */
    public String getPassword(boolean encrypted)
    {
-      return encrypted ? m_password : decryptPwd(m_uid, m_password);
+      return m_password;
+     // return encrypted ? m_password : decryptPwd(m_uid, m_password);
    }
 
    /**
@@ -1101,7 +1106,8 @@ public class PSDeploymentServerConnection
       try {
          return PSEncryptor.getInstance().encrypt(pwd);
       } catch (PSEncryptionException e) {
-         ms_log.error("Error encrypting password: " + e.getMessage(),e);
+         ms_log.error("Error encrypting password: {} " + e.getMessage());
+         ms_log.debug(e.getMessage(),e);
          return "";
       }
 
@@ -1540,7 +1546,7 @@ public class PSDeploymentServerConnection
    /**
     * Reference to Log4j singleton object used to log any errors or debug info.
     */
-   private static Logger ms_log = Logger.getLogger(PSDeploymentServerConnection.class);
+   private static Logger ms_log = LogManager.getLogger(PSDeploymentServerConnection.class);
 
    /**
     * Constant for the page to use when executing deployment requests against

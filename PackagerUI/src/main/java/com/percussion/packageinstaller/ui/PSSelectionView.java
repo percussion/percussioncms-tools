@@ -53,9 +53,10 @@ public class PSSelectionView extends JPanel implements DocumentListener
       Object host = m_hostField.getSelectedItem();
       String port = m_portField.getText();
       String user = m_userField.getText();
-      String rawPass = new String(m_passwordField.getPassword());
-      String password = PSDeploymentServerConnection.encryptPwd(
-               user, rawPass);
+      String password = new String(m_passwordField.getPassword());
+//      String password = PSDeploymentServerConnection.encryptPwd(
+//               user, rawPass);
+
       boolean isSSL = m_useSSLBox.isSelected();
       
       if(host == null || StringUtils.isBlank(port) ||

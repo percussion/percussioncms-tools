@@ -37,4 +37,4 @@ and the updated Workbench and other tools will be installed.
 
 If the installation fails for any reason please [report an issue](https://www.github.com/percussion/percussioncms-tools/issues)
 
-A seperate README.md file will be created in the devtools folder that contains info on the tools that are available and instructions on how to run them.
+A separate README.md file will be created in the devtools folder that contains info on the tools that are available and instructions on how to run them.
