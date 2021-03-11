@@ -217,6 +217,24 @@
             </executions>
         </plugin>
         <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+        <execution>
+        <id>default-cli</id>
+        <phase>process-resources</phase>
+        <goals>
+            <goal>run</goal>
+        </goals>
+        <configuration>
+            <!-- Add any additional adhoc configuration files not covered in other plugins here -->
+            <target>
+            </target>
+        </configuration>
+        </execution>
+        </executions>
+        </plugin>
+        <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
             <configuration>
