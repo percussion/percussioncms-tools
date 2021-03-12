@@ -20,7 +20,8 @@
  *******************************************************************************/
 package com.percussion.workbench.ui.editors.form;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.core.expressions.Expression;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.MenuManager;
@@ -62,7 +63,7 @@ public class PSMultiPageEditorSite implements IEditorSite
    /**
     * Logger for this class.
     */
-   private static final Logger ms_log = Logger.getLogger(PSMultiPageEditorSite.class);
+   private static final Logger ms_log = LogManager.getLogger(PSMultiPageEditorSite.class);
 
    /**
     * Creates a site for the given editor nested within the given multi-page editor.

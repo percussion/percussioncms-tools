@@ -9,12 +9,7 @@
  *****************************************************************************/
 package com.percussion.workbench.ui.handlers;
 
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypeFactory;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.models.IPSCmsModel;
 import com.percussion.client.models.IPSContentTypeModel;
 import com.percussion.client.models.PSLockException;
@@ -25,16 +20,11 @@ import com.percussion.workbench.ui.editors.dialog.PSConvertTemplatesDialog;
 import com.percussion.workbench.ui.model.PSDesignObjectHierarchy;
 import com.percussion.workbench.ui.util.PSUiUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Handler for the folder that contains the templates (both shared and local)
@@ -163,8 +153,8 @@ public class PSContentTypeAssociateTemplateNodeHandler extends
    {
       if (templateRefs.size() > 1 && ctypeRefs.size() > 1)
       {
-         Log log = LogFactory
-               .getLog(PSContentTypeAssociateTemplateNodeHandler.class);
+         Logger log = LogManager
+               .getLogger(PSContentTypeAssociateTemplateNodeHandler.class);
          log.warn(
             "Unexpected params: either the templates or ctypes must have at most a single object.");
          return false;

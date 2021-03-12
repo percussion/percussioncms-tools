@@ -24,7 +24,8 @@ import com.percussion.workbench.ui.PSMessages;
 import com.percussion.workbench.ui.help.PSHelpManager;
 import com.percussion.workbench.ui.util.PSControlInfo;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.util.Assert;
 import org.eclipse.jface.util.SafeRunnable;
@@ -66,7 +67,7 @@ public abstract class PSMultiPageEditorBase extends PSEditorBase
    /**
     * Logger used in this class.
     */
-   private static final Logger ms_log = Logger.getLogger(PSMultiPageEditorBase.class);
+   private static final Logger ms_log = LogManager.getLogger(PSMultiPageEditorBase.class);
 
    @Override
    public final void createControl(@SuppressWarnings("unused") Composite comp)

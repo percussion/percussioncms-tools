@@ -37,7 +37,8 @@ import com.percussion.workbench.ui.help.IPSHelpProvider;
 import com.percussion.workbench.ui.help.PSHelpManager;
 import com.percussion.workbench.ui.util.PSFileEditorHelper;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -95,7 +96,7 @@ public class PSXmlApplicationEditor extends PSMultiPageEditorBase
    implements IPSHelpProvider
 {
    private final static Logger ms_log =
-         Logger.getLogger(PSXmlApplicationEditor.class);
+         LogManager.getLogger(PSXmlApplicationEditor.class);
 
    @Override
    public boolean isValidReference(IPSReference ref)

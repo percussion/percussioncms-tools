@@ -38,7 +38,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -764,7 +765,7 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
    /**
     * Logger for this class. Never <code>null</code>.
     */
-   private static final Logger ms_log = Logger
+   private static final Logger ms_log = LogManager
          .getLogger(PSWorkbenchPlugin.class);
 
    /**

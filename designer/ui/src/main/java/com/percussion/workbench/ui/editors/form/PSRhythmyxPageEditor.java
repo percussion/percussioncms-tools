@@ -14,7 +14,8 @@ import com.percussion.client.PSCoreFactory;
 import com.percussion.workbench.ui.PSMessages;
 import com.percussion.workbench.ui.controls.PSButtonFactory;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
@@ -55,7 +56,7 @@ public class PSRhythmyxPageEditor extends EditorPart
     * The class logger.
     */
    private static final Logger ms_log =
-         Logger.getLogger(PSRhythmyxPageEditor.class);
+         LogManager.getLogger(PSRhythmyxPageEditor.class);
 
    // see base
    @Override
@@ -156,7 +157,7 @@ public class PSRhythmyxPageEditor extends EditorPart
 
                /**
                 * Is used to skip loading of auto-submitting form
-                * {@link #AUTOLOGIN_FORM}.
+                * {@link #}.
                 */
                private boolean mi_skipAutoFormChangedEvent;
             });
@@ -275,13 +276,14 @@ public class PSRhythmyxPageEditor extends EditorPart
       {
          ms_log.error("Unrecognized login url: " + loginUrl);
       }
-      final Formatter formatter = new Formatter();
-      final String userId =
-            escapeHtml(getConnectionInfo().getUserid());
-      final String password =
-            escapeHtml(getConnectionInfo().getClearTextPassword());
-      formatter.format(AUTOLOGIN_FORM, loginUrl, userId, password);
-      m_browser.setText(formatter.toString());
+      try( Formatter formatter = new Formatter()) {
+         final String userId =
+                 escapeHtml(getConnectionInfo().getUserid());
+         final String password =
+                 escapeHtml(getConnectionInfo().getClearTextPassword());
+         formatter.format(AUTOLOGIN_FORM, loginUrl, userId, password);
+         m_browser.setText(formatter.toString());
+      }
    }
 
    /**

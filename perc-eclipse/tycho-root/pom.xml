@@ -24,11 +24,12 @@
 
     <modules>
         <module>helios-repository-def</module>
+        <module>../../com.percussion.doc.help.packagebuilder</module>
+        <module>../../com.percussion.doc.help.packageinstaller</module>
+        <module>../../com.percussion.doc.help.workbench</module>
         <module>../../vedit/vedit.ui</module>
         <module>../../designer/core</module>
         <module>../../designer/ui</module>
-        <!-- <module>../../com.percussion.doc.packagebuilder</module>
-        <module>../../com.percussion.doc.packageinstaller</module> -->
         <module>com.percussion.workbench.ui.feature</module>
         <module>perc-eclipse-repository</module>
     </modules>
@@ -58,11 +59,6 @@
                     <compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
                     <extraClasspathElements>
                         <dependency>
-                            <groupId>log4j</groupId>
-                            <artifactId>log4j</artifactId>
-                            <version>1.2.17</version>
-                        </dependency>
-                        <dependency>
                             <groupId>com.percussion</groupId>
                             <artifactId>tablefactory</artifactId>
                             <version>${project.parent.version}</version>
@@ -72,7 +68,25 @@
                             <artifactId>eclipse-maven-deps</artifactId>
                             <version>${project.parent.version}</version>
                         </dependency>
-
+                        <dependency>
+                            <groupId>org.wso2.wsf</groupId>
+                            <artifactId>org.eclipse.ui.workbench</artifactId>
+                            <version>3.3.0</version>
+                            <scope>provided</scope>
+                        </dependency>
+                        <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.core -->
+                        <dependency>
+                            <groupId>org.osgi</groupId>
+                            <artifactId>org.osgi.core</artifactId>
+                            <version>4.0.1</version>
+                            <scope>provided</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.eclipse.core</groupId>
+                            <artifactId>org.eclipse.core.runtime</artifactId>
+                            <version>3.6.0.v20100505</version>
+                            <scope>provided</scope>
+                        </dependency>
                     </extraClasspathElements>
                 </configuration>
             </plugin>

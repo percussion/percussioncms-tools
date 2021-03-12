@@ -14,14 +14,10 @@ import com.percussion.client.PSCoreFactory;
 import com.percussion.webservices.faults.PSContractViolationFault;
 import com.percussion.webservices.faults.PSNotAuthenticatedFault;
 import com.percussion.webservices.rhythmyx.SecurityLocator;
-import com.percussion.webservices.security.LoginRequest;
-import com.percussion.webservices.security.LoginResponse;
-import com.percussion.webservices.security.LogoutRequest;
-import com.percussion.webservices.security.RefreshSessionRequest;
-import com.percussion.webservices.security.SecuritySOAPStub;
+import com.percussion.webservices.security.*;
 import com.percussion.webservices.security.data.PSLogin;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
@@ -244,5 +240,5 @@ public class PSWebServicesConnection
    /**
     * Logger instance for this class.
     */
-   private static Log ms_log = LogFactory.getLog(PSWebServicesConnection.class);
+   private static Logger ms_log = LogManager.getLogger(PSWebServicesConnection.class);
 }

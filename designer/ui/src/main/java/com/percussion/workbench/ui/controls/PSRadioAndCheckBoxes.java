@@ -12,7 +12,8 @@ package com.percussion.workbench.ui.controls;
 import com.percussion.workbench.ui.IPSUiConstants;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -102,7 +103,7 @@ import java.util.List;
 public class PSRadioAndCheckBoxes extends Composite
    implements IPSUiConstants
 {
-   private static final Logger ms_log = Logger.getLogger(PSRadioAndCheckBoxes.class);
+   private static final Logger ms_log = LogManager.getLogger(PSRadioAndCheckBoxes.class);
   
    /**
     * Create the composite

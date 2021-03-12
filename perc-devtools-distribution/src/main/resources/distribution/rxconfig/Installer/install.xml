@@ -6,13 +6,11 @@
     <property environment="env"/>
     <property name="install.src" location="../.."/>
     <property name="install.dir" location="${install.src}"/>
-    <property name="project.version" value="${project.parent.version}"/>
-
-
+    <echo>Version: ${percversion}</echo>
     <tstamp>
         <format property="timestamp" pattern="yyyy-MM-dd_HH-mm-ss"/>
     </tstamp>
-
+    <echoproperties/>
     <condition property="isMac">
         <os family="mac" />
     </condition>

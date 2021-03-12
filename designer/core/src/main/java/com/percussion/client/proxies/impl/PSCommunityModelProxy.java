@@ -22,7 +22,8 @@ import com.percussion.services.security.data.PSCommunity;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.webservices.transformation.impl.PSTransformerFactory;
 import org.apache.axis.client.Stub;
-import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.commons.logging.LogFactory;
 
 import javax.xml.rpc.ServiceException;
@@ -257,5 +258,5 @@ public class PSCommunityModelProxy extends PSCmsModelProxy
    /**
     * Logger object to log any errors.
     */
-   private static Log ms_log = LogFactory.getLog(PSCommunityModelProxy.class);
+   private static Logger ms_log = LogManager.getLogger(PSCommunityModelProxy.class);
 }

@@ -9,14 +9,7 @@
  *****************************************************************************/
 package com.percussion.client.models.impl;
 
-import com.percussion.client.IPSHierarchyNodeRef;
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSDuplicateNameException;
-import com.percussion.client.PSErrorCodes;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
+import com.percussion.client.*;
 import com.percussion.client.models.IPSHierarchyManager;
 import com.percussion.client.models.impl.PSCmsModel.IProxyWrapper;
 import com.percussion.client.proxies.IPSHierarchyModelProxy;
@@ -24,18 +17,10 @@ import com.percussion.client.proxies.IPSHierarchyModelProxy.NodeId;
 import com.percussion.client.proxies.impl.PSHierarchyNodeRefHiddenParent;
 import com.percussion.utils.guid.IPSGuid;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Implements the interface by using the connection layer to perform its work.
@@ -84,8 +69,10 @@ public class PSHierarchyManager implements IPSHierarchyManager
          boolean found = false;
          for (String name : treeNames)
          {
-            if (name.equalsIgnoreCase(treeName))
+            if (name.equalsIgnoreCase(treeName)) {
                found = true;
+               break;
+            }
          }
          if (!found)
          {
@@ -127,7 +114,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
          m_model.checkObjectType(source.getObjectType(), true);
       }
       
-      Set<String> usedNames = new HashSet<String>();
+      Set<String> usedNames = new HashSet<>();
       try
       {
          Collection<IPSHierarchyNodeRef> currentChildren = 
@@ -880,5 +867,5 @@ public class PSHierarchyManager implements IPSHierarchyManager
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory.getLog(PSHierarchyManager.class);
+   private static Logger ms_logger = LogManager.getLogger(PSHierarchyManager.class);
 }

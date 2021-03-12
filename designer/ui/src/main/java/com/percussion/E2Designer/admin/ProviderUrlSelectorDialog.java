@@ -19,7 +19,8 @@ import com.percussion.validation.ValidationConstraint;
 import com.percussion.UTComponents.UTFixedButton;
 import com.percussion.guitools.PSDialog;
 import com.percussion.guitools.PSPropertyPanel;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.naming.AuthenticationException;
 import javax.naming.AuthenticationNotSupportedException;
@@ -63,7 +64,7 @@ public class ProviderUrlSelectorDialog extends PSDialog
    /**
     * The class logger.
     */
-   private final static Logger ms_log = Logger.getLogger(ProviderUrlSelectorDialog.class);
+   private final static Logger ms_log = LogManager.getLogger(ProviderUrlSelectorDialog.class);
 
    
    /**

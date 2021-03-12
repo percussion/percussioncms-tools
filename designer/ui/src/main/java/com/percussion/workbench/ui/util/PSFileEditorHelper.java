@@ -11,7 +11,8 @@ package com.percussion.workbench.ui.util;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
@@ -39,7 +40,7 @@ import java.io.OutputStream;
  */
 public class PSFileEditorHelper
 {
-   private final static Logger ms_log = Logger.getLogger(PSFileEditorHelper.class);
+   private final static Logger ms_log = LogManager.getLogger(PSFileEditorHelper.class);
    
    /**
     * Determines content type for the provided file from the file name and content.

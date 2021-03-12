@@ -35,7 +35,8 @@ import com.percussion.workbench.ui.model.IPSDropHandler;
 import com.percussion.workbench.ui.model.PSDesignObjectHierarchy;
 import com.percussion.workbench.ui.util.PSUiUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -1885,6 +1886,6 @@ public class PSDeclarativeNodeHandler implements
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = 
-      LogFactory.getLog(PSDeclarativeNodeHandler.class);
+   private static Logger ms_logger =
+      LogManager.getLogger(PSDeclarativeNodeHandler.class);
 }

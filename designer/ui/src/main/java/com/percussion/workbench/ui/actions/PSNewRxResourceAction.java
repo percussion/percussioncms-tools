@@ -17,7 +17,8 @@ import com.percussion.workbench.ui.PSUiReference;
 import com.percussion.workbench.ui.PSWorkbenchPlugin;
 import com.percussion.workbench.ui.util.PSUiUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -607,7 +608,7 @@ public class PSNewRxResourceAction extends PSBaseSelectionListenerAction
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory.getLog(PSNewRxResourceAction.class);
+   private static Logger ms_logger = LogManager.getLogger(PSNewRxResourceAction.class);
    
    /**
     * The wizard object type found when the selection was updated. Never

@@ -20,6 +20,8 @@ import org.apache.tools.ant.taskdefs.Replace;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -107,7 +109,7 @@ public class PSDevToolsPreInstall {
 
                 percVersion = System.getProperty(PERCUSSION_VERSION);
                 if (percVersion == null)
-                    percVersion = "";
+                    percVersion = getRunningJarVersion();
 
                 developmentFlag = System.getProperty(DEVELOPMENT);
                 if (developmentFlag == null || DEVELOPMENT.trim().equalsIgnoreCase(""))
@@ -230,7 +232,7 @@ public class PSDevToolsPreInstall {
 
                 //"-Dlistener=com.percussion.preinstall.AntBuildListener",
                 ProcessBuilder builder = new ProcessBuilder(
-                        javabin,"-Dfile.encoding=UTF8","-Dsun.jnu.encoding=UTF8", "-Dinstall.dir=" + installDir.toAbsolutePath().toString(), "-jar", jar.toAbsolutePath().toString(), "-f", ANT_INSTALL).directory(execPath.toFile());
+                        javabin,"-Dfile.encoding=UTF-8","-Dsun.jnu.encoding=UTF-8", "-Dinstall.dir=" + installDir.toAbsolutePath().toString(), "-jar", jar.toAbsolutePath().toString(), "-f", ANT_INSTALL).directory(execPath.toFile());
 
                 //pass in known flags
                 builder.environment().put(DEVELOPMENT, developmentFlag);
@@ -265,5 +267,25 @@ public class PSDevToolsPreInstall {
             r.execute();
         }
 
+        public static String getRunningJarVersion(){
+            // static
+            try {
+                 URI file  = PSDevToolsPreInstall.class
+                        .getProtectionDomain()
+                        .getCodeSource()
+                        .getLocation()
+                        .toURI();
 
+                 String fileName = Paths.get(file).getFileName().toString();
+                 String parts[] = fileName.split("^(.+?)-(\\d.*?)\\.jar$");
+                if(parts.length==3)
+                    return parts[2];
+                else
+                    return "";
+
+            } catch (URISyntaxException e) {
+                return "";
+            }
+
+        }
     }

@@ -45,7 +45,6 @@ import static org.junit.Assert.assertTrue;
 /**
  * Unit test class for the <code>PSApplicationIDTypes</code> class.
  */
-@Category(IntegrationTest.class)
 public class PSApplicationIDTypesTest
 {
     public PSApplicationIDTypesTest() {

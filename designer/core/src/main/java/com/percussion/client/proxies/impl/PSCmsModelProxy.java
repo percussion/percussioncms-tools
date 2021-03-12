@@ -9,15 +9,7 @@
  *****************************************************************************/
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSPrimaryObjectType;
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSCoreUtils;
-import com.percussion.client.PSErrorCodes;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypeFactory;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.models.IPSCmsModel;
 import com.percussion.client.proxies.IPSCmsModelProxy;
@@ -33,25 +25,16 @@ import com.percussion.services.security.PSPermissions;
 import com.percussion.services.security.data.PSAclImpl;
 import com.percussion.webservices.common.PSObjectSummary;
 import com.percussion.webservices.common.PSObjectSummaryLocked;
-import com.percussion.webservices.faults.PSContractViolationFault;
-import com.percussion.webservices.faults.PSErrorResultsFault;
-import com.percussion.webservices.faults.PSErrorsFault;
-import com.percussion.webservices.faults.PSInvalidSessionFault;
-import com.percussion.webservices.faults.PSLockFault;
-import com.percussion.webservices.faults.PSNotAuthorizedFault;
-import com.percussion.webservices.systemdesign.DeleteAclsRequest;
-import com.percussion.webservices.systemdesign.LoadAclsRequest;
-import com.percussion.webservices.systemdesign.SaveAclsRequest;
-import com.percussion.webservices.systemdesign.SaveAclsResponsePermissions;
-import com.percussion.webservices.systemdesign.SystemDesignSOAPStub;
+import com.percussion.webservices.faults.*;
+import com.percussion.webservices.systemdesign.*;
 import com.percussion.webservices.transformation.PSTransformationException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import org.apache.axis.AxisFault;
 import org.apache.axis.client.Stub;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.rpc.ServiceException;
 import java.lang.reflect.Array;
@@ -1361,7 +1344,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    }
    
    /**
-    * See {@link PSProxyUtils#processAndThrowException(Throwable, Log)} 
+    * See {@link PSProxyUtils#processAndThrowException(Throwable, Logger)}
     * for documentation.
     */
    protected static void processAndThrowException(Throwable ex)
@@ -1371,7 +1354,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    }
 
    /**
-    * See {@link PSProxyUtils#processAndThrowException(int, Throwable, Log)} 
+    * See {@link PSProxyUtils#processAndThrowException(int, Throwable, Logger)}
     * for documentation.
     */
    protected static void processAndThrowException(int refCount, Throwable ex)
@@ -1827,5 +1810,5 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    /**
     * Logger object to log any errors.
     */
-   private static Log ms_log = LogFactory.getLog(PSCmsModelProxy.class);
+   private static Logger ms_log = LogManager.getLogger(PSCmsModelProxy.class);
 }

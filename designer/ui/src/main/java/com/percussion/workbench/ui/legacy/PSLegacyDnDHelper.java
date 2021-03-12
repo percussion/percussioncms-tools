@@ -10,7 +10,8 @@
 package com.percussion.workbench.ui.legacy;
 
 import com.percussion.workbench.ui.PSUiReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 
@@ -35,7 +36,7 @@ import java.util.Collection;
  */
 public class PSLegacyDnDHelper
 {
-   final static Logger ms_log = Logger.getLogger(PSLegacyDnDHelper.class);
+   final static Logger ms_log = LogManager.getLogger(PSLegacyDnDHelper.class);
 
    /**
     * Hidden constructor.

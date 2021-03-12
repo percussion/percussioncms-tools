@@ -148,12 +148,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.percussion</groupId>
-            <artifactId>rxutils</artifactId>
-            <scope>compile</scope>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <scope>compile</scope>

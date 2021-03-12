@@ -11,7 +11,8 @@ package com.percussion.client.proxies.impl;
 
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -455,6 +456,5 @@ public class PSWebServicesProxyConfig
    /**
     * Logger to log errors.
     */
-   private static Logger ms_logger = Logger
-      .getLogger(PSWebServicesProxyConfig.class);
+   private static Logger ms_logger = LogManager.getLogger(PSWebServicesProxyConfig.class);
 }
