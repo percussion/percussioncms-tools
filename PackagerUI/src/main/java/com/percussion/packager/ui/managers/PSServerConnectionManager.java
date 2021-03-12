@@ -28,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -292,9 +293,14 @@ public class PSServerConnectionManager
          if (register) {
             addRecentConnection(server);
          }
-
-      }catch(NullPointerException npe){
+      }catch(PSAuthenticationFailedException e){
+         JOptionPane.showMessageDialog(PSPackagerClient.getFrame(), PSResourceUtils.getCommonResourceString("invalidCredentials"));
+         server.clearCredentials();
+         return this.initConnection(server);
+      }catch(Exception npe){
+         JOptionPane.showMessageDialog(PSPackagerClient.getFrame(), "Not able to connect to server");
          npe.printStackTrace();
+         return false;
       }
         return false;
       
