@@ -1,24 +1,20 @@
 @echo off
 echo Java Version:
 java -version
+
+ECHO "Prod command example: Workbench.cmd"
+ECHO "Dev command example: Workbench.cmd dev <port_number>"
+
 IF "%1"=="" (
-  ECHO Invalid argument: %1
-  ECHO.
-  ECHO Usage:  %~n0  command
-  ECHO.
-  ECHO Where:  command may be prod, dev
-  ECHO Where:  prod is without debug port enabled suitable for production and dev is with debug port enabled suitable for developers
-  ECHO "Prod command example: Workbench.cmd prod"
-  ECHO "Dev command example: Workbench.cmd dev <port_number>"
-  GOTO:EOF
+  goto PROD
 )
+
 IF "%1"=="dev" (
 	if "%2"=="" (
 		ECHO please provide valid debug port number
 		goto end
-	)
+	) else (goto DEV)
 )
-if "%1"=="prod" (goto PROD) else (goto DEV)
 goto end
 
 :PROD
