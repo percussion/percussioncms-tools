@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
-
+#!/bin/bash -bm
+source DevOptions.sh
 echo "Using Java version:"
 java -version
-source DevOptions.sh
 java $JAVA_OPTS -jar lib/perc-package-installer-@project.version@.jar "$@"

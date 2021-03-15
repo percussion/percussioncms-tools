@@ -19,16 +19,11 @@ import com.percussion.cms.objectstore.PSMenuChild;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.guidmgr.data.PSDesignGuid;
 import com.percussion.workbench.ui.PSUiReference;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Handler for a node that is a menu so it can process adding/removing menu 
@@ -211,6 +206,6 @@ public class PSMenuAllowedEntriesNodeHandler extends PSLinkNodeHandler
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory
-         .getLog(PSMenuAllowedEntriesNodeHandler.class);
+   private static final Logger ms_logger = LogManager
+         .getLogger(PSMenuAllowedEntriesNodeHandler.class);
 }

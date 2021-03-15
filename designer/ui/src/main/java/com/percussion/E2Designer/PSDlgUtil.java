@@ -12,7 +12,8 @@ package com.percussion.E2Designer;
 import com.percussion.workbench.ui.legacy.AwtSwtModalDialogBridge;
 import com.percussion.workbench.ui.util.PSErrorDialog;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -33,7 +34,7 @@ import java.util.Arrays;
  */
 public class PSDlgUtil
 {
-   private static final Logger ms_log = Logger.getLogger(PSDlgUtil.class);
+   private static final Logger ms_log = LogManager.getLogger(PSDlgUtil.class);
 
    /** A error dialog &quot;wrapper&quot; method that calls upon
     * JOptionPane.showMessageDialog.

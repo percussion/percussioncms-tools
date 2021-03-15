@@ -45,19 +45,12 @@ import static org.junit.Assert.assertTrue;
 /**
  * Unit test class for the <code>PSApplicationIDTypes</code> class.
  */
-@Category(IntegrationTest.class)
 public class PSApplicationIDTypesTest
 {
-   /**
-    * Construct this unit test
-    *
-    * @param name The name of this test.
-    */
-   public PSApplicationIDTypesTest()
-   {
-   }
+    public PSApplicationIDTypesTest() {
+    }
 
-   /**
+    /**
     * Test constructing this object using parameters
     *
     * @throws Exception If there are any errors.
@@ -285,7 +278,6 @@ public class PSApplicationIDTypesTest
     * @return <code>true</code> if no exceptions were caught, <code>false</code>
     * otherwise.
     */
-   @Test
    private boolean testCtorValid(PSDependency dep, String res, String elem)
    {
       try

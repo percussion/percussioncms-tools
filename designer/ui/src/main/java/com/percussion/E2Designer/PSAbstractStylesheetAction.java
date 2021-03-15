@@ -12,7 +12,8 @@ package com.percussion.E2Designer;
 import com.percussion.conn.PSServerException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 public abstract class PSAbstractStylesheetAction extends PSFigureAbstractAction
 {
-   final static Logger ms_log = Logger.getLogger(PSAbstractStylesheetAction.class);
+   final static Logger ms_log = LogManager.getLogger(PSAbstractStylesheetAction.class);
 
    // see base class
    protected PSAbstractStylesheetAction(String name)

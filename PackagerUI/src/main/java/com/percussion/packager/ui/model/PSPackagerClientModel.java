@@ -24,6 +24,8 @@ import com.percussion.deployer.objectstore.PSDescriptor;
 import com.percussion.deployer.objectstore.PSExportDescriptor;
 import com.percussion.deployer.objectstore.PSUserDependency;
 import com.percussion.error.PSException;
+import com.percussion.packager.ui.PSPackagerClient;
+import com.percussion.packager.ui.PSPackagerMainFrame;
 import com.percussion.packager.ui.PSResourceUtils;
 import com.percussion.packager.ui.data.PSElementCategory;
 import com.percussion.packager.ui.data.PSElementFilter;
@@ -34,8 +36,10 @@ import com.percussion.packager.ui.data.PSProgressStatus;
 import com.percussion.packager.ui.data.PSServerRegistration;
 import com.percussion.packager.ui.managers.IPSServerConnectionListener;
 import com.percussion.packager.ui.managers.PSServerConnectionManager;
+import com.percussion.security.PSAuthenticationFailedException;
 import org.apache.commons.lang.StringUtils;
 
+import javax.swing.*;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -278,6 +282,10 @@ public class PSPackagerClientModel
                disconnect();
             if(!connMgr.initConnection(server))
                loadDataIsland();
+         }catch(PSAuthenticationFailedException e){
+            JOptionPane.showMessageDialog(PSPackagerClient.getFrame(), PSResourceUtils.getCommonResourceString("invalidCredentials"));
+            server.setCredentials("","");
+            this.connect(server);
          }
          catch (Exception e)
          {

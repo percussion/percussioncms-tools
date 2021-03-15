@@ -37,5 +37,26 @@
            version="8.0.2"
            unpack="true"/>
 
+   <plugin
+           id="com.percussion.doc.help.workbench"
+           download-size="0"
+           install-size="0"
+           version="8.0.2"
+           unpack="true"/>
+
+   <plugin
+           id="com.percussion.doc.help.packageinstaller"
+           download-size="0"
+           install-size="0"
+           version="8.0.2"
+           unpack="true"/>
+
+   <plugin
+           id="com.percussion.doc.help.packagebuilder"
+           download-size="0"
+           install-size="0"
+           version="8.0.2"
+           unpack="true"/>
+
 
 </feature>

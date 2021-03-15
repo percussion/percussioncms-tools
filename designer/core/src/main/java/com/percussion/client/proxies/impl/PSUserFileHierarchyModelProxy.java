@@ -26,24 +26,15 @@ import com.percussion.webservices.faults.PSNotAuthorizedFault;
 import com.percussion.webservices.transformation.PSTransformationException;
 import com.percussion.webservices.transformation.impl.PSTransformerFactory;
 import com.percussion.webservices.ui.data.PSHierarchyNode;
-import com.percussion.webservices.uidesign.CreateHierarchyNodesRequest;
-import com.percussion.webservices.uidesign.CreateHierarchyNodesRequestType;
-import com.percussion.webservices.uidesign.FindHierarchyNodesRequest;
-import com.percussion.webservices.uidesign.GetChildrenRequest;
-import com.percussion.webservices.uidesign.LoadHierarchyNodesRequest;
-import com.percussion.webservices.uidesign.UiDesignSOAPStub;
+import com.percussion.webservices.uidesign.*;
 import org.apache.commons.beanutils.Converter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Provides hierarchy management services for the object type
@@ -552,6 +543,6 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
    /**
     * Logger instance for this class.
     */
-   private static Log ms_log = LogFactory.getLog(
+   private static Logger ms_log = LogManager.getLogger(
       PSUserFileHierarchyModelProxy.class);
 }

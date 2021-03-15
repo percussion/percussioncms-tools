@@ -9,12 +9,7 @@
  *****************************************************************************/
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSHierarchyNodeRef;
-import com.percussion.client.IPSPrimaryObjectType;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSHierarchyNodeRef;
 import com.percussion.client.proxies.IPSHierarchyModelProxy;
 import com.percussion.client.proxies.PSProxyUtils;
@@ -24,18 +19,14 @@ import com.percussion.webservices.uidesign.MoveChildrenRequest;
 import com.percussion.webservices.uidesign.RemoveChildrenRequest;
 import com.percussion.webservices.uidesign.UiDesignSOAPStub;
 import org.apache.axis.client.Stub;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.rpc.ServiceException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Abstract base class for classes implementing the interface
@@ -70,7 +61,7 @@ public abstract class PSHierarchyModelProxy implements IPSHierarchyModelProxy
       if (children == null || children.length == 0)
          return;
       Map<Long, List<IPSHierarchyNodeRef>> parentChildrenMap = 
-         new HashMap<Long, List<IPSHierarchyNodeRef>>();
+         new HashMap<>();
       for (IPSHierarchyNodeRef nodeRef : children)
       {
          IPSHierarchyNodeRef parentRef = nodeRef.getParent();
@@ -414,5 +405,5 @@ public abstract class PSHierarchyModelProxy implements IPSHierarchyModelProxy
    /**
     * Logger instance for this class.
     */
-   private static Log ms_log = LogFactory.getLog(PSHierarchyModelProxy.class);
+   private static Logger ms_log = LogManager.getLogger(PSHierarchyModelProxy.class);
 }

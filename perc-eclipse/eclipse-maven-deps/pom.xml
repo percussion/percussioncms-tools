@@ -282,7 +282,6 @@
                                         <Manifest-Version>1.0</Manifest-Version>
                                     </manifestEntries>
                                 </transformer>
-
                             </transformers>
                         </configuration>
                     </execution>

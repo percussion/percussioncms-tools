@@ -5,8 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/PackagerUI/CMLite-Main-PackagerUI.iml" filepath="$PROJECT_DIR$/PackagerUI/CMLite-Main-PackagerUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/ContentExplorer/ContentExplorer.iml" filepath="$PROJECT_DIR$/ContentExplorer/ContentExplorer.iml" />
       <module fileurl="file://$PROJECT_DIR$/designer/core/com.percussion.client.iml" filepath="$PROJECT_DIR$/designer/core/com.percussion.client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.packagebuilder/com.percussion.doc.packagebuilder.iml" filepath="$PROJECT_DIR$/com.percussion.doc.packagebuilder/com.percussion.doc.packagebuilder.iml" />
-      <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.packageinstaller/com.percussion.doc.packageinstaller.iml" filepath="$PROJECT_DIR$/com.percussion.doc.packageinstaller/com.percussion.doc.packageinstaller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/com.percussion.doc.help.packagebuilder.iml" filepath="$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/com.percussion.doc.help.packagebuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/com.percussion.doc.help.packageinstaller.iml" filepath="$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/com.percussion.doc.help.packageinstaller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/com.percussion.doc.help.workbench.iml" filepath="$PROJECT_DIR$/com.percussion.doc.help.workbench/com.percussion.doc.help.workbench.iml" />
       <module fileurl="file://$PROJECT_DIR$/designer/ui/com.percussion.workbench.ui.iml" filepath="$PROJECT_DIR$/designer/ui/com.percussion.workbench.ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/com.percussion.workbench.ui.feature/com.percussion.workbench.ui.feature.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/com.percussion.workbench.ui.feature/com.percussion.workbench.ui.feature.iml" />
       <module fileurl="file://$PROJECT_DIR$/vedit/vedit.ui/de.byteaction.velocity.vaulttec.ui.iml" filepath="$PROJECT_DIR$/vedit/vedit.ui/de.byteaction.velocity.vaulttec.ui.iml" />
@@ -16,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/htmlconverter/htmlConverter.iml" filepath="$PROJECT_DIR$/htmlconverter/htmlConverter.iml" />
       <module fileurl="file://$PROJECT_DIR$/loader/loader.iml" filepath="$PROJECT_DIR$/loader/loader.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/neon-repository-def.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/neon-repository-def.iml" />
+      <module fileurl="file://$PROJECT_DIR$/perc-deployer-client/perc-deployer-client.iml" filepath="$PROJECT_DIR$/perc-deployer-client/perc-deployer-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-devtools-distribution/perc-devtools-distribution.iml" filepath="$PROJECT_DIR$/perc-devtools-distribution/perc-devtools-distribution.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/perc-eclipse.iml" filepath="$PROJECT_DIR$/perc-eclipse/perc-eclipse.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/perc-eclipse-repository/perc-eclipse-repository.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/perc-eclipse-repository/perc-eclipse-repository.iml" />

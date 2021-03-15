@@ -14,7 +14,8 @@ import com.percussion.workbench.ui.PSUiReference;
 import com.percussion.workbench.ui.PSWorkbenchPlugin;
 import com.percussion.workbench.ui.model.IPSDeclarativeNodeHandler;
 import com.percussion.workbench.ui.util.PSUiUtils;
-import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -274,5 +275,5 @@ final class PSCopyAction extends PSBaseSelectionListenerAction
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory.getLog(PSCopyAction.class);
+   private static Logger ms_logger = LogManager.getLogger(PSCopyAction.class);
 }

@@ -14,11 +14,7 @@ import com.percussion.client.proxies.PSProxyUtils;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.guidmgr.data.PSDesignGuid;
 import com.percussion.services.guidmgr.data.PSGuid;
-import com.percussion.services.security.IPSAcl;
-import com.percussion.services.security.IPSAclEntry;
-import com.percussion.services.security.PSAclUtils;
-import com.percussion.services.security.PSPermissions;
-import com.percussion.services.security.PSTypedPrincipal;
+import com.percussion.services.security.*;
 import com.percussion.services.security.data.PSAclEntryImpl;
 import com.percussion.services.security.data.PSAclImpl;
 import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
@@ -26,18 +22,11 @@ import com.percussion.webservices.common.PSObjectSummary;
 import com.percussion.webservices.security.data.PSCommunityVisibility;
 import com.percussion.webservices.securitydesign.GetVisibilityByCommunityRequest;
 import com.percussion.webservices.securitydesign.SecurityDesignSOAPStub;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.security.acl.NotOwnerException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class has helper methods that allow easy access to various one off
@@ -46,7 +35,7 @@ import java.util.Set;
 public class PSSecurityUtils
 {
 
-   private static Log log =  LogFactory.getLog(PSSecurityUtils.class);
+   private static Logger log =  LogManager.getLogger(PSSecurityUtils.class);
 
    /**
     * Private ctor
@@ -100,7 +89,7 @@ public class PSSecurityUtils
                "All references passed in must be of object type community.");
       }
 
-      List<IPSReference> results = new ArrayList<IPSReference>();
+      List<IPSReference> results = new ArrayList<>();
       long[] comms = new long[communities.size()];
       int count = 0;
       PSCoreFactory factory = PSCoreFactory.getInstance();
@@ -171,8 +160,7 @@ public class PSSecurityUtils
          throw new IllegalArgumentException("type cannot be null.");
       Set<IPSReference> refs = new HashSet<IPSReference>();
       List<IPSReference> objs = getVisibilityByCommunity(communities, type);
-      for (IPSReference ref : objs)
-         refs.add(ref);
+      refs.addAll(objs);
       return refs;
    }
 
@@ -514,7 +502,7 @@ public class PSSecurityUtils
    {
       int count = 0;
       
-      List<String> processed = new ArrayList<String>();
+      List<String> processed = new ArrayList<>();
       for(IPSAclEntry entry : acl.getEntries())
       {
          if (entry.getTypedPrincipal().isCommunity() && 

@@ -19,7 +19,8 @@ import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.serialization.PSObjectSerializer;
 import com.percussion.xml.serialization.PSObjectSerializerException;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -357,5 +358,5 @@ public class PSUiConfigManager
    /**
     * Logger to log error or warnings.
     */
-   private static Logger ms_logger = Logger.getLogger(PSUiConfigManager.class);
+   private static Logger ms_logger = LogManager.getLogger(PSUiConfigManager.class);
 }

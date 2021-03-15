@@ -39,7 +39,8 @@ import com.percussion.workbench.ui.editors.form.PSXmlApplicationEditor;
 import com.percussion.workbench.ui.legacy.AwtSwtModalDialogBridge;
 import org.apache.commons.collections.map.ReferenceIdentityMap;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
@@ -108,7 +109,7 @@ public class UIMainFrame extends JFrame implements IConnectionSource
    /**
     * The class logger.
     */
-   private final static Logger ms_log = Logger.getLogger(UIMainFrame.class);
+   private final static Logger ms_log = LogManager.getLogger(UIMainFrame.class);
 
    // constructors
    /**

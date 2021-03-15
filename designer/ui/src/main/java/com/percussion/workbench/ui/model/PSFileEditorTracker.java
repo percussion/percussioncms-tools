@@ -21,30 +21,15 @@ import com.percussion.workbench.ui.PSUiReference;
 import com.percussion.workbench.ui.PSWorkbenchPlugin;
 import com.percussion.workbench.ui.util.PSCompletionProvider;
 import com.percussion.workbench.ui.util.PSUiUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.IEditorDescriptor;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorRegistry;
-import org.eclipse.ui.IPartListener;
-import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.FileEditorInput;
 
@@ -142,11 +127,10 @@ public class PSFileEditorTracker
          data.m_ref = ref;
          data.m_page = page;
 
-         if (ms_logger.isDebugEnabled())
-         {
-            ms_logger.debug("PSFileEditorTracker: registering "
-                  + ref.getName() + (page == null ? " system" : " internal"));
-         }
+
+         ms_logger.debug("PSFileEditorTracker: registering "
+               + ref.getName() + (page == null ? " system" : " internal"));
+
          //the order of these 2 is important for cleanup in case of error
          content = loadContent(ref);
          m_registrations.add(data);
@@ -246,7 +230,7 @@ public class PSFileEditorTracker
                   
                   try
                   {
-                     Collection<IPath> affectedPaths = new ArrayList<IPath>();
+                     Collection<IPath> affectedPaths = new ArrayList<>();
                      IResourceDelta[] d = event.getDelta().getAffectedChildren(
                            IResourceDelta.CHANGED);
                      if (d.length == 0)
@@ -255,7 +239,7 @@ public class PSFileEditorTracker
                      for (IPath affectedPath : affectedPaths)
                      {
                         Info info = getData(ref);
-                        if (info.m_content.getFullPath().equals(affectedPath))
+                        if (null!=info && info.m_content.getFullPath().equals(affectedPath))
                         {
                            save(info.m_ref, false);
                         }
@@ -739,7 +723,7 @@ public class PSFileEditorTracker
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory.getLog(PSFileEditorTracker.class);
+   private static final Logger ms_logger = LogManager.getLogger(PSFileEditorTracker.class);
    
    /**
     * Manages variable, method, field completions. Initialized in constructor.
