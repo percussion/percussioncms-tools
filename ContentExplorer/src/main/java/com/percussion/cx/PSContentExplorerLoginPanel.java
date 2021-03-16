@@ -141,6 +141,8 @@ public class PSContentExplorerLoginPanel extends JFrame
       c.insets = new Insets(5, 20, 0, 50); // top padding
       c.anchor = GridBagConstraints.LINE_START;
       c.fill = 0;
+
+
       UTMnemonicLabel p1alabel = new UTMnemonicLabel(m_res, "serverurl", m_url);
       p1alabel.setMinimumSize(new Dimension(150, 60));
       p1alabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -274,7 +276,7 @@ public class PSContentExplorerLoginPanel extends JFrame
          String prt = m_parent.getParameter("port");
 
          m_url.setEditable(true);
-        // m_url.setBorder(null);
+         m_url.setBorder(m_password.getBorder());
 
          String user = m_adminProps.getProperty(LoginDialog.LAST_USER);
          if (user != null && user.trim().length() > 0)
@@ -282,12 +284,12 @@ public class PSContentExplorerLoginPanel extends JFrame
          else
             m_userId.setText(System.getProperty("user.name"));
 
-//         if (server == null || prot == null)
- //        {
-            m_url.setText("");
+        if (server == null || prot == null)
+        {
+            m_url.setText("http://localhost:9992");
             m_url.setEditable(true);
-   //      }
-  /*       else
+        }
+         else
          {
             String url = prot + "://" + server;
 
@@ -298,7 +300,6 @@ public class PSContentExplorerLoginPanel extends JFrame
             }
             m_url.setText(url);
          }
-         */
 
       }
       catch (IOException e) // I don't want to show any dialog here
