@@ -25,7 +25,6 @@ import com.percussion.deployer.objectstore.PSExportDescriptor;
 import com.percussion.deployer.objectstore.PSUserDependency;
 import com.percussion.error.PSException;
 import com.percussion.packager.ui.PSPackagerClient;
-import com.percussion.packager.ui.PSPackagerMainFrame;
 import com.percussion.packager.ui.PSResourceUtils;
 import com.percussion.packager.ui.data.PSElementCategory;
 import com.percussion.packager.ui.data.PSElementFilter;
@@ -125,7 +124,11 @@ public class PSPackagerClientModel
 
          if(m_cancelCurrentOperation)
             return;
-         
+
+         //If package is not loaded yet... then load it first
+         if(m_metaInfo == null){
+            load(info);
+         }
          // Need to recalculate depends and save descriptor
          PSExportDescriptor descriptor = save();
          if(m_cancelCurrentOperation)
