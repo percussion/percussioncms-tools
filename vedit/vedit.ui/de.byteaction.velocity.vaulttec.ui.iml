@@ -55,5 +55,18 @@
     <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.gtk.linux.x86_64:4.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:4.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.wso2.wsf:org.eclipse.ui.workbench:3.3.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jface:text:3.3.0-v20070606-0010" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.core:runtime:3.10.0-v20140318-2214" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:osgi:3.10.0-v20140606-1445" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.equinox:common:3.6.200-v20130402-1505" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.core:jobs:3.6.0-v20140424-0053" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.equinox:registry:3.5.400-v20140428-1507" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.equinox:preferences:3.5.200-v20140224-1527" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.core:contenttype:3.4.200-v20140207-1251" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.equinox:app:1.3.200-v20130910-1609" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:text:3.3.0-v20070606-0010" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:swt:3.3.0-v3346" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:jface:3.3.0-I20070606-0010" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.core:commands:3.3.0-I20070605-0010" level="project" />
   </component>
 </module>

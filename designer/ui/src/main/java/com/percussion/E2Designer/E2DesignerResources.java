@@ -947,7 +947,7 @@ public class E2DesignerResources extends PSResources
          { "menuHelpStartTutorial", "Start Tutorial" },
          { "mn_menuHelpStartOne", 'S' },
 
-         { "menuHelpAbout", "About Rhythmyx..." },
+         { "menuHelpAbout", "About Percussion CMS..." },
          { "mn_menuHelpAbout", 'A' },
 
 

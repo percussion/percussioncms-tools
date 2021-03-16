@@ -26,7 +26,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.percussion</groupId>
-        <artifactId>desktop</artifactId>
+        <artifactId>percussioncms-tools</artifactId>
         <version>8.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -146,12 +146,6 @@
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.percussion</groupId>
-            <artifactId>rxutils</artifactId>
-            <scope>compile</scope>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

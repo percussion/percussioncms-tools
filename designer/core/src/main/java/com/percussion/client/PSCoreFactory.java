@@ -37,8 +37,8 @@ import com.percussion.webservices.faults.PSNotAuthenticatedFault;
 import com.percussion.webservices.systemdesign.SystemDesignSOAPStub;
 import com.percussion.xml.serialization.PSObjectSerializer;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
@@ -53,18 +53,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 
 /**
@@ -1794,7 +1783,7 @@ public class PSCoreFactory
    /**
     * Never <code>null</code>.
     */
-   private static final Log ms_log = LogFactory.getLog(PSCoreFactory.class);   
+   private static final Logger ms_log = LogManager.getLogger(PSCoreFactory.class);
 
    /**
     * This flag indicates whether this factory was configured with test

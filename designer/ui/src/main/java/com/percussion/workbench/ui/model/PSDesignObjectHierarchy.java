@@ -9,19 +9,7 @@
  *****************************************************************************/
 package com.percussion.workbench.ui.model;
 
-import com.percussion.client.IPSCoreListener;
-import com.percussion.client.IPSHierarchyNodeRef;
-import com.percussion.client.IPSPrimaryObjectType;
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSDuplicateNameException;
-import com.percussion.client.PSLogonStateChangedEvent;
-import com.percussion.client.PSModelChangedEvent;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypeFactory;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.error.PSClientException;
 import com.percussion.client.models.IPSCmsModel;
 import com.percussion.client.models.IPSHierarchyManager;
@@ -31,11 +19,7 @@ import com.percussion.services.guidmgr.data.PSGuid;
 import com.percussion.services.ui.data.PSHierarchyNode;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.types.PSPair;
-import com.percussion.workbench.ui.IPSCatalog;
-import com.percussion.workbench.ui.PSMessages;
-import com.percussion.workbench.ui.PSModelTracker;
-import com.percussion.workbench.ui.PSUiReference;
-import com.percussion.workbench.ui.PSWorkbenchPlugin;
+import com.percussion.workbench.ui.*;
 import com.percussion.workbench.ui.dnd.PSReferenceTransfer;
 import com.percussion.workbench.ui.model.IPSHierarchyChangeListener.HierarchyChangeType;
 import com.percussion.workbench.ui.util.PSUiUtils;
@@ -44,8 +28,8 @@ import com.percussion.workbench.ui.views.hierarchy.PSHierarchyDefProcessor;
 import com.percussion.workbench.ui.views.hierarchy.PSHierarchyDefProcessor.InheritedProperties;
 import com.percussion.workbench.ui.views.hierarchy.PSHierarchyDefinitionException;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Display;
 
@@ -54,18 +38,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static com.percussion.workbench.ui.model.IPSHierarchyChangeListener.HierarchyChangeType.MODEL_DEACTIVATED;
 
@@ -3003,6 +2976,6 @@ public class PSDesignObjectHierarchy implements IPSDesignObjectChangeListener,
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory
-         .getLog(PSDesignObjectHierarchy.class);
+   private static Logger ms_logger = LogManager
+         .getLogger(PSDesignObjectHierarchy.class);
 }

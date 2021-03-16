@@ -2,11 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.percussion</groupId>
-    <artifactId>desktop</artifactId>
+    <artifactId>percussioncms-tools</artifactId>
     <version>8.0.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>perc-packaging-client</artifactId>
+    <name>perc-packaging-client</name>
    <packaging>jar</packaging>
   <build>
     <plugins>
@@ -191,11 +192,6 @@
       <dependency>
           <groupId>axis</groupId>
           <artifactId>axis-jaxrpc</artifactId>
-          <scope>compile</scope>
-      </dependency>
-      <dependency>
-          <groupId>xml-apis</groupId>
-          <artifactId>xml-apis</artifactId>
           <scope>compile</scope>
       </dependency>
       <dependency>

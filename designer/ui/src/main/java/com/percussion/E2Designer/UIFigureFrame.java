@@ -32,7 +32,8 @@ import com.percussion.workbench.ui.editors.form.PSXmlApplicationEditorActionBarC
 import com.percussion.workbench.ui.legacy.PSLegacyDnDHelper;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 
@@ -142,7 +143,7 @@ public abstract class UIFigureFrame extends JInternalFrame
          Bookable,
          Printable
 {
-   private final static Logger ms_log = Logger.getLogger(UIFigureFrame.class);
+   private final static Logger ms_log = LogManager.getLogger(UIFigureFrame.class);
 
    public UIFigureFrame(String strTitle, Dimension d,
          final PSXmlApplicationEditor xmlApplicationEditor)

@@ -62,7 +62,8 @@ import org.apache.axis.AxisFault;
 import org.apache.axis.client.Stub;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.xml.rpc.ServiceException;
 import java.lang.reflect.InvocationTargetException;
@@ -81,9 +82,9 @@ public class PSProxyUtils
 {
    /**
     * Convenience method that calls {@link #processAndThrowException(int, 
-    * Throwable, Log) processAndThrowException(-1, ex, log)}.
+    * Throwable, Logger) processAndThrowException(-1, ex, log)}.
     */
-   public static void processAndThrowException(Throwable ex, Log log)
+   public static void processAndThrowException(Throwable ex, Logger log)
       throws PSModelException
    {
       try
@@ -117,7 +118,7 @@ public class PSProxyUtils
     *    converted to client exceptions.
     */
    public static void processAndThrowException(int refCount, Throwable ex, 
-      Log log) throws PSMultiOperationException, PSModelException
+      Logger log) throws PSMultiOperationException, PSModelException
    {
       if (null == ex)
          throw new IllegalArgumentException("ex cannot be null");
@@ -188,7 +189,7 @@ public class PSProxyUtils
     *    <code>null</code>.
     * @param ex the exception to log, not <code>null</code>.
     */
-   public static void logError(Log log, Throwable ex)
+   public static void logError(Logger log, Throwable ex)
    {
       if (log == null)
          throw new IllegalArgumentException("log cannot be null");

@@ -16,7 +16,8 @@ import com.percussion.workbench.ui.PSUiReference;
 import com.percussion.workbench.ui.model.IPSDeclarativeNodeHandler;
 import com.percussion.workbench.ui.security.PSAclDialog;
 import com.percussion.workbench.ui.util.PSUiUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -33,7 +34,7 @@ import java.util.List;
 class PSSecurityAction extends PSBaseSelectionListenerAction
 {
    
-   Logger log = Logger.getLogger(PSSecurityAction.class);
+   Logger log = LogManager.getLogger(PSSecurityAction.class);
    
    /**
     * The id of this action.

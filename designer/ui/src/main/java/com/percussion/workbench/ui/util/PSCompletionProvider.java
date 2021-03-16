@@ -21,18 +21,13 @@ import com.percussion.extension.PSExtensionMethod;
 import com.percussion.extension.PSExtensionMethodParam;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.utils.jexl.PSPredefinedJexlVariableDefs;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.QualifiedName;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Provides fields, methods, variables completions.
@@ -46,7 +41,7 @@ public class PSCompletionProvider
    /**
     * The class log.
     */
-   final static Log ms_log = LogFactory.getLog(PSCompletionProvider.class);
+   final static Logger ms_log = LogManager.getLogger(PSCompletionProvider.class);
 
    /**
     * Creates new provider. Initializes completion lists. 

@@ -1,0 +1,75 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Content Type Editor - Properties Tab </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13036.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13051.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Content Type Editor - Properties Tab</h3>
+<p class="bodytext">The last tab of the Content Type Editor is the Properties tab.  It allows you to enable or disable searching for the Content Type, set up item transform and validation rules, configure pre- and post-processing extensions, and edit some of the fields you entered in the <a id="h13170" class="jumptemplate" title="New Content Type Wizard" href="13033.htm" target="_self">New Content Type Wizard</a>.</p>
+<p class="bodytext">Use this tab to:</p>
+<ul class="listbullet"><li class="listbullet"><a id="h14327" class="jump-seetemplate" title="Adding Extensions and Disabling Searching" href="13013.htm" target="_self">Add extensions to the Content Type</a></li><li class="listbullet"><a id="h13173" class="jumptemplate" title="Editing a Content Type" href="13009.htm" target="_self">Edit the Label, Description, and Workflows of the Content Type</a><p class="exapandinghtmlblock"><a id="h14730" class="expandinghtmlblocklink" title="Screenshot of Content Type Editor, Properties Tab" href="javascript:toggleBlock('14730')" target="_self"><img id="i14730" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Content Type Editor, Properties Tab</a></p>
+<div id="d14730" class="widegraphic" style="display:none"><p class="bodytext"><img src="wb1126a.gif" alt="Content Type Editor, Properties tab" height="431" width="580" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div></li></ul><p class="subheading"><strong class="specialbold"><strong class="specialbold">Field Definitions</strong></strong></p>
+<p class="fielddescription"><strong class="fieldname">Content Type name</strong> - Read only. System name of Content Type.</p>
+<p class="fielddescription"><strong class="fieldname">Label</strong> - Name displayed to users for Content Type. </p>
+<p class="fielddescription"><strong class="fieldname">Description</strong> - Description of Content Type.</p>
+<p class="fielddescription"><strong class="fieldname">Allowed workflows</strong> - Lists all available Workflows for Content Type. Allowed Workflows are checked. </p>
+<p class="bodytext">[<strong class="buttons">All</strong>] - Checks all workflows.</p>
+<p class="bodytext">[<strong class="buttons">None</strong>] - Unchecks all workflows.</p>
+<p class="fielddescription"><strong class="fieldname">Default workflow</strong> - The Workflow assigned to a Content Item of the Content Type if no other Workflow is chosen. When the <strong class="specialbold">Default workflow </strong>is selected, it is automatically checked under <strong class="specialbold">Allowed workflows</strong> if it is not already checked. If the user unchecks the <strong class="specialbold">Default workflow</strong> under <strong class="specialbold">Allowed Workflows</strong>, the first checked Workflow becomes the Default Workflow. The drop list for this field includes all available Workflows for the Content Type.</p>
+<p class="fielddescription"><strong class="fieldname">Enable searching for this Content Type</strong> - When checked indexes content of the Content Type for searching. Default is checked.</p>
+<p class="fielddescription"><strong class="fieldname">Item Transforms and Validations</strong> - Allow defining of Item Input Transforms, Item Output Transforms, Item Validation Rules, Pre-Processing, and Post-Processing for the Content Type. The Input Transforms tab is displayed in the graphic above, but all five tabs are nearly identical.</p>
+<p class="fielddescription"><strong class="fieldname">Input Transforms tab</strong>  - Lists extensions selected which change the format or value of Content Editor data before it is entered into the Rhythmyx repository. A common item transformation involves reformatting a date field. Note: In versions of Rhythmyx prior to 6.0, item transforms were referred to as item translations.</p>
+<p class="fielddescription"><strong class="fieldname">Output Transforms tab</strong> - Lists Extensions selected which change the format or value of Content Item data when it is retrieved from the Rhythmyx repository and listed in a Content Editor or page. A common output transformation involves spelling out an abbreviated word. Note: In versions of Rhythmyx prior to 6.0, item transforms were referred to as item translations.</p>
+<p class="fielddescription"><strong class="fieldname">Validation tab</strong> - Lists Extensions selected for checking the format or value of data entered in to the Content Editor when it is saved and entered into the Rhythmyx repository. An item validation rule could specify that a start date must precede an end date. </p>
+<p class="fielddescription"><strong class="fieldname">Pre-Processing tab</strong> - Lists Extensions selected for processing information in the Content Editor prior to the request to the Repository.</p>
+<p class="fielddescription"><strong class="fieldname">Post-Processing tab</strong> - Lists Extensions selected for processing information in the Content Editor following the request to the Repository.</p>
+<p class="bodytext"><strong class="specialbold"><strong class="specialbold">Fields on these tabs:</strong></strong></p>
+<p class="fielddescription"><strong class="fieldname">Extension</strong> Displays selected Extensions. Extensions execute in the order in which they are listed. Clicking in a row accesses a drop list that includes all available extensions for the tab. </p>
+<p class="fielddescription"><strong class="fieldname">C</strong> - Opens a dialog for setting conditions or defining extensions. The conditions or extensions specify when the extension is executed. Appears on <strong class="specialbold">Input Transforms</strong>, <strong class="specialbold">Output Transforms</strong>, and <strong class="specialbold">Validation tabs</strong> only.</p>
+<p class="fielddescription"><strong class="fieldname">Item Transforms and Validations Description</strong><strong class="specialbold"><strong class="specialbold"> </strong></strong>- Displays a description of an extension selected in the Extension table.</p>
+<p class="bodytext">[<strong class="buttons">^</strong>] - Moves the selected extension higher in the list.</p>
+<p class="bodytext">[<strong class="buttons">V</strong>] - Moves the selected extension lower in the list.</p>
+<p class="bodytext">[<strong class="buttons">+</strong>] - Adds a row for inserting an extension above the selected extension.</p>
+<p class="bodytext">[<strong class="buttons">X</strong>] - Deletes the selected extension from the table.</p>
+<p class="fielddescription"><strong class="fieldname">Maximum Number of Errors Before Stopping</strong>  Indicates the number of validation errors that Rhythmyx can find in the Content Editor fields before stopping processing. Appears on <strong class="specialbold">Validation tab</strong> only.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13034.htm" target="_self">Content Type Editor</a></p><p class="relateditem"><a href="13035.htm" target="_self">Content Type Editor - Content Type Tab</a></p><p class="relateditem"><a href="13036.htm" target="_self">Content Type Editor - Field Set Tabs</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

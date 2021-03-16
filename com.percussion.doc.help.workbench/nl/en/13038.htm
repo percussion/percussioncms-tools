@@ -1,0 +1,74 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Field Properties Editor  </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="14142.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13520.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Field Properties Editor </h2>
+<p class="bodytext">The Field Properties editor allows you to configure field properties that are set or modified less frequently than those on the main Field and Field Set editor. </p>
+<p class="bodytext">To access the Field Properties editor:</p>
+<ul class="listbullet"><li class="listbullet">In the <a id="h13524" class="jumptemplate" title="Fields and Field Sets Editor" href="13523.htm" target="_self">Field and Field Set editor</a>, select a field in the table and click [<strong class="buttons">All Properties</strong>].</li></ul><p class="bodytext">Using the Field Properties Editor you can:</p>
+<ul class="listbullet"><li class="listbullet"><a id="h13060" class="jumptemplate" title="Configuring Additional Properties" href="13059.htm" target="_self">Configure additional properties</a></li><li class="listbullet"><a id="h13526" class="jumptemplate" title="Editing Fields and Field Sets" href="13521.htm" target="_self">Edit properties</a><p class="exapandinghtmlblock"> <a id="h14740" class="expandinghtmlblocklink" title="Screenshot of Field Properties Editor" href="javascript:toggleBlock('14740')" target="_self"><img id="i14740" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Field Properties Editor</a></p>
+<div id="d14740" class="widegraphic" style="display:none"><p class="bodytext"><img src="wb1105.gif" alt="Field properties editor" height="469" width="469" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div></li></ul><p class="subheading"><strong class="specialbold">Field Definitions</strong></p>
+<p class="fielddescription"><strong class="fieldname">Field name</strong><strong class="specialbold"> </strong>- The system name of the field.</p>
+<p class="fielddescription"><strong class="fieldname">Data type</strong> - The type of data that the field stores, such as text or binary; see <a id="h13024" class="jumptemplate" title="Default Content Editor Controls" href="13023.htm" target="_self">Default Content Editor Controls</a> for the default data type associated with each control.</p>
+<p class="fielddescription"><strong class="fieldname">Storage size</strong> - The storage size of the field in the backend table; see <a id="h13024_2" class="jumptemplate" title="Default Content Editor Controls" href="13023.htm" target="_self">Default Content Editor Controls</a> for the default storage size associated with each control.</p>
+<p class="fielddescription"><strong class="fieldname">Default value</strong> - The default value of the field, if any (entered from the previous screen).</p>
+<p class="fielddescription"><strong class="fieldname">Treat data as binary</strong> - Causes a binary or other very large field Binary fields are stored differently than other fields in the database so their large size does not cause database errors. If this is checked, Rhythmyx stores the information as non-character data in a column with additional storage space. Default is unchecked.</p>
+<p class="bodytext"><strong class="specialbold">Display:</strong></p>
+<p class="fielddescription"><strong class="fieldname">Label</strong><strong class="specialbold"> </strong>- The display name for the field.</p>
+<p class="fielddescription"><strong class="fieldname">Mnemonic</strong> - The key used in the ALT + key sequence for moving the cursor to this field; drop list includes all unused letters for fields in the Content Type.</p>
+<p class="fielddescription"><strong class="fieldname">Error label</strong> - Sentence or phrase to display if field entry is not valid.</p>
+<p class="fielddescription"><strong class="fieldname">Control</strong> - The mechanism for displaying the field, such as drop-list or text box. See <a id="h13024_3" class="jumptemplate" title="Default Content Editor Controls" href="13023.htm" target="_self">Default Content Editor Controls</a> for the default controls.</p>
+<p class="fielddescription"><strong class="fieldname">Show in summary</strong> - Enabled for fields in child field sets only. If you want a field name and its values to display in the main Content Editor when users open it, leave <strong class="specialbold">Show in summary</strong> checked. If you uncheck <strong class="specialbold">Show in summary</strong>, users must click [<strong class="buttons">Edit Table</strong>] in the Content Editor to view the field (and all other fields in the field set) in a table.</p>
+<p class="fielddescription"><strong class="fieldname">Show in preview</strong> - Specifies whether or not to display this field in a preview of a Content Item.  </p>
+<p class="fielddescription"><strong class="fieldname">Show &quot;clear field&quot; text box in binary control</strong> -Enabled if <strong class="specialbold">Treat data as binary </strong>is checked. When checked, the editor displays a box the user can check to clear the database table column before uploading binary data. If the &quot;clear field&quot; text box is not checked, the contents of the column in the backend table are not changed if the field is left blank in the Content Editor.</p>
+<p class="bodytext"><strong class="specialbold">Search:</strong></p>
+<p class="fielddescription"><strong class="fieldname">Allow this field to be searched</strong> - Indexes the contents of the field for searching. </p>
+<p class="fielddescription"><strong class="fieldname">Index formatting, such as HTML tags</strong> - Indexes formatting marks for searching.</p>
+<p class="fielddescription"><strong class="fieldname">Include in full-text multi-field query</strong> - When checked, field is automatically searched during a user-entered search. When unchecked, field is not searched during a user-entered search unless it is specified in the Advanced Search dialog. For example, you might not want the Workflow to be included in a Search, so you might uncheck the box for the Workflow field. Checked by default.   </p>
+<p class="fielddescription"><strong class="fieldname">Punctuation is part of word (use for file names, etc.)</strong> - Indexes words for searches with punctuation that follows them.</p>
+<p class="bodytext">[<strong class="buttons">Visibility</strong>] - Opens the <a id="h13179" class="jumptemplate" title="Maintaining Field Visibility Rules" href="13073.htm" target="_self">Field Visibility Rule editor</a>. This editor lets you configure whether to show or hide the field in the Content Editor.</p>
+<p class="bodytext">[<strong class="buttons">Validation</strong>] - Opens the <a id="h13180" class="jumptemplate" title="Maintaining Field Validations" href="13072.htm" target="_self">Field Validation editor</a>. This editor lets you configure validity checks (validation rules) on the format and value of data entered into the field.</p>
+<p class="bodytext">[<strong class="buttons">Transforms</strong>] - Opens the <a id="h14350" class="jump-seetemplate" title="Maintaining Field Transforms" href="13391.htm" target="_self">Field Transforms editor</a>. This editor lets you specify how the Content Editor changes the format of data entered into the field. Note: In versions of Rhythmyx prior to 6.0, field transforms were referred to as field translations.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13519.htm" target="_self">Maintaining Content Type Fields</a></p><p class="relateditem"><a href="13523.htm" target="_self">Fields and Field Sets Editor</a></p><p class="relateditem"><a href="14142.htm" target="_self">Default System Fields</a></p><p class="relateditem"><a href="13520.htm" target="_self">Creating Fields and Field Sets</a></p><p class="relateditem"><a href="13059.htm" target="_self">Configuring Additional Properties</a></p><p class="relateditem"><a href="13521.htm" target="_self">Editing Fields and Field Sets</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

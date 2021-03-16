@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/mars-respository-def/pom.xml" />
         <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/pom.xml" />
         <option value="$PROJECT_DIR$/loader/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-deployer-client/pom.xml" />
       </list>
     </option>
   </component>

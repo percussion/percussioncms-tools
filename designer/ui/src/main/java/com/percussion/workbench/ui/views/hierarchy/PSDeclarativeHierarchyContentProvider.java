@@ -15,8 +15,8 @@ import com.percussion.workbench.ui.PSWorkbenchPlugin;
 import com.percussion.workbench.ui.model.IPSHierarchyChangeListener;
 import com.percussion.workbench.ui.model.PSDesignObjectHierarchy;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -25,11 +25,7 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Display;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class uses a {@link PSDesignObjectHierarchy} model as the source of its
@@ -229,7 +225,7 @@ public class PSDeclarativeHierarchyContentProvider implements
     * 
     * @return Never <code>null</code>.
     */
-   static protected Log getLogger()
+   static protected Logger getLogger()
    {
       return ms_logger;
    }
@@ -444,6 +440,6 @@ public class PSDeclarativeHierarchyContentProvider implements
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory
-         .getLog(PSDeclarativeHierarchyContentProvider.class);
+   private static Logger ms_logger = LogManager
+         .getLogger(PSDeclarativeHierarchyContentProvider.class);
 }

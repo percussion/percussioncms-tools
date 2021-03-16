@@ -13,7 +13,8 @@ import com.percussion.conn.PSServerException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.workbench.ui.PSMessages;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -29,7 +30,7 @@ import java.util.List;
  */
 public class PSEditExternalInterfaceFileAction extends PSFigureAbstractAction
 {
-   private final static Logger ms_log = Logger
+   private final static Logger ms_log = LogManager
          .getLogger(PSEditExternalInterfaceFileAction.class);
 
    public PSEditExternalInterfaceFileAction()

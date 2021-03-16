@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.percussion</groupId>
-    <artifactId>desktop</artifactId>
+    <artifactId>percussioncms-tools</artifactId>
     <version>8.0.2-SNAPSHOT</version>
     <dependencies>
         <dependency>
@@ -36,9 +36,10 @@
     </modules>
 
     <properties>
+        <COPYRIGHTYEAR>2021</COPYRIGHTYEAR>
         <build.profile.id>dev</build.profile.id>
         <versionString>INTERNAL</versionString>
-        <jenkins.buildNumber>2020</jenkins.buildNumber>
+        <jenkins.buildNumber>2021</jenkins.buildNumber>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
         <buildNumber>${maven.build.timestamp}</buildNumber>
         <jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.it.execution.data.file>
@@ -121,7 +122,7 @@
         <install.jre.version>8.222.10.1</install.jre.version>
         <axis.version>1.3</axis.version>
         <httpcomponents.version>4.5.8</httpcomponents.version>
-        <log4j2.version>2.13.2</log4j2.version>
+        <log4j2.version>2.14.0</log4j2.version>
         <tika.version>1.24.1</tika.version>
         <commons-cli.version>1.4</commons-cli.version>
         <xmpbox.version>2.0.17</xmpbox.version>

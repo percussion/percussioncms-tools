@@ -13,10 +13,18 @@
     <file url="file://$PROJECT_DIR$/ServerPropertiesEditor/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ServerUIComponents/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ServerUIComponents/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.packagebuilder/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.packagebuilder/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.packageinstaller/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.packageinstaller/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/designer/core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/designer/core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/designer/core/src/main/resources" charset="UTF-8" />
@@ -28,6 +36,8 @@
     <file url="file://$PROJECT_DIR$/loader/src" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/loader/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/loader/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/perc-deployer-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/perc-deployer-client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-devtools-distribution/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-devtools-distribution/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-package-builder/src/main/java" charset="UTF-8" />

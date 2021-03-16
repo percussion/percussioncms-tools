@@ -10,7 +10,8 @@
 package com.percussion.workbench.ui.legacy;
 
 import com.percussion.E2Designer.PSDlgUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
@@ -49,7 +50,7 @@ public class AwtSwtModalDialogBridge
     * The bridge logger.
     */
    private static final Logger ms_log =
-      Logger.getLogger(AwtSwtModalDialogBridge.class);
+      LogManager.getLogger(AwtSwtModalDialogBridge.class);
 
    /**
     * Must be created in SWT event handling thread, so it can use Display from the

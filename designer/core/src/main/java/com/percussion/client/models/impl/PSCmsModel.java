@@ -23,8 +23,8 @@ import com.percussion.services.security.PSPermissions;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.security.IPSTypedPrincipal;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.security.acl.NotOwnerException;
 import java.text.MessageFormat;
@@ -295,7 +295,7 @@ public class PSCmsModel implements IPSCmsModel
    {
       try
       {
-         List<String> names = new ArrayList<String>();
+         List<String> names = new ArrayList<>();
          names.add(name);
          return create(objectType, names, defaulter)[0];
       }
@@ -336,9 +336,9 @@ public class PSCmsModel implements IPSCmsModel
       {
          int nameIndex = 1;
          String baseName = objectType.getPrimaryType().toString().toLowerCase();
-         baseName.replace(' ', '_');
+         baseName = baseName.replace(' ', '_');
          String proposedName = baseName + nameIndex++;
-         names = new ArrayList<String>();
+         names = new ArrayList<>();
          //need a unique name
          try
          {
@@ -373,10 +373,10 @@ public class PSCmsModel implements IPSCmsModel
       {
          //if we can't reach the server, do the best we can
          ms_logger.info("Catalog failed while creating new objects.", e);
-         existingRefs = new ArrayList<IPSReference>();
+         existingRefs = new ArrayList<>();
       }
       Object[] results = new Object[names.size()];
-      Collection<String> validNames = new ArrayList<String>();
+      Collection<String> validNames = new ArrayList<>();
       int resultIndex = 0;
       for (String name : names)
       {
@@ -410,7 +410,7 @@ public class PSCmsModel implements IPSCmsModel
       }
 
       IPSCmsModelProxy proxy = getProxy();
-      List<Object> proxyResults = new ArrayList<Object>();
+      List<Object> proxyResults = new ArrayList<>();
       IPSReference[] refs = null;
       if (!validNames.isEmpty())
       {
@@ -432,7 +432,7 @@ public class PSCmsModel implements IPSCmsModel
       // walk thru the results array and set the successful ones
       for (int i = 0, j = 0; i < results.length; i++)
       {
-         if (results[i] == null)
+         if (results[i] == null && refs !=null)
             results[i] = refs[j++];
       }
 
@@ -441,7 +441,10 @@ public class PSCmsModel implements IPSCmsModel
          throw new PSMultiOperationException(results, names.toArray());
       }
 
-      return Arrays.asList(results).toArray(new IPSReference[refs.length]);
+      if(refs!=null)
+         return Arrays.asList(results).toArray(new IPSReference[refs.length]);
+      else
+         return Arrays.asList(results).toArray(new IPSReference[results.length]);
    }
 
    // see interface
@@ -480,9 +483,9 @@ public class PSCmsModel implements IPSCmsModel
       {
          supportsAcl = false;
       }
-      List<Object> goodData = new ArrayList<Object>();
-      List<Object> goodAclData = new ArrayList<Object>();
-      List<IPSReference> goodRefs = new ArrayList<IPSReference>();
+      List<Object> goodData = new ArrayList<>();
+      List<Object> goodAclData = new ArrayList<>();
+      List<IPSReference> goodRefs = new ArrayList<>();
       if (supportsAcl)
       {
          //If ACLs are supported then deal with the ACL load errors too
@@ -505,11 +508,11 @@ public class PSCmsModel implements IPSCmsModel
       Object[] goodObjects = goodData.toArray(new Object[goodData.size()]);
 
       IPSCmsModelProxy proxy = getProxy();
-      List<Object> proxyResults = new ArrayList<Object>();
-      IPSReference[] refs = null;
+      List<Object> proxyResults = new ArrayList<>();
+      IPSReference[] refs;
       if (goodObjects.length > 0)
       {
-         Object[] exResults = null;
+         Object[] exResults;
          try
          {
             refs = proxy.create(goodObjects, names, proxyResults);
@@ -520,10 +523,8 @@ public class PSCmsModel implements IPSCmsModel
                throw e;
             ex = e;
             exResults = e.getResults();
-            List<IPSReference> newRefs = new ArrayList<IPSReference>();
-            for (int i = 0; i < exResults.length; i++)
-            {
-               Object obj = exResults[i];
+            List<IPSReference> newRefs = new ArrayList<>();
+            for (Object obj : exResults) {
                if (!(obj instanceof Throwable))
                   newRefs.add((IPSReference) obj);
             }
@@ -547,9 +548,8 @@ public class PSCmsModel implements IPSCmsModel
          }
          if(supportsAcl)
          {
-            List<IPSReference> newRefs = new ArrayList<IPSReference>();
-            for (IPSReference ref : refs)
-               newRefs.add(ref);
+            List<IPSReference> newRefs = new ArrayList<>();
+            newRefs.addAll(Arrays.asList(refs));
 
             try
             {
@@ -592,11 +592,11 @@ public class PSCmsModel implements IPSCmsModel
          for (IPSReference ref : refs)
          {
             currentRefs.remove(ref);
-            Collection<IPSReference> comps = new ArrayList<IPSReference>(); 
+            Collection<IPSReference> comps = new ArrayList<>();
             comps.addAll(currentRefs);
             comps.addAll(Arrays.asList(refs));
             comps.remove(ref);
-            Collection<String> existingNames = new ArrayList<String>();
+            Collection<String> existingNames = new ArrayList<>();
             for (IPSReference existingRef : comps)
             {
                existingNames.add(existingRef.getName());
@@ -3016,5 +3016,5 @@ public class PSCmsModel implements IPSCmsModel
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Log ms_logger = LogFactory.getLog(PSCmsModel.class);
+   private static Logger ms_logger = LogManager.getLogger(PSCmsModel.class);
 }

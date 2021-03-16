@@ -20,6 +20,9 @@ import org.apache.tools.ant.taskdefs.Replace;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,16 +30,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class PSDevToolsPreInstall {
 
-        public static String DISTRIBUTION_DIR = "distribution";
+        private static final String POM_PROPERTIES="/META-INF/maven/com.percussion/perc-devtools-distribution/pom.properties";
+        public static final String DISTRIBUTION_DIR = "distribution";
         public static final String PERC_JAVA_HOME = "perc.java.home";
         public static final String JAVA_HOME = "java.home";
-        public static final String PERCUSSION_VERSION = "percversion";
+        public static final String PERCUSSION_VERSION = "project.version";
         public static final String INSTALL_TEMPDIR = "percInstallTmp_";
         public static final String PERC_ANT_JAR = "perc-ant";
         public static final String DEVELOPMENT = "DEVELOPMENT";
@@ -52,7 +57,19 @@ public class PSDevToolsPreInstall {
         public static Integer processCode=0;
         public static Boolean error=false;
 
-    /**
+    private static String getVersionFromResource(){
+
+            try (InputStream is = PSDevToolsPreInstall.class.getResourceAsStream(POM_PROPERTIES)) {
+                Properties props = new Properties();
+                props.load(is);
+                return props.getProperty("version","");
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+            return "";
+    }
+
+        /**
      * Find the ant jar by path pattern to avoid hard coding / forcing version.
      *
      * @param execPath Folder containing the jar
@@ -106,8 +123,8 @@ public class PSDevToolsPreInstall {
                 }
 
                 percVersion = System.getProperty(PERCUSSION_VERSION);
-                if (percVersion == null)
-                    percVersion = "";
+                if (percVersion == null || percVersion.equals(""))
+                    percVersion = getVersionFromResource();
 
                 developmentFlag = System.getProperty(DEVELOPMENT);
                 if (developmentFlag == null || DEVELOPMENT.trim().equalsIgnoreCase(""))
@@ -115,7 +132,7 @@ public class PSDevToolsPreInstall {
 
                 System.out.println("perc.java.home=" + javaHome);
                 System.out.println("java.bin=" + javabin);
-                System.out.println("percversion=" + percVersion);
+                System.out.println("project.version=" + percVersion);
                 System.out.println(DEVELOPMENT + "=" + developmentFlag);
 
 
@@ -230,7 +247,7 @@ public class PSDevToolsPreInstall {
 
                 //"-Dlistener=com.percussion.preinstall.AntBuildListener",
                 ProcessBuilder builder = new ProcessBuilder(
-                        javabin,"-Dfile.encoding=UTF8","-Dsun.jnu.encoding=UTF8", "-Dinstall.dir=" + installDir.toAbsolutePath().toString(), "-jar", jar.toAbsolutePath().toString(), "-f", ANT_INSTALL).directory(execPath.toFile());
+                        javabin,"-Dproject.version="+percVersion,"-Dfile.encoding=UTF-8","-Dsun.jnu.encoding=UTF-8", "-Dinstall.dir=" + installDir.toAbsolutePath().toString(), "-jar", jar.toAbsolutePath().toString(), "-f", ANT_INSTALL).directory(execPath.toFile());
 
                 //pass in known flags
                 builder.environment().put(DEVELOPMENT, developmentFlag);
@@ -265,5 +282,25 @@ public class PSDevToolsPreInstall {
             r.execute();
         }
 
+        public static String getRunningJarVersion(){
+            // static
+            try {
+                 URI file  = PSDevToolsPreInstall.class
+                        .getProtectionDomain()
+                        .getCodeSource()
+                        .getLocation()
+                        .toURI();
 
+                 String fileName = Paths.get(file).getFileName().toString();
+                 String parts[] = fileName.split("^(.+?)-(\\d.*?)\\.jar$");
+                if(parts.length==3)
+                    return parts[2];
+                else
+                    return "";
+
+            } catch (URISyntaxException e) {
+                return "";
+            }
+
+        }
     }

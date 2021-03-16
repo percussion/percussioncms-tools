@@ -11,7 +11,8 @@ package com.percussion.workbench.ui.editors.form;
 
 import com.percussion.services.assembly.data.PSTemplateBinding;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
@@ -40,7 +41,7 @@ class PSBindingClipboardLoader
    /**
     * The class log.
     */
-   private final static Log ms_log = LogFactory.getLog(
+   private final static Logger ms_log = LogManager.getLogger(
          PSBindingClipboardLoader.class); 
    
    /**

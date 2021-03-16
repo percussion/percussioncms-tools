@@ -49,6 +49,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
+import javax.swing.text.DefaultEditorKit;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -163,7 +164,7 @@ public class PSContentExplorerApplet extends JApplet implements IPSActionListene
          if (PSAjaxSwingWrapperLocator.getInstance().isAjaxSwingEnabled())
          {
 
-            // Clear all cookies that may have been left over from previouse
+            // Clear all cookies that may have been left over from previous
             CookieManager manager = new CookieManager();
             manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
             CookieHandler.setDefault(manager);
@@ -171,7 +172,7 @@ public class PSContentExplorerApplet extends JApplet implements IPSActionListene
       }
       catch (Exception e)
       {
-         log.error("something wrone with cookie manager",e);
+         log.error("Something is wrong with cookie manager. {}",e);
       }
 
       try
@@ -206,11 +207,18 @@ public class PSContentExplorerApplet extends JApplet implements IPSActionListene
          } catch (Exception e) {
                     e.printStackTrace();
          }
-         
+
+         if(isMacPlatform()) {
+            InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.copyAction);
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.pasteAction);
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.cutAction);
+
+         }
+
          UIManager.put("Tree.collapsedIcon", PSImageIconLoader.loadIcon(collapsed_icon, false, ms_thisApplet));
          UIManager.put("Tree.expandedIcon", PSImageIconLoader.loadIcon(expanded_icon, false, ms_thisApplet));
-         
-         
+
 
          String rsflag = getParameter(PSContentExplorerConstants.PARAM_RESTRICTSEARCHFIELDSTOUSERCOMMUNITY);
          if (rsflag != null && rsflag.equalsIgnoreCase("yes"))
@@ -2650,9 +2658,7 @@ public class PSContentExplorerApplet extends JApplet implements IPSActionListene
    {
       // set key event post processor to handle special key strokes to
       // simulate "browser behavior".
-      // NOTE: some of the special key, such as F6, does not work in Mac
-      // disable Mac for now.
-      if (!isMacPlatform() && m_keyEventPostProcessor == null)
+      if (m_keyEventPostProcessor == null)
       {
          KeyboardFocusManager focusMgr = KeyboardFocusManager.getCurrentKeyboardFocusManager();
          m_keyEventPostProcessor = new PSKeyEventPostProcessor(this);

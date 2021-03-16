@@ -81,7 +81,7 @@ Export-Package: com.percussion.client,
                 org.apache.commons.lang.builder,
                 org.apache.commons.lang.exception,
                 org.apache.commons.logging,
-                org.apache.log4j
+                org.apache.logging.log4j
 Bundle-ClassPath: ., target/dependency/eclipse-maven-deps.jar
 Bundle-Vendor: Percussion Software
 Eclipse-BundleShape: dir
