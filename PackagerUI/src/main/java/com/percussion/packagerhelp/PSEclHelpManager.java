@@ -10,7 +10,7 @@
 
 package com.percussion.packagerhelp;
 
-//TODO: Fix Help import org.eclipse.help.standalone.Help;
+import org.eclipse.help.standalone.Help;
 
 import java.io.File;
 import java.util.Locale;
@@ -105,11 +105,10 @@ public class PSEclHelpManager
          System.out.println();
          
          String[] opt = {"-eclipsehome", DOC_ROOT_PATH, "-product", "com.percussion.doc.help.packageinstaller.Installer"};
-    /* TODO: Fix Help
-       Help h = new Help(opt);
+
+         Help h = new Help(opt);
          h.start();
          h.displayHelp(HELP_TOPIC_ROOT + filename);
-       */
       }
       catch ( MissingResourceException mre )
       {

@@ -1,16 +1,20 @@
 package com.percussion.cx;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import com.percussion.E2Designer.*;
+import com.percussion.E2Designer.admin.AppletMainDialog;
+import com.percussion.E2Designer.admin.StatusBar;
+import com.percussion.border.PSFocusBorder;
+import com.percussion.util.PSProperties;
+import com.percussion.webservices.faults.PSContractViolationFault;
+import com.percussion.webservices.faults.PSNotAuthenticatedFault;
+import org.apache.axis.AxisFault;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import javax.swing.SwingWorker;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -18,35 +22,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingWorker;
-import javax.swing.border.EtchedBorder;
-
-import org.apache.axis.AxisFault;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-
-import com.percussion.E2Designer.LoginDialog;
-import com.percussion.E2Designer.UTFixedPasswordField;
-import com.percussion.E2Designer.UTFixedTextField;
-import com.percussion.E2Designer.UTMnemonicLabel;
-import com.percussion.E2Designer.UserConfig;
-import com.percussion.E2Designer.Util;
-import com.percussion.E2Designer.admin.AppletMainDialog;
-import com.percussion.E2Designer.admin.StatusBar;
-import com.percussion.border.PSFocusBorder;
-import com.percussion.util.PSProperties;
-import com.percussion.webservices.faults.PSContractViolationFault;
-import com.percussion.webservices.faults.PSNotAuthenticatedFault;
 
 /**
  * The LoginPanel creates the applets/applications first dialog shown to the
@@ -248,11 +226,7 @@ public class PSContentExplorerLoginPanel extends JFrame
 
    /**
     * Initializes the login panel with data
-    * 
-    * @param server the server to login to, can be <code>null</code>
-    * @param protocol the protocol name, can be <code>null</code> in which case
-    *           it defaults to 'http'.
-    * @param port the servers port to use, can be <code>null</code>
+    *
     */
    private void initData()
    {
@@ -435,6 +409,7 @@ public class PSContentExplorerLoginPanel extends JFrame
 
          private volatile String errorMessage = "";
 
+
          @Override
          protected Boolean doInBackground() throws Exception
          {
@@ -456,7 +431,7 @@ public class PSContentExplorerLoginPanel extends JFrame
                m_parent.setParameter("port", port);
                m_parent.setParameter("userId", m_userId.getText());
                m_parent.setParameter("password", m_password.getText());
-
+               m_parent.setParameter("locale", getDefaultLocale());
             }
             catch (PSNotAuthenticatedFault e)
             {
@@ -514,18 +489,16 @@ public class PSContentExplorerLoginPanel extends JFrame
                }
 
             }
-            catch (InterruptedException e)
+            catch (InterruptedException | ExecutionException e)
             {
                // This is thrown if the thread's interrupted.
-            }
-            catch (ExecutionException e)
-            {
-               // This is thrown if we throw an exception
-               // from doInBackground.
+               e.printStackTrace();
             }
 
-            PSContentExplorerLoginPanel.this.setCursor(getCursor().getDefaultCursor());
+
+            PSContentExplorerLoginPanel.this.setCursor(Cursor.getDefaultCursor());
             PSContentExplorerLoginPanel.this.repaint();
+            PSContentExplorerLoginPanel.this.setFocusable(true);
             m_statusBar.repaint();
          }
 
@@ -568,6 +541,12 @@ public class PSContentExplorerLoginPanel extends JFrame
    {
       this.applet = applet;
       m_login.setEnabled(true);
+   }
+
+   private static String getDefaultLocale(){
+      Locale current = Locale.getDefault();
+
+      return current.getLanguage().concat("_").concat(current.getCountry());
    }
 
    //////////////////////////////////////////////////////////////////////////////

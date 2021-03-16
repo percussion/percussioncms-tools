@@ -104,7 +104,7 @@ public class PSContentExplorerHelper
       parameters.put("helpset_file", "../Docs/Rhythmyx/Business_Users/Content_Explorer_Help.hs");
       parameters.put("sys_cxinternalpath", "");
       parameters.put("sys_cxdisplaypath", "");
-      parameters.put("TYPE", "application/x-java-applet;version=1.5.0_12");
+      parameters.put("TYPE", "application/x-java-applet;version=1.8.0_12");
       parameters.put("MAYSCRIPT", "true");
       parameters.put("NAME", "ContentExplorerApplet");
       parameters.put("ID", "ContentExplorerApplet");
@@ -128,7 +128,7 @@ public class PSContentExplorerHelper
       parameters.put("OPTIONS_URL", "../sys_cxSupport/options.xml");
       parameters.put("MENU_URL", "../sys_cxDependencyTree/DependencyTreeMenu.html");
       parameters.put("NAV_URL", "../sys_cx/ContentExplorer.html");
-      parameters.put("TITLE", "Rhythmyx Impact Analysis");
+      parameters.put("TITLE", "Impact Analysis");
       parameters.put("sys_cxinternalpath", "");
       parameters.put("sys_cxdisplaypath", "");
       parameters.put("NAME", "ContentExplorerApplet");
@@ -158,7 +158,7 @@ public class PSContentExplorerHelper
       parameters.put("ID", "ContentExplorerApplet");
       parameters.put("HEIGHT", "320");
       parameters.put("WIDTH", "782");
-      parameters.put("POPUP_TITLE", "Rhythmyx- Active Assembly for Documents");
+      parameters.put("POPUP_TITLE", "Active Assembly for Documents");
       
       return parameters;
 

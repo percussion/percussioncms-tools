@@ -332,7 +332,7 @@ public class PSAboutDialog extends JDialog
    /**
     * The constant for percussion home page url.
     */
-   public static final String PERCUSSION_URL = "http://www.percussion.com";
+   public static final String PERCUSSION_URL = "https://www.percussion.com";
 
    /**
     * Various public constant strings

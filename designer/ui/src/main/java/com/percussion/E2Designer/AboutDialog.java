@@ -227,7 +227,7 @@ public class AboutDialog extends PSDialog
     */
    JLabel m_labelUrl = null;
 
-   public static final String sPERCUSSION_URL = "http://www.percussion.com";
+   public static final String sPERCUSSION_URL = "https://www.percussion.com";
 
   // about dialog size
   private ImageIcon m_icon = new ImageIcon(getClass().getResource(getResources().getString("gif_about")));
