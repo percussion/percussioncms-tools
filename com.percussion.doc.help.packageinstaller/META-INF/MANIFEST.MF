@@ -7,4 +7,5 @@ Bundle-Activator: com.percussion.doc.packageinstaller.PackageInstallerHelpPlugin
 Bundle-Vendor: Percussion Software
 Bundle-Localization: plugin
 Eclipse-AutoStart: true
+Eclipse-BundleShape: dir
 

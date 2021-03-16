@@ -237,7 +237,7 @@ public class PSJavaHelp
           */
          if( helpInst.m_helpIDToFileMap == null || isTopicID)
          {
-            System.out.println("using supplied help id as topic id" + helpID);
+            System.out.println("using supplied help id as topic id " + helpID);
             helpTopicID = helpID;
          }
          else
@@ -272,7 +272,7 @@ public class PSJavaHelp
       catch(BadIDException e)
       {
          System.out.println("Invalid ID " + e.getID());
-/*         java.util.Enumeration ids = e.getHelpSet().getCombinedMap().getAllIDs();
+        java.util.Enumeration ids = e.getHelpSet().getCombinedMap().getAllIDs();
          for (; ids.hasMoreElements(); )
          {
             System.out.println(ids.nextElement().toString());
@@ -282,7 +282,7 @@ public class PSJavaHelp
          for (; ids.hasMoreElements(); )
          {
             System.out.println("Map - " + ids.nextElement().toString());
-         }        */
+         }
 
          //Requested Help Topic is not found in  helpset file
          showErrorDialog( getResourceString("noHelp"),
@@ -406,7 +406,7 @@ public class PSJavaHelp
       // This may be called before initialization
       if (m_helpSetURL == null) return null;
       
-      if (m_hbroker == null)
+      if (m_hbroker == null || m_hbroker.getHelpSet()==null)
       {
          createHelpSet();
       }
@@ -429,11 +429,11 @@ public class PSJavaHelp
          url = new URL(m_helpSetURL);
          hs = new HelpSet(loader, url);
          System.out.println("Helpset URL is " + hs.getHelpSetURL());
-/*         java.util.Enumeration ids = hs.getLocalMap().getAllIDs();
+        java.util.Enumeration ids = hs.getLocalMap().getAllIDs();
          for (; ids.hasMoreElements(); )
          {
             System.out.println("Map - " + ids.nextElement().toString());
-         }           */
+         }
          m_hbroker = hs.createHelpBroker();
       }
       catch(MalformedURLException me)

@@ -27,11 +27,7 @@ import de.byteaction.velocity.vaulttec.ui.model.ModelTools;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -126,7 +122,7 @@ public class VelocityEditor extends TextEditor
 
    private static DTD dtd = null;
 
-   public static final Map<String, String> ms_taginfomap = new HashMap<String, String>(
+   public static final Map<String, String> ms_taginfomap = new HashMap<>(
          100);
    static
    {

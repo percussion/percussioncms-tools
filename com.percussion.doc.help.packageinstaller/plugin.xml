@@ -18,16 +18,10 @@
 
 <plugin
    id="com.percussion.doc.help.packageinstaller"
-   name="Help Plug-in"
-   version="1.0.0"
-   provider-name="PERCUSSION"
+   name="Percussion Package Installer Help Plugin"
+   version="8.0.2.qualifier"
+   provider-name="Percussion Software, Inc."
    class="com.percussion.doc.packageinstaller.PackageInstallerHelpPlugin">
-
-   <runtime>
-      <library name="doc.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
 
    <requires>
       <import plugin="org.eclipse.ui"/>
@@ -39,7 +33,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="com.percussion.doc.help.PackageInstaller"
-            name="Percussion Development Tools">
+            name="Percussion Package Installer">
       </product>
    </extension>
    <extension point="org.eclipse.help.toc">

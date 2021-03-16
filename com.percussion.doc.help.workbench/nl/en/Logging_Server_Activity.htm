@@ -1,0 +1,52 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Logging server activity </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="Debugging_Rhythmyx_Applications.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="Log_Database.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h4 class="heading4">Logging server activity</h4>
+<p class="bodytext">Three forms of logging are available for server activity in Rhythmyx.</p>
+<ul class="listbullet"><li class="listbullet">Basic server activity is output to a console.  This output is saved in a file (<code class="monospace">consoleout.txt</code>), which is stored in the Rhythmyx root directory.  You can use this file to track basic server activity.  Percussion Software Technical Support may request a copy of this file when providing assistance.</li><li class="listbullet">A detailed server log is maintained internally.  You can configure the level of detail in this log in the Rhythmyx Server Administrator.  The following levels of logging are available:<ul class="listbullet2"><li class="listbullet2">Errors - Log errors that occur during processing. Define this setting to help resolve problems.</li><li class="listbullet2">Server startup and shutdown - Logs the startup and shutdown of the server.</li><li class="listbullet2">Application startup and shutdown - Logs when applications start up and shutdown.</li><li class="listbullet2">Application statistics at shutdown - Logs the time the application is active, events it processes, and performance statistics.</li><li class="listbullet2">Basic user activity - Logs the session id, username, and request URL for each request and the host address of the requestor.</li><li class="listbullet2">Full user activity - Logs all basic and detailed user activity and any additional information encountered while processing the request, such as SQL statements that are completed.</li><li class="listbullet2">Detailed user activity - Logs basic user activity information, and the input XML document, HTML parameters, and request statistics.</li><li class="listbullet2">Multiple handler - For multiple request handlers, logs a message for each resource that matches the request criteria. The first resource that matches the request criteria processes it, but Rhythmyx checks subsequent resources. Use only for debugging purposes.<p class="listcontinue">You can request the output of this internal log from the Rhythmyx Server Administrator.  To retrieve the output of this log:</p>
+</li></ul><ol class="listnumber2"><li class="listnumber2">On the Rhythymyx Server Administrator, click the Logging tab and then the View tab.</li><li class="listnumber2">(Optional) Specify query options and enter dates and times. Logging data is very detailed so you may want to specify a small time interval to limit the amount of data returned.</li><li class="listnumber2">Click the [<strong class="buttons">Get it</strong>] button. The Rhythmyx Server Administrator will popup a new window with the output you requested.<p class="listcontinue2">NOTE:  The internal logger stores log information in an internal database.  If for some reason this database is unavailable, Rhythmyx writes log information to an XML file (log.xml) stored at the root of the Rhythmyx installation.</p>
+</li></ol></li><li class="listbullet">Direct logging through Log4j is typically used for extensions and certain other Java classes (typically classes that begin with the prefix PS).  For details about Log4j, see <object classid="java:com.sun.java.help.impl.JHSecondaryViewer"><param name="content" value="http://logging.apache.org/log4j"><param name="viewerActivator" value="javax.help.LinkLabel"><param name="viewerStyle" value="javax.help.SecondaryWindow"><param name="viewerSize" value="800,800"><param name="viewerLocation" value="100,100"><param name="viewerName" value=""><param name="text" value="http://logging.apache.org/log4j"></object>.  The default Log4j configuration file is stored in  <code class="monospace">rxconfig/Server/rxlogger.properties</code>.  This file includes extensive comments describing the default configuration.  Logging for the following parameters is available through Log4j:<ul class="listbullet2"><li class="listbullet2">sys_contentid</li><li class="listbullet2">sys_revision</li><li class="listbullet2">sys_authtype</li><li class="listbullet2">sys_context</li><li class="listbullet2">sys_community</li></ul></li></ul><p class="bodytext"></p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">In This Section</p><p class="relateditem"><a href="Log_Database.htm" target="_self">Log Database</a></p></td>
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="Debugging_Rhythmyx_Applications.htm" target="_self">Debugging Rhythmyx Applications</a></p><p class="relateditem"><a href="Tracing.htm" target="_self">Tracing</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

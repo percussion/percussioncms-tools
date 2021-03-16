@@ -39,10 +39,11 @@
             <includes>
                 <include>plugin.xml</include>
                 <include>toc.xml</include>
+                <include>map.jhm</include>
             </includes>
         </resource>
         <resource>
-            <directory>src/main/resources</directory>
+            <directory>nl</directory>
             <includes>
                 <include>**/*</include>
             </includes>

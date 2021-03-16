@@ -40,6 +40,14 @@
                 <directory>.</directory>
                 <includes>
                     <include>plugin.xml</include>
+                    <include>toc.xml</include>
+                    <include>map.jhm</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>nl</directory>
+                <includes>
+                    <include>**/*</include>
                 </includes>
             </resource>
         </resources>

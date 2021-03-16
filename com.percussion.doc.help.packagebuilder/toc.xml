@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?><toc label="Percussion Package Builder Help"><topic label="About the Package Builder Tool" href="19855.htm"/><topic label="Connecting to Servers" href="19856.htm"><topic label="Connections Manager Dialog" href="19857.htm"/><topic label="Connecting to a Server" href="19867.htm"/><topic label="Defining a New Server Connection" href="19858.htm"/><topic label="Modifying a Server Connection" href="19859.htm"/><topic label="Deleting a Server Connection" href="19860.htm"/></topic><topic label="Package Descriptor List Dialog" href="19871.htm"/><topic label="Defining Descriptors" href="19869.htm"><topic label="Descriptor Definition Dialog" href="19872.htm"><topic label="Descriptor Definition Dialog General Tab" href="19873.htm"/><topic label="Descriptor Definition Dialog Selection Tab" href="19874.htm"/><topic label="Descriptor Definition Dialog Dependencies Tab" href="19875.htm"/></topic><topic label="Creating a Descriptor" href="19880.htm"/><topic label="Modifying a Descriptor" href="19881.htm"/><topic label="Deleting a Descriptor" href="19882.htm"/><topic label="Generating a Configuration Definition File" href="19883.htm"/><topic label="Exporting a Descriptor Summary" href="19884.htm"/></topic><topic label="Building Packages" href="19870.htm"/></toc>
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Percussion Package Builder Help">
+    <topic label="About the Package Builder Tool" href="19855.htm"/>
+    <topic label="Connecting to Servers" href="19856.htm">
+        <topic label="Connections Manager Dialog" href="19857.htm"/>
+        <topic label="Connecting to a Server" href="19867.htm"/>
+        <topic label="Defining a New Server Connection" href="19858.htm"/>
+        <topic label="Modifying a Server Connection" href="19859.htm"/>
+        <topic label="Deleting a Server Connection" href="19860.htm"/>
+    </topic>
+    <topic label="Package Descriptor List Dialog" href="19871.htm"/>
+    <topic label="Defining Descriptors" href="19869.htm">
+        <topic label="Descriptor Definition Dialog" href="19872.htm">
+            <topic label="Descriptor Definition Dialog General Tab" href="19873.htm"/>
+            <topic label="Descriptor Definition Dialog Selection Tab" href="19874.htm"/>
+            <topic label="Descriptor Definition Dialog Dependencies Tab" href="19875.htm"/>
+        </topic><topic label="Creating a Descriptor" href="19880.htm"/>
+        <topic label="Modifying a Descriptor" href="19881.htm"/>
+        <topic label="Deleting a Descriptor" href="19882.htm"/>
+        <topic label="Generating a Configuration Definition File" href="19883.htm"/>
+        <topic label="Exporting a Descriptor Summary" href="19884.htm"/>
+    </topic>
+    <topic label="Building Packages" href="19870.htm"/>
+</toc>
