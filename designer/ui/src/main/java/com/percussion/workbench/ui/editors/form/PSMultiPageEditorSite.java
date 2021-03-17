@@ -79,7 +79,7 @@ public class PSMultiPageEditorSite implements IEditorSite
        this.m_editor = editor;
        
        final IServiceLocator parentServiceLocator = multiPageEditor.getSite();
-       m_serviceLocator = new ServiceLocator(parentServiceLocator);
+       m_serviceLocator = new ServiceLocator(parentServiceLocator,null,null);
 
        initializeDefaultServices();
    }
