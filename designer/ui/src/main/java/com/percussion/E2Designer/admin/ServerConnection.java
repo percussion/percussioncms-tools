@@ -106,7 +106,6 @@ public class ServerConnection implements IConnectionSource
             m_res.getString("notAuthorized") + " " + server,
             m_res.getString("error"), JOptionPane.ERROR_MESSAGE);
 
-         e.printStackTrace();
       }
       catch (PSAuthenticationFailedException e)
       {
@@ -114,7 +113,7 @@ public class ServerConnection implements IConnectionSource
                                        Util.cropErrorMessage(e.getMessage()),
                                        m_res.getString("error"),
                                         JOptionPane.ERROR_MESSAGE);
-         throw e;
+
       }
         catch (PSServerException e)
       {
@@ -122,12 +121,17 @@ public class ServerConnection implements IConnectionSource
                                     m_res.getString("servererror") + " (" + server + ")",
                                                     m_res.getString("error"),
                                         JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
 
-         e.printStackTrace();
       }
       catch (Exception e)
       {
-         e.printStackTrace();
+          JOptionPane.showMessageDialog(null,
+                  m_res.getString("servererror") + " (" + server + ")",
+                  m_res.getString("error"),
+                  JOptionPane.ERROR_MESSAGE);
+          e.printStackTrace();
+          return false;
       }
 
       return false;

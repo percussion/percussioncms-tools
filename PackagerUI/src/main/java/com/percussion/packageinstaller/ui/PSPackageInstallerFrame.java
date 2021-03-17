@@ -11,7 +11,6 @@ package com.percussion.packageinstaller.ui;
 
 import com.percussion.deployer.client.IPSDeployJobControl;
 import com.percussion.deployer.client.PSDeploymentManager;
-import com.percussion.deployer.error.IPSDeploymentErrors;
 import com.percussion.deployer.error.PSDeployException;
 import com.percussion.deployer.objectstore.PSArchive;
 import com.percussion.deployer.objectstore.PSArchiveDetail;
@@ -23,10 +22,12 @@ import com.percussion.deployer.objectstore.PSImportPackage;
 import com.percussion.deployer.objectstore.PSValidationResult;
 import com.percussion.deployer.objectstore.PSValidationResults;
 import com.percussion.packageinstaller.ui.managers.PSInstallerServerConnectionManager;
+import com.percussion.packager.ui.PSPackagerClient;
 import com.percussion.packager.ui.PSResourceUtils;
 import com.percussion.packager.ui.PSUiUtils;
 import com.percussion.packager.ui.data.PSServerRegistration;
 import com.percussion.packagerhelp.PSEclHelpManager;
+import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.utils.collections.PSMultiValueHashMap;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang.StringUtils;
@@ -404,19 +405,29 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
 
          try
          {
-            connMgr.initConnection(server);
+           boolean check = connMgr.initConnection(server);
+           //If User Cancelled Connection then return
+            if(check == true){
+               setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+               return;
+            }
+
+         }catch(PSAuthenticationFailedException e){
+            JOptionPane.showMessageDialog(PSPackagerClient.getFrame(), PSResourceUtils.getCommonResourceString("invalidCredentials"));
+            boolean check = connMgr.initConnection(server,false);
+            //If User Cancelled Connection then return
+            if(check == true){
+               setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+               return;
+            }
          }
          catch (Exception e)
          {
-            if(e.getMessage().startsWith("An unexpected error has occurred:"))
-            {
-               throw new PSDeployException(
-                  IPSDeploymentErrors.UNABLE_TO_CONNECT_TO_SERVER);
-            }
-            else
-            {
-               throw e;
-            }
+            JOptionPane.showMessageDialog(PSPackagerClient.getFrame(), "Unable to connect to server");
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            e.printStackTrace();
+            return;
+
          }         
          
          connMgr.saveServerRegistration(server);

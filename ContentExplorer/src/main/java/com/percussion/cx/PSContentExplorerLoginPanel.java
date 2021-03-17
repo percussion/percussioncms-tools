@@ -26,6 +26,34 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 
+import com.percussion.E2Designer.LoginDialog;
+import com.percussion.E2Designer.UTFixedPasswordField;
+import com.percussion.E2Designer.UTFixedTextField;
+import com.percussion.E2Designer.UTMnemonicLabel;
+import com.percussion.E2Designer.Util;
+import com.percussion.E2Designer.admin.AppletMainDialog;
+import com.percussion.E2Designer.admin.StatusBar;
+import com.percussion.border.PSFocusBorder;
+import com.percussion.util.PSProperties;
+import com.percussion.webservices.faults.PSContractViolationFault;
+import com.percussion.webservices.faults.PSNotAuthenticatedFault;
+import org.apache.axis.AxisFault;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
+
 /**
  * The LoginPanel creates the applets/applications first dialog shown to the
  * user. It askes for server name, user Id and password and provides a login
@@ -336,22 +364,26 @@ public class PSContentExplorerLoginPanel extends JFrame
          if (StringUtils.isNotEmpty(m_url.getText()))
          {
             URI uri = new URI(m_url.getText());
-            protocol = uri.getScheme();
-            host = uri.getHost();
-            int prt = uri.getPort();
-            if (prt == -1)
-            {
-               port = protocol.equalsIgnoreCase("https") ? "443" : "80";
+            if(uri != null) {
+               protocol = uri.getScheme();
+               host = uri.getHost();
+               int prt = uri.getPort();
+               if (prt == -1 && protocol != null) {
+                  port = protocol.equalsIgnoreCase("https") ? "443" : "80";
+               } else {
+                  port = String.valueOf(prt);
+               }
             }
-            else
-               port = String.valueOf(prt);
 
          }
 
       }
       catch (URISyntaxException e)
       {
-         throw new IllegalArgumentException("Cannot login Invalid url " + m_url.getText());
+         JOptionPane.showMessageDialog(this,  Util.cropErrorMessage("Invalid URI. Please correct URI"),
+                 m_res.getString("error"), JOptionPane.ERROR_MESSAGE);
+         this.setCursor(getCursor().getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        return;
       }
 
       m_parent.setParameter("serverName", host);
@@ -408,7 +440,6 @@ public class PSContentExplorerLoginPanel extends JFrame
       {
 
          private volatile String errorMessage = "";
-
 
          @Override
          protected Boolean doInBackground() throws Exception

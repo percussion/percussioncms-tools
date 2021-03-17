@@ -17,11 +17,10 @@ import com.percussion.E2Designer.UTFixedTextField;
 import com.percussion.E2Designer.UTMnemonicLabel;
 import com.percussion.E2Designer.UserConfig;
 import com.percussion.E2Designer.Util;
+import com.percussion.UTComponents.UTFixedButton;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
-import com.percussion.util.PSFormatVersion;
 import com.percussion.util.PSProperties;
-import com.percussion.UTComponents.UTFixedButton;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -388,50 +387,40 @@ public class LoginPanel extends JPanel
 
          String protocol = m_useSSL.isSelected() ? "https" : "http";
 
+         if (protocol == null || protocol.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Protocol cannot be Null",
+                    m_res.getString("error"),
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+         }
+
+         if (serverName == null || serverName.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Server cannot be Null",
+                    m_res.getString("error"),
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+         }
+         if (m_userId.getText() == null || m_userId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "UserId  cannot be Null",
+                    m_res.getString("error"),
+                    JOptionPane.ERROR_MESSAGE);
+            return ;
+         }
+         if (m_password.getText() == null || m_password.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Password  cannot be Null",
+                    m_res.getString("error"),
+                    JOptionPane.ERROR_MESSAGE);
+            return ;
+         }
+
+
          if (m_connection.login(serverName, m_userId.getText(),
              m_password.getText(), protocol))
          {
-            //**************** Do not check version compatibility ********************
-            // check the version to be sure we support it
- //           PSFormatVersion serverVersion =
- //              m_connection.getConnection().getServerVersion();
- //           PSFormatVersion clientVersion =
- //              new PSFormatVersion("com.percussion.E2Designer");
-
-
-//            if (serverVersion == null ||
-//               !m_connection.getConnection().checkVersionCompatibility(
-//                  clientVersion))
-//            {
-//               String strServerVersion;
-//               String msg;
-//               if (serverVersion == null)
-//               {
-//                  strServerVersion = E2Designer.getResources().getString(
-//                     "UnknownServerVersion");
-//               }
-//               else
-//                  strServerVersion = serverVersion.getVersionString();
-//
-//               msg = "InterfaceMismatch";
-//               String msgPattern = E2Designer.getResources().getString( msg );
-//               Object[] params = { strServerVersion,
-//                  new Integer(serverVersion.getInterfaceVersion()).toString()};
-//
-//               JOptionPane.showMessageDialog(this,
-//                  MessageFormat.format( msgPattern, params ),
-//                  E2Designer.getResources().getString( "VersionMismatchTitle" ),
-//                  JOptionPane.ERROR_MESSAGE);
-//
-//               if (!m_applet)
-//               {
-//                  m_connection.logout();
-//                  // close the main application
-//                  System.exit(0);
-//               }
-//               else
-//                  throw new UserCancelledException();
-//            }
 
             m_statusBar.setStatusText(m_res.getString("connectedStatus") +
                serverName);
