@@ -185,8 +185,8 @@ public class PSDeploymentServerConnection
       m_port  = port;
       m_uid = userid;
       m_password = password == null ? "" : password;
-     // if (!isPwdEncrypted)
-      //   m_password = encryptPwd(m_uid, m_password);
+      if (!isPwdEncrypted)
+         m_password = encryptPwd(m_uid, m_password);
 
       // create the connection object
       try
@@ -195,7 +195,7 @@ public class PSDeploymentServerConnection
          m_conn.setContext(this);  // associate cookies with this instance
          m_conn.setAllowUserInteraction(false);
          m_conn.setTimeout(0);  // no timeout
-         m_conn.addBasicAuthorization("", m_uid, m_password);
+         m_conn.addBasicAuthorization("", m_uid, getPassword(false));
       }
       catch (ProtocolNotSuppException e)
       {
@@ -224,19 +224,7 @@ public class PSDeploymentServerConnection
             IPSDeploymentErrors.SERVER_RESPONSE_ELEMENT_INVALID, args);
       }
 
-      // The client's deployment version must be greater than or equal to the
-      // server's.  This allows forward compatiblity to be handled by the
-      // server.
-	  
-	  //This will have to be reworked once we allow remote install of the package manager for cougar.
-	  // It will need to know the difference of cougar and rhythmyx
-      //if (deployInterface >= DEPLOYMENT_INTERFACE_VERSION)
-      //{
-      //   m_isConnected = false;
-      //   throw new PSDeployException(IPSDeploymentErrors.SERVER_VERSION_INVALID,
-      //      m_version.getVersionString());
-      //}
-      
+
       String licensed = root.getAttribute("licensed");
       if ((licensed != null) && (licensed.trim().length() > 0))
          m_bLicensed = "yes".equalsIgnoreCase(licensed.trim());
@@ -258,15 +246,7 @@ public class PSDeploymentServerConnection
          throw new PSDeployException(
             IPSDeploymentErrors.SERVER_RESPONSE_ELEMENT_INVALID, args);
       }
-      //This will have to be reworked once we allow remote install of the package manager for cougar.
-	  // It will need to know the difference of cougar and rhythmyx
-      // currently versions prior to 6.0 are not supported
-      //if (m_version.getMajorVersion() < 6)
-      //{
-      //   m_isConnected = false;
-      //   throw new PSDeployException(IPSDeploymentErrors.SERVER_VERSION_INVALID,
-      //      m_version.getVersionString());
-      //}      
+
 
       Element repositoryEl = tree.getNextElement(PSDbmsInfo.XML_NODE_NAME,
          PSXmlTreeWalker.GET_NEXT_ALLOW_SIBLINGS);
@@ -1056,8 +1036,8 @@ public class PSDeploymentServerConnection
     */
    public String getPassword(boolean encrypted)
    {
-      return m_password;
-     // return encrypted ? m_password : decryptPwd(m_uid, m_password);
+
+      return encrypted ? m_password : decryptPwd(m_uid, m_password);
    }
 
    /**
@@ -1101,16 +1081,9 @@ public class PSDeploymentServerConnection
          return "";
 
       String key = uid == null || uid.trim().length() == 0 ? PSLegacyEncrypter.INVALID_DRIVER() :
-         uid;
+              uid;
 
-      try {
-         return PSEncryptor.getInstance().encrypt(pwd);
-      } catch (PSEncryptionException e) {
-         ms_log.error("Error encrypting password: {} " + e.getMessage());
-         ms_log.debug(e.getMessage(),e);
-         return "";
-      }
-
+      return PSCryptographer.encrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
    }
 
    /**
@@ -1134,7 +1107,12 @@ public class PSDeploymentServerConnection
       try {
          return PSEncryptor.getInstance().decrypt(pwd);
       } catch (PSEncryptionException e) {
-         return PSCryptographer.decrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
+         try {
+            return PSCryptographer.decrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
+         }catch (Exception ex){
+            System.out.println("Error: Pwd Decryption Failed " + ex.getMessage());
+            return "";
+         }
       }
 
    }

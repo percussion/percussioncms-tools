@@ -93,10 +93,8 @@ public class SecurityRolePanel extends JPanel implements ITabDataHelper
 
       catch (Exception se)
       {
-         se.printStackTrace();
-         JOptionPane.showMessageDialog(null, Util.cropErrorMessage(
-            se.getLocalizedMessage()), ms_res.getString("error"),
-            JOptionPane.ERROR_MESSAGE);
+         Util.showStackTraceDialog(se,ms_res.getString("error"),Util.cropErrorMessage(
+                  se.getLocalizedMessage()) );
       }
 
       initPanel();

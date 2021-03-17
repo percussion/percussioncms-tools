@@ -57,6 +57,7 @@
 package com.percussion.E2Designer.admin;
 
 import com.percussion.E2Designer.UTFixedTextField;
+import com.percussion.E2Designer.Util;
 import com.percussion.design.objectstore.PSServerConfiguration;
 import org.apache.commons.lang.StringUtils;
 
@@ -124,12 +125,7 @@ public class SettingsPerformancePanel extends JPanel implements ITabDataHelper
       }
       catch (IllegalArgumentException exc)
       {
-         JOptionPane.showMessageDialog(null,
-         sm_res.getString("missingnumber"),
-         sm_res.getString("error"),
-         JOptionPane.ERROR_MESSAGE);
-
-         exc.printStackTrace();
+         Util.showStackTraceDialog(exc,sm_res.getString("error"),sm_res.getString("missingnumber") );
       }
       catch (Exception exc)
       {

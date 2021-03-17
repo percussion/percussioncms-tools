@@ -62,7 +62,7 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
    private void init()
    {
       setTitle("Percussion Package Installer");
-      setResizable(false);
+      setResizable(true);
       URL imageFile = getClass().getResource(getResourceString("image.icon16"));
       if (imageFile != null)
       {
@@ -74,7 +74,7 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
       
       getContentPane().add(mainPanel);
       displayView(Views.SELECTION);      
-      setSize(600, 680);
+      setSize(630, 700);
       PSUiUtils.center(this);
    }
    

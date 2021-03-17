@@ -573,11 +573,11 @@ public class PSDbmsInfo implements IPSDeployComponent
       if (pwd == null || pwd.trim().length() == 0)
          return "";
 
-      try {
-         return PSEncryptor.getInstance().encrypt(pwd);
-      } catch (PSEncryptionException e) {
-         return "";
-      }
+      String key = uid == null || uid.trim().length() == 0
+              ? PSLegacyEncrypter.INVALID_DRIVER()
+              : uid;
+
+      return PSCryptographer.encrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
    }
 
    /**
@@ -600,11 +600,7 @@ public class PSDbmsInfo implements IPSDeployComponent
             ? PSLegacyEncrypter.INVALID_DRIVER()
             : uid;
 
-      try {
-         return PSEncryptor.getInstance().decrypt(pwd);
-      } catch (PSEncryptionException e) {
-         return PSCryptographer.decrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
-      }
+      return PSCryptographer.decrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
 
    }
 

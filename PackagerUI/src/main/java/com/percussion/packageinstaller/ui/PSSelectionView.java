@@ -51,20 +51,27 @@ public class PSSelectionView extends JPanel implements DocumentListener
    public PSServerRegistration getServerRegistration()
    {
       Object host = m_hostField.getSelectedItem();
-      String port = m_portField.getText();
+      String ports = m_portField.getText();
       String user = m_userField.getText();
-      String password = new String(m_passwordField.getPassword());
-//      String password = PSDeploymentServerConnection.encryptPwd(
-//               user, rawPass);
+      String rawPass = new String(m_passwordField.getPassword());
+      String password = PSDeploymentServerConnection.encryptPwd(
+               user, rawPass);
+      int port = 0;
+      try {
+         port = Integer.parseInt(ports);
+      }catch (NumberFormatException ne){
+         System.out.println("Port should be a valid number :" + ports);
+         return null;
+      }
 
       boolean isSSL = m_useSSLBox.isSelected();
       
-      if(host == null || StringUtils.isBlank(port) ||
+      if(host == null || port == 0 ||
          StringUtils.isBlank(user))
          return null;
-            
+
       PSServerRegistration server = new PSServerRegistration(host.toString(),
-         Integer.parseInt(port),
+         port,
          user,
          password,
          true,

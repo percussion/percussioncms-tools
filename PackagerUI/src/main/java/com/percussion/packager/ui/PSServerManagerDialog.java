@@ -465,6 +465,7 @@ public class PSServerManagerDialog extends PSDialog implements ActionListener,
            PSPackagerClient.getErrorDialog().showErrorMessage(
               getResourceString("error.port.not.int"), 
               PSResourceUtils.getCommonResourceString("errorTitle"));
+           return false;
         }
         
       return true;

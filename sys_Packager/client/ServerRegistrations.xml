@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?><PSXServerRegistrations recentConns="">
   <PSXServerRegistration isDefault="no" name="percussioncm2.percussion.com" port="9992" useSSL="no"/>
+  <PSXServerRegistration isDefault="no" name="localhost" port="9992" useSSL="no"/>
 </PSXServerRegistrations>

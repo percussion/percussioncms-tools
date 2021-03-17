@@ -117,20 +117,12 @@ public class ServerConnection implements IConnectionSource
       }
         catch (PSServerException e)
       {
-         JOptionPane.showMessageDialog(null,
-                                    m_res.getString("servererror") + " (" + server + ")",
-                                                    m_res.getString("error"),
-                                        JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-
+          Util.showStackTraceDialog(e,m_res.getString("error"),m_res.getString("servererror") + " (" + server + ")" );
       }
       catch (Exception e)
       {
-          JOptionPane.showMessageDialog(null,
-                  m_res.getString("servererror") + " (" + server + ")",
-                  m_res.getString("error"),
-                  JOptionPane.ERROR_MESSAGE);
-          e.printStackTrace();
+          Util.showStackTraceDialog(e,m_res.getString("error"),m_res.getString("servererror") + " (" + server + ")" );
+          System.out.println("Login Failed Due to :" + e.getMessage());
           return false;
       }
 
@@ -153,11 +145,7 @@ public class ServerConnection implements IConnectionSource
       }
       catch (Exception e)
       {
-         JOptionPane.showMessageDialog(null,
-                                       m_res.getString("logoutFailed"),
-                                       m_res.getString("error"),
-                                       JOptionPane.ERROR_MESSAGE);
-         e.printStackTrace();
+          Util.showStackTraceDialog(e,m_res.getString("error"),m_res.getString("logoutFailed") );
       }
 
       // set this to null in all cases
