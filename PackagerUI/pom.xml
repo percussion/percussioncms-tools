@@ -65,7 +65,7 @@
       <dependency>
         <groupId>org.eclipse</groupId>
         <artifactId>org.eclipse.help.base</artifactId>
-        <version>3.3.1.v20070813_33x</version>
+        <version>3.5.3.v201102101200</version>
     </dependency>
 
       <!-- Logging -->
