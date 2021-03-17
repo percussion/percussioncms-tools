@@ -801,18 +801,13 @@ public class ModifyMemberListDialog extends PSDialog
       }
       catch (IOException e)
       {
-         e.printStackTrace();
-         JOptionPane.showMessageDialog(null,
-            Util.cropErrorMessage(
-            ms_res.getString("ioerror") + e.getLocalizedMessage()),
-            ms_dlgResource.getString("error"), JOptionPane.ERROR_MESSAGE);
+         Util.showStackTraceDialog(e,ms_dlgResource.getString("error"),Util.cropErrorMessage(
+                 ms_res.getString("ioerror") + e.getLocalizedMessage()));
       }
       catch (Exception e)
       {
-         e.printStackTrace();
-         JOptionPane.showMessageDialog(null,
-         Util.cropErrorMessage(e.getLocalizedMessage()),
-         ms_dlgResource.getString("error"), JOptionPane.ERROR_MESSAGE);
+         Util.showStackTraceDialog(e,ms_dlgResource.getString("error"),Util.cropErrorMessage(
+                 ms_res.getString("ioerror") + e.getLocalizedMessage()) );
       }
 
       return list;

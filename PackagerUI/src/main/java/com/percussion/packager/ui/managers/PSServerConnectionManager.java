@@ -18,6 +18,7 @@ import com.percussion.deployer.error.PSDeployException;
 import com.percussion.packager.ui.PSCredentialsDialog;
 import com.percussion.packager.ui.PSPackagerClient;
 import com.percussion.packager.ui.PSResourceUtils;
+import com.percussion.packager.ui.PSUiUtils;
 import com.percussion.packager.ui.data.PSServerRegistration;
 import com.percussion.packager.ui.data.PSServerRegistrations;
 import com.percussion.security.PSAuthenticationFailedException;
@@ -298,9 +299,10 @@ public class PSServerConnectionManager
          server.clearCredentials();
          return this.initConnection(server);
       }catch(Exception npe){
-         JOptionPane.showMessageDialog(PSPackagerClient.getFrame(), "Not able to connect to server");
-         npe.printStackTrace();
-         return false;
+         PSUiUtils.showStackTraceDialog(npe,"ERROR","Connection to Server Failed. Invalid Server Configurations/Credentials");
+         System.out.println("Connection to Server Failed Due to: " + npe.getMessage());
+         server.clearCredentials();
+         return this.initConnection(server);
       }
         return false;
       

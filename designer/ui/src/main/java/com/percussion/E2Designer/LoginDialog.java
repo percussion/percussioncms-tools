@@ -162,7 +162,7 @@ public class LoginDialog extends PSDialog /*implements ActionListener*/
       }
       catch (UnknownHostException e)
       {
-         e.printStackTrace();
+         Util.showStackTraceDialog(e,"ERROR","Connection to Server Failed. Invalid Server Configurations/Credentials");
       }
       return localHost;
    }

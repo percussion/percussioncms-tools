@@ -489,11 +489,7 @@ public class LoginPanel extends JPanel
       }
       catch (Exception e)
       {
-         e.printStackTrace();
-         JOptionPane.showMessageDialog(this,
-            Util.cropErrorMessage(e.getMessage()),
-            m_res.getString("error"), JOptionPane.ERROR_MESSAGE);
-         // close connection to server when error occurs
+         Util.showStackTraceDialog(e,"Error","Connection to Server Failed. Invalid Server Configurations/Credentials" );
          m_connection.logout();
          m_login.setEnabled(true);
       }
