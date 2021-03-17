@@ -30,7 +30,6 @@ public class PSDisplayFormComposite extends Composite
    /**
     * Create the composite
     * @param parent
-    * @param style
     */
    public PSDisplayFormComposite(Composite parent)
    {

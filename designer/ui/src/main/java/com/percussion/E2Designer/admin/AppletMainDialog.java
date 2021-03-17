@@ -104,10 +104,11 @@ public class AppletMainDialog extends JFrame
          helpSetURL = PSServerAdminApplet.m_helpSetURL;
       else
       {
+         String url = connection.getConnection().getProtocol() + "://" + connection.getServerName() + ":" + connection.getServerPort() + "/";
          String helpFile = ms_props.getProperty(
             PSServerAdminApplet.HELPSETFILE);
          //Attach the protocol based on the file location.
-         helpSetURL = PSJavaHelp.getHelpSetURL(helpFile);
+         helpSetURL = PSJavaHelp.getHelpSetURL(helpFile,true,url);
       }
 
       if(helpSetURL != null && helpSetURL.trim().length() != 0)
@@ -278,7 +279,7 @@ public class AppletMainDialog extends JFrame
       try
       {
          File file = PSProperties.getConfig(LoginPanel.ENTRY_NAME,
-         LoginPanel.PROPERTIES_FILENAME, LoginPanel.ADMIN_DIR);
+         LoginPanel.PROPERTIES_FILENAME, ".." +  File.separator + LoginPanel.ADMIN_DIR);
 
          props = new PSProperties (file.getAbsolutePath());
 
@@ -300,6 +301,10 @@ public class AppletMainDialog extends JFrame
       else
       {
          ms_props = new PSProperties();
+
+         //Set the default if the property file is not found.
+         ms_props.setProperty(PSServerAdminApplet.HELPSETFILE,
+                 PSServerAdminApplet.HELPSETFILE_PATH);
       }
     }
   }

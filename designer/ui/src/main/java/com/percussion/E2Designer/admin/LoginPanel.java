@@ -686,7 +686,7 @@ public class LoginPanel extends JPanel
     * Constant for the directory containing admin client configs.
     * Assumed to be relative to the Rx directory.
     */
-    public static final String ADMIN_DIR = "rxconfig/Administrator";
+    public static final String ADMIN_DIR = "rxconfig/Workbench";
 
     /**
      * Constant for default port number '9992'.

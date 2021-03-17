@@ -93,18 +93,29 @@
         <!-- Copy lib dir -->
         <echo message="Installing updated libraries..."/>
         <mkdir dir="${install.dir}/devtools/lib" />
-        <copy todir="${install.dir}/devtools/lib">
+        <copy todir="${install.dir}/devtools/lib" overwrite="true" failonerror="true" verbose="true">
             <fileset dir="${install.src}/devtools/lib">
                 <include name="**.jar"/>
             </fileset>
         </copy>
 
         <!-- Copy Scripts -->
-        <copy todir="${install.dir}/devtools">
+        <copy todir="${install.dir}/devtools" verbose="true" overwrite="true" failonerror="true" filtering="true">
             <fileset dir="${install.src}/devtools">
+                <exclude name="**/DevOptions.*" />
                 <include name="**/*.sh" unless="${isWindows}"/>
-                <include name="**/*.cmd" />
+                <include name="**/*.cmd" unless="${isMac}"/>
                 <include name="README.md"/>
+            </fileset>
+            <!-- Selector for DevOptions.* -->
+            <fileset dir="${install.src}/devtools">
+                <present present="srconly" targetdir="${install.dir}/devtools" />
+            </fileset>
+        </copy>
+
+        <copy todir="${install.dir}/rxconfig/Workbench" verbose="true" overwrite="false" failonerror="true" filtering="true">
+            <fileset dir="${install.src}/rxconfig/Workbench">
+                <include name="*.properties"/>
             </fileset>
         </copy>
 

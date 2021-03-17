@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 /**
  * PSServerAdminApplet provides the init, start and stop functions which will
  * be used from any applet container such as browsers. It tries to start with
- * the system look and feel. If this failes it comes up with th edefault look
+ * the system look and feel. If this failes it comes up with the default look
  * and feel.
  */
 ////////////////////////////////////////////////////////////////////////////////
@@ -264,5 +264,7 @@ public class PSServerAdminApplet extends JApplet
     * this application using JavaHelp viewer.
     */
    public static final String HELPSETFILE = "helpset_file";
+
+   public static final String HELPSETFILE_PATH= "/Rhythmyx/Docs/Rhythmyx/Server_Administrator/Rhythmyx_Server_Administrator.hs";
 }
 

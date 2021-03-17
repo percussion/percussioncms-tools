@@ -14,6 +14,8 @@
     <properties>
         <assembly-directory>${project.build.outputDirectory}/distribution</assembly-directory>
         <ant-installer>${assembly-directory}/rxconfig/Installer</ant-installer>
+        <rxconfig-directory>${assembly-directory}/rxconfig</rxconfig-directory>
+
         <devtools-directory>${assembly-directory}/devtools</devtools-directory>
         <lib-directory>${assembly-directory}/devtools/lib</lib-directory>
     </properties>
@@ -22,7 +24,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-ant</artifactId>
-            <version>8.0.2-SNAPSHOT</version>
+            <version>8.0.2.10</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
@@ -62,7 +64,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>8.0.2-SNAPSHOT</version>
+            <version>8.0.2.10</version>
         </dependency>
     </dependencies>
 <build>
@@ -81,6 +83,27 @@
                         <resources>
                             <resource>
                                 <directory>src/main/resources/scripts</directory>
+                                <filtering>true</filtering>
+                            </resource>
+                            <resource>
+                                <directory>../designer/ui/src/main/resources/default-config/rxconfig/Workbench</directory>
+                                <filtering>true</filtering>
+                            </resource>
+                        </resources>
+                        <useBuildFilters>true</useBuildFilters>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copy-workbench-resources</id>
+                    <phase>generate-resources</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${rxconfig-directory}/Workbench</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>../designer/ui/src/main/resources/default-config/rxconfig/Workbench</directory>
                                 <filtering>true</filtering>
                             </resource>
                         </resources>
@@ -119,7 +142,7 @@
                             <artifactItem>
                                 <groupId>com.percussion</groupId>
                                 <artifactId>rxutils</artifactId>
-                                <version>${project.version}</version>
+                                <version>8.0.2.10</version>
                                 <type>jar</type>
                                 <overWrite>true</overWrite>
                                 <outputDirectory>${ant-installer}</outputDirectory>
@@ -127,7 +150,7 @@
                             <artifactItem>
                                 <groupId>com.percussion</groupId>
                                 <artifactId>perc-ant</artifactId>
-                                <version>${project.version}</version>
+                                <version>8.0.2.10</version>
                                 <type>jar</type>
                                 <overWrite>true</overWrite>
                                 <outputDirectory>${ant-installer}</outputDirectory>
