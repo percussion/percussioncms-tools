@@ -69,9 +69,9 @@
                             <version>${project.parent.version}</version>
                         </dependency>
                         <dependency>
-                            <groupId>org.wso2.wsf</groupId>
+                            <groupId>org.eclipse</groupId>
                             <artifactId>org.eclipse.ui.workbench</artifactId>
-                            <version>3.3.0</version>
+                            <version>3.6.2.M20110210-1200</version>
                             <scope>provided</scope>
                         </dependency>
                         <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.core -->

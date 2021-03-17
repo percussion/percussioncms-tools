@@ -75,5 +75,6 @@
     <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.workbench.texteditor:3.6.1.r361_v20100714-0800" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.views:3.5.1.M20110202-0800" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.compare:3.5.101.R36x_v20100929-0800" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.workbench:3.6.2.M20110210-1200" level="project" />
   </component>
 </module>

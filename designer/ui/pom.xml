@@ -91,12 +91,6 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.wso2.wsf</groupId>
-            <artifactId>org.eclipse.ui.workbench</artifactId>
-            <version>3.3.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.eclipse.core</groupId>
             <artifactId>org.eclipse.core.expressions</artifactId>
             <version>3.4.501.v20131118-1915</version>
@@ -151,6 +145,11 @@
             <groupId>org.eclipse</groupId>
             <artifactId>org.eclipse.compare</artifactId>
             <version>3.5.101.R36x_v20100929-0800</version>
+        </dependency>
+       <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.workbench</artifactId>
+           <version>3.6.2.M20110210-1200</version>
         </dependency>
     </dependencies>
 
