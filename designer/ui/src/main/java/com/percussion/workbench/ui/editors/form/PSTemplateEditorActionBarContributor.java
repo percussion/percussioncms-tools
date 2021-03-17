@@ -1,12 +1,3 @@
-/******************************************************************************
- *
- * [ PSTemplateEditorActionBarContributor.java ]
- *
- * COPYRIGHT (c) 1999 - 2007 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
- *
- *****************************************************************************/
 package com.percussion.workbench.ui.editors.form;
 
 import org.eclipse.jface.action.Action;
@@ -22,6 +13,7 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.EditorActionBarContributor;
 import org.eclipse.ui.texteditor.ITextEditor;
 
@@ -82,9 +74,10 @@ public class PSTemplateEditorActionBarContributor
     */
    private void connectToEditor()
    {
-      if (getTabFolder() != null)
+      CTabFolder tab = getTabFolder();
+      if ( tab != null)
       {
-         getTabFolder().addSelectionListener(m_editorFolderSelectionListener);
+         tab.addSelectionListener(m_editorFolderSelectionListener);
          doContributeToMenu();
       }
    }
@@ -94,8 +87,9 @@ public class PSTemplateEditorActionBarContributor
     */
    private void disconnectFromEditor()
    {
-      if (getTabFolder() != null)
-         getTabFolder().removeSelectionListener(m_editorFolderSelectionListener);
+      CTabFolder tab = getTabFolder();
+      if (tab != null)
+         tab.removeSelectionListener(m_editorFolderSelectionListener);
    }
 
    /**
@@ -154,10 +148,10 @@ public class PSTemplateEditorActionBarContributor
          return;
       }
       final IEditorPart editor = getActiveEditor().getVisibleEditor();
-      final ITextEditor textEditor = editor == null
+      final TextEditor textEditor = editor == null
             ? null
-            : (ITextEditor) editor.getAdapter(ITextEditor.class);  
-      m_editorHelper.activateActionBars(textEditor);
+            : (TextEditor) editor.getAdapter(ITextEditor.class);
+      m_editorHelper.activateActionBars( textEditor);
    }
 
    /**

@@ -3,14 +3,12 @@
     <groupId>de.byteaction.velocity</groupId>
     <artifactId>de.byteaction.velocity.vaulttec.ui</artifactId>
     <packaging>eclipse-plugin</packaging>
-
     <parent>
         <groupId>com.percussion</groupId>
         <version>8.0.2-SNAPSHOT</version>
         <artifactId>tycho-root</artifactId>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
-
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -147,6 +145,36 @@
             <artifactId>text</artifactId>
             <version>3.3.0-v20070606-0010</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.core.resources</artifactId>
+            <version>3.6.1.R36x_v20110131-1630</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.ide</artifactId>
+            <version>3.6.2.M20101201-0800</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.editors</artifactId>
+            <version>3.6.1.r361_v20100825-0800</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.workbench.texteditor</artifactId>
+            <version>3.6.1.r361_v20100714-0800</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.views</artifactId>
+            <version>3.5.1.M20110202-0800</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.compare</artifactId>
+            <version>3.5.101.R36x_v20100929-0800</version>
         </dependency>
     </dependencies>
     <repositories>

@@ -132,7 +132,7 @@ public class PSContentExplorerMenuBar extends JMenuBar implements IPSSelectionLi
    /**
     * Notification event that the selection has changed in main view of applet.
     * Updates the default selection and context selection of the menu source if
-    * the supplied selection is an instance of {@link #PSNavigationalSelection},
+    * the supplied selection is an instance of {@link PSNavigationalSelection},
     * otherwise only context selection.
     * 
     * @param selection the selection object that represents the current

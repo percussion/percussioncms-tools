@@ -68,5 +68,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:swt:3.3.0-v3346" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:jface:3.3.0-I20070606-0010" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.core:commands:3.3.0-I20070605-0010" level="project" />
+    <orderEntry type="library" name="Maven: com.percussion:rxutils:8.0.2.10" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.core.resources:3.6.1.R36x_v20110131-1630" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.ide:3.6.2.M20101201-0800" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.editors:3.6.1.r361_v20100825-0800" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.workbench.texteditor:3.6.1.r361_v20100714-0800" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.views:3.5.1.M20110202-0800" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.compare:3.5.101.R36x_v20100929-0800" level="project" />
   </component>
 </module>

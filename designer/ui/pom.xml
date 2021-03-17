@@ -123,7 +123,7 @@
         <dependency>
             <groupId>jmock</groupId>
             <artifactId>jmock-cglib</artifactId>
-            <version>1.2.0</version>
+            <version>1.0.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -132,7 +132,26 @@
             <version>3.3.0-v20070606-0010</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.forms</artifactId>
+            <version>3.5.2.r36_v20100702</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.editors</artifactId>
+            <version>3.6.1.r361_v20100825-0800</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.workbench.texteditor</artifactId>
+            <version>3.6.1.r361_v20100714-0800</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.compare</artifactId>
+            <version>3.5.101.R36x_v20100929-0800</version>
+        </dependency>
     </dependencies>
 
 </project>

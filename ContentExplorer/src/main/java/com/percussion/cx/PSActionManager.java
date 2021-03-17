@@ -678,7 +678,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
    }
 
    /**
-    * The same as {@link #filter(PSMenuAction, PSSelection)}. In addition, this
+    * The same as {@link #filterMenuAction(PSMenuAction, PSSelection, boolean)}. In addition, this
     * will return a default "No Entries" action if the action is not visible to
     * the selected nodes.
     *

@@ -389,25 +389,25 @@ public class VelocityEditor extends TextEditor
    private VelocityOutlinePage fOutlinePage;
 
    /**
-    * {@link #setCompletionData(IFile)} for details. May be <code>null</code>
+    * {@link #setCompletionData(IResource)} for details. May be <code>null</code>
     * if not transmitted by invoker
     */
    public List<String[]> fVariableCompletions = null;
 
    /**
-    * {@link #setCompletionData(IFile)} for details. May be <code>null</code>
+    * {@link #setCompletionData(IResource)} for details. May be <code>null</code>
     * if not transmitted by invoker
     */
    public List<Object[]> fMethodCompletions = null;
 
    /**
-    * {@link #setCompletionData(IFile)} for details. May be <code>null</code>
+    * {@link #setCompletionData(IResource)} for details. May be <code>null</code>
     * if not transmitted by invoker
     */
    public List<String[]> fFieldCompletions = null;
    
    /**
-    * {@link #setCompletionData(IFile)} for details. May be <code>null</code>
+    * {@link #setCompletionData(IResource)} for details. May be <code>null</code>
     * if not transmitted by invoker
     */
    public List<String> fMacroCompletions = null;
@@ -602,7 +602,7 @@ public class VelocityEditor extends TextEditor
    /**
     * Get the outline page if requested.
     * 
-    * @see org.eclipse.core.runtime.IAdaptable.getAdapter(Class)
+    * @see org.eclipse.core.runtime.IAdaptable
     */
    public Object getAdapter(Class aClass)
    {
@@ -2196,7 +2196,7 @@ public class VelocityEditor extends TextEditor
     * i.e. #foo()
     * </ul>
     * 
-    * @param file
+    * @param file File
     */
    @SuppressWarnings("unchecked")
    private void setCompletionData(IResource file)
@@ -2230,9 +2230,9 @@ public class VelocityEditor extends TextEditor
    {
       final Object value =
             resource.getSessionProperty(new QualifiedName(KEY, subkey));
-      return value != null && value instanceof List
+      return value instanceof List
             ? (List) value
-            : Collections.EMPTY_LIST;
+            : Collections.emptyList();
    }
 
    /**

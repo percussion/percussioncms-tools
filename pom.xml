@@ -739,6 +739,13 @@
 
 
         </pluginManagement>
+        <extensions>
+            <extension>
+                <groupId>fi.yle.tools</groupId>
+                <artifactId>aws-maven</artifactId>
+                <version>1.4.1</version>
+            </extension>
+        </extensions>
     </build>
 <reporting>
     <plugins>
@@ -843,6 +850,12 @@
         <pluginRepository>
             <id>maven-central</id>
             <url>https://repo1.maven.org/maven2</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>yle-public</id>
+            <name>Yle public repository</name>
+            <url>https://maven.yle.fi/release</url>
+            <layout>default</layout>
         </pluginRepository>
     </pluginRepositories>
 
@@ -2462,7 +2475,7 @@
         </snapshotRepository>
         <repository>
             <id>percussion.s3.repo</id>
-            <url>s3://percussion-maven-repo/repositories/releases/</url>
+            <url>s3://percussion-maven-repo/repositories/releases</url>
         </repository>
     </distributionManagement>
 </project>

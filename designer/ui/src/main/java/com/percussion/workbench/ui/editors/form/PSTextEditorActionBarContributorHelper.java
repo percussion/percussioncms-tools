@@ -12,6 +12,7 @@ package com.percussion.workbench.ui.editors.form;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.SubActionBars;
+import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.editors.text.TextEditorActionContributor;
 import org.eclipse.ui.texteditor.ITextEditor;
 
@@ -49,7 +50,7 @@ public class PSTextEditorActionBarContributorHelper
     * @param textEditor if <code>null</code> this method deactivates the
     * contributions, otherwise enables them.
     */
-   public void activateActionBars(final ITextEditor textEditor)
+   public void activateActionBars(final TextEditor textEditor)
    {
       m_textEditorContributor.setActiveEditor(textEditor);
       if (textEditor != null) {

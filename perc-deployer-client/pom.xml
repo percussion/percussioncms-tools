@@ -44,12 +44,12 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>${project.parent.version}</version>
+            <version>8.0.2.10</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>${project.parent.version}</version>
+            <version>8.0.2.10</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>${project.parent.version}</version>
+            <version>8.0.2.10</version>
             <type>test-jar</type>
             <scope>test</scope>
             <classifier>tests</classifier>
@@ -139,7 +139,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>tablefactory</artifactId>
-            <version>${project.parent.version}</version>
+            <version>8.0.2.10</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

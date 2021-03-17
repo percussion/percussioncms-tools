@@ -67,12 +67,7 @@ public class PSContentExplorerFrame extends PSDesktopExplorerWindow implements A
     * The constuctor sets the applications main frame size and title. It adds a
     * new window listener to watch for closing events. Then it performs the same
     * initialization as a browser.
-    * @param port 
-    * @param host 
-    * @param protocol 
-    *
-    * @param applet the applet
-    * @param String pssessionid (can be blank
+    * @param uri
     */
    public PSContentExplorerFrame(URI uri)
    {

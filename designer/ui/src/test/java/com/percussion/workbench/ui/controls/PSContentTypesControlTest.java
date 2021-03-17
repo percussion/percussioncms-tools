@@ -45,7 +45,7 @@ public class PSContentTypesControlTest extends PSUiTestBase
    {
       final IPSReference ref1 = createContentTypeRef("ContentType1");
       final IPSReference ref2 = createContentTypeRef("ContentType2");
-      final Set<IPSReference> selectedContentTypes = new HashSet<IPSReference>();
+      final Set<IPSReference> selectedContentTypes = new HashSet<>();
       selectedContentTypes.add(ref1);
       selectedContentTypes.add(ref2);
 
@@ -58,14 +58,14 @@ public class PSContentTypesControlTest extends PSUiTestBase
             return selectedContentTypes;
          }
       };
-      final CGLIBCoreMock mockContentTypeModel = new CGLIBCoreMock(IPSContentTypeModel.class);
+      final CGLIBCoreMock mockContentTypeModel = new CGLIBCoreMock(IPSContentTypeModel.class,"Content Type Model");
       page.m_contentTypeModel = (IPSContentTypeModel) mockContentTypeModel
             .proxy();
       final PSUiAssemblyTemplate template = new PSUiAssemblyTemplate();
 
       // content types
       page.updateTemplate(template);
-      assertEquals(new HashSet<IPSReference>(selectedContentTypes),
+      assertEquals(new HashSet<>(selectedContentTypes),
             template.getNewContentTypes());
       
       mockContentTypeModel.verify();
