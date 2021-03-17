@@ -1,5 +1,7 @@
+**/hs_err_pid*.log
 **/Thumbs.db
 **/doc.jar
+**/rxBuild.log
 
 # random output file
 **/test-output.jar

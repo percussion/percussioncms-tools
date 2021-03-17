@@ -2256,7 +2256,7 @@ public class PSContentExplorerApplet extends JApplet implements IPSActionListene
     * the cursor to wait cursor, move the mouse outside the applet and come back
     * it gets reset to default cursor or some vague styled one.
     * <p>
-    * The logic here is very simple in which we do not depend on the intetrnal
+    * The logic here is very simple in which we do not depend on the internal
     * state of the cursor, rather we depend on our own flag that can be set and
     * reset in the beginning and ending of any lengthy operation. The run()
     * method of this class makes sure to set the cursor to the style of the

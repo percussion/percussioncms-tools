@@ -9,7 +9,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>8.0.2-SNAPSHOT</version>
+            <version>8.0.2.10</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -611,7 +611,7 @@
                         <dependency>
                             <groupId>com.percussion</groupId>
                             <artifactId>rxutils</artifactId>
-                            <version>${project.version}</version>
+                            <version>8.0.2.10</version>
                         </dependency>
                         <dependency>
                             <groupId>xerces</groupId>
@@ -693,12 +693,7 @@
                         <dependency>
                             <groupId>com.percussion</groupId>
                             <artifactId>build-tools</artifactId>
-                            <version>${project.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.percussion</groupId>
-                            <artifactId>perc-security-utils</artifactId>
-                            <version>${project.version}</version>
+                            <version>8.0.2.10</version>
                         </dependency>
                         <dependency>
                             <groupId>com.h3xstream.findsecbugs</groupId>
@@ -1386,34 +1381,15 @@
                 <artifactId>myfaces-impl</artifactId>
                 <version>${myfaces.version}</version>
             </dependency>
-
-
-            <!-- https://mvnrepository.com/artifact/net.sf.saxon/saxon -->
-            <!-- <dependency> package now net.sf.saxon have to be aware of
-                license changes also. <groupId>net.sf.saxon</groupId> <artifactId>saxon</artifactId>
-                <version>7.9.1</version> </dependency> -->
-            <!-- https://mvnrepository.com/artifact/com.icl.saxon/saxon -->
-            <!-- https://mvnrepository.com/artifact/saxon/saxon -->
             <dependency>
                 <groupId>saxon</groupId>
                 <artifactId>saxon</artifactId>
                 <version>6.5.3</version>
             </dependency>
-
-
-            <!-- https://mvnrepository.com/artifact/org.openrdf.sesame/sesame-model
-                2.4.0 not in maven dependent on old version of any23 -->
-
-            <!-- <dependency> <groupId>org.openrdf.sesame</groupId> <artifactId>sesame-model</artifactId>
-                <version>2.6.10</version> </dependency> -->
-            <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
-
             <dependency>
                 <groupId>org.apache.solr</groupId>
                 <artifactId>solr-solrj</artifactId>
                 <version>${solr.version}</version>
-                <!-- Jetty Jars need to be excluded as they are provided by app server
-     will cause app to fail to start when upgrading jetty if jars are present -->
                 <exclusions>
                     <exclusion>
                         <groupId>org.eclipse.jetty</groupId>
@@ -1448,22 +1424,6 @@
                 <version>4.4.1</version>
             </dependency>
 
-
-            <!-- rxutils aspectjrt cactus.core.framework.uberjar.javaEE.14-1.8.1.jar
-                commons-codec-1.10commons-collections-3.2.2.jar commons-io-2.0.1.jar commons-jexl-1.1.1-patched.jar
-                commons-lang-2.4.jar commons-logging-1.1.1.jar geronimo-jms_1.1_spec-1.1.1.jar
-                guava-r07.jar hibernate3.jar jackrabbit-jcr-commons-1.4.jar jasypt-1.8.jar
-                jcr-1.0.jar jdbc2_0-stdext.jar jh.jar joda-time-2.5.jar jtidy-r938.jar junit-4.11.jar
-                spring-beans-3.2.17.RELEASE.jar spring-context-3.2.17.RELEASE.jar spring-core-3.2.17.RELEASE.jar
-                spring-test-3.2.17.RELEASE.jar spring-web-3.2.17.RELEASE.jar spring-webmvc-3.2.17.RELEASE.jar
-                velocity-1.6.2.jar xercesImpl-2.11.0.jar xml-apis-1.4.01.jar -->
-
-
-            <!-- https://mvnrepository.com/artifact/org.apache.any23/apache-any23-core -->
-            <!-- 0.8.0 first version in maven 0.7.0-incubating exists -->
-            <!-- <dependency> <groupId>org.apache.any23</groupId> <artifactId>apache-any23-core</artifactId>
-                <version>0.8.0</version> </dependency> -->
-            <!-- https://mvnrepository.com/artifact/org.apache.any23/apache-any23-core -->
             <dependency>
                 <groupId>org.apache.any23</groupId>
                 <artifactId>apache-any23-core</artifactId>

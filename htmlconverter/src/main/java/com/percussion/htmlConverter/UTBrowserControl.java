@@ -115,7 +115,7 @@ public class UTBrowserControl
 /*
       public static void main(String[] args)
       {
-            displayURL("http://www.percussion.com");
+            displayURL("https://www.percussion.com");
       }
 */
 

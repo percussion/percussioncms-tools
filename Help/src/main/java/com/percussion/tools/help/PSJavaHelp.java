@@ -78,7 +78,7 @@ public class PSJavaHelp
     * </code> or empty.
     * @param helpMappingResourceFile the help topic mapping resource file name,
     * will be loaded through resource bundle, supply <code>null</code> if the
-    * requested help ids to the {@link #launchHelp(Sting) #launchHelp(helpID)}
+    * requested help ids to the {@link #launchHelp(String) #launchHelp(helpID)}
     * is going to be topic ids.
     *
     * @throws IllegalArgumentException if helpSetUrl is <code>null</code> or
@@ -184,7 +184,7 @@ public class PSJavaHelp
    }
 
    /**
-    * Convenience method for {@link #launchHelp(String, boolean, JDialog)
+    * Convenience method for {@link #launchHelp(String, boolean, Window)}
     * launchHelp(helpID, false, null) }. Assumes the help frame is not parented
     * by any dialog.
     */
@@ -373,8 +373,6 @@ public class PSJavaHelp
       catch( IOException ioex )
       {
          System.out.println("DEBUG - disabled help loading errors");
-//         showErrorDialog( getResourceString("unableLoadHelpMapping"),
-//            getResourceString("noHelpTitle"), JOptionPane.ERROR_MESSAGE );
       }
       finally
       {
@@ -431,9 +429,7 @@ public class PSJavaHelp
          System.out.println("Helpset URL is " + hs.getHelpSetURL());
         java.util.Enumeration ids = hs.getLocalMap().getAllIDs();
          for (; ids.hasMoreElements(); )
-         {
             System.out.println("Map - " + ids.nextElement().toString());
-         }
          m_hbroker = hs.createHelpBroker();
       }
       catch(MalformedURLException me)
