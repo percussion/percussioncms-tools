@@ -32,24 +32,7 @@ import com.percussion.deployer.error.IPSDeploymentErrors;
 import com.percussion.deployer.error.PSDeployException;
 import com.percussion.deployer.error.PSDeployNonUniqueException;
 import com.percussion.deployer.error.PSLockedException;
-import com.percussion.deployer.objectstore.IPSDeployComponent;
-import com.percussion.deployer.objectstore.PSAppPolicySettings;
-import com.percussion.deployer.objectstore.PSApplicationIDTypes;
-import com.percussion.deployer.objectstore.PSArchive;
-import com.percussion.deployer.objectstore.PSArchiveInfo;
-import com.percussion.deployer.objectstore.PSArchiveSummary;
-import com.percussion.deployer.objectstore.PSDbmsInfo;
-import com.percussion.deployer.objectstore.PSDbmsMap;
-import com.percussion.deployer.objectstore.PSDependency;
-import com.percussion.deployer.objectstore.PSDeployComponentUtils;
-import com.percussion.deployer.objectstore.PSDeployableElement;
-import com.percussion.deployer.objectstore.PSDeployableObject;
-import com.percussion.deployer.objectstore.PSDescriptor;
-import com.percussion.deployer.objectstore.PSExportDescriptor;
-import com.percussion.deployer.objectstore.PSIdMap;
-import com.percussion.deployer.objectstore.PSImportDescriptor;
-import com.percussion.deployer.objectstore.PSLogSummary;
-import com.percussion.deployer.objectstore.PSUserDependency;
+import com.percussion.deployer.objectstore.*;
 import com.percussion.deployer.server.uninstall.IPSUninstallResult;
 import com.percussion.deployer.server.uninstall.PSPackageUninstaller;
 import com.percussion.design.objectstore.IPSObjectStoreErrors;
@@ -88,15 +71,13 @@ import com.percussion.services.pkginfo.utils.PSIdNameHelper;
 import com.percussion.servlets.PSSecurityFilter;
 import com.percussion.util.IOTools;
 import com.percussion.util.IPSBrandCodeConstants;
-import com.percussion.utils.security.PSEncryptionException;
-import com.percussion.utils.security.PSEncryptor;
-import com.percussion.utils.security.deprecated.PSCryptographer;
 import com.percussion.util.PSFormatVersion;
 import com.percussion.util.PSPurgableTempFile;
 import com.percussion.util.PSXMLDomUtil;
 import com.percussion.utils.codec.PSXmlDecoder;
 import com.percussion.utils.collections.PSMultiValueHashMap;
 import com.percussion.utils.guid.IPSGuid;
+import com.percussion.utils.security.deprecated.PSCryptographer;
 import com.percussion.utils.security.deprecated.PSLegacyEncrypter;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
@@ -3644,17 +3625,10 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     */
    private String decryptPwd(String pwd, String key1, String key2)
    {
-      String ret = pwd;
-
       if (pwd == null || pwd.trim().length() == 0)
          return "";
 
-      try{
-         ret = PSEncryptor.getInstance().decrypt(pwd);
-      } catch (PSEncryptionException e) {
-        ret = PSCryptographer.decrypt(key1, key2, pwd);
-      }
-      return ret;
+      return PSCryptographer.decrypt(key1, key2, pwd);
    }
 
    /**
