@@ -125,7 +125,7 @@ public class PSPackagerMainFrame extends JFrame implements IPSPackagerClientMode
       m_mainPanel.add(m_tabbedPanel, "TABS");
       getContentPane().add(m_toolBar, "north, hidemode 3");
       getContentPane().add(m_mainPanel,  "grow");
-      setSize(820, 620);
+      setSize(850, 650);
       handleToolBarButtons();
       handleMenuItemState();
       addF1KeyListeners(this);      
