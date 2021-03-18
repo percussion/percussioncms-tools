@@ -19,12 +19,12 @@ goto end
 
 :PROD
 echo Starting without debug port enabled.
-start workbench\eclipse.exe
+start eclipse\eclipse.exe
 goto end
 
 :DEV
 echo Starting with debug port enabled.
-start workbench\eclipse.exe --launcher.stickyVmargs -vmargs -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=%2
+start eclipse\eclipse.exe --launcher.stickyVmargs -vmargs -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=%2
 goto end
 
 :end

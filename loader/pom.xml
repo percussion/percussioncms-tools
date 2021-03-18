@@ -614,7 +614,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-server-ui-cmp</artifactId>
-            <version>8${project.parent.version}</version>
+            <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

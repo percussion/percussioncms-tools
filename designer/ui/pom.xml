@@ -151,6 +151,16 @@
             <artifactId>org.eclipse.ui.workbench</artifactId>
            <version>3.6.2.M20110210-1200</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.swt</artifactId>
+            <version>3.6.2.v3659c</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.swt.cocoa.macosx</artifactId>
+            <version>3.6.2.v3659b</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -122,7 +122,6 @@
                     <groupId>aspectjrt</groupId>
                 </exclusion>
             </exclusions>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

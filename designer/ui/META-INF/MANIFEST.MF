@@ -23,7 +23,8 @@ Require-Bundle: de.byteaction.velocity.vaulttec.ui,
  org.eclipse.ui.forms,
  org.eclipse.jface.text,
  org.eclipse.ui.forms,
- org.eclipse.core.expressions
+ org.eclipse.core.expressions,
+ org.eclipse.swt
 Bundle-ClassPath: ., target/dependency/eclipse-maven-deps.jar
 Eclipse-AutoStart: true
 Export-Package: com.percussion.workbench.ui,

@@ -14,18 +14,18 @@ case "${unameOut}" in
     MINGW*)     machine=MinGw;;
     *)          machine="UNKNOWN:${unameOut}"
 esac
-echo ${machine}
+echo "${machine}"
 
-if ["$1"==""]; then
-	prod = true
+if [ "$1" == "" ]; then
+	prod=true
 fi
 
-if ["$1"=="dev"]; then
+if [ "$1" == "dev" ]; then
 	devUsage
 fi
 
 function devUsage(){
-	if ["$2"==""]; then
+	if [ "$2" == "" ]; then
 		checkPort
 	fi
 }
@@ -38,16 +38,16 @@ function checkPort() {
 if [[ ${machine} -eq "Mac" ]]
 then
   chmod +x ./workbench/Eclipse.app/Contents/MacOS/eclipse
-  if ["$prod"=="true"]; then
-	./workbench/Eclipse.app/Contents/MacOS/eclipse
+  if [ "$prod" == "true" ]; then
+	./eclipse/Eclipse.app/Contents/MacOS/eclipse
   else
-	./workbench/Eclipse.app/Contents/MacOS/eclipse --launcher.stickyVmargs -vmargs -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=$2
+	./eclipse/Eclipse.app/Contents/MacOS/eclipse --launcher.stickyVmargs -vmargs -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=$2
   fi
 else
-  chmod +x ./workbench/eclipse
-  if ["$prod"=="true"]; then
-	./workbench/eclipse
+  chmod +x ./eclipse/eclipse
+  if [ "$prod" == "true" ]; then
+	./eclipse/eclipse
   else
-	./workbench/eclipse --launcher.stickyVmargs -vmargs -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=$2
+	./eclipse/eclipse --launcher.stickyVmargs -vmargs -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=$2
   fi
 fi
