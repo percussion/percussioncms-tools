@@ -99,12 +99,12 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>${project.parent.version}</version>
+            <version>8.0.2.10</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>${project.parent.version}</version>
+            <version>8.0.2.10</version>
         </dependency>
         <!-- JFX Dependencies -->
         <dependency>
