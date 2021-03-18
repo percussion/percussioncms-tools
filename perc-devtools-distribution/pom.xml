@@ -85,10 +85,6 @@
                                 <directory>src/main/resources/scripts</directory>
                                 <filtering>true</filtering>
                             </resource>
-                            <resource>
-                                <directory>../designer/ui/src/main/resources/default-config/rxconfig/Workbench</directory>
-                                <filtering>true</filtering>
-                            </resource>
                         </resources>
                         <useBuildFilters>true</useBuildFilters>
                     </configuration>

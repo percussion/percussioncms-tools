@@ -6,6 +6,7 @@
     <property environment="env"/>
     <property name="install.src" location="../.."/>
     <property name="install.dir" location="${install.src}"/>
+    <property name="project.version" value="${project.version}" />
     <echo>Version: ${project.version}</echo>
     <tstamp>
         <format property="timestamp" pattern="yyyy-MM-dd_HH-mm-ss"/>
@@ -107,11 +108,42 @@
                 <include name="**/*.cmd" unless="${isMac}"/>
                 <include name="README.md"/>
             </fileset>
-            <!-- Selector for DevOptions.* -->
-            <fileset dir="${install.src}/devtools">
-                <present present="srconly" targetdir="${install.dir}/devtools" />
-            </fileset>
         </copy>
+
+        <if>
+            <os family="unix"/>
+            <then>
+                <if>
+                    <not>
+                        <available file="${install.dir}/devtools/DevOptions.sh"/>
+                    </not>
+                    <then>
+                        <copy todir="${install.dir}/devtools">
+                            <fileset dir="${install.src}/devtools">
+                                <include name="DevOptions.sh" />
+                            </fileset>
+                        </copy>
+                    </then>
+                </if>
+            </then>
+            <elseif>
+                <os family="windows"/>
+                <then>
+                    <if>
+                        <not>
+                            <available file="${install.dir}/devtools/DevOptions.cmd"/>
+                        </not>
+                        <then>
+                            <copy todir="${install.dir}/devtools">
+                                <fileset dir="${install.src}/devtools">
+                                    <include name="DevOptions.cmd" />
+                                </fileset>
+                            </copy>
+                        </then>
+                    </if>
+                </then>
+            </elseif>
+        </if>
 
         <copy todir="${install.dir}/rxconfig/Workbench" verbose="true" overwrite="false" failonerror="true" filtering="true">
             <fileset dir="${install.src}/rxconfig/Workbench">
