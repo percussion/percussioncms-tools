@@ -1188,14 +1188,14 @@ public class PSPackagerMainFrame extends JFrame implements IPSPackagerClientMode
    {
       if (m_homePage)
       {
-        PSEclHelpManager.launchHelp(this.getClass().getName());
+        PSEclHelpManager.launchHelp(null,"/com.percussion.doc.help.packagebuilder/toc.xml");
       }
       else
       {
          int currentTab = m_tabbedPanel.getSelectedIndex();
          String className = 
             m_tabbedPanel.getComponentAt(currentTab).getClass().getName();
-         PSEclHelpManager.launchHelp(className);
+         PSEclHelpManager.launchHelp(null,"/com.percussion.doc.help.packagebuilder/toc.xml");
       }
 
    }

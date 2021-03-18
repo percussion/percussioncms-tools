@@ -62,53 +62,17 @@ public class PSEclHelpManager
     * property file, the main help is shown. If there is no main help mapping,
     * the method prints a message to the console, displays an error dlg and returns.
    **/
-   public static void launchHelp( String helpId )
+   public static void launchHelp( String helpId, String helpPlugin )
    {
-      ResourceBundle helpIdToFileMap = null;
       PSEclHelpManager helpInst = getInstance();
-
-
-      
-      if ( null == m_pkgHelpIdToFileMap || null == m_insHelpIdToFileMap )
-      {
-         // the end user has already been notified once
-         System.out.println( "Help requested but no map available." );
-         return;
-      }
-      
-      if ( helpId.contains("com.percussion.packager.ui") )
-      {
-         helpIdToFileMap = m_pkgHelpIdToFileMap;
-      }
-      else
-      {
-         helpIdToFileMap = m_insHelpIdToFileMap;
-      }
-
       try
       {
-         String filename;
-         if ( null == helpId || 0 == helpId.trim().length())
-            filename = helpIdToFileMap.getString( MAIN_HELP_TOPIC_ID );
-         else
-         {
-            filename = helpIdToFileMap.getString( helpId );
-            if ( null == filename )
-            {
-               System.out.println( "Couldn't find help mapping for '" + helpId + "'. Trying default." );
-               filename = helpIdToFileMap.getString( MAIN_HELP_TOPIC_ID );
-            }
-         }
-         System.out.print("Help ID - " + helpId);
-         System.out.println();
-         System.out.print("Filename - " + filename);
-         System.out.println();
-         
-         String[] opt = {"-eclipsehome", DOC_ROOT_PATH, "-product", "com.percussion.doc.help.packageinstaller.Installer"};
+         String[] opt = {"-eclipsehome", DOC_ROOT_PATH, "-nl",
+                 Locale.getDefault().getLanguage()};
 
          Help h = new Help(opt);
          h.start();
-         h.displayHelp(HELP_TOPIC_ROOT + filename);
+         h.displayHelp(helpPlugin);
       }
       catch ( MissingResourceException mre )
       {
@@ -153,10 +117,11 @@ public class PSEclHelpManager
       File f = new File(".");
       String filePath = f.getAbsolutePath();
       String docPath = filePath.substring(0, filePath.length()-1);
-      if(isMac())
+      if(System.getProperty("os.name").toLowerCase().contains("mac")){
+        docPath = docPath + MAC_ECLIPSE_HOME;
+      }else {
          docPath = docPath + "eclipse";
-      else
-         docPath = docPath + "eclipse";
+      }
       return docPath;
    }
    
@@ -176,7 +141,6 @@ public class PSEclHelpManager
    **/
    public static final String HELP_TOPIC_ROOT = "/com.percussion.doc.help.";
 
-   private static final String MAC_ECLIPSE_PATH = "eclipse/Eclipse.app/Contents/MacOS/eclipse";
    /**
     * The HTML help id mapping file. Kept by the singleton instance. This may be
     * null if the resource can't be found and someone tries to display help.
@@ -194,7 +158,5 @@ public class PSEclHelpManager
    **/
    private static PSEclHelpManager ms_theInstance = null;
 
-   private static boolean isMac() {
-      return (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0);
-   }
+   private static final String MAC_ECLIPSE_HOME = "eclipse/Eclipse.app/Contents/MacOS/";
 }
