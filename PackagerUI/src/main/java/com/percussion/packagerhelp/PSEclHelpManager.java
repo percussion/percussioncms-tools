@@ -153,7 +153,10 @@ public class PSEclHelpManager
       File f = new File(".");
       String filePath = f.getAbsolutePath();
       String docPath = filePath.substring(0, filePath.length()-1);
-      docPath = docPath + "eclipse";
+      if(isMac())
+         docPath = docPath + "eclipse";
+      else
+         docPath = docPath + "eclipse";
       return docPath;
    }
    
@@ -173,6 +176,7 @@ public class PSEclHelpManager
    **/
    public static final String HELP_TOPIC_ROOT = "/com.percussion.doc.help.";
 
+   private static final String MAC_ECLIPSE_PATH = "eclipse/Eclipse.app/Contents/MacOS/eclipse";
    /**
     * The HTML help id mapping file. Kept by the singleton instance. This may be
     * null if the resource can't be found and someone tries to display help.
@@ -189,4 +193,8 @@ public class PSEclHelpManager
     * The single instance of this class. Use getInstance() to obtain it.
    **/
    private static PSEclHelpManager ms_theInstance = null;
+
+   private static boolean isMac() {
+      return (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0);
+   }
 }

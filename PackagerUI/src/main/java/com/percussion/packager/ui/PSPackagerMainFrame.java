@@ -1085,7 +1085,6 @@ public class PSPackagerMainFrame extends JFrame implements IPSPackagerClientMode
     * Helper method to create a menu item from the resource bundle
     * info of the specified key and with the action listener being this
     * object.
-    * @param key assumed not <code>null</code> or empty.
     * @return the menu item.
     */
    private JMenuItem createMenuItem(String resourcename, ActionListener listener)
@@ -1174,7 +1173,7 @@ public class PSPackagerMainFrame extends JFrame implements IPSPackagerClientMode
     */
    private void onAbout()
    {
-      PSFormatVersion version = new PSFormatVersion("com.percussion.deployer.ui");
+      PSFormatVersion version = new PSFormatVersion("com.percussion.packager.ui");
       
       PSAboutDialog dlg = new PSAboutDialog(this, 
          PSResourceUtils.getCommonResourceString("aboutTitle"),
