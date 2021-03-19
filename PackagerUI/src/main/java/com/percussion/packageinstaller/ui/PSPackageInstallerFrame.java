@@ -710,7 +710,7 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
     */
    private void onHelp()
    {
-      PSEclHelpManager.launchHelp(this.getClass().getName());
+      PSEclHelpManager.launchHelp(null,"/com.percussion.doc.help.packageinstaller/toc.xml");
    }
    
    /**

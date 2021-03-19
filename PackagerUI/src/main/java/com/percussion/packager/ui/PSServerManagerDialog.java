@@ -270,7 +270,7 @@ public class PSServerManagerDialog extends PSDialog implements ActionListener,
    @Override
    public void onHelp()
    {
-      PSEclHelpManager.launchHelp(this.getClass().getName());
+      PSEclHelpManager.launchHelp(null,"/com.percussion.doc.help.packagebuilder/toc.xml");
    }
    
    
