@@ -167,6 +167,7 @@
      <dependency>
         <groupId>axis</groupId>
         <artifactId>axis</artifactId>
+         <version>${axiscore.version}</version>
     </dependency>
       <dependency>
           <groupId>org.apache.logging.log4j</groupId>

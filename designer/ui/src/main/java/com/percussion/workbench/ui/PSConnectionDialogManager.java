@@ -127,7 +127,9 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
       if (error != null)
       {
          errorMsg = PSCoreFactory.getInstance().getFaultMessage(error);
-
+         if(errorMsg != null && errorMsg.contains("com.percussion.conn.PSServerException: null")){
+            errorMsg = "Connection to Server failed due to unknown reason.";
+         }
          // if we still don't have a valid error message, show the default
          if (StringUtils.isBlank(errorMsg))
             errorMsg = PSMessages.getString(

@@ -190,10 +190,10 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency><!-- current is 1.4.1-->
+        <dependency><!-- current is 1.4.2-->
             <groupId>axis</groupId>
             <artifactId>axis</artifactId>
-            <version>${axis.version}</version>
+            <version>${axiscore.version}</version>
         </dependency>
         <dependency><!-- current is 1.4.1 -->
             <groupId>axis</groupId>

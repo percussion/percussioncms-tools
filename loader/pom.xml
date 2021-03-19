@@ -460,9 +460,10 @@
 
 
         <!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
-        <dependency><!-- current is 1.4.1 -->
+        <dependency><!-- current is 1.4.2 -->
             <groupId>axis</groupId>
             <artifactId>axis</artifactId>
+            <version>${axiscore.version}</version>
      
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api for 
