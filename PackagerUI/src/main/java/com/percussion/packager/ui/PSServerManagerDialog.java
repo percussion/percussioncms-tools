@@ -73,7 +73,7 @@ public class PSServerManagerDialog extends PSDialog implements ActionListener,
       loadServerList(null);
       handleButtonState();
       
-      setSize(360, 400);
+      setSize(400, 420);
       setResizable(true);
       center();
       

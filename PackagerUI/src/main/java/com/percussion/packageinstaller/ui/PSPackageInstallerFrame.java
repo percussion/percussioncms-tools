@@ -74,7 +74,7 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
       
       getContentPane().add(mainPanel);
       displayView(Views.SELECTION);      
-      setSize(630, 720);
+      setSize(630, 700);
       PSUiUtils.center(this);
    }
    
@@ -112,7 +112,9 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
       
       m_cmdPanel = createCommandPanel();
       
-      panel.add(m_cmdPanel, "grow");      
+      panel.add(m_cmdPanel, "grow");
+
+      panel.add(new JSeparator());
       
       return panel;
    }
