@@ -22,7 +22,7 @@ import com.percussion.conn.PSDesignerConnection;
 import com.percussion.i18n.ui.PSI18NTranslationKeyValues;
 import com.percussion.util.PSRemoteRequester;
 import com.percussion.workbench.ui.PSWorkbenchPlugin;
-import org.apache.log4j.BasicConfigurator;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
@@ -79,7 +79,6 @@ public class PSLegacyInitialzer
          E2Designer.ms_rhythmyxDir = PSWorkbenchPlugin.getDefault().getStateLocation().toFile();
          try
          {
-            BasicConfigurator.configure();
             configureLookAndFeel();
 
             final PSDesignerConnection ms_conn = PSCoreFactory.getInstance().getDesignerConnection();
