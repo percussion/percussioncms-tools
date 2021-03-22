@@ -1072,7 +1072,13 @@ public class PSXmlApplicationEditor extends PSMultiPageEditorBase
     */
    public Object getEditorControl()
    {
-      return getTabFolder().getSelection().getData(EDITOR_TAB_PROPERTY);
+      CTabFolder tab = getTabFolder();
+      if(tab != null) {
+         return tab.getSelection().getData(EDITOR_TAB_PROPERTY);
+      }else {
+         return null;
+      }
+
    }
 
    private abstract class PSFrameProviderPanel extends JPanel
