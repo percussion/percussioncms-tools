@@ -324,13 +324,13 @@ public class PSXmlApplicationEditorActionBarContributor
          // ask window if they have any dynamic actions
          final UIFigureFrame frame =
             (UIFigureFrame) getActiveEditor().getEditorControl();
-         if (frame.hasActionItems(MENU_INSERT))
+         if (frame != null && frame.hasActionItems(MENU_INSERT))
          {
             final IAction[] actions = frame.getActionItems(MENU_INSERT);
             
             Debug.assertTrue(actions != null && actions.length > 0, E2Designer.getResources(),
                          "BadActionArray", null);
-            if (actions.length > 0)
+            if (actions != null && actions.length > 0)
             {
                final MenuManager insertMenu = createInsertMenuManager();
                for (final IAction action : actions)
@@ -340,14 +340,15 @@ public class PSXmlApplicationEditorActionBarContributor
             }
          }
 
-         // adding all the InternalFrame's actionListeners
-         for (final Action listener : frame.getDynamicActionListeners())
-         {
-            final IAction action = m_childSupportedActions.get(listener.getId()); 
-            assert action != null; 
-            m_actionListeners.put(listener.getId(), listener);
-            action.setEnabled(true);
-            maybeRetargetGlobalAction(action);
+         if(frame != null) {
+            // adding all the InternalFrame's actionListeners
+            for (final Action listener : frame.getDynamicActionListeners()) {
+               final IAction action = m_childSupportedActions.get(listener.getId());
+               assert action != null;
+               m_actionListeners.put(listener.getId(), listener);
+               action.setEnabled(true);
+               maybeRetargetGlobalAction(action);
+            }
          }
       }
    }
@@ -403,7 +404,6 @@ public class PSXmlApplicationEditorActionBarContributor
     * Optional accelerator keys, icons and mnemonic characters can be supplied for
     * each item in the resource bundle.
     *
-    * @returns the newly created menubar
     */
    private void createLegacyMenuItems()
    {
