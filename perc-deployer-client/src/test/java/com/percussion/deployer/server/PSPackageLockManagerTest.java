@@ -30,8 +30,10 @@ import com.percussion.util.IOTools;
 import com.percussion.util.PSArchiveFiles;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.xml.PSXmlDocumentBuilder;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.TemporaryFolder;
 import org.w3c.dom.Document;
 
 import java.io.File;
@@ -43,16 +45,18 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for the PSPackageLockManager.
  */
-@SuppressWarnings("unchecked")
 @Category(IntegrationTest.class)
 public class PSPackageLockManagerTest
 {
+
+   @Rule
+   public TemporaryFolder tempFolder = new TemporaryFolder();
+
    /**
     * Tests lock/unlock.
     * 
@@ -70,11 +74,16 @@ public class PSPackageLockManagerTest
       {
          tmpFile = File.createTempFile("tmp", null);
          tmpFile.deleteOnExit();
-         tmpFile.delete();
-         tmpFile.mkdir();
-         
-         File resourceDir = new File(RESOURCE_DIR);
+         assertTrue(tmpFile.delete());
+         assertTrue(tmpFile.mkdir());
+
+         ClassLoader classLoader = getClass().getClassLoader();
+
+         File resourceDir = new File(classLoader.getResource(RESOURCE_DIR).getFile());
+         assertNotNull(resourceDir);
          File[] resourceFiles = resourceDir.listFiles();
+
+         assertNotNull(resourceFiles);
          for (File file : resourceFiles)
          {
             if (file.isDirectory())
@@ -255,6 +264,6 @@ public class PSPackageLockManagerTest
     * E2 root.
     */
    private static final String RESOURCE_DIR =
-      "Packages/Percussion";
+      "com/percussion/Packages/Percussion";
   
 }
