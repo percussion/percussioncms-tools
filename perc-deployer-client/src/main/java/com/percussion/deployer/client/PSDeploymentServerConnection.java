@@ -516,6 +516,7 @@ public class PSDeploymentServerConnection
          // send the request to the Rx server        
          synchronized(m_mutexObject)
          {
+            m_conn.setTimeout(300000);
             resp = m_conn.Post(requestPage, data, hdrs);
          }
          // get the response code
