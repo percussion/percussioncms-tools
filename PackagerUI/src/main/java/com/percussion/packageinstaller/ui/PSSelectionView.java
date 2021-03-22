@@ -54,8 +54,7 @@ public class PSSelectionView extends JPanel implements DocumentListener
       String ports = m_portField.getText();
       String user = m_userField.getText();
       String rawPass = new String(m_passwordField.getPassword());
-      String password = PSDeploymentServerConnection.encryptPwd(
-               user, rawPass);
+      String password = rawPass;
       int port = 0;
       try {
          port = Integer.parseInt(ports);
