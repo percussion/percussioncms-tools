@@ -161,7 +161,9 @@
         <gunzip src="perc-eclipse-repository-${project.version}-macosx.cocoa.x86_64.tar.gz"/>
         <untar src="perc-eclipse-repository-${project.version}-macosx.cocoa.x86_64.tar" dest="${install.dir}/devtools/eclipse" overwrite="true" />
         <echo>Marking ${install.dir}/devtools/eclipse/Eclipse.app/Contents/MacOS/eclipse executable...</echo>
-        <chmod dir="${install.dir}/devtools/eclipse/Eclipse.app/Contents/MacOS" file="eclipse" perm="ugo+x" verbose="true"/>
+        <exec executable="chmod" dir="${install.dir}" failonerror="true" outputproperty="chmodout">
+            <arg line="ugo+rx ${install.dir}/devtools/eclipse/Eclipse.app/Contents/MacOS/eclipse" />
+        </exec>
     </target>
 
     <target name="doWindows" if="isWindows">
