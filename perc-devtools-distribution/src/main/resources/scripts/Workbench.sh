@@ -37,7 +37,7 @@ function checkPort() {
 
 if [[ ${machine} -eq "Mac" ]]
 then
-  chmod +x ./workbench/Eclipse.app/Contents/MacOS/eclipse
+  chmod +x ./eclipse/Eclipse.app/Contents/MacOS/eclipse
   if [ "$prod" == "true" ]; then
 	./eclipse/Eclipse.app/Contents/MacOS/eclipse
   else
