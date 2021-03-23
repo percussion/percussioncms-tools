@@ -686,7 +686,16 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
                   }
                   finally
                   {
-                     setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                     if (SwingUtilities.isEventDispatchThread()) {
+                        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                     }else{
+                        SwingUtilities.invokeLater(
+                                new Runnable(){
+                                   public void run() {
+                                      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                                   }
+                                });
+                     }
                   }
                   
                   
