@@ -900,11 +900,14 @@ public class PSSortableTable extends Composite implements ISelectionProvider
    public List getValues()
    {
       List results = new ArrayList();
-      for(Object obj : (List)m_tableViewer.getInput())
-      {
-         if(!m_rowObjectProvider.isEmpty(obj))
-            results.add(obj);
+      if(m_tableViewer.getInput()!=null){
+         for(Object obj : (List)m_tableViewer.getInput())
+         {
+            if(!m_rowObjectProvider.isEmpty(obj))
+               results.add(obj);
+         }
       }
+
       return results;   
    }  
    
