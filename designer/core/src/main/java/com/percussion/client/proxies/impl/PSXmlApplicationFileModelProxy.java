@@ -35,12 +35,19 @@ import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import org.apache.commons.collections.list.TransformedList;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Formatter;
 import java.util.List;
 
 /**
@@ -150,7 +157,7 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
          final PSApplicationFile file = new PSApplicationFile(new File(fileRef
             .getFilePath()), fileRef.isContainer());
          getObjectStore().renameApplicationFile(fileRef.getApplication(), file,
-            name, false);
+            name, false,true);
          if (data != null)
          {
             ((PSMimeContentAdapter) data).setName(name);
@@ -203,8 +210,7 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
       // was locked and the file application is locked on the server
       final PSXmlApplicationFileHierarchyRef fileRef =
          (PSXmlApplicationFileHierarchyRef) ref;
-      final boolean applicationLocked = checkApplicationLock(fileRef);
-      return fileRef.isLocked() && applicationLocked;
+        return fileRef.isLocked();
    }
 
    /**
@@ -334,8 +340,53 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
          boolean operationFailed = true;
          try
          {
+            String beforeHash = null;
+            final PSApplicationFile file2 = new PSApplicationFile(new File(m_ref
+                    .getFilePath()));
+            if(StringUtils.isNotEmpty(m_ref.getHash())) {
+               IPSMimeContent contentBefore = m_objectStore.loadApplicationFile(
+                       m_ref.getApplication(), file2).getContent();
+               if (!(contentBefore instanceof
+                       com.percussion.services.system.data.PSMimeContentAdapter)) {
+                  com.percussion.services.system.data.PSMimeContentAdapter buf =
+                          new com.percussion.services.system.data.PSMimeContentAdapter();
+                  if (StringUtils.isNotBlank(contentBefore.getCharEncoding()))
+                  {
+                     buf.setCharacterEncoding(contentBefore.getCharEncoding());
+                  }
+                  buf.setMimeType(contentBefore.getMimeType());
+                  buf.setContent(contentBefore.getContent());
+                  beforeHash = getSha1((ByteArrayInputStream) buf.getContent(), buf.getCharacterEncoding());
+               } else {
+                  beforeHash = getSha1((ByteArrayInputStream) contentBefore.getContent(), contentBefore.getCharEncoding());
+               }
+
+               if(!m_ref.getHash().equals(beforeHash)) {
+                  throw new RuntimeException("The file you are trying to edit has been modified, "
+                          + "please copy your changes, reopen the file and merge your changes manually.");
+               }
+            }
+
             m_objectStore.saveApplicationFile(m_ref.getApplication(), file,
-               true, m_lock && !m_ref.isTreeLocked());
+                    true, m_lock && !m_ref.isTreeLocked(), true);
+            final PSApplicationFile file3 = new PSApplicationFile(new File(m_ref
+                    .getFilePath()));
+            IPSMimeContent contentAfter = m_objectStore.loadApplicationFile(
+                    m_ref.getApplication(), file3).getContent();
+            if (!(contentAfter instanceof
+                    com.percussion.services.system.data.PSMimeContentAdapter)) {
+               com.percussion.services.system.data.PSMimeContentAdapter buf =
+                       new com.percussion.services.system.data.PSMimeContentAdapter();
+               if (StringUtils.isNotBlank(contentAfter.getCharEncoding()))
+               {
+                  buf.setCharacterEncoding(contentAfter.getCharEncoding());
+               }
+               buf.setMimeType(contentAfter.getMimeType());
+               buf.setContent(contentAfter.getContent());
+               m_ref.setHash(getSha1((ByteArrayInputStream) buf.getContent(), buf.getCharacterEncoding()));
+            } else {
+               m_ref.setHash(getSha1((ByteArrayInputStream) contentAfter.getContent(), contentAfter.getCharEncoding()));
+            }
             operationFailed = false;
          }
          finally
@@ -406,7 +457,7 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
          try
          {
             m_objectStore.removeApplicationFile(m_ref.getApplication(), file,
-               !m_ref.isTreeLocked());
+               !m_ref.isTreeLocked(),true);
             operationFailed = false;
          }
          finally
@@ -471,11 +522,6 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
          assert m_ref.getParent() != null;
          final PSApplicationFile file = new PSApplicationFile(new File(m_ref
             .getFilePath()));
-         if (m_lockForEdit)
-         {
-            m_objectStore.extendApplicationLock(m_ref.getApplication(),
-               m_overrideLock);
-         }
          final IPSMimeContent content = m_objectStore.loadApplicationFile(
             m_ref.getApplication(), file).getContent();
          if (m_lockForEdit)
@@ -502,8 +548,10 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
             }
             buf.setMimeType(content.getMimeType());
             buf.setContent(content.getContent());
+            m_ref.setHash(getSha1((ByteArrayInputStream) buf.getContent(), buf.getCharacterEncoding()));
             return buf;
          }
+         m_ref.setHash(getSha1((ByteArrayInputStream) content.getContent(), content.getCharEncoding()));
          return content;
       }
 
@@ -544,6 +592,43 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
        */
       private final PSXmlApplicationFileModelProxy m_model;
    }
+   /**
+    * Creates an SHA-1 string of the supplied input stream.
+    * @param inputStream Assumed not <code>null</code>.
+    * @return The 40 char string representing the SHA-1.
+    */
+   private static String getSha1(ByteArrayInputStream inputStream, String encoding)
+   {
+      try
+      {
+         String s = IOUtils.toString(inputStream, encoding);
+         inputStream.reset();
+         MessageDigest md = MessageDigest.getInstance("SHA-1");
+         byte[] sha1hash = new byte[40];
+         md.update(s.getBytes(encoding), 0, s.length());
+         sha1hash = md.digest();
+         Formatter formatter = new Formatter();
+         for (byte b : md.digest(sha1hash))
+         {
+            formatter.format("%02x", b);
+         }
+         return formatter.toString();
+      }
+      catch (NoSuchAlgorithmException e)
+      {
+         //shouldn't happen
+         throw new RuntimeException(e);
+      }
+      catch (UnsupportedEncodingException e)
+      {
+         //shouldn't happen
+         throw new RuntimeException(e);
+      }
+      catch (IOException e)
+      {
+         throw new RuntimeException(e);
+      }
+   }
 
    /**
     * Object type - file. Singleton instance.
@@ -556,4 +641,9 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
     */
    public static final PSObjectType OBJECT_TYPE_FOLDER = new PSObjectType(
       PSObjectTypes.XML_APPLICATION_FILE, PSObjectTypes.FileSubTypes.FOLDER);
+
+   /**
+    * Object type - folder. Singleton instance.
+    */
+   public static List<Integer> ms_hashList = new ArrayList<Integer>();
 }

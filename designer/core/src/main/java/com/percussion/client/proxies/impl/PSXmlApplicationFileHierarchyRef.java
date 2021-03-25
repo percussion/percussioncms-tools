@@ -99,7 +99,6 @@ public class PSXmlApplicationFileHierarchyRef extends PSHierarchyNodeRef
    public void lock()
    {
       m_locked = true;
-      setLock(this, true);
    }
    
    /**
@@ -133,9 +132,29 @@ public class PSXmlApplicationFileHierarchyRef extends PSHierarchyNodeRef
             "Application files are identified by application/file names, n" +
             "ot by ids.");
    }
+   /**
+    * Set the hash of the page
+    * @param hash
+    */
+   public void setHash(String hash) {
+      this.hash = hash;
+   }
+
+   /**
+    * Get the hash of the page
+    * @return The hash of the page, may be null
+    */
+   public String getHash() {
+      return this.hash;
+   }
 
    /**
     * Indicates whether current node is locked.
     */
    private boolean m_locked;
+
+   /**
+    * hash of reference
+    */
+   private String hash = null;
 }

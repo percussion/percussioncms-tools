@@ -1,10 +1,12 @@
 package de.byteaction.velocity.vaulttec.ui.editor;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
+import de.byteaction.velocity.editor.VelocityEditor;
+import de.byteaction.velocity.editor.VelocityFoldingStructureProvider;
+import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
+import de.byteaction.velocity.vaulttec.ui.editor.parser.NodeVisitor;
+import de.byteaction.velocity.vaulttec.ui.model.ITreeNode;
+import de.byteaction.velocity.vaulttec.ui.model.ITreeVisitor;
+import de.byteaction.velocity.vaulttec.ui.model.Template;
 import org.apache.velocity.runtime.RuntimeInstance;
 import org.apache.velocity.runtime.parser.ParseException;
 import org.apache.velocity.runtime.parser.Token;
@@ -25,13 +27,12 @@ import org.htmlparser.Parser;
 import org.htmlparser.Tag;
 import org.htmlparser.util.NodeIterator;
 import org.htmlparser.util.ParserException;
-import de.byteaction.velocity.editor.VelocityEditor;
-import de.byteaction.velocity.editor.VelocityFoldingStructureProvider;
-import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
-import de.byteaction.velocity.vaulttec.ui.editor.parser.NodeVisitor;
-import de.byteaction.velocity.vaulttec.ui.model.ITreeNode;
-import de.byteaction.velocity.vaulttec.ui.model.ITreeVisitor;
-import de.byteaction.velocity.vaulttec.ui.model.Template;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Reconciler strategy which parses the whole editor's content (a Velocity
@@ -106,7 +107,8 @@ public class VelocityReconcilingStrategy implements IReconcilingStrategy, IRecon
             RuntimeInstance runtime = VelocityEditorEnvironment.getParser();
             parseHtml();
             // end html
-            SimpleNode root = runtime.parse(reader, name);
+            org.apache.velocity.Template velTemplate = runtime.getTemplate(name, "UTF-8");
+            SimpleNode root = runtime.parse(reader, String.valueOf(velTemplate));
             // Create tree model
             NodeVisitor visitor = new NodeVisitor(name);
             root.jjtAccept(visitor, null);
