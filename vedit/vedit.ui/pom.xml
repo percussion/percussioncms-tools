@@ -5,7 +5,7 @@
     <packaging>eclipse-plugin</packaging>
     <parent>
         <groupId>com.percussion</groupId>
-        <version>8.0.2-SNAPSHOT</version>
+        <version>8.0.3-SNAPSHOT</version>
         <artifactId>tycho-root</artifactId>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>

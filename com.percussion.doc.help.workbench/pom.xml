@@ -20,7 +20,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.percussion</groupId>
-        <version>8.0.2-SNAPSHOT</version>
+        <version>8.0.3-SNAPSHOT</version>
         <artifactId>tycho-root</artifactId>
         <relativePath>../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>

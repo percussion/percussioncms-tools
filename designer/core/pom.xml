@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.percussion</groupId>
         <artifactId>tycho-root</artifactId>
-        <version>8.0.2-SNAPSHOT</version>
+        <version>8.0.3-SNAPSHOT</version>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
     <artifactId>com.percussion.client</artifactId>
@@ -116,17 +116,17 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>tablefactory</artifactId>
-            <version>8.0.2.10</version>
+            <version>8.0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>8.0.2.10</version>
+            <version>8.0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>8.0.2.10</version>
+            <version>8.0.3-SNAPSHOT</version>
             <type>test-jar</type>
             <scope>compile</scope>
             <exclusions>

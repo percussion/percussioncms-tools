@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.percussion</groupId>
     <artifactId>percussioncms-tools</artifactId>
-    <version>8.0.2-SNAPSHOT</version>
+    <version>8.0.3-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>perc-loader</artifactId>
@@ -91,7 +91,7 @@
        <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>rxutils</artifactId>
-        <version>8.0.2.10</version>
+        <version>8.0.3-SNAPSHOT</version>
         <classifier>tests</classifier>
       <type>test-jar</type>
       <scope>test</scope>
@@ -99,7 +99,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>8.0.2.10</version>
+            <version>8.0.3-SNAPSHOT</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>
@@ -609,7 +609,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>8.0.2.10</version>
+            <version>8.0.3-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

@@ -21,7 +21,7 @@
     <parent>
         <artifactId>percussioncms-tools</artifactId>
         <groupId>com.percussion</groupId>
-        <version>8.0.2-SNAPSHOT</version>
+        <version>8.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-packaging-client</artifactId>
-            <version>8.0.2-SNAPSHOT</version>
+            <version>8.0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
