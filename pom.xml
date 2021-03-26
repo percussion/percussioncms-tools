@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.percussion</groupId>
     <artifactId>percussioncms-tools</artifactId>
-    <version>8.0.2-SNAPSHOT</version>
+    <version>8.0.2.10</version>
     <dependencies>
         <dependency>
             <groupId>com.percussion</groupId>

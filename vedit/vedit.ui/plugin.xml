@@ -3,7 +3,7 @@
 <plugin
    id="de.byteaction.velocity.ui"
    name="%pluginName"
-   version="8.0.2-SNAPSHOT"
+   version="8.0.2.10"
    provider-name="%providerName"
    class="de.byteaction.velocity.vaulttec.ui.VelocityPlugin">
 

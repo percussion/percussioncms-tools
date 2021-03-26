@@ -21,7 +21,7 @@ Contributors:
 	<parent>
 		<groupId>com.percussion</groupId>
 		<artifactId>tycho-root</artifactId>
-		<version>8.0.2-SNAPSHOT</version>
+		<version>8.0.2.10</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
