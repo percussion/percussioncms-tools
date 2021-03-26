@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<products>
+  <product>
+    <name>Widget</name>
+    <comment>Grade AA widging device.</comment>
+    <feature>It's cheap!</feature>
+    <feature>It's easy!</feature>
+    <feature>It's fun!</feature>
+    <checked>It's cheap!</checked>
+    <checked>It's fun!</checked>
+  </product>
+  <product>
+    <name>Gadget</name>
+    <comment>Gadges effectively at all ranges.</comment>
+    <feature>Durable!</feature>
+  </product>
+  <product>
+    <name>Gizmo</name>
+    <comment>Slightly more mo than giz.</comment>
+    <feature>Low maintenance!</feature>
+    <feature>Trouble free!</feature>
+    <checked>Low maintenance!</checked>
+  </product>
+</products>

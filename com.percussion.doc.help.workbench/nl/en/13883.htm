@@ -1,0 +1,67 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Standard Database Search Editor </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13790.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13884.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Standard Database Search Editor</h3>
+<p class="bodytext">The standard search editor for systems that use the database engine appears as follows:</p>
+<p class="exapandinghtmlblock"><a id="h14797" class="expandinghtmlblocklink" title="Screenshot of Standard Database Search dialog" href="javascript:toggleBlock('14797')" target="_self"><img id="i14797" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Standard Database Search editor</a></p>
+<div id="d14797" class="widegraphic" style="display:none"><p class="bodytext"><img src="standardsearch60.gif" alt="Standard Database Search dialog" height="530" width="552" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="subheading"><strong class="specialbold">Field Definitions</strong></p>
+<p class="fielddescription"><strong class="fieldname">Standard Search Name</strong> - Read only. System name for search query.</p>
+<p class="fielddescription"><strong class="fieldname">Standard Search Label</strong> - Required. Name displayed to users for search query.</p>
+<p class="fielddescription"><strong class="fieldname">Description</strong> - Description of search.</p>
+<p class="fielddescription"><strong class="fieldname">Maximum rows returned</strong>   Specifies the maximum number of results to return for the query.  Default is <em class="emphasis">-1</em>.</p>
+<p class="fielddescription"><strong class="fieldname">Unlimited</strong>  Check this box to return all results of the query.  If this value is checked, Rhythmyx ignores the value in the <strong class="specialbold">Maximum Results</strong> field.</p>
+<p class="fielddescription"><strong class="fieldname">Display Format</strong>  Specifies the <a id="h13942" class="jumptemplate" title="Maintaining Display Formats" href="13252.htm" target="_self">display format</a> used for the View.  Options are all display formats currently available in the system.  The default is the first display format in alphabetical order.</p>
+<p class="fielddescription"><strong class="fieldname">Initial display mode</strong> - <em class="emphasis">Simple</em> or <em class="emphasis">Advanced</em>. </p>
+<ul class="listbullet2"><li class="listbullet2">In Simple display mode, only the <strong class="specialbold">Search for</strong>, <strong class="specialbold">Display Format</strong>, and <strong class="specialbold">Max rows returned</strong> fields are visible in the dialog. An [<strong class="buttons">Advanced</strong>] button is also available for moving to Advanced mode.<p class="exapandinghtmlblock"><a id="h14801" class="expandinghtmlblocklink" title="Screenshot of Simple Display Mode" href="javascript:toggleBlock('14801')" target="_self"><img id="i14801" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Simple Display Mode</a></p>
+<div id="d14801" class="widegraphic" style="display:none"><p class="bodytext"><img src="placeholdergraphic.gif" alt="Simple Display Mode" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div></li></ul><p class="subheading"></p>
+<ul class="listbullet2"><li class="listbullet2">Advanced display mode displays the same fields as those displayed in the Search editor graphic, above (other than <strong class="specialbold">Description</strong>, <strong class="specialbold">Initial display mode</strong>, and <strong class="specialbold">User customizable</strong>). A [<strong class="buttons">Simple</strong>] button is available for moving to Simple mode.</li></ul><p class="bodytext"></p>
+<p class="fielddescription"><strong class="fieldname">User customizable</strong><strong class="specialbold"> </strong>- When checked, the search dialog displays a [<strong class="buttons">Customize</strong>] button that users can click to open the <a id="h13864" class="jumptemplate" title="Field Selection Editor" href="13273.htm" target="_self">Field Selection editor</a>, which enables them to add or remove fields to the search query.</p>
+<p class="fielddescription"><strong class="fieldname">Search Criteria</strong> - The contents of this box vary, depending on the fields you specify for the View.  Use the [<strong class="specialbold">Customize</strong>] button to maintain the fields included in the search.  The control for the field varies depending on the data type of the field.</p>
+<p class="fielddescription"><strong class="fieldname">Title</strong> - A drop list of options and a text box for filling in the Title or a portion of the Title to search for. The options in the drop list are <em class="emphasis">Starts with</em>, <em class="emphasis">Contains</em>, <em class="emphasis">Ends with</em>, <em class="emphasis">Exact</em>.</p>
+<ul class="listbullet"><li class="listbullet"><em class="emphasis">Starts with - </em>The title must start with the value entered in the text box.</li><li class="listbullet"><em class="emphasis">Contains</em> - The title must contain the value entered in the text box.</li><li class="listbullet"><em class="emphasis">Ends with</em> - The title must end with the value entered in the text box.</li><li class="listbullet"><em class="emphasis">Exact</em> - The title must match the value entered in the text box.<p class="listnote"><em class="emphasis">Note: Title is the default Search Criteria field.  As the definition for Search Criteria Explains, you can add other search criteria fields.</em></p>
+</li></ul><p class="bodytext">[<strong class="buttons">Customize</strong>] - Opens the <a id="h13864_2" class="jumptemplate" title="Field Selection Editor" href="13273.htm" target="_self">Field Selection editor</a>, which enables users to add or remove fields to the search query.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13790.htm" target="_self">Search Editor, Standard Search</a></p><p class="relateditem"><a href="13884.htm" target="_self">Standard Full Text Search Editor</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

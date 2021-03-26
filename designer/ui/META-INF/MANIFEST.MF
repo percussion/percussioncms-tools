@@ -1,0 +1,38 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Percussion CMS Workbench Plug-in
+Bundle-SymbolicName: com.percussion.workbench.ui; singleton:=true
+Bundle-Version: 8.0.2.qualifier
+Bundle-Activator: com.percussion.workbench.ui.PSWorkbenchPlugin
+Bundle-ActivationPolicy: lazy;exclude:="com.percussion.workbench.ui.PSWorkbenchPlugin"
+Bundle-Vendor: Percussion Software
+Bundle-Localization: plugin
+Require-Bundle: de.byteaction.velocity.vaulttec.ui,
+ org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.views,
+ com.percussion.client,
+ com.percussion.doc.help.workbench,
+ com.percussion.doc.help.packagebuilder,
+ com.percussion.doc.help.packageinstaller,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
+ org.eclipse.wst.common.snippets,
+ org.eclipse.ui.forms,
+ org.eclipse.jface.text,
+ org.eclipse.ui.forms,
+ org.eclipse.core.expressions,
+ org.eclipse.swt
+Bundle-ClassPath: ., target/dependency/eclipse-maven-deps.jar
+Eclipse-AutoStart: true
+Export-Package: com.percussion.workbench.ui,
+ com.percussion.workbench.connections,
+ com.percussion.workbench.ui.dnd,
+ com.percussion.workbench.ui.editors.dialog,
+ com.percussion.workbench.ui.editors.form,
+ com.percussion.workbench.ui.editors.wizards,
+ com.percussion.workbench.ui.preferences,
+ com.percussion.workbench.ui.views
+Eclipse-BundleShape: dir

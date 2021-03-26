@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file defines the structure for the Rhythmyx workbench 'Community Visibility' 
+view. This view shows all the assembly related objects in a tree structure as
+described in the functional specification.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="CONTENT_TYPE">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/contentType16.gif"
+      />
+   </InstanceTree>
+   <InstanceTree objectIds="TEMPLATE:GLOBAL TEMPLATE:LOCAL TEMPLATE:OTHER TEMPLATE:SHARED TEMPLATE:VARIANT">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/template16.gif"
+      />   
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_CASCADING_SYSTEM UI_ACTION_MENU:MENU_CASCADING_USER UI_ACTION_MENU:MENU_DYNAMIC_SYSTEM UI_ACTION_MENU:MENU_DYNAMIC_USER">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/menuAction16.gif"
+      />    
+   </InstanceTree>
+   <InstanceTree objectIds="UI_ACTION_MENU:MENU_ENTRY_SYSTEM UI_ACTION_MENU:MENU_ENTRY_USER">
+       <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/menuActionEntry16.gif"
+      />   
+   </InstanceTree>
+   <InstanceTree objectIds="UI_DISPLAY_FORMAT">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/displayFormat16.gif"
+      />    
+   </InstanceTree>
+   <InstanceTree objectIds="UI_SEARCH:CUSTOM UI_SEARCH:STANDARD">
+       <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/search16.gif"
+      />   
+   </InstanceTree>
+   <InstanceTree objectIds="SITE">
+       <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/site16.gif"
+      />   
+   </InstanceTree>   
+   <InstanceTree objectIds="UI_VIEW:CUSTOM UI_VIEW:STANDARD">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/view16.gif"
+      />    
+   </InstanceTree>
+   <InstanceTree objectIds="WORKFLOW">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+         iconPath="icons/workflow16.gif"
+      />    
+   </InstanceTree>   
+         
+   <InstanceTree objectIds="COMMUNITY">
+      <Handler iconPath="icons/community16.gif"/>
+       <Node labelKey="Visible Content Types" sorting="ascending">
+          <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="CONTENT_TYPE"
+          />
+          <Catalog type="class" 
+                   name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                   isReference="true">
+             <CatalogProperty name="objectType">CONTENT_TYPE</CatalogProperty>
+          </Catalog>
+       </Node>
+       <Node labelKey="Visible Templates and XSL Variants" sorting="ascending">
+       <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="TEMPLATE:GLOBAL TEMPLATE:LOCAL TEMPLATE:OTHER TEMPLATE:SHARED TEMPLATE:VARIANT"
+          />
+          <Catalog type="class" 
+                   name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                   isReference="true">
+             <CatalogProperty name="objectType">TEMPLATE:GLOBAL TEMPLATE:LOCAL TEMPLATE:OTHER TEMPLATE:SHARED TEMPLATE:VARIANT</CatalogProperty>
+             
+          </Catalog>
+                 
+       </Node>
+       <Node labelKey="Visible Menus and Menu Entries" sorting="ascending">
+       <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="UI_ACTION_MENU:MENU_CASCADING_SYSTEM UI_ACTION_MENU:MENU_CASCADING_USER UI_ACTION_MENU:MENU_DYNAMIC_SYSTEM UI_ACTION_MENU:MENU_DYNAMIC_USER UI_ACTION_MENU:MENU_ENTRY_SYSTEM UI_ACTION_MENU:MENU_ENTRY_USER"
+          />          
+          <Catalog type="class" 
+                   name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                   isReference="true">
+             <CatalogProperty name="objectType">UI_ACTION_MENU:MENU_CASCADING_SYSTEM UI_ACTION_MENU:MENU_CASCADING_USER UI_ACTION_MENU:MENU_DYNAMIC_SYSTEM UI_ACTION_MENU:MENU_DYNAMIC_USER UI_ACTION_MENU:MENU_ENTRY_SYSTEM UI_ACTION_MENU:MENU_ENTRY_USER</CatalogProperty>
+             
+          </Catalog>                  
+       </Node>
+       <Node labelKey="Visible Display Formats" sorting="ascending">
+       <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="UI_DISPLAY_FORMAT"
+          />
+          <Catalog type="class" 
+                   name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                   isReference="true">
+             <CatalogProperty name="objectType">UI_DISPLAY_FORMAT</CatalogProperty>
+              
+          </Catalog>
+                
+       </Node>
+       <Node labelKey="Visible Searches" sorting="ascending">
+       <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="UI_SEARCH:CUSTOM UI_SEARCH:STANDARD"
+          />
+          <Catalog type="class" 
+                      name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                      isReference="true">
+                <CatalogProperty name="objectType">UI_SEARCH:CUSTOM UI_SEARCH:STANDARD</CatalogProperty>
+                
+             </Catalog>                     
+       </Node>
+       <Node labelKey="Visible Sites" sorting="ascending">
+       <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="SITE"
+          />
+          <Catalog type="class" 
+                   name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                   isReference="true">
+             <CatalogProperty name="objectType">SITE</CatalogProperty>
+              
+          </Catalog>                 
+       </Node>
+       <Node labelKey="Visible Views" sorting="ascending">
+       <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="UI_VIEW:CUSTOM UI_VIEW:STANDARD"
+          />
+          <Catalog type="class" 
+                   name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                   isReference="true">
+             <CatalogProperty name="objectType">UI_VIEW:CUSTOM UI_VIEW:STANDARD</CatalogProperty>
+             
+          </Catalog>         
+       </Node>
+       <Node labelKey="Visible Workflows" sorting="ascending">
+       <Handler 
+             className="com.percussion.workbench.ui.handlers.PSCommunityVisibilityDropHandler"
+             allowedTypes="WORKFLOW"
+          />
+          <Catalog type="class" 
+                   name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisiblityExpansionFactory"
+                   isReference="true">
+             <CatalogProperty name="objectType">WORKFLOW</CatalogProperty>
+             
+          </Catalog>    
+       </Node>                                                       
+   </InstanceTree>
+   <Node labelKey="Communities" sorting="ascending">
+      <Catalog type="class" name="com.percussion.workbench.ui.catalogs.security.PSCommunityVisibilityCatalogFactory"/>
+   </Node>
+</TreeDef>
+

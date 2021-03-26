@@ -1,0 +1,98 @@
+<!--
+This is a test file for use by the PSDeclarativeHierarchyTest.java class.
+It provides several tree fragments composed of Nodes and Catalogs. 
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Documents and Settings\paulhoward\My Documents\viewHierarchyDef.xsd">
+   <InstanceTree objectIds="SLOT">
+      <Handler iconPath="icons/slot16.gif"/>
+      <Node labelKey="Slot sub-folder"/>
+   </InstanceTree>
+   <Node 
+      labelKey="Cataloged Slots"
+      allowedTypes="USER_FILE:WORKBENCH_FOLDER TEMPLATE:SHARED"
+      >
+      <!-- catalogs 3 deep -->
+      <Handler 
+         className="com.percussion.workbench.ui.views.hierarchy.TestHandler" 
+         iconPath="icons/slot16.gif"
+         />
+      <Catalog type="object" name="SLOT">
+         <Handler 
+            className="com.percussion.workbench.ui.views.hierarchy.TestHandler" 
+            allowedTypes="com.percussion.client.PSObjectTypes$1:SLOT"
+            iconPath="icons/slot16.gif"
+            />
+         <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+            <CatalogProperty name="group">1</CatalogProperty>
+            <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+               <CatalogProperty name="subgroup">1</CatalogProperty>
+            </Catalog>
+         </Catalog>
+      </Catalog>
+   </Node>
+   <Node labelKey="Root node 2">
+      <!-- Mixture of multiple nodes and multiple catalogs -->
+      <Handler 
+         iconPath="icons/slot16.gif"
+         />
+      <Node labelKey="xmixed node 1">
+         <!-- add child so parent is treated as folder, not leaf -->
+         <Node labelKey="child1"/>
+      </Node>
+      <Node labelKey="mixed node 2">
+         <!-- add child so parent is treated as folder, not leaf -->
+         <Node labelKey="child1"/>
+      </Node>
+      <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+         <CatalogProperty name="mixed">group1</CatalogProperty>
+      </Catalog>
+      <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+         <CatalogProperty name="mixed">group2</CatalogProperty>
+      </Catalog>
+   </Node>
+   <Node labelKey="Root node 3">
+      <!-- alternating nodes and catalogs -->
+      <CatalogProperty name="scope">37</CatalogProperty>
+      <Node labelKey="child1">
+         <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+            <CatalogProperty name="alternating">1</CatalogProperty>
+            <CatalogProperty name="prop2">21</CatalogProperty>
+            <Node labelKey="catalog child1">
+               <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+                  <CatalogProperty name="alternating">2</CatalogProperty>
+               </Catalog>
+            </Node>
+         </Catalog>
+      </Node>
+   </Node>
+   <Node 
+      labelKey="Root node 4"
+      allowedTypes="com.percussion.client.PSObjectTypes$1:USER_FILE:com.percussion.client.PSObjectTypes$UserFileSubTypes:WORKBENCH_FOLDER"
+      >
+      <!-- context parent -->
+      <Catalog type="object" name="SLOT">
+         <Node labelKey="context parent test">
+            <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+               <CatalogProperty name="ctxparent">1</CatalogProperty>
+            </Catalog>
+         </Node>
+      </Catalog>
+   </Node>
+   <Node 
+      labelKey="Root node 5"
+      allowedTypes="com.percussion.client.PSObjectTypes$1:COMMUNITY"
+      >
+      <!-- context parent -->
+      <Catalog 
+         type="object" 
+         name="SLOT"
+         allowedTypes="com.percussion.client.PSObjectTypes$1:TEMPLATE:SHARED"
+         >
+         <Node labelKey="context parent test">
+            <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+               <CatalogProperty name="ctxparent">1</CatalogProperty>
+            </Catalog>
+         </Node>
+      </Catalog>
+   </Node>
+</TreeDef>

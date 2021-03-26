@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<groupProviderObjectClasses>
+   <objectClassDefs jndiClassName="com.sun.jndi.ldap.LdapCtxFactory">
+      <objectClassDef name="group" memberAttr="member" type="static">
+      </objectClassDef>
+      <objectClassDef name="groupOfNames" memberAttr="member" type="static">
+      </objectClassDef>
+      <objectClassDef name="groupOfUniqueNames" memberAttr="uniquemember" type="static">
+      </objectClassDef>      
+      <objectClassDef name="groupOfUrls" memberAttr="memberurl" type="dynamic">
+      </objectClassDef>
+   </objectClassDefs>
+</groupProviderObjectClasses>

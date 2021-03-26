@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension
+         id="RhythmyxWorkbench"
+         point="org.eclipse.core.runtime.applications">
+      <application> 
+         <run class="com.percussion.workbench.ui.RhythmyxWorkbenchApplication"/> 
+      </application> 
+   </extension>
+   <extension
+         id="RhythmyxWorkbenchProduct"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.percussion.workbench.ui.RhythmyxWorkbench"
+            name="Percussion CMS Workbench">
+         <property
+               name="aboutImage"
+               value="icons/aboutRhythmyx.png"/>
+         <property
+               name="aboutText"
+               value="%product_blurb"/>
+         <property
+               name="windowImages"
+               value="icons/main16.gif"/>
+      </product>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.percussion.workbench.ui.PSRxPerspective"
+            fixed="false"
+            id="com.percussion.workbench.ui.RhythmyxPerspective"
+            name="%rx_perspective_label">
+      </perspective>
+   </extension>
+   <extension
+            point="org.eclipse.ui.actionSets">
+         <actionSet
+               label="Percussion"
+               visible="true"
+               id="com.percussion.actions.connection">
+            <action 
+                 label="%menu_action_disconnect_label"
+                 icon="icons/disconnect16.gif"
+                 class="com.percussion.workbench.ui.actions.PSDisconnectAction"
+                 tooltip="%menu_action_disconnect_tooltip"
+                 menubarPath="file/additions"
+                 id="com.percussion.workbench.ui.actions.disconnect">
+           </action>
+            <action 
+                 label="%menu_action_connect_label"
+                 icon="icons/connect16.gif"
+                 class="com.percussion.workbench.ui.actions.PSConnectDialogAction"
+                 tooltip="%menu_action_connect_tooltip"
+                 menubarPath="file/additions"
+                 id="com.percussion.workbench.ui.actions.PSConnectDialogAction">
+            </action>
+        </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="com.percussion.workbench.ui.views"
+            name="%show_view_category_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSContentDesignView"
+            icon="icons/contentDesign16.gif"
+            id="com.percussion.workbench.ui.views.PSContentDesignView"
+            name="%content_design_view_label">
+      </view>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSCommunityVisibilityView"
+            id="com.percussion.workbench.ui.views.PSCommunityVisibilityView"
+            icon="icons/communityVisibility16.gif"
+            name="%community_visibility_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSAssemblyDesignView"
+            icon="icons/assemblyDesign16.gif"
+            id="com.percussion.workbench.ui.views.PSAssemblyDesignView"
+            name="%assembly_design_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSHelpView"
+            id="com.percussion.workbench.ui.views.PSHelpView"
+            icon="icons/help16.gif"
+            name="%help_view_label"/>             
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSObjectSorterView"
+            id="com.percussion.workbench.ui.views.PSObjectSorterView"
+            icon="icons/objectSorter16.gif"
+            name="%object_sorter_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSProblemsView"
+            id="com.percussion.workbench.ui.views.PSProblemsView"
+            icon="icons/problems16.gif"
+            name="%problems_view_label"/>                  
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSSecurityDesignView"
+            icon="icons/securityDesign16.gif"
+            id="com.percussion.workbench.ui.views.PSSecurityDesignView"
+            name="%security_design_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSUiElementsDesignView"
+            icon="icons/uielementsDesign16.gif"
+            id="com.percussion.workbench.ui.views.PSUiElementsDesignView"
+            name="%uielements_design_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSSystemDesignView"
+            icon="icons/systemDesign16.gif"
+            id="com.percussion.workbench.ui.views.PSSystemDesignView"
+            name="%system_design_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSXmlServerDesignView"
+            icon="icons/xmlserverDesign16.gif"
+            id="com.percussion.workbench.ui.views.PSXmlServerDesignView"
+            name="%xml_server_design_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSFileExplorerView"
+            icon="icons/filenav_nav16.gif"
+            id="com.percussion.workbench.ui.views.PSFileExplorerView"
+            name="%file_explorer_view_label"/>
+      <view
+            allowMultiple="false"
+            category="com.percussion.workbench.ui.views"
+            class="com.percussion.workbench.ui.views.PSDatabaseExplorerView"
+            id="com.percussion.workbench.ui.views.PSDatabaseExplorerView"
+            icon="icons/databaseExplorer16.gif"
+            name="%database_explorer_view_label"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.percussion.workbench.ui.preferences.PSRhythmyxPreferencesPage"
+            id="com.percussion.workbench.ui.preferences.PSRhythmyxPreferencesPage"
+            name="%general_preferences_page"/>
+      <page
+      		category="com.percussion.workbench.ui.preferences.PSRhythmyxPreferencesPage"
+            class="com.percussion.workbench.ui.preferences.PSSecurityPreferencesPage"
+            id="com.percussion.workbench.ui.preferences.PSSecurityPreferencesPage"
+            name="%security_preferences_page"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="com.percussion.workbench.ui.preferences.PreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+   </extension>
+   <extension 
+   	  point="org.eclipse.ui.editors">
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSAutoTranslationEditor"
+            icon="icons/autoTrans16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSAutoTranslationEditor"
+            name="%autoTrans_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSXmlApplicationEditor"
+            contributorClass="com.percussion.workbench.ui.editors.form.PSXmlApplicationEditorActionBarContributor"
+            icon="icons/application16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSXmlApplicationEditor"
+            name="%application_editor_label"/>
+   	  <editor
+            class="com.percussion.workbench.ui.editors.form.PSSlotEditor"
+            icon="icons/slot16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSSlotEditor"
+            name="%slot_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSExtensionEditor"
+            icon="icons/extension16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSExtensionEditor"
+            name="%extension_editor_label"/>      
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSKeywordEditor"
+            icon="icons/keyword16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSKeywordEditor"
+            name="%keyword_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSViewEditor"
+            icon="icons/view16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSViewEditor"
+            name="%view_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSSearchEditor"
+            icon="icons/search16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSSearchEditor"
+            name="%search_editor_label"/>      
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSCommunityEditor"
+            icon="icons/community16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSCommunityEditor"
+            name="%community_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSDisplayFormatEditor"
+            icon="icons/displayFormat16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSDisplayFormatEditor"
+            name="%displayformat_editor_label"/>      
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSActionMenuEditor"
+            icon="icons/menuAction16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSActionMenuEditor"
+            name="%menu_action_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSActionMenuEditor"
+            icon="icons/menuActionEntry16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSActionMenuEntryEditor"
+            name="%menu_action_entry_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSTemplateEditor"
+            contributorClass="com.percussion.workbench.ui.editors.form.PSTemplateEditorActionBarContributor"
+            default="true"
+            icon="icons/template16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSTemplateEditor"
+            name="%template_editor_label"/>                        
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSContentTypeEditor"
+            icon="icons/contentType16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSContentTypeEditor"
+            name="%contenttype_editor_label"/>        
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSSystemDefEditor"
+            icon="icons/ce_systemDef16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSSystemDefEditor"
+            name="%systemdef_editor_label"/>        
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSSharedDefEditor"
+            icon="icons/ce_sharedFile16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSSharedDefEditor"
+            name="%shareddef_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSLocaleEditor"
+            default="false"
+            icon="icons/locale16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSLocaleEditor"
+            name="%locale_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSRelationshipTypeEditor"
+            default="false"
+            icon="icons/relationshipType16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSRelationshipTypeEditor"
+            name="%relationship_type_editor_label"/>
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSRhythmyxPageEditor"
+            default="false"
+            icon="icons/components16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSRhythmyxPageEditor"
+            name="%component_editor_label"/>        
+      <editor
+            class="com.percussion.workbench.ui.editors.form.PSItemFilterEditor"
+            default="false"
+            icon="icons/itemFilter16.gif"
+            id="com.percussion.workbench.ui.editors.form.PSItemFilterEditor"
+            name="%item_filter_editor_label"/>        
+   </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            class="com.percussion.workbench.ui.editors.wizards.PSContentTypeExportWizard"
+            icon="icons/contentType16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSContentTypeExportWizard"
+            name="%contenttype_export_wizard_label">
+         <description>Export Rhythmyx Content Types to local file system.</description>
+      </wizard>
+      <wizard
+            class="com.percussion.workbench.ui.editors.wizards.PSTemplateExportWizard"
+            icon="icons/template16.gif"
+            id="Rhythmyx-Main-Workbench.wizard1"
+            name="%template_export_wizard_label">
+         <description>Export Rhythmyx Templates to local file system.</description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <wizard
+            class="com.percussion.workbench.ui.editors.wizards.PSContentTypeImportWizard"
+            icon="icons/contentType16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSContentTypeImportWizard"
+            name="%contenttype_import_wizard_label">
+         <description>Import Rhythmyx Content Types from local file system.</description>
+      </wizard>
+      <wizard
+            class="com.percussion.workbench.ui.editors.wizards.PSTemplateImportWizard"
+            icon="icons/template16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSTemplateImportWizard"
+            name="%template_import_wizard_label">
+         <description>Import Rhythmyx Templates from local file system.</description>
+      </wizard>
+   </extension>
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSXmlApplicationWizard"
+            icon="icons/newApplication16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSXmlApplicationWizard"
+            name="%application_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSSlotWizard"
+            icon="icons/newSlot16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSSlotWizard"
+            name="%slot_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSKeywordWizard"
+            icon="icons/newKeyword16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSKeywordWizard"
+            name="%keyword_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSContentTypeWizard"
+            icon="icons/newContentType16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSContentTypeWizard"
+            name="%contenttype_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSSharedDefFileWizard"
+            icon="icons/newCe_sharedFile16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSSharedDefFileWizard"
+            name="%shareddef_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSLocaleWizard"
+            icon="icons/newLocale16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSLocaleWizard"
+            name="%locale_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSItemFilterWizard"
+            icon="icons/newItemFilter16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSItemFilterWizard"
+            name="%item_filter_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSViewWizard"
+            icon="icons/newView16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSViewWizard"
+            name="%view_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSSearchWizard"
+            icon="icons/newSearch16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSSearchWizard"
+            name="%search_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSCommunityWizard"
+            icon="icons/newCommunity16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSCommunityWizard"
+            name="%community_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSDisplayFormatWizard"
+            icon="icons/newDisplayFormat16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSDisplayFormatWizard"
+            name="%displayformat_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSActionMenuWizard"
+            icon="icons/newMenuAction16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSActionMenuWizard"
+            name="%menu_action_new_wizard_label">
+      </wizard>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSActionMenuEntryWizard"
+            icon="icons/newMenuActionEntry16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSActionMenuEntryWizard"
+            name="%menu_action_entry_new_wizard_label">
+      </wizard>
+      <category
+         id="rhythmyx.cms.category"
+         name="%new_wizard_category_label"/>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSTemplateWizard"
+            icon="icons/newTemplate16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSTemplateWizard"
+            name="%template_new_wizard_label"/>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSRelationshipTypeWizard"
+            icon="icons/newRelationshipType16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSRelationshipTypeWizard"
+            name="%relationshiptype_new_wizard_label"/>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSVariantWizard"
+            icon="icons/newVariant16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSVariantWizard"
+            name="%variant_new_wizard_label"/>
+      <wizard
+            category="rhythmyx.cms.category"
+            class="com.percussion.workbench.ui.editors.wizards.PSExtensionRegistrationWizard"
+            icon="icons/newExtension16.gif"
+            id="com.percussion.workbench.ui.editors.wizards.PSExtensionRegistrationWizard"
+            name="%extension_new_wizard_label"/>
+    </extension>
+   <extension
+         point="org.eclipse.ui.editors.documentProviders">
+      <provider
+            class="org.eclipse.ui.editors.text.TextFileDocumentProvider"
+            id="org.eclipse.ui.editors.text.ExternalFileDocumentProvider"
+            inputTypes="com.percussion.workbench.ui.editors.form.PSExternalFileEditorInput"/>
+   </extension>
+	<extension
+         point="org.eclipse.wst.common.snippets.SnippetContributions">
+         <category smallicon="icons/snippets/field.gif" label="Rx Field Macros" description="Rhythmyx Field Velocity Macros" 
+         	id="com.percussion.vm.category_field" extensions="*.vm">
+			<item smallicon="icons/snippets/field.gif" label="displayfield" 
+				description="Displays the contents of a field without active assembly behavior. Use this for things like page titles." 
+				id="com.percussion.vm.displayfield">
+				<content>#displayfield("${fieldname}")</content>
+				<variable description="The fieldname references the JSR-170 field from the content node. Fieldnames are the name given in the content editor. Content editor fields may optionally be referenced as part of the &quot;rx:&quot; namespace, but this is not required. Fields referenced for managed nav are in the &quot;nav:&quot; namespace, and there are some jcr fields in the &quot;jcr:&quot; namespace." id="fieldname"/>
+			</item>
+			<item smallicon="icons/snippets/field.gif" label="field" 
+				description="Displays the contents of a field. In active assembly an edit icon is added to the field."
+				id="com.percussion.vm.field">
+				<content>#field("${fieldname}")</content>
+				<variable description="The fieldname references the JSR-170 field from the content node. Fieldnames are the name given in the content editor. Content editor fields may optionally be referenced as part of the &quot;rx:&quot; namespace, but this is not required. Fields referenced for managed nav are in the &quot;nav:&quot; namespace, and there are some jcr fields in the &quot;jcr:&quot; namespace." id="fieldname"/>
+			</item>
+			<item smallicon="icons/snippets/field.gif" label="datefield" 
+				description="Displays the contents of a date field formatted using a SimpleDateFormat string. In active assembly an edit icon is added to the field."				
+				id="com.percussion.vm.datefield">
+				<content>#datefield("${fieldname}" "${fieldformat}")</content>
+				<variable description="The fieldname references the JSR-170 field from the content node. Fieldnames are the name given in the content editor. Content editor fields may optionally be referenced as part of the &quot;rx:&quot; namespace, but this is not required. Fields referenced for managed nav are in the &quot;nav:&quot; namespace, and there are some jcr fields in the &quot;jcr:&quot; namespace." 
+					id="fieldname"/>
+				<variable description="The format to use when displaying the date. The format is the same as for the java.text.SimpleDateFormat class. For example, MM/dd/yyyy will show the 28th of February as 02/28/2006"
+					id="format"/>
+			</item>	
+			<item smallicon="icons/snippets/field.gif" label="field_if_set" 
+				description="Displays the contents of a field with before and after text, if and only if the field is defined. In active assembly an edit icon is added to the field."
+				id="com.percussion.vm.field">
+				<content>#field_if_set("${before}" "${field}" "${after}" )</content>
+				<variable description="Text to place before the field content" id="before" />
+				<variable description="The fieldname references the JSR-170 field from the content node. Fieldnames are the name given in the content editor. Content editor fields may optionally be referenced as part of the &quot;rx:&quot; namespace, but this is not required. Fields referenced for managed nav are in the &quot;nav:&quot; namespace, and there are some jcr fields in the &quot;jcr:&quot; namespace." id="field"/>
+				<variable description="Text to place after the field content" id="after" />
+			</item>
+			<item smallicon="icons/snippets/field.gif" label="datefield_if_set" 
+				description="Displays the contents of a date field formatted using a SimpleDateFormat string, if and only if the field is defined. In active assembly an edit icon is added to the field."				
+				id="com.percussion.vm.datefield">
+				<content>#datefield_if_set("${before}" "${field}" "${format}" "${after}")</content>
+				<variable description="Text to place before the field content" id="before" />
+				<variable description="The fieldname references the JSR-170 field from the content node. Fieldnames are the name given in the content editor. Content editor fields may optionally be referenced as part of the &quot;rx:&quot; namespace, but this is not required. Fields referenced for managed nav are in the &quot;nav:&quot; namespace, and there are some jcr fields in the &quot;jcr:&quot; namespace." 
+					id="field"/>
+				<variable description="The format to use when displaying the date. The format is the same as for the java.text.SimpleDateFormat class. For example, MM/dd/yyyy will show the 28th of February as 02/28/2006"
+					id="format"/>
+				<variable description="Text to place after the field content" id="after" />					
+			</item>	
+			<item smallicon="icons/snippets/field.gif" label="fieldLink" 
+				description="Displays the contents of a field with a link that can be followed to a target page. In active assembly an edit icon is added to the field."
+				id="com.percussion.vm.fieldlink">
+				<content>#fieldLink("${fieldname}" "${pagelink}")</content>
+				<variable description="The fieldname references the JSR-170 field from the content node. Fieldnames are the name given in the content editor. Content editor fields may optionally be referenced as part of the &quot;rx:&quot; namespace, but this is not required. Fields referenced for managed nav are in the &quot;nav:&quot; namespace, and there are some jcr fields in the &quot;jcr:&quot; namespace." id="fieldname"/>
+				<variable description="The pagelink to the target page for this link." id="pagelink"/>
+			</item>											
+		 </category>
+		 <category smallicon="icons/snippets/slot.gif" label="Rx Slot Macros" 
+		 	description="Rhythmyx Slot Velocity Macros" 
+         	id="com.percussion.vm.category_slot" extensions="*.vm">
+         	<item smallicon="icons/snippets/slot.gif" label="simple slot" 
+				description="Display the content of a slot, with no extra formatting information such as headers and footers, and no parameters" 
+				id="com.percussion.vm.simpleslot">
+				<content>#slot_simple("${slotname}")</content>
+				<variable description="The name (not the label) of the slot being referenced by this slot." 
+					id="slotname"/>
+			</item>
+         	<item smallicon="icons/snippets/slot.gif" label="wrapped slot" 
+				description="Display the content of a slot, with no parameters, but with text specified for before and after each slot's content" 
+				id="com.percussion.vm.wrappedslot">
+				<content>#slot_wrapped("${slotname}" "${startslottext}" "${endslottext}")</content>
+				<variable description="The name (not the label) of the slot being referenced by this slot." 
+					id="slotname"/>
+				<variable description="The text to include before the formatted value of a given slot."
+					id="startslottext"/>
+				<variable description="The text to include after the formatted value of a given slot."
+					id="endslottext"/>
+			</item>	
+         	<item smallicon="icons/snippets/slot.gif" label="full slot" 
+				description="Display the content of a slot, with parameters, with text specified for before and after each slot's content, and with header and footer text. The header and footer are omitted if the contents of the slot is empty" 
+				id="com.percussion.vm.slot">
+				<content>#slot("${slotname}" "${header}" "${before}" "${after}" "${footer}" "${params}")</content>
+				<variable description="The name (not the label) of the slot being referenced by this slot." 
+					id="slotname"/>
+				<variable description="The text to include before the slot, omitted if there are no items in the slot"
+					id="header"/>					
+				<variable description="The text to include before the formatted value of each snippet in the given slot."
+					id="before"/>
+				<variable description="The text to include after the formatted value of each snippet in the given slot."
+					id="after"/>
+				<variable description="The text to include after the slot, omitted if there are no items in the slot"
+					id="footer"/>					
+				<variable description="The extra parameters to pass to the slot content finder. The parameters can either be a Java java.util.Map object, or a string that is encoded as a URL query, i.e. name=value&amp;name2=value2&amp;..."
+					id="params"/>
+			</item>	
+        	<item smallicon="icons/snippets/slot.gif" label="page slot" 
+				description="Display the content of a paged slot, with parameters, with text specified for before and after each slot's content, and with header and footer text. The header and footer are omitted if the contents of the slot is empty. Note, $sys.pagecount must be specified as one of the binding variables in the Template; otherwise additional pages may not be published. For example, $sys.pagecount=$rx.paginate.slotContentPageCount($sys.assemblyItem,$slotname,$pagesize,$sys.params)" 
+				id="com.percussion.vm.slot_page">
+				<content>#slot_page("${slotname}" "${header}" "${before}" "${after}" "${footer}" "${params}" "${itemsPerPage}" "${pageNumber}")</content>
+				<variable description="The name (not the label) of the slot being referenced by this slot." 
+					id="slotname"/>
+				<variable description="The text to include before the slot, omitted if there are no items in the slot"
+					id="header"/>					
+				<variable description="The text to include before the formatted value of each snippet in the given slot."
+					id="before"/>
+				<variable description="The text to include after the formatted value of each snippet in the given slot."
+					id="after"/>
+				<variable description="The text to include after the slot, omitted if there are no items in the slot"
+					id="footer"/>					
+				<variable description="The extra parameters to pass to the slot content finder. The parameters can either be a Java java.util.Map object, or a string that is encoded as a URL query, i.e. name=value&amp;name2=value2&amp;..."
+					id="params"/>
+				<variable description="The number of items per page."
+					id="itemsPerPage"/>
+				<variable description="The current page being rendered, generally $sys.page. For example, $pageNumber=if ($sys.page != null) {$sys.page;} else {1;}"
+					id="pageNumber"/>
+			</item>	
+			<item smallicon="icons/snippets/slot.gif" label="raw slot"
+				description="Insert the velocity code to create a slot, allowing for modifications to be made. You may add markup before and after each part."
+				id="com.percussion.vm.rawslot">
+				<content>#initslot("${slotname}"  "${params}")
+  #if($sys.currentslot.relresults.size() &gt; 0)
+     #foreach( $relresult in $sys.currentslot.relresults )
+       #slotItem($relresult)
+       $rx.doc.extractBody($relresult) 
+     #end
+  #end
+#endslot("${slotname}")
+  				</content>
+  				<variable description="The name (not the label) of the slot being referenced by this slot." 
+					id="slotname"/>
+				<variable description="The extra parameters to pass to the slot content finder. The parameters can either be a Java java.util.Map object, or a string that is encoded as a URL query, i.e. name=value&amp;name2=value2&amp;..."
+					id="params"/>
+			</item>	
+         	<item smallicon="icons/snippets/slot.gif" label="node slot" 
+				description="Display the content of a slot, given a specific node, with parameters, with text specified for before and after each slot's content, and with header and footer text. The header and footer are omitted if the contents of the slot is empty" 
+				id="com.percussion.vm.nodeslot">
+				<content>#node_slot(${node} "${slotname}" "${header}" "${before}" "${after}" "${footer}" "${params}")</content>
+				<variable description="The node that should be used. This must reference a javax.jcr.Node object, such as $sys.item" 
+					id="node"/>
+				<variable description="The name (not the label) of the slot being referenced by this slot." 
+					id="slotname"/>
+				<variable description="The text to include before the slot, omitted if there are no items in the slot"
+					id="header"/>					
+				<variable description="The text to include before the formatted value of a given slot."
+					id="before"/>
+				<variable description="The text to include after the formatted value of a given slot."
+					id="after"/>
+				<variable description="The text to include after the slot, omitted if there are no items in the slot"
+					id="footer"/>					
+				<variable description="The extra parameters to pass to the slot content finder. The parameters can either be a Java java.util.Map object, or a string that is encoded as a URL query, i.e. name=value&amp;name2=value2&amp;..."
+					id="params"/>
+			</item>								
+         </category>
+         <category smallicon="icons/snippets/misc.gif" label="Rx Slot Misc and Prebuild" 
+		 	description="Rhythmyx Miscellaneous Macros and Examples" 
+         	id="com.percussion.vm.category_misc" extensions="*.vm">
+         	<item smallicon="icons/snippets/misc.gif" label="inner" 
+				description="Display the inner page's content in a global template" 
+				id="com.percussion.vm.inner">
+				<content>#inner()</content>
+			</item>  
+         	<item smallicon="icons/snippets/misc.gif" label="children" 
+				description="Assemble a child's content into the page" 
+				id="com.percussion.vm.inner">
+				<content>#children("${childname}" "${templatename}" "${header}" "${before}" "${after}" "${footer}")</content>
+				<variable description="The name of the child field." 
+					id="childname"/>
+				<variable description="The name of the template to use to render the child instances." 
+					id="templatename"/>
+				<variable description="The text to include before the child, omitted if there are no children"
+					id="header"/>
+				<variable description="The text to insert before each child field's rendering." 
+					id="before"/>
+				<variable description="The text to insert after each child field's rendering." 
+					id="after"/>	
+				<variable description="The text to include after the child, omitted if there are no children"
+					id="footer"/>			
+			</item> 
+       	<item smallicon="icons/snippets/misc.gif" label="pager" 
+				description="A macro used to navigate various pages (or paged content of the item)" 
+				id="com.percussion.vm.pager">
+				<content>#pager("${pagecount}" "${pagenumber}" "${previous_markup}" "${pagetext}" "${next_markup}")</content>
+				<variable description="the number of pages total, generally $sys.pagecount." 
+					id="pagecount"/>
+				<variable description="The current page being rendered, generally $sys.page. For example, $pageNumber=if ($sys.page != null) {$sys.page;} else {1;}" 
+					id="pagenumber"/>
+				<variable description="The markup to render in the previous link. The previous link is rendered if the page number is greater than one. This can be text, graphics or both. Anything valid for an anchor tag is allowed."
+					id="previous_markup"/>
+				<variable description="The text to render that could, for example, indicate where the user is in the sequence. For example, 'page 3' or 'page 2 or 5'. Such a string will normally be created in the binding, e.g. $pagetext='Page ' + $sys.page + ' of ' + $sys.pagecount." 
+					id="pagetext"/>
+				<variable description="The markup to render in the next link. The next link is rendered if the page number is less than the count. This can be text, graphics or both. Anything valid for an anchor tag is allowed." 
+					id="next_markup"/>	
+			</item> 
+			<item smallicon="icons/snippets/misc.gif" label="sample page"
+				description="Example sample page"
+				id="com.percussion.vm.sample_page">
+				<content>
+<![CDATA[<html>
+   <head>
+     <meta content="Percussion Rhythmyx" name="generator"/>
+      <title>Title Goes Here</title>
+   </head>
+   <body>
+      <p>Enter the body text of your HTML document here</p>
+   </body>
+</html>]]>
+				</content>
+			</item>
+			<item smallicon="icons/snippets/misc.gif" label="linkback_head" 
+				description="Placed in the &lt;head&gt; section to call the linkback JEXL tool to encode assembly parameters "
+				id="com.percussion.vm.linkback_head">
+				<content>#linkback_head()</content>
+			</item>			
+			<item smallicon="icons/snippets/lclamp.gif" label="L-clamp global template"
+				description="Example global template using an lclamp layout"
+				id="com.percussion.vm.gt_lclamp">
+				<content><![CDATA[
+   <head>
+     <meta content="Percussion Rhythmyx" name="generator"/>
+      <title>Title Goes Here</title>
+   </head>
+   <body>				
+## This is a basic example of a global template. This example is simplistic
+## and places the breadcrumbs immediately with the inner content. In implementing
+## a completed global template you will probably wish to add sectional images
+<table border="1">
+  <tr>
+## The sectional image could go in this first table cell  
+  	  <td></td>
+  	  <td>#slot("nav_top" "" "" "" "" "template=vel_top_nav")</td>
+  </tr>
+  <tr>
+     <td>#slot("nav_left" "" "" "" "" "template=vel_left_nav")</td>
+     <td>#slot("nav_breadcrumb" "" "" "" "" "template=vel_nav_breadcrumbs")
+     <br/>#inner()</td>
+  </tr>
+</table>				
+</body>
+</html>				]]>
+				</content>
+			</item>						       	
+			<item smallicon="icons/snippets/nav.gif" label="breadcrumbs nav"
+				description="Example breadcrumbs navigation implementation"
+				id="com.percussion.vm.nav_breadcrumbs">
+				<content><![CDATA[
+## Define the breadcrumbs macro. This macro is run recursively "up" the parent				
+## navon chain until the root (navtree) is reached. This breadcrumb macro does
+## very simple formatting, just root / level1 / level2 / etc. 
+
+#macro(breadcrumbs $navon)
+#if ($navon.getParent())
+#breadcrumbs($navon.getParent())
+<b>&nbsp;|&nbsp;<b>
+#end
+#set($url = $navon.getProperty("nav:url").String)
+#set($label = $navon.getProperty("nav:landingPage").Node.getProperty("displaytitle").String)
+<a href="$url">$label</a>
+#end
+
+## Invoke the macro on the self navon
+#breadcrumbs($nav.self)				
+				]]>
+				</content>
+			</item>
+			<item smallicon="icons/snippets/nav.gif" label="top nav"
+				description="Example top navigation implementation"
+				id="com.percussion.vm.nav_top">
+				<content><![CDATA[
+## The top nav is fairly simple. It renders a span for each
+## toplevel navon child of the root. It does simple coloring for the navon
+## that is an ancestor or the self navon
+
+#set($toplevel = $nav.root.getNodes("nav:submenu"))
+#foreach($navon in $toplevel)
+#set($axis = $navon.getProperty("nav:axis").String)
+#set($url = $navon.getProperty("nav:url").String)
+#set($label = $navon.getProperty("nav:landingPage").Node.getProperty("displaytitle").String)
+#if ($axis == "SELF" || $axis == "PARENT" || $axis == "ANCESTOR")
+<span style="padding-left: 10px; background-color:#E0E0FF"><a href="$url" style="color: black; font-weight: bold">$label</a></span>
+#else
+<span style="padding-left: 10px; background-color:#EFEFEF"><a href="$url" style="color: black; font-weight: bold">$label</a></span>
+#end
+#end
+				]]>
+				</content>
+			</item>			
+			<item smallicon="icons/snippets/nav.gif" label="left nav"
+				description="Example left navigation implementation"
+				id="com.percussion.vm.nav_left">
+				<content><![CDATA[
+## A left nav is more complex. This one is about as simple as possible. 
+## There are three macros. The #navitem macro renders a single navon or
+## navtree. The positioning in these macros is controlled by a set of 
+## nested DIV tags. The self navon is marked with light blue instead of
+## gray.
+				
+#macro(navitem $navnode)
+	#set($url = $navnode.getProperty("nav:url").String)
+	#set($axis = $navnode.getProperty("nav:axis").String)
+	#set($label = $navnode.getProperty("nav:landingPage").Node.getProperty("displaytitle").String)
+	#if ($axis == "SELF")
+		<div style="background-color:#E0E0FF"><a href="$url" style="color: black; font-weight: bold">$label</a></div>
+	#else
+		<div style="background-color:#EFEFEF"><a href="$url" style="color: black; font-weight: bold">$label</a></div>
+	#end
+#end
+
+## The #renderleftnav macro is the main section of the nav rendering. It allows
+## rendering to a specific depth (less than three). It simply recurses and
+## renders the submenu. 
+
+#macro(renderleftnav $navnode)
+	#set($depth = $navnode.getDepth())
+	#if ($depth == 1)
+		<div>
+	#else	
+		<div style="margin-left: 30px">
+	#end
+	#foreach($navon in $navnode.getNodes("nav:submenu"))
+		#set($axis = $navon.getProperty("nav:axis").String)
+		#if ($axis != "NONE")
+			#navitem($navon)
+			#if ($depth < 4)
+				#renderleftnav($navon)
+			#end
+		#end
+	#end
+		</div>
+#end
+
+## The #leftnav macro is the base macro that renders the specific navon below
+## the root that belongs to the self hirearchy. Note that the toplevel
+## child of the root is not itself rendered.
+
+#macro(leftnav $navnode)
+	#foreach($navon in $navnode.getNodes("nav:submenu"))
+		#set($axis = $navon.getProperty("nav:axis").String)
+		#if ($axis == "SELF" || $axis == "PARENT" || $axis == "ANCESTOR")
+			#renderleftnav($navon)
+		#end
+	#end
+#end
+
+#leftnav($nav.root)
+				]]>
+				</content>
+			</item>
+			
+         </category>
+
+   </extension>
+ <extension
+       point="org.eclipse.ui.decorators">
+    <decorator
+          class="com.percussion.workbench.ui.decorators.PSNodeReferenceDecorator"
+          icon="icons/decorators/nodeRef.gif"
+          id="com.percussion.workbench.ui.decorator"
+          label="%node_ref_decorator_label"
+          state="true"
+          lightweight="true"
+          location="BOTTOM_RIGHT"
+          objectClass="com.percussion.workbench.ui.PSUiReference">
+       <description>%node_ref_decorator_desc</description>
+    </decorator>
+ </extension>
+	<extension point="org.eclipse.ui.editorActions">
+	</extension>
+ <extension
+       point="org.eclipse.ui.perspectiveExtensions">
+    <perspectiveExtension targetID="com.percussion.workbench.ui.RhythmyxPerspective">
+       <newWizardShortcut id="com.percussion.workbench.ui.editors.wizards.PSContentTypeWizard"/>
+       <newWizardShortcut id="com.percussion.workbench.ui.editors.wizards.PSSlotWizard"/>
+       <newWizardShortcut id="com.percussion.workbench.ui.editors.wizards.PSTemplateWizard"/>
+       <viewShortcut id="com.percussion.workbench.ui.views.PSAssemblyDesignView"/>
+       <viewShortcut id="com.percussion.workbench.ui.views.PSContentDesignView"/>
+       <viewShortcut id="com.percussion.workbench.ui.views.PSSecurityDesignView"/>
+       <viewShortcut id="com.percussion.workbench.ui.views.PSSystemDesignView"/>
+       <viewShortcut id="com.percussion.workbench.ui.views.PSUiElementsDesignView"/>
+    </perspectiveExtension>
+ </extension>
+ <extension
+       point="org.eclipse.ui.actionSetPartAssociations">
+    <actionSetPartAssociation targetID="com.percussion.actions.connection">
+       <part id="com.percussion.workbench.ui.views.PSContentDesignView"/>
+       <part id="com.percussion.workbench.ui.views.PSCommunityVisibilityView"/>
+       <part id="com.percussion.workbench.ui.views.PSAssemblyDesignView"/>
+       <part id="com.percussion.workbench.ui.views.PSUiElementsDesignView"/>
+       <part id="com.percussion.workbench.ui.views.PSSecurityDesignView"/>
+       <part id="com.percussion.workbench.ui.views.PSSystemDesignView"/>
+       <part id="com.percussion.workbench.ui.views.PSXmlServerDesignView"/>
+       <part id="com.percussion.workbench.ui.views.PSDatabaseExplorerView"/>
+    </actionSetPartAssociation>
+ </extension>
+
+</plugin>

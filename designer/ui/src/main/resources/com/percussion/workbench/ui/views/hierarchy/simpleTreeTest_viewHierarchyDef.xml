@@ -1,0 +1,33 @@
+<!--
+This is a test file for use by the PSDeclarativeHierarchyTest.java class.
+It provides a simple tree composed solely of Nodes. It has sorting of various
+types: document, ascending and descending.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Documents and Settings\paulhoward\My Documents\viewHierarchyDef.xsd">
+   <Node labelKey="zNode 0-1">
+      <Description>Description of Node 1.</Description>
+      <Node labelKey="Node 1-1"/>
+      <Node labelKey="Node 1-2"/>
+   </Node>
+   <Node labelKey="aNode 0-2">
+      <NodeProperty name="foo">bar</NodeProperty>
+      <Node sorting="descending" labelKey="Node 1-1">
+         <Node labelKey="Node 2-1">
+            <Node sorting="ascending" labelKey="Node 3-1">
+               <Node labelKey="zNode 4-1">
+                  <Node labelKey="Node 5-1">
+                     <Node labelKey="Node 6-1"/>
+                  </Node>
+               </Node>
+               <!-- these nodes will be treated as leaves because they don't have children -->
+               <Node labelKey="ANode 4-2"/>
+               <Node labelKey="ZNode 4-3"/>
+               <Node labelKey="aNode 4-4"/>
+            </Node>
+         </Node>
+         <Node labelKey="zNode 2-2"/>
+      </Node>
+      <Node labelKey="Node 1-2"/>
+   </Node>
+   <Node labelKey="xNode 0-3"/>
+</TreeDef>

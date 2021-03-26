@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="userfile-list">
+    <element name="hierarchy-node" property="all" updater="addHierarchyNode" forceAccessible="true"/>
+  </element>
+</info>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 1.1a for Windows">
+	<TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY>
+
+<P><FONT SIZE="6"><B>Module: <I>Monitoring</I></B></FONT></P>
+<P>This module helps monitor E2 server activities. Using this module it is possible to monitor the following activities
+of E2 server,</P>
+
+<UL>
+	<LI>Users sessions
+	<LI>E2 threads
+	<LI>Executing remote commands
+</UL>
+
+<P><BR>
+<FONT SIZE="5"><I>User statistics</I></FONT><BR>
+<IMG SRC="users.gif" WIDTH="641" HEIGHT="439" ALIGN="BOTTOM" BORDER="0"></P>
+<P>The current user statistics will be in <EM>symantec.itoos.awt.MultiList</EM> control. collection of <EM>com.percussion.server.PSServerUserStats</EM>
+objects will be used to manage server statistics. Another Update button will be provided on this acreen to save
+the Update interval changes.</P>
+<P><BR>
+<FONT SIZE="5"><I>Thread statistics</I></FONT></P>
+<P><IMG SRC="threads.gif" WIDTH="641" HEIGHT="439" ALIGN="BOTTOM" BORDER="0"></P>
+<P>All the currently running threads in the E2 server will be displayed in this screen. This information will be
+collected from E2 server memory and sent to admin client in an XML file. The XML file will be converted to collection
+of <EM>com.percussion.server.PSServerThreadStats</EM> objects to show it in the UI. An update button will be included
+in this screen to save the Update interval.</P>
+<P><BR>
+<FONT SIZE="5"><I>Remote console</I></FONT></P>
+<P><IMG SRC="console.gif" WIDTH="641" HEIGHT="439" ALIGN="BOTTOM" BORDER="0"></P>
+<P>This module will be used to execute some simple commands on E2 remotely. An action item will be defined for
+each of these commands. Some of the actions will be</P>
+
+<UL>
+	<LI>Start application (App name as paramemter)
+	<LI>Stop a running application (App name as parameter)
+	<LI>Stop server
+	<LI>Start server
+	<LI>Load an exe on the server
+	<LI>Get statistic value (like server running since)
+	<LI>Server version and Web server type version etc.
+</UL>
+
+<P>The response to these commsnds from the server will be displyed in the output window.
+
+</BODY>
+
+</HTML>

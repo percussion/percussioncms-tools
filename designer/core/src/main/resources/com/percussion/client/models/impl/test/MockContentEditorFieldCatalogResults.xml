@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentEditorFieldCatalogResults>
+   <System>
+      <SearchField name="sys_title">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="System Title"/>
+      </SearchField>
+      <SearchField name="sys_contentstateid">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Workflow State ID"/>
+      </SearchField>
+      <SearchField name="sys_reminderdate">
+
+         <Field contentTypeId="anyContentType" datatype="datetime" displayName="Reminder Date" mnemonic="r"/>
+      </SearchField>
+      <SearchField name="sys_contentlastmodifieddate">
+         <Field contentTypeId="anyContentType" datatype="datetime" displayName="Last modified date"/>
+      </SearchField>
+      <SearchField name="sys_communityid">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Community">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+
+                  <Value>1003</Value>
+                  <DisplayLabel>Corporate Investments</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>1004</Value>
+                  <DisplayLabel>Corporate Investments Admin</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>10</Value>
+                  <DisplayLabel>Default</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>1002</Value>
+                  <DisplayLabel>Enterprise Investments</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>1001</Value>
+                  <DisplayLabel>Enterprise Investments Admin</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+
+      <SearchField name="sys_contentlastmodifier">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Last modified by"/>
+      </SearchField>
+      <SearchField name="sys_workflowid">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Workflow">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>4</Value>
+
+                  <DisplayLabel>Simple Workflow</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>5</Value>
+                  <DisplayLabel>Standard Workflow</DisplayLabel>
+               </DisplayEntry>
+               <PSXChoiceFilter>
+
+                  <DependentField dependencyType="required" fieldRef="sys_communityid"/>
+                  <DependentField dependencyType="required" fieldRef="sys_contenttypeid"/>
+                  <PSXUrlRequest>
+                     <Href>sys_psxContentEditorCataloger/WorkflowContentTypeCommunityLookup.xml</Href>
+                     <Anchor/>
+                  </PSXUrlRequest>
+               </PSXChoiceFilter>
+            </DisplayChoices>
+
+         </Field>
+      </SearchField>
+      <SearchField name="sys_contenttypeid">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Content Type">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>301</Value>
+                  <DisplayLabel>Auto Index</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>302</Value>
+                  <DisplayLabel>Brief</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>303</Value>
+
+                  <DisplayLabel>Calendar</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>304</Value>
+                  <DisplayLabel>Category</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>305</Value>
+                  <DisplayLabel>Contacts</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>306</Value>
+                  <DisplayLabel>Event</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>308</Value>
+                  <DisplayLabel>External Link</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>309</Value>
+                  <DisplayLabel>File</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>311</Value>
+                  <DisplayLabel>Generic</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>310</Value>
+
+                  <DisplayLabel>Generic Word</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>312</Value>
+                  <DisplayLabel>Home</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>307</Value>
+                  <DisplayLabel>Image</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>313</Value>
+                  <DisplayLabel>NavImage</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>315</Value>
+                  <DisplayLabel>NavTree</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>314</Value>
+                  <DisplayLabel>Navon</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>316</Value>
+                  <DisplayLabel>Press Release</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>319</Value>
+
+                  <DisplayLabel>TEST_EPHOX</DisplayLabel>
+               </DisplayEntry>
+               <PSXChoiceFilter>
+                  <DependentField dependencyType="required" fieldRef="sys_communityid"/>
+                  <PSXUrlRequest>
+                     <Href>sys_psxContentEditorCataloger/ContentTypeCommunityLookup.xml</Href>
+                     <Anchor/>
+                  </PSXUrlRequest>
+
+               </PSXChoiceFilter>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="sys_lang">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Locale">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>en-us</Value>
+
+                  <DisplayLabel>US English</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="sys_contentcreatedby">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Created by"/>
+      </SearchField>
+
+      <SearchField name="sys_contentid">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Content id"/>
+      </SearchField>
+      <SearchField name="sys_contentexpirydate">
+         <Field contentTypeId="anyContentType" datatype="datetime" displayName="Expiration Date" mnemonic="e"/>
+      </SearchField>
+      <SearchField name="sys_contentcreateddate">
+         <Field contentTypeId="anyContentType" datatype="datetime" displayName="Created on"/>
+      </SearchField>
+
+      <SearchField name="sys_suffix">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Suffix" mnemonic="S"/>
+      </SearchField>
+      <SearchField name="sys_objecttype">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Object type"/>
+      </SearchField>
+      <SearchField name="sys_contentcheckoutusername">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Checked out user name"/>
+      </SearchField>
+
+      <SearchField name="sys_contentstartdate">
+         <Field contentTypeId="anyContentType" datatype="datetime" displayName="Start Date" mnemonic="D"/>
+      </SearchField>
+   </System>
+   <Shared>
+      <SearchField name="item_type">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="File Type" mnemonic="T"/>
+      </SearchField>
+      <SearchField name="img2_filename">
+
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Mini File Name"/>
+      </SearchField>
+      <SearchField name="item_size">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="File Size" mnemonic="z"/>
+      </SearchField>
+      <SearchField name="img2_height">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Mini Height"/>
+      </SearchField>
+      <SearchField name="img_alt">
+
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Image Alt Text" mnemonic="x"/>
+      </SearchField>
+      <SearchField name="img1_filename">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Image File Name"/>
+      </SearchField>
+      <SearchField name="default_variantid">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Default Variant ID" mnemonic="V">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+
+                  <Value>332</Value>
+                  <DisplayLabel>P - EI Press Release</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="img2_ext">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Mini Extension"/>
+
+      </SearchField>
+      <SearchField name="img1_height">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Image Height"/>
+      </SearchField>
+      <SearchField name="img1_width">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Image Width"/>
+      </SearchField>
+      <SearchField name="body">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Body" mnemonic="B"/>
+
+      </SearchField>
+      <SearchField name="item_ext">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="File Extension" mnemonic="e"/>
+      </SearchField>
+      <SearchField name="category">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Categories">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>692</Value>
+
+                  <DisplayLabel>CI Estate Planning</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>669</Value>
+                  <DisplayLabel>CI Funds</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>690</Value>
+                  <DisplayLabel>CI Insurance</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>658</Value>
+                  <DisplayLabel>CI Insurance Products</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>649</Value>
+                  <DisplayLabel>CI Investment Advice</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>651</Value>
+                  <DisplayLabel>CI Mortgages</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>581</Value>
+                  <DisplayLabel>CI Portfolio Managers</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>648</Value>
+
+                  <DisplayLabel>CI Products and Services</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>684</Value>
+                  <DisplayLabel>CI Retirement</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>677</Value>
+                  <DisplayLabel>CI Tax</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>339</Value>
+                  <DisplayLabel>EI Estate Planning</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>376</Value>
+                  <DisplayLabel>EI Funds</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>371</Value>
+                  <DisplayLabel>EI Home Purchase</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>344</Value>
+                  <DisplayLabel>EI Insurance</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>402</Value>
+
+                  <DisplayLabel>EI Insurance Products</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>476</Value>
+                  <DisplayLabel>EI Investment Advice</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>408</Value>
+                  <DisplayLabel>EI Mortgages</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>485</Value>
+                  <DisplayLabel>EI Mortgages and Home Finance</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>487</Value>
+                  <DisplayLabel>EI Products and Services</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>350</Value>
+                  <DisplayLabel>EI Retirement</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>356</Value>
+                  <DisplayLabel>EI Tax</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>366</Value>
+
+                  <DisplayLabel>Home Equity</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="keywords">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Keywords" mnemonic="K"/>
+      </SearchField>
+
+      <SearchField name="filename">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="File Name" mnemonic="N"/>
+      </SearchField>
+      <SearchField name="img1_size">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Image File Size"/>
+      </SearchField>
+      <SearchField name="img1_ext">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Image Extension"/>
+      </SearchField>
+
+      <SearchField name="img2_size">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Mini File Size"/>
+      </SearchField>
+      <SearchField name="img2_type">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Mini Mime Type"/>
+      </SearchField>
+      <SearchField name="webdavowner">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="WebDAV Owner" mnemonic="O"/>
+      </SearchField>
+
+      <SearchField name="img1_type">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Image Mime Type"/>
+      </SearchField>
+      <SearchField name="description">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Description" mnemonic="D"/>
+      </SearchField>
+      <SearchField name="img2_width">
+         <Field contentTypeId="anyContentType" datatype="integer" displayName="Mini Width"/>
+      </SearchField>
+
+      <SearchField name="item_filename">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Binary Filename" mnemonic="B"/>
+      </SearchField>
+      <SearchField name="callout">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Callout" mnemonic="o"/>
+      </SearchField>
+      <SearchField name="displaytitle">
+         <Field contentTypeId="anyContentType" datatype="text" displayName="Title" mnemonic="t"/>
+      </SearchField>
+
+   </Shared>
+   <Local>
+      <SearchField name="phone">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Phone" mnemonic="h"/>
+      </SearchField>
+      <SearchField name="rolloverimg_filename">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Rollover Image Filename"/>
+      </SearchField>
+      <SearchField name="ephox1">
+
+         <Field contentTypeId="TEST_EPHOX" datatype="text" displayName="Ephox1"/>
+      </SearchField>
+      <SearchField name="calendar_start">
+         <Field contentTypeId="Calendar" datatype="datetime" displayName="Calendar Date" mnemonic="l"/>
+      </SearchField>
+      <SearchField name="address1">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Address 1" mnemonic="1"/>
+      </SearchField>
+      <SearchField name="includehome">
+
+         <Field contentTypeId="Press Release" datatype="text" displayName="Include on Home Page">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>yes</Value>
+                  <DisplayLabel>yes</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+
+      </SearchField>
+      <SearchField name="fax">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Fax" mnemonic="x"/>
+      </SearchField>
+      <SearchField name="rolloverimg_size">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Rollover Image Size"/>
+      </SearchField>
+      <SearchField name="address2">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Address 2" mnemonic="2"/>
+
+      </SearchField>
+      <SearchField name="dept">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Dept" mnemonic="D"/>
+      </SearchField>
+      <SearchField name="cellphone">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Cell Phone" mnemonic="h"/>
+      </SearchField>
+      <SearchField name="event_end">
+         <Field contentTypeId="Event" datatype="datetime" displayName="Event End Date" mnemonic="e"/>
+
+      </SearchField>
+      <SearchField name="activeimg_ext">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Active Image Extension"/>
+      </SearchField>
+      <SearchField name="rolloverimg_height">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Rollover Image Height"/>
+      </SearchField>
+      <SearchField name="event_location">
+         <Field contentTypeId="Event" datatype="text" displayName="Event Location" mnemonic="L"/>
+
+      </SearchField>
+      <SearchField name="PageAuthor">
+         <Field contentTypeId="Generic Word" datatype="text" displayName="Page Author"/>
+      </SearchField>
+      <SearchField name="event_type">
+         <Field contentTypeId="Event" datatype="text" displayName="Event Type" mnemonic="t">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>1</Value>
+
+                  <DisplayLabel>Conference</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>2</Value>
+                  <DisplayLabel>Seminar</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>3</Value>
+                  <DisplayLabel>Training</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="inactiveimg_height">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Inactive Image Height"/>
+
+      </SearchField>
+      <SearchField name="activeimg_height">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Active Image Height"/>
+      </SearchField>
+      <SearchField name="activeimg_width">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Active Image Width"/>
+      </SearchField>
+      <SearchField name="placeholder">
+         <Field contentTypeId="Home" datatype="text" displayName="Placeholder"/>
+
+         <Field contentTypeId="Generic" datatype="text" displayName="Placeholder"/>
+         <Field contentTypeId="Category" datatype="text" displayName="Placeholder"/>
+         <Field contentTypeId="Brief" datatype="text" displayName="Placeholder"/>
+      </SearchField>
+      <SearchField name="event_start">
+         <Field contentTypeId="Event" datatype="datetime" displayName="Event Start Date" mnemonic="D"/>
+      </SearchField>
+      <SearchField name="firstname">
+         <Field contentTypeId="Contacts" datatype="text" displayName="First Name" mnemonic="F"/>
+
+      </SearchField>
+      <SearchField name="inactiveimg_filename">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Inactive Image File Name"/>
+      </SearchField>
+      <SearchField name="rolloverimg_type">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Rollover Image Type"/>
+      </SearchField>
+      <SearchField name="state">
+         <Field contentTypeId="Contacts" datatype="text" displayName="State" mnemonic="S"/>
+
+      </SearchField>
+      <SearchField name="zipcode">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Zip Code" mnemonic="Z"/>
+      </SearchField>
+      <SearchField name="inactiveimg_ext">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Inactive Image Extension"/>
+      </SearchField>
+      <SearchField name="bodysource_encoding">
+         <Field contentTypeId="Generic Word" datatype="text" displayName="Body Source Encoding"/>
+
+      </SearchField>
+      <SearchField name="no_variable">
+         <Field contentTypeId="NavTree" datatype="text" displayName="Variable Selector" mnemonic="V">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>Corporate Investments</Value>
+                  <DisplayLabel>Corporate Investments</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>Enterprise Investments</Value>
+                  <DisplayLabel>Enterprise Investments</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>rxs_navbase</Value>
+                  <DisplayLabel>rxs_navbase</DisplayLabel>
+
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+         <Field contentTypeId="Navon" datatype="text" displayName="Variable Selector" mnemonic="V">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>Corporate Investments</Value>
+                  <DisplayLabel>Corporate Investments</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>Enterprise Investments</Value>
+                  <DisplayLabel>Enterprise Investments</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>rxs_navbase</Value>
+
+                  <DisplayLabel>rxs_navbase</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="no_selector">
+         <Field contentTypeId="NavTree" datatype="text" displayName="Image Selector" mnemonic="S">
+            <DisplayChoices>
+
+               <DisplayEntry selected="no">
+                  <Value>ciau</Value>
+                  <DisplayLabel>Corporate Investments AU</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>cihp</Value>
+                  <DisplayLabel>Corporate Investments HP</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>ciia</Value>
+                  <DisplayLabel>Corporate Investments IA</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>cipm</Value>
+
+                  <DisplayLabel>Corporate Investments PM</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>cips</Value>
+                  <DisplayLabel>Corporate Investments PS</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>home</Value>
+                  <DisplayLabel>Home Page Logo</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>section</Value>
+                  <DisplayLabel>SectionImage</DisplayLabel>
+               </DisplayEntry>
+
+            </DisplayChoices>
+         </Field>
+         <Field contentTypeId="Navon" datatype="text" displayName="Image Selector" mnemonic="S">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>ciau</Value>
+                  <DisplayLabel>Corporate Investments AU</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>cihp</Value>
+                  <DisplayLabel>Corporate Investments HP</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>ciia</Value>
+                  <DisplayLabel>Corporate Investments IA</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>cipm</Value>
+                  <DisplayLabel>Corporate Investments PM</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>cips</Value>
+
+                  <DisplayLabel>Corporate Investments PS</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>home</Value>
+                  <DisplayLabel>Home Page Logo</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>section</Value>
+                  <DisplayLabel>SectionImage</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="rolloverimg_ext">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Rollover Image Extension"/>
+
+      </SearchField>
+      <SearchField name="inactiveimg_size">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Inactive Image Size"/>
+      </SearchField>
+      <SearchField name="pr_type">
+         <Field contentTypeId="Press Release" datatype="text" displayName="Type" mnemonic="T">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>CORPORATE</Value>
+
+                  <DisplayLabel>Corporate</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>PRODUCTRELATED</Value>
+                  <DisplayLabel>Product-Related</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>REG_ASIA</Value>
+                  <DisplayLabel>Regional Asia</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>REG_EUROPE</Value>
+                  <DisplayLabel>Regional Europe</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>REG_US</Value>
+                  <DisplayLabel>Regional US</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="query">
+
+         <Field contentTypeId="Calendar" datatype="text" displayName="Query" mnemonic="Q">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>../rxs_Event_auto/allevents_calendarmonth.xml</Value>
+                  <DisplayLabel>Monthly Calendar</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+
+         <Field contentTypeId="Auto Index" datatype="text" displayName="Query" mnemonic="Q">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>../rxs_PressRelease_auto/specifiedyear.xml?pr_year=2004&amp;sys_variantid=309</Value>
+                  <DisplayLabel>All Press Releases 2004</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>../rxs_PressRelease_auto/specifiedyear.xml?pr_year=2003&amp;sys_variantid=309</Value>
+                  <DisplayLabel>All Press Releases 2005</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="rich">
+
+         <Field contentTypeId="File" datatype="text" displayName="Rich"/>
+      </SearchField>
+      <SearchField name="no_propagate">
+         <Field contentTypeId="NavTree" datatype="text" displayName="Propagate" mnemonic="g">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>1</Value>
+                  <DisplayLabel>Yes</DisplayLabel>
+
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+         <Field contentTypeId="Navon" datatype="text" displayName="Propagate" mnemonic="g">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>1</Value>
+                  <DisplayLabel>Yes</DisplayLabel>
+
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="url">
+         <Field contentTypeId="External Link" datatype="text" displayName="URL" mnemonic="U"/>
+      </SearchField>
+      <SearchField name="inactiveimg_type">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Inactive Image Type"/>
+
+      </SearchField>
+      <SearchField name="rolloverimg_width">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Rollover Image Width"/>
+      </SearchField>
+      <SearchField name="city">
+         <Field contentTypeId="Contacts" datatype="text" displayName="City" mnemonic="i"/>
+      </SearchField>
+      <SearchField name="activeimg_type">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Active Image Type"/>
+
+      </SearchField>
+      <SearchField name="ephox2">
+         <Field contentTypeId="TEST_EPHOX" datatype="text" displayName="Ephox2"/>
+      </SearchField>
+      <SearchField name="selector">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Image Selector" mnemonic="S">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>ciau</Value>
+
+                  <DisplayLabel>Corporate Investments AU</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>cihp</Value>
+                  <DisplayLabel>Corporate Investments HP</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>ciia</Value>
+                  <DisplayLabel>Corporate Investments IA</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>cipm</Value>
+                  <DisplayLabel>Corporate Investments PM</DisplayLabel>
+               </DisplayEntry>
+
+               <DisplayEntry selected="no">
+                  <Value>cips</Value>
+                  <DisplayLabel>Corporate Investments PS</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>home</Value>
+                  <DisplayLabel>Home Page Logo</DisplayLabel>
+
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>section</Value>
+                  <DisplayLabel>SectionImage</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+
+      <SearchField name="file_category">
+         <Field contentTypeId="File" datatype="text" displayName="File Category" mnemonic="g">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>3</Value>
+                  <DisplayLabel>Documentation</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>2</Value>
+                  <DisplayLabel>Flash</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>1</Value>
+                  <DisplayLabel>PDF</DisplayLabel>
+               </DisplayEntry>
+
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="img_category">
+         <Field contentTypeId="Image" datatype="text" displayName="Image Category" mnemonic="g">
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>1</Value>
+
+                  <DisplayLabel>Photo</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>2</Value>
+                  <DisplayLabel>Product</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+
+                  <Value>3</Value>
+                  <DisplayLabel>Sidebar</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="nt_theme">
+         <Field contentTypeId="NavTree" datatype="text" displayName="Theme" mnemonic="h">
+
+            <DisplayChoices>
+               <DisplayEntry selected="no">
+                  <Value>ei</Value>
+                  <DisplayLabel>Enterprise Investments</DisplayLabel>
+               </DisplayEntry>
+               <DisplayEntry selected="no">
+                  <Value>ci</Value>
+
+                  <DisplayLabel>Corporate Investments</DisplayLabel>
+               </DisplayEntry>
+            </DisplayChoices>
+         </Field>
+      </SearchField>
+      <SearchField name="lastname">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Last Name" mnemonic="L"/>
+      </SearchField>
+
+      <SearchField name="country">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Country" mnemonic="o"/>
+      </SearchField>
+      <SearchField name="ephox4">
+         <Field contentTypeId="TEST_EPHOX" datatype="text" displayName="Ephox4"/>
+      </SearchField>
+      <SearchField name="middlename">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Middle Name" mnemonic="m"/>
+      </SearchField>
+
+      <SearchField name="inactiveimg_width">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Inactive Image Width"/>
+      </SearchField>
+      <SearchField name="activeimg_size">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Active Image Size"/>
+      </SearchField>
+      <SearchField name="email">
+         <Field contentTypeId="Contacts" datatype="text" displayName="Email" mnemonic="m"/>
+      </SearchField>
+
+      <SearchField name="ephox3">
+         <Field contentTypeId="TEST_EPHOX" datatype="text" displayName="Ephox3"/>
+      </SearchField>
+      <SearchField name="activeimg_filename">
+         <Field contentTypeId="NavImage" datatype="text" displayName="Active Image File Name"/>
+      </SearchField>
+      <SearchField name="bodysource_filename">
+         <Field contentTypeId="Generic Word" datatype="text" displayName="File Name" mnemonic="N"/>
+      </SearchField>
+
+   </Local>
+</ContentEditorFieldCatalogResults>
