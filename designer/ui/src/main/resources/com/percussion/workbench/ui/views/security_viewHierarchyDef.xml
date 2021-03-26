@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   This file defines the structure for the Rhythmyx workbench 'Security Design' 
+   view. This view shows communities and roles as described in the functional 
+   specification.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="ROLE">
+      <Handler iconPath="icons/role16.gif" />
+   </InstanceTree>
+   <InstanceTree objectIds="COMMUNITY">
+      <Handler iconPath="icons/community16.gif" className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"/>
+   </InstanceTree>
+   <Node labelKey="Roles">
+      <Description>Contains all roles known to the server.</Description>
+      <Node labelKey="Community">
+         <Description>This node contains those roles assigned to 1 or more communities.</Description>
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.security.PSRoleCatalogFactory"
+               isReference="true">
+            <CatalogProperty name="category">community</CatalogProperty>
+         </Catalog>
+      </Node>
+      <Node labelKey="Workflow">
+         <Description>This node contains those roles assigned to 1 or more workflows.</Description>
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.security.PSRoleCatalogFactory"
+               isReference="true">
+            <CatalogProperty name="category">workflow</CatalogProperty>
+         </Catalog>
+      </Node>
+      <Node labelKey="Unassigned">
+         <Description>This node contains roles that are not assigned to any community or workflow.</Description>
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.security.PSRoleCatalogFactory"
+               isReference="true">
+            <CatalogProperty name="category">unassigned</CatalogProperty>
+         </Catalog>
+      </Node>
+   </Node>
+   <Node labelKey="Communities" objectHomeType="COMMUNITY" sorting="ascending">
+      <Description />
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+            allowedTypes="COMMUNITY"
+            />
+      <Catalog type="object" name="COMMUNITY">
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.security.PSCommunityExpansionFactory" isReference="true"/>
+      </Catalog>
+   </Node>
+</TreeDef>

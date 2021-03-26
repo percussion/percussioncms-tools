@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+	$Id: predefinedUdfs.xml 1.10 2000/02/29 01:33:53Z paulhoward Release $
+
+	These functions have been written and supplied by Percussion Software as
+	part of the Rhythmyx distribution. They provide simple data transformations
+	that can be used when mapping data from the backend database to the XML 
+	document.
+
+	This file should not be modified unless it is renamed, as updates to the
+	software will overwrite this file with newer versions without warning.
+
+	Newer versions of this file will be available on the Percussion website.
+
+	Copyright 1999, Percussion Software Inc.
+-->
+
+<!-- The DTD (document type definition) for the XML file -->
+
+<!DOCTYPE Extensions [
+	<!-- There is one script definition for each UDF -->
+	<!ELEMENT Extensions (PSXScriptExtensionDef*)>
+
+	<!ELEMENT PSXScriptExtensionDef (PSXExtensionDef, body)>
+	<!ATTLIST PSXScriptExtensionDef 
+		id CDATA #REQUIRED >
+
+	<!ELEMENT PSXExtensionDef (HandlerDef, name, description?, version?, type, ParamDefs?)>
+	<!ATTLIST PSXExtensionDef 
+		id CDATA #REQUIRED >
+
+	<!-- This is the actual code that will be executed by this extension's 
+      handler -->
+	<!ELEMENT body (#PCDATA)>
+
+	<!-- The handler name in this definition is used to find the handler on the server -->
+	<!ELEMENT HandlerDef (PSXExtensionHandlerDef)>
+	<!ELEMENT PSXExtensionHandlerDef (name, description?)>
+
+	<!-- All handlers of these objects must be scriptable, by definition. -->	
+	<!ATTLIST PSXExtensionHandlerDef 
+		id CDATA #REQUIRED 
+		scriptable CDATA #FIXED "yes" >
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+
+	<!-- The version of this UDF. Highly recommended. -->
+	<!ELEMENT version (#PCDATA)>
+
+	<!-- type Must be "1" -->
+	<!ELEMENT type (#PCDATA)>
+
+	<!-- These define the parameters sent to the function. -->
+	<!ELEMENT ParamDefs (PSXExtensionParamDef*)>
+
+	<!ELEMENT PSXExtensionParamDef (name, dataType, description?)>
+	<!ATTLIST PSXExtensionParamDef 
+		id CDATA #REQUIRED >
+
+	<!-- One of the types supported by the handler, such as 'string', 'int', etc. -->
+	<!ELEMENT dataType (#PCDATA)>
+]>
+<!--  end DTD -->
+
+<!-- UDFs defined in version 1.0 have been converted to Java and moved to 
+      the server.  -->
+
+<Extensions/>

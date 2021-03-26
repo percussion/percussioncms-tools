@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 1.1a for Windows">
+	<TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+
+
+<BLOCKQUOTE>
+	<P>This package defines the Administration client UI for E2 server. The login page will be HTML with SSL connection
+	to E2 server. Admin client will be invoked by the following URL</P>
+	<P><EM>https://hostName/psxadmin.html.</EM></P>
+	<P>This brings up the login page for E2 server administration. Enter user name and administration password. If
+	this is the first time the admin client is called, use <EM>'admin'</EM> for both user name and password. E2 server
+	name field will be read only.</P>
+	<P><IMG SRC="doc-files/loginpage.gif" WIDTH="633" HEIGHT="441" ALIGN="BOTTOM" BORDER="0"></P>
+	<P>Pressing OK on this page sends the login request for E2 server with the following options.</P>
+	<P><EM>http://hostName/E2Hook?psxaction=adminOpen&amp;loginid=loginid&amp;loginpw=loginpw</EM></P>
+	<P>When the E2 server gets the request, it first verifies the that the login information to make sure that the
+	user is indeed administrator for this server. If this is successful, E2 server send the page with admin applet.
+	From this point on all the communication will be between admin Applet and E2 server.</P>
+	<P>E2 server name will be passed to the applet.</P>
+	<P><BR>
+	<IMG SRC="doc-files/adminApplet.gif" WIDTH="686" HEIGHT="553" ALIGN="BOTTOM" BORDER="0"></P>
+	<P><BR>
+	<SAMP><STRONG>Note: If this is the first login into the admin client, the admin password should be changed from
+	'admin' to some valid password.</STRONG></SAMP></P>
+	<P><IMG SRC="doc-files/password.gif" WIDTH="361" HEIGHT="197" ALIGN="BOTTOM" BORDER="0"></P>
+	<P>In case server is not running, an common error page will be returned to the browser.</P>
+	<P>For more details on administration applet see <EM>com.percussion.server.admin.PSAdminApplet</EM> class or follow
+	the links for individual administration modules.</P>
+
+	<P>
+	<TABLE BORDER="1" WIDTH="100%">
+	<TR>
+		<TD WIDTH="30%"><A HREF="doc-files/Status.html">Status</A></TD>
+		<TD WIDTH="70%">Server, Application status display. Commands to see more details of server \ application and to manage them</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="30%"><A HREF="doc-files/settings.html">Settings</A></TD>
+		<TD WIDTH="70%">Handles E2 server configuration options related to <EM>Performance</EM>, <EM>data</EM> <EM>caching</EM>, <EM>log</EM>
+			and <EM>Object store</EM>.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="30%"><A HREF="doc-files/Security.html">Security</A></TD>
+		<TD WIDTH="70%">Handles security related options like <EM>providers, roles, ACL, credentials </EM>and<EM> encryption</EM></TD>
+	</TR>
+	<TR>
+		<TD WIDTH="30%"><A HREF="doc-files/Monitor.html">Monitor</A></TD>
+		<TD WIDTH="70%">Server monitoring and statistics.</TD>
+	</TR>
+	</TABLE>
+
+	</BLOCKQUOTE>
+
+</BODY>
+
+</HTML>

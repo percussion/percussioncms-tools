@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file defines the configuration for various operations required in 
+	proxies. The single proxy class can provide most common functionality using 
+	this config file. The Java object version of this file is 
+	PSWebServicesProxyConfig.java and the user of this information is 
+	PSCmsModelProxy  that uses reflection to do its job for various types of objects
+-->
+<WebServicesProxyConfig>
+	<!-- There will be one proxy defined for one object type, the type being 
+		the string representation of primary object type defined PSObjectTypes 
+		enumeration. forType attribute holds this string -->
+	<Proxy forType="SLOT">
+		<!-- The information required to catalog the summaries of the 
+			specified object type. methodName attribute holds the name of 
+			the method on the request class that is defined below  -->
+		<Operation name="catalog" methodName="findSlots">
+			<!-- web services request class name -->
+			<Request
+				class="com.percussion.webservices.assemblydesign.FindSlotsRequest">
+			</Request>
+			<!-- web services response class name that is always the same for 
+				all object type services and hence no tused for any object type -->
+			<Response
+				class="[Lcom.percussion.webservices.common.PSObjectSummary;" />
+		</Operation>
+		<!-- The information required to create new objects of the 
+			specified object type. methodName attribute holds the name of 
+			the method on the request class that is defined below  -->
+		<Operation name="create" methodName="createSlots">
+			<!--  All create methods take only string array and hence not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- The response class -->
+			<Response
+				class="[Lcom.percussion.services.assembly.data.PSTemplateSlot;">
+				<!-- not used as the transformers return the right objects -->
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<!-- The information required to delete existing objects of the 
+			specified object type. methodName attribute holds the name of 
+			the method on the request class that is defined below  -->
+		<Operation name="delete" methodName="deleteSlots">
+			<!-- web services request class name -->
+			<Request
+				class="com.percussion.webservices.assemblydesign.DeleteSlotsRequest">
+				<!-- not used since all delete services expect the long 
+					array that is ids of the object to be deleted-->
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<!-- The information required to load objects of the specified 
+			object type. methodName attribute holds the name of 
+			the method on the request class that is defined below  -->
+		<Operation name="load" methodName="loadSlots">
+			<!-- web services request class name -->
+			<Request
+				class="com.percussion.webservices.assemblydesign.LoadSlotsRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<!-- web services response class name -->
+			<Response
+				class="[Lcom.percussion.services.assembly.data.PSTemplateSlot;" />
+		</Operation>
+		<!-- The information required to save supplied objects of the 
+			specified object type. methodName attribute holds the name of 
+			the method on the request class that is defined below  -->
+		<Operation name="save" methodName="saveSlots">
+			<!-- web services request class name -->
+			<Request
+				class="com.percussion.webservices.assemblydesign.SaveSlotsRequest">
+				<SetMethod name="setPSTemplateSlot">
+					<Param
+						class="[Lcom.percussion.webservices.assembly.data.PSTemplateSlot;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<!-- No response class for save method -->
+		</Operation>
+		<!-- The information required to rename supplied objects of the 
+			specified object type. The only attribute used is the 'class'  -->
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.services.assembly.data.PSTemplateSlot" />
+	</Proxy>
+	<Proxy forType="TEMPLATE">
+		<Operation name="catalog" methodName="findAssemblyTemplates">
+			<Request
+				class="com.percussion.webservices.assemblydesign.FindAssemblyTemplatesRequest">
+			</Request>
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="create" methodName="createAssemblyTemplates">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.client.objectstore.PSUiAssemblyTemplate;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="delete" methodName="deleteAssemblyTemplates">
+			<Request
+				class="com.percussion.webservices.assemblydesign.DeleteAssemblyTemplatesRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="load" methodName="loadAssemblyTemplates">
+			<Request
+				class="com.percussion.webservices.assemblydesign.LoadAssemblyTemplatesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.client.objectstore.PSUiAssemblyTemplate;" />
+		</Operation>
+		<Operation name="save" methodName="saveAssemblyTemplates">
+			<Request
+				class="com.percussion.webservices.assemblydesign.SaveAssemblyTemplatesRequest">
+				<SetMethod name="setPSAssemblyTemplate">
+					<Param
+						class="[Lcom.percussion.webservices.assembly.data.PSAssemblyTemplate;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.client.objectstore.PSUiAssemblyTemplate" />
+	</Proxy>
+	<Proxy forType="CONTENT_TYPE">
+		<Operation name="catalog" methodName="findContentTypes">
+			<Request
+				class="com.percussion.webservices.contentdesign.FindContentTypesRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="create" methodName="createContentTypes">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSItemDefinition;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="load" methodName="loadContentTypes">
+			<Request
+				class="com.percussion.webservices.contentdesign.LoadContentTypesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSItemDefinition;" />
+		</Operation>
+		<Operation name="delete" methodName="deleteContentTypes">
+			<Request
+				class="com.percussion.webservices.contentdesign.DeleteContentTypesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="save" methodName="saveContentTypes">
+			<Request
+				class="com.percussion.webservices.contentdesign.SaveContentTypesRequest">
+				<SetMethod name="setPSContentType">
+					<Param
+						class="[Lcom.percussion.webservices.content.PSContentType;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.cms.objectstore.PSItemDefinition" />
+	</Proxy>
+	<!-- Config for User File object type -->
+	<Proxy forType="USER_FILE">
+		<Operation name="delete" methodName="deleteHierarchyNodes">
+			<Request
+				class="com.percussion.webservices.uidesign.DeleteHierarchyNodesRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="load" methodName="loadHierarchyNodes">
+			<Request
+				class="com.percussion.webservices.uidesign.LoadHierarchyNodesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.services.ui.data.PSHierarchyNode;" />
+		</Operation>
+		<Operation name="save" methodName="saveHierarchyNodes">
+			<Request
+				class="com.percussion.webservices.uidesign.SaveHierarchyNodesRequest">
+				<SetMethod name="setPSHierarchyNode">
+					<Param
+						class="[Lcom.percussion.webservices.ui.data.PSHierarchyNode;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.services.ui.data.PSHierarchyNode" />
+	</Proxy>
+	<Proxy forType="KEYWORD">
+		<Operation name="catalog" methodName="findKeywords">
+			<Request
+				class="com.percussion.webservices.contentdesign.FindKeywordsRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="create" methodName="createKeywords">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.services.content.data.PSKeyword;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="load" methodName="loadKeywords">
+			<Request
+				class="com.percussion.webservices.contentdesign.LoadKeywordsRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.services.content.data.PSKeyword;" />
+		</Operation>
+		<Operation name="save" methodName="saveKeywords">
+			<Request
+				class="com.percussion.webservices.contentdesign.SaveKeywordsRequest">
+				<SetMethod name="setPSKeyword">
+					<Param
+						class="[Lcom.percussion.webservices.content.PSKeyword;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteKeywords">
+			<Request
+				class="com.percussion.webservices.contentdesign.DeleteKeywordsRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.services.content.data.PSKeyword" />
+	</Proxy>
+	<Proxy forType="LOCALE">
+		<Operation name="catalog" methodName="findLocales">
+			<Request
+				class="com.percussion.webservices.contentdesign.FindLocalesRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="load" methodName="loadLocales">
+			<Request
+				class="com.percussion.webservices.contentdesign.LoadLocalesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response class="[Lcom.percussion.i18n.PSLocale;" />
+		</Operation>
+		<Operation name="save" methodName="saveLocales">
+			<Request
+				class="com.percussion.webservices.contentdesign.SaveLocalesRequest">
+				<SetMethod name="setPSLocale">
+					<Param
+						class="[Lcom.percussion.webservices.content.PSLocale;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteLocales">
+			<Request
+				class="com.percussion.webservices.contentdesign.DeleteLocalesRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.i18n.PSLocale" />
+	</Proxy>
+	<Proxy forType="WORKFLOW">
+		<Operation name="catalog" methodName="findWorkflows">
+			<Request
+				class="com.percussion.webservices.systemdesign.FindWorkflowsRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+	</Proxy>
+	<Proxy forType="ROLE">
+		<Operation name="catalog" methodName="findRoles">
+			<Request
+				class="com.percussion.webservices.securitydesign.FindRolesRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+	</Proxy>
+	<Proxy forType="UI_DISPLAY_FORMAT">
+		<Operation name="catalog" methodName="findDisplayFormats">
+			<Request
+				class="com.percussion.webservices.uidesign.FindDisplayFormatsRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="create" methodName="createDisplayFormats">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSDisplayFormat;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="load" methodName="loadDisplayFormats">
+			<Request
+				class="com.percussion.webservices.uidesign.LoadDisplayFormatsRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSDisplayFormat;" />
+		</Operation>
+		<Operation name="save" methodName="saveDisplayFormats">
+			<Request
+				class="com.percussion.webservices.uidesign.SaveDisplayFormatsRequest">
+				<SetMethod name="setPSDisplayFormat">
+					<Param
+						class="[Lcom.percussion.webservices.ui.data.PSDisplayFormat;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteDisplayFormats">
+			<Request
+				class="com.percussion.webservices.uidesign.DeleteDisplayFormatsRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.cms.objectstore.PSDisplayFormat" />
+	</Proxy>
+	<Proxy forType="UI_VIEW">
+		<Operation name="create" methodName="createViews">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSSearch;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="load" methodName="loadViews">
+			<Request
+				class="com.percussion.webservices.uidesign.LoadViewsRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSSearch;" />
+		</Operation>
+		<Operation name="save" methodName="saveViews">
+			<Request
+				class="com.percussion.webservices.uidesign.SaveViewsRequest">
+				<SetMethod name="setPSViewDef">
+					<Param
+						class="[Lcom.percussion.webservices.ui.data.PSViewDef;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteViews">
+			<Request
+				class="com.percussion.webservices.uidesign.DeleteViewsRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.cms.objectstore.PSSearch" />
+	</Proxy>
+	<Proxy forType="UI_SEARCH">
+		<Operation name="create" methodName="createSearches">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSSearch;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="load" methodName="loadSearches">
+			<Request
+				class="com.percussion.webservices.uidesign.LoadSearchesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSSearch;" />
+		</Operation>
+		<Operation name="save" methodName="saveSearches">
+			<Request
+				class="com.percussion.webservices.uidesign.SaveSearchesRequest">
+				<SetMethod name="setPSSearchDef">
+					<Param
+						class="[Lcom.percussion.webservices.ui.data.PSSearchDef;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteSearches">
+			<Request
+				class="com.percussion.webservices.uidesign.DeleteSearchesRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.cms.objectstore.PSSearch" />
+	</Proxy>
+	<Proxy forType="UI_ACTION_MENU">
+		<Operation name="load" methodName="loadActions">
+			<Request
+				class="com.percussion.webservices.uidesign.LoadActionsRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.cms.objectstore.PSAction;" />
+		</Operation>
+		<Operation name="save" methodName="saveActions">
+			<Request
+				class="com.percussion.webservices.uidesign.SaveActionsRequest">
+				<SetMethod name="setPSAction">
+					<Param
+						class="[Lcom.percussion.webservices.ui.data.PSAction;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteActions">
+			<Request
+				class="com.percussion.webservices.uidesign.DeleteActionsRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.cms.objectstore.PSAction" />
+	</Proxy>
+	<Proxy forType="RELATIONSHIP_TYPE">
+		<Operation name="catalog" methodName="findRelationshipTypes">
+			<Request
+				class="com.percussion.webservices.systemdesign.FindRelationshipTypesRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="load" methodName="loadRelationshipTypes">
+			<Request
+				class="com.percussion.webservices.systemdesign.LoadRelationshipTypesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.design.objectstore.PSRelationshipConfig;" />
+		</Operation>
+		<Operation name="save" methodName="saveRelationshipTypes">
+			<Request
+				class="com.percussion.webservices.systemdesign.SaveRelationshipTypesRequest">
+				<SetMethod name="setPSRelationshipConfig">
+					<Param
+						class="[Lcom.percussion.webservices.system.PSRelationshipConfig;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteRelationshipTypes">
+			<Request
+				class="com.percussion.webservices.systemdesign.DeleteRelationshipTypesRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.design.objectstore.PSRelationshipConfig" />
+	</Proxy>
+	<Proxy forType="COMMUNITY">
+		<Operation name="catalog" methodName="findCommunities">
+			<Request
+				class="com.percussion.webservices.securitydesign.FindCommunitiesRequest" />
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="create" methodName="createCommunities">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.client.objectstore.PSUiCommunity;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="load" methodName="loadCommunities">
+			<Request
+				class="com.percussion.webservices.securitydesign.LoadCommunitiesRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.client.objectstore.PSUiCommunity;" />
+		</Operation>
+		<Operation name="save" methodName="saveCommunities">
+			<Request
+				class="com.percussion.webservices.securitydesign.SaveCommunitiesRequest">
+				<SetMethod name="setPSCommunity">
+					<Param
+						class="[Lcom.percussion.webservices.security.data.PSCommunity;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="delete" methodName="deleteCommunities">
+			<Request
+				class="com.percussion.webservices.securitydesign.DeleteCommunitiesRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.client.objectstore.PSUiCommunity" />
+	</Proxy>
+	<Proxy forType="ITEM_FILTER">
+		<Operation name="catalog" methodName="findItemFilters">
+			<Request
+				class="com.percussion.webservices.systemdesign.FindItemFiltersRequest">
+			</Request>
+			<Response
+				class="com.percussion.webservices.common.PSObjectSummary[]" />
+		</Operation>
+		<Operation name="create" methodName="createItemFilters">
+			<!--  not used -->
+			<Request class="[Ljava.lang.String;" />
+			<!-- end -->
+			<Response
+				class="[Lcom.percussion.services.filter.data.PSItemFilter;">
+				<GetMethod name="dummy">
+					<Return class="dummy" />
+				</GetMethod>
+			</Response>
+		</Operation>
+		<Operation name="delete" methodName="deleteItemFilters">
+			<Request
+				class="com.percussion.webservices.systemdesign.DeleteItemFiltersRequest">
+				<SetMethod name="setId">
+					<!-- not used -->
+					<Param class="long[]" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="load" methodName="loadItemFilters">
+			<Request
+				class="com.percussion.webservices.systemdesign.LoadItemFiltersRequest">
+				<SetMethod name="setId">
+					<Param class="long[]" />
+				</SetMethod>
+				<SetMethod name="setLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+				<SetMethod name="setOverrideLock">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+			<Response
+				class="[Lcom.percussion.services.filter.data.PSItemFilter;" />
+		</Operation>
+		<Operation name="save" methodName="saveItemFilters">
+			<Request
+				class="com.percussion.webservices.systemdesign.SaveItemFiltersRequest">
+				<SetMethod name="setPSItemFilter">
+					<Param
+						class="[Lcom.percussion.webservices.system.PSItemFilter;" />
+				</SetMethod>
+				<SetMethod name="setRelease">
+					<Param class="java.lang.Boolean" />
+				</SetMethod>
+			</Request>
+		</Operation>
+		<Operation name="rename" methodName="dummy"
+			class="com.percussion.services.filter.data.PSItemFilter" />
+	</Proxy>
+</WebServicesProxyConfig>

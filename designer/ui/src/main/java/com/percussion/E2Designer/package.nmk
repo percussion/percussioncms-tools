@@ -1,0 +1,488 @@
+ ############################################################################
+ #
+ # COPYRIGHT (c) 1999 - 2005 by Percussion Software, Inc., Woburn, MA USA.
+ # All rights reserved. This material contains unpublished, copyrighted
+ # work including confidential and proprietary information of Percussion.
+ #
+ ############################################################################
+ 
+PACKAGE=com.percussion.E2Designer
+
+#
+# These are our (internal) tests
+#
+TEST_CLASSES = \
+  CatalogerMetaDataTest \
+  PSDlgUtilTest \
+  UIFigureFrameTest \
+  UTParameterPanelTest \
+  PSXmlApplicationConverterTest
+
+# Strip export-restricted classes from the jar
+#
+.IF $(JAR_EXPORT)
+#	EXCLUDED_CLASSES += 
+.END
+
+#
+# Strip testing and non-essential classes from the jar
+#
+.IF $(JAR_PRODUCTION)
+	EXCLUDED_CLASSES += \
+		$(TEST_CLASSES)
+.END
+
+#
+# These will go in the default (unshared) jar file for this package.
+#
+DEFAULT_CLASSES = \
+AbstractDataTypeInfo \
+AdvancedCEPropertiesDialog \
+AllFileFilter \
+ApplicationFileFilter \
+ApplicationImportExport \
+ApplicationRequestor \
+AssertionFailedError \
+AutoCreateApplicationFile \
+AutoCreateConnector \
+AutoCreateDataset \
+AutoCreatePipe \
+AuxFilesTransferHelper \
+BECredentialCellEditor \
+BasicWindowMonitor \
+BitmapManager \
+BlackAndWhiteFilter \
+BleachImageFilter \
+Bookable \
+BrightenImageFilter \
+CatalogBackendColumns \
+CatalogCatalogers \
+CatalogCgiVariables \
+CatalogContentEditorFields \
+CatalogContentItemStatus \
+CatalogCookie \
+CatalogDatabaseFunctions \
+CatalogDatasources \
+CatalogDtds \
+CatalogerMetaData \
+CatalogExtendedBackendcolumns \
+CatalogExtendedTypes \
+CatalogExtensionCatalogHandler \
+CatalogHelper \
+CatalogHtmlParam \
+CatalogIndices \
+CatalogLocales \
+CatalogMacros \
+CatalogMimeTypes \
+CatalogObjectTypes \
+CatalogOwners \
+CatalogReceiver \
+CatalogServerExits \
+CatalogTables \
+CatalogUdfs \
+CatalogUserContext \
+CatalogWorkflowContentTypes \
+CatalogWorkflowWorkflows \
+CatalogXmlFields \
+CEDataTypeInfo \
+ConditionalCell \
+ConditionalCellEditor \
+ConditionalCellRenderer \
+ConditionalTableModel \
+ConditionalValidationError \
+ConditionalValidator \
+ContentTypeDialog \
+ControlParameterTable \
+CopyableFigureTransfer \
+DTBackendColumn \
+DTCgiVariable \
+DTContentItemData \
+DTContentItemStatus \
+DTCookie \
+DTDateLiteral \
+DTHtmlParameter \
+DTMacro \
+DTNumericLiteral \
+DTOriginatingRelationshipProperty \
+DTRelationshipProperty \
+DTSingleHtmlParameter \
+DTTextLiteral \
+DTUserContext \
+DTXMLField \
+DataEncryptorPanel \
+Debug \
+DialogMenuCellEditor \
+DisplayChoiceConstraint \
+DissolveFilter \
+DroppedBackendDatatank \
+DroppedPageDatatank \
+DroppedXslFile \
+EscMouseAdapter \
+ExceptionDialog \
+ExtendedBackendColumnData \
+ExtendedTypes \
+ExtendedTypesForeignKey \
+ExtendedTypesPrimaryKey \
+ExtendedTypesUniqueKeys \
+FigureCreationException \
+FigureFactory \
+FigureFactoryManager \
+FigureInfo \
+FigureTransfer \
+FileBrowserComboBoxModel \
+FileBrowserComboBoxRenderer \
+FileBrowserListRenderer \
+FunctionsPropertyDialog \
+GenericValidator \
+IAuxFilesTransfer \
+IConnectionSource \
+ICustomDropAction \
+ICustomDropSourceData \
+IDConsistencyConstraint \
+IDConstraint \
+IDQuantityConstraint \
+IDataCataloger \
+IDataTypeInfo \
+IDependencyManager \
+IDynamicActions \
+IEditor \
+IEditorComponent \
+IFigureLabelHelper \
+IGuiLink \
+IOConstraint \
+IOSPipe \
+IPersist \
+IPSCellEditorDialog \
+IRefreshableGuiLink \
+ISelectable \
+IntegerConstraint \
+IUTConstants \
+JavaExitsPropertyDialogData \
+JoinArrow \
+JoinHand \
+ListMemberConstraint \
+LookupRequestDialog \
+MapBrowser \
+MapBrowserTable \
+MapBrowserTree \
+MapBrowserTreeNode \
+MapBrowserTreeNodeRenderer \
+MapperCellEditor \
+MapperCellRenderer \
+ObjectCollator \
+OptionsPropertyDialog \
+OSAclEntry \
+OSApplication \
+OSApplicationFile \
+OSBackendDatatank \
+OSBackendJoin \
+OSBackendTable \
+OSBinaryDataset \
+OSCustomError \
+OSDataEncryptor \
+OSDataMapper \
+OSDataSelector \
+OSDataSynchronizer \
+OSDataset \
+OSExitCallSet \
+OSExtensionCall \
+OSExternalInterface \
+OSField \
+OSFile \
+OSLoadSaveHelper \
+OSNonTextRequestor \
+OSNotifier \
+OSPageDatatank \
+OSPipeHelper \
+OSQueryPipe \
+OSRecipient \
+OSRequestLinkSet \
+OSRequestor \
+OSResultPage \
+OSResultPager \
+OSSharedField \
+OSTransaction \
+OSUdfConstants \
+OSUpdatePipe \
+ParameterNameValueTable \
+PropertiesPanel \
+PSAbstractStylesheetAction \
+PSComboBox \
+PSConditionalExitPanel \
+PSDlgUtil \
+PSDialog \
+PSDialogAPI \
+PSEditExternalInterfaceFileAction \
+PSEditorDialog \
+PSEditStylesheetAction \
+PSEditStylesheetSourceAction \
+PSEditDtdAction \
+PSFigureAbstractAction \
+PSGenerateStylesheetFromSourceAction \
+PSHelp \
+PSResources \
+PSUdfSet \
+PSWidgetCloseStrategy \
+PageTankFileFilter \
+PageableAndPrintable \
+PasswordConstraint \
+PopupMenuAdapter \
+PrintPanelPage \
+PSCatalogTransitionActionTriggers \
+PSRuleEditorDialog \
+PSRuleEditorTableModel \
+PSXmlApplicationConverter \
+ResizableObject \
+ResourceHelper \
+ResourceHelperTest \
+ResultPagerTableModel \
+RhythmyxWorkbench \
+RigidConnectionConstraint \
+RoleMemberData \
+ScientificFormat \
+SecurityProviderMetaData \
+SelectorColumnComboBox \
+SelectorOperatorComboBox \
+SelectorValueComboBox \
+SqlCataloger \
+StatusBar \
+StringConstraint \
+StringLengthConstraint \
+SwingWorker \
+TableInternalFrame \
+TestBitmapManager \
+UIAppFrame \
+UICIdentifier \
+UIConnectableFigureBEDatatank \
+UIConnectionPoint \
+UIConnector \
+UIContentEditorHandler \
+UIFigure \
+UIFigureFrame \
+UIFlexibleConnectionPoint \
+UIJoinConnector \
+UIMainFrame \
+PSMainFrameInitFlag \
+UIPipe \
+UIPipeFrame \
+UIQueryPipe \
+UIRigidConnectionPoint \
+URLRequestDialog \
+URLRequestUDFDialog \
+UTAppNavigator \
+UTBooleanComboBox \
+UTBrowseButton \
+UTBrowserControl \
+UTCellEditor \
+UTCheckBoxCellEditor \
+UTCheckBoxCellRenderer \
+UTEditorComponent \
+UTFixedButton \
+UTFixedComboBox \
+UTFixedHeightTextField \
+UTFixedHeightComboBox \
+UTFixedHeightPasswordField \
+UTFixedLabel \
+UTFixedPasswordField \
+UTFixedTextField \
+UTJTable \
+UTListDialog \
+UTMnemonicLabel \
+UTMultiLineBasicTableUI \
+UTMultiLineCellRenderer \
+UTMultiLineTable \
+UTNodePrinter \
+UTOperatorComboBoxRenderer \
+UTPipeNavigator \
+UTPopupMenuCellEditor \
+UTPopupMenuCellEditorData \
+UTRadioButtonCellEditor \
+UTRadioButtonCellRenderer \
+UTReadOnlyTableCellEditor \
+UTServer \
+UTSpinTextField \
+UTStandardCommandPanel \
+UTTable \
+UTTableModel \
+UTTextFieldCellEditor \
+UTTextFieldCellRenderer \
+UTTextFieldEditor \
+UninitializedException \
+UserConfig \
+UserConfigHelper \
+Util \
+ValidationConstraint \
+ValidationException \
+ValidationFramework \
+ValidationTest \
+ValueSelectorCellEditor \
+ValueSelectorDialog \
+ValueSelectorDialogHelper \
+WhereClauseItem \
+WhereClauseTableModel \
+XMLBrowser \
+XMLBrowserDialog \
+XMLDropTargetTextField \
+	AboutDialog \
+	AppFigureFactory \
+	AppPropDialog \
+	AppSecDialog \
+	BackendJoinPropertyDialog \
+	BackendTankPropertyDialog \
+	BinaryResourceDialog \
+  CheckboxSelectorConstraint \
+	ConditionalPropertyDialog \
+	CreateUdfDialog \
+	DatasetInputConnectorPropertyDialog \
+	DatasetPropertyDialog \
+	DatasourceComboBox \
+	DataSynchronizerPropertyDialog \
+	DragInfo \
+	E2Designer \
+	E2DesignerResources \
+	EncryptorPropertyDialog \
+  FeatureSet \
+	FileBrowser \
+	FlexibleQueryBuilderDialog \
+  FlushTableMetaDataDialog \
+	FormulaPropertyDialog \
+	IConnectionConstraint \
+	JavaExitsPropertyDialog \
+	JoinFigureFactory \
+	LoginDialog \
+	MapperPropertyDialog \
+	MapperTableModel \
+	MultiTableDatatankPropertyDialog \
+	NotifierPropertyDialog \
+	PageTankPropertyDialog \
+	PipeFigureFactory \
+	PipePropertyDialog \
+	RequestLinkPropertyDialog \
+  ResourceCacheSettingsDialog \
+  ResourceSelectionPanel \
+  ResourceSelectorDialog \
+	ResultPagerPropertyDialog \
+	RoleMemberPropertyDialog \
+	SaveAsDialog \
+	SelectorPropertyDialog \
+	StartTutorialDialog \
+  TracePropDialog \
+	TransactionManagerPropertyDialog \
+	UIConnectableFigure \
+	UIJoinMainFrame \
+	UTCellEditorDialog \
+	UTExtensionParamPanel \
+	UTOperatorComboBox \
+	UTParameterPanel \
+	UTParameterPanelTableModel \
+	UTPropertiesPanel \
+	WebpagePropertyDialog 
+	
+
+#
+# These will go in the shared jar file.
+#
+SHARED_CLASSES =
+
+#
+# Properties files
+#
+PROPERTIES = \
+AboutDialogResources.properties \
+AdvancedCEPropertiesDialogResources.properties \
+AppPropDialogResources.properties \
+AppSecDialogResources.properties \
+BackendJoinPropertyDialogResources.properties \
+BackendTankPropertyDialogResources.properties \
+BinaryResourceDialogResources.properties \
+ConditionalPropertyDialogResources.properties \
+ConditionalTableModelResources.properties \
+ContentEditorDialogResources.properties \
+ContentTypeDialogResources.properties \
+CreateUdfDialogResources.properties \
+DataEncryptorPanelResources.properties \
+DataSynchronizerPropertyDialogResources.properties \
+DatasetInputConnectorPropertyDialogResources.properties \
+DatasetPropertyDialogResources.properties \
+EncryptorPropertyDialogResources.properties \
+ErrorPagePropertyDialogResources.properties \
+ErrorPagePropertyTableModelResources.properties \
+FieldPropertiesDialogResources.properties \
+FileBrowserResources.properties \
+FlushTableMetaDataDialogResources.properties \
+FlexibleQueryBuilderDialogResources.properties \
+FunctionsPropertyDialogResources.properties \
+FormulaPropertyDialogResources.properties \
+JavaExitsPropertyDialogResources.properties \
+LoginDialogResources.properties \
+MapperPropertyDialogResources.properties \
+MapperTableModelResources.properties \
+MultiTableDatatankPropertyDialogResources.properties \
+NewAclPropertyDialogResources.properties \
+NotifierPropertyDialogResources.properties \
+OptionsPropertyDialogResources.properties \
+PageTankPropertyDialogResources.properties \
+PipePropertyDialogResources.properties \
+PropertiesPanelResources.properties \
+PSConditionalExitPanelResources.properties \
+PSRuleEditorDialogResources.properties \
+PSRuleEditorTableModelResources.properties \
+RequestLinkPropertyDialogResources.properties \
+ReservedWords.properties \
+ResourceCacheSettingsDialogResources.properties \
+ResourceSelectionPanelResources.properties \
+ResourceSelectorDialogResources.properties \
+ResultPagerPropertyDialogResources.properties \
+RoleMemberPropertyDialogResources.properties \
+RolePropertyDialogResources.properties \
+SaveAsDialogResources.properties \
+SelectorPropertyDialogResources.properties \
+StartTutorialDialogResources.properties \
+TracePropDialogResources.properties \
+TransactionManagerPropertyDialogResources.properties \
+UIJoinMainFrameResources.properties \
+UTExtensionParamPanelResources.properties \
+UTOperatorComboBoxResources.properties \
+UTParameterPanelResources.properties \
+UTParameterPanelTableModelResources.properties \
+UTPropertiesPanelResources.properties \
+UTSpinTextFieldResources.properties \
+UTStandardCommandPanelResources.properties \
+ValidationResources.properties \
+ValueSelectorDialogResources.properties \
+Version.properties \
+WebpagePropertyDialogResources.properties \
+XMLBrowserDialogResources.properties \
+htmlmapping.properties \
+helptopicmapping.properties \
+designer.properties \
+ContentEditorControlChoicesPanelResources.properties \
+ContentEditorControlPropertiesPanelResources.properties \
+DisplayControlPropertiesDialogResources.properties \
+FieldMappingsPanelResources.properties \
+LookupRequestDialogResources.properties \
+URLRequestDialogResources.properties \
+URLRequestUDFDialogResources.properties
+
+#
+# Image files are in a subdirectory and have a different nmk file,
+# so we leave this macro blank
+#
+IMAGES =
+
+#
+# XML Resource files
+#
+XML_RESOURCES = \
+sys_Default.xml 
+
+#
+# Resource files (properties and image files combined)
+#
+RESOURCES = \
+	$(PROPERTIES) \
+	$(IMAGES) \
+        $(XML_RESOURCES)
+
+ALL_CLASSES =  $(SHARED_CLASSES) $(DEFAULT_CLASSES) $(TEST_CLASSES)
+ALL_FILES = $(ALL_CLASSES) $(RESOURCES)

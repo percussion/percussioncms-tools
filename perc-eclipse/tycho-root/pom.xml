@@ -1,0 +1,176 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    http://maven.apache.org/maven-v4_0_0.xsd">
+<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.percussion</groupId>
+        <artifactId>perc-eclipse</artifactId>
+        <version>8.0.2.10</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>tycho-root</artifactId>
+
+    <packaging>pom</packaging>
+    <properties>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <tycho.version>0.22.0</tycho.version>
+
+    </properties>
+
+    <modules>
+        <module>helios-repository-def</module>
+        <module>../../com.percussion.doc.help.packagebuilder</module>
+        <module>../../com.percussion.doc.help.packageinstaller</module>
+        <module>../../com.percussion.doc.help.workbench</module>
+        <module>../../vedit/vedit.ui</module>
+        <module>../../designer/core</module>
+        <module>../../designer/ui</module>
+        <module>com.percussion.workbench.ui.feature</module>
+        <module>perc-eclipse-repository</module>
+    </modules>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-compiler-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+                    <compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
+                    <extraClasspathElements>
+                        <dependency>
+                            <groupId>com.percussion</groupId>
+                            <artifactId>tablefactory</artifactId>
+                            <version>8.0.2.10</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.percussion</groupId>
+                            <artifactId>eclipse-maven-deps</artifactId>
+                            <version>${project.parent.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.eclipse</groupId>
+                            <artifactId>org.eclipse.ui.workbench</artifactId>
+                            <version>3.6.2.M20110210-1200</version>
+                            <scope>provided</scope>
+                        </dependency>
+                        <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.core -->
+                        <dependency>
+                            <groupId>org.osgi</groupId>
+                            <artifactId>org.osgi.core</artifactId>
+                            <version>4.0.1</version>
+                            <scope>provided</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.eclipse.core</groupId>
+                            <artifactId>org.eclipse.core.runtime</artifactId>
+                            <version>3.6.0.v20100505</version>
+                            <scope>provided</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.eclipse</groupId>
+                            <artifactId>org.eclipse.swt</artifactId>
+                            <version>3.6.2.v3659c</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.eclipse</groupId>
+                            <artifactId>org.eclipse.swt.cocoa.macosx</artifactId>
+                            <version>3.6.2.v3659b</version>
+                        </dependency>
+                    </extraClasspathElements>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>target-platform-configuration</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+                    <executionEnvironment>JavaSE-1.8</executionEnvironment>
+                    <target>
+                        <artifact>
+                            <groupId>com.percussion</groupId>
+                            <artifactId>helios-repository-def</artifactId>
+                            <version>${project.parent.version}</version>
+                        </artifact>
+                    </target>
+
+                    <environments>
+                        <environment>
+                            <os>win32</os>
+                            <ws>win32</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                        <environment>
+                            <os>linux</os>
+                            <ws>gtk</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+
+                        <environment>
+                            <os>macosx</os>
+                            <ws>cocoa</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                    </environments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho.extras</groupId>
+                <artifactId>target-platform-validation-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+
+                    <failOnError>false</failOnError>
+
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-maven-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-toolchains-plugin</artifactId>
+                <version>${maven.toolchains.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>toolchain</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <toolchains>
+                        <jdk>
+                            <version>8</version>
+                            <vendor>oracle</vendor>
+                        </jdk>
+                    </toolchains>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

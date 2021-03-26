@@ -1,0 +1,61 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Changing a Query Resource's Cache Settings </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13413.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="Debugging_Rhythmyx_Applications.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Changing a Query Resource's Cache Settings</h3>
+<p class="bodytext">Resource caching is an advanced feature, and you should consult with Rhythmyx Customer Support prior to changing any resource cache settings. </p>
+<p class="bodytext">To change a resource's cache settings:</p>
+<ol class="listnumber"><li class="listnumber">In the Pipe Properties dialog, click [<strong class="buttons">Cache Settings</strong>].<p class="listcontinue">Rhythmyx displays the Cache Settings dialog.</p>
+<p class="widegraphic"><img src="wb_cachesettings_57.gif" alt="Linked GIF" height="402" width="496" vspace="2" hspace="2" align="bottom" border="0"></p>
+</li><li class="listnumber">To enable caching for the resource, check <strong class="specialbold">Enable Caching</strong>; to disable caching for the resource, uncheck <strong class="specialbold">Enable Caching</strong>.</li><li class="listnumber">To add CGI variables, cookies, and user context variables to the default key for the cached page, click <img src="7820.gif" alt="" height="24" width="84" vspace="0" hspace="0" align="bottom" border="0"> .<p class="listcontinue">Rhythmyx opens a Value Selector dialog that allows you to create CGI variables, cookies, and user context variables. </p>
+<p class="listcontinue">Create as many additional key values as necessary.</p>
+</li><li class="listnumber">To delete a key value, select the value and click <img src="removebutton.gif" alt="Remove Button" height="23" width="74" vspace="2" hspace="2" align="bottom" border="0">.</li><li class="listnumber">To have Rhythmyx automatically flush the page if data obtained by a dependency changes, add the dependency manually by specifying the query resource(s) that obtain the data:<p class="listcontinue">Click the Dependencies tab.</p>
+<p class="widegraphic"> <img src="wb_cachesettingsdependencies_57.gif" alt="Cache Dependencies" height="402" width="496" vspace="2" hspace="2" align="bottom" border="0"></p>
+<p class="listcontinue">Click <img src="addbutton.gif" alt="Add Button" height="24" width="84" vspace="2" hspace="2" align="bottom" border="0"> to open the Select Dependency dialog.</p>
+<p class="widegraphic"><img src="selectdependency.gif" alt="Select Dependency" height="98" width="424" vspace="2" hspace="2" align="bottom" border="0"></p>
+<p class="listcontinue">In the <strong class="specialbold">Application Name </strong>drop list, choose the application name associated with the dependency, and in the <strong class="specialbold">Resource Name</strong> drop list, choose the resource used to add the additional data. Click [<strong class="buttons">OK</strong>] to enter the dependency on the Dependencies tab.</p>
+<p class="listcontinue">Add all dependencies that affect the result page data.</p>
+<p class="listcontinue">To remove a dependency, select it and click <img src="removebutton.gif" alt="Remove Button" height="23" width="74" vspace="2" hspace="2" align="bottom" border="0">. </p>
+</li><li class="listnumber">Click [<strong class="buttons">OK</strong>] to save the cache settings.</li></ol><p class="note">NOTE: To write a custom exit for resource cache flushing, see the javadoc for <object classid="java:com.sun.java.help.impl.JHSecondaryViewer"><param name="content" value="\Javadocs\com\percussion\server\cache\PSCacheProxy.html"><param name="viewerActivator" value="javax.help.LinkLabel"><param name="viewerStyle" value="javax.help.SecondaryWindow"><param name="viewerSize" value="800,800"><param name="viewerLocation" value="100,100"><param name="viewerName" value=""><param name="text" value="com.percussion.server.cache"></object>.</p>
+<p class="note"></p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="Page_Datatank.htm" target="_self">XML Application Procedures</a></p><p class="relateditem"><a href="13301.htm" target="_self">Creating a New Application</a></p><p class="relateditem"><a href="13373.htm" target="_self">Creating New Resources</a></p><p class="relateditem"><a href="13395.htm" target="_self">Adding Tables to a Resource</a></p><p class="relateditem"><a href="13398.htm" target="_self">Mapping Data</a></p><p class="relateditem"><a href="13399.htm" target="_self">Maintaining Query Resources</a></p><p class="relateditem"><a href="13407.htm" target="_self">Maintaining Update Resources</a></p><p class="relateditem"><a href="13400.htm" target="_self">Adding Exits to a Resource</a></p><p class="relateditem"><a href="Using_the_Value_Selector.htm" target="_self">Using the Value Selector</a></p><p class="relateditem"><a href="13410.htm" target="_self">Modfying an Application</a></p><p class="relateditem"><a href="13240.htm" target="_self">Adding Extension Parameters</a></p><p class="relateditem"><a href="13411.htm" target="_self">Saving, Starting, and Stopping an Application</a></p><p class="relateditem"><a href="13412.htm" target="_self">Exporting Application XML</a></p><p class="relateditem"><a href="13413.htm" target="_self">Deleting an Application</a></p><p class="relateditem"><a href="Debugging_Rhythmyx_Applications.htm" target="_self">Debugging Rhythmyx Applications</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

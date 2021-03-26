@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<info primitiveTypes="element">
+  <element name="RhythmyxGeneralPreferences">
+    <element name="showHiddenApps" property="showHiddenApps"/>
+    <element name="showAdvancedFunctionality" property="showAdvancedFunctionality"/>
+    <element name="showWarningForReadOnlyObjects" property="showWarningForReadOnlyObjects"/>
+    <element name="hideDeprecatedFunctionality" property="hideDeprecatedFunctionality"/>
+    <element name="autoConnectOnOpen" property="autoConnectOnOpen"/>
+    <element name="autoOpenProblemsView" property="autoOpenProblemsView"/>
+    <element name="defaultDateFormat" property="defaultDateFormat"/>
+  </element>
+</info>

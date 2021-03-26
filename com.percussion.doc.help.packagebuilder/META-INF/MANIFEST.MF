@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Help Plug-in
+Bundle-SymbolicName: com.percussion.doc.help.packagebuilder; singleton:=true
+Bundle-Version: 8.0.2.10
+Bundle-Activator: com.percussion.doc.packagebuilder.PackageBuilderHelpPlugin
+Bundle-Vendor: Percussion Software
+Bundle-Localization: plugin
+Eclipse-AutoStart: true
+Eclipse-BundleShape: dir

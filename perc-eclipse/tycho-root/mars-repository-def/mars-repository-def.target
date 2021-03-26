@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.5.2"?>
+
+<target name="Eclipse Mars">
+<locations>
+
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.core.runtime" version="0.0.0"/>
+<unit id="org.eclipse.rcp.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.equinox.p2.user.ui.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.ui.views" version="0.0.0"/>
+<unit id="org.eclipse.ui.editors" version="0.0.0"/>
+<unit id="org.eclipse.ui" version="0.0.0"/>
+<unit id="org.eclipse.core.runtime" version="0.0.0"/>
+<unit id="org.eclipse.ui.workbench.texteditor" version="0.0.0"/>
+<unit id="org.eclipse.core.resources" version="0.0.0"/>
+<unit id="org.eclipse.ui.ide" version="0.0.0"/>
+<unit id="org.eclipse.wst.common.snippets" version="0.0.0"/>
+<unit id="org.eclipse.ui.forms" version="0.0.0"/>
+<unit id="org.eclipse.jface.text" version="0.0.0"/>
+<unit id="org.eclipse.core.expressions" version="0.0.0"/>
+<unit id="org.eclipse.wst.web_ui.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/releases/mars/"/>
+</location>
+</locations>
+</target>

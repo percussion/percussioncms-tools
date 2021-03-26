@@ -1,0 +1,71 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Standard Full Text Search Editor </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13883.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13791.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Standard Full Text Search Editor</h3>
+<p class="bodytext">The standard search editor for systems that use the Full Text Search engine appears as follows:</p>
+<p class="exapandinghtmlblock"><a id="h14803" class="expandinghtmlblocklink" title="Screenshot for Standard Full Text Search Editor" href="javascript:toggleBlock('14803')" target="_self"><img id="i14803" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Standard Full Text Search Editor</a></p>
+<div id="d14803" class="widegraphic" style="display:none"><p class="bodytext"><img src="wb1310.gif" alt="Search Editor, standard searches" height="384" width="667" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="subheading"><strong class="specialbold">Field Definitions</strong></p>
+<p class="fielddescription"><strong class="fieldname">Standard Search Name</strong> - Read only. System name for search query.</p>
+<p class="fielddescription"><strong class="fieldname">Standard Search Label</strong> - Required. Name displayed to users for search query.</p>
+<p class="fielddescription"><strong class="fieldname">Description</strong> - Description of search.</p>
+<p class="fielddescription"><strong class="fieldname">Search for</strong> - Word or words or word fragment you want to search for. There is a limit of 100 characters in this field. </p>
+<p class="fielddescription"><strong class="fieldname">Mode</strong> - How the search engine conducts the search.</p>
+<ul class="listbullet2"><li class="listbullet2"><strong class="specialbold">Concept</strong> - A Concept search finds words that have meanings related to the term you enter.  For example, if you entered the word &quot;cat&quot;, a Concept search may also return Content Items that include the words &quot;lion&quot; and &quot;tiger&quot; as well.  </li><li class="listbullet2"><strong class="specialbold">Pattern</strong> - A Pattern search finds Content Items that includes words that match the word you entered closely, but not exactly.  For example, if you entered the word &quot;cat&quot;, a Pattern search would also return Content Items that include the words &quot;catalog&quot; and &quot;catamaran&quot; as well.  </li><li class="listbullet2"><strong class="specialbold">Boolean</strong> - A Boolean search is a search that finds an exact match for your query using Boolean operators.  </li></ul><p class="fielddescription"><strong class="fieldname">Filter with</strong> - Specific word or words that the items found must include.</p>
+<p class="fielddescription"><strong class="fieldname">Expansion</strong> - If you are using <em class="emphasis">Concept Mode</em>, specify the <strong class="specialbold">Expansion</strong>, which determines how closely or distantly related a word must be to the word you entered.  Rhythmyx allows the following levels of Expansion (examples assume that you entered the word &quot;catch&quot; in the <strong class="specialbold">Search for</strong> field):</p>
+<ul class="listbullet2"><li class="listbullet2"><em class="emphasis">exact matches</em> (returns only Content Items that include the word &quot;catch&quot; or nearly identical variants, such as &quot;catches&quot;);</li><li class="listbullet2"><em class="emphasis">simple variations</em> (In addition to the previous option, also returns Content Items that include the word &quot;caught&quot;);</li><li class="listbullet2"><em class="emphasis">most strongly related concepts</em> (default option; in addition to the previous option, also returns Content Items that include the word &quot;catchable&quot; and &quot;catching&quot;);</li><li class="listbullet2"><em class="emphasis">strongly related concepts</em> (In addition to the previous option, also returns Content Items that include words such as &quot;bag&quot; or &quot;arrest&quot;);</li><li class="listbullet2"><em class="emphasis">weakly related concepts</em> (In addition to the previous option, also returns Content Items that include words such as &quot;capture&quot;, &quot;secure&quot;, &quot;seize&quot;, or &quot;nail&quot;.</li></ul><p class="fielddescription"><strong class="fieldname">Max rows returned</strong> - Maximum number of results to return.</p>
+<p class="fielddescription"><strong class="fieldname">Unlimited</strong> - Return all results. If checked, any value in <strong class="specialbold">Max rows returned</strong> is ignored.</p>
+<p class="fielddescription"><strong class="fieldname">Display Format</strong> - The <a id="h13942" class="jumptemplate" title="Maintaining Display Formats" href="13252.htm" target="_self">Display Format</a> you want to use to display the results of the search.</p>
+<p class="fielddescription"><strong class="fieldname">Initial display mode</strong> - <em class="emphasis">Simple</em> or <em class="emphasis">Advanced</em>. </p>
+<ul class="listbullet2"><li class="listbullet2">In Simple display mode, only the <strong class="specialbold">Search for</strong>, <strong class="specialbold">Display Format</strong>, and <strong class="specialbold">Max rows returned</strong> fields are visible in the dialog. An [<strong class="buttons">Advanced</strong>] button is also available for moving to Advanced mode.<p class="exapandinghtmlblock"><a id="h14811" class="expandinghtmlblocklink" title="Graphic of Standard FTS Editor, Simple Mode" href="javascript:toggleBlock('14811')" target="_self"><img id="i14811" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Simple Mode</a></p>
+<div id="d14811" class="widegraphic" style="display:none"><p class="bodytext"><img src="placeholdergraphic.gif" alt="Standard Full Text Search Editor, Simple Mode" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div></li></ul><p class="subheading"></p>
+<ul class="listbullet2"><li class="listbullet2">Advanced display mode displays the same fields as those displayed in the Search editor graphic, above (other than <strong class="specialbold">Description</strong>, <strong class="specialbold">Initial display mode</strong>, and <strong class="specialbold">User customizable</strong>). A [<strong class="buttons">Simple</strong>] button is available for moving to Simple mode.</li></ul><p class="fielddescription"><strong class="fieldname">User customizable</strong> - When checked, the search dialog displays a [<strong class="buttons">Customize</strong>] button that users can click to open the <a id="h13864" class="jumptemplate" title="Field Selection Editor" href="13273.htm" target="_self">Field Selection editor</a>, which enables them to add or remove fields to the search query.</p>
+<p class="fielddescription"><strong class="fieldname">Search Criteria</strong><strong class="specialbold"> - </strong>The contents of this box vary, depending on the fields you specify for the View.  Use the [<strong class="specialbold">Customize</strong>] button to maintain the fields included in the search.  The control for the field varies depending on the datatype of the field.</p>
+<p class="fielddescription"><strong class="fieldname">Title</strong> - A drop list of options and a text box for filling in the Title or a portion of the Title to search for. The options in the drop list are <em class="emphasis">Starts with</em>, <em class="emphasis">Contains</em>, <em class="emphasis">Ends with</em>, <em class="emphasis">Exact</em>.</p>
+<ul class="listbullet"><li class="listbullet"><em class="emphasis">Starts with - </em>The title must start with the value entered in the text box.</li><li class="listbullet"><em class="emphasis">Contains</em> - The title must contain the value entered in the text box.</li><li class="listbullet"><em class="emphasis">Ends with</em> - The title must end with the value entered in the text box.</li><li class="listbullet"><em class="emphasis">Exact</em> - The title must match the value entered in the text box.<p class="listnote">Note: Title is the default Search Criteria field.  As the definition for Search Criteria Explains, you can add other search criteria fields.</p>
+</li></ul><p class="bodytext">[<strong class="buttons">Customize</strong>] - Opens the <a id="h13864_2" class="jumptemplate" title="Field Selection Editor" href="13273.htm" target="_self">Field Selection editor</a>, which enables users to add or remove fields to the search query.</p>
+<p class="bodytext"></p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13790.htm" target="_self">Search Editor, Standard Search</a></p><p class="relateditem"><a href="13883.htm" target="_self">Standard Database Search Editor</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

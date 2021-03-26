@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file defines the structure for the Rhythmyx workbench 'Database Explorer'
+view. This view shows content of data sources.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="DB_TYPE:DATASOURCE">
+      <Handler iconPath="icons/datasource16.gif"/>
+      <Catalog type="object" name="DB_TYPE"/>
+   </InstanceTree>
+
+   <InstanceTree objectIds="DB_TYPE:CATEGORY">
+      <Catalog type="object" name="DB_TYPE"/>
+   </InstanceTree>
+
+   <InstanceTree objectIds="DB_TYPE:TABLE">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSLegacyDragNodeHandler"
+            iconPath="icons/sqlTable16.gif"
+            securable="false"
+            renamable="false"
+            deletable="false"
+            pasteable="false"
+            />
+   </InstanceTree>
+
+   <InstanceTree objectIds="DB_TYPE:VIEW">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSLegacyDragNodeHandler"
+            iconPath="icons/sqlView16.gif"
+            securable="false"
+            renamable="false"
+            deletable="false"
+            pasteable="false"
+            />
+   </InstanceTree>
+
+   <Catalog type="object" name="DB_TYPE" displayLabelSource="objectLabel"/>
+</TreeDef>

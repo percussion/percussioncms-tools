@@ -1,0 +1,16 @@
+<!--
+This is a test file for use by the PSDeclarativeHierarchyTest.java class.
+It provides a simple tree that contains children from a hierarchical model.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Documents and Settings\paulhoward\My Documents\viewHierarchyDef.xsd">
+   <InstanceTree objectIds="RESOURCE_FILE:FOLDER">
+      <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+         <CatalogProperty name="resourceType">folder</CatalogProperty>
+      </Catalog>
+   </InstanceTree>
+   <Node labelKey="Resources">
+      <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+         <CatalogProperty name="resource">roots</CatalogProperty>
+      </Catalog>
+   </Node>
+</TreeDef>

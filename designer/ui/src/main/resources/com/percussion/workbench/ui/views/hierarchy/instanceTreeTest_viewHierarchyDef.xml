@@ -1,0 +1,31 @@
+<!--
+This is a test file for use by the PSDeclarativeHierarchyTest.java class.
+It provides a simple tree that has children that will use Instance nodes.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Documents and Settings\paulhoward\My Documents\viewHierarchyDef.xsd">
+   <InstanceTree objectIds="SLOT">
+      <Node labelKey="Contained Templates">
+         <Description/>
+         <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+            <CatalogProperty name="expansionType">variantLinks</CatalogProperty>
+         </Catalog>
+      </Node>
+   </InstanceTree>
+   <Node labelKey="Node 1">
+      <Catalog type="object" name="SLOT"/>
+   </Node>
+   <Node labelKey="Node 2">
+      <Catalog type="object" name="SLOT" defaultInstanceTree="false"/>
+   </Node>
+   <Node labelKey="Node 3">
+      <Catalog type="object" name="SLOT">
+         <Catalog type="class" name="com.percussion.workbench.ui.views.hierarchy.TestCataloger">
+            <CatalogProperty name="slotInstanceOverride">1</CatalogProperty>
+         </Catalog>
+      </Catalog>
+   </Node>
+   <Node labelKey="Node 4">
+      <CatalogProperty name="inherited">2</CatalogProperty>
+      <Catalog type="object" name="SLOT"/>
+   </Node>
+</TreeDef>

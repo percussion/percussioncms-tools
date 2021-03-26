@@ -1,0 +1,96 @@
+ ############################################################################
+ #
+ # $Id: package.nmk 1.5 2001/11/05 22:14:57Z snezanahasanovic Exp $
+ #
+ # Version Labels	: $Name: Pre_CEEditorUI $
+ #
+ # Locked By		: $Locker: $
+ #
+ # Revision History:
+ #	$Log: package.nmk $
+ #	Revision 1.5  2001/11/05 22:14:57Z  snezanahasanovic
+ #	Added a new check mark icon.
+ #	Revision 1.4  2001/10/19 18:41:55Z  snezanahasanovic
+ #	Added two new images.
+ #	Revision 1.3  2001/09/27 21:43:26Z  SyamalaKommuru
+ #	new gif added
+ #	Revision 1.2  2000/06/29 20:21:56Z  paulhoward
+ #	Added optional.gif.
+ #	
+ #	Revision 1.1  1999/09/23 14:53:13Z  chadloder
+ #	Initial revision
+ #
+ ############################################################################
+ 
+PACKAGE=com.percussion.E2Designer.admin.images
+
+#
+# These are our (internal) tests
+#
+TEST_CLASSES =
+
+# Strip export-restricted classes from the jar
+#
+.IF $(JAR_EXPORT)
+	EXCLUDED_CLASSES = \
+		$(EXCLUDED_CLASSES)
+.END
+
+#
+# Strip testing and non-essential classes from the jar
+#
+.IF $(JAR_PRODUCTION)
+	EXCLUDED_CLASSES = \
+		$(EXCLUDED_CLASSES) \
+		$(TEST_CLASSES)
+.END
+
+#
+# These will go in the default (unshared) jar file for this package.
+#
+DEFAULT_CLASSES =
+
+#
+# These will go in the shared jar file.
+#
+SHARED_CLASSES =
+
+#
+# Properties files
+#
+PROPERTIES =
+
+#
+# Image files
+#
+IMAGES = \
+checkRed_icon.gif \
+filter.gif \
+group.gif \
+group_any_16.gif \
+group_host_16.gif \
+group_member.gif \
+group_odbc_16.gif \
+group_os_16.gif \
+group_web_16.gif \
+main.gif \
+mark_icon.gif \
+optional.gif \
+role.gif \
+user.gif \
+user_any_16.gif \
+user_host_16.gif \
+user_member.gif \
+user_odbc_16.gif \
+user_os_16.gif \
+user_web_16.gif
+
+#
+# Resource files (properties and image files combined)
+#
+RESOURCES = \
+	$(PROPERTIES) \
+	$(IMAGES)
+
+ALL_CLASSES =  $(SHARED_CLASSES) $(DEFAULT_CLASSES) $(TEST_CLASSES)
+ALL_FILES = $(ALL_CLASSES) $(RESOURCES)

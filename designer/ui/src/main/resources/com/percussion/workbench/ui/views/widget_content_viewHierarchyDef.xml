@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file defines the structure for the Rhythmyx workbench 'Content Design' 
+view. This view shows all the content related objects in a tree structure as
+described in the functional specification.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="CONTENT_TYPE">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+         iconPath="icons/contentType16.gif"
+         />
+      <Node labelKey="Allowed Workflows" sorting="ascending">
+         <Description/>
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSContentTypeAllowedWorkflowNodeHandler" 
+            allowedTypes="WORKFLOW"
+            />
+         <Catalog 
+            type="class" 
+            name="com.percussion.workbench.ui.catalogs.canonical.PSContentTypeExpansionFactory"
+            isReference="true"
+            >
+            <CatalogProperty name="expansionType">workflow</CatalogProperty>
+         </Catalog>
+      </Node>
+      <Node labelKey="Allowed Templates and XSL Variants" sorting="ascending">
+         <NodeProperty name="childType">templateLinkedToContentType</NodeProperty>
+         <Description/>
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSContentTypeAssociateTemplateNodeHandler" 
+            allowedTypes="TEMPLATE:SHARED TEMPLATE:LOCAL TEMPLATE:VARIANT"
+            />
+         <Catalog 
+            type="class" 
+            name="com.percussion.workbench.ui.catalogs.canonical.PSContentTypeExpansionFactory"
+            isReference="true"
+            >
+            <CatalogProperty name="expansionType">linkedSharedTemplates</CatalogProperty>
+         </Catalog>
+      </Node>
+   </InstanceTree>
+   <InstanceTree objectIds="USER_FILE:WORKBENCH_FOLDER">
+      <Handler 
+      	className="com.percussion.workbench.ui.handlers.PSNavigationObjectNodeHandler"
+         allowedTypes="USER_FILE:WORKBENCH_FOLDER CONTENT_TYPE"
+         securable="false"
+      	/>
+      <Catalog type="object" name="USER_FILE"/>
+   </InstanceTree>
+   <InstanceTree objectIds="TEMPLATE:SHARED TEMPLATE:VARIANT TEMPLATE:LOCAL">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+         iconPath="icons/template16.gif"
+         />
+   </InstanceTree>
+   <InstanceTree objectIds="SLOT">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+         iconPath="icons/slot16.gif"
+         />
+   </InstanceTree>
+   <InstanceTree objectIds="KEYWORD">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+         iconPath="icons/keyword16.gif"
+         />
+   </InstanceTree>
+   <InstanceTree objectIds="LOCALE">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+            iconPath="icons/locale16.gif"
+            renamable="false"
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="WORKFLOW">
+      <Handler 
+            className="com.percussion.workbench.ui.handlers.PSRefNodeHandler"
+            iconPath="icons/workflow16.gif"
+            />
+   </InstanceTree>
+   <InstanceTree objectIds="SHARED_FIELDS">
+      <Handler
+         className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+         copyable="false"
+         securable="false"
+         iconPath="icons/ce_sharedFile16.gif"
+         />
+   </InstanceTree>
+   <Node 
+      labelKey="Content Types" 
+      objectHomeType="CONTENT_TYPE" 
+      treeName="contenttypes"
+      sorting="ascending"
+      >
+      <Description>Contains the design objects that define named groupings of fields and how they are rendered.</Description>
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSContentTypesNodeHandler"
+			allowedTypes="USER_FILE:WORKBENCH_FOLDER CONTENT_TYPE"
+      	/>
+      <Catalog 
+      	   type="object" 
+      	   name="USER_FILE" 
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER CONTENT_TYPE"
+            catalogObjectTypes="USER_FILE:WORKBENCH_FOLDER"
+      	   >
+      </Catalog>
+      <Catalog 
+            type="class" 
+            name="com.percussion.workbench.ui.catalogs.canonical.PSContentTypeCatalogFactory"
+            catalogObjectTypes="CONTENT_TYPE"
+            >
+         <CatalogProperty name="contentTypeCategory">uncategorized</CatalogProperty>
+      </Catalog>
+   </Node>
+   <Node labelKey="Keywords" objectHomeType="KEYWORD" sorting="ascending">
+      <Description/>
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+         allowedTypes="KEYWORD"
+         />
+      <Catalog type="object" name="KEYWORD">
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSKeywordExpansionFactory"/>
+      </Catalog>
+   </Node>
+   <Node labelKey="Shared Fields" objectHomeType="SHARED_FIELDS" sorting="ascending">
+      <Description/>
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+			allowedTypes="SHARED_FIELDS"
+      	/>
+      <Catalog type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSSharedFieldsCatalogFactory">
+         <Catalog type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSSharedFieldsExpansionFactory"/>
+      </Catalog>
+   </Node>
+</TreeDef>

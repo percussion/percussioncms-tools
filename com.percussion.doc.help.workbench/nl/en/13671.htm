@@ -1,0 +1,49 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Adding Properties to a Menu or Menu Entry </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13664.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="13245.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h2 class="heading2">Adding Properties to a Menu or Menu Entry</h2>
+<p class="bodytext">For a graphic of the Menu and Menu Entry editor and definitions of the fields discussed below, see the <a id="h13668" class="jumptemplate" title="Menu and Menu Entry Editor" href="13657.htm" target="_self">Menu and Menu Entry Editor</a> section.</p>
+<p class="bodytext">To add properties to a Menu or Menu Entry:</p>
+<ol class="listnumber"><li class="listnumber">In the <a id="h13668_2" class="jumptemplate" title="Menu and Menu Entry Editor" href="13657.htm" target="_self">Menu and Menu Entry editor</a>, click the <a id="h13679" class="jumptemplate" title="Menu and Menu Entry Editor, General Tab for Menus" href="13659.htm" target="_self">General tab</a>.</li><li class="listnumber">Optionally, change the default <strong class="specialbold">Sort rank</strong>.</li><li class="listnumber">Optionally, in <strong class="specialbold">Mnemonic</strong> add a letter or character for selecting this menu or menu entry when it is visible in another menu. </li><li class="listnumber">Optionally, in <strong class="specialbold">Accelerator</strong>, add a sequence of keys to serve as a shortcut for opening the menu or performing the function associated with the menu entry.</li><li class="listnumber">Optionally, in <strong class="specialbold">Tooltip</strong>, add a definition that will appear when the user hovers the cursor over the menu label or menu entry label.</li><li class="listnumber">If you want to display an icon beside the menu or menu entry label when it is listed in a menu, in <strong class="specialbold">Icon path</strong>, enter the path in the Rhythmyx root of the icon graphic file.</li><li class="listnumber"><a id="h13680" class="jumptemplate" title="Menu and Menu Entry Editor, General Tab for Menu Entries" href="13660.htm" target="_self">If you are entering a menu entry</a>:<ol class="listalpha2"><li class="listalpha2">Check <strong class="specialbold">Support multi-select</strong> if you want users to be able to perform the menu entry's function on a group of selected Content Items. </li><li class="listalpha2">If you want to refresh screens after Rhythmyx performs the menu entry's function, change the Refresh hint from the default value of <em class="emphasis">None</em>.</li><li class="listalpha2">If you want Rhythmyx to launch a new window when performing the menu entry's function, check <strong class="specialbold">Launch new window</strong>. In <strong class="specialbold">Target</strong>, enter a name for the window. In <strong class="specialbold">Style</strong>, enter javascript options for defining the window or click [<strong class="buttons">...</strong>] to choose options in the <a id="h13728" class="jumptemplate" title="Window Style Dialog" href="13686.htm" target="_self">Window Style dialog</a>.</li></ol></li><li class="listnumber">Click the <a id="h13681" class="jumptemplate" title="Menu and Menu Entry Editor, Usage Tab" href="13661.htm" target="_self">Usage tab</a>. For each <strong class="specialbold">Usage Area </strong>(Content Explorer window type) in which you want to display the currently edited menu or menu entry:<ol class="listalpha2"><li class="listalpha2">In the <strong class="specialbold">Usage area</strong> box, click the usage area.</li><li class="listalpha2">For each element in the<strong class="specialbold"> Available for UI contexts</strong> box: if you want to display the currently edited menu or menu entry in the element's right-click menu, move the element to the <strong class="specialbold">Show</strong> box.</li></ol></li><li class="listnumber">Click the <a id="h13682" class="jumptemplate" title="Menu and Menu Entry Editor, Command Tab" href="13662.htm" target="_self">Command tab</a> if it is visible. Either:<ul class="listbullet2"><li class="listbullet2">Manually enter the URL of the command application that you want to execute for the menu entry or dynamic menu. Enter the names and values of any parameters associated with the application.<p class="listcontinue2">OR</p>
+</li><li class="listbullet2">Choose an application option in <strong class="specialbold">Command Group</strong> that is similar to the type of application that you want to use. See <a id="h13682_2" class="jumptemplate" title="Menu and Menu Entry Editor, Command Tab" href="13662.htm" target="_self">Menu and Menu Entry Editor, Command tab</a>, for a description of the available options. Click generate to fill in <strong class="specialbold">URL</strong> and <strong class="specialbold">Parameters</strong> with model entries. Modify the model entries to specify the exact name and values of the application and parameters that you want to use. For more information about the supplied options and the commands they can execute, see the section <em class="emphasis">Rhythmyx HTTP Interface</em> in the <em class="emphasis">Technical Reference Guide</em>.</li></ul></li><li class="listnumber">Click the <a id="h13683" class="jumptemplate" title="Menu and Menu Entry Editor, Visibility Tab" href="13663.htm" target="_self">Visibility tab</a>. By default, for a new Menu or Menu Entry, all values of all visibility contexts (Content Item properties, such as <em class="emphasis">State</em>) are in the <strong class="specialbold">Show</strong> list. If you do not want Content Items or Folders with a certain property value (such as <em class="emphasis">Archived</em>) to display the Menu or Menu Entry, click the <strong class="specialbold">Visibility context</strong> for the property, and move the value from the <strong class="specialbold">Show</strong> list to the <strong class="specialbold">Hide</strong> list. Repeat this procedure for all property values that should cause the Menu or Menu Entry to be hidden.</li><li class="listnumber"><a id="h14329" class="jumptemplate" title="Saving New and Edited Objects" href="14328.htm" target="_self">Save and close</a> the Menu and Menu Entry editor.</li></ol><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13242.htm" target="_self">Maintaining Menus and Menu Entries</a></p><p class="relateditem"><a href="13243.htm" target="_self">New Menu Wizard</a></p><p class="relateditem"><a href="13658.htm" target="_self">New Menu Entry Wizard</a></p><p class="relateditem"><a href="13657.htm" target="_self">Menu and Menu Entry Editor</a></p><p class="relateditem"><a href="13244.htm" target="_self">Creating a Menu</a></p><p class="relateditem"><a href="13664.htm" target="_self">Creating a Menu Entry</a></p><p class="relateditem"><a href="13245.htm" target="_self">Editing a Menu or Menu Entry</a></p><p class="relateditem"><a href="13676.htm" target="_self">Dragging and Dropping Menu Entries to Menus</a></p><p class="relateditem"><a href="13246.htm" target="_self">Deleting a Menu</a></p><p class="relateditem"><a href="13665.htm" target="_self">Deleting a Menu Entry</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

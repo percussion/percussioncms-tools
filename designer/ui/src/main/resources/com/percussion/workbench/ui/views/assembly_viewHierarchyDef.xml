@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file defines the structure for the Rhythmyx workbench 'Assembly Design' 
+view. This view shows all the assembly related objects in a tree structure as
+described in the functional specification.
+-->
+<TreeDef sorting="document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="viewHierarchyDef.xsd">
+   <InstanceTree objectIds="SLOT">
+      <Handler 
+      	className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+         iconPath="icons/slot16.gif"
+         />
+      <Node labelKey="Allowed Content Types" sorting="ascending">
+         <Description/>
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSSlotAllowedTemplateNodeHandler" 
+            allowedTypes="TEMPLATE:SHARED TEMPLATE:LOCAL TEMPLATE:VARIANT"
+            />
+         <Catalog 
+            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSSlotExpansionFactory" 
+            defaultInstanceTree="false" 
+            isReference="true" 
+            >
+            <CatalogProperty name="linkType">contentType</CatalogProperty>
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+               iconPath="icons/contenttype16.gif"
+               />
+			      <Node labelKey="Allowed Templates" sorting="ascending">
+			         <Description/>
+			         <Handler 
+			            className="com.percussion.workbench.ui.handlers.PSSlotAllowedTemplateNodeHandler" 
+			            allowedTypes="TEMPLATE:SHARED"
+			            />
+			         <Catalog 
+			            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSSlotExpansionFactory" 
+			            defaultInstanceTree="false" 
+			            isReference="true" 
+			            >
+                     <CatalogProperty name="linkType">template</CatalogProperty>
+			            <Handler 
+			               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+			               iconPath="icons/template16.gif"
+			               />
+			         </Catalog>
+			      </Node>
+         </Catalog>
+      </Node>
+   </InstanceTree>
+   <InstanceTree objectIds="USER_FILE:WORKBENCH_FOLDER">
+      <Handler 
+      	className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"
+      	securable="false"
+      	/>
+      <Catalog type="object" name="USER_FILE"/>
+   </InstanceTree>
+   <InstanceTree objectIds="TEMPLATE:SHARED">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" 
+         iconPath="icons/template16.gif"
+         />
+      <Node labelKey="Contained Slots" sorting="ascending">
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSTemplateContainedSlotNodeHandler" 
+            allowedTypes="SLOT"
+            />
+         <Catalog 
+            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateExpansionFactory" 
+            defaultInstanceTree="false" 
+            isReference="true"
+            >
+            <CatalogProperty name="type">containedSlots</CatalogProperty>
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+               iconPath="icons/slot16.gif"
+               />
+         </Catalog>
+      </Node>
+      <Node labelKey="Allowed Content Types" sorting="ascending">
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSTemplateAssociateContentTypeNodeHandler" 
+            allowedTypes="CONTENT_TYPE"
+            />
+         <Catalog 
+            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateExpansionFactory" 
+            defaultInstanceTree="false" 
+            isReference="true"
+            >
+            <CatalogProperty name="linkType">contentType</CatalogProperty>
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+               iconPath="icons/contentType16.gif"
+               />
+         </Catalog>
+      </Node>
+   </InstanceTree>
+   <InstanceTree objectIds="TEMPLATE:LOCAL">
+      <!-- This node is identical to the TEMPLATE:SHARED InstanceTree, except
+         for the 'Allowed Content Type' node, which is singular. -->
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" 
+         iconPath="icons/template16.gif"
+         />
+      <Node labelKey="Contained Slots" sorting="ascending">
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSTemplateContainedSlotNodeHandler" 
+            allowedTypes="SLOT"
+            />
+         <Catalog 
+            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateExpansionFactory" 
+            defaultInstanceTree="false" 
+            isReference="true"
+            >
+            <CatalogProperty name="type">containedSlots</CatalogProperty>
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+               iconPath="icons/slot16.gif"
+               />
+         </Catalog>
+      </Node>
+      <Node labelKey="Allowed Content Type" sorting="ascending">
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSTemplateAssociateContentTypeNodeHandler" 
+            allowedTypes="CONTENT_TYPE"
+            />
+         <Catalog 
+            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateExpansionFactory" 
+            defaultInstanceTree="false" 
+            isReference="true"
+            >
+            <CatalogProperty name="linkType">contentType</CatalogProperty>
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+               iconPath="icons/contentType16.gif"
+               />
+         </Catalog>
+      </Node>
+   </InstanceTree>
+   <InstanceTree objectIds="TEMPLATE:GLOBAL">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler" 
+         iconPath="icons/template16.gif"
+         />
+      <Node labelKey="Contained Slots" sorting="ascending">
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSTemplateContainedSlotNodeHandler" 
+            allowedTypes="SLOT"
+            />
+         <Catalog 
+            type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateExpansionFactory" 
+            defaultInstanceTree="false" 
+            isReference="true"
+            >
+            <CatalogProperty name="type">containedSlots</CatalogProperty>
+            <Handler 
+               className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+               iconPath="icons/slot16.gif"
+               />
+         </Catalog>
+      </Node>
+   </InstanceTree>
+   <InstanceTree objectIds="TEMPLATE:VARIANT">
+      <Handler 
+         className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+         iconPath="icons/template16.gif"
+         />
+      <Catalog 
+         type="class" name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateCatalogFactory" 
+         defaultInstanceTree="false" 
+         isReference="true"
+         >
+         <CatalogProperty name="category">contentTypeOwner</CatalogProperty>
+         <Handler 
+            className="com.percussion.workbench.ui.handlers.PSRefNodeHandler" 
+            iconPath="icons/contentType16.gif"
+            />
+      </Catalog>
+   </InstanceTree>
+   <InstanceTree objectIds="CONTENT_TYPE">
+      <Handler iconPath="icons/contentType16.gif"/>
+   </InstanceTree>
+   <Node 
+   	labelKey="Slots" 
+   	objectHomeType="SLOT" 
+   	treeName="slots" 
+   	sorting="ascending"
+   	>
+      <HomeNodeProperty name="category">default</HomeNodeProperty>
+      <CatalogProperty name="userPathRootName">slots</CatalogProperty>
+      <Description>Contains the design objects that define a region containing links, including what types and templates are allowed to be linked and how to find the links when assembling. Slots are found within templates.</Description>
+      <Handler 
+	         className="com.percussion.workbench.ui.handlers.PSDropNodeHandler"
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER SLOT"
+            deletable="false"
+            copyable="false"
+            />
+      <Catalog 
+      	   type="object" 
+            name="USER_FILE" 
+      	   allowedTypes="USER_FILE:WORKBENCH_FOLDER SLOT"
+      	   catalogObjectTypes="USER_FILE:WORKBENCH_FOLDER"
+            >
+      </Catalog>
+      <Catalog 
+            type="class" 
+            name="com.percussion.workbench.ui.catalogs.canonical.PSSlotCatalogFactory"
+            catalogObjectTypes="SLOT"
+            >
+         <CatalogProperty name="category">uncategorized</CatalogProperty>
+      </Catalog>
+      
+   </Node>
+   <Node labelKey="Templates">
+      <!-- Will cause a shortcut menu to appear on the New wizard sub-menu when
+         activated on this node. -->
+      <!--NodeProperty name="wizardShortCutType">TEMPLATE:SHARED</NodeProperty-->
+      <CatalogProperty name="outputType">non-global</CatalogProperty>
+      <Node 
+         labelKey="Shared" 
+         objectHomeType="TEMPLATE:SHARED" 
+         treeName="templates" 
+         sorting="ascending"
+         >
+         <!-- Used by the template wizard to preset some values if this node 
+            (or any ancesctor) is selected when the new wizard is activated. 
+            One of 3 values supported: global, local and shared. -->
+         <NodeProperty name="templateType">shared</NodeProperty>
+         <CatalogProperty name="templateType">shared</CatalogProperty>
+         <CatalogProperty name="userPathRootName">templates</CatalogProperty>
+         <Description>This node contains templates used by 0 or more content types.</Description>
+	      <Handler
+	         className="com.percussion.workbench.ui.handlers.PSDropNodeHandler"
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER TEMPLATE:SHARED"
+            deletable="false"
+            copyable="false"
+	         />
+         <Catalog 
+            type="object" 
+            name="USER_FILE"
+            allowedTypes="USER_FILE:WORKBENCH_FOLDER TEMPLATE:SHARED"
+            catalogObjectTypes="USER_FILE:WORKBENCH"
+            />
+         <Catalog 
+            type="class" 
+            name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateCatalogFactory"
+            catalogObjectTypes="TEMPLATE:SHARED"
+            >
+            <CatalogProperty name="category">uncategorized</CatalogProperty>
+         </Catalog>
+      </Node>
+      <Node 
+         labelKey="Type Specific" 
+         objectHomeType="TEMPLATE:LOCAL" 
+         sorting="ascending"
+         >
+         <NodeProperty name="templateType">local</NodeProperty>
+         <CatalogProperty name="templateType">local</CatalogProperty>
+         <Description>This node contains templates restricted to exactly 1 content type.</Description>
+	      <Handler
+		         className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+		         allowedTypes="TEMPLATE:LOCAL"
+		         />
+         <Catalog 
+            type="class" 
+            name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateCatalogFactory"
+            >
+            <CatalogProperty name="templateType">local</CatalogProperty>
+         </Catalog>
+      </Node>
+   </Node>
+   <Node 
+         labelKey="Global Templates" 
+         objectHomeType="TEMPLATE:GLOBAL"
+         sorting="ascending"
+         >
+      <NodeProperty name="templateType">global</NodeProperty>
+      <CatalogProperty name="outputType">global</CatalogProperty>
+      <Description/>
+      <Handler
+	         className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+	         allowedTypes="TEMPLATE:GLOBAL"
+	         />
+      <Catalog 
+         type="class" 
+         name="com.percussion.workbench.ui.catalogs.canonical.PSTemplateCatalogFactory"
+         >
+      </Catalog>
+   </Node>
+   <Node labelKey="Item Filters" objectHomeType="ITEM_FILTER" sorting="ascending">
+      <Description/>
+      <Handler
+	         className="com.percussion.workbench.ui.handlers.PSDropCopyNodeHandler"
+	         allowedTypes="ITEM_FILTER"
+	         />
+      <Catalog type="object" name="ITEM_FILTER">
+	      <Handler iconPath="icons/itemFilter16.gif" className="com.percussion.workbench.ui.handlers.PSDeclarativeNodeHandler"/>
+      </Catalog>      
+   </Node>
+</TreeDef>
+

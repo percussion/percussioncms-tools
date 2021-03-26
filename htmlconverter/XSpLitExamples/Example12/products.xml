@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<products>
+  <product>
+    <name>Widget</name>
+  </product>
+  <product>
+    <name>Gadget</name>
+  </product>
+  <product>
+    <name>Gizmo</name>
+  </product>
+</products>

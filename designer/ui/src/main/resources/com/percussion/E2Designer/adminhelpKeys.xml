@@ -1,0 +1,44 @@
+<keys>
+   <mapping key="default" url="Rhythmyx_Server_Administrator.htm"/>
+   <mapping key="AdminMemberDialog" url="New_Member_Dialog.htm" />
+   <mapping key="AdminMemberDialog_edit" url="Editing_a_Member_s_Properties.htm" />
+   <mapping key="AdminRoleDialog" url="Add_Edit_Role_Dialog.htm" />
+   <mapping key="AdminRoleDialog_edit" url="Editing_a_Role.htm" />
+   <mapping key="ModifyMemberListDialog" url="Modify_Member_List_for__Role__Dialog.htm" />
+   <mapping key="NewSecurityProviderTypeDialog" url="About_Security.htm" />
+   <mapping key="NTSecurityProviderDialog" url="OS_NT.htm" />
+   <mapping key="WebServerSecurityProviderDialog" url="Web_Server.htm" />
+   <mapping key="AclEntryDetailsDialog" url="Creating_a_Server_ACL.htm" />
+   <mapping key="StatusDetailsDialog" url="Monitoring_Statisitics.htm" />
+   <mapping key="JndiSecurityProviderDialog" url="14236.htm" />
+   <mapping key="JndiGroupProviderDialog" url="JNDI_Group_Providers_Dialog.htm" />
+   <mapping key="PSWebServerSecurityProviderDialog" url="Web_Server_Security_Provider_Details_Dialog.htm" />
+   <mapping key="admin.AuthenticationsPanel" url="9951.htm" />
+   <mapping key="admin.ContentExplorerPluginPanel" url="Configuring_the_Java_Plugin_Version_for_Content_Explorer.htm" />
+   <mapping key="admin.DirectoriesPanel" url="9958.htm" />
+   <mapping key="admin.DirectorySetsPanel" url="9966.htm" />
+   <mapping key="admin.LoggingSettingsPanel" url="Setting_logging.htm" />
+   <mapping key="admin.LoggingViewPanel" url="Setting_logging.htm" />
+   <mapping key="admin.MonitorConsolePanel" url="Interfacing_by_remote_console.htm" />
+   <mapping key="admin.RoleProvidersPanel" url="9973.htm" />
+   <mapping key="admin.SearchGeneralPanel" url="17889.htm" />
+   <mapping key="admin.SecurityRolePanel" url="Roles.htm" />
+   <mapping key="admin.SecurityProviderSummaryPanel" url="Security_Providers_and_Authentication.htm" />
+   <mapping key="admin.ServerAclSummaryPanel" url="Maintaining_Access_Control_Lists.htm" />
+   <mapping key="admin.SettingsPerformancePanel" url="Optimizing_Performance.htm" />
+   <mapping key="admin.StatusPropertyPanel" url="Managing_Applications_and_Servers.htm" />
+   <mapping key="admin.SecurityExitPanel" url="About_Security.htm" />
+   <mapping key="AuthenticationEditorDialog" url="9952.htm" />
+   <mapping key="DirectoryEditorDialog" url="14228.htm" />
+   <mapping key="DirectorySetEditorDialog" url="9967.htm" />
+   <mapping key="ProviderUrlSelectorDialog" url="9960.htm" />
+   <mapping key="RoleProviderEditorDialog" url="14224.htm" />
+   <mapping key="DatasourceDriverConfigDialog" url="14155.htm" />
+   <mapping key="DatasourceJndiDialog" url="14161.htm" />   
+   <mapping key="DatasourceConnectionDialog" url="14170.htm" />
+   <mapping key="admin.DatasourceDriversPanel" url="14146.htm" />
+   <mapping key="admin.DatasourceJndiPanel" url="14147.htm" />
+   <mapping key="admin.DatasourceConnectionsPanel" url="14148.htm" />
+   <mapping key="CatalogerConfigDialog" url="14189.htm" />
+   <mapping key="admin.CatalogerConfigurationsPanel" url="14182.htm" />
+</keys>

@@ -1,0 +1,92 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Bindings Tab </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+<script language="javascript" type="text/javascript" src="dhtml_popup.js"></script>
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13143.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="15501.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Bindings Tab</h3>
+<p class="bodytext">The Bindings tab of the Template editor allows you to specify the variables you will use when processing your Templates, and to define the value for  each variable. </p>
+<p class="exapandinghtmlblock"><a id="h13591" class="expandinghtmlblocklink" title="WB_1203 Template Editor Bindings Tab" href="javascript:toggleBlock('13591')" target="_self"><img id="i13591" class="expandicon" src="arrowright.gif" alt="" border="0">Screenshot of Template Editor Bindings tab</a> </p>
+<div id="d13591" class="widegraphic" style="display:none"><p class="widegraphic"><img src="wb_1203.gif" alt="WB-1203:  Template Editor Bindings Tab" height="447" width="722" vspace="2" hspace="2" align="bottom" border="0"></p>
+</div><p class="subheading"></p>
+<p class="bodytext">Both Variables and Values are expressed using Java Expression Language (<a class="jumptemplate" title="" href="http://jakarta.apache.org/commons/jexl/" target="_self">JEXL</a>).</p>
+<p class="bodytext">In the Variables table, the Variable Name column lists the variables used in the Template.  You can choose a <a id="h13182" class="jumptemplate" title="System Variables" href="13181.htm" target="_self">system variable</a> or define a custom variable of your own. </p>
+<p class="bodytext">Custom variables must begin with the character &quot;$&quot;, but can otherwise be any string; for example, $name or $length.  A single variable can take a list of values as a one-dimensional array.  For example, you can assign a value to $name[0] ($name[0]=Brief), which creates a single element list.  If you assign another value to $name[4] (for example, $name[4]=Category), you have created an array of five elements for the variable $name:</p>
+<p class="list2">$name[0]=Brief</p>
+<p class="list2">$name[1]=&lt;empty&gt;</p>
+<p class="list2">$name[2]=&lt;empty&gt;</p>
+<p class="list2">$name[3]=&lt;empty&gt;</p>
+<p class="list2">$name[4]=Category</p>
+<p class="bodytext">You can also define more complex variables by concatenating two strings with a dot.  For example, if you defined the variables $circle.diameter and $circle.area, you have defined the variable $circle, which contains two additional variables, diameter and area.  Each of the contained variables must exist in the data being processed, but their values can be empty.  If a variable does not exist, processing of the binding fails, which causes processing of the Template to fail and ultimately causes the processing of any page using that Template to fail. </p>
+<p class="bodytext">The Value column defines the value that will be bound to each variable listed in the Variable name column.  Values are JEXL expressions, which can return any kind of Java object.  When defining bindings for Velocity templates, you should define your expressions to return the following data types:</p>
+<table width="552" cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse">
+<tr align="left" valign="top">
+<td width="120"><p class="tableheading">Data Category</p>
+</td>
+<td width="432"><p class="tableheading">Recommended Java Data Types</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="120"><p class="tablebodytext">Numbers</p>
+</td>
+<td width="432"><p class="tablebodytext">java.lang.Short, java.lang.Integer, java.lang.Long, java.lang..Double</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="120"><p class="tablebodytext">Dates</p>
+</td>
+<td width="432"><p class="tablebodytext">java.util.Date (Dates must be formatted)</p>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td width="120"><p class="tablebodytext">Strings</p>
+</td>
+<td width="432"><p class="tablebodytext">java.lang.String</p>
+</td>
+</tr>
+
+</table>
+<p class="bodytext">The Value is displayed in the Value column of the table, but you use the Expression Editor to create the Value.  After clicking in the Value column, click in the When you click in a cell of the Value column, Rhythmyx puts the cursor in the Expression Editor, where you can define the Value.</p>
+<p class="bodytext">The Expression Editor includes and autocomplete function.  As you enter text, the Rhythmyx Workbench displays a list of existing binding variables and functions that match the text you have entered.  You can select the variable or function you want to use.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">In This Section</p><p class="relateditem"><a href="15501.htm" target="_self">Binding Variables</a></p></td>
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="13133.htm" target="_self">Template Editor</a></p><p class="relateditem"><a href="13142.htm" target="_self">Velocity Tab</a></p><p class="relateditem"><a href="13143.htm" target="_self">General Tab</a></p><p class="relateditem"><a href="13147.htm" target="_self">Template Editor Slots Tab</a></p><p class="relateditem"><a href="13148.htm" target="_self">Template Editor Sites Tab</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+

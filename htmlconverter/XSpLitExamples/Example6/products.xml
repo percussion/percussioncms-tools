@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<products>
+  <productlist>
+    <product>
+      <name>Widget</name>
+      <feature>It's cheap!</feature>
+    </product>
+    <product>
+      <name>Gadget</name>
+      <feature>It's easy!</feature>
+      <feature>It's fun!</feature>
+    </product>
+    <product>
+      <name>Gizmo</name>
+      <feature>Low maintenance</feature>
+    </product>
+  </productlist>
+</products>

@@ -1,0 +1,50 @@
+<!--
+  ~ Copyright 1999-2020 Percussion Software, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Adding Exits to a Resource </title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta name="Generator" content="AITPublish">
+<meta name="Keywords" content="">
+<link rel="stylesheet" type="text/css" href="44.css">
+</head>
+<body text="#000000" link="#0000A0" alink="#008000" vlink="#FF0000"><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "18">
+<p class="bodytext"><a href="13409.htm" target="_self"><img src="125.gif" alt="Previous Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+<td width= "18">
+<p class="bodytext"><a href="Using_the_Value_Selector.htm" target="_self"><img src="124.gif" alt="Next Topic" height="17" width="18" vspace="0" hspace="0" align="bottom" border="0"></a></p></td>
+</tr>
+</table>
+<h3 class="heading3">Adding Exits to a Resource</h3>
+<p class="bodytext">Exits are Rhythmyx extensions that process XML documents.  The are represented on the resource by the Exit icon:  <img src="exit.gif" alt="" height="33" width="32" vspace="2" hspace="2" align="bottom" border="0">.</p>
+<p class="bodytext">Exits fall into two categories.  Pre-exits (also known as Document Pre-processors) process the document before it is input to the resource.  They are represented on the input side of the resource (on the left in a query, on the right in an update).   Post-exits (Result Document Processors) process the document after it is output by the resource. They are represented on the output side of the resource (on the right in a query or on the left in an update.  </p>
+<p class="bodytext">Most exits are specifically designated as belonging to one of these categories, but some exits can be used generically as either pre-exits or post-exits.  Whether a generic exit behaves as a pre-exit or a post-exit depends on whether it is added to the input side of the resource or the output side.</p>
+<p class="bodytext">To  add an exit to a resource:</p>
+<ol class="listnumber"><li class="listnumber">In the XML Server Explorer, expand the Extensions node, then expand the Exits node.  Exits are categorized as pre-exits, post-exits, or generic exits.  Locate the exit you want to add to your resource.</li><li class="listnumber">Drag the exit to the resource and add it to the correct location.  Pre-exits can only be added to the input side of the resource, while post-exits can only be added to the output side of the resource.  Generic exits can be added to either side.</li><li class="listnumber">Specify values for the parameters of the exit:<ol class="listalpha2"><li class="listalpha2">Double-click on the exit icon where the exit you want to maintain is located.</li><li class="listalpha2">The Workbench displays the Exit properties dialog.  </li><li class="listalpha2">All of the exits currently assigned to the specified side of the resource are listed in the <strong class="specialbold">Java Exits</strong> field.  Exits are processed in the order listed.  To change the order, select an exit that you want to reposition and click the up and down arrow buttons to move it in the list.</li><li class="listalpha2">The parameters for the selected exit are listed in the Parameters box.  To assign a value to a parameter, double-click in the Value column of the corresponding row, then click the browse button to display the Value Selector.  Use the Value Selector to specify the Value for the parameter.</li></ol></li><li class="listnumber">When you have finished maintaining the order of exits and their parameters, click the [<strong class="buttons">OK</strong>] button to save your changes.</li></ol><table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<td width= "226.8">
+<p class="relatedheading">See Also</p><p class="relateditem"><a href="Page_Datatank.htm" target="_self">XML Application Procedures</a></p><p class="relateditem"><a href="13301.htm" target="_self">Creating a New Application</a></p><p class="relateditem"><a href="13373.htm" target="_self">Creating New Resources</a></p><p class="relateditem"><a href="13395.htm" target="_self">Adding Tables to a Resource</a></p><p class="relateditem"><a href="13398.htm" target="_self">Mapping Data</a></p><p class="relateditem"><a href="13399.htm" target="_self">Maintaining Query Resources</a></p><p class="relateditem"><a href="13407.htm" target="_self">Maintaining Update Resources</a></p><p class="relateditem"><a href="Using_the_Value_Selector.htm" target="_self">Using the Value Selector</a></p><p class="relateditem"><a href="13410.htm" target="_self">Modfying an Application</a></p><p class="relateditem"><a href="13240.htm" target="_self">Adding Extension Parameters</a></p><p class="relateditem"><a href="13411.htm" target="_self">Saving, Starting, and Stopping an Application</a></p><p class="relateditem"><a href="13412.htm" target="_self">Exporting Application XML</a></p><p class="relateditem"><a href="13413.htm" target="_self">Deleting an Application</a></p><p class="relateditem"><a href="Changing_a_Query_Resources_Cache_Settings.htm" target="_self">Changing a Query Resource's Cache Settings</a></p><p class="relateditem"><a href="Debugging_Rhythmyx_Applications.htm" target="_self">Debugging Rhythmyx Applications</a></p></td>
+</tr>
+</table>
+
+
+</body>
+</html>
+
