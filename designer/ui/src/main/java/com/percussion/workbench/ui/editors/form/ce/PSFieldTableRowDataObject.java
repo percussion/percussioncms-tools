@@ -10,14 +10,8 @@
 package com.percussion.workbench.ui.editors.form.ce;
 
 import com.percussion.cms.objectstore.PSFieldDefinition;
-import com.percussion.design.objectstore.PSControlRef;
-import com.percussion.design.objectstore.PSDependency;
-import com.percussion.design.objectstore.PSDisplayMapping;
-import com.percussion.design.objectstore.PSDisplayText;
-import com.percussion.design.objectstore.PSField;
-import com.percussion.design.objectstore.PSFieldSet;
-import com.percussion.design.objectstore.PSUISet;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.*;
+import com.percussion.share.service.exception.PSValidationException;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
@@ -70,7 +64,7 @@ public class PSFieldTableRowDataObject
             fld.setOccurrenceDimension(PSField.OCCURRENCE_DIMENSION_OPTIONAL,
                   null);
          }
-         catch (PSValidationException e)
+         catch ( PSSystemValidationException e)
          {
             // should not come here as it is setting default
          }

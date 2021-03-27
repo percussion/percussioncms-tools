@@ -9,7 +9,17 @@
  *****************************************************************************/
 package com.percussion.E2Designer;
 
+import com.percussion.conn.PSServerException;
+import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.design.objectstore.PSSystemValidationException;
+import com.percussion.error.PSIllegalStateException;
+import com.percussion.security.PSAuthenticationFailedException;
+import com.percussion.security.PSAuthorizationException;
 import com.percussion.workbench.ui.PSMessages;
+import com.percussion.share.service.exception.PSValidationException;
+import org.eclipse.core.runtime.CoreException;
+
+import java.net.MalformedURLException;
 
 /**
  * Edits stylesheet source.
@@ -30,8 +40,7 @@ public class PSEditStylesheetSourceAction extends PSAbstractStylesheetAction
    }
 
    @Override
-   protected void doPerformAction() throws Exception
-   {
+   protected void doPerformAction() throws MalformedURLException, PSServerException, PSAuthenticationFailedException, PSIllegalStateException, PSNotLockedException, PSAuthorizationException, CoreException, PSValidationException, PSSystemValidationException, PSValidationException {
       getEditor().openEditorForResource(getSourceFileURL());
       getEditor().updateOnSave(getSourceFileURL(), getStylesheetFileURL(), getResultPage());
    }

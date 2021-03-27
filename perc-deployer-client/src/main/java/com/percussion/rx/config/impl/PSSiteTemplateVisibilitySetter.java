@@ -34,19 +34,15 @@ import com.percussion.services.assembly.IPSAssemblyService;
 import com.percussion.services.assembly.IPSAssemblyTemplate;
 import com.percussion.services.assembly.PSAssemblyServiceLocator;
 import com.percussion.services.catalog.PSTypeEnum;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.sitemgr.IPSSite;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidation
 {
-   @SuppressWarnings("unchecked")
    @Override
    protected boolean applyProperty(Object obj, ObjectState state,
          @SuppressWarnings("unused")
@@ -61,8 +57,7 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
     */
    @Override
    protected boolean addPropertyDefs(Object obj, String propName,
-         Object pvalue, Map<String, Object> defs)
-   {
+         Object pvalue, Map<String, Object> defs) throws PSNotFoundException {
       if (super.addPropertyDefs(obj, propName, pvalue, defs))
          return true;
       
@@ -77,12 +72,11 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
     * //see base class method for details
     */
    @Override
-   protected Object getPropertyValue(Object obj, String propName)
-   {
+   protected Object getPropertyValue(Object obj, String propName) throws PSNotFoundException {
       if (VISIBILITY.equals(propName))
       {
          IPSSite site = getSite(obj, propName);
-         List<String> templates = new ArrayList<String>();
+         List<String> templates = new ArrayList<>();
          for (IPSAssemblyTemplate t : site.getAssociatedTemplates())
          {
             templates.add(t.getName());
@@ -123,7 +117,6 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
    protected boolean deApplyProperty(Object obj,
          @SuppressWarnings("unused")
          List<IPSAssociationSet> aSets, String propName, Object propValue)
-      throws Exception
    {
       IPSSite site = getSite(obj, propName);
       Collection<String> curList = convertObjectToList(propValue);
@@ -137,8 +130,7 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
    
    @Override
    protected List<PSConfigValidation> validate(String objName, ObjectState state,
-         String propName, Object propValue, Object otherValue)
-   {
+         String propName, Object propValue, Object otherValue) throws PSNotFoundException {
       if (!VISIBILITY.equals(propName))
          return super.validate(objName, state, propName, propValue, otherValue);
       
@@ -147,8 +139,7 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
       if (curList.isEmpty() || otherList.isEmpty())
          return Collections.emptyList();
 
-      Collection<String> commons = new ArrayList<String>();
-      commons.addAll(curList);
+      Collection<String> commons = new ArrayList<>(curList);
       commons.retainAll(otherList);
       if (commons.isEmpty())
          return Collections.emptyList();
@@ -170,12 +161,10 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
     * @param propValue the property value, may be <code>null</code>.
     * 
     * @return <code>true</code> if the Site was modified by this method.
-    * 
-    * @throws Exception if an error occurs.
+    *
     */
-   @SuppressWarnings("unchecked")
    private boolean applyToSite(IPSSite site, ObjectState state,
-         Object propValue) throws Exception
+         Object propValue)
    {
       Collection<String> curList = convertObjectToList(propValue);
       Collection<String> prevList = getPrevTemplates();
@@ -188,9 +177,8 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
          mergeOrRemoveTemplates(site, prevList, true);
          return true;
       }
-      
-      List<String> templates = new ArrayList<String>();
-      templates.addAll(prevList);
+
+      List<String> templates = new ArrayList<>(prevList);
       templates.removeAll(curList);
       mergeOrRemoveTemplates(site, templates, true);
       
@@ -206,7 +194,6 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
     * 
     * @return the converted list, never <code>null</code>, may be empty.
     */
-   @SuppressWarnings("unchecked")
    private Collection<String> convertObjectToList(Object propValue)
    {
       if (propValue == null)
@@ -313,12 +300,12 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
    {
       try
       {
-         IPSAssemblyTemplate t = srv.findTemplateByName(name);
-         return t;
+         return srv.findTemplateByName(name);
       }
       catch (Exception e)
       {
-         ms_log.error("Failed to load Template \"" + name + "\".", e);
+         log.error("Failed to load Template: {} Error: {}",  name  , e.getMessage());
+         log.debug(e.getMessage(),e);
       }
       return null;
    }
@@ -331,7 +318,7 @@ public class PSSiteTemplateVisibilitySetter extends PSPropertySetterWithValidati
    /**
     * The logger of the setter.
     */
-   private static Log ms_log = LogFactory
-         .getLog("PSSiteTemplateVisibilitySetter");
+   private static final Logger log = LogManager
+         .getLogger(PSSiteTemplateVisibilitySetter.class);
 
 }

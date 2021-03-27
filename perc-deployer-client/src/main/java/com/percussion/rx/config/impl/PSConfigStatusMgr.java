@@ -52,10 +52,6 @@ public class PSConfigStatusMgr  implements IPSConfigStatusMgr
 
    private SessionFactory sessionFactory;
 
-   public SessionFactory getSessionFactory() {
-      return sessionFactory;
-   }
-
    @Autowired
    public void setSessionFactory(SessionFactory sessionFactory) {
       this.sessionFactory = sessionFactory;
@@ -93,23 +89,20 @@ public class PSConfigStatusMgr  implements IPSConfigStatusMgr
     * (non-Javadoc)
     * @see com.percussion.rx.config.IPSConfigStatusMgr#loadConfigStatus(long)
     */
-   public PSConfigStatus loadConfigStatus(long statusID)
-   {
+   public PSConfigStatus loadConfigStatus(long statusID) throws PSNotFoundException {
       // As per the convention added this method, there is not much need at this
       // moment to cache the status objects.
 
-      PSConfigStatus cfgStatus = loadConfigStatusModifiable(statusID);
+      return loadConfigStatusModifiable(statusID);
 
-      return cfgStatus;
    }
    
    /*
     * (non-Javadoc)
     * @see com.percussion.rx.config.IPSConfigStatusMgr#loadConfigStatusModifiable(long)
     */
-   public PSConfigStatus loadConfigStatusModifiable(long statusID)
-   {
-      PSConfigStatus cfgStatus = null;
+   public PSConfigStatus loadConfigStatusModifiable(long statusID) throws PSNotFoundException {
+      PSConfigStatus cfgStatus;
       Session session = sessionFactory.getCurrentSession();
 
          Criteria criteria = session.createCriteria(PSConfigStatus.class);
@@ -137,7 +130,7 @@ public class PSConfigStatusMgr  implements IPSConfigStatusMgr
       if (StringUtils.isBlank(nameFilter))
          throw new IllegalArgumentException("nameFilter may not be null or empty string");
      
-      List<PSConfigStatus> cfgStatusList = null;
+      List<PSConfigStatus> cfgStatusList;
       Session session = sessionFactory.getCurrentSession();
 
          Criteria criteria = session.createCriteria(PSConfigStatus.class);
@@ -159,7 +152,7 @@ public class PSConfigStatusMgr  implements IPSConfigStatusMgr
       if (StringUtils.isBlank(nameFilter))
          throw new IllegalArgumentException("nameFilter may not be null or empty string");
      
-      List<PSConfigStatus> resultList = new ArrayList<PSConfigStatus>();
+      List<PSConfigStatus> resultList = new ArrayList<>();
       List<PSConfigStatus> cfgStatusList = findConfigStatus(nameFilter);
       if(!cfgStatusList.isEmpty())
       {
@@ -182,8 +175,7 @@ public class PSConfigStatusMgr  implements IPSConfigStatusMgr
     * (non-Javadoc)
     * @see com.percussion.rx.config.IPSConfigStatusMgr#deleteConfigStatus(long)
     */
-   public void deleteConfigStatus(long statusID)
-   {
+   public void deleteConfigStatus(long statusID) throws PSNotFoundException {
       PSConfigStatus cfgStatus = loadConfigStatusModifiable(statusID);
       sessionFactory.getCurrentSession().delete(cfgStatus);
    }
@@ -217,7 +209,7 @@ public class PSConfigStatusMgr  implements IPSConfigStatusMgr
    {
       if (StringUtils.isBlank(configName))
          throw new IllegalArgumentException("configName may not be null or empty string");
-      List<PSConfigStatus> cfgList = null;
+      List<PSConfigStatus> cfgList;
       Session session = sessionFactory.getCurrentSession();
 
          Criteria criteria = session.createCriteria(PSConfigStatus.class);
@@ -227,7 +219,7 @@ public class PSConfigStatusMgr  implements IPSConfigStatusMgr
          criteria.setMaxResults(1);
          cfgList = criteria.list();
 
-      return cfgList.size()==0 ? null : cfgList.get(0);
+      return cfgList.isEmpty() ? null : cfgList.get(0);
    }
 }
 

@@ -24,28 +24,8 @@ import com.percussion.cms.objectstore.PSItemDefinition;
 import com.percussion.conn.PSDesignerConnection;
 import com.percussion.conn.PSServerException;
 import com.percussion.design.catalog.PSCatalogResultsWalker;
-import com.percussion.design.objectstore.PSBackEndColumn;
-import com.percussion.design.objectstore.PSContainerLocator;
-import com.percussion.design.objectstore.PSContentEditorMapper;
-import com.percussion.design.objectstore.PSContentEditorPipe;
-import com.percussion.design.objectstore.PSContentEditorSharedDef;
-import com.percussion.design.objectstore.PSContentEditorSystemDef;
-import com.percussion.design.objectstore.PSControlMeta;
-import com.percussion.design.objectstore.PSControlParameter;
-import com.percussion.design.objectstore.PSControlRef;
-import com.percussion.design.objectstore.PSDisplayMapper;
-import com.percussion.design.objectstore.PSDisplayMapping;
-import com.percussion.design.objectstore.PSDisplayText;
-import com.percussion.design.objectstore.PSField;
-import com.percussion.design.objectstore.PSFieldSet;
-import com.percussion.design.objectstore.PSParam;
-import com.percussion.design.objectstore.PSSharedFieldGroup;
-import com.percussion.design.objectstore.PSTableLocator;
-import com.percussion.design.objectstore.PSTableSet;
-import com.percussion.design.objectstore.PSTextLiteral;
-import com.percussion.design.objectstore.PSUIDefinition;
-import com.percussion.design.objectstore.PSUISet;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.*;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.util.PSCollection;
@@ -562,7 +542,7 @@ public class PSContentEditorDefinition
          field.setOccurrenceDimension(PSField.OCCURRENCE_DIMENSION_OPTIONAL,
                null);
       }
-      catch (PSValidationException e)
+      catch (PSSystemValidationException e)
       {
          // should not come here as it is setting default
       }
@@ -1382,7 +1362,7 @@ public class PSContentEditorDefinition
     * <li>Has no embedded whitespace</li>
     * <li>Has only Alphanummeric and "_" (underscore) characters</li> 
     * <li>Does not have first char in lower case and second char in upper case.</li>
-    * <li>Is not a reserved word as defined in local static method {@link #getReservedWord}.</li>
+    * <li>Is not a reserved word as defined in local static method .</li>
     * </ol>
     * 
     * @param fieldName the field name to be checked for validity, may be

@@ -27,44 +27,16 @@ package com.percussion.deployer.server.dependencies;
 import com.percussion.conn.PSServerException;
 import com.percussion.deployer.error.IPSDeploymentErrors;
 import com.percussion.deployer.error.PSDeployException;
-import com.percussion.deployer.objectstore.PSAppEnabledPolicySetting;
-import com.percussion.deployer.objectstore.PSAppPolicySettings;
-import com.percussion.deployer.objectstore.PSApplicationIDTypes;
-import com.percussion.deployer.objectstore.PSDatasourceMap;
-import com.percussion.deployer.objectstore.PSDbmsInfo;
-import com.percussion.deployer.objectstore.PSDbmsMap;
-import com.percussion.deployer.objectstore.PSDbmsMapping;
 import com.percussion.deployer.objectstore.PSDependency;
-import com.percussion.deployer.objectstore.PSDependencyFile;
-import com.percussion.deployer.objectstore.PSDeployableObject;
-import com.percussion.deployer.objectstore.PSIdMap;
-import com.percussion.deployer.objectstore.PSLogPolicySetting;
-import com.percussion.deployer.objectstore.PSTracePolicySetting;
-import com.percussion.deployer.objectstore.PSTransactionSummary;
-import com.percussion.deployer.server.PSArchiveHandler;
-import com.percussion.deployer.server.PSDbmsHelper;
-import com.percussion.deployer.server.PSDependencyDef;
-import com.percussion.deployer.server.PSDependencyMap;
-import com.percussion.deployer.server.PSImportCtx;
-import com.percussion.design.objectstore.IPSReplacementValue;
-import com.percussion.design.objectstore.PSAcl;
-import com.percussion.design.objectstore.PSAclEntry;
-import com.percussion.design.objectstore.PSApplication;
-import com.percussion.design.objectstore.PSApplicationType;
-import com.percussion.design.objectstore.PSBackEndDataTank;
-import com.percussion.design.objectstore.PSBackEndTable;
-import com.percussion.design.objectstore.PSDataSelector;
-import com.percussion.design.objectstore.PSDataSet;
-import com.percussion.design.objectstore.PSFunctionCall;
-import com.percussion.design.objectstore.PSLogger;
-import com.percussion.design.objectstore.PSPipe;
-import com.percussion.design.objectstore.PSQueryPipe;
-import com.percussion.design.objectstore.PSWhereClause;
+import com.percussion.deployer.objectstore.*;
+import com.percussion.deployer.server.*;
+import com.percussion.design.objectstore.*;
 import com.percussion.design.objectstore.server.PSApplicationSummary;
 import com.percussion.design.objectstore.server.PSServerXmlObjectStore;
 import com.percussion.design.objectstore.server.PSXmlObjectStoreLockerId;
 import com.percussion.security.PSSecurityToken;
 import com.percussion.server.PSServer;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.security.IPSBackEndRoleMgr;
 import com.percussion.services.security.PSRoleMgrLocator;
 import com.percussion.util.PSCollection;
@@ -72,11 +44,7 @@ import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -103,8 +71,7 @@ public class PSApplicationDependencyHandler
 
    // see base class
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -863,8 +830,7 @@ public class PSApplicationDependencyHandler
     * @throws PSDeployException if there are any errors.
     */
    private List<PSDependency> getStyleSheetDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       List<PSDependency> deps = new ArrayList<PSDependency>();
 
       String appName = dep.getDependencyId();
@@ -910,7 +876,7 @@ public class PSApplicationDependencyHandler
     *
     * @param app The application to check, assumed not <code>null</code>.
     * @param resourceName A resource name returned by
-    * {@link PSApplicationIDTypes#getResourceList()}, assumed not
+    *  assumed not
     * <code>null</code> or empty.
     *
     * @return The dataset, or <code>null</code> if not found.

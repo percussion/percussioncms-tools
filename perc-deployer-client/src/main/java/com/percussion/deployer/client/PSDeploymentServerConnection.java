@@ -45,12 +45,12 @@ import com.percussion.server.IPSCgiVariables;
 import com.percussion.server.PSServerLockException;
 import com.percussion.server.job.PSJobException;
 import com.percussion.util.PSCharSetsConstants;
-import com.percussion.utils.security.PSEncryptionException;
-import com.percussion.utils.security.PSEncryptor;
-import com.percussion.utils.security.deprecated.PSCryptographer;
+import com.percussion.security.PSEncryptionException;
+import com.percussion.security.PSEncryptor;
+import com.percussion.legacy.security.deprecated.PSCryptographer;
 import com.percussion.util.PSFormatVersion;
 import com.percussion.util.PSPurgableTempFile;
-import com.percussion.utils.security.deprecated.PSLegacyEncrypter;
+import com.percussion.legacy.security.deprecated.PSLegacyEncrypter;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
 import org.apache.logging.log4j.LogManager;
@@ -1081,10 +1081,10 @@ public class PSDeploymentServerConnection
       if (pwd == null || pwd.trim().length() == 0)
          return "";
 
-      String key = uid == null || uid.trim().length() == 0 ? PSLegacyEncrypter.INVALID_DRIVER() :
+      String key = uid == null || uid.trim().length() == 0 ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER() :
               uid;
 
-      return PSCryptographer.encrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
+      return PSCryptographer.encrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);
    }
 
    /**
@@ -1102,14 +1102,14 @@ public class PSDeploymentServerConnection
       if (pwd == null || pwd.trim().length() == 0)
          return "";
 
-      String key = uid == null || uid.trim().length() == 0 ? PSLegacyEncrypter.INVALID_DRIVER() :
+      String key = uid == null || uid.trim().length() == 0 ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER() :
          uid;
 
       try {
-         return PSEncryptor.getInstance().decrypt(pwd);
+         return PSEncryptor.getInstance("AES",null).decrypt(pwd);
       } catch (PSEncryptionException e) {
          try {
-            return PSCryptographer.decrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
+            return PSCryptographer.decrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);
          }catch (Exception ex){
             System.out.println("Error: Pwd Decryption Failed " + ex.getMessage());
             return "";

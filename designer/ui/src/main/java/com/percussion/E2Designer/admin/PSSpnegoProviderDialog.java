@@ -13,7 +13,7 @@ import com.percussion.E2Designer.SecurityProviderMetaData;
 import com.percussion.design.objectstore.PSSecurityProviderInstance;
 import com.percussion.error.PSIllegalArgumentException;
 import com.percussion.security.PSSecurityProvider;
-import com.percussion.utils.security.deprecated.PSCryptographer;
+import com.percussion.legacy.security.deprecated.PSCryptographer;
 import com.percussion.validation.ListMemberConstraint;
 import com.percussion.validation.StringConstraint;
 import com.percussion.validation.StringLengthConstraint;
@@ -119,6 +119,7 @@ public class PSSpnegoProviderDialog extends PSDialog
    /**
     * Process the action for the Ok button.
     */
+   @Override
    public void onOk()
    {
       m_name.setText(DIALOG_NAME);
@@ -161,6 +162,7 @@ public class PSSpnegoProviderDialog extends PSDialog
    /**
     * Process the action for the Cancel button.
     */
+   @Override
    public void onCancel()
    {
       m_isModified = false;
@@ -187,8 +189,8 @@ public class PSSpnegoProviderDialog extends PSDialog
          return;
 
       // set up the validation framework
-      ArrayList<JTextField> comps = new ArrayList<JTextField>(10);
-      ArrayList<ValidationConstraint> constraints = new ArrayList<ValidationConstraint>(10);
+      ArrayList<JTextField> comps = new ArrayList<>(10);
+      ArrayList<ValidationConstraint> constraints = new ArrayList<>(10);
       StringConstraint nonEmpty = new StringConstraint();
 
       // validate security privider name
@@ -229,6 +231,7 @@ public class PSSpnegoProviderDialog extends PSDialog
     * 
     * @return the dialog resources, never <code>null</code>.
     */
+   @Override
    protected ResourceBundle getResources()
    {
       if (ms_res == null)
@@ -276,19 +279,16 @@ public class PSSpnegoProviderDialog extends PSDialog
    // implementation for ISecurityProviderEditor
    public void setInstanceNames(@SuppressWarnings("rawtypes") Collection names)
    {
-      if (names == null || names.size() == 0)
+      if (names == null || names.isEmpty())
       {
          m_existingProviders = null;
          return;
       }
 
-      Iterator<?> iter = names.iterator();
-      while (iter.hasNext())
-      {
-         Object o = iter.next();
+      for (Object o : names) {
          if (!(o instanceof String))
             throw new IllegalArgumentException(
-               "Invalid entry in instance name list");
+                    "Invalid entry in instance name list");
       }
       m_existingProviders = names;
 
@@ -430,11 +430,13 @@ public class PSSpnegoProviderDialog extends PSDialog
       {
          super(propertyName);
       }
-      
+
+      @Override
       protected JTextField getTextField() {
          return field;
       }
-      
+
+      @Override
       public void load(Properties props) {
          String p = props.getProperty(
                propertyName, 
@@ -445,7 +447,7 @@ public class PSSpnegoProviderDialog extends PSDialog
          }
       }
 
-
+      @Override
       public void save(boolean force)
       {
          String s = getTextField().getText().trim();

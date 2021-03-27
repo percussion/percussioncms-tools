@@ -38,6 +38,7 @@ import com.percussion.cx.objectstore.PSProperties;
 import com.percussion.design.objectstore.PSLocator;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.error.PSException;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.util.IPSHtmlParameters;
 import com.percussion.util.PSIteratorUtils;
 import com.percussion.util.PSStringComparator;
@@ -854,8 +855,7 @@ public class PSFolderActionManager
     * @throws PSCmsException if an error happens while processing the request.
     */
    public void delete(PSNode parentNode, Iterator nodeList, boolean force)
-         throws PSCmsException
-   {
+           throws PSCmsException, PSNotFoundException {
       validateNodeAsFolder(parentNode);
       PSLocator parentLocator = PSActionManager.nodeToLocator(parentNode);
 
@@ -887,10 +887,6 @@ public class PSFolderActionManager
     *           <code>TYPE_ITEM</code> is only allowed for parent of type
     *           <code>TYPE_FOLDER</code>
     *           
-    * @param force <code>true</code> to force the action in case child nodes 
-    *           are participating in cross site links. <code>false</code> to 
-    *           error out in such a case.
-    * 
     * @throws PSCmsException if an error happens while processing the request.
     */
    public void purgeAllContent(PSNode parentNode, Iterator nodeList)

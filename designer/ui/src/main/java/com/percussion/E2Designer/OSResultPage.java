@@ -24,7 +24,7 @@ import com.percussion.design.objectstore.PSHtmlParameter;
 import com.percussion.design.objectstore.PSNotLockedException;
 import com.percussion.design.objectstore.PSResultPage;
 import com.percussion.design.objectstore.PSResultPageSet;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.util.IOTools;

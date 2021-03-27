@@ -18,13 +18,8 @@ import com.percussion.client.impl.PSReference;
 import com.percussion.client.models.IPSCmsModel;
 import com.percussion.conn.PSServerException;
 import com.percussion.content.IPSMimeContent;
-import com.percussion.design.objectstore.PSApplicationFile;
-import com.percussion.design.objectstore.PSApplicationType;
-import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSObjectStore;
-import com.percussion.design.objectstore.PSRevisionHistory;
-import com.percussion.design.objectstore.PSUnknownNodeTypeException;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.*;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
@@ -310,10 +305,9 @@ public class ApplicationImportExport
     * Loads application file from server and returns its content.
     */
    private IPSMimeContent loadAppFileFromServer(OSApplication app, final String file)
-      throws PSServerException, PSAuthorizationException,
-      PSAuthenticationFailedException, PSNotLockedException,
-      PSValidationException, PSIllegalStateException
-   {
+           throws PSServerException, PSAuthorizationException,
+           PSAuthenticationFailedException, PSNotLockedException,
+            PSIllegalStateException, PSSystemValidationException {
       final PSApplicationFile psfile = new PSApplicationFile(new File(file));
       return getObjectStore().loadApplicationFile(app, psfile).getContent();
    }

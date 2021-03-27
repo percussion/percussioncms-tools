@@ -16,7 +16,7 @@ import com.percussion.services.security.IPSAclEntry;
 import com.percussion.services.security.PSPermissions;
 import com.percussion.services.security.PSTypedPrincipal;
 import com.percussion.services.security.data.PSAclImpl;
-import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
+import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.workbench.ui.IPSUiConstants;
 import com.percussion.workbench.ui.PSMessages;
 import com.percussion.workbench.ui.security.PSAclDialog.EntryTypePair;

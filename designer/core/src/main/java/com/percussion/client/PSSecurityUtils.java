@@ -17,7 +17,7 @@ import com.percussion.services.guidmgr.data.PSGuid;
 import com.percussion.services.security.*;
 import com.percussion.services.security.data.PSAclEntryImpl;
 import com.percussion.services.security.data.PSAclImpl;
-import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
+import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.webservices.common.PSObjectSummary;
 import com.percussion.webservices.security.data.PSCommunityVisibility;
 import com.percussion.webservices.securitydesign.GetVisibilityByCommunityRequest;
@@ -35,7 +35,7 @@ import java.util.*;
 public class PSSecurityUtils
 {
 
-   private static Logger log =  LogManager.getLogger(PSSecurityUtils.class);
+   private static final Logger log =  LogManager.getLogger(PSSecurityUtils.class);
 
    /**
     * Private ctor
@@ -57,7 +57,7 @@ public class PSSecurityUtils
    {
       if (community == null)
          throw new IllegalArgumentException("community cannot be null.");
-      List<IPSReference> commList = new ArrayList<IPSReference>(1);
+      List<IPSReference> commList = new ArrayList<>(1);
       commList.add(community);
       return getVisibilityByCommunity(commList, type);
 
@@ -158,10 +158,8 @@ public class PSSecurityUtils
             "communities cannot be null or empty.");
       if (type == null)
          throw new IllegalArgumentException("type cannot be null.");
-      Set<IPSReference> refs = new HashSet<IPSReference>();
-      List<IPSReference> objs = getVisibilityByCommunity(communities, type);
-      refs.addAll(objs);
-      return refs;
+
+      return new HashSet<>(getVisibilityByCommunity(communities, type));
    }
 
    /**
@@ -180,15 +178,15 @@ public class PSSecurityUtils
    {
       List<IPSReference> commList = PSCoreUtils.catalog(
          PSObjectTypes.COMMUNITY, true);
-      Map<String, IPSReference> comms = new HashMap<String, IPSReference>();
+      Map<String, IPSReference> comms = new HashMap<>();
       for (IPSReference ref : commList)
       {
          comms.put(ref.getName(), ref);
       }
-      List<String> lst = new ArrayList<String>(comms.keySet());
+      List<String> lst = new ArrayList<>(comms.keySet());
       Collection<String> visibleComms = com.percussion.services.security.data.PSSecurityUtils
          .getVisibleCommunities(acl, lst);
-      List<IPSReference> retList = new ArrayList<IPSReference>();
+      List<IPSReference> retList = new ArrayList<>();
       if (visibleComms.size() == comms.size())
       {
          retList.addAll(commList);
@@ -352,7 +350,7 @@ public class PSSecurityUtils
       PSCoreFactory factory = PSCoreFactory.getInstance();
       String commName = commRef.getName();
       Map<IPSCmsModel, Collection<IPSReference>> validRefsByModel = 
-         new HashMap<IPSCmsModel, Collection<IPSReference>>();
+         new HashMap<>();
       IPSCmsModel model = null;
       for(IPSReference ref : associatedRefs)
       {
@@ -400,7 +398,7 @@ public class PSSecurityUtils
          Collection<IPSReference> validRefs = validRefsByModel.get(model);
          if (validRefs == null)
          {
-            validRefs = new ArrayList<IPSReference>();
+            validRefs = new ArrayList<>();
             validRefsByModel.put(model, validRefs);
          }
          validRefs.add(ref);
@@ -445,8 +443,8 @@ public class PSSecurityUtils
       PSCoreFactory factory = PSCoreFactory.getInstance();
       String commName = commRef.getName();
       Map<IPSCmsModel, Collection<IPSReference>> validRefsByModel = 
-         new HashMap<IPSCmsModel, Collection<IPSReference>>();
-      IPSCmsModel model = null;
+         new HashMap<>();
+      IPSCmsModel model;
       for(IPSReference ref : associatedRefs)
       {
          model = factory.getModel(ref);
@@ -477,7 +475,7 @@ public class PSSecurityUtils
          Collection<IPSReference> validRefs = validRefsByModel.get(model);
          if (validRefs == null)
          {
-            validRefs = new ArrayList<IPSReference>();
+            validRefs = new ArrayList<>();
             validRefsByModel.put(model, validRefs);
          }
          validRefs.add(ref);

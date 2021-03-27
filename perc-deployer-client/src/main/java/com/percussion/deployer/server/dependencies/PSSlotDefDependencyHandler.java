@@ -44,6 +44,7 @@ import com.percussion.services.assembly.PSAssemblyServiceLocator;
 import com.percussion.services.assembly.data.PSTemplateSlot;
 import com.percussion.services.assembly.data.PSTemplateTypeSlotAssociation;
 import com.percussion.services.catalog.PSTypeEnum;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.guidmgr.data.PSGuid;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.types.PSPair;
@@ -162,10 +163,8 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
    
    //see base class
    @Override
-   @SuppressWarnings("unchecked")
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-         throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       if (dep == null)
@@ -180,7 +179,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
       boolean isLegacy = isLegacySlot(slot);
       
       // OK, we have the slot, now package its dependencies..
-      List<PSDependency> childDeps = new ArrayList<PSDependency>();
+      List<PSDependency> childDeps = new ArrayList<>();
       
       PSTemplateTypeSlotAssociation[] slotRelations = 
          ((PSTemplateSlot)slot).getSlotTypeAssociations();
@@ -281,7 +280,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
          throw new IllegalArgumentException("tok may not be null");
       
       init();
-      List<PSDependency> deps = new ArrayList<PSDependency>();
+      List<PSDependency> deps = new ArrayList<>();
       List<IPSTemplateSlot> slots = m_assemblyHelper.getSlots();
       PSDependency dep = null;
       for (IPSTemplateSlot slot : slots)
@@ -308,7 +307,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
 
 
       // pack the data into the files
-      List<PSDependencyFile> files = new ArrayList<PSDependencyFile>();
+      List<PSDependencyFile> files = new ArrayList<>();
       IPSTemplateSlot slot  = findSlotByDependencyID(dep.getDependencyId());
       PSDependencyFile f = getDepFileFromSlot(slot);
       files.add(f);
@@ -379,14 +378,13 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
    @Override
    public void installDependencyFiles(PSSecurityToken tok,
          PSArchiveHandler archive, PSDependency dep, PSImportCtx ctx)
-   throws PSDeployException
-   {
+           throws PSDeployException, PSAssemblyException, PSNotFoundException {
       Iterator files = getSlotDependecyFilesFromArchive(archive, dep);
       PSDependencyFile depFile = (PSDependencyFile) files.next();
       String tgtId = findTargetId(dep, ctx);
       PSTemplateSlot slot = (PSTemplateSlot) findSlotByDependencyID(tgtId);
             
-      boolean isNew = (slot == null) ? true : false;
+      boolean isNew = slot == null;
       Integer ver = null;
 
       if (!isNew)
@@ -463,7 +461,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
             slot = (IPSTemplateSlot) PSDependencyUtils.transformElementId(slot,
                   dep, ctx, clMapping);
          }
-         PSTemplateTypeSlotAssociation assoc[] = ((PSTemplateSlot) slot)
+         PSTemplateTypeSlotAssociation[] assoc = ((PSTemplateSlot) slot)
                .getSlotTypeAssociations();
          removeAllAssociationsOnSlot(slot);
          int slotId = slot.getGUID().getUUID();
@@ -515,13 +513,12 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
     * @throws PSDeployException
     */
    private void removeInvalidAssociations(PSSecurityToken tok,
-         IPSTemplateSlot slot) throws PSDeployException
-   {
+         IPSTemplateSlot slot) throws PSDeployException, PSNotFoundException {
       if (slot == null)
          throw new IllegalArgumentException(
                "Slot Definition cannot be null for idtype mapping");
 
-      PSTemplateTypeSlotAssociation assoc[] = ((PSTemplateSlot) slot)
+      PSTemplateTypeSlotAssociation[] assoc = ((PSTemplateSlot) slot)
             .getSlotTypeAssociations();
       PSDependencyHandler ceHandler = 
          getDependencyHandler(PSCEDependencyHandler.DEPENDENCY_TYPE);
@@ -532,7 +529,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
       List<PSTemplateTypeSlotAssociation> aList = Arrays.asList(assoc);
       Iterator<PSTemplateTypeSlotAssociation> it = aList.iterator();
       List<PSTemplateTypeSlotAssociation> addList = 
-         new ArrayList<PSTemplateTypeSlotAssociation>();
+         new ArrayList<>();
       while (it.hasNext())
       {
          PSTemplateTypeSlotAssociation a = it.next();
@@ -579,7 +576,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
    {
       if (slot == null)
          throw new IllegalArgumentException("Slot Definition may not be null");
-      PSTemplateTypeSlotAssociation assoc[] = ((PSTemplateSlot) slot)
+      PSTemplateTypeSlotAssociation[] assoc = ((PSTemplateSlot) slot)
             .getSlotTypeAssociations();
       for (PSTemplateTypeSlotAssociation a : assoc)
       {
@@ -605,8 +602,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
     */
    private void doTransforms(PSSecurityToken tok, PSArchiveHandler archive,
          PSDependency dep, PSImportCtx ctx, IPSTemplateSlot slot)
-         throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (slot == null)
          throw new IllegalArgumentException(
                "Slot Definition cannot be null");
@@ -709,7 +705,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
       }
       catch (Exception e)
       {
-         m_log.error("Error ",e);
+         log.error("Error ",e);
          throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR, 
                "Could not create template from file:" + f.getName());
       }
@@ -776,7 +772,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
    /**
     * Constant for this handler's supported type
     */
-   final static String DEPENDENCY_TYPE = 
+    static final String DEPENDENCY_TYPE =
       IPSDeployConstants.DEP_OBJECT_TYPE_SLOT_DEF;
 
    /**
@@ -788,7 +784,7 @@ public class PSSlotDefDependencyHandler extends PSDependencyHandler
    /**
     * logger 
     */
-   private Logger m_log = Logger.getLogger(this.getClass());
+   private static final Logger log = Logger.getLogger(PSSlotDefDependencyHandler.class);
 
    
    /**

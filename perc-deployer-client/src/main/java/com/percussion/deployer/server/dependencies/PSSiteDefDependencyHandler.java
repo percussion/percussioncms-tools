@@ -41,8 +41,8 @@ import com.percussion.deployer.services.PSDeployServiceException;
 import com.percussion.deployer.services.PSDeployServiceLocator;
 import com.percussion.security.PSSecurityToken;
 import com.percussion.services.assembly.IPSAssemblyTemplate;
-import com.percussion.services.assembly.IPSTemplateSlot;
 import com.percussion.services.catalog.PSTypeEnum;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.guidmgr.PSGuidUtils;
 import com.percussion.services.guidmgr.data.PSGuid;
 import com.percussion.services.publisher.IPSEdition;
@@ -63,12 +63,7 @@ import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class to handle packaging and deploying a site definition.
@@ -143,13 +138,7 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
             }
          }
       }
-      catch (SAXException e)
-      {
-         throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR, e,
-               "could not parse serialized Site data, due to :"
-                     + e.getLocalizedMessage());
-      }
-      catch (IOException e)
+      catch (SAXException | IOException e)
       {
          throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR, e,
                "could not parse serialized Site data, due to :"
@@ -171,12 +160,12 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
       if (m_namedSites != null)
          m_namedSites.clear();
       else
-         m_namedSites = new HashMap<String, IPSSite>();
+         m_namedSites = new HashMap<>();
       
       if (m_guidSites != null)
          m_namedSites.clear();
       else
-         m_guidSites  = new HashMap<IPSGuid, IPSSite>();
+         m_guidSites  = new HashMap<>();
  
       List<IPSSite> sites = m_siteMgr.findAllSites();
     
@@ -242,11 +231,10 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
     * @throws PSDeployException
     */
    private List<PSDependency> getTemplateDependencies(
-         PSSecurityToken tok, PSDependency dep, IPSSite site) 
-         throws PSDeployException
-   {
+         PSSecurityToken tok, PSDependency dep, IPSSite site)
+           throws PSDeployException, PSNotFoundException {
             
-      List<PSDependency> deps = new ArrayList<PSDependency>();
+      List<PSDependency> deps = new ArrayList<>();
       Iterator<IPSAssemblyTemplate> it = 
          ((PSSite) site).getAssociatedTemplates().iterator();
 
@@ -284,10 +272,9 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
     * @throws PSDeployException
     */
    private Set<PSDependency> getContextDependencies(
-         PSSecurityToken tok, PSDependency dep, IPSSite site) 
-         throws PSDeployException
-   {
-      Set<PSDependency> deps = new HashSet<PSDependency>();
+         PSSecurityToken tok, PSDependency dep, IPSSite site)
+           throws PSDeployException, PSNotFoundException {
+      Set<PSDependency> deps = new HashSet<>();
       PSDependencyHandler  ctxHandler = getDependencyHandler(
             PSContextDefDependencyHandler.DEPENDENCY_TYPE);
       Set<PSSiteProperty> props = ((PSSite)site).getProperties();
@@ -320,10 +307,9 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
     * @throws PSDeployException
     */
    private List<PSDependency> getEditionDependencies(
-         PSSecurityToken tok, PSDependency dep, IPSSite site) 
-         throws PSDeployException
-   {
-      List<PSDependency> deps = new ArrayList<PSDependency>();
+         PSSecurityToken tok, PSDependency dep, IPSSite site)
+           throws PSDeployException, PSNotFoundException {
+      List<PSDependency> deps = new ArrayList<>();
       PSDependencyHandler  edtnHandler = getDependencyHandler(
             PSEditionDefDependencyHandler.DEPENDENCY_TYPE);
       
@@ -349,8 +335,7 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
    // see base class
    @Override
    public Iterator<PSDependency> getChildDependencies(PSSecurityToken tok,
-         PSDependency dep) throws PSDeployException
-   {
+         PSDependency dep) throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -390,7 +375,7 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
       Set<String> siteNames = m_namedSites.keySet();
       Iterator<String> it = siteNames.iterator();
       
-      List<PSDependency> deps = new ArrayList<PSDependency>();
+      List<PSDependency> deps = new ArrayList<>();
       while (it.hasNext())
       {
          String sName = it.next();
@@ -521,7 +506,7 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
       if (!dep.getObjectType().equals(DEPENDENCY_TYPE))
          throw new IllegalArgumentException("dep wrong type");
 
-      List<PSDependencyFile> files = new ArrayList<PSDependencyFile>();
+      List<PSDependencyFile> files = new ArrayList<>();
       IPSSite site = findSiteByDependencyID(dep.getDependencyId());
       if (site == null)
       {
@@ -574,7 +559,7 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
          Set<IPSGuid> tmpGuids = PSSite.getTemplateIdsFromSite(tmpStr);
          // Transform the templates of this site.
          // Templates not found on the target system will be dropped.
-         Set<IPSGuid> newGuids = new HashSet<IPSGuid>();
+         Set<IPSGuid> newGuids = new HashSet<>();
          for (IPSGuid g : tmpGuids)
          {
             PSIdMapping tmpMap = getTemplateOrVariantMapping(tok, ctx, 
@@ -672,8 +657,7 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
    @Override
    public void installDependencyFiles(PSSecurityToken tok,
          PSArchiveHandler archive, PSDependency dep, PSImportCtx ctx)
-   throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       Iterator<PSDependencyFile> files = getSiteDependecyFilesFromArchive(
             archive, dep);
       PSDependencyFile depFile = files.next();
@@ -700,7 +684,7 @@ public class PSSiteDefDependencyHandler extends PSDataObjectDependencyHandler
          while ( tmpIt.hasNext() )
          {
             IPSAssemblyTemplate t = tmpIt.next();
-            t.setSlots(new HashSet<IPSTemplateSlot>());
+            t.setSlots(new HashSet<>());
          }
       }   
       IPSDeployService depSvc = PSDeployServiceLocator.getDeployService();

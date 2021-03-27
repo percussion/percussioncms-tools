@@ -43,7 +43,7 @@ import com.percussion.services.system.data.PSSharedProperty;
 import com.percussion.services.ui.data.PSHierarchyNode;
 import com.percussion.services.workflow.data.PSWorkflow;
 import com.percussion.utils.guid.IPSGuid;
-import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
+import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.utils.types.PSPair;
 import junit.framework.TestCase;

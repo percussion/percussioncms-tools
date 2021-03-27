@@ -33,6 +33,7 @@ import com.percussion.deployer.server.PSDependencyDef;
 import com.percussion.deployer.server.PSDependencyMap;
 import com.percussion.deployer.server.PSImportCtx;
 import com.percussion.security.PSSecurityToken;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.tablefactory.PSJdbcFilterContainer;
 import com.percussion.tablefactory.PSJdbcRowData;
 import com.percussion.tablefactory.PSJdbcSelectFilter;
@@ -73,8 +74,7 @@ public class PSTransitionDefDependencyHandler
 
    // see base class
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       if (dep == null)
@@ -145,6 +145,7 @@ public class PSTransitionDefDependencyHandler
    }
    
    // see base class
+   @Override
    public PSDependency getDependency(PSSecurityToken tok, String id, 
       String parentType, String parentId)
          throws PSDeployException
@@ -202,6 +203,7 @@ public class PSTransitionDefDependencyHandler
     
 
    // see base class
+   @Override
    public boolean doesDependencyExist(PSSecurityToken tok, String id, 
       String parentId) throws PSDeployException
    {
@@ -243,12 +245,14 @@ public class PSTransitionDefDependencyHandler
    }
 
    // see base class
+   @Override
    public String getParentType()
    {
       return PSWorkflowDefDependencyHandler.DEPENDENCY_TYPE;
    }
    
    // see base class
+   @Override
    public void reserveNewId(PSDependency dep, PSIdMap idMap)
       throws PSDeployException
    {
@@ -265,6 +269,7 @@ public class PSTransitionDefDependencyHandler
    }
 
    // see base class
+   @Override
    public Iterator getDependencyFiles(PSSecurityToken tok, PSDependency dep)
       throws PSDeployException
    {
@@ -282,6 +287,7 @@ public class PSTransitionDefDependencyHandler
    }
 
    // see base class
+   @Override
    public void installDependencyFiles(PSSecurityToken tok,
       PSArchiveHandler archive, PSDependency dep, PSImportCtx ctx)
          throws PSDeployException
@@ -294,6 +300,7 @@ public class PSTransitionDefDependencyHandler
     * specifically for <code>TRANSITION_ID</code> in the 
     * <code>TRANSITIONS_TABLE</code>.
     */
+   @Override
    protected String getNextId(String table, PSDependency dep, 
       String tgtParentId) throws PSDeployException
    {
@@ -382,7 +389,7 @@ public class PSTransitionDefDependencyHandler
    /**
     * Constant for this handler's supported type
     */
-   final static String DEPENDENCY_TYPE = "TransitionDef";
+    static final String DEPENDENCY_TYPE = "TransitionDef";
 
    // private table and column names
    private static final String TRANSITIONS_TABLE = "TRANSITIONS";

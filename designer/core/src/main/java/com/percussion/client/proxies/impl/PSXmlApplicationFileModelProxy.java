@@ -24,16 +24,11 @@ import com.percussion.client.proxies.IPSCmsModelProxy;
 import com.percussion.conn.PSServerException;
 import com.percussion.content.IPSMimeContent;
 import com.percussion.content.PSMimeContentAdapter;
-import com.percussion.design.objectstore.IPSObjectStoreErrors;
-import com.percussion.design.objectstore.PSApplication;
-import com.percussion.design.objectstore.PSApplicationFile;
-import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSObjectStore;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.*;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
+import com.percussion.share.service.exception.PSValidationException;
 import org.apache.commons.collections.list.TransformedList;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -58,7 +53,6 @@ import java.util.List;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
  */
 public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
 {
@@ -80,10 +74,8 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
    }
 
    // see base class
-   @SuppressWarnings("unused") //exception
    public Collection<IPSReference> catalog()
-      throws PSModelException
-   {
+           throws PSModelException, UnsupportedOperationException {
       throw new UnsupportedOperationException("This model handles a hierarchy");
    }
 
@@ -163,23 +155,7 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
             ((PSMimeContentAdapter) data).setName(name);
          }
       }
-      catch (PSServerException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSAuthorizationException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSAuthenticationFailedException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSNotLockedException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSValidationException e)
+      catch (PSServerException  | PSNotLockedException | PSAuthenticationFailedException | PSAuthorizationException | PSSystemValidationException e)
       {
          throw new PSModelException(e);
       }
@@ -444,9 +420,8 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
 
       @Override
       protected Object doTransform(Object obj) throws PSServerException,
-         PSAuthorizationException, PSAuthenticationFailedException,
-         PSNotLockedException, PSValidationException
-      {
+              PSAuthorizationException, PSAuthenticationFailedException,
+              PSNotLockedException, PSValidationException, PSSystemValidationException {
          m_ref = (PSXmlApplicationFileHierarchyRef) obj;
          assert m_ref.getParent() != null;
          final PSApplicationFile file = new PSApplicationFile(new File(m_ref
@@ -509,10 +484,9 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
 
       @Override
       protected Object doTransform(Object obj) throws PSServerException,
-         PSAuthorizationException, PSAuthenticationFailedException,
-         PSNotLockedException, PSValidationException, PSIllegalStateException,
-         PSLockedException, PSModelException
-      {
+              PSAuthorizationException, PSAuthenticationFailedException,
+              PSNotLockedException, PSValidationException, PSIllegalStateException,
+              PSLockedException, PSModelException, PSSystemValidationException {
          m_ref = (PSXmlApplicationFileHierarchyRef) obj;
          if (m_ref.getObjectType().getSecondaryType().equals(
             PSObjectTypes.FileSubTypes.FOLDER))

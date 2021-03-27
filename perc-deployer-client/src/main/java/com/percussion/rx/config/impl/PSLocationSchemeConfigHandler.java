@@ -32,6 +32,7 @@ import com.percussion.rx.design.impl.PSLocationSchemeModel;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.contentmgr.IPSContentMgr;
 import com.percussion.services.contentmgr.PSContentMgrLocator;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.sitemgr.IPSLocationScheme;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.types.PSPair;
@@ -88,7 +89,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
       List<PSPair<String, ObjectState>> commonNames = getCommonObjectNames(other);
 
       PSConfigValidation vError;
-      List<PSConfigValidation> result = new ArrayList<PSConfigValidation>();
+      List<PSConfigValidation> result = new ArrayList<>();
       for (PSPair<String, ObjectState> pair : commonNames)
       {
          String msg = " Context / Location Scheme pair \"" + pair.getFirst()
@@ -149,7 +150,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     * 
     * @return a list of Context names as a {@link List List&lt;String>} type or 
     * it may be a string that contains a ${place-holder}. It may be 
-    * <code>null</code> if the {@link #setNames(Object)} has never been called
+    * <code>null</code> if the  has never been called
     * or wired by Spring framework.
     */
    public Object getContexts()
@@ -230,19 +231,18 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     */
    @Override
    public List<PSPair<Object, ObjectState>> getDesignObjects(
-         Map<String, Object> cachedObjs)
-   {
+         Map<String, Object> cachedObjs) throws PSNotFoundException {
       if (StringUtils.isBlank(getName()))
          throw new PSConfigException(
                "Location Scheme name may not be null or empty.");
 
       PSLocationSchemeModel model = PSConfigUtils.getSchemeModel();
-      List<PSPair<Object, ObjectState>> result = new ArrayList<PSPair<Object, ObjectState>>();
+      List<PSPair<Object, ObjectState>> result = new ArrayList<>();
       
       for (PSPair<String, ObjectState> sname : getObjectNames())
       {
          Object scheme = getLocationScheme(sname.getFirst(), model, cachedObjs);
-         result.add(new PSPair<Object, ObjectState>(scheme, sname.getSecond()));
+         result.add(new PSPair<>(scheme, sname.getSecond()));
       }
       return result;
    }
@@ -252,8 +252,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     * @see com.percussion.rx.config.impl.PSObjectConfigHandler#getDefaultDesignObject(java.util.Map)
     */
    @Override
-   public Object getDefaultDesignObject(Map<String, Object> cachedObjs)
-   {
+   public Object getDefaultDesignObject(Map<String, Object> cachedObjs) throws PSNotFoundException {
       Collection<String> names;
       Object contextsObj = getContexts();
       // if the contexts object has replacement value, we get all the location
@@ -272,9 +271,8 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
       // and load the first object from available and return.
       if (!names.contains(locSchemeName))
          locSchemeName = names.iterator().next();
-      Object scheme = getLocationScheme(locSchemeName, PSConfigUtils
+      return getLocationScheme(locSchemeName, PSConfigUtils
             .getSchemeModel(), cachedObjs);
-      return scheme;
    }
 
    /*
@@ -282,8 +280,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     */
    @Override
    public IPSGuid saveResult(IPSDesignModel model, Object obj, ObjectState state,
-         List<IPSAssociationSet> assocList)
-   {
+         List<IPSAssociationSet> assocList) throws PSNotFoundException {
       if (m_isUnProcess || state.equals(ObjectState.PREVIOUS))
       {
          IPSLocationScheme scheme = (IPSLocationScheme) obj;
@@ -312,7 +309,6 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
    /*
     * //see base class method for details
     */
-   @SuppressWarnings("unchecked")
    @Override
    protected Collection<String> getPrevNames()
    {
@@ -334,7 +330,6 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     * @return a list of Location Scheme names, never <code>null</code>, but may 
     * be empty.
     */
-   @SuppressWarnings("unchecked")
    private Collection<String> getNamesFromCtxProperty(Object ctxValue)
    {
       if (ctxValue == null)
@@ -345,7 +340,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
       Collection<String> ctxNames = PSConfigUtils.getObjectNames(
             ctxValue, PSConfigUtils.getContextModel(), CONTEXTS);
 
-      List<String> result = new ArrayList<String>();      
+      List<String> result = new ArrayList<>();
       PSLocationSchemeModel model = PSConfigUtils.getSchemeModel(); 
       for (String ctxName : ctxNames)
       {
@@ -392,8 +387,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     * <code>null</code>.
     */
    private Object getLocationScheme(String uniqueSchemeName,
-         PSLocationSchemeModel model, Map<String, Object> cachedObjs)
-   {
+         PSLocationSchemeModel model, Map<String, Object> cachedObjs) throws PSNotFoundException {
       String ctxName = getContextFromUniqueName(uniqueSchemeName);
       
       // get Location Scheme from cache
@@ -477,7 +471,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
       {
          IPSGuid ctId = PSConfigUtils.getContentTypeModel().nameToGuid(
                getContentType());
-         if (scheme.getContentTypeId().longValue() != ctId.longValue())
+         if (scheme.getContentTypeId() != ctId.longValue())
          {
             throw new PSConfigException(
                   "Failed to configure Location Scheme \""
@@ -492,7 +486,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
       {
          IPSGuid tpId = PSConfigUtils.getTemplateModel().nameToGuid(
                getTemplate());
-         if (scheme.getTemplateId().longValue() != tpId.longValue())
+         if (scheme.getTemplateId() != tpId.longValue())
          {
             throw new PSConfigException(
                   "Failed to configure Location Scheme \""
@@ -511,7 +505,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     * @param model the model used to create the Location Scheme, assumed not
     * <code>null</code>.
     * @param ctxName the Context name, assumed not <code>null</code> or empty.
-    * @param the cached, loaded or created Location Scheme, never 
+    * @param cachedObjs cached, loaded or created Location Scheme, never
     * <code>null</code>.
     * 
     * @return the created Location Scheme, never <code>null</code>.
@@ -539,7 +533,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     * @param tpId the Template ID, assumed not <code>null</code>.
     * @param model the Location Scheme model, assumed not <code>null</code>.
     * @param ctxName the Context name, assumed not <code>null</code> or empty.
-    * @param the cached, loaded or created Location Scheme, never 
+    * @param cachedObjs cached, loaded or created Location Scheme, never
     * <code>null</code>.
     */
    private void validateUniqueContentTypeTemplateAssoc(IPSGuid ctId,
@@ -579,8 +573,8 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
    private void validateDiffContentTypeTemplate(IPSGuid ctId, IPSGuid tpId,
          String ctxName, IPSLocationScheme scheme, boolean isExist)
    {
-      if (scheme.getTemplateId().longValue() != tpId.longValue()
-            || scheme.getContentTypeId().longValue() != ctId.longValue())
+      if (scheme.getTemplateId() != tpId.longValue()
+            || scheme.getContentTypeId() != ctId.longValue())
          return;
       
       if (isExist)
@@ -631,7 +625,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
                + "\" does not associate with Template \"" + template + "\".");
       }
       
-      return new PSPair<IPSGuid, IPSGuid>(ctGuid, tpGuid);
+      return new PSPair<>(ctGuid, tpGuid);
    }
 
    /**
@@ -733,7 +727,6 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
     * //see base class method for details
     */
    @Override
-   @SuppressWarnings("unchecked")
    public Map<String, Object> getExtraProperties()
    {
       return m_extraProperties;
@@ -751,7 +744,7 @@ public class PSLocationSchemeConfigHandler extends PSObjectConfigHandler
    /**
     * Holds the {@link #CONTEXTS} property, which is a list of Context names
     */
-   private Map<String, Object> m_extraProperties = new HashMap<String, Object>();
+   private Map<String, Object> m_extraProperties = new HashMap<>();
 
    /**
     * Determines if the {@link #unprocess(Object, List)} was called.

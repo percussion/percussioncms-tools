@@ -125,6 +125,11 @@
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
+            <artifactId>perc-legacy</artifactId>
+            <version>8.0.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
             <version>8.0.3-SNAPSHOT</version>
             <type>test-jar</type>
@@ -179,6 +184,16 @@
             <groupId>jmock</groupId>
             <artifactId>jmock-cglib</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-deployer-client</artifactId>
+            <version>8.0.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-exceptions-spring</artifactId>
+            <version>8.0.3-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

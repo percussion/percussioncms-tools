@@ -161,6 +161,28 @@
             <artifactId>org.eclipse.swt.cocoa.macosx</artifactId>
             <version>3.6.2.v3659b</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.core.resources</artifactId>
+            <version>3.6.1.R36x_v20110131-1630</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.ide</artifactId>
+            <version>3.6.2.M20101201-0800</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>sitemanage</artifactId>
+            <version>8.0.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-security-utils</artifactId>
+            <version>8.0.3-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -31,6 +31,7 @@ import com.percussion.deployer.objectstore.PSIdMap;
 import com.percussion.deployer.objectstore.PSIdMapping;
 import com.percussion.deployer.objectstore.PSImportPackage;
 import com.percussion.security.PSSecurityToken;
+import com.percussion.services.error.PSNotFoundException;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
@@ -60,7 +61,6 @@ public class PSTransformsHandler
     * 
     * @throws IllegalArgumentException if any parameter is invalid.
     */
-   @SuppressWarnings("unchecked")
    public PSTransformsHandler(PSSecurityToken tok, String sourceName,
          List<PSImportPackage> packages) 
    {
@@ -88,8 +88,7 @@ public class PSTransformsHandler
     * 
     * @throws PSDeployException If an error occurs during target guessing.
     */
-   public PSIdMap getIdMap() throws PSDeployException
-   {
+   public PSIdMap getIdMap() throws PSDeployException, PSNotFoundException {
       // transform id's
       guessAll();
       
@@ -105,9 +104,8 @@ public class PSTransformsHandler
     * @throws PSDeployException If an error occurs during target guessing.
     */
    private void guessAll()
-      throws PSDeployException
-   {
-      List<PSIdMapping> allMappings = new ArrayList<PSIdMapping>();
+           throws PSDeployException, PSNotFoundException {
+      List<PSIdMapping> allMappings = new ArrayList<>();
 
       for (PSImportPackage pkg : m_packages)
       {
@@ -177,60 +175,50 @@ public class PSTransformsHandler
       
       checkModifyIdMap();
       
-      Set<PSIdMapping> mappings = new HashSet<PSIdMapping>();
+      Set<PSIdMapping> mappings = new HashSet<>();
       
-      List<PSDependency> deps = new ArrayList<PSDependency>();
+      List<PSDependency> deps = new ArrayList<>();
       getSupportedIdMapDependencies(depElement, deps);
-      Iterator<PSDependency> idMapDeps = deps.iterator();
-      while (idMapDeps.hasNext())
-      {
-         PSDependency dep = idMapDeps.next();
+      for (PSDependency dep : deps) {
          String depId = dep.getDependencyId();
          String objType = dep.getObjectType();
-         
+
          PSIdMapping mapping;
-         if (!dep.supportsParentId())         
-         {
+         if (!dep.supportsParentId()) {
             mapping = m_idMap.getMapping(depId, objType);
-            if (mapping == null)
-            {
+            if (mapping == null) {
                mapping = new PSIdMapping(
-                  depId, dep.getDisplayName(), objType, true);
-               m_idMap.addMapping(mapping);                  
+                       depId, dep.getDisplayName(), objType, true);
+               m_idMap.addMapping(mapping);
             }
-         }
-         else
-         {
-            PSIdMapping parentMapping = m_idMap.getMapping(dep.getParentId(), 
-               dep.getParentType());
-            if (parentMapping == null) 
-            {
+         } else {
+            PSIdMapping parentMapping = m_idMap.getMapping(dep.getParentId(),
+                    dep.getParentType());
+            if (parentMapping == null) {
                //this should not happen if we go in the order
-               PSDependency parent = 
-                  getParentDependency(dep, dep.getParentType(), depElement);
-               if (parent == null)
-               {
+               PSDependency parent =
+                       getParentDependency(dep, dep.getParentType(), depElement);
+               if (parent == null) {
                   throw new IllegalStateException(
-                     "could not find a parent for a child " + 
-                     "that supports parent id");
+                          "could not find a parent for a child " +
+                                  "that supports parent id");
                }
-               parentMapping = new PSIdMapping(parent.getDependencyId(), 
-                  parent.getDisplayName(), parent.getObjectType(), true);
-               m_idMap.addMapping(parentMapping);         
-               if (!unMappedOnly || !parentMapping.isMapped())              
-                  mappings.add(parentMapping);            
+               parentMapping = new PSIdMapping(parent.getDependencyId(),
+                       parent.getDisplayName(), parent.getObjectType(), true);
+               m_idMap.addMapping(parentMapping);
+               if (!unMappedOnly || !parentMapping.isMapped())
+                  mappings.add(parentMapping);
             }
             mapping = m_idMap.getMapping(
-               depId, objType, dep.getParentId(), dep.getParentType());               
-            if (mapping == null)
-            {
+                    depId, objType, dep.getParentId(), dep.getParentType());
+            if (mapping == null) {
                mapping = new PSIdMapping(
-                  depId, dep.getDisplayName(), objType, dep.getParentId(),                   
-                  parentMapping.getSourceName(), dep.getParentType(), true);
-               m_idMap.addMapping(mapping);               
-            }                           
+                       depId, dep.getDisplayName(), objType, dep.getParentId(),
+                       parentMapping.getSourceName(), dep.getParentType(), true);
+               m_idMap.addMapping(mapping);
+            }
          }
-            
+
          //Add always if user requested all mappings, otherwise adds only  the
          //the mappings that were not mapped.
          if (!unMappedOnly || !mapping.isMapped())
@@ -337,8 +325,7 @@ public class PSTransformsHandler
     * @throws PSDeployException if there are any errors. 
     */
    private List<PSIdMapping> guessTarget(Iterator<PSIdMapping> idMappings)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       List<PSIdMapping> unMatchedById = new ArrayList<PSIdMapping>();
       List<PSIdMapping> unMatchedParentList = new ArrayList<PSIdMapping>();
       while (idMappings.hasNext())
@@ -390,9 +377,8 @@ public class PSTransformsHandler
     * @throws IllegalStateException if id map can not be modifiable.
     * @throws PSDeployException if exception happens cataloging.
     */
-   private void guessTarget(PSIdMapping mapping, boolean mustMatchById) 
-      throws PSDeployException
-   {
+   private void guessTarget(PSIdMapping mapping, boolean mustMatchById)
+           throws PSDeployException, PSNotFoundException {
       checkModifyIdMap();
       
       if (mapping == null)
@@ -447,8 +433,7 @@ public class PSTransformsHandler
     */
    private PSMappingElement guessTarget(String elementType, String sourceName,
       String sourceId, String parentType, String parentId, 
-      boolean mustMatchById) throws PSDeployException
-   {
+      boolean mustMatchById) throws PSDeployException, PSNotFoundException {
       List<PSMappingElement> targetElements = getUnmappedTargetElements(
             elementType, parentType, parentId);      
                
@@ -505,9 +490,8 @@ public class PSTransformsHandler
     */
    @SuppressWarnings("unchecked")
    private List<PSMappingElement> getUnmappedTargetElements(String objectType, 
-      String parentType, String sourceParentId) 
-      throws PSDeployException
-   {
+      String parentType, String sourceParentId)
+           throws PSDeployException, PSNotFoundException {
       checkModifyIdMap();
       
       if (objectType == null || objectType.trim().length() == 0)
@@ -616,8 +600,7 @@ public class PSTransformsHandler
     */
    @SuppressWarnings("unchecked")
    private Set<PSMappingElement> getMappingElements(String type)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       Set<PSMappingElement> mapElems = new HashSet<PSMappingElement>();
       
       Iterator iter = PSDependencyManager.getInstance().getDependencies(m_tok,
@@ -654,8 +637,7 @@ public class PSTransformsHandler
     */
    @SuppressWarnings("unchecked")
    private Iterator<PSMappingElement> getElementsByType(String type)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (type == null || type.trim().length() == 0)
          throw new IllegalArgumentException("type may not be null or empty");
 

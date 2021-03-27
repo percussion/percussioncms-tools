@@ -57,6 +57,7 @@ import com.percussion.server.PSServer;
 import com.percussion.server.PSServerBrand;
 import com.percussion.server.PSUserSessionManager;
 import com.percussion.services.catalog.PSTypeEnum;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.guidmgr.IPSGuidManager;
 import com.percussion.services.guidmgr.PSGuidManagerLocator;
 import com.percussion.services.guidmgr.data.PSGuid;
@@ -77,8 +78,8 @@ import com.percussion.util.PSXMLDomUtil;
 import com.percussion.utils.codec.PSXmlDecoder;
 import com.percussion.utils.collections.PSMultiValueHashMap;
 import com.percussion.utils.guid.IPSGuid;
-import com.percussion.utils.security.deprecated.PSCryptographer;
-import com.percussion.utils.security.deprecated.PSLegacyEncrypter;
+import com.percussion.legacy.security.deprecated.PSCryptographer;
+import com.percussion.legacy.security.deprecated.PSLegacyEncrypter;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
 import com.percussion.xml.PSXmlValidator;
@@ -120,7 +121,7 @@ import java.util.Set;
 public class PSDeploymentHandler implements IPSLoadableRequestHandler
 {
 
-   private final static Logger ms_log = Logger.getLogger(PSDeploymentHandler.class);
+   private static final Logger log = Logger.getLogger(PSDeploymentHandler.class);
    
    /**
     * Parameterless ctor used by server to construct this loadable handler.
@@ -293,8 +294,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     * @throws PSDeployException if there are any errors.
     */
    public Document getDeployableElements(PSRequest req)
-         throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (req == null)
          throw new IllegalArgumentException("req may not be null");
 
@@ -433,8 +433,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     * @throws PSDeployException if the descriptor cannot be located or there are
     *             any errors.
     */
-   public Document getExportDescriptor(PSRequest req) throws PSDeployException
-   {
+   public Document getExportDescriptor(PSRequest req) throws PSDeployException, PSNotFoundException {
       if (req == null)
          throw new IllegalArgumentException("req may not be null");
 
@@ -587,8 +586,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     *             <code>null</code>.
     * @throws PSDeployException if there are any errors.
     */
-   public Document getIdTypes(PSRequest req) throws PSDeployException
-   {
+   public Document getIdTypes(PSRequest req) throws PSDeployException, PSNotFoundException {
       if (req == null)
          throw new IllegalArgumentException("req may not be null");
 
@@ -1001,9 +999,9 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
                 String[] v2Split = pkgInfo.getPackageVersion().split("\\.");
                 boolean isLowerVersion = true;
                 
-                ms_log.debug("Package is: " + pkgInfo.getPackageDescriptorName());
-                ms_log.debug("New pkg version: " + Arrays.toString(v1Split));
-                ms_log.debug("Installed pkg version: " + Arrays.toString(v2Split));
+                log.debug("Package is: " + pkgInfo.getPackageDescriptorName());
+                log.debug("New pkg version: " + Arrays.toString(v1Split));
+                log.debug("Installed pkg version: " + Arrays.toString(v2Split));
                 
                 if (expDesc.getVersion().equals(pkgInfo.getPackageVersion())
                         || Integer.parseInt(v1Split[0]) > Integer.parseInt(v2Split[0])
@@ -1830,8 +1828,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     *             <code>null</code>.g
     * @throws PSDeployException if there are any other errors.
     */
-   public Document saveExportDescriptor(PSRequest req) throws PSDeployException
-   {
+   public Document saveExportDescriptor(PSRequest req) throws PSDeployException, PSNotFoundException {
       if (req == null)
          throw new IllegalArgumentException("req may not be null");
 
@@ -2439,8 +2436,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     * 
     * @throws PSDeployException if there are any errors.
     */
-   public Document loadDependencies(PSRequest req) throws PSDeployException
-   {
+   public Document loadDependencies(PSRequest req) throws PSDeployException, PSNotFoundException {
       if (req == null)
          throw new IllegalArgumentException("req may not be null");
 
@@ -2493,8 +2489,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     * 
     * @throws PSDeployException if there are any errors.
     */
-   public Document loadAncestors(PSRequest req) throws PSDeployException
-   {
+   public Document loadAncestors(PSRequest req) throws PSDeployException, PSNotFoundException {
       if (req == null)
          throw new IllegalArgumentException("req may not be null");
 
@@ -2869,8 +2864,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     * not be <code>null</code> or empty.
     * @return results of the uninstallation.
     */
-   public List<IPSUninstallResult> uninstallPackages(List<String> packageNames)
-   {
+   public List<IPSUninstallResult> uninstallPackages(List<String> packageNames) throws PSNotFoundException {
       return uninstallPackages(packageNames, false);
    }
    
@@ -2883,8 +2877,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     * @param isRevertEntry <code>true</code> if the package has been marked for REVERT
     * @return results of the uninstallation.
     */
-   public List<IPSUninstallResult> uninstallPackages(List<String> packageNames, boolean isRevertEntry)
-   {
+   public List<IPSUninstallResult> uninstallPackages(List<String> packageNames, boolean isRevertEntry) throws PSNotFoundException {
       if (packageNames == null || packageNames.isEmpty())
          throw new IllegalArgumentException(
                "packageNames must not be null or empty");
@@ -3523,7 +3516,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     		  }catch(Exception ex){}
     	  }
     	  
-    	  ms_log.warn(msg, e);
+    	  log.warn(msg, e);
           
     	  try{
 	    	  // its possible that session has timed out, so
@@ -3546,7 +3539,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
 	                	  if(clientSessId!= null)
 	                		  msg = msg + " For Session Id: " + clientSessId;
 	                	  
-	                	  ms_log.warn(msg,exSession);
+	                	  log.warn(msg,exSession);
 	                  }
 	               }
 	            }
@@ -3569,7 +3562,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
 	         PSXmlDocumentBuilder.replaceRoot(respDoc, respEl);
 	         request.getResponse().setStatus(500);
           }catch(RuntimeException ex){
-        	  ms_log.warn("An unexpected error occurred while handling an error in the request.",ex);
+        	  log.warn("An unexpected error occurred while handling an error in the request.",ex);
         	  //At this point this is an actual runtime exception, so we should throw it up the chain.
         	  throw ex;
           }
@@ -3604,10 +3597,10 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
          return "";
 
       String key = uid == null || uid.trim().length() == 0
-            ? PSLegacyEncrypter.INVALID_DRIVER()
+            ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER()
             : uid;
 
-      return decryptPwd(pwd, PSLegacyEncrypter.INVALID_CRED(), key);
+      return decryptPwd(pwd, PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key);
    }
 
    /**
@@ -3913,8 +3906,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     * 
     */
    private void updateCreatePackageInfoService(PSExportDescriptor desc,
-         String installerName)
-   {
+         String installerName) throws PSNotFoundException {
 
       IPSPkgInfoService pkgInfoService = PSPkgInfoServiceLocator
             .getPkgInfoService();

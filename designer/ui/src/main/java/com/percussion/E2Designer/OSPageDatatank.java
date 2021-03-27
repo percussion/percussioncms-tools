@@ -51,6 +51,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
+import com.percussion.share.service.exception.PSValidationException;
 
 ////////////////////////////////////////////////////////////////////////////////
 public class OSPageDatatank extends PSPageDataTank implements IGuiLink, 
@@ -71,16 +72,18 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
    **/
    public static final int SRC_TYPE_BACKEND = 3;
 
+    /* TODO: If an object is dragged from the browser (such as HTML file) which
+    * can create different objects based on user choice, create a new object
+    * and then create the chosen object when known. Then the XSL type can be
+    * removed.
+    */
+
    /**
     * A page tank that exists in the application can never have a type of XSL
     * (i.e it's a total hack). This is used when the user drags an HTML file
     * then chooses to create a web page (XSL). In this case, the tank is only
     * temporary.
     *
-    * @todo If an object is dragged from the browser (such as HTML file) which
-    * can create different objects based on user choice, create a new object
-    * and then create the chosen object when known. Then the XSL type can be
-    * removed.
    **/
    public static final int SRC_TYPE_XSL = 4;
    /** DTD generated for an Update, contains HTML form params as DTD */
@@ -126,6 +129,7 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
       copyFrom(tank);
    }
 
+   @Override
    public void setSchemaSource( URL dtd )
    {
       super.setSchemaSource( dtd );
@@ -455,7 +459,7 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
    {
       String fileName = new String("");
       PSCollection tables = backendTank.getTables();
-      if (tables.size() > 0)
+      if (!tables.isEmpty())
       {
          PSBackEndTable table = (PSBackEndTable) tables.get(0);
          fileName = table.getTable();
@@ -501,7 +505,7 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
          PSCollection tables = backendTank.getTables();
          String rootElement = getFileBaseName(backendTank);
 
-         Vector<String> masterTableAliases = new Vector<String>(5);
+         Vector<String> masterTableAliases = new Vector<>(5);
 
          Vector joinInfo = createJoinMap(joins, masterTableAliases);
          if ( null == joinInfo )
@@ -519,7 +523,7 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
             mapping.add(new String [0]);
             joinInfo.add(mapping);
          }
-         if ( null == joins || 0 == joins.size())
+         if ( null == joins || joins.isEmpty())
             masterTableAliases.add(((OSBackendTable) tables.get(0)).getAlias());
 
          // create the first entry
@@ -527,22 +531,19 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
          String [] children = new String[masterTableCt];
          for ( int i = 0; i < masterTableCt; ++i )
             children[i] =
-               Util.makeXmlName((String) masterTableAliases.get(i)) + "Set";
+               Util.makeXmlName( masterTableAliases.get(i)) + "Set";
 
          Map<String, String[]> dtd = new HashMap();
          dtd.put( Util.makeXmlName( rootElement ), children );
 
          // create entry for each master table
-         for ( int i = 0; i < masterTableCt; ++i )
-            addElements( dtd, (String) masterTableAliases.get(i), joinInfo, tables );
+         for (String masterTableAlias : masterTableAliases)
+            addElements(dtd, (String) masterTableAlias, joinInfo, tables);
 
          // write out hash map
-         Iterator keys = dtd.keySet().iterator();
-         while ( keys.hasNext())
-         {
-            String key = (String) keys.next();
-            children = (String[]) dtd.get( key );
-            String element = createElement( key, children );
+         for (String key : dtd.keySet()) {
+            children = (String[]) dtd.get(key);
+            String element = createElement(key, children);
             out.write(element.getBytes(PSCharSets.rxJavaEnc()));
             out.write(newLineBytes);
          }
@@ -550,13 +551,9 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
          out.flush();
          return new ByteArrayInputStream( out.toByteArray());
       }
-      catch ( IllegalArgumentException iae )
+      catch ( IllegalArgumentException | IOException iae )
       {
          PSDlgUtil.showError(iae);
-      }
-      catch(IOException e)
-      {
-         PSDlgUtil.showError(e);
       }
       return null;   // phtodo throw??
    }
@@ -575,12 +572,9 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
     * </UL>
     * This method is called on the table that appears in the join info after the
     *
-    * @param os The stream to which all newly created elements will be added.
+    * @param dtd The stream to which all newly created elements will be added.
     *
     * @param tableAlias The alias name of the table for which we are adding elements.
-    *
-    * @param nameMap A map that contains table aliases as keys and the corresponding
-    * element name as the value.
     *
     * @param joinInfo A vector of vectors. Each vector contains 2 objects, a
     * table alias (String) and a String array. The string array contains a list of table
@@ -719,17 +713,16 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
    **/
    private Vector createJoinMap(PSCollection joins, Vector<String> masterTables)
    {
-      Vector<Object> map = new Vector<Object>(joins.size()*2);
-      if ( null == joins || 0 == joins.size())
+      Vector<Object> map = new Vector<>(joins.size()*2);
+      if ( null == joins || joins.isEmpty())
          return map;
 
-      final Set<String> rightTableAliases = new HashSet<String>();
+      final Set<String> rightTableAliases = new HashSet<>();
 
       // scan joins and pull out all the tables on the RHS, making a unique list
       int joinCt = joins.size();
-      for ( int i = 0; i < joinCt; ++i )
-      {
-         PSBackEndJoin join = (PSBackEndJoin) joins.get(i);
+      for (Object o : joins) {
+         PSBackEndJoin join = (PSBackEndJoin) o;
          rightTableAliases.add(join.getRightColumn().getTable().getAlias());
       }
 
@@ -740,49 +733,46 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
 
       /* walk the joins checking if each left table appears on the RHS of any
          join and whether it has already been added to the list */
-      final Set<String> masterTablesSet = new HashSet<String>();
-      for ( int i = 0; i < joinCt; ++i )
-      {
+      final Set<String> masterTablesSet = new HashSet<>();
+      for (Object o : joins) {
 
-         PSBackEndJoin join = (PSBackEndJoin) joins.get(i);
+         PSBackEndJoin join = (PSBackEndJoin) o;
          String alias = join.getLeftColumn().getTable().getAlias();
          // does it appear on RHS ?
          boolean bAppearsRHS = rightTableAliases.contains(alias);
-         if ( !bAppearsRHS )
-         {
+         if (!bAppearsRHS) {
             masterTablesSet.add(alias);
          }
 
          // has this alias been added to the map yet?
          int mapCt = map.size();
          boolean bFound = false;
-         for ( int j = 0; j < mapCt && !bFound; ++j )
-         {
+         for (int j = 0; j < mapCt && !bFound; ++j) {
             Vector v = (Vector) map.get(j);
             String mappedAlias = (String) v.get(0);
-            if ( alias.equals( mappedAlias ))
+            if (alias.equals(mappedAlias)) {
                bFound = true;
+               break;
+            }
          }
-         if ( !bFound )
-         {
-            Vector<Object> v = new Vector<Object>(2);
-            v.add( alias );
+         if (!bFound) {
+            Vector<Object> v = new Vector<>(2);
+            v.add(alias);
             // make list of joined tables
-            Vector<String> joinedChildren = new Vector<String>(5);
-            for ( int j = 0; j < joinCt; ++j )
-            {
+            Vector<String> joinedChildren = new Vector<>(5);
+            for (int j = 0; j < joinCt; ++j) {
                PSBackEndJoin join2 = (PSBackEndJoin) joins.get(j);
                String leftAlias = join2.getLeftColumn().getTable().getAlias();
-               if ( leftAlias.equals( alias ))
-                  joinedChildren.add( join2.getRightColumn().getTable().getAlias());
+               if (leftAlias.equals(alias))
+                  joinedChildren.add(join2.getRightColumn().getTable().getAlias());
             }
-            if ( joinedChildren.size() > 1 )
-               Collections.sort( joinedChildren, oc );
+            if (joinedChildren.size() > 1)
+               Collections.sort(joinedChildren, oc);
 
-            String [] children = new String[joinedChildren.size()];
-            for ( int j = 0; j < children.length; ++j )
+            String[] children = new String[joinedChildren.size()];
+            for (int j = 0; j < children.length; ++j)
                children[j] = (String) joinedChildren.get(j);
-            v.add( children );
+            v.add(children);
             map.add(v);
          }
       }
@@ -1382,7 +1372,6 @@ public class OSPageDatatank extends PSPageDataTank implements IGuiLink,
 
    /**
     * Interface method unimplemented.
-    * @see com.percussion.E2Designer.IPersist#cleanup(com.percussion.OSApplication)
     */
    public void cleanup(OSApplication app)
    {

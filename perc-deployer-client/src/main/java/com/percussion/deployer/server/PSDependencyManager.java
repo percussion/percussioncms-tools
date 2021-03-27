@@ -50,7 +50,9 @@ import com.percussion.deployer.server.dependencies.PSDependencyHandler;
 import com.percussion.deployer.server.dependencies.PSUserDependencyHandler;
 import com.percussion.security.PSSecurityToken;
 import com.percussion.server.PSServer;
+import com.percussion.services.assembly.PSAssemblyException;
 import com.percussion.services.catalog.PSTypeEnum;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.pkginfo.IPSPkgInfoService;
 import com.percussion.services.pkginfo.PSPkgInfoServiceLocator;
 import com.percussion.services.pkginfo.data.PSPkgElement;
@@ -194,8 +196,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any other errors.
     */
    public Iterator getDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -238,8 +239,7 @@ public class PSDependencyManager
     * @throws PSDeployException for any other errors.
     */
    public Iterator getAncestors(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -270,8 +270,7 @@ public class PSDependencyManager
     */
    public void addToArchive(PSSecurityToken tok, PSDependency dependency,
          PSArchiveHandler archiveHandler, IPSJobHandle jobHandle)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -790,12 +789,12 @@ public class PSDependencyManager
                   }
                }
             }
-            catch (PSDeployException e)
+            catch (PSDeployException | PSNotFoundException | PSAssemblyException e)
             {
                // log the specific dependency that failed, to aid debugging
                ms_log.error("failure while processing: "
                      + formatDependencyString(dependency));
-               throw e;
+               throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR);
             }
             catch (RuntimeException e)
             {
@@ -846,8 +845,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any other errors.
     */
    public Iterator getDependencies(PSSecurityToken tok, String type)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -1018,8 +1016,7 @@ public class PSDependencyManager
     */
    public void addMissingDependencies(PSSecurityToken tok,
          PSDeployableElement pkg, PSDependencyTreeContext treeCtx,
-         IPSJobHandle jobHandle) throws PSDeployException
-   {
+         IPSJobHandle jobHandle) throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -1052,8 +1049,7 @@ public class PSDependencyManager
     * @throws PSDeployException if any error occurs.
     */
    public void validatePackages(PSSecurityToken tok,
-         PSExportDescriptor exportDesc) throws PSDeployException
-   {
+         PSExportDescriptor exportDesc) throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       if (exportDesc == null)
@@ -1233,8 +1229,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    public PSDependency findDependency(PSSecurityToken tok, String type,
-         String depId) throws PSDeployException
-   {
+         String depId) throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       if (StringUtils.isBlank(type))
@@ -1262,8 +1257,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    public Iterator getDependencies(PSSecurityToken tok, int flags)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -1356,8 +1350,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    public Iterator getPossibleIdTypes(PSSecurityToken tok, String id)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -1714,8 +1707,7 @@ public class PSDependencyManager
     */
    private void addMissingDependencies(PSSecurityToken tok, PSDependency dep,
          boolean checkElements, Set loaded, PSDependencyTreeContext treeCtx,
-         IPSJobHandle jobHandle) throws PSDeployException
-   {
+         IPSJobHandle jobHandle) throws PSDeployException, PSNotFoundException {
       PSDependencyIdentifier depId = new PSDependencyIdentifier(dep,
             !checkElements);
 
@@ -1868,8 +1860,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    private boolean checkModifiedDependencies(PSSecurityToken tok,
-         PSDependency pkg) throws PSDeployException
-   {
+         PSDependency pkg) throws PSDeployException, PSNotFoundException {
       boolean isMod = false;
 
       Iterator deps = pkg.getDependencies();
@@ -1987,8 +1978,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    private boolean doesDependencyExist(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       PSDependencyDef depDef = getDependencyDef(dep.getObjectType());
       PSDependencyHandler depHandler = PSDependencyHandler.getHandlerInstance(
             depDef, m_depMap);
@@ -2016,8 +2006,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    private PSDependency getActualDependency(PSSecurityToken tok,
-         PSDependency dep) throws PSDeployException
-   {
+         PSDependency dep) throws PSDeployException, PSNotFoundException {
       return getActualDependency(tok, dep, null);
    }
 
@@ -2037,8 +2026,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    public PSDependency getActualDependency(PSSecurityToken tok,
-         PSDependency dep, PSIdMap idMap) throws PSDeployException
-   {
+         PSDependency dep, PSIdMap idMap) throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -2119,8 +2107,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    public Iterator getParentDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -2173,8 +2160,7 @@ public class PSDependencyManager
     * @throws PSDeployException if there are any errors.
     */
    private boolean isChild(PSSecurityToken tok, PSDependency child,
-         PSDependency parent) throws PSDeployException
-   {
+         PSDependency parent) throws PSDeployException, PSNotFoundException {
       boolean isChild = false;
 
       // not supported for custom

@@ -34,10 +34,11 @@ import com.percussion.rx.design.IPSDesignModelFactory;
 import com.percussion.rx.design.PSDesignModelFactoryLocator;
 import com.percussion.services.assembly.IPSTemplateSlot;
 import com.percussion.services.catalog.PSTypeEnum;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.types.PSPair;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -84,16 +85,14 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
     */
    @Override
    protected boolean addPropertyDefs(Object obj, String propName,
-         Object pvalue, Map<String, Object> defs)
-   {
+         Object pvalue, Map<String, Object> defs) throws PSNotFoundException {
       if (super.addPropertyDefs(obj, propName, pvalue, defs))
          return true;
       
       if (FINDER_ARGUMENTS.equals(propName) || FINDER_PARAMS.equals(propName))
       {
          IPSTemplateSlot slot = (IPSTemplateSlot) obj;
-         Map<String, Object> srcMap = new HashMap<String, Object>();
-         srcMap.putAll(slot.getFinderArguments());
+         Map<String, Object> srcMap = new HashMap<>(slot.getFinderArguments());
          addPropertyDefsForMap(propName, pvalue, srcMap, defs);
       }
       return true;
@@ -103,8 +102,7 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
     * //see base class method for details
     */
    @Override
-   protected Object getPropertyValue(Object obj, String propName)
-   {
+   protected Object getPropertyValue(Object obj, String propName) throws PSNotFoundException {
       IPSTemplateSlot slot = (IPSTemplateSlot) obj;
       if (FINDER_ARGUMENTS.equals(propName) || FINDER_PARAMS.equals(propName))
       {
@@ -113,7 +111,7 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
       else if (SLOT_ASSOCIATION.equals(propName))
       {
          Collection<PSPair<IPSGuid, IPSGuid>> pairs = slot.getSlotAssociations();
-         List<PSPair<String, String>> assocs = new ArrayList<PSPair<String, String>>();
+         List<PSPair<String, String>> assocs = new ArrayList<>();
          IPSDesignModelFactory factory = PSDesignModelFactoryLocator
                .getDesignModelFactory();
          IPSDesignModel ctModel = factory.getDesignModel(PSTypeEnum.NODEDEF);
@@ -123,7 +121,7 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
          {
             String ctName = ctModel.guidToName(pair.getFirst());
             String tpName = tpModel.guidToName(pair.getSecond());
-            assoc = new PSPair<String, String>(ctName, tpName);
+            assoc = new PSPair<>(ctName, tpName);
             assocs.add(assoc);
          }
          return assocs;
@@ -134,8 +132,7 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
 
    @Override
    protected List<PSConfigValidation> validate(String objName, ObjectState state,
-         String propName, Object propValue, Object otherValue)
-   {
+         String propName, Object propValue, Object otherValue) throws PSNotFoundException {
       if (!SLOT_ASSOCIATION.equals(propName))
          return super.validate(objName, state, propName, propValue, otherValue);
       
@@ -143,19 +140,19 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
       List<PSPair<String, String>> otherAssoc = convertObjectToList(otherValue);
       if (curAssoc.isEmpty() || otherAssoc.isEmpty())
          return Collections.emptyList();
-      
-      Collection<PSPair<String, String>> commons = new ArrayList<PSPair<String, String>>();
-      commons.addAll(curAssoc);
+
+      Collection<PSPair<String, String>> commons = new ArrayList<>(curAssoc);
       commons.retainAll(otherAssoc);
       if (commons.isEmpty())
          return Collections.emptyList();
       
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder buffer = new StringBuilder();
       buffer
             .append("the following pairs of Content Type / Template associations are already configured: ");
       for (PSPair<String, String> pair : curAssoc)
       {
-         buffer.append(" (" + pair.getFirst() + ", " + pair.getSecond() + ")");
+         buffer.append(" (").append(pair.getFirst()).append(", ").append(pair.getSecond())
+                 .append(")");
       }
       PSConfigValidation vError = new PSConfigValidation(objName,
             SLOT_ASSOCIATION, true, buffer.toString());
@@ -188,7 +185,6 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
     * @return <code>true</code> if the associations have been removed;
     * otherwise have done nothing or no association has been removed.
     */
-   @SuppressWarnings("unchecked")
    private boolean removeSlotAssociations(List<IPSAssociationSet> aSets,
          Object propValue)
    {
@@ -212,7 +208,6 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
     * @param propValue the new value of the property, assumed it is a Map 
     * object, may be <code>null</code>.
     */
-   @SuppressWarnings("unchecked")
    private void setFinderArguments(IPSTemplateSlot slot, Object propValue)
    {
       if (propValue == null)
@@ -240,16 +235,15 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
    private Map<String, String> filterParameters(IPSTemplateSlot slot,
          Object propValue)
    {
-      Map<String, String> props = (Map<String, String>)propValue; 
-      Map<String, String> params = new HashMap<String, String>();
-      params.putAll(props);
+      Map<String, String> props = (Map<String, String>)propValue;
+      Map<String, String> params = new HashMap<>(props);
       List<String> names = PSConfigUtils.getExtensionParameterNames(slot
             .getFinderName());
       for (String name : props.keySet())
       {
          if (!names.contains(name))
          {
-            ms_log.warn("Skip finder argument \"" + name
+            log.warn("Skip finder argument \"" + name
                   + "\" since it is not a parameter defined by finder \""
                   + slot.getFinderName() + "\".");
             params.remove(name);
@@ -264,7 +258,6 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
     * @param aSets the target associated, not <code>null</code> or empty.
     * @param propValue the new association, not <code>null</code>, but be empty.
     */
-   @SuppressWarnings("unchecked")
    private void setSlotAssociations(List<IPSAssociationSet> aSets,
          Object propValue)
    {
@@ -276,11 +269,9 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
       List<PSPair<String, String>> prevAssoc = getPrevAssoc();
       if (curAssoc.isEmpty() && prevAssoc.isEmpty())
          return;
-      
-      List<PSPair<String, String>> assoc = new ArrayList<PSPair<String,String>>();
-      
+
       // get previous only associations
-      assoc.addAll(prevAssoc);
+      List<PSPair<String, String>> assoc = new ArrayList<>(prevAssoc);
       assoc.removeAll(curAssoc);
       if (!assoc.isEmpty())
       {
@@ -359,7 +350,7 @@ public class PSTemplateSlotSetter extends PSPropertySetterWithValidation
    /**
     * The logger for this class
     */
-   static Log ms_log = LogFactory.getLog("PSTemplateSlotSetter");
+   static Logger log = LogManager.getLogger(PSTemplateSlotSetter.class);
 
 
    /**

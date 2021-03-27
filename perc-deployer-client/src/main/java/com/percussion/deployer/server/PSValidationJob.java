@@ -26,12 +26,7 @@ package com.percussion.deployer.server;
 
 import com.percussion.deployer.client.PSDeploymentManager;
 import com.percussion.deployer.error.PSDeployException;
-import com.percussion.deployer.objectstore.PSArchiveInfo;
-import com.percussion.deployer.objectstore.PSDbmsInfo;
-import com.percussion.deployer.objectstore.PSDeployableElement;
-import com.percussion.deployer.objectstore.PSIdMap;
-import com.percussion.deployer.objectstore.PSImportDescriptor;
-import com.percussion.deployer.objectstore.PSImportPackage;
+import com.percussion.deployer.objectstore.*;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
@@ -39,6 +34,7 @@ import com.percussion.security.PSSecurityToken;
 import com.percussion.server.PSRequest;
 import com.percussion.server.job.IPSJobErrors;
 import com.percussion.server.job.PSJobException;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.LogFactory;
@@ -46,13 +42,8 @@ import org.w3c.dom.Document;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Job to validate all packages in an import descriptor.  Results are saved on
@@ -86,10 +77,7 @@ public class PSValidationJob extends PSDeployJob
       {
          m_descriptor = new PSImportDescriptor(descriptor.getDocumentElement());
          List pkgList = new ArrayList();
-         Iterator importPkgs = m_descriptor.getImportPackageList().iterator();
-         while (importPkgs.hasNext())
-         {
-            PSImportPackage importPkg = (PSImportPackage)importPkgs.next();
+         for (PSImportPackage importPkg : m_descriptor.getImportPackageList()) {
             pkgList.add(importPkg.getPackage());
          }
          initDepCount(pkgList.iterator(), false);
@@ -104,7 +92,6 @@ public class PSValidationJob extends PSDeployJob
    /**
     * Runs this validation job.  Validates all packages and saves the results.
     */
-   @SuppressWarnings("unchecked")
    @Override
    public void doRun() 
    {
@@ -124,17 +111,12 @@ public class PSValidationJob extends PSDeployJob
             resultsFile.getParentFile().mkdirs();
             resultsFile.deleteOnExit();
             
-            FileOutputStream out = null;
-            try 
+
+            try (FileOutputStream out= new FileOutputStream(resultsFile))
             {
-               out = new FileOutputStream(resultsFile);
                PSXmlDocumentBuilder.write(doc, out);
             }
-            finally 
-            {
-               if (out != null)
-                  try {out.close();} catch (IOException e){}
-            }
+
             
             setStatus(100);  
             setStatusMessage(PSDeploymentManager.getBundle().getString("completed"));       
@@ -164,8 +146,7 @@ public class PSValidationJob extends PSDeployJob
     * 
     * @throws PSDeployException If there are any errors.
     */
-   public void validate(PSImportDescriptor descriptor, IPSJobHandle jobHandle, PSSecurityToken tok) throws PSDeployException
-   {
+   public void validate(PSImportDescriptor descriptor, IPSJobHandle jobHandle, PSSecurityToken tok) throws PSDeployException, PSNotFoundException {
        Validate.notNull(descriptor);
        Validate.notNull(jobHandle);
        Validate.notNull(tok);
@@ -215,8 +196,8 @@ public class PSValidationJob extends PSDeployJob
              PSImportPackage pkg = (PSImportPackage)pkgs.next();
              PSDeployableElement de = pkg.getPackage();
              valCtx.addPackage(pkg);
-             String msg = MessageFormat.format(bundle.getString("processing"), 
-                new Object[] {de.getDisplayIdentifier()});
+             String msg = MessageFormat.format(bundle.getString("processing"),
+                     de.getDisplayIdentifier());
              setStatusMessage(msg);
              PSDependencyValidator dv = new PSDependencyValidator(
                    tok, de, valCtx, descriptor.getName());

@@ -26,20 +26,17 @@ package com.percussion.deployer.server;
 import com.percussion.deployer.client.IPSDeployConstants;
 import com.percussion.deployer.error.PSDeployException;
 import com.percussion.deployer.error.PSLockedException;
-import com.percussion.deployer.objectstore.PSArchive;
-import com.percussion.deployer.objectstore.PSArchiveInfo;
-import com.percussion.deployer.objectstore.PSImportDescriptor;
-import com.percussion.deployer.objectstore.PSImportPackage;
-import com.percussion.deployer.objectstore.PSValidationResult;
+import com.percussion.deployer.objectstore.*;
 import com.percussion.error.PSException;
 import com.percussion.security.PSSecurityToken;
 import com.percussion.server.PSRequest;
 import com.percussion.server.job.PSJobException;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.utils.collections.PSMultiValueHashMap;
 import com.percussion.utils.request.PSRequestInfo;
 import org.apache.commons.lang.Validate;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,7 +51,7 @@ import java.util.List;
  */
 public class PSLocalDeployerClient implements IPSPackageInstaller
 {
-    private static Log log = LogFactory.getLog(PSLocalDeployerClient.class);
+    private static final Logger log = LogManager.getLogger(PSLocalDeployerClient.class);
     
     public PSLocalDeployerClient()
     {
@@ -62,14 +59,12 @@ public class PSLocalDeployerClient implements IPSPackageInstaller
     }
     
     @Override
-    public void installPackage(File packageFile) throws PSDeployException
-    {
+    public void installPackage(File packageFile) throws PSDeployException, PSNotFoundException {
         installPackage(packageFile, false);
     }
     
     @Override
-    public void installPackage(File packageFile, boolean shouldValidateVersion) throws PSDeployException
-    { 
+    public void installPackage(File packageFile, boolean shouldValidateVersion) throws PSDeployException, PSNotFoundException {
     	Validate.notNull(packageFile);
         PSDeploymentHandler dh = null;
         String sessionId = null;
@@ -120,8 +115,7 @@ public class PSLocalDeployerClient implements IPSPackageInstaller
      *  
      * @throws PSDeployException If there are any errors.
      */
-    private PSImportDescriptor validateArchive(PSDeploymentHandler dh, PSArchiveInfo info) throws PSDeployException
-    {
+    private PSImportDescriptor validateArchive(PSDeploymentHandler dh, PSArchiveInfo info) throws PSDeployException, PSNotFoundException {
     	return validateArchive(dh, info, false);
     }
     
@@ -138,7 +132,7 @@ public class PSLocalDeployerClient implements IPSPackageInstaller
      * @throws PSDeployException If there are any errors.
      */
     private PSImportDescriptor validateArchive(PSDeploymentHandler dh, PSArchiveInfo info, 
-    		boolean shouldValidateVersion) throws PSDeployException
+    		boolean shouldValidateVersion) throws PSDeployException, PSNotFoundException
     {
         // Validate archive file is valid
         PSMultiValueHashMap<String, String> results = dh.validateArchive(info, false, false, true, shouldValidateVersion);

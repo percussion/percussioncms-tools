@@ -24,7 +24,7 @@ import com.percussion.services.guidmgr.data.PSDesignGuid;
 import com.percussion.services.security.IPSAcl;
 import com.percussion.services.security.IPSAclEntry;
 import com.percussion.services.security.PSPermissions;
-import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
+import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;

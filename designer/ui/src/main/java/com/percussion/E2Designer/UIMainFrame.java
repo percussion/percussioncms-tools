@@ -27,7 +27,7 @@ import com.percussion.design.objectstore.PSLockedException;
 import com.percussion.design.objectstore.PSNonUniqueException;
 import com.percussion.design.objectstore.PSNotLockedException;
 import com.percussion.design.objectstore.PSObjectStore;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.design.objectstore.PSVersionConflictException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
@@ -497,30 +497,6 @@ public class UIMainFrame extends JFrame implements IConnectionSource
                MessageFormat.format(getResources().getString("StartStopApplicationException"), astrParams),
                getResources().getString("ApplicationErr"));
       }
-      catch (PSValidationException e)
-      {
-         PSDlgUtil.showErrorDialog( e.getLocalizedMessage(),
-         getResources().getString("ApplicationErr"));
-         localApp.setEnabled(!localApp.isEnabled());
-         String newRevision = "";
-         if (localApp.getRevisionHistory() != null)
-         newRevision = localApp.getRevisionHistory().getLatestVersion();
-         if (!oldRevision.equals(newRevision))
-         {
-            try
-            {
-               // if the version changed, we know that saving was o.k. but starting
-               // failed. in this case we disable the application again
-               getObjectStore().saveApplication(localApp, releaseLock, false,
-                     false);
-            }
-            catch (Exception e1)
-            {
-               PSDlgUtil.showErrorDialog(e1.getLocalizedMessage(),
-                     getResources().getString("ServerErr"));
-            }
-         }
-      }
       catch (PSNonUniqueException e)
       {
          Object[] astrParams =
@@ -532,10 +508,29 @@ public class UIMainFrame extends JFrame implements IConnectionSource
          PSDlgUtil.showErrorDialog(
                MessageFormat.format(getResources().getString("NotUniqueApplicationException"), astrParams),
                getResources().getString("ApplicationErr"));
-      }
-      catch (Exception e)
+      }   catch (Exception e)
       {
-         PSDlgUtil.showError(e);
+         PSDlgUtil.showErrorDialog( e.getLocalizedMessage(),
+                 getResources().getString("ApplicationErr"));
+         localApp.setEnabled(!localApp.isEnabled());
+         String newRevision = "";
+         if (localApp.getRevisionHistory() != null)
+            newRevision = localApp.getRevisionHistory().getLatestVersion();
+         if (!oldRevision.equals(newRevision))
+         {
+            try
+            {
+               // if the version changed, we know that saving was o.k. but starting
+               // failed. in this case we disable the application again
+               getObjectStore().saveApplication(localApp, releaseLock, false,
+                       false);
+            }
+            catch (Exception e1)
+            {
+               PSDlgUtil.showErrorDialog(e1.getLocalizedMessage(),
+                       getResources().getString("ServerErr"));
+            }
+         }
       }
       finally
       {

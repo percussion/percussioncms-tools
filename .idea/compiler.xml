@@ -60,6 +60,7 @@
       <module name="perc-server-properties-editor" target="8" />
       <module name="perc-server-ui-cmp" target="1.8" />
       <module name="perc-server-ui-content" target="8" />
+      <module name="percussioncms-tools" target="1.8" />
       <module name="tycho-root" target="1.8" />
     </bytecodeTargetLevel>
   </component>

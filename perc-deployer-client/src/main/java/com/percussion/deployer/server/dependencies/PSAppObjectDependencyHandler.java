@@ -148,8 +148,7 @@ public abstract class PSAppObjectDependencyHandler
     * dependencies.
     */
    protected void addApplicationDependencies(PSSecurityToken tok, Set childDeps, 
-      Element srcNode) throws PSDeployException
-   {
+      Element srcNode) throws PSDeployException, com.percussion.services.error.PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       
@@ -177,8 +176,7 @@ public abstract class PSAppObjectDependencyHandler
     * @throws PSDeployException if there are any errors.
     */
    protected List getExtensionDependencies(PSSecurityToken tok, 
-      Element srcNode)  throws PSDeployException
-   {
+      Element srcNode) throws PSDeployException, com.percussion.services.error.PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       
@@ -269,8 +267,7 @@ public abstract class PSAppObjectDependencyHandler
     * @throws PSDeployException if there are any errors.
     */
    protected List getUrlDependencies(PSSecurityToken tok, 
-      Element srcNode)  throws PSDeployException
-   {
+      Element srcNode) throws PSDeployException, com.percussion.services.error.PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       
@@ -327,8 +324,7 @@ public abstract class PSAppObjectDependencyHandler
     * @throws PSDeployException if there are any errors.
     */
    protected List getLiteralPathDependencies(PSSecurityToken tok, 
-      Element srcNode)  throws PSDeployException
-   {
+      Element srcNode) throws PSDeployException, com.percussion.services.error.PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
       
@@ -387,8 +383,7 @@ public abstract class PSAppObjectDependencyHandler
     * @throws PSDeployException if there are any errors.
     */
    protected Iterator getStylesheetDependencies(PSSecurityToken tok, 
-      Document doc) throws PSDeployException
-   {
+      Document doc) throws PSDeployException, com.percussion.services.error.PSNotFoundException {
       
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
@@ -456,8 +451,7 @@ public abstract class PSAppObjectDependencyHandler
     * @throws PSDeployException if there are any errors.
     */
    protected PSDependency getDepFromPath(PSSecurityToken tok, String path)
-      throws PSDeployException 
-   {
+           throws PSDeployException, com.percussion.services.error.PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
          

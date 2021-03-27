@@ -11,10 +11,11 @@ package com.percussion.E2Designer;
 
 import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.workbench.ui.PSMessages;
 import org.eclipse.core.runtime.CoreException;
 
@@ -40,11 +41,9 @@ public class PSEditStylesheetAction extends PSAbstractStylesheetAction
     */
    @Override
    protected void doPerformAction()
-         throws PSServerException, PSAuthorizationException,
-         PSAuthenticationFailedException, PSNotLockedException,
-         PSValidationException, PSIllegalStateException, IllegalStateException,CoreException
-         
-   {
+           throws PSServerException, PSAuthorizationException,
+           PSAuthenticationFailedException, PSNotLockedException,
+           PSIllegalStateException, IllegalStateException, CoreException, PSSystemValidationException, PSValidationException {
       final URL url = getResultPage().getStyleSheet();
       if (getResultPage().isContentLoaded())
       {

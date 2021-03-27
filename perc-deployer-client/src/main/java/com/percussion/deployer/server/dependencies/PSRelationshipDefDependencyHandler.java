@@ -39,6 +39,7 @@ import com.percussion.design.objectstore.PSRelationshipConfig;
 import com.percussion.design.objectstore.PSRelationshipConfigSet;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.security.PSSecurityToken;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.webservices.IPSWebserviceErrors;
 import com.percussion.webservices.PSErrorException;
 import com.percussion.webservices.PSWebserviceUtils;
@@ -80,8 +81,7 @@ public class PSRelationshipDefDependencyHandler
    // see base class
    @SuppressWarnings("unchecked")
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -118,14 +118,12 @@ public class PSRelationshipDefDependencyHandler
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
-      List<PSDependency> deps = new ArrayList<PSDependency>();
+      List<PSDependency> deps = new ArrayList<>();
       
       PSRelationshipConfigSet cfgSet = 
          PSRelationshipCommandHandler.getConfigurationSet();
-      Iterator configs = cfgSet.iterator();
-      while (configs.hasNext())
-      {
-         PSRelationshipConfig cfg = (PSRelationshipConfig)configs.next();
+      for (Object o : cfgSet) {
+         PSRelationshipConfig cfg = (PSRelationshipConfig) o;
          String name = cfg.getName();
          deps.add(createDependency(m_def, name, name));
       }
@@ -134,6 +132,7 @@ public class PSRelationshipDefDependencyHandler
    }
 
    // see base class
+   @Override
    public PSDependency getDependency(PSSecurityToken tok, String id)
       throws PSDeployException
    {
@@ -181,6 +180,7 @@ public class PSRelationshipDefDependencyHandler
    }
 
    // see base class
+   @Override
    public Iterator getDependencyFiles(PSSecurityToken tok, PSDependency dep)
       throws PSDeployException
    {
@@ -193,7 +193,7 @@ public class PSRelationshipDefDependencyHandler
       if (!dep.getObjectType().equals(DEPENDENCY_TYPE))
          throw new IllegalArgumentException("dep wrong type");
 
-      List<PSDependencyFile> files = new ArrayList<PSDependencyFile>();
+      List<PSDependencyFile> files = new ArrayList<>();
 
       PSRelationshipConfigSet cfgSet = 
          PSRelationshipCommandHandler.getConfigurationSet();
@@ -211,6 +211,7 @@ public class PSRelationshipDefDependencyHandler
    }
 
    // see base class
+   @Override
    public void installDependencyFiles(PSSecurityToken tok,
       PSArchiveHandler archive, PSDependency dep, PSImportCtx ctx)
          throws PSDeployException
@@ -293,12 +294,7 @@ public class PSRelationshipDefDependencyHandler
          addTransactionLogEntry(dep, ctx, cfgName, 
                PSTransactionSummary.TYPE_CMS_OBJECT, action);
       }
-      catch (PSUnknownNodeTypeException e) 
-      {
-         throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR, 
-            e.getLocalizedMessage());
-      }
-      catch (PSErrorException e) 
+      catch (PSUnknownNodeTypeException | PSErrorException e)
       {
          throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR, 
             e.getLocalizedMessage());
@@ -306,6 +302,7 @@ public class PSRelationshipDefDependencyHandler
    }
    
    // see base class
+   @Override
    public boolean doesDependencyExist(PSSecurityToken tok, String id)
       throws PSDeployException
    {
@@ -321,13 +318,13 @@ public class PSRelationshipDefDependencyHandler
    /**
     * Constant for this handler's supported type
     */
-   final static String DEPENDENCY_TYPE = "RelationshipDef";
+    static final String DEPENDENCY_TYPE = "RelationshipDef";
 
    /**
     * List of child types supported by this handler, it will never be
     * <code>null</code> or empty.
     */
-   private static List<String> ms_childTypes = new ArrayList<String>();
+   private static List<String> ms_childTypes = new ArrayList<>();
 
    static
    {

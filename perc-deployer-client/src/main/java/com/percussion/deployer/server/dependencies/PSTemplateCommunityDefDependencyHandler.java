@@ -37,6 +37,7 @@ import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.contentmgr.IPSContentMgr;
 import com.percussion.services.contentmgr.IPSNodeDefinition;
 import com.percussion.services.contentmgr.PSContentMgrLocator;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.guidmgr.data.PSGuid;
 
 import java.util.ArrayList;
@@ -62,7 +63,6 @@ public class PSTemplateCommunityDefDependencyHandler
     * <code>null</code>.
     *
     * @throws IllegalArgumentException if any param is invalid.
-    * @throws PSDeployException if any other error occurs.
     */
 
    public PSTemplateCommunityDefDependencyHandler(PSDependencyDef def,
@@ -71,48 +71,7 @@ public class PSTemplateCommunityDefDependencyHandler
       super(def, dependencyMap);
    }
 
-
-   
-   
-   // see base class
-   // Given a templateID, locate all the communities that it is registered to
-   // tempID is a PSGuid for a Template
-   // parentType is the TEMPLATE
-   // parentID  is the template ID ( PSGuid )
-/*   public PSDependency getDependency(PSSecurityToken tok, String tempID)
-      throws PSDeployException
-   {
-      if (tok == null)
-         throw new IllegalArgumentException("tok may not be null");
-
-      if (tempID == null || tempID.trim().length() == 0)
-         throw new IllegalArgumentException("id may not be null or empty");
-
-      // template ids are GUIDs, make sure the id is a guid.
-      long templateGuid = -1;
-      long ctypeGuidVal = -1;
-      PSGuid ctypeGuid = null;
-      PSGuid tmpGuid   = null;
-      try {
-         templateGuid = Long.parseLong(tempID);
-         tmpGuid      = new PSGuid(PSTypeEnum.TEMPLATE, templateGuid);
-      }
-      catch ( NumberFormatException ne)
-      {
-         throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR,
-               "ContentTypeTemplate Definition was expecting a long value: "
-                     + tempID);
-      }
-
-      PSDependency dep = getDependency(tok, ""+templateGuid, 
-            VARCOMMUNITYTABLE, TEMPLATEID, COMMUNITYID);
-      if ( dep != null )
-         dep.setDependencyType(PSDependency.TYPE_LOCAL);
-
-      return dep;
-   }
-*/
-   
+   @Override
    public PSDependency getDependency(PSSecurityToken tok, String commID)
          throws PSDeployException
    {
@@ -121,7 +80,7 @@ public class PSTemplateCommunityDefDependencyHandler
 
       if (commID == null || commID.trim().length() == 0)
          throw new IllegalArgumentException("community ID may not be null or empty");
-      PSDependency dep = null;
+      PSDependency dep;
       dep = createDependency(m_def, commID, commID);
       if ( dep != null )
          dep.setDependencyType(PSDependency.TYPE_LOCAL);
@@ -132,8 +91,7 @@ public class PSTemplateCommunityDefDependencyHandler
    
    //see base class
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-         throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -153,12 +111,13 @@ public class PSTemplateCommunityDefDependencyHandler
    // Empty Implementation
    public Iterator getDependencies(PSSecurityToken tok) throws PSDeployException
    {    
-      List<PSDependency> deps = new ArrayList<PSDependency>(); 
+      List<PSDependency> deps = new ArrayList<>();
       return deps.iterator();
    }
 
    
    // see base class
+   @Override
    public Iterator getDependencyFiles(PSSecurityToken tok, PSDependency dep)
       throws PSDeployException
    {
@@ -171,7 +130,7 @@ public class PSTemplateCommunityDefDependencyHandler
 
 
       // pack the data into the files
-      List<PSDependencyFile> files = new ArrayList<PSDependencyFile>();
+      List<PSDependencyFile> files = new ArrayList<>();
       // get the first dep data for the slot object of itself
       PSDependencyData vrData = getDepDataFromTable(dep, VARCOMMUNITYTABLE,
             TEMPLATEID, true);
@@ -185,8 +144,6 @@ public class PSTemplateCommunityDefDependencyHandler
 
    /**
     * Creates a dummy dependency file from a given dependency data object.
-    *
-    * @param depData The dependency data object, may not be <code>null</code>.
     *
     * @return The dependency file object, it will never be <code>null</code>.
     *
@@ -203,6 +160,7 @@ public class PSTemplateCommunityDefDependencyHandler
    }
    
    // see base class
+   @Override
    public void installDependencyFiles(PSSecurityToken tok,
       PSArchiveHandler archive, PSDependency dep, PSImportCtx ctx)
          throws PSDeployException
@@ -324,7 +282,7 @@ public class PSTemplateCommunityDefDependencyHandler
     * List of child types supported by this handler, it will never be
     * <code>null</code> or empty.
     */
-   private static List<String> ms_childTypes = new ArrayList<String>();
+   private static List<String> ms_childTypes = new ArrayList<>();
    static
    {
       ms_childTypes.add(PSCommunityDependencyHandler.DEPENDENCY_TYPE);

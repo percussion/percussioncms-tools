@@ -27,18 +27,18 @@ package com.percussion.deployer.objectstore;
 import com.percussion.deployer.server.PSDbmsHelper;
 import com.percussion.design.objectstore.IPSObjectStoreErrors;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
-import com.percussion.utils.security.PSEncryptionException;
-import com.percussion.utils.security.PSEncryptor;
-import com.percussion.utils.security.deprecated.PSCryptographer;
+import com.percussion.legacy.security.deprecated.PSCryptographer;
+import com.percussion.legacy.security.deprecated.PSLegacyEncrypter;
+import com.percussion.security.PSEncryptionException;
+import com.percussion.security.PSEncryptor;
 import com.percussion.utils.jdbc.IPSConnectionInfo;
-import com.percussion.utils.security.deprecated.PSLegacyEncrypter;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.Objects;
 
@@ -229,9 +229,9 @@ public class PSDbmsInfo implements IPSDeployComponent
          pwd = decryptPwd(m_uid, pwd);
       }else if(encrypted && !passwordEncrypted){
          try {
-            pwd = PSEncryptor.getInstance().encrypt(m_pw);
+            pwd = PSEncryptor.getInstance("AES",null).encrypt(m_pw);
          } catch (PSEncryptionException e) {
-            logger.warn("Error encrypting datasource password:" + e.getMessage());
+            logger.warn("Error encrypting datasource password: {}" , e.getMessage());
             logger.debug(e.getMessage(),e);
          }
       }
@@ -574,10 +574,10 @@ public class PSDbmsInfo implements IPSDeployComponent
          return "";
 
       String key = uid == null || uid.trim().length() == 0
-              ? PSLegacyEncrypter.INVALID_DRIVER()
+              ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER()
               : uid;
 
-      return PSCryptographer.encrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
+      return PSCryptographer.encrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);
    }
 
    /**
@@ -597,10 +597,10 @@ public class PSDbmsInfo implements IPSDeployComponent
          return "";
 
       String key = uid == null || uid.trim().length() == 0
-            ? PSLegacyEncrypter.INVALID_DRIVER()
+            ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER()
             : uid;
 
-      return PSCryptographer.decrypt(PSLegacyEncrypter.INVALID_CRED(), key, pwd);
+      return PSCryptographer.decrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);
 
    }
 

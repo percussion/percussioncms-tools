@@ -40,6 +40,7 @@ import com.percussion.deployer.server.PSImportCtx;
 import com.percussion.design.objectstore.PSLocator;
 import com.percussion.design.objectstore.PSRelationshipSet;
 import com.percussion.security.PSSecurityToken;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.util.PSIteratorUtils;
 
 import java.util.ArrayList;
@@ -81,8 +82,7 @@ public class PSFolderTranslationsDependencyHandler
 
    // see base class
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -110,6 +110,7 @@ public class PSFolderTranslationsDependencyHandler
    }
 
    // see base class
+   @Override
    public PSDependency getDependency(PSSecurityToken tok, String id)
       throws PSDeployException
    {
@@ -141,6 +142,7 @@ public class PSFolderTranslationsDependencyHandler
    }
 
    // see base class
+   @Override
    public Iterator getDependencyFiles(PSSecurityToken tok, PSDependency dep)
       throws PSDeployException
    {
@@ -149,6 +151,7 @@ public class PSFolderTranslationsDependencyHandler
    }   
 
    // see base class
+   @Override
    public void installDependencyFiles(PSSecurityToken tok,
       PSArchiveHandler archive, PSDependency dep, PSImportCtx ctx)
          throws PSDeployException
@@ -410,6 +413,7 @@ public class PSFolderTranslationsDependencyHandler
     * @return <code>true</code>, since translated folders must be installed
     * first.
     */
+   @Override
    public boolean shouldDeferInstallation()
    {
       return true;
@@ -418,7 +422,7 @@ public class PSFolderTranslationsDependencyHandler
    /**
     * Constant for this handler's supported type
     */
-   final static String DEPENDENCY_TYPE = "FolderTranslations";
+    static final String DEPENDENCY_TYPE = "FolderTranslations";
 
    /**
     * List of child types supported by this handler, it will never be

@@ -25,11 +25,12 @@ import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.PSApplicationFile;
 import com.percussion.design.objectstore.PSNotLockedException;
 import com.percussion.design.objectstore.PSObjectStore;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.error.PSException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.workbench.ui.PSMessages;
 import com.percussion.workbench.ui.PSModelTracker;
 import com.percussion.workbench.ui.PSWorkbenchPlugin;
@@ -470,8 +471,7 @@ public class PSXmlApplicationEditor extends PSMultiPageEditorBase
     * and <b>before</b> application files are saved.  
     */
    private void applyUpdatesOnSave() throws IOException, PSException,
-         IllegalStateException, CoreException
-   {
+           IllegalStateException, CoreException, PSValidationException {
       for (final URL url : m_updateOnSave.keySet())
       {
          generateStylesheetForSource(url);
@@ -483,8 +483,7 @@ public class PSXmlApplicationEditor extends PSMultiPageEditorBase
     * the stylesheet, closes stylesheet editor.
     */
    public void generateStylesheetForSource(final URL sourceUrl)
-         throws IOException, PSException, IllegalStateException, CoreException
-   {
+           throws IOException, PSException, IllegalStateException, CoreException, PSValidationException {
       final URL stylesheetUrl = m_updateOnSaveStylesheets.get(sourceUrl);
       assert stylesheetUrl != null;
       closeEditorForResource(stylesheetUrl);
@@ -515,10 +514,9 @@ public class PSXmlApplicationEditor extends PSMultiPageEditorBase
     * @param in the data input stream.
     */
    public void registerStreamAsLoadedResource(URL url, InputStream in)
-         throws PSServerException, PSAuthorizationException,
-         PSAuthenticationFailedException, PSNotLockedException,
-         PSValidationException, PSIllegalStateException, CoreException
-   {
+           throws PSServerException, PSAuthorizationException,
+           PSAuthenticationFailedException, PSNotLockedException,
+           PSValidationException, PSIllegalStateException, CoreException, PSSystemValidationException, PSValidationException {
       m_loadedResources.put(url, getFileForResource(url, in));
    }
    
@@ -682,10 +680,9 @@ public class PSXmlApplicationEditor extends PSMultiPageEditorBase
     * @throws IllegalStateException
     */
    public void openEditorForResource(final URL url) throws PSServerException,
-         PSAuthorizationException, PSAuthenticationFailedException,
-         PSNotLockedException, PSValidationException,
-         PSIllegalStateException, IllegalStateException, CoreException
-   {
+           PSAuthorizationException, PSAuthenticationFailedException,
+           PSNotLockedException, PSValidationException,
+           PSIllegalStateException, IllegalStateException, CoreException, PSSystemValidationException, PSValidationException {
       if (showEditorIfResourceIsAlreadyOpen(url))
       {
          return;
@@ -752,11 +749,10 @@ public class PSXmlApplicationEditor extends PSMultiPageEditorBase
     * @throws IllegalStateException
     */
    private IFile getFileForResource(final URL url, InputStream content)
-      throws PSServerException, PSAuthorizationException,
-         PSAuthenticationFailedException, PSNotLockedException,
-         PSValidationException,
-         PSIllegalStateException, IllegalStateException, CoreException
-   {
+           throws PSServerException, PSAuthorizationException,
+           PSAuthenticationFailedException, PSNotLockedException,
+           PSValidationException,
+           PSIllegalStateException, IllegalStateException, CoreException, PSSystemValidationException, PSValidationException {
       IProject proj = PSWorkbenchPlugin.getDefault().getProject();
       if (m_loadedResources.containsKey(url))
       {

@@ -16,7 +16,7 @@ import com.percussion.content.PSMimeContentAdapter;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSApplicationFile;
 import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;

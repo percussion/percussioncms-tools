@@ -28,6 +28,7 @@
       <module fileurl="file://$PROJECT_DIR$/ServerPropertiesEditor/perc-server-properties-editor.iml" filepath="$PROJECT_DIR$/ServerPropertiesEditor/perc-server-properties-editor.iml" />
       <module fileurl="file://$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp.iml" filepath="$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp.iml" />
       <module fileurl="file://$PROJECT_DIR$/ContentUI/perc-server-ui-content.iml" filepath="$PROJECT_DIR$/ContentUI/perc-server-ui-content.iml" />
+      <module fileurl="file://$PROJECT_DIR$/percussioncms-tools.iml" filepath="$PROJECT_DIR$/percussioncms-tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/tycho-root.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/tycho-root.iml" />
     </modules>
   </component>

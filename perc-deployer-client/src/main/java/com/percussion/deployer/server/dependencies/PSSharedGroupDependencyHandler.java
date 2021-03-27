@@ -41,6 +41,7 @@ import com.percussion.design.objectstore.PSUIDefinition;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.design.objectstore.server.PSServerXmlObjectStore;
 import com.percussion.security.PSSecurityToken;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.util.PSCollection;
 import com.percussion.util.PSIteratorUtils;
 import com.percussion.xml.PSXmlDocumentBuilder;
@@ -126,6 +127,7 @@ public class PSSharedGroupDependencyHandler
    }
    
    // see base class
+   @Override
    public boolean doesDependencyExist(PSSecurityToken tok, String id) 
       throws PSDeployException
    {
@@ -139,6 +141,7 @@ public class PSSharedGroupDependencyHandler
    }
    
    // see base class
+   @Override
    public PSDependency getDependency(PSSecurityToken tok, String id) 
       throws PSDeployException
    {
@@ -157,9 +160,8 @@ public class PSSharedGroupDependencyHandler
    }
    
    // see base class
-   public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep) 
-      throws PSDeployException
-   {
+   public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
          
@@ -179,7 +181,7 @@ public class PSSharedGroupDependencyHandler
       }
       
       // use set to ensure we don't add dupes
-      Set<PSDependency> childDeps = new HashSet<PSDependency>();
+      Set<PSDependency> childDeps = new HashSet<>();
       
       // get dependencies specified by id type map
       childDeps.addAll(getIdTypeDependencies(tok, dep));
@@ -207,8 +209,7 @@ public class PSSharedGroupDependencyHandler
    @SuppressWarnings("unchecked")
    private List<PSDependency> checkLocatorTables(PSSecurityToken tok,
       PSContainerLocator locator)
-        throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -218,7 +219,7 @@ public class PSSharedGroupDependencyHandler
       PSDependencyHandler schemaHandler = getDependencyHandler(
          PSSchemaDependencyHandler.DEPENDENCY_TYPE);
 
-      List<PSDependency> childDeps = new ArrayList<PSDependency>();
+      List<PSDependency> childDeps = new ArrayList<>();
       for (String tableName : PSDependencyUtils.getLocatorTables(locator))
       {
          PSDependency schemaDep =
@@ -233,6 +234,7 @@ public class PSSharedGroupDependencyHandler
    }
    
    // see base class
+   @Override
    public Iterator getDependencyFiles(PSSecurityToken tok, PSDependency dep)
       throws PSDeployException
    {
@@ -250,7 +252,7 @@ public class PSSharedGroupDependencyHandler
       checkServerControls(tok, dep);
       
       // Build list of dependency files
-      List<PSDependencyFile> files = new ArrayList<PSDependencyFile>();         
+      List<PSDependencyFile> files = new ArrayList<>();
       PSServerXmlObjectStore os = PSServerXmlObjectStore.getInstance();
       
       // get group and figure out which file it's from
@@ -259,22 +261,17 @@ public class PSSharedGroupDependencyHandler
       File[] grpFiles = os.getContentEditorSharedDefFiles();
       if (grpFiles != null)
       {
-         for (int i = 0; i < grpFiles.length; i++) 
-         {
+         for (File file : grpFiles) {
             PSContentEditorSharedDef def;
-            try 
-            {
-               def = os.getContentEditorSharedDef(grpFiles[i].getName());
+            try {
+               def = os.getContentEditorSharedDef(file.getName());
+            } catch (Exception e) {
+               throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR,
+                       e.getLocalizedMessage());
             }
-            catch (Exception e) 
-            {
-               throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR, 
-                  e.getLocalizedMessage());
-            }
-            
-            if ((group = def.getSharedGroup(dep.getDependencyId())) != null)
-            {
-               grpFile = grpFiles[i];
+
+            if ((group = def.getSharedGroup(dep.getDependencyId())) != null) {
+               grpFile = file;
                break;
             }
          }
@@ -299,6 +296,7 @@ public class PSSharedGroupDependencyHandler
    }
 
    // see base class
+   @Override
    public void installDependencyFiles(PSSecurityToken tok, 
       PSArchiveHandler archive, PSDependency dep, PSImportCtx ctx) 
          throws PSDeployException
@@ -382,17 +380,14 @@ public class PSSharedGroupDependencyHandler
          boolean sharedDefExists = true;
          if (defFiles != null && defFiles.length > 0)
          {
-            for (int i = 0; i < defFiles.length; i++) 
-            {
-               if (defFiles[i].getName().equals(origFile.getName()))
-               {
+            for (File file : defFiles) {
+               if (file.getName().equals(origFile.getName())) {
                   PSContentEditorSharedDef def = os.getContentEditorSharedDef(
-                     defFiles[i].getName());
-                  matchFile = defFiles[i];
+                          file.getName());
+                  matchFile = file;
                   matchDef = def;
-                  if (def.getSharedGroup(groupName) != null)
-                  {
-                     defFile = defFiles[i];
+                  if (def.getSharedGroup(groupName) != null) {
+                     defFile = file;
                      tgtDef = def;
                   }
                   break;
@@ -407,13 +402,11 @@ public class PSSharedGroupDependencyHandler
             // not in the original file, need to see if in a different one
             if (getSharedGroup(groupName) != null)
             {
-               for (int i = 0; i < defFiles.length; i++) 
-               {
+               for (File file : defFiles) {
                   PSContentEditorSharedDef def = os.getContentEditorSharedDef(
-                     defFiles[i].getName());
-                  if (def.getSharedGroup(groupName) != null)
-                  {
-                     defFile = defFiles[i];
+                          file.getName());
+                  if (def.getSharedGroup(groupName) != null) {
+                     defFile = file;
                      tgtDef = def;
                      break;
                   }
@@ -508,7 +501,7 @@ public class PSSharedGroupDependencyHandler
    /**
     * Constant for this handler's supported type
     */
-   public final static String DEPENDENCY_TYPE = "SharedGroup";
+   public  static final String DEPENDENCY_TYPE = "SharedGroup";
    
    /**
     * List of child types supported by this handler, never <code>null</code> or

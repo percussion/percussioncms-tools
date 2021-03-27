@@ -128,10 +128,8 @@ public class PSFilterDefDependencyHandler extends PSDependencyHandler
 
    //see base class
    @Override
-   @SuppressWarnings("unchecked")
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-         throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 

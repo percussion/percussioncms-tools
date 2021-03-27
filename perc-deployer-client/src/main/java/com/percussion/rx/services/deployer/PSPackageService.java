@@ -29,6 +29,7 @@ import com.percussion.rx.config.data.PSConfigStatus;
 import com.percussion.rx.config.data.PSConfigStatus.ConfigStatus;
 import com.percussion.rx.services.deployer.PSPkgUiResponse.PSPkgUiResponseType;
 import com.percussion.server.PSServer;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.pkginfo.IPSPkgInfoService;
 import com.percussion.services.pkginfo.PSPkgInfoServiceLocator;
 import com.percussion.services.pkginfo.data.PSPkgElement;
@@ -37,20 +38,12 @@ import com.percussion.services.pkginfo.data.PSPkgInfo.PackageAction;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.types.PSPair;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import javax.ws.rs.*;
+import java.util.*;
 
 /**
  * Business layer package service that calls to the lower level CRUD package
@@ -99,14 +92,14 @@ public class PSPackageService
    {
       if (StringUtils.isBlank(packageNames))
       {
-         PSPkgUiResponse response = new PSPkgUiResponse(
+         return new PSPkgUiResponse(
                PSPkgUiResponseType.FAILURE,
                "Skipping the reapplying of "
                      + "visibility settings as packageNames parameter value is empty");
-         return response;
+
 
       }
-      PSPkgUiResponse response = null;
+      PSPkgUiResponse response;
       try
       {
          response = PSPackageServiceHelper
@@ -127,15 +120,14 @@ public class PSPackageService
    {
       if (StringUtils.isBlank(packageNames))
       {
-         PSPkgUiResponse response = new PSPkgUiResponse(
+         return  new PSPkgUiResponse(
                PSPkgUiResponseType.FAILURE,
                "Skipping the reapplying of "
                      + "configuration settings as packageNames parameter value is empty");
-         return response;
 
       }
 
-      PSPkgUiResponse response = null;
+      PSPkgUiResponse response;
       try
       {
          response = PSPackageServiceHelper.applyConfiguartion(packageNames);
@@ -156,12 +148,9 @@ public class PSPackageService
       PSPackageCommunities pkgComms = new PSPackageCommunities();
       Map<IPSGuid, String> pkgInfomap = PSPackageServiceHelper.getPkgGuidNameMap();
       Map<IPSGuid, String> commsMap = getPkgCommsMap(pkgInfomap);
-      Iterator<IPSGuid> iter = pkgInfomap.keySet().iterator();
-      while (iter.hasNext())
-      {
-         IPSGuid guid = iter.next();
+      for (IPSGuid guid : pkgInfomap.keySet()) {
          PSPackageCommunity pkgComm = new PSPackageCommunity(pkgInfomap
-               .get(guid), commsMap.get(guid));
+                 .get(guid), commsMap.get(guid));
          pkgComms.add(pkgComm);
       }
       return pkgComms;
@@ -178,7 +167,7 @@ public class PSPackageService
    private Map<IPSGuid, String> getPkgCommsMap(Map<IPSGuid, String> pkgInfomap)
    {
       IPSConfigService srv = PSConfigServiceLocator.getConfigService();
-      Map<IPSGuid, String> result = new HashMap<IPSGuid, String>();
+      Map<IPSGuid, String> result = new HashMap<>();
       for (Map.Entry<IPSGuid, String> pkg : pkgInfomap.entrySet())
       {
          Collection<String> names = srv.loadCommunityVisibility(pkg.getValue());         
@@ -192,8 +181,7 @@ public class PSPackageService
    @Path("/communityPackages")
    public PSCommunityPackages getCommunityPackages()
    {
-      PSCommunityPackages commPkgs = PSPackageServiceHelper.getCommunityPackages();
-      return commPkgs;
+      return PSPackageServiceHelper.getCommunityPackages();
    }
 
    @POST
@@ -245,8 +233,7 @@ public class PSPackageService
    @Path("/uninstallPackage")
    @Consumes("application/x-www-form-urlencoded")
    public PSUninstallMessages postUninstallPackage(@QueryParam("packageName")
-   String packageNames)
-   {
+   String packageNames) throws PSNotFoundException {
       PSUninstallMessages msgs = new PSUninstallMessages();
       PSPackageUninstall pkgUninstall = new PSPackageUninstall();
       msgs.setMessages(pkgUninstall.uninstallPackages(packageNames));
@@ -258,8 +245,7 @@ public class PSPackageService
    @Consumes("application/x-www-form-urlencoded")
    public PSUninstallMessages postCheckPackageDependencies(
          @QueryParam("packageName")
-         String packageName)
-   {
+         String packageName) throws PSNotFoundException {
       PSUninstallMessages msgs = new PSUninstallMessages();
       PSPackageUninstall pkgUninstall = new PSPackageUninstall();
       msgs.setMessages(pkgUninstall.checkPackageDepedencies(packageName));
@@ -271,7 +257,7 @@ public class PSPackageService
    public PSPkgUiResponse getValidationResults(@QueryParam("packageName")
    String packageName)
    {
-      PSPkgUiResponse response = null;
+      PSPkgUiResponse response;
       try
       {
          response = PSPackageServiceHelper.getValidationResults(packageName);
@@ -289,9 +275,8 @@ public class PSPackageService
    public PSPkgUiResponse getServerTimeout()
    {
       int sto = PSServer.getServerConfiguration().getUserSessionTimeout();
-      PSPkgUiResponse response = new PSPkgUiResponse(
+      return new PSPkgUiResponse(
             PSPkgUiResponseType.SUCCESS, sto + "");
-      return response;
    }
    
    @POST
@@ -301,7 +286,7 @@ public class PSPackageService
          @QueryParam("packageName")
          String packageName)
    {
-      PSPkgUiResponse msg = new PSPkgUiResponse();
+      PSPkgUiResponse msg;
       try
       {
          PSConvertToSource cs = new PSConvertToSource();
@@ -316,7 +301,7 @@ public class PSPackageService
       {
          msg = new PSPkgUiResponse(PSPkgUiResponseType.FAILURE, e
                .getLocalizedMessage());
-         ms_logger.error("error converting package",e);
+         log.error("error converting package",e);
       }
       return msg;
    }
@@ -342,7 +327,7 @@ public class PSPackageService
          updatePkgComms(pkg, commList, false);
       }
       List<PSPkgInfo> pInfos = getPkgService().findAllPkgInfos();
-      List<IPSGuid> objectGuids = new ArrayList<IPSGuid>();
+      List<IPSGuid> objectGuids = new ArrayList<>();
       for (PSPkgInfo info : pInfos)
       {
          if (pkgs.contains(info.getPackageDescriptorName()))
@@ -390,14 +375,11 @@ public class PSPackageService
     */
    private List<String> getListFromString(String commaList)
    {
-      List<String> nameList = new ArrayList<String>();
+      List<String> nameList = new ArrayList<>();
       if (StringUtils.isNotBlank(commaList))
       {
          String[] commNames = commaList.split(NAME_SEPARATOR);
-         for (String commName : commNames)
-         {
-            nameList.add(commName);
-         }
+         nameList.addAll(Arrays.asList(commNames));
       }
       return nameList;
    }
@@ -458,7 +440,7 @@ public class PSPackageService
       return ERROR;
    }
    
-   // Constants for installed and configured status;
+   // Constants for installed and configured status
    static final String SUCCESS = "Success";
 
    static final String ERROR = "Error";
@@ -487,6 +469,6 @@ public class PSPackageService
   /**
    * The logger for this class.
    */
-  private static Logger ms_logger = Logger.getLogger("PSPackageService");
+  private static final Logger log = LogManager.getLogger(PSPackageService.class);
 
 }

@@ -9,14 +9,7 @@
  *****************************************************************************/
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSCoreUtils;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypeFactory;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.PSObjectTypes.XmlApplicationSubTypes;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.models.PSLockException;
@@ -25,18 +18,7 @@ import com.percussion.client.proxies.IPSXmlApplicationConverter;
 import com.percussion.client.proxies.PSProxyUtils;
 import com.percussion.client.proxies.PSXmlApplicationConverterProvider;
 import com.percussion.conn.PSServerException;
-import com.percussion.design.objectstore.PSApplication;
-import com.percussion.design.objectstore.PSApplicationFile;
-import com.percussion.design.objectstore.PSApplicationType;
-import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNonUniqueException;
-import com.percussion.design.objectstore.PSNotFoundException;
-import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSObjectStore;
-import com.percussion.design.objectstore.PSUnknownDocTypeException;
-import com.percussion.design.objectstore.PSUnknownNodeTypeException;
-import com.percussion.design.objectstore.PSValidationException;
-import com.percussion.design.objectstore.PSVersionConflictException;
+import com.percussion.design.objectstore.*;
 import com.percussion.error.PSException;
 import com.percussion.security.PSAuthenticationFailedExException;
 import com.percussion.security.PSAuthenticationFailedException;
@@ -46,11 +28,7 @@ import com.percussion.services.guidmgr.data.PSGuid;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -81,7 +59,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
     */
    public Collection<IPSReference> catalog() throws PSModelException
    {
-      Collection<IPSReference> coll = new ArrayList<IPSReference>();
+      Collection<IPSReference> coll = new ArrayList<>();
       Properties props = new Properties();
       props.put("name", "");
       props.put("description", "");
@@ -107,15 +85,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
             coll.add(ref);
          }
       }
-      catch (PSAuthenticationFailedException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSServerException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSModelException e)
+      catch (PSAuthenticationFailedException | PSModelException| PSServerException e)
       {
          throw new PSModelException(e);
       }
@@ -131,7 +101,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          results = new ArrayList<PSApplication>();
       else
          results.clear();
-      List<IPSReference> refs = new ArrayList<IPSReference>();// PSReference[count];
+      List<IPSReference> refs = new ArrayList<>();// PSReference[count];
       for (String name : names)
       {
          try
@@ -153,25 +123,9 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
             results.add(app);
             refs.add(new PSReference(app.getName(), app.getName(),
                   app.getDescription(), objType, null));
-         }
-         catch (PSServerException e)
+         } catch (PSException | PSModelException e)
          {
-            throw new RuntimeException(e);
-         }
-         catch (PSAuthorizationException e)
-         {
-            throw new RuntimeException(e);
-         }
-         catch (PSAuthenticationFailedException e)
-         {
-            throw new RuntimeException(e);
-         }
-         catch (PSModelException e)
-         {
-            throw new RuntimeException(e);
-         }
-         catch (PSException e)
-         {
+            //TODO: Logging and change to named exception
             throw new RuntimeException(e);
          }
       }
@@ -203,7 +157,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
       else
          results.clear();
 
-      List<String> existingNames = new ArrayList<String>();
+      List<String> existingNames = new ArrayList<>();
       try
       {
          Collection<IPSReference> handles = getModel().catalog();
@@ -257,19 +211,12 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
 
             results.add(newUiApp);
          }
-         catch (PSUnknownDocTypeException e)
+         catch (PSUnknownDocTypeException | PSUnknownNodeTypeException e)
          {
             // this cannot happen theoretically since we roundtripped
             // (toXml and fromXml) right here to create the application object
             throw new RuntimeException(e.getLocalizedMessage());
-         }
-         catch (PSUnknownNodeTypeException e)
-         {
-            // this cannot happen theoretically since we roundtripped
-            // (toXml and fromXml) right here to create the application object
-            throw new RuntimeException(e.getLocalizedMessage());
-         }
-         catch (PSException e)
+         } catch (PSException e)
          {
             throw new RuntimeException(e);
          }
@@ -307,29 +254,11 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
                   ref
                }, false);
             }
-         }
-         catch (PSServerException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthorizationException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthenticationFailedException e)
-         {
-            ex = e;
-         }
-         catch (PSLockedException e)
+         } catch (PSLockedException e)
          {
             ex = new PSLockException("load",
                   ref.getObjectType().getPrimaryType().name(),ref.getName());
-         }
-         catch (PSNotFoundException e)
-         {
-            ex = e;
-         }
-         catch (PSException e)
+         } catch (PSException e)
          {
             ex = e;
          }
@@ -353,31 +282,10 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          throw new IllegalArgumentException(
             "reference must not be null or empty");
       }
-      for (int i = 0; i < reference.length; i++)
-      {
-         IPSReference ref = reference[i];
-         try
-         {
+      for (IPSReference ref : reference) {
+         try {
             getObjectStore().removeApplication(ref.getName());
-         }
-         catch (PSServerException e)
-         {
-            // XXX Auto-generated catch block
-            e.printStackTrace();
-         }
-         catch (PSAuthorizationException e)
-         {
-            // XXX Auto-generated catch block
-            e.printStackTrace();
-         }
-         catch (PSAuthenticationFailedException e)
-         {
-            // XXX Auto-generated catch block
-            e.printStackTrace();
-         }
-         catch (PSLockedException e)
-         {
-            // XXX Auto-generated catch block
+         } catch (PSServerException | PSAuthenticationFailedException | PSLockedException | PSAuthorizationException e) {
             e.printStackTrace();
          }
       }
@@ -407,10 +315,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          try
          {
             final boolean isNew = !ref.isPersisted();
-            if (isNew)
-            {
-               assert !app.isEnabled(); 
-            }
+            assert !isNew || !app.isEnabled();
             
             // don't validate new one because it is possible it hasn't been
             // initialized yet
@@ -445,35 +350,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
                }, true);
             }
          }
-         catch (PSLockedException e)
-         {
-            ex = e;
-         }
-         catch (PSServerException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthorizationException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthenticationFailedException e)
-         {
-            ex = e;
-         }
-         catch (PSNotLockedException e)
-         {
-            ex = e;
-         }
-         catch (PSNonUniqueException e)
-         {
-            ex = e;
-         }
-         catch (PSValidationException e)
-         {
-            ex = e;
-         }
-         catch (PSVersionConflictException e)
+         catch (PSLockedException | PSServerException | PSAuthorizationException | PSAuthenticationFailedException | PSNotLockedException | PSNonUniqueException | PSSystemValidationException | PSVersionConflictException e)
          {
             ex = e;
          }
@@ -499,18 +376,17 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
     * @throws PSServerException for any unspecified server error.
     * @throws PSAuthorizationException if the user is not authorized.
     * @throws PSAuthenticationFailedException if the user is not authenticated.
-    * @throws PSValidationException for any validation errors.
     */
    private Collection<PSApplicationFile> getApplicationFiles(PSApplication app) 
       throws PSServerException, PSAuthorizationException, 
-         PSAuthenticationFailedException, PSValidationException
+         PSAuthenticationFailedException
    {
       try
       {
          PSObjectStore os = getObjectStore();
          
          Collection<PSApplicationFile> applicationFiles = 
-            new ArrayList<PSApplicationFile>();
+            new ArrayList<>();
          for (final String file : os.getApplicationFiles(app.getRequestRoot()))
          {
             final PSApplicationFile psFile = new PSApplicationFile(new File(file));
@@ -519,8 +395,9 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          
          return applicationFiles;
       }
-      catch (PSNotLockedException e)
+      catch (PSNotLockedException | PSSystemValidationException e)
       {
+         //TODO - Add logging change exception type
          // should never happen
          throw new RuntimeException(e);
       }
@@ -549,27 +426,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
             app.setName(name);
          }
       }
-      catch (PSServerException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSAuthorizationException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSAuthenticationFailedException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSLockedException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSNonUniqueException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSNotFoundException e)
+      catch (PSServerException | PSLockedException | PSAuthenticationFailedException | PSNotFoundException | PSNonUniqueException | PSAuthorizationException e)
       {
          throw new PSModelException(e);
       }
@@ -605,19 +462,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          {
             getObjectStore().extendApplicationLock(app);
          }
-         catch (PSServerException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthorizationException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthenticationFailedException e)
-         {
-            ex = e;
-         }
-         catch (PSLockedException e)
+         catch (PSServerException | PSLockedException | PSAuthenticationFailedException | PSAuthorizationException e)
          {
             ex = e;
          }
@@ -668,11 +513,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          
          return (psref.getLockUserName() != null);
       }
-      catch (PSAuthenticationFailedException e)
-      {
-         ex = e;
-      }
-      catch (PSServerException e)
+      catch (PSAuthenticationFailedException | PSServerException e)
       {
          ex = e;
       }
@@ -688,7 +529,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          throw new IllegalArgumentException(
             "refs must not be null or empty");
       }
-      List<IPSReference> persistedRefs = new ArrayList<IPSReference>();
+      List<IPSReference> persistedRefs = new ArrayList<>();
       for (IPSReference reference : refs)
       {
          if(reference.isPersisted())
@@ -716,19 +557,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
                references[i]
             }, true);
          }
-         catch (PSServerException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthorizationException e)
-         {
-            ex = e;
-         }
-         catch (PSAuthenticationFailedException e)
-         {
-            ex = e;
-         }
-         catch (PSLockedException e)
+         catch (PSServerException | PSAuthenticationFailedException | PSAuthorizationException | PSLockedException e)
          {
             ex = e;
          }

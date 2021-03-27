@@ -42,6 +42,7 @@ import com.percussion.services.assembly.IPSAssemblyTemplate;
 import com.percussion.services.assembly.IPSTemplateSlot;
 import com.percussion.services.assembly.data.PSAssemblyTemplate;
 import com.percussion.services.catalog.PSTypeEnum;
+import com.percussion.services.error.PSNotFoundException;
 import com.percussion.utils.guid.IPSGuid;
 import org.apache.commons.lang.StringUtils;
 
@@ -85,8 +86,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
    // see base class
    @Override
    public Iterator getChildDependencies(PSSecurityToken tok, PSDependency dep)
-      throws PSDeployException
-   {
+           throws PSDeployException, PSNotFoundException {
       if (tok == null)
          throw new IllegalArgumentException("tok may not be null");
 
@@ -117,7 +117,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
    }
 
    /**
-    * Utility method to find the Variant by a given guid(as a STRINGGGGGG)
+    * Utility method to find the Variant by a given guid(as a String)
     * @param depId the guid
     * @return <code>null</code> if Variant is not found
     * 
@@ -161,18 +161,14 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
     * @throws PSDeployException
     */
    private List<PSDependency> getContentTypeDependencies(PSSecurityToken tok,
-         IPSAssemblyTemplate tmp) throws PSDeployException
-   {
-      List<PSDependency> depList = new ArrayList<PSDependency>();
+         IPSAssemblyTemplate tmp) throws PSDeployException, PSNotFoundException {
+      List<PSDependency> depList = new ArrayList<>();
       init();
       List<IPSGuid> ctGuidList = m_assemblyHelper.getContentTypesByTemplate(tmp);
       PSDependencyHandler handler = getDependencyHandler(
                                          PSCEDependencyHandler.DEPENDENCY_TYPE);
-      Iterator<IPSGuid> it = ctGuidList.iterator();
-      while ( it.hasNext() )
-      {
-         IPSGuid ctGuid = it.next();
-         String id = ""+ctGuid.longValue();
+      for (IPSGuid ctGuid : ctGuidList) {
+         String id = "" + ctGuid.longValue();
          PSDependency childDep = handler.getDependency(tok, id);
          depList.add(childDep);
       }
@@ -187,21 +183,17 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
     * @throws PSDeployException
     */
    private List<PSDependency> getSlotDependencies(PSSecurityToken tok,
-         IPSAssemblyTemplate tmp) throws PSDeployException
-   {
-      List<PSDependency> depList = new ArrayList<PSDependency>();
+         IPSAssemblyTemplate tmp) throws PSDeployException, PSNotFoundException {
+      List<PSDependency> depList = new ArrayList<>();
       
       Set<IPSTemplateSlot> slots = tmp.getSlots();
       
       PSDependencyHandler handler = getDependencyHandler(
             PSSlotDependencyHandler.DEPENDENCY_TYPE);
-      
-      Iterator<IPSTemplateSlot> it = slots.iterator();
-      while ( it.hasNext() )
-      {
-         IPSTemplateSlot slot = it.next();
+
+      for (IPSTemplateSlot slot : slots) {
          IPSGuid slotGuid = slot.getGUID();
-         String id = ""+slotGuid.longValue();
+         String id = "" + slotGuid.longValue();
          PSDependency childDep = handler.getDependency(tok, id);
          depList.add(childDep);
       }
@@ -223,7 +215,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
             .getLegacyTemplatesMap();
       
       Iterator variantNames = legTemplates.keySet().iterator(); 
-      List<PSDependency> deps = new ArrayList<PSDependency>();
+      List<PSDependency> deps = new ArrayList<>();
       PSDependency dep;
       while (variantNames.hasNext())
       {
@@ -298,7 +290,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
          throw new IllegalArgumentException("idMap may not be null");
 
       PSDependencyUtils.reserveNewId(dep, idMap, getType());
-      return;
+
    }
 
    // see base class
@@ -316,7 +308,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
       init();
 
       // pack the data into the files
-      List<PSDependencyFile> files = new ArrayList<PSDependencyFile>();
+      List<PSDependencyFile> files = new ArrayList<>();
 
       IPSAssemblyTemplate tmp = findVariantByDependencyID(dep.getDependencyId(), true);
 
@@ -360,7 +352,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
       else
          tmp = findVariantByDependencyID(dep.getDependencyId(), false);
 
-      boolean isNew = (tmp == null) ? true : false;
+      boolean isNew = tmp == null;
       Integer ver = null;
       if (!isNew)
       {
@@ -390,7 +382,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
    /**
     * Constant for this handler's supported type
     */
-   final static String DEPENDENCY_TYPE = 
+    static final String DEPENDENCY_TYPE =
       IPSDeployConstants.DEP_OBJECT_TYPE_VARIANT_DEF;   
       
    /**
@@ -402,7 +394,7 @@ public class PSVariantDefDependencyHandler extends PSDataObjectDependencyHandler
     * List of child types supported by this handler, it will never be
     * <code>null</code> or empty.
     */
-   private static List<String> ms_childTypes = new ArrayList<String>();
+   private static List<String> ms_childTypes = new ArrayList<>();
 
    static
    {

@@ -10,12 +10,8 @@
 package com.percussion.workbench.ui.editors.form.ce;
 
 import com.percussion.E2Designer.PSRuleEditorDialog;
-import com.percussion.design.objectstore.PSApplyWhen;
-import com.percussion.design.objectstore.PSDisplayText;
-import com.percussion.design.objectstore.PSField;
-import com.percussion.design.objectstore.PSFieldValidationRules;
-import com.percussion.design.objectstore.PSRule;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.*;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.extension.IPSFieldValidator;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.rx.utils.PSContentTypeUtils;
@@ -310,7 +306,7 @@ public class PSFieldValidationsDialog extends PSDialog
          field.clearOccurrenceSettings();
          field.setOccurrenceDimension(occur, null);
       }
-      catch (PSValidationException e)
+      catch ( PSSystemValidationException e)
       {
          // We can safely ignore this as we are setting a valid value here.
          e.printStackTrace();
