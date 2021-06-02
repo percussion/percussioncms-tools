@@ -54,7 +54,7 @@
         <maven.dependency.plugin.version>3.1.2</maven.dependency.plugin.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <maven.deploy.plugin.version>3.0.0-M1</maven.deploy.plugin.version>
-        <xstream.version>1.4.15</xstream.version>
+        <xstream.version>1.4.16</xstream.version>
         <maven.bundle.plugin.version>4.2.1</maven.bundle.plugin.version>
         <duplicate.finder.maven.plugin.version>1.4.0</duplicate.finder.maven.plugin.version>
         <maven.enforcer.plugin.version>3.0.0-M3</maven.enforcer.plugin.version>
@@ -143,6 +143,7 @@
         <twelvemonkeys.version>3.6</twelvemonkeys.version>
         <javax.help.version>2.0.05</javax.help.version>
         <commons.httpclient.version>3.1</commons.httpclient.version>
+        <guava.version>30.0-jre</guava.version>
         <eclipse-manifest-location>META-INF</eclipse-manifest-location>
     </properties>
     <profiles>
@@ -1254,12 +1255,10 @@
                 <version>1.1.1</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-            <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>25.0.0.redhat-1</version>
+                <version>${guava.version}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>jsr305</artifactId>

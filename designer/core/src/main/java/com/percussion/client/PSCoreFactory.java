@@ -102,7 +102,7 @@ public class PSCoreFactory
       if (ms_instance == null)
       {
          ms_instance = new PSCoreFactory();
-         ms_instance.initSpringContext();
+      //   ms_instance.initSpringContext();
 
          // Initialize the singleton with the class registry from this package
          PSObjectSerializer.getInstance().registerBeanClasses(

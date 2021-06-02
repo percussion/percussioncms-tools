@@ -202,18 +202,14 @@
 
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-         
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.jackrabbit/jackrabbit-jcr-commons -->
         <dependency>
             <groupId>org.apache.jackrabbit</groupId>
             <artifactId>jackrabbit-jcr-commons</artifactId>
-   
         </dependency>
 
       
