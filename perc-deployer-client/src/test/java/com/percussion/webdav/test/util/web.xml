@@ -32,6 +32,15 @@
       <param-value>/Rhythmyx</param-value>
       <description>The Rhythmyx Servlet context name, defaults to &quot;/Rhythmyx&quot;.</description>
    </context-param>
+   <servlet-mapping>
+      <servlet-name>ServletRedirector</servlet-name>
+      <url-pattern>/ServletRedirector</url-pattern>
+   </servlet-mapping>
+   <servlet>
+      <servlet-name>ServletRedirector</servlet-name>
+      <servlet-class>org.apache.cactus.server.ServletTestRedirector</servlet-class>
+   </servlet>
+
    <servlet>
       <servlet-name>testutil</servlet-name>
       <display-name>Testing PSServletRequester</display-name>

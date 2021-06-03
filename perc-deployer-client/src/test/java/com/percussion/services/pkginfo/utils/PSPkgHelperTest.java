@@ -41,6 +41,7 @@ import com.percussion.util.PSProperties;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
 import org.apache.cactus.ServletTestCase;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.io.FileOutputStream;
@@ -51,6 +52,7 @@ import java.util.Set;
  * Test id-name helper
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSPkgHelperTest extends ServletTestCase
 {
    /**

@@ -264,6 +264,6 @@ public class PSPackageLockManagerTest
     * E2 root.
     */
    private static final String RESOURCE_DIR =
-      "com/percussion/Packages/Percussion";
+      "com/percussion/Percussion";
   
 }

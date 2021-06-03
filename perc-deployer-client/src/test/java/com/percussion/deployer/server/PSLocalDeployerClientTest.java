@@ -31,6 +31,7 @@ import com.percussion.utils.request.PSRequestInfo;
 import com.percussion.utils.testing.IntegrationTest;
 import org.apache.cactus.ServletTestCase;
 import org.apache.commons.lang.time.DateUtils;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.io.File;
@@ -42,6 +43,7 @@ import java.util.Date;
  *
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSLocalDeployerClientTest extends ServletTestCase
 {
     

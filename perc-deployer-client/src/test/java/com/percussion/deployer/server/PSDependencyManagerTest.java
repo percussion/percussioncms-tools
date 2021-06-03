@@ -248,7 +248,7 @@ public class PSDependencyManagerTest
    /**
     * The directory of the source tree that contains the package configuration file.
     */
-   private static final String RESOURCE_D0C_DIR = "config/Deployer";
+   private static final String RESOURCE_D0C_DIR = "config";
    
    private static final String MENU_TYPE = PSMenuActionDependencyHandler.DEPENDENCY_TYPE;
    private static final String SLOT_TYPE = PSSlotDependencyHandler.DEPENDENCY_TYPE;
