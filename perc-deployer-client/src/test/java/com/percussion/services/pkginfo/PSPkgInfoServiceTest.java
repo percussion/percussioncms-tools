@@ -53,6 +53,7 @@ import static org.junit.Assert.assertTrue;
  * Test case for the {@link IPSPkgInfoService} class.
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSPkgInfoServiceTest
 {
 

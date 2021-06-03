@@ -36,6 +36,7 @@ import com.percussion.services.error.PSNotFoundException;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.utils.types.PSPair;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ import java.util.Map;
  */
 @SuppressWarnings("unchecked")
 @Category(IntegrationTest.class)
+@Ignore
 public class PSTemplateSlotSetterTest extends PSConfigurationTest // TestCase
 {
    public void testSlotProperties() throws Exception
