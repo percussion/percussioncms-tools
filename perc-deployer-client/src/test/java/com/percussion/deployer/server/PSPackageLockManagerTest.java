@@ -30,6 +30,7 @@ import com.percussion.util.IOTools;
 import com.percussion.util.PSArchiveFiles;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.xml.PSXmlDocumentBuilder;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -51,6 +52,7 @@ import static org.junit.Assert.*;
  * Unit test for the PSPackageLockManager.
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSPackageLockManagerTest
 {
 

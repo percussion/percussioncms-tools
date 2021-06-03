@@ -35,6 +35,7 @@ import com.percussion.services.pkginfo.data.PSPkgInfo.PackageActionStatus;
 import com.percussion.services.pkginfo.data.PSPkgInfo.PackageType;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -298,6 +299,7 @@ public class PSPkgInfoServiceTest
     * @throws Exception If the test fails.
     */
    @Test
+   @Ignore
    public void testPkgInfoServices() throws Exception
    {
       // cleanup test specific data
@@ -456,6 +458,7 @@ public class PSPkgInfoServiceTest
     * @throws Exception If the test fails.
     */
    @Test
+   @Ignore
    public void testPkgElementServices() throws Exception
    {
       // Get the PkgInfo Service
@@ -606,6 +609,7 @@ public class PSPkgInfoServiceTest
     * @throws Exception If the test fails.
     */
    @Test
+   @Ignore
    public void testPkgDependencyServices() throws Exception
    {
 
@@ -719,6 +723,7 @@ public class PSPkgInfoServiceTest
     * @throws Exception If the test fails.
     */
    @Test
+   @Ignore
    public void testPkgConfigInfoServices() throws Exception
    {
 

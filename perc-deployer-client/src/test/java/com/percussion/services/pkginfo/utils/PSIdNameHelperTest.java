@@ -27,6 +27,7 @@ import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.pkginfo.PSIdNameServiceLocator;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -39,6 +40,7 @@ import static org.junit.Assert.assertTrue;
  * Test id-name helper
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSIdNameHelperTest
 {
    /**

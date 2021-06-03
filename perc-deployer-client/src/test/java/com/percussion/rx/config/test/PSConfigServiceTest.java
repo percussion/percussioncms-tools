@@ -37,6 +37,7 @@ import com.percussion.services.guidmgr.IPSGuidManager;
 import com.percussion.services.guidmgr.PSGuidManagerLocator;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.io.File;
@@ -44,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSConfigServiceTest extends PSConfigurationTest
 {
    PSConfigService m_srv;

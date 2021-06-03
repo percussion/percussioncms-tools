@@ -34,6 +34,7 @@ import com.percussion.services.sitemgr.IPSLocationScheme;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.utils.types.PSPair;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.HashMap;
@@ -42,6 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSLocationSchemeSetterTest extends PSConfigurationTest
 {
    public void testGenerator() throws Exception

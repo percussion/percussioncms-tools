@@ -32,6 +32,7 @@ import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.sitemgr.IPSSite;
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.HashMap;
@@ -44,6 +45,7 @@ import java.util.Map;
  * @author YuBingChen
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSSiteTemplateVisibilitySetterTest extends PSConfigurationTest
 {
 
