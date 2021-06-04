@@ -122,7 +122,7 @@
         <install.jre.version>8.222.10.1</install.jre.version>
         <axis.version>1.4.1</axis.version>
         <axiscore.version>1.4.2</axiscore.version>
-        <httpcomponents.version>4.5.8</httpcomponents.version>
+        <httpcomponents.version>4.5.13</httpcomponents.version>
         <log4j2.version>2.14.0</log4j2.version>
         <tika.version>1.24.1</tika.version>
         <commons-cli.version>1.4</commons-cli.version>
