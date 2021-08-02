@@ -37,6 +37,7 @@ import com.percussion.services.guidmgr.IPSGuidManager;
 import com.percussion.services.guidmgr.PSGuidManagerLocator;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.utils.types.PSPair;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSKeywordSetterTest extends PSConfigurationTest
 {
    @SuppressWarnings("unchecked")

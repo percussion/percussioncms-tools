@@ -33,6 +33,7 @@ import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.guidmgr.IPSGuidManager;
 import com.percussion.services.guidmgr.PSGuidManagerLocator;
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSActionSetterTest extends PSConfigurationTest
 {
    public void testConfigFiles() throws Exception

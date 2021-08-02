@@ -28,6 +28,7 @@ import com.percussion.rx.config.impl.PSObjectConfigHandler;
 import com.percussion.services.pkginfo.utils.PSPkgHelper;
 import com.percussion.utils.testing.IntegrationTest;
 import org.apache.cactus.ServletTestCase;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import java.util.List;
  * Base class for config service tests which apply configurations.  Disables
  * package element version updates on setup and re-enables updates on teardown.
  */
+@Ignore
 @Category(IntegrationTest.class)
 public abstract class PSConfigurationTest extends ServletTestCase
 {

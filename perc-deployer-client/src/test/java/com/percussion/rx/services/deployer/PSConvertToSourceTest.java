@@ -33,6 +33,7 @@ import com.percussion.services.pkginfo.data.PSPkgInfo.PackageCategory;
 import com.percussion.services.pkginfo.data.PSPkgInfo.PackageType;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.utils.types.PSPair;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -42,6 +43,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSConvertToSourceTest
 {
 

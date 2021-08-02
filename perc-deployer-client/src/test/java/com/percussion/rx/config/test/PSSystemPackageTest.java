@@ -24,9 +24,11 @@
 package com.percussion.rx.config.test;
 
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSSystemPackageTest extends PSConfigurationTest
 {
    /**

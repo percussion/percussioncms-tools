@@ -41,6 +41,7 @@ import com.percussion.deployer.server.dependencies.PSTemplateDependencyHandler;
 import com.percussion.deployer.server.dependencies.PSUserDependencyHandler;
 import com.percussion.deployer.server.dependencies.PSWorkflowDependencyHandler;
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -53,6 +54,7 @@ import static org.junit.Assert.assertTrue;
  * Unit test for the PSDependencyMap and PSDependencyDef classes
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSDependencyManagerTest
 {
    /**
@@ -248,7 +250,7 @@ public class PSDependencyManagerTest
    /**
     * The directory of the source tree that contains the package configuration file.
     */
-   private static final String RESOURCE_D0C_DIR = "config/Deployer";
+   private static final String RESOURCE_D0C_DIR = "config";
    
    private static final String MENU_TYPE = PSMenuActionDependencyHandler.DEPENDENCY_TYPE;
    private static final String SLOT_TYPE = PSSlotDependencyHandler.DEPENDENCY_TYPE;

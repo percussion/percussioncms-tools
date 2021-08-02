@@ -29,6 +29,7 @@ import com.percussion.services.pkginfo.data.PSIdName;
 import com.percussion.services.pkginfo.impl.PSIdNameService;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -40,6 +41,7 @@ import static org.junit.Assert.assertNull;
  * Test case for the {@link PSIdNameService} class.
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSIdNameServiceTest
 {
    /**

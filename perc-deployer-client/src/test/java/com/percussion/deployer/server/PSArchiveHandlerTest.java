@@ -36,6 +36,7 @@ import com.percussion.deployer.objectstore.PSDeployableElement;
 import com.percussion.server.PSServer;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.xml.PSXmlDocumentBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.w3c.dom.Document;
@@ -56,6 +57,7 @@ import static org.junit.Assert.assertTrue;
  * Unit test for the <code>PSArchivHander</code> object.
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSArchiveHandlerTest
 {
    /**

@@ -30,6 +30,7 @@ import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
 import org.apache.cactus.ServletTestCase;
 import org.apache.commons.lang.ArrayUtils;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSPackageVisibilityTest extends ServletTestCase
 {
    public void testGetCommunities()

@@ -51,6 +51,7 @@ import com.percussion.legacy.security.deprecated.PSCryptographer;
 import com.percussion.util.PSFormatVersion;
 import com.percussion.util.PSPurgableTempFile;
 import com.percussion.legacy.security.deprecated.PSLegacyEncrypter;
+import com.percussion.utils.io.PathUtils;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
 import org.apache.logging.log4j.LogManager;
@@ -1080,11 +1081,21 @@ public class PSDeploymentServerConnection
    {
       if (pwd == null || pwd.trim().length() == 0)
          return "";
+      String key = uid == null || uid.trim().length() == 0
+              ? PSLegacyEncrypter.getInstance(
+              PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+      ).INVALID_DRIVER()
+              : uid;
 
-      String key = uid == null || uid.trim().length() == 0 ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER() :
-              uid;
+      try {
+         return PSEncryptor.getInstance("AES",
+                 PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+         ).encrypt(pwd);
+      } catch (PSEncryptionException e) {
+         return "";
+      }
 
-      return PSCryptographer.encrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);
+
    }
 
    /**
@@ -1106,7 +1117,8 @@ public class PSDeploymentServerConnection
          uid;
 
       try {
-         return PSEncryptor.getInstance("AES",null).decrypt(pwd);
+         return PSEncryptor.getInstance("AES",
+                 PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)).decrypt(pwd);
       } catch (PSEncryptionException e) {
          try {
             return PSCryptographer.decrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);

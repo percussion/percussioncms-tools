@@ -37,6 +37,7 @@ import com.percussion.services.assembly.PSAssemblyServiceLocator;
 import com.percussion.services.assembly.data.PSTemplateBinding;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.utils.types.PSPair;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ import java.util.Map;
  * @author YuBingChen
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSTemplateSetterTest extends PSConfigurationTest
 {
    

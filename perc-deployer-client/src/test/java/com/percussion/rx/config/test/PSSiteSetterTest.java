@@ -36,6 +36,7 @@ import com.percussion.services.sitemgr.PSSiteManagerLocator;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.utils.testing.IntegrationTest;
 import org.apache.commons.lang.StringUtils;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.HashMap;
@@ -43,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class PSSiteSetterTest extends PSConfigurationTest
 {
    public void testConfigFiles() throws Exception

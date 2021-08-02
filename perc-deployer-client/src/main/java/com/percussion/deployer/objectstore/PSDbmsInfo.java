@@ -31,6 +31,7 @@ import com.percussion.legacy.security.deprecated.PSCryptographer;
 import com.percussion.legacy.security.deprecated.PSLegacyEncrypter;
 import com.percussion.security.PSEncryptionException;
 import com.percussion.security.PSEncryptor;
+import com.percussion.utils.io.PathUtils;
 import com.percussion.utils.jdbc.IPSConnectionInfo;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
@@ -574,10 +575,18 @@ public class PSDbmsInfo implements IPSDeployComponent
          return "";
 
       String key = uid == null || uid.trim().length() == 0
-              ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER()
+              ? PSLegacyEncrypter.getInstance(
+              PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+      ).INVALID_DRIVER()
               : uid;
 
-      return PSCryptographer.encrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);
+      try {
+         return PSEncryptor.getInstance("AES",
+                 PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+         ).encrypt(pwd);
+      } catch (PSEncryptionException e) {
+         return "";
+      }
    }
 
    /**
@@ -597,11 +606,32 @@ public class PSDbmsInfo implements IPSDeployComponent
          return "";
 
       String key = uid == null || uid.trim().length() == 0
-            ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER()
-            : uid;
+              ? PSLegacyEncrypter.getInstance(
+              PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+      ).INVALID_DRIVER()
+              : uid;
 
-      return PSCryptographer.decrypt(PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key, pwd);
+      return decryptPwd(pwd, PSLegacyEncrypter.getInstance(
+              PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+      ).INVALID_CRED(), key);
 
+   }
+
+   private String decryptPwd(String pwd, String key1, String key2)
+   {
+      String ret = pwd;
+
+      if (pwd == null || pwd.trim().length() == 0)
+         return "";
+
+      try{
+         ret = PSEncryptor.getInstance("AES",
+                 PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+         ).decrypt(pwd);
+      } catch (PSEncryptionException e) {
+         ret = PSCryptographer.decrypt(key1, key2, pwd);
+      }
+      return ret;
    }
 
    public boolean isPasswordEncrypted() {

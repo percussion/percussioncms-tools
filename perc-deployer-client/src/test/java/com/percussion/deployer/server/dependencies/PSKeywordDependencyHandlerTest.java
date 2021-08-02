@@ -31,6 +31,7 @@ import com.percussion.services.content.PSContentServiceLocator;
 import com.percussion.services.content.data.PSKeyword;
 import com.percussion.utils.testing.IntegrationTest;
 import org.apache.cactus.ServletTestCase;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 import java.util.HashSet;
@@ -42,6 +43,7 @@ import java.util.Set;
  * Test case for the {@link PSKeywordDependencyHandler}.
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSKeywordDependencyHandlerTest extends ServletTestCase
 {
    /**

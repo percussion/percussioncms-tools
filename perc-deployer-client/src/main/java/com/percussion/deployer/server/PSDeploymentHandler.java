@@ -46,6 +46,8 @@ import com.percussion.rx.config.impl.PSDefaultConfigGenerator;
 import com.percussion.security.IPSSecurityErrors;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
+import com.percussion.security.PSEncryptionException;
+import com.percussion.security.PSEncryptor;
 import com.percussion.security.PSUserEntry;
 import com.percussion.server.IPSCgiVariables;
 import com.percussion.server.IPSLoadableRequestHandler;
@@ -80,6 +82,7 @@ import com.percussion.utils.collections.PSMultiValueHashMap;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.legacy.security.deprecated.PSCryptographer;
 import com.percussion.legacy.security.deprecated.PSLegacyEncrypter;
+import com.percussion.utils.io.PathUtils;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
 import com.percussion.xml.PSXmlValidator;
@@ -3592,10 +3595,15 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
          return "";
 
       String key = uid == null || uid.trim().length() == 0
-            ? PSLegacyEncrypter.getInstance(null).INVALID_DRIVER()
-            : uid;
+              ? PSLegacyEncrypter.getInstance(
+              PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+      ).INVALID_DRIVER()
+              : uid;
 
-      return decryptPwd(pwd, PSLegacyEncrypter.getInstance(null).INVALID_CRED(), key);
+      return decryptPwd(pwd, PSLegacyEncrypter.getInstance(
+              PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+      ).INVALID_CRED(), key);
+
    }
 
    /**
@@ -3613,10 +3621,19 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
     */
    private String decryptPwd(String pwd, String key1, String key2)
    {
+      String ret = pwd;
+
       if (pwd == null || pwd.trim().length() == 0)
          return "";
 
-      return PSCryptographer.decrypt(key1, key2, pwd);
+      try{
+         ret = PSEncryptor.getInstance("AES",
+                 PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
+         ).decrypt(pwd);
+      } catch (PSEncryptionException e) {
+         ret = PSCryptographer.decrypt(key1, key2, pwd);
+      }
+      return ret;
    }
 
    /**

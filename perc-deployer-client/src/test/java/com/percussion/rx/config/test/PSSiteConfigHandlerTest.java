@@ -30,6 +30,7 @@ import com.percussion.rx.config.impl.PSSiteConfigHandler;
 import com.percussion.util.PSResourceUtils;
 import com.percussion.utils.testing.IntegrationTest;
 import com.percussion.utils.types.PSPair;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -49,6 +50,7 @@ import static org.junit.Assert.assertTrue;
  * @author YuBingChen
  */
 @Category(IntegrationTest.class)
+@Ignore
 public class PSSiteConfigHandlerTest
 {
    @Test
