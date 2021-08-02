@@ -240,11 +240,6 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
          throw new PSAuthenticationFailedException(
                IPSSecurityErrors.GENERIC_AUTHENTICATION_FAILED, null);
       }
-      catch (ServletException e)
-      {
-         throw new PSDeployException(IPSDeploymentErrors.UNEXPECTED_ERROR, e
-               .getLocalizedMessage());
-      }
 
       PSServer.checkAccessLevel(req, PSAclEntry.SACE_ADMINISTER_SERVER);
       sessionId = req.getUserSessionId();
