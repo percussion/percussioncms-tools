@@ -3627,9 +3627,7 @@ public class PSDeploymentHandler implements IPSLoadableRequestHandler
          return "";
 
       try{
-         ret = PSEncryptor.getInstance("AES",
-                 PathUtils.getRxDir(null).getAbsolutePath().concat(PSEncryptor.SECURE_DIR)
-         ).decrypt(pwd);
+         ret = PSEncryptor.decryptString(PathUtils.getRxDir().getAbsolutePath().concat(PSEncryptor.SECURE_DIR),pwd);
       } catch (PSEncryptionException e) {
          ret = PSCryptographer.decrypt(key1, key2, pwd);
       }
