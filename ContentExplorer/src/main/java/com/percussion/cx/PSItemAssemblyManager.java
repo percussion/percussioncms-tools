@@ -48,9 +48,7 @@ public class PSItemAssemblyManager
 
    /**
     * Takes the action manager object mainly to acces the applet associated.
-    * 
-    * @param proxy the remote proxy to use to execute a relationship request to
-    *    the server, may not be <code>null</code>.
+    *
     * @param actionManager, must not be <code>null</code>
     */
    public PSItemAssemblyManager(PSActionManager actionManager)

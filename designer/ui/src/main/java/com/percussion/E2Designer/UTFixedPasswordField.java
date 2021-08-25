@@ -47,7 +47,7 @@ public class UTFixedPasswordField extends JPasswordField
    /**
    * Construct a new fixed password field of passed width/height.
    *
-   * @param string      the text field name
+   * @param name      the text field name
    * @param width         the text field width
    * @param height      the text field height
    */

@@ -205,6 +205,7 @@ public class PSContentExplorerLoginPanel extends JFrame
       panel.add(m_password, c);
       m_password.setMinimumSize(new Dimension(300, 60));
       m_password.setFont(new Font("Arial", Font.PLAIN, 18));
+      m_password.enableInputMethods(true);
 
       c.fill = GridBagConstraints.HORIZONTAL;
       c.gridx = 0;

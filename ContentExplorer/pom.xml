@@ -108,8 +108,18 @@
   <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>rxutils</artifactId>
-        <version>8.0.3-SNAPSHOT</version>
+        <version>${project.parent.version}</version>
     </dependency>
+      <dependency>
+          <groupId>com.percussion</groupId>
+          <artifactId>perc-security-utils</artifactId>
+          <version>${project.parent.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.percussion</groupId>
+          <artifactId>perc-xml-security</artifactId>
+          <version>${project.parent.version}</version>
+      </dependency>
 	<dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
@@ -120,7 +130,7 @@
   <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>perc-system</artifactId>
-        <version>8.0.3-SNAPSHOT</version>
+        <version>${project.parent.version}</version>
     </dependency>
       <dependency>
           <groupId>com.percussion</groupId>

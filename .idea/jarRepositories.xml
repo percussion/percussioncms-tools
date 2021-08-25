@@ -52,6 +52,11 @@
       <option name="url" value="https://mvn.percussion.com/repositories/snapshots/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="percussion.s3.repo.release" />
+      <option name="name" value="percussion.s3.repo.release" />
+      <option name="url" value="https://mvn.percussion.com/releases" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="github" />
       <option name="name" value="GitHub PercussionCMS Apache Maven Packages" />
       <option name="url" value="https://maven.pkg.github.com/percussion/percussioncms" />
@@ -67,6 +72,16 @@
       <option name="url" value="https://mvn.percussion.com/repositories/thirdparty/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="maven.apache.org" />
+      <option name="name" value="maven.apache.org" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github" />
+      <option name="name" value="GitHub Percussion Apache Maven Packages" />
+      <option name="url" value="https://maven.pkg.github.com/percussion/percussioncms" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
@@ -75,6 +90,11 @@
       <option name="id" value="perc-java-repo" />
       <option name="name" value="perc-java-repo" />
       <option name="url" value="http://repo-man.cloud.percussion.com:8081/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="percussion.s3.repo.snapshots" />
+      <option name="name" value="percussion.s3.repo.snapshots" />
+      <option name="url" value="https://mvn.percussion.com/snapshots" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="perc-release-repo" />

@@ -31,7 +31,7 @@ public class PSContentExplorerUtils
    static Logger log = Logger.getLogger(PSContentExplorerUtils.class);
    public static Map<String, String> getQueryMap(String url)  
    {  
-      Map<String, String> map = new HashMap<String, String>();  
+      Map<String, String> map = new HashMap<>();
       
       int idx  = url.indexOf("?");
       String query = "";
@@ -166,7 +166,7 @@ public class PSContentExplorerUtils
          }
          catch (Exception e)
          {
-            PSContentExplorerApplet.log.error("couldnt print JAXP property",e);
+            PSContentExplorerApplet.log.error("Couldn't print JAXP property",e);
          }
       }
    }
