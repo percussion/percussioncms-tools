@@ -124,6 +124,15 @@
                             </fileset>
                         </copy>
                     </then>
+                    <else>
+                        <move file="${install.dir}/devtools/DevOptions.sh" tofile="${install.dir}/devtools/DevOptions.sh.bak"
+                        overwrite="true" force="true" verbose="true"/>
+                        <copy todir="${install.dir}/devtools">
+                            <fileset dir="${install.src}/devtools">
+                                <include name="DevOptions.sh" />
+                            </fileset>
+                        </copy>
+                    </else>
                 </if>
             </then>
             <elseif>
@@ -140,6 +149,15 @@
                                 </fileset>
                             </copy>
                         </then>
+                        <else>
+                            <move file="${install.dir}/devtools/DevOptions.cmd" tofile="${install.dir}/devtools/DevOptions.cmd.bak"
+                                  overwrite="true" force="true" verbose="true"/>
+                            <copy todir="${install.dir}/devtools">
+                                <fileset dir="${install.src}/devtools">
+                                    <include name="DevOptions.cmd" />
+                                </fileset>
+                            </copy>
+                        </else>
                     </if>
                 </then>
             </elseif>
