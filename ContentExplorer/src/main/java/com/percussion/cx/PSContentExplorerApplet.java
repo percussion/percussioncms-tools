@@ -1558,7 +1558,7 @@ public class PSContentExplorerApplet extends JApplet implements IPSActionListene
     *
     * @return <code>true</code> if the platform is Mac.
     */
-   public boolean isMacPlatform()
+   public static boolean isMacPlatform()
    {
       return m_osName.startsWith("Mac OS");
    }
@@ -2615,7 +2615,7 @@ public class PSContentExplorerApplet extends JApplet implements IPSActionListene
     * Operating system name. Initialized upon applet loading, never empty after
     * that.
     */
-   public String m_osName = "";
+   public static String m_osName = "";
 
    /**
     * RestrictSearchFieldsToUserCommunity property, default is <code>true</code>

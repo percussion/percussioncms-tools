@@ -1,7 +1,18 @@
 package com.percussion.cx;
 
 
-import java.awt.Dimension;
+import com.percussion.cx.javafx.PSWindowManager;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -10,22 +21,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
-import com.percussion.cx.javafx.PSWindowManager;
-
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 
 public class PSContentExplorerApplication extends Application {
    
@@ -141,14 +136,15 @@ public class PSContentExplorerApplication extends Application {
       
       
       //BasicConfigurator.configure();
-
       System.setProperty("javax.xml.parsers.SAXParserFactory",
             "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl");
       System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
-            "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
+            "com.percussion.xml.PSDocumentBuilderFactoryImpl");
       System.setProperty("javax.xml.transform.TransformerFactory",
-            "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
+            "org.apache.xalan.xsltc.trax.SmartTransformerFactoryImpl");
       System.setProperty("javax.xml.xpath.XPathFactory", "com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl");
+      System.setProperty("javax.xml.datatype.DatatypeFactory",
+              "com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl");
 
     
       log.info("USING JAVA:   " + System.getProperty("java.version"));

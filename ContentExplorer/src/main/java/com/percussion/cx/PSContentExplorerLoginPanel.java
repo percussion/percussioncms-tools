@@ -1,31 +1,5 @@
 package com.percussion.cx;
 
-import com.percussion.E2Designer.*;
-import com.percussion.E2Designer.admin.AppletMainDialog;
-import com.percussion.E2Designer.admin.StatusBar;
-import com.percussion.border.PSFocusBorder;
-import com.percussion.util.PSProperties;
-import com.percussion.webservices.faults.PSContractViolationFault;
-import com.percussion.webservices.faults.PSNotAuthenticatedFault;
-import org.apache.axis.AxisFault;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-
-import javax.swing.SwingWorker;
-import javax.swing.*;
-import javax.swing.border.EtchedBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
-
 import com.percussion.E2Designer.LoginDialog;
 import com.percussion.E2Designer.UTFixedPasswordField;
 import com.percussion.E2Designer.UTFixedTextField;
@@ -34,6 +8,7 @@ import com.percussion.E2Designer.Util;
 import com.percussion.E2Designer.admin.AppletMainDialog;
 import com.percussion.E2Designer.admin.StatusBar;
 import com.percussion.border.PSFocusBorder;
+import com.percussion.error.PSExceptionUtils;
 import com.percussion.util.PSProperties;
 import com.percussion.webservices.faults.PSContractViolationFault;
 import com.percussion.webservices.faults.PSNotAuthenticatedFault;
@@ -43,14 +18,17 @@ import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 
@@ -95,13 +73,7 @@ public class PSContentExplorerLoginPanel extends JFrame
       m_login.setSize(newDimension);
       m_login.setMinimumSize(newDimension);
 
-      m_login.addActionListener(new ActionListener()
-      {
-         public void actionPerformed(@SuppressWarnings("unused") ActionEvent e)
-         {
-            onOk();
-         }
-      });
+      m_login.addActionListener(e -> onOk());
 
       m_statusBar = new StatusBar(m_res.getString("disconnectedStatus"));
       for (Component comp : m_statusBar.getComponents())
@@ -125,10 +97,9 @@ public class PSContentExplorerLoginPanel extends JFrame
 
    /**
     * Create and initialize all GUI elements.
-    * 
-    * @throws Exception creating GUI element failed.
+    *
     */
-   private void initPanel() throws Exception
+   private void initPanel()
    {
       PSFocusBorder focusBorder = new PSFocusBorder(1, Color.RED);
 
@@ -232,7 +203,7 @@ public class PSContentExplorerLoginPanel extends JFrame
       c.gridy = 5;
       c.weighty = 0;
       c.gridwidth = 2;
-      c.insets = new Insets(10, 0, 0, 0);; // top padding
+      c.insets = new Insets(10, 0, 0, 0); // top padding
       c.anchor = GridBagConstraints.SOUTH;
       c.fill = GridBagConstraints.HORIZONTAL;
       panel.add(m_statusBar, c);
@@ -249,7 +220,14 @@ public class PSContentExplorerLoginPanel extends JFrame
 
       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
      this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-     
+
+      if(PSContentExplorerApplet.isMacPlatform()) {
+         InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
+         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.copyAction);
+         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.pasteAction);
+         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.cutAction);
+      }
+
      m_password.requestFocusInWindow();
    }
 
@@ -443,7 +421,7 @@ public class PSContentExplorerLoginPanel extends JFrame
          private volatile String errorMessage = "";
 
          @Override
-         protected Boolean doInBackground() throws Exception
+         protected Boolean doInBackground()
          {
             try
             {
@@ -496,10 +474,11 @@ public class PSContentExplorerLoginPanel extends JFrame
          }
 
          // Can safely update the GUI from this method.
+         @Override
          protected void done()
          {
 
-            System.out.println("done");
+            log.debug("done");
             boolean status;
             try
             {
@@ -507,7 +486,7 @@ public class PSContentExplorerLoginPanel extends JFrame
                status = get();
                if (status)
                {
-                  System.out.println("good");
+                  log.debug("good");
                   m_parent.initCESession();
 
                }
@@ -524,7 +503,9 @@ public class PSContentExplorerLoginPanel extends JFrame
             catch (InterruptedException | ExecutionException e)
             {
                // This is thrown if the thread's interrupted.
-               e.printStackTrace();
+               log.error(PSExceptionUtils.getMessageForLog(e));
+
+               Thread.currentThread().interrupt();
             }
 
 
@@ -586,11 +567,6 @@ public class PSContentExplorerLoginPanel extends JFrame
     * the parent frame
     */
    private PSContentExplorerFrame m_parent = null;
-
-   /**
-    * the E2 server connection
-    */
-   // private ServerConnection m_connection = null;
 
    /**
     * editable text field for port

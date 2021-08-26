@@ -18,6 +18,11 @@ import com.percussion.design.objectstore.IPSObjectStoreErrors;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.util.IPSHtmlParameters;
 import com.percussion.util.PSEntrySet;
+import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,12 +31,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang.StringUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 
 /**
  * The class that is used to represent menu actions as defined by
@@ -152,7 +151,7 @@ public class PSNode implements IPSComponent, Cloneable,
          m_name = "name_missing";
       m_label = sourceNode.getAttribute(LABEL_ATTR);
       if (m_label == null || m_label.length() < 1)
-         m_label = "** MISSING **";
+         m_label = m_name;
       m_type =
          PSComponentUtils.getEnumeratedAttribute(
             sourceNode,
