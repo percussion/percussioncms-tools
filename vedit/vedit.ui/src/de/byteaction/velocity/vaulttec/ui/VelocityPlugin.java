@@ -3,15 +3,6 @@ package de.byteaction.velocity.vaulttec.ui;
 import de.byteaction.velocity.editor.compare.CompareDialog;
 import de.byteaction.velocity.preferences.GeneralPreferencePage;
 import de.byteaction.velocity.vaulttec.ui.editor.VelocityEditorEnvironment;
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 import org.eclipse.compare.CompareEditorInput;
 import org.eclipse.compare.internal.Utilities;
 import org.eclipse.core.resources.IWorkspace;
@@ -30,6 +21,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 /**
  * The main plugin class to be used in the desktop.
@@ -407,7 +408,7 @@ public class VelocityPlugin extends AbstractUIPlugin
         }
         catch (InterruptedException x)
         {
-            // cancelled by user
+            Thread.currentThread().interrupt();
         }
         catch (InvocationTargetException x)
         {

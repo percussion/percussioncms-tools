@@ -10,16 +10,22 @@
 
 package com.percussion.cx;
 
+import com.percussion.cx.guitools.PSMouseAdapter;
 import com.percussion.cx.objectstore.PSMenuAction;
 import com.percussion.cx.objectstore.PSNode;
-import com.percussion.cx.guitools.PSMouseAdapter;
 import com.percussion.util.PSIteratorUtils;
+import org.apache.log4j.Logger;
 
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.accessibility.Accessible;
+import javax.accessibility.AccessibleContext;
+import javax.swing.*;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
+import java.awt.*;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -45,22 +51,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
-
-import javax.accessibility.Accessible;
-import javax.accessibility.AccessibleContext;
-import javax.swing.AbstractAction;
-import javax.swing.JPopupMenu;
-import javax.swing.JTree;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.event.TreeExpansionEvent;
-import javax.swing.event.TreeExpansionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
-
-import org.apache.log4j.Logger;
 
 /**
  * The tree that builds tree model as per 'sys_Node.dtd'. See {@link
@@ -498,6 +488,7 @@ public class PSNavigationTree
                      }
                      catch (InterruptedException e)
                      {
+                        Thread.currentThread().interrupt();
                      }
                   }
                };

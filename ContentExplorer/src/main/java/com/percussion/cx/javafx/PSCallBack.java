@@ -41,8 +41,7 @@ public final class PSCallBack implements Callback<PopupFeatures, WebEngine>
          }
          catch (InterruptedException e)
          {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
          }
       }
       if (popupWebView.getScene() == null)

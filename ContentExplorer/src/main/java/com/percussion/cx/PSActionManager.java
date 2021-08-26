@@ -2058,7 +2058,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
       try
       {
          PSMenuAction newAction = null;
-         String url = "../sys_cxSupport/ActionList.html" + "?sys_mode=" + mode + "&sys_uicontext=" + uiContext;
+         String url = "/sys_cxSupport/ActionList.html" + "?sys_mode=" + mode + "&sys_uicontext=" + uiContext;
 
          // check to see if the key exists in the action map
          // if found use that as the actions
@@ -2464,6 +2464,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
             {
                m_applet.debugMessage("Interrupted " + e.getLocalizedMessage());
                monitor.setStatus(PSProcessMonitor.STATUS_COMPLETE);
+               Thread.currentThread().interrupt();
             }
             catch (PSContentExplorerException e)
             {
@@ -5655,6 +5656,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
             {
                m_applet.debugMessage("Interrupted " + e.getLocalizedMessage());
                monitor.setStatus(PSProcessMonitor.STATUS_COMPLETE);
+               Thread.currentThread().interrupt();
             }
          }
       };

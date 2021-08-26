@@ -10,11 +10,33 @@
 
 package com.percussion.cx;
 
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Rectangle;
+import com.percussion.border.PSFocusBorder;
+import com.percussion.cms.objectstore.PSDisplayColumn;
+import com.percussion.cms.objectstore.PSDisplayFormat;
+import com.percussion.cx.error.PSContentExplorerException;
+import com.percussion.cx.guitools.PSMouseAdapter;
+import com.percussion.cx.objectstore.PSMenuAction;
+import com.percussion.cx.objectstore.PSNode;
+import com.percussion.guitools.PSTableSorter;
+import com.percussion.util.PSIteratorUtils;
+import com.percussion.util.PSStringOperation;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.MouseInputListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.plaf.basic.BasicTableUI;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -45,45 +67,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.CellEditor;
-import javax.swing.Icon;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.border.BevelBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.MouseInputListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.plaf.basic.BasicTableUI;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-
-import com.percussion.border.PSFocusBorder;
-import com.percussion.cms.objectstore.PSDisplayColumn;
-import com.percussion.cms.objectstore.PSDisplayFormat;
-import com.percussion.cx.error.PSContentExplorerException;
-import com.percussion.cx.objectstore.PSMenuAction;
-import com.percussion.cx.objectstore.PSNode;
-import com.percussion.cx.guitools.PSMouseAdapter;
-import com.percussion.guitools.PSTableSorter;
-import com.percussion.util.PSIteratorUtils;
-import com.percussion.util.PSStringOperation;
 
 /**
  * The main display panel that is used to display a table that represents
@@ -905,7 +888,9 @@ public class PSMainDisplayPanel extends JScrollPane
       }
       catch (InterruptedException e)
       {
-         log.error("Background menu creation Interrupted",e);
+         log.error("Background menu creation Interrupted");
+         log.debug(e);
+         Thread.currentThread().interrupt();
       }
       catch (ExecutionException e)
       {

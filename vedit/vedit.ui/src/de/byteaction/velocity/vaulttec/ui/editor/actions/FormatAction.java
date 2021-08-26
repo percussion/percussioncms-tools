@@ -1,21 +1,12 @@
 package de.byteaction.velocity.vaulttec.ui.editor.actions;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import de.byteaction.velocity.editor.EditorsUtil;
+import de.byteaction.velocity.editor.compare.VelocityCompare;
+import de.byteaction.velocity.editor.compare.VelocityInput;
+import de.byteaction.velocity.ui.editor.xml.VelocityAutoIndentStrategy;
+import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
+import de.byteaction.velocity.vaulttec.ui.editor.VelocityConfiguration;
+import de.byteaction.velocity.vaulttec.ui.model.Directive;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -42,13 +33,23 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.TextEditorAction;
-import de.byteaction.velocity.editor.EditorsUtil;
-import de.byteaction.velocity.editor.compare.VelocityCompare;
-import de.byteaction.velocity.editor.compare.VelocityInput;
-import de.byteaction.velocity.ui.editor.xml.VelocityAutoIndentStrategy;
-import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
-import de.byteaction.velocity.vaulttec.ui.editor.VelocityConfiguration;
-import de.byteaction.velocity.vaulttec.ui.model.Directive;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * DOCUMENT ME!
@@ -184,6 +185,7 @@ public class FormatAction extends TextEditorAction implements IObjectActionDeleg
         catch (InterruptedException e)
         {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
         return document;
     }

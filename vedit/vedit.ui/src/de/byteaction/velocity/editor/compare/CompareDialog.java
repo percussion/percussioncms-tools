@@ -6,7 +6,6 @@
  */
 package de.byteaction.velocity.editor.compare;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.compare.CompareEditorInput;
 import org.eclipse.compare.internal.ICompareContextIds;
 import org.eclipse.compare.internal.ResizableDialog;
@@ -32,6 +31,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author akmal
@@ -131,7 +132,7 @@ public class CompareDialog extends ResizableDialog implements IPropertyChangeLis
             }
             catch (InterruptedException x)
             {
-                // NeedWork
+                Thread.currentThread().interrupt();
             }
             catch (OperationCanceledException x)
             {
