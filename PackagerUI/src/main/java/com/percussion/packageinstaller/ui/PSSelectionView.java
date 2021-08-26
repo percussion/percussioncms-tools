@@ -9,7 +9,7 @@
  ******************************************************************************/
 package com.percussion.packageinstaller.ui;
 
-import com.percussion.deployer.client.PSDeploymentServerConnection;
+import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
 import com.percussion.packageinstaller.ui.managers.PSInstallerServerConnectionManager;
 import com.percussion.packager.ui.PSResourceUtils;
 import com.percussion.packager.ui.data.PSServerRegistration;

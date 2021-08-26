@@ -9,11 +9,11 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.deployer.client.PSDeploymentServerConnection;
+import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
+import com.percussion.guitools.PSDialog;
 import com.percussion.packager.ui.data.PSServerRegistration;
 import com.percussion.packager.ui.managers.PSServerConnectionManager;
 import com.percussion.packagerhelp.PSEclHelpManager;
-import com.percussion.guitools.PSDialog;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang.StringUtils;
 

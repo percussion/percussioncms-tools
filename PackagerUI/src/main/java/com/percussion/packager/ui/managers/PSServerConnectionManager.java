@@ -10,11 +10,12 @@
 package com.percussion.packager.ui.managers;
 
 import com.percussion.conn.PSServerException;
-import com.percussion.deployer.catalog.PSCataloger;
-import com.percussion.deployer.client.IPSDeployConstants;
-import com.percussion.deployer.client.PSDeploymentManager;
-import com.percussion.deployer.client.PSDeploymentServerConnection;
-import com.percussion.deployer.error.PSDeployException;
+import com.percussion.desktop.deployer.catalog.PSCataloger;
+import com.percussion.desktop.deployer.client.IPSDeployConstants;
+import com.percussion.desktop.deployer.client.PSDeploymentManager;
+import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
+import com.percussion.desktop.deployer.error.PSDeployException;
+import com.percussion.guitools.ErrorDialogs;
 import com.percussion.packager.ui.PSCredentialsDialog;
 import com.percussion.packager.ui.PSPackagerClient;
 import com.percussion.packager.ui.PSResourceUtils;
@@ -24,12 +25,11 @@ import com.percussion.packager.ui.data.PSServerRegistrations;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.xml.PSXmlDocumentBuilder;
-import com.percussion.guitools.ErrorDialogs;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

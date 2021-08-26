@@ -23,7 +23,7 @@
  */
 package com.percussion.rx.config.test;
 
-import com.percussion.deployer.client.IPSDeployConstants;
+import com.percussion.desktop.deployer.client.IPSDeployConstants;
 import com.percussion.rx.config.IPSConfigService.ConfigTypes;
 import com.percussion.rx.config.IPSConfigStatusMgr;
 import com.percussion.rx.config.PSConfigServiceLocator;

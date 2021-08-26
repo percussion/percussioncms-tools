@@ -23,10 +23,10 @@
  */
 package com.percussion.rx.config.impl;
 
-import com.percussion.deployer.objectstore.PSDependency;
-import com.percussion.deployer.objectstore.PSExportDescriptor;
-import com.percussion.deployer.server.PSDependencyManager;
-import com.percussion.deployer.server.PSDeploymentHandler;
+import com.percussion.desktop.deployer.objectstore.PSDependency;
+import com.percussion.desktop.deployer.objectstore.PSExportDescriptor;
+import com.percussion.desktop.deployer.server.PSDependencyManager;
+import com.percussion.desktop.deployer.server.PSDeploymentHandler;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.utils.tools.PSParseFragments;
 import org.apache.commons.lang.StringUtils;

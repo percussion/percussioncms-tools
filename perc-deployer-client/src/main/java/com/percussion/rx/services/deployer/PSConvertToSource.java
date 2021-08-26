@@ -23,9 +23,9 @@
  */
 package com.percussion.rx.services.deployer;
 
-import com.percussion.deployer.client.IPSDeployConstants;
-import com.percussion.deployer.server.PSDeploymentHandler;
-import com.percussion.deployer.server.uninstall.PSPackageUninstaller;
+import com.percussion.desktop.deployer.client.IPSDeployConstants;
+import com.percussion.desktop.deployer.server.PSDeploymentHandler;
+import com.percussion.desktop.deployer.server.uninstall.PSPackageUninstaller;
 import com.percussion.server.PSServer;
 import com.percussion.services.error.PSNotFoundException;
 import com.percussion.services.pkginfo.IPSPkgInfoService;

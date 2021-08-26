@@ -23,11 +23,11 @@
  */
 package com.percussion.rx.config.data;
 
-import com.percussion.deployer.client.IPSDeployConstants;
-import com.percussion.deployer.objectstore.PSDependency;
-import com.percussion.deployer.objectstore.PSDescriptor;
-import com.percussion.deployer.objectstore.PSExportDescriptor;
-import com.percussion.deployer.objectstore.PSUserDependency;
+import com.percussion.desktop.deployer.client.IPSDeployConstants;
+import com.percussion.desktop.deployer.objectstore.PSDependency;
+import com.percussion.desktop.deployer.objectstore.PSDescriptor;
+import com.percussion.desktop.deployer.objectstore.PSExportDescriptor;
+import com.percussion.desktop.deployer.objectstore.PSUserDependency;
 import com.percussion.utils.collections.PSMultiValueHashMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;

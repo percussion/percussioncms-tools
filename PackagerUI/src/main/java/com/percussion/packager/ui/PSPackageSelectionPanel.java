@@ -9,11 +9,11 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.deployer.error.PSDeployException;
+import com.percussion.desktop.deployer.error.PSDeployException;
+import com.percussion.guitools.PSTableSorter;
 import com.percussion.packager.ui.data.PSPackageDescriptorMetaInfo;
 import com.percussion.packager.ui.managers.PSServerConnectionManager;
 import com.percussion.packager.ui.model.PSPackagerClientModel;
-import com.percussion.guitools.PSTableSorter;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

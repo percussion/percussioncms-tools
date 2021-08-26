@@ -9,9 +9,9 @@
  ******************************************************************************/
 package com.percussion.packageinstaller.ui;
 
-import com.percussion.deployer.client.PSDeploymentServerConnection;
-import com.percussion.packager.ui.data.PSServerRegistration;
+import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
 import com.percussion.guitools.ErrorDialogs;
+import com.percussion.packager.ui.data.PSServerRegistration;
 import org.jvnet.substance.skin.SubstanceModerateLookAndFeel;
 
 import javax.swing.*;

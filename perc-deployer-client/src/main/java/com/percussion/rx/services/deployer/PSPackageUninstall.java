@@ -23,9 +23,9 @@
  */
 package com.percussion.rx.services.deployer;
 
-import com.percussion.deployer.server.PSDeploymentHandler;
-import com.percussion.deployer.server.uninstall.IPSUninstallResult;
-import com.percussion.deployer.server.uninstall.IPSUninstallResult.PSUninstallResultType;
+import com.percussion.desktop.deployer.server.PSDeploymentHandler;
+import com.percussion.desktop.deployer.server.uninstall.IPSUninstallResult;
+import com.percussion.desktop.deployer.server.uninstall.IPSUninstallResult.PSUninstallResultType;
 import com.percussion.rx.design.IPSDesignModel;
 import com.percussion.rx.design.IPSDesignModelFactory;
 import com.percussion.rx.design.PSDesignModelFactoryLocator;

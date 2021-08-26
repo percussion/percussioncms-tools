@@ -9,8 +9,9 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.deployer.client.PSDeploymentServerConnection;
-import com.percussion.deployer.error.PSDeployException;
+import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
+import com.percussion.desktop.deployer.error.PSDeployException;
+import com.percussion.guitools.PSAboutDialog;
 import com.percussion.packager.ui.data.PSPackageDescriptorMetaInfo;
 import com.percussion.packager.ui.data.PSProgressStatus;
 import com.percussion.packager.ui.data.PSServerRegistration;
@@ -20,7 +21,6 @@ import com.percussion.packager.ui.model.PSPackagerClientModel;
 import com.percussion.packager.ui.model.PSPackagerClientModel.ChangeEventTypes;
 import com.percussion.packagerhelp.PSEclHelpManager;
 import com.percussion.util.PSFormatVersion;
-import com.percussion.guitools.PSAboutDialog;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang.StringUtils;
 
