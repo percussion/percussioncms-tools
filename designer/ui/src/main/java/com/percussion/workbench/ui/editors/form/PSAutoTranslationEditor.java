@@ -1,12 +1,3 @@
-/******************************************************************************
- *
- * [ PSAutoTranslationEditor.java ]
- *
- * COPYRIGHT (c) 1999 - 2007 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
- *
- *****************************************************************************/
 package com.percussion.workbench.ui.editors.form;
 
 import com.percussion.client.IPSReference;
@@ -43,7 +34,6 @@ import org.eclipse.swt.widgets.TableItem;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -59,11 +49,10 @@ public class PSAutoTranslationEditor extends PSEditorBase
    {
       if(ref == null)
          return false; // Should never happen
-      if(ref.getObjectType().getPrimaryType() == 
-         PSObjectTypes.AUTO_TRANSLATION_SET)
-         return true;
-      return false;
+      return ref.getObjectType().getPrimaryType() ==
+              PSObjectTypes.AUTO_TRANSLATION_SET;
    }
+
 
    /* 
     * @see com.percussion.workbench.ui.editors.form.PSEditorBase#
@@ -72,34 +61,37 @@ public class PSAutoTranslationEditor extends PSEditorBase
    @Override
    public void createControl(Composite parent)
    {
+      initCaches();
+
       Composite comp = new Composite(parent, SWT.NONE);
       comp.setLayout(new FormLayout());
 
-      m_translationSettingsLabel = new Label(comp, SWT.NONE);
+      Label translationSettingsLabel = new Label(comp, SWT.NONE);
       final FormData formData = new FormData();
       formData.top = new FormAttachment(0, 15);
       formData.left = new FormAttachment(0, 20);
-      m_translationSettingsLabel.setLayoutData(formData);
-      m_translationSettingsLabel.setText(PSMessages.getString(
+      translationSettingsLabel.setLayoutData(formData);
+      translationSettingsLabel.setText(PSMessages.getString(
          "PSAutoTranslationEditor.translationSetting.label")); //$NON-NLS-1$
       
       m_table = new PSSortableTable(comp, new TranslationTableLabelProvider(),
          new NewRowObjectProvider(), SWT.NONE, 
          PSSortableTable.SHOW_DELETE |
+         PSSortableTable.SHOW_INSERT |
          PSSortableTable.INSERT_ALLOWED |
          PSSortableTable.DELETE_ALLOWED |
          PSSortableTable.SURPRESS_MANUAL_SORT);
       m_table.setCellModifier(new TranslationTableCellModifier());
       registerControl(
-         m_translationSettingsLabel.getText(),
+         translationSettingsLabel.getText(),
          m_table,
          null);
-      final FormData formData_1 = new FormData();
-      formData_1.height = 300;
-      formData_1.left = new FormAttachment(m_translationSettingsLabel, 0, SWT.LEFT);
-      formData_1.right = new FormAttachment(100, 0);
-      formData_1.top = new FormAttachment(m_translationSettingsLabel, 0, SWT.BOTTOM);
-      m_table.setLayoutData(formData_1);
+      final FormData formData1 = new FormData();
+      formData1.height = 300;
+      formData1.left = new FormAttachment(translationSettingsLabel, 0, SWT.LEFT);
+      formData1.right = new FormAttachment(100, 0);
+      formData1.top = new FormAttachment(translationSettingsLabel, 0, SWT.BOTTOM);
+      m_table.setLayoutData(formData1);
       
       m_cTypeCellEditor = new PSComboBoxCellEditor(m_table.getTable(), new String[]{}, SWT.READ_ONLY);
       m_cTypeCellEditor.setLabelProvider(new PSReferenceLabelProvider(true));
@@ -139,8 +131,8 @@ public class PSAutoTranslationEditor extends PSEditorBase
       if(control == m_table)
       {
          set.clear();
-         List<TranslationTableRow> list = 
-            (List<TranslationTableRow>)m_table.getValues();
+         List<TranslationTableRow> list =
+                 m_table.getValues();
          for(TranslationTableRow row : list)
          {
             set.add(row.getAutoTranslation());
@@ -157,7 +149,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
    public void loadControlValues(Object designObject)
    {
       Set<PSAutoTranslation> set = (Set<PSAutoTranslation>)designObject;
-      List<TranslationTableRow> list = new ArrayList<TranslationTableRow>();
+      List<TranslationTableRow> list = new ArrayList<>();
       for(PSAutoTranslation trans : set)
       {
          list.add(new TranslationTableRow(trans));
@@ -167,7 +159,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
    }
    
    /**
-    * Loads the specified columns cell editor with its appropriote list
+    * Loads the specified column's cell editor with its appropriate list
     * of choices.
     * @param col the column
     */
@@ -184,7 +176,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
          {
             List<PSPair<IPSReference, IPSReference>> avail = getAvailableKeyPairs(row);
             IPSReference locale = tRow.getLocale();
-            List<IPSReference> choices = new ArrayList<IPSReference>();
+            List<IPSReference> choices = new ArrayList<>();
             for(PSPair<IPSReference, IPSReference> pair : avail)
             {
                if((locale == null || locale.equals(pair.getSecond())) &&
@@ -199,7 +191,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
          {
             List<PSPair<IPSReference, IPSReference>> avail = getAvailableKeyPairs(row);
             IPSReference cType = tRow.getContenttype();
-            List<IPSReference> choices = new ArrayList<IPSReference>();            
+            List<IPSReference> choices = new ArrayList<>();
             for(PSPair<IPSReference, IPSReference> pair : avail)
             {
                if((cType == null || cType.equals(pair.getFirst())) &&
@@ -212,13 +204,17 @@ public class PSAutoTranslationEditor extends PSEditorBase
          case 2:
          {
             m_commCellEditor.setItems(
-               collectionToSortedArray(getCommunities()));
+               collectionToSortedArray(getCommunities(false)));
             break;
          }
          case 3:
          {            
             m_workflowCellEditor.setItems(collectionToSortedArray(
                getAllowedWorkflows(tRow.getCommunity())));
+            break;
+         }
+         default:
+         {
             break;
          }
       }
@@ -230,11 +226,10 @@ public class PSAutoTranslationEditor extends PSEditorBase
     * @param coll assumed not <code>null</code>.
     * @return a sorted array of references.
     */
-   @SuppressWarnings("unchecked")
    private Object[] collectionToSortedArray(Collection<IPSReference> coll)
    {
-      List<IPSReference> list = new ArrayList(coll);
-      Collections.sort(list, new PSReferenceComparator());
+      List<IPSReference> list = new ArrayList<>(coll);
+      list.sort(new PSReferenceComparator());
       return list.toArray();
    }
    
@@ -249,9 +244,9 @@ public class PSAutoTranslationEditor extends PSEditorBase
    private List<PSPair<IPSReference, IPSReference>> getUsedKeyPairs(int ignoreRow)
    {
       TableItem[] items = m_table.getTable().getItems();
-      TranslationTableRow tRow = null;
+      TranslationTableRow tRow;
       List<PSPair<IPSReference, IPSReference>> pairs = 
-         new ArrayList<PSPair<IPSReference, IPSReference>>();
+         new ArrayList<>();
       for(int i = 0; i < items.length; i++)
       {
          if(ignoreRow > -1 && i == ignoreRow)
@@ -260,7 +255,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
          IPSReference contenttype = tRow.getContenttype();
          IPSReference locale = tRow.getLocale();
          if(contenttype != null && locale != null)
-            pairs.add(new PSPair<IPSReference, IPSReference>(
+            pairs.add(new PSPair<>(
                contenttype, locale));
       }
       return pairs;
@@ -276,16 +271,16 @@ public class PSAutoTranslationEditor extends PSEditorBase
    private List<PSPair<IPSReference, IPSReference>> getAvailableKeyPairs(int ignoreRow)
    {
       List<PSPair<IPSReference, IPSReference>> pairs = 
-         new ArrayList<PSPair<IPSReference, IPSReference>>();
-      Collection<IPSReference> cTypes = getContentTypes();
-      Collection<IPSReference> locales = getLocales();
+         new ArrayList<>();
+      Collection<IPSReference> cTypes = getContentTypes(false);
+      Collection<IPSReference> locales = getLocales(false);
       List<PSPair<IPSReference, IPSReference>> used = getUsedKeyPairs(ignoreRow);
       
       for(IPSReference cType : cTypes)
       {
          for(IPSReference locale : locales)
          {
-            PSPair<IPSReference, IPSReference> pair = new PSPair<IPSReference, IPSReference>(
+            PSPair<IPSReference, IPSReference> pair = new PSPair<>(
                cType, locale);
             if(!used.contains(pair))
                pairs.add(pair);
@@ -294,61 +289,71 @@ public class PSAutoTranslationEditor extends PSEditorBase
       return pairs;
       
    }
-   
+
+   private void initCaches(){
+      cachedLocales = getLocales(true);
+      cachedWorkflows = getWorkflows(true);
+      cachedContentTypes = getContentTypes(true);
+      cachedCommunities = getCommunities(true);
+   }
    /**
     * Convenience method to return a <code>Collection</code> of
     * all known content types.
     * @return a collection of <code>IPSReference</code> objects that
     * represent the content types, never <code>null</code>
     */
-   protected Collection<IPSReference> getContentTypes()
+   protected Collection<IPSReference> getContentTypes(boolean refresh)
    {
-      Collection<IPSReference> results = new ArrayList<IPSReference>();      
-      PSCoreFactory factory = PSCoreFactory.getInstance();
-      
       try
-      {         
-         
-         IPSContentTypeModel model = 
-            (IPSContentTypeModel)factory.getModel(PSObjectTypes.CONTENT_TYPE);
-         
-         results = model.getUseableContentTypes(false);         
+      {
+         if(cachedContentTypes == null || cachedContentTypes.isEmpty() || refresh) {
+            PSCoreFactory factory = PSCoreFactory.getInstance();
+            IPSContentTypeModel model =
+                    (IPSContentTypeModel) factory.getModel(PSObjectTypes.CONTENT_TYPE);
+
+            cachedContentTypes = model.getUseableContentTypes(false);
+         }
          
       }
       catch (PSModelException e)
       {
          PSWorkbenchPlugin.handleException(
             PSMessages.getString("PSSlotEditor.error.gettingContentTypes"),  //$NON-NLS-1$
-            PSMessages.getString("common.error.title"), //$NON-NLS-1$
+            PSMessages.getString(COMMON_ERROR), //$NON-NLS-1$
             e.getLocalizedMessage(),
             e);
       }
-      return results;
+      return cachedContentTypes;
    }
-   
+
+   private Collection<IPSReference> cachedCommunities;
+   private Collection<IPSReference> cachedContentTypes;
+   private Collection<IPSReference> cachedWorkflows;
+   private Collection<IPSReference> cachedLocales;
+
    /**
     * Convenience method to return a <code>Collection</code> of
     * all known communities.
     * @return a collection of <code>IPSReference</code> objects that
     * represent the communities
     */
-   protected Collection<IPSReference> getCommunities()
+   protected Collection<IPSReference> getCommunities(boolean refresh)
    {
-      Collection<IPSReference> results = null;      
       try
       {         
-         results = 
-            PSCoreUtils.catalog(PSObjectTypes.COMMUNITY, false);
+            if(cachedCommunities == null || cachedCommunities.isEmpty() || refresh) {
+               cachedCommunities = PSCoreUtils.catalog(PSObjectTypes.COMMUNITY, false);
+            }
       }
       catch (PSModelException e)
       {
          PSWorkbenchPlugin.handleException(
             PSMessages.getString("PSAutoTranslationEditor.error.catalogingComms"), //$NON-NLS-1$
-            PSMessages.getString("common.error.title"), //$NON-NLS-1$
+            PSMessages.getString(COMMON_ERROR), //$NON-NLS-1$
             e.getLocalizedMessage(),
             e);
       }
-      return results;
+      return cachedCommunities;
    }
    
    /**
@@ -361,7 +366,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
     */
    protected Collection<IPSReference> getAllowedWorkflows(IPSReference ref)
    {
-      Collection<IPSReference> results = new ArrayList<IPSReference>();
+      Collection<IPSReference> results = new ArrayList<>();
       if(ref == null)
          return results;      
       try
@@ -373,7 +378,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
       {
          PSWorkbenchPlugin.handleException(
             PSMessages.getString("PSAutoTranslationEditor.error.catalogingAllowedWorkflows"), //$NON-NLS-1$
-            PSMessages.getString("common.error.title"), //$NON-NLS-1$
+            PSMessages.getString(COMMON_ERROR), //$NON-NLS-1$
             e.getLocalizedMessage(),
             e);
       }
@@ -386,23 +391,24 @@ public class PSAutoTranslationEditor extends PSEditorBase
     * @return a collection of <code>IPSReference</code> objects that
     * represent the workflows
     */
-   protected Collection<IPSReference> getWorkflows()
+   protected Collection<IPSReference> getWorkflows(boolean refresh)
    {
-      Collection<IPSReference> results = null;      
       try
-      {         
-         results = 
-            PSCoreUtils.catalog(PSObjectTypes.WORKFLOW, false);
+      {
+         if(cachedWorkflows == null || cachedWorkflows.isEmpty() || refresh) {
+            cachedWorkflows =
+                    PSCoreUtils.catalog(PSObjectTypes.WORKFLOW, false);
+         }
       }
       catch (PSModelException e)
       {
          PSWorkbenchPlugin.handleException(
             PSMessages.getString("PSAutoTranslationEditor.error.catalogingWorkflows"), //$NON-NLS-1$
-            PSMessages.getString("common.error.title"), //$NON-NLS-1$
+            PSMessages.getString(COMMON_ERROR), //$NON-NLS-1$
             e.getLocalizedMessage(),
             e);
       }
-      return results;
+      return cachedWorkflows;
    }
    
    /**
@@ -411,23 +417,25 @@ public class PSAutoTranslationEditor extends PSEditorBase
     * @return a collection of <code>IPSReference</code> objects that
     * represent the locales
     */
-   protected Collection<IPSReference> getLocales()
+   protected Collection<IPSReference> getLocales(boolean refresh)
    {
-      Collection<IPSReference> results = null;      
+
       try
-      {         
-         results = 
-            PSCoreUtils.catalog(PSObjectTypes.LOCALE, false);         
+      {
+         if(cachedLocales == null || cachedLocales.isEmpty() || refresh) {
+            cachedLocales =
+                    PSCoreUtils.catalog(PSObjectTypes.LOCALE, false);
+         }
       }
       catch (PSModelException e)
       {
          PSWorkbenchPlugin.handleException(
             PSMessages.getString("PSAutoTranslationEditor.error.catalogingLocales"), //$NON-NLS-1$
-            PSMessages.getString("common.error.title"), //$NON-NLS-1$
+            PSMessages.getString(COMMON_ERROR), //$NON-NLS-1$
             e.getLocalizedMessage(),
             e);
       }
-      return results;
+      return cachedLocales;
    }
    
    /* 
@@ -477,12 +485,10 @@ public class PSAutoTranslationEditor extends PSEditorBase
       public boolean isEmpty(Object obj)
       {
          TranslationTableRow row = (TranslationTableRow)obj;
-         if(getAvailableKeyPairs(-1).size() == 0)
+         if(getAvailableKeyPairs(-1).isEmpty())
             return true;
-         if(row.getCommunity() == null || row.getContenttype() == null ||
-            row.getLocale() == null || row.getWorkflow() == null)
-            return true;
-         return false;
+         return row.getCommunity() == null || row.getContenttype() == null ||
+                 row.getLocale() == null || row.getWorkflow() == null;
       }
       
    }
@@ -542,18 +548,24 @@ public class PSAutoTranslationEditor extends PSEditorBase
             (TranslationTableRow)((TableItem)element).getData();
          switch(col)
          {
-            case 0:
+            case 0: {
                row.setContenttype(val);
                break;
+            }
             case 1:
                row.setLocale(val);
                break;
-            case 2:
+            case 2: {
                row.setCommunity(val);
                break;
-            case 3:
+            }
+            case 3: {
                row.setWorkflow(val);
                break;
+            }
+            default:{
+               break;
+            }
          }
          m_table.refreshTable();
          
@@ -573,7 +585,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
       public String getColumnText(Object element, int columnIndex)
       {
          TranslationTableRow row = (TranslationTableRow)element;
-         String label = null;
+         String label;
          switch(columnIndex)
          {
             case 0:
@@ -617,7 +629,7 @@ public class PSAutoTranslationEditor extends PSEditorBase
       {
          
       }
-      
+
       TranslationTableRow(IPSReference contenttype, IPSReference community,
          IPSReference locale, IPSReference workflow)
       {
@@ -630,13 +642,13 @@ public class PSAutoTranslationEditor extends PSEditorBase
       TranslationTableRow(PSAutoTranslation trans)
       {         
          mi_contenttype = PSUiUtils.getReferenceById(
-            getContentTypes(), trans.getContentTypeId());
+            getContentTypes(false), trans.getContentTypeId());
          mi_community = PSUiUtils.getReferenceById(
-            getCommunities(), trans.getCommunityId());
+            getCommunities(false), trans.getCommunityId());
          mi_locale = PSUiUtils.getReferenceByName(
-            getLocales(), trans.getLocale());
+            getLocales(false), trans.getLocale());
          mi_workflow = PSUiUtils.getReferenceById(
-            getWorkflows(), trans.getWorkflowId());
+            getWorkflows(false), trans.getWorkflowId());
       }
       
       public PSAutoTranslation getAutoTranslation()
@@ -716,14 +728,13 @@ public class PSAutoTranslationEditor extends PSEditorBase
     * Cache of the help hint helper object
     */
    private PSHelpHintKeyHelper m_helpHintKeyHelper;
-   
-   private Label m_translationSettingsLabel;
+
    private PSSortableTable m_table;
    private PSComboBoxCellEditor m_cTypeCellEditor;
    private PSComboBoxCellEditor m_commCellEditor;
    private PSComboBoxCellEditor m_localeCellEditor;
    private PSComboBoxCellEditor m_workflowCellEditor;
-   
-   
+
+   private static final String COMMON_ERROR="common.error.title";
 
 }
