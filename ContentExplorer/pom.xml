@@ -108,29 +108,29 @@
   <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>rxutils</artifactId>
-        <version>${project.parent.version}</version>
+        <version>${cmsserver.version}</version>
     </dependency>
       <dependency>
           <groupId>com.percussion</groupId>
           <artifactId>perc-security-utils</artifactId>
-          <version>${project.parent.version}</version>
+          <version>${cmsserver.version}</version>
       </dependency>
       <dependency>
           <groupId>com.percussion</groupId>
           <artifactId>perc-xml-security</artifactId>
-          <version>${project.parent.version}</version>
+          <version>${cmsserver.version}</version>
       </dependency>
 	<dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+        <version>${cmsserver.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
   </dependency>
   <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>perc-system</artifactId>
-        <version>${project.parent.version}</version>
+      <version>${cmsserver.version}</version>
     </dependency>
       <dependency>
           <groupId>com.percussion</groupId>

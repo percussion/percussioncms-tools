@@ -176,12 +176,12 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>sitemanage</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-security-utils</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
         </dependency>
     </dependencies>
 

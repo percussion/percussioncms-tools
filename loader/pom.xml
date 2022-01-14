@@ -91,7 +91,7 @@
        <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>rxutils</artifactId>
-        <version>8.0.3-SNAPSHOT</version>
+           <version>${cmsserver.version}</version>
         <classifier>tests</classifier>
       <type>test-jar</type>
       <scope>test</scope>
@@ -99,7 +99,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>
@@ -605,7 +605,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
