@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -178,6 +179,27 @@ public class PSContentExplorerLoginPanel extends JFrame
       m_password.setFont(new Font("Arial", Font.PLAIN, 18));
       m_password.enableInputMethods(true);
 
+      m_locale = createEditButton("headerinfo.locale","en-us", localeDialog());
+      UTMnemonicLabel p4Label = new UTMnemonicLabel(m_res, "locale", m_locale);
+      p4Label.setLabelFor(m_locale);
+      p4Label.setMinimumSize(new Dimension(150, 60));
+      p4Label.setFont(new Font("Arial", Font.BOLD, 18));
+      c.weightx = 0.2;
+      c.fill = 0;
+      c.gridx = 0;
+      c.gridy = 3;
+      c.fill = GridBagConstraints.NONE;
+      c.insets = new Insets(5, 20, 0, 50); // top padding
+      panel.add(p4Label, c);
+      c.gridx = 1;
+      c.gridy = 3;
+      c.fill = GridBagConstraints.HORIZONTAL;
+      c.insets = new Insets(5, 0, 0, 20); // top padding
+      panel.add(m_locale, c);
+      m_locale.setMinimumSize(new Dimension(300, 60));
+      m_locale.setFont(new Font("Arial", Font.PLAIN, 18));
+      m_locale.enableInputMethods(false);
+
       c.fill = GridBagConstraints.HORIZONTAL;
       c.gridx = 0;
       c.gridy = 3;
@@ -229,6 +251,55 @@ public class PSContentExplorerLoginPanel extends JFrame
       }
 
      m_password.requestFocusInWindow();
+   }
+
+   private JButton createEditButton(String key, String value, ActionListener al)
+   {
+      JButton button = new JButton(value);
+      button.setToolTipText(value);
+      button.getAccessibleContext().setAccessibleDescription(m_res.getString("headerinfo.edittext") +" "+ m_res.getString(key));
+      button.setIcon(PSImageIconLoader.loadIcon("update"));
+      button.setContentAreaFilled(false);
+      button.setBorder(null);
+      button.setHorizontalAlignment(SwingConstants.LEFT);
+      button.addActionListener(al);
+      return button;
+   }
+
+   private ActionListener localeDialog()
+   {
+      return e -> {
+         ArrayList<String> localeList = new ArrayList<String>() {
+            {
+               add("en-us");
+               add("es");
+            }
+         };
+         String[] choices = localeList.toArray(new String[]
+                 {});
+         //String locale = "en-us";
+         String locale = m_locale.getText();
+         int index = 0;
+
+         for (int i = 0; i < choices.length; i++)
+         {
+            if (choices[i].equals(locale))
+            {
+               index = i;
+               break;
+            }
+         }
+
+         String message = m_res.getString("headerinfo.changeloc");
+         String input = (String) JOptionPane.showInputDialog(this,message,
+                 message, JOptionPane.QUESTION_MESSAGE, null, // Use
+                 choices, // Array of choices
+                 choices[index]); // Initial choice
+
+         if (input != null){
+            m_locale.setText(input);
+         }
+      };
    }
 
    /**
@@ -587,6 +658,11 @@ public class PSContentExplorerLoginPanel extends JFrame
     * the login button
     */
    private JButton m_login = null;
+
+   /**
+    * the locale change
+    */
+   private JButton m_locale = null;
 
    /**
     * status bar, informing the user about the applets/applications state
