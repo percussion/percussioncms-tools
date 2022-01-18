@@ -266,7 +266,7 @@ public class PSCESessionManager implements Runnable
    }
    
    
-   public void login(String protocol, String server, String port, String uid, String password) throws Exception
+   public void login(String protocol, String server, String port, String uid, String password, String locale) throws Exception
    {
       Integer timeoutInSec = 30;
       try
@@ -282,7 +282,7 @@ public class PSCESessionManager implements Runnable
          // convert timeout to milliseconds
          securitySession.setTimeout(timeoutInSec * 1000);
          LoginRequest logRequest = new LoginRequest(uid,password,
-              null, null, null);
+              null, null, locale);
 
          // convert time from seconds to milliseconds
          log.debug("Logging in ...");

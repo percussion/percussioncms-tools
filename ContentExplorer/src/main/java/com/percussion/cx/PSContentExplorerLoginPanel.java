@@ -277,7 +277,7 @@ public class PSContentExplorerLoginPanel extends JFrame
          };
          String[] choices = localeList.toArray(new String[]
                  {});
-         //String locale = "en-us";
+
          String locale = m_locale.getText();
          int index = 0;
 
@@ -401,6 +401,16 @@ public class PSContentExplorerLoginPanel extends JFrame
          m_password.requestFocus();
          return;
       }
+
+      if (m_locale.getText() == null || m_locale.getText().trim().length() == 0)
+      {
+         JOptionPane.showMessageDialog(this, Util.cropErrorMessage(m_res.getString("missLocale")),
+                 m_res.getString("error"), JOptionPane.ERROR_MESSAGE);
+         this.setCursor(getCursor().getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+         m_statusBar.setStatusText(m_res.getString("disconnectedStatus"));
+         m_locale.requestFocus();
+         return;
+      }
       
       m_statusBar.setStatusText(m_res.getString("connectingStatus"));
       m_login.setEnabled(false);
@@ -500,7 +510,7 @@ public class PSContentExplorerLoginPanel extends JFrame
                String protocol = m_parent.getParameter("protocol");
                String port = m_parent.getParameter("port");
 
-               PSCESessionManager.getInstance().login(protocol, host, port, m_userId.getText(), m_password.getText());
+               PSCESessionManager.getInstance().login(protocol, host, port, m_userId.getText(), m_password.getText(), m_locale.getText());
                
                m_statusBar.setStatusText(m_res.getString("connectedStatus") + host);
 

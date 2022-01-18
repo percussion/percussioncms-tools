@@ -96,7 +96,7 @@ public class PSOptionManager
       if (puo == null){
          final JDialog dialog = new JDialog();
          dialog.setAlwaysOnTop(true);
-         JOptionPane.showMessageDialog( dialog, "User Options not available for this Locale!! Please try another Locale." , "ERROR",
+         JOptionPane.showMessageDialog( dialog, m_applet.getResources().getString("userOption.missing.for.locale"), m_applet.getResources().getString("error"),
                  JOptionPane.ERROR_MESSAGE );
          System.exit(0);
       }else{
