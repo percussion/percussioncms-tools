@@ -44,22 +44,22 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-security-utils</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-legacy</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-system</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>rxutils</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
             <classifier>tests</classifier>
@@ -149,7 +149,7 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>tablefactory</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>${cmsserver.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
