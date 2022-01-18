@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
@@ -90,14 +91,21 @@ public class PSOptionManager
    {
       PSDisplayOptions theDisplayOptions = null;
 
-      if (getUserOptions() == null)
-         throw new IllegalStateException("load() must be called before calling getDisplayOptions()");
+      PSUserOptions puo = getUserOptions();
 
-      PSOptions dispOptions =
-         getUserOptions().getOptions(PSDisplayOptions.DISPLAY_OPTIONS_CATEGORY);
+      if (puo == null){
+         final JDialog dialog = new JDialog();
+         dialog.setAlwaysOnTop(true);
+         JOptionPane.showMessageDialog( dialog, m_applet.getResources().getString("userOption.missing.for.locale"), m_applet.getResources().getString("error"),
+                 JOptionPane.ERROR_MESSAGE );
+         System.exit(0);
+      }else{
+         PSOptions dispOptions =
+                 puo.getOptions(PSDisplayOptions.DISPLAY_OPTIONS_CATEGORY);
 
-      if (dispOptions != null)
-         theDisplayOptions = new PSDisplayOptions(dispOptions);
+         if (dispOptions != null)
+            theDisplayOptions = new PSDisplayOptions(dispOptions);
+      }
 
       return theDisplayOptions;
    }
