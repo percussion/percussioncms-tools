@@ -697,10 +697,10 @@ public class PSContentExplorerLoginPanel extends JFrame
 
       String localeJsonString = "{}";
       BufferedReader br = null;
-
+      String strCurrentLine;
       if(responseCode == 200){
          br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-         String strCurrentLine;
+
          while ((strCurrentLine = br.readLine()) != null) {
             if(strCurrentLine!=null && !strCurrentLine.equalsIgnoreCase(""))
                localeJsonString =strCurrentLine;
@@ -716,7 +716,6 @@ public class PSContentExplorerLoginPanel extends JFrame
          }
       }else{
          br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-         String strCurrentLine;
          while ((strCurrentLine = br.readLine()) != null) {
             System.out.println(strCurrentLine);
          }
