@@ -12,9 +12,12 @@ import com.percussion.error.PSExceptionUtils;
 import com.percussion.util.PSProperties;
 import com.percussion.webservices.faults.PSContractViolationFault;
 import com.percussion.webservices.faults.PSNotAuthenticatedFault;
+import com.percussion.webservices.security.data.PSLocale;
 import org.apache.axis.AxisFault;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -23,12 +26,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -100,8 +104,9 @@ public class PSContentExplorerLoginPanel extends JFrame
     * Create and initialize all GUI elements.
     *
     */
-   private void initPanel()
+   private void initPanel() throws Exception
    {
+      List<PSLocale> localeList = getLocaleList();
       PSFocusBorder focusBorder = new PSFocusBorder(1, Color.RED);
 
       this.setLayout(new BorderLayout());
@@ -179,7 +184,13 @@ public class PSContentExplorerLoginPanel extends JFrame
       m_password.setFont(new Font("Arial", Font.PLAIN, 18));
       m_password.enableInputMethods(true);
 
-      m_locale = createEditButton("headerinfo.locale","en-us", localeDialog());
+      String key="en-us";
+      List<PSLocale> psLocales = getLocaleList();
+      if(!psLocales.isEmpty()){
+         key = psLocales.get(0).getCode();
+      }
+
+      m_locale = createEditButton("headerinfo.locale",key, localeDialog());
       UTMnemonicLabel p4Label = new UTMnemonicLabel(m_res, "locale", m_locale);
       p4Label.setLabelFor(m_locale);
       p4Label.setMinimumSize(new Dimension(150, 60));
@@ -269,12 +280,28 @@ public class PSContentExplorerLoginPanel extends JFrame
    private ActionListener localeDialog()
    {
       return e -> {
-         ArrayList<String> localeList = new ArrayList<String>() {
-            {
-               add("en-us");
-               add("es");
-            }
-         };
+         List<PSLocale> locales = new ArrayList<>();
+         try {
+            locales = getLocaleList();
+         } catch (Exception ex) {
+            ex.printStackTrace();
+         }
+
+         List<String> localeList = new ArrayList<>();
+
+         for(PSLocale psl : locales){
+            localeList.add(psl.getCode());
+         }
+
+         if(localeList.isEmpty()){
+            localeList = new ArrayList<String>() {
+               {
+                  add("en-us");
+                  add("es");
+               }
+            };
+         }
+
          String[] choices = localeList.toArray(new String[]
                  {});
 
@@ -641,6 +668,60 @@ public class PSContentExplorerLoginPanel extends JFrame
       Locale current = Locale.getDefault();
 
       return current.getLanguage().concat("_").concat(current.getCountry());
+   }
+
+   private List<PSLocale> getLocaleList() throws Exception{
+
+      List<PSLocale> locales = new ArrayList<>();
+
+      String host = m_parent.getParameter("serverName");
+      String protocol = m_parent.getParameter("protocol");
+      String port = m_parent.getParameter("port");
+      String url = protocol + "://" + host;
+
+      if (!((protocol.equalsIgnoreCase("https") && protocol.equals("443"))
+              || (protocol.equalsIgnoreCase("http") && protocol.equals("80"))))
+      {
+         url += ":" + port;
+      }
+
+      URL localeUrl =  new URL(url+"/locale.jsp");
+
+      HttpURLConnection connection = null;
+      int responseCode = 0;
+      connection = (HttpURLConnection) localeUrl.openConnection();
+      connection.setUseCaches(false);
+      connection.setRequestProperty("Content-Type", "application/json");
+      connection.setDoOutput(true);
+      responseCode = connection.getResponseCode();
+
+      String localeJsonString = "{}";
+      BufferedReader br = null;
+      String strCurrentLine;
+      if(responseCode == 200){
+         br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+         while ((strCurrentLine = br.readLine()) != null) {
+            if(strCurrentLine!=null && !strCurrentLine.equalsIgnoreCase(""))
+               localeJsonString =strCurrentLine;
+         }
+         JSONObject obj = new JSONObject(localeJsonString);
+         JSONArray activelocales = obj.getJSONArray("activelocales");
+         for(int i=0; i<activelocales.length(); i++){
+            JSONObject activeLoale = activelocales.getJSONObject(i);
+            PSLocale psl =  new PSLocale();
+            psl.setCode(activeLoale.getString("localecode"));
+            psl.setLabel(activeLoale.getString("localedisplayname"));
+            locales.add(psl);
+         }
+      }else{
+         br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+         while ((strCurrentLine = br.readLine()) != null) {
+            System.out.println(strCurrentLine);
+         }
+      }
+
+      return locales;
    }
 
    //////////////////////////////////////////////////////////////////////////////
