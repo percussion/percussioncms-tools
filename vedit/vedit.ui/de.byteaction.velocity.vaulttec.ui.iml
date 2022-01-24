@@ -25,18 +25,19 @@
     <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.workbench.texteditor:3.6.1.r361_v20100714-0800" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.views:3.5.1.M20110202-0800" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.compare:3.5.101.R36x_v20100929-0800" level="project" />
-    <orderEntry type="library" name="Maven: com.percussion:rxutils:8.0.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.percussion:rxutils:8.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.10.11" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
+    <orderEntry type="library" name="Maven: oro:oro:2.0.8" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.core:runtime:3.10.0-v20140318-2214" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:text:3.3.0-v20070606-0010" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:swt:3.3.0-v3346" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:jface:3.3.0-I20070606-0010" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.core:commands:3.3.0-I20070605-0010" level="project" />
-    <orderEntry type="library" name="Maven: com.percussion:perc-security-utils:8.0.3-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.percussion:perc-xml-security:8.0.3-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.percussion:perc-legacy:8.0.3-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.percussion:perc-security-utils:8.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.percussion:perc-xml-security:8.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.percussion:perc-legacy:8.0.3" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.9" level="project" />
