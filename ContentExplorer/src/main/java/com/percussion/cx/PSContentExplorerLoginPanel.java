@@ -12,9 +12,12 @@ import com.percussion.error.PSExceptionUtils;
 import com.percussion.util.PSProperties;
 import com.percussion.webservices.faults.PSContractViolationFault;
 import com.percussion.webservices.faults.PSNotAuthenticatedFault;
+import com.percussion.webservices.security.data.PSLocale;
 import org.apache.axis.AxisFault;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -23,11 +26,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -99,8 +104,9 @@ public class PSContentExplorerLoginPanel extends JFrame
     * Create and initialize all GUI elements.
     *
     */
-   private void initPanel()
+   private void initPanel() throws Exception
    {
+      List<PSLocale> localeList = getLocaleList();
       PSFocusBorder focusBorder = new PSFocusBorder(1, Color.RED);
 
       this.setLayout(new BorderLayout());
@@ -178,6 +184,33 @@ public class PSContentExplorerLoginPanel extends JFrame
       m_password.setFont(new Font("Arial", Font.PLAIN, 18));
       m_password.enableInputMethods(true);
 
+      String key="en-us";
+      List<PSLocale> psLocales = getLocaleList();
+      if(!psLocales.isEmpty()){
+         key = psLocales.get(0).getCode();
+      }
+
+      m_locale = createEditButton("headerinfo.locale",key, localeDialog());
+      UTMnemonicLabel p4Label = new UTMnemonicLabel(m_res, "locale", m_locale);
+      p4Label.setLabelFor(m_locale);
+      p4Label.setMinimumSize(new Dimension(150, 60));
+      p4Label.setFont(new Font("Arial", Font.BOLD, 18));
+      c.weightx = 0.2;
+      c.fill = 0;
+      c.gridx = 0;
+      c.gridy = 3;
+      c.fill = GridBagConstraints.NONE;
+      c.insets = new Insets(5, 20, 0, 50); // top padding
+      panel.add(p4Label, c);
+      c.gridx = 1;
+      c.gridy = 3;
+      c.fill = GridBagConstraints.HORIZONTAL;
+      c.insets = new Insets(5, 0, 0, 20); // top padding
+      panel.add(m_locale, c);
+      m_locale.setMinimumSize(new Dimension(300, 60));
+      m_locale.setFont(new Font("Arial", Font.PLAIN, 18));
+      m_locale.enableInputMethods(false);
+
       c.fill = GridBagConstraints.HORIZONTAL;
       c.gridx = 0;
       c.gridy = 3;
@@ -229,6 +262,71 @@ public class PSContentExplorerLoginPanel extends JFrame
       }
 
      m_password.requestFocusInWindow();
+   }
+
+   private JButton createEditButton(String key, String value, ActionListener al)
+   {
+      JButton button = new JButton(value);
+      button.setToolTipText(value);
+      button.getAccessibleContext().setAccessibleDescription(m_res.getString("headerinfo.edittext") +" "+ m_res.getString(key));
+      button.setIcon(PSImageIconLoader.loadIcon("update"));
+      button.setContentAreaFilled(false);
+      button.setBorder(null);
+      button.setHorizontalAlignment(SwingConstants.LEFT);
+      button.addActionListener(al);
+      return button;
+   }
+
+   private ActionListener localeDialog()
+   {
+      return e -> {
+         List<PSLocale> locales = new ArrayList<>();
+         try {
+            locales = getLocaleList();
+         } catch (Exception ex) {
+            ex.printStackTrace();
+         }
+
+         List<String> localeList = new ArrayList<>();
+
+         for(PSLocale psl : locales){
+            localeList.add(psl.getCode());
+         }
+
+         if(localeList.isEmpty()){
+            localeList = new ArrayList<String>() {
+               {
+                  add("en-us");
+                  add("es");
+               }
+            };
+         }
+
+         String[] choices = localeList.toArray(new String[]
+                 {});
+
+         String locale = m_locale.getText();
+         int index = 0;
+
+         for (int i = 0; i < choices.length; i++)
+         {
+            if (choices[i].equals(locale))
+            {
+               index = i;
+               break;
+            }
+         }
+
+         String message = m_res.getString("headerinfo.changeloc");
+         String input = (String) JOptionPane.showInputDialog(this,message,
+                 message, JOptionPane.QUESTION_MESSAGE, null, // Use
+                 choices, // Array of choices
+                 choices[index]); // Initial choice
+
+         if (input != null){
+            m_locale.setText(input);
+         }
+      };
    }
 
    /**
@@ -330,6 +428,16 @@ public class PSContentExplorerLoginPanel extends JFrame
          m_password.requestFocus();
          return;
       }
+
+      if (m_locale.getText() == null || m_locale.getText().trim().length() == 0)
+      {
+         JOptionPane.showMessageDialog(this, Util.cropErrorMessage(m_res.getString("missLocale")),
+                 m_res.getString("error"), JOptionPane.ERROR_MESSAGE);
+         this.setCursor(getCursor().getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+         m_statusBar.setStatusText(m_res.getString("disconnectedStatus"));
+         m_locale.requestFocus();
+         return;
+      }
       
       m_statusBar.setStatusText(m_res.getString("connectingStatus"));
       m_login.setEnabled(false);
@@ -429,7 +537,7 @@ public class PSContentExplorerLoginPanel extends JFrame
                String protocol = m_parent.getParameter("protocol");
                String port = m_parent.getParameter("port");
 
-               PSCESessionManager.getInstance().login(protocol, host, port, m_userId.getText(), m_password.getText());
+               PSCESessionManager.getInstance().login(protocol, host, port, m_userId.getText(), m_password.getText(), m_locale.getText());
                
                m_statusBar.setStatusText(m_res.getString("connectedStatus") + host);
 
@@ -562,6 +670,60 @@ public class PSContentExplorerLoginPanel extends JFrame
       return current.getLanguage().concat("_").concat(current.getCountry());
    }
 
+   private List<PSLocale> getLocaleList() throws Exception{
+
+      List<PSLocale> locales = new ArrayList<>();
+
+      String host = m_parent.getParameter("serverName");
+      String protocol = m_parent.getParameter("protocol");
+      String port = m_parent.getParameter("port");
+      String url = protocol + "://" + host;
+
+      if (!((protocol.equalsIgnoreCase("https") && protocol.equals("443"))
+              || (protocol.equalsIgnoreCase("http") && protocol.equals("80"))))
+      {
+         url += ":" + port;
+      }
+
+      URL localeUrl =  new URL(url+"/locale.jsp");
+
+      HttpURLConnection connection = null;
+      int responseCode = 0;
+      connection = (HttpURLConnection) localeUrl.openConnection();
+      connection.setUseCaches(false);
+      connection.setRequestProperty("Content-Type", "application/json");
+      connection.setDoOutput(true);
+      responseCode = connection.getResponseCode();
+
+      String localeJsonString = "{}";
+      BufferedReader br = null;
+      String strCurrentLine;
+      if(responseCode == 200){
+         br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+         while ((strCurrentLine = br.readLine()) != null) {
+            if(strCurrentLine!=null && !strCurrentLine.equalsIgnoreCase(""))
+               localeJsonString =strCurrentLine;
+         }
+         JSONObject obj = new JSONObject(localeJsonString);
+         JSONArray activelocales = obj.getJSONArray("activelocales");
+         for(int i=0; i<activelocales.length(); i++){
+            JSONObject activeLoale = activelocales.getJSONObject(i);
+            PSLocale psl =  new PSLocale();
+            psl.setCode(activeLoale.getString("localecode"));
+            psl.setLabel(activeLoale.getString("localedisplayname"));
+            locales.add(psl);
+         }
+      }else{
+         br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+         while ((strCurrentLine = br.readLine()) != null) {
+            System.out.println(strCurrentLine);
+         }
+      }
+
+      return locales;
+   }
+
    //////////////////////////////////////////////////////////////////////////////
    /**
     * the parent frame
@@ -587,6 +749,11 @@ public class PSContentExplorerLoginPanel extends JFrame
     * the login button
     */
    private JButton m_login = null;
+
+   /**
+    * the locale change
+    */
+   private JButton m_locale = null;
 
    /**
     * status bar, informing the user about the applets/applications state
