@@ -26,6 +26,14 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
             <version>3.1.0</version>
+            <configuration>
+                <archive>
+                    <index>true</index>
+                    <manifest>
+                        <mainClass>com.percussion.loader.PSContentLoaderApp</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
             <executions>
               <execution>
                 <goals>

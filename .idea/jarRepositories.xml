@@ -22,6 +22,11 @@
       <option name="url" value="https://dist.wso2.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="github" />
+      <option name="name" value="GitHub Percussion Maven Packages" />
+      <option name="url" value="https://maven.pkg.github.com/percussion/percussioncms" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="1_repoman" />
       <option name="name" value="1_repoman" />
       <option name="url" value="http://repo-man.cloud.percussion.com:8081/nexus/content/groups/public/" />

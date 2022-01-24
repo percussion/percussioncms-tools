@@ -4,14 +4,6 @@
     <file url="file://$PROJECT_DIR$/ContentExplorer/src" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ContentExplorer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ContentExplorer/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ContentUI/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ContentUI/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Designer/core" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Designer/core/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Designer/core/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Designer/ui" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Designer/ui/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Designer/ui/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Help/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Help/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/PackagerUI/src" charset="UTF-8" />
@@ -23,16 +15,16 @@
     <file url="file://$PROJECT_DIR$/ServerUIComponents/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/nl" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/src" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/nl" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/src" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/nl" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/src" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/designer/core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/designer/core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/designer/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/designer/ui" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/designer/ui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/designer/ui/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/htmlconverter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/htmlconverter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/loader/src" charset="UTF-8" />
@@ -42,29 +34,12 @@
     <file url="file://$PROJECT_DIR$/perc-deployer-client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-devtools-distribution/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-devtools-distribution/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/eclipse-maven-deps/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/eclipse-maven-deps/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/com.percussion.workbench.ui.feature/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/com.percussion.workbench.ui.feature/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/helios-repository-def/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/helios-repository-def/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/perc-eclipse-repository/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/perc-eclipse-repository/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/perc-eclipse/tycho-root/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-package-builder/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-package-builder/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-package-installer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-package-installer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-server-admin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/perc-server-admin/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/vedit/vedit.ui/src" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/vedit/vedit.ui/src/main/resources" charset="windows-1252" />
   </component>
 </project>

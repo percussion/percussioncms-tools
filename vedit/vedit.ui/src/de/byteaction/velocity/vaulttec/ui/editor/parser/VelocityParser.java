@@ -1,5 +1,13 @@
 package de.byteaction.velocity.vaulttec.ui.editor.parser;
 
+import de.byteaction.velocity.vaulttec.ui.IPreferencesConstants;
+import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
+import org.apache.velocity.runtime.RuntimeInstance;
+import org.apache.velocity.runtime.directive.Directive;
+import org.apache.velocity.runtime.directive.DirectiveConstants;
+import org.apache.velocity.runtime.parser.Parser;
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,15 +15,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-import org.apache.velocity.runtime.RuntimeInstance;
-import org.apache.velocity.runtime.directive.Directive;
-import org.apache.velocity.runtime.directive.DirectiveConstants;
-import org.apache.velocity.runtime.parser.Parser;
-import org.eclipse.jface.preference.IPreferenceStore;
-import de.byteaction.velocity.vaulttec.ui.IPreferencesConstants;
-import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
 
 /**
  * DOCUMENT ME!
@@ -94,7 +94,8 @@ public class VelocityParser extends RuntimeInstance
      * @throws Exception
      *             DOCUMENT ME!
      */
-    public synchronized void init() throws Exception
+    @Override
+    public synchronized void init()
     {
         if (!fIsInitialized)
         {
@@ -103,7 +104,11 @@ public class VelocityParser extends RuntimeInstance
             setProperty("file.resource.loader.path", store.getString(IPreferencesConstants.LIBRARY_PATH));
             setProperty("velocimacro.library", store.getString(IPreferencesConstants.LIBRARY_LIST));
             // Initialize system and user directives
-            initializeDirectives();
+            try {
+                initializeDirectives();
+            } catch (Exception e) {
+                java.util.logging.Logger.getAnonymousLogger().severe(e.getMessage());
+            }
             // Call super implementation last because it calls createNewParser()
             super.init();
             fIsInitialized = true;
@@ -115,10 +120,7 @@ public class VelocityParser extends RuntimeInstance
      */
     public Parser createNewParser()
     {
-        Parser parser = super.createNewParser();
-        parser.setDirectives(fDirectives);
-
-        return parser;
+        return  super.createNewParser();
     }
 //    public Map get Resources
     /**
@@ -126,8 +128,7 @@ public class VelocityParser extends RuntimeInstance
      * Runtime. The directives to be initialized are listed in the
      * RUNTIME_DEFAULT_DIRECTIVES properties file.
      */
-    private void initializeDirectives() throws Exception
-    {
+    private void initializeDirectives() throws Exception {
         /*
          * Initialize the runtime directive table. This will be used for
          * creating parsers.
@@ -200,12 +201,9 @@ public class VelocityParser extends RuntimeInstance
     /**
      * Adds a new Velocimacro. Usually called by Macro only while parsing.
      * 
-     * @param String
-     *            name Name of velocimacro
-     * @param String
-     *            macro String form of macro body
-     * @param String
-     *            argArray Array of strings, containing the #macro() arguments.
+     * @param name Name of velocimacro
+     * @param macro String form of macro body
+     * @param argArray Array of strings, containing the #macro() arguments.
      *            the 0th is the name.
      * @return boolean True if added, false if rejected for some reason (either
      *         parameters or permission settings)

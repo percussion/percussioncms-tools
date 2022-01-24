@@ -64,14 +64,5 @@
     <orderEntry type="library" name="Maven: xml-resolver:xml-resolver:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.10.11" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.10.11" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.sun:tools:1.8.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../Program Files/Java/jdk1.8.0_301/jre/../lib/tools.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>

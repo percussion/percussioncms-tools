@@ -1,6 +1,10 @@
 package de.byteaction.velocity.vaulttec.ui.editor.parser;
 
-import java.util.Stack;
+import de.byteaction.velocity.vaulttec.ui.editor.VelocityEditorEnvironment;
+import de.byteaction.velocity.vaulttec.ui.model.Directive;
+import de.byteaction.velocity.vaulttec.ui.model.IBlock;
+import de.byteaction.velocity.vaulttec.ui.model.ITreeNode;
+import de.byteaction.velocity.vaulttec.ui.model.Template;
 import org.apache.velocity.runtime.parser.node.ASTAddNode;
 import org.apache.velocity.runtime.parser.node.ASTAndNode;
 import org.apache.velocity.runtime.parser.node.ASTAssignment;
@@ -34,7 +38,6 @@ import org.apache.velocity.runtime.parser.node.ASTObjectArray;
 import org.apache.velocity.runtime.parser.node.ASTOrNode;
 import org.apache.velocity.runtime.parser.node.ASTReference;
 import org.apache.velocity.runtime.parser.node.ASTSetDirective;
-import org.apache.velocity.runtime.parser.node.ASTStop;
 import org.apache.velocity.runtime.parser.node.ASTStringLiteral;
 import org.apache.velocity.runtime.parser.node.ASTSubtractNode;
 import org.apache.velocity.runtime.parser.node.ASTText;
@@ -44,11 +47,8 @@ import org.apache.velocity.runtime.parser.node.ASTprocess;
 import org.apache.velocity.runtime.parser.node.Node;
 import org.apache.velocity.runtime.parser.node.ParserVisitor;
 import org.apache.velocity.runtime.parser.node.SimpleNode;
-import de.byteaction.velocity.vaulttec.ui.editor.VelocityEditorEnvironment;
-import de.byteaction.velocity.vaulttec.ui.model.Directive;
-import de.byteaction.velocity.vaulttec.ui.model.IBlock;
-import de.byteaction.velocity.vaulttec.ui.model.ITreeNode;
-import de.byteaction.velocity.vaulttec.ui.model.Template;
+
+import java.util.Stack;
 
 /**
  * DOCUMENT ME!
@@ -535,8 +535,4 @@ public class NodeVisitor implements ParserVisitor
       return null;
    }
 
-   public Object visit(ASTStop arg0, Object arg1)
-   {
-      return null;
-   }
 }

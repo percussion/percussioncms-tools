@@ -772,8 +772,12 @@
             <releases>  <enabled>true</enabled>  </releases>
             <snapshots> <enabled>true</enabled>
             <updatePolicy>never</updatePolicy></snapshots>
-            <name>GitHub Percussion Apache Maven Packages</name>
+            <name>GitHub Percussion Maven Packages</name>
             <url>https://maven.pkg.github.com/percussion/percussioncms</url>
+        </repository>
+        <repository>
+            <id>maven-eclipse-repo</id>
+            <url>http://maven-eclipse.github.io/maven</url>
         </repository>
         <repository>
             <id>perc-release-repo</id>
@@ -802,6 +806,7 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
+
         <repository>
             <id>WSO2</id>
             <url>https://dist.wso2.org/maven2</url>
@@ -2467,8 +2472,6 @@
 
         </dependencies>
     </dependencyManagement>
-
-
     <distributionManagement>
         <snapshotRepository>
             <id>percussion.s3.repo</id>
