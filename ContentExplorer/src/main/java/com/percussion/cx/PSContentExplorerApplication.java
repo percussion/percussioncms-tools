@@ -12,7 +12,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import javax.swing.*;
+import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -34,14 +37,15 @@ public class PSContentExplorerApplication extends Application {
    private static File logConfig;
    
    private static final String DEFAULT_CONFIG_FOLDER_NAME=".perc_config";
-   
+
+   @java.lang.SuppressWarnings("java:S106")
    public static void main(String[] args) {
        System.out.println(Arrays.toString(args));
        launch(args);
    }
    
  
-   private static volatile PSContentExplorerFrame baseFrame = null;
+   private static PSContentExplorerFrame baseFrame = null;
    
    
    public static PSContentExplorerFrame getBaseFrame()
@@ -54,13 +58,36 @@ public class PSContentExplorerApplication extends Application {
       PSContentExplorerApplication.baseFrame = baseFrame;
    }
 
+   private void addOSXKeyStrokes(InputMap inputMap) {
+      inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK), DefaultEditorKit.copyAction);
+      inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.META_DOWN_MASK), DefaultEditorKit.cutAction);
+      inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK), DefaultEditorKit.pasteAction);
+      inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.META_DOWN_MASK), DefaultEditorKit.selectAllAction);
+      inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK), "copy");
+      inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.META_DOWN_MASK), "selectAll");
+      inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK), "paste");
+   }
    @Override
+   @java.lang.SuppressWarnings("java:S106")
    public void start(Stage primaryStage) {
       Platform.setImplicitExit(false);
       try {
          UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
+         // This must be performed immediately after the LaF has been set
+         if (System.getProperty("os.name", "").startsWith("Mac")) {
+            // Ensure OSX key bindings are used for copy, paste etc
+            // Use the Nimbus keys and ensure this occurs before any component creation
+            addOSXKeyStrokes((InputMap) UIManager.get("EditorPane.focusInputMap"));
+            addOSXKeyStrokes((InputMap) UIManager.get("FormattedTextField.focusInputMap"));
+            addOSXKeyStrokes((InputMap) UIManager.get("PasswordField.focusInputMap"));
+            addOSXKeyStrokes((InputMap) UIManager.get("TextField.focusInputMap"));
+            addOSXKeyStrokes((InputMap) UIManager.get("TextPane.focusInputMap"));
+            addOSXKeyStrokes((InputMap) UIManager.get("TextArea.focusInputMap"));
+            addOSXKeyStrokes((InputMap) UIManager.get("Table.ancestorInputMap"));
+            addOSXKeyStrokes((InputMap) UIManager.get("Tree.focusInputMap"));
+         }
       } catch (Exception e) {
-                 e.printStackTrace();
+                 log.error(e);
       }
       
       String version = this.getClass().getPackage().getImplementationVersion();
@@ -109,7 +136,8 @@ public class PSContentExplorerApplication extends Application {
       
 
       logConfig = new File(configDir,"log4j.properties");
-      
+
+
       System.out.println("Setting log4j config to "+logConfig);
       System.setProperty("configDir", configDir.getAbsolutePath());
       ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -133,9 +161,7 @@ public class PSContentExplorerApplication extends Application {
       } else {
          PropertyConfigurator.configure(logConfig.getAbsolutePath());
       }
-      
-      
-      //BasicConfigurator.configure();
+
       System.setProperty("javax.xml.parsers.SAXParserFactory",
             "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl");
       System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
@@ -216,10 +242,10 @@ public class PSContentExplorerApplication extends Application {
    }
    public static void logout()
    {
-      SwingUtilities.invokeLater(() ->
-      {
-         baseFrame.logout();
-      });
+      SwingUtilities.invokeLater(() -> {
+                 baseFrame.logout();
+              }
+      );
    }
    
    @Override

@@ -21,16 +21,25 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -104,9 +113,8 @@ public class PSContentExplorerLoginPanel extends JFrame
     * Create and initialize all GUI elements.
     *
     */
-   private void initPanel() throws Exception
+   private void initPanel()
    {
-      List<PSLocale> localeList = getLocaleList();
       PSFocusBorder focusBorder = new PSFocusBorder(1, Color.RED);
 
       this.setLayout(new BorderLayout());
@@ -145,6 +153,21 @@ public class PSContentExplorerLoginPanel extends JFrame
 
       m_url.setMinimumSize(newDimension);
       panel.add(m_url, c);
+
+      //Rebuild the locale list when the server url is changed.
+      m_url.addFocusListener(new FocusAdapter()
+      {
+         @Override
+         public void focusLost(FocusEvent e) {
+            m_locale.removeAllItems();
+            for(PSLocale l : getLocaleList(m_url.getText())){
+
+               m_locale.addItem(l);
+               if(l.getCode().equalsIgnoreCase("en-us"))
+                  m_locale.setSelectedItem(l);
+            }
+         }
+      });
 
       UTMnemonicLabel p2label = new UTMnemonicLabel(m_res, "userId", m_userId);
       p2label.setLabelFor(m_userId);
@@ -185,12 +208,12 @@ public class PSContentExplorerLoginPanel extends JFrame
       m_password.enableInputMethods(true);
 
       String key="en-us";
-      List<PSLocale> psLocales = getLocaleList();
+      List<PSLocale> psLocales = getLocaleList(m_url.getText());
       if(!psLocales.isEmpty()){
          key = psLocales.get(0).getCode();
       }
 
-      m_locale = createEditButton("headerinfo.locale",key, localeDialog());
+      m_locale = createLocaleComboBox(getLocaleList(m_url.getText()));
       UTMnemonicLabel p4Label = new UTMnemonicLabel(m_res, "locale", m_locale);
       p4Label.setLabelFor(m_locale);
       p4Label.setMinimumSize(new Dimension(150, 60));
@@ -199,7 +222,6 @@ public class PSContentExplorerLoginPanel extends JFrame
       c.fill = 0;
       c.gridx = 0;
       c.gridy = 3;
-      c.fill = GridBagConstraints.NONE;
       c.insets = new Insets(5, 20, 0, 50); // top padding
       panel.add(p4Label, c);
       c.gridx = 1;
@@ -238,7 +260,7 @@ public class PSContentExplorerLoginPanel extends JFrame
       c.gridwidth = 2;
       c.insets = new Insets(10, 0, 0, 0); // top padding
       c.anchor = GridBagConstraints.SOUTH;
-      c.fill = GridBagConstraints.HORIZONTAL;
+
       panel.add(m_statusBar, c);
 
       panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
@@ -275,58 +297,6 @@ public class PSContentExplorerLoginPanel extends JFrame
       button.setHorizontalAlignment(SwingConstants.LEFT);
       button.addActionListener(al);
       return button;
-   }
-
-   private ActionListener localeDialog()
-   {
-      return e -> {
-         List<PSLocale> locales = new ArrayList<>();
-         try {
-            locales = getLocaleList();
-         } catch (Exception ex) {
-            ex.printStackTrace();
-         }
-
-         List<String> localeList = new ArrayList<>();
-
-         for(PSLocale psl : locales){
-            localeList.add(psl.getCode());
-         }
-
-         if(localeList.isEmpty()){
-            localeList = new ArrayList<String>() {
-               {
-                  add("en-us");
-                  add("es");
-               }
-            };
-         }
-
-         String[] choices = localeList.toArray(new String[]
-                 {});
-
-         String locale = m_locale.getText();
-         int index = 0;
-
-         for (int i = 0; i < choices.length; i++)
-         {
-            if (choices[i].equals(locale))
-            {
-               index = i;
-               break;
-            }
-         }
-
-         String message = m_res.getString("headerinfo.changeloc");
-         String input = (String) JOptionPane.showInputDialog(this,message,
-                 message, JOptionPane.QUESTION_MESSAGE, null, // Use
-                 choices, // Array of choices
-                 choices[index]); // Initial choice
-
-         if (input != null){
-            m_locale.setText(input);
-         }
-      };
    }
 
    /**
@@ -429,7 +399,7 @@ public class PSContentExplorerLoginPanel extends JFrame
          return;
       }
 
-      if (m_locale.getText() == null || m_locale.getText().trim().length() == 0)
+      if (m_locale.getSelectedItem() == null)
       {
          JOptionPane.showMessageDialog(this, Util.cropErrorMessage(m_res.getString("missLocale")),
                  m_res.getString("error"), JOptionPane.ERROR_MESSAGE);
@@ -537,7 +507,9 @@ public class PSContentExplorerLoginPanel extends JFrame
                String protocol = m_parent.getParameter("protocol");
                String port = m_parent.getParameter("port");
 
-               PSCESessionManager.getInstance().login(protocol, host, port, m_userId.getText(), m_password.getText(), m_locale.getText());
+               PSCESessionManager.getInstance().login(protocol, host, port, m_userId.getText(),
+                       m_password.getText(),
+                       ((PSLocale)m_locale.getSelectedItem()).getCode());
                
                m_statusBar.setStatusText(m_res.getString("connectedStatus") + host);
 
@@ -670,60 +642,92 @@ public class PSContentExplorerLoginPanel extends JFrame
       return current.getLanguage().concat("_").concat(current.getCountry());
    }
 
-   private List<PSLocale> getLocaleList() throws Exception{
+   private List<PSLocale> getLocaleList(String serverUrl){
 
       List<PSLocale> locales = new ArrayList<>();
 
-      String host = m_parent.getParameter("serverName");
-      String protocol = m_parent.getParameter("protocol");
-      String port = m_parent.getParameter("port");
-      String url = protocol + "://" + host;
+      URL localeUrl = null;
 
-      if (!((protocol.equalsIgnoreCase("https") && protocol.equals("443"))
-              || (protocol.equalsIgnoreCase("http") && protocol.equals("80"))))
-      {
-         url += ":" + port;
-      }
-
-      URL localeUrl =  new URL(url+"/locale.jsp");
-
+   try {
+      localeUrl = new URL(serverUrl + "/locale.jsp");
+   } catch (MalformedURLException e) {
+     log.warn(PSExceptionUtils.getMessageForLog(e));
+     return locales;
+   }
       HttpURLConnection connection = null;
       int responseCode = 0;
-      connection = (HttpURLConnection) localeUrl.openConnection();
-      connection.setUseCaches(false);
-      connection.setRequestProperty("Content-Type", "application/json");
-      connection.setDoOutput(true);
-      responseCode = connection.getResponseCode();
+         try {
+            connection = (HttpURLConnection) localeUrl.openConnection();
+            connection.setUseCaches(false);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+            responseCode = connection.getResponseCode();
 
-      String localeJsonString = "{}";
-      BufferedReader br = null;
-      String strCurrentLine;
-      if(responseCode == 200){
-         br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String localeJsonString = "{}";
+            BufferedReader br = null;
+            String strCurrentLine;
+            if (responseCode == 200) {
+               br = new BufferedReader(
+                       new InputStreamReader(connection.getInputStream(),
+                               StandardCharsets.UTF_8));
 
-         while ((strCurrentLine = br.readLine()) != null) {
-            if(strCurrentLine!=null && !strCurrentLine.equalsIgnoreCase(""))
-               localeJsonString =strCurrentLine;
+               while ((strCurrentLine = br.readLine()) != null) {
+                  if (!strCurrentLine.equalsIgnoreCase(""))
+                     localeJsonString = strCurrentLine;
+               }
+               JSONObject obj = new JSONObject(localeJsonString);
+               JSONArray activelocales = obj.getJSONArray("activelocales");
+               for (int i = 0; i < activelocales.length(); i++) {
+                  JSONObject activeLoale = activelocales.getJSONObject(i);
+                  PSLocale psl = new PSLocale();
+                  psl.setCode(activeLoale.getString("localecode"));
+                  psl.setLabel(activeLoale.getString("localedisplayname"));
+                  locales.add(psl);
+               }
+            } else {
+               br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+               while ((strCurrentLine = br.readLine()) != null) {
+                  log.info(strCurrentLine);
+               }
+            }
+         } catch (IOException e) {
+            log.error(e);
          }
-         JSONObject obj = new JSONObject(localeJsonString);
-         JSONArray activelocales = obj.getJSONArray("activelocales");
-         for(int i=0; i<activelocales.length(); i++){
-            JSONObject activeLoale = activelocales.getJSONObject(i);
-            PSLocale psl =  new PSLocale();
-            psl.setCode(activeLoale.getString("localecode"));
-            psl.setLabel(activeLoale.getString("localedisplayname"));
-            locales.add(psl);
-         }
-      }else{
-         br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-         while ((strCurrentLine = br.readLine()) != null) {
-            System.out.println(strCurrentLine);
-         }
-      }
-
       return locales;
    }
 
+   class PSLocaleRenderer extends BasicComboBoxRenderer {
+      public Component getListCellRendererComponent(JList list, Object value,
+                                                    int index, boolean isSelected, boolean cellHasFocus) {
+         super.getListCellRendererComponent(list, value, index, isSelected,
+                 cellHasFocus);
+
+         PSLocale item = (PSLocale) value;
+
+         setText(item.getLabel());
+
+         return this;
+      }
+   }
+   private JComboBox createLocaleComboBox(List<PSLocale> locs) {
+      final JComboBox cbox = new JComboBox();
+      for (PSLocale l : locs) {
+         cbox.addItem(l);
+         if(l.getCode().equalsIgnoreCase("en-us")){
+            cbox.setSelectedItem(l);
+         }
+      }
+      cbox.setRenderer(new PSLocaleRenderer());
+
+      cbox.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            selectedLocale = (PSLocale) cbox.getSelectedItem();
+         }
+      });
+
+      return cbox;
+   }
    //////////////////////////////////////////////////////////////////////////////
    /**
     * the parent frame
@@ -731,9 +735,10 @@ public class PSContentExplorerLoginPanel extends JFrame
    private PSContentExplorerFrame m_parent = null;
 
    /**
-    * editable text field for port
+    * editable text field for server url
     */
    private JTextField m_url = new JTextField("");
+
 
    /**
     * editable text field for user identification
@@ -751,9 +756,14 @@ public class PSContentExplorerLoginPanel extends JFrame
    private JButton m_login = null;
 
    /**
-    * the locale change
+    * the locale
     */
-   private JButton m_locale = null;
+   private JComboBox m_locale = null;
+
+   /**
+    * THe currently selected locale
+    */
+   private PSLocale selectedLocale = null;
 
    /**
     * status bar, informing the user about the applets/applications state
