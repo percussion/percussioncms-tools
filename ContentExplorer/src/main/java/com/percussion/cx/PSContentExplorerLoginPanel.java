@@ -22,13 +22,11 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
-import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -160,11 +158,20 @@ public class PSContentExplorerLoginPanel extends JFrame
          @Override
          public void focusLost(FocusEvent e) {
             m_locale.removeAllItems();
-            for(PSLocale l : getLocaleList(m_url.getText())){
-
-               m_locale.addItem(l);
-               if(l.getCode().equalsIgnoreCase("en-us"))
-                  m_locale.setSelectedItem(l);
+            List<PSLocale> locs = getLocaleList(m_url.getText());
+            if(locs.isEmpty()){
+               PSLocale t = new PSLocale();
+               t.setCode("en-us");
+               t.setEnabled(true);
+               t.setLabel("US English");
+               m_locale.addItem(t);
+               m_locale.setSelectedItem(t);
+            }else {
+               for (PSLocale l : locs) {
+                  m_locale.addItem(l);
+                  if (l.getCode().equalsIgnoreCase("en-us"))
+                     m_locale.setSelectedItem(l);
+               }
             }
          }
       });
@@ -276,13 +283,6 @@ public class PSContentExplorerLoginPanel extends JFrame
       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
      this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
-      if(PSContentExplorerApplet.isMacPlatform()) {
-         InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
-         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.copyAction);
-         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.pasteAction);
-         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), DefaultEditorKit.cutAction);
-      }
-
      m_password.requestFocusInWindow();
    }
 
@@ -378,7 +378,7 @@ public class PSContentExplorerLoginPanel extends JFrame
    {
 
       this.setCursor(getCursor().getPredefinedCursor(Cursor.WAIT_CURSOR));
-
+      this.m_login.setEnabled(false);
       if (m_userId.getText() == null || m_userId.getText().trim().length() == 0)
       {
          JOptionPane.showMessageDialog(this, Util.cropErrorMessage(m_res.getString("missUserId")),
@@ -386,6 +386,7 @@ public class PSContentExplorerLoginPanel extends JFrame
          this.setCursor(getCursor().getPredefinedCursor(Cursor.DEFAULT_CURSOR));
          m_statusBar.setStatusText(m_res.getString("disconnectedStatus"));
          m_userId.requestFocus();
+         this.m_login.setEnabled(true);
          return;
       }
       
@@ -396,6 +397,7 @@ public class PSContentExplorerLoginPanel extends JFrame
          this.setCursor(getCursor().getPredefinedCursor(Cursor.DEFAULT_CURSOR));
          m_statusBar.setStatusText(m_res.getString("disconnectedStatus"));
          m_password.requestFocus();
+         this.m_login.setEnabled(true);
          return;
       }
 
@@ -406,11 +408,11 @@ public class PSContentExplorerLoginPanel extends JFrame
          this.setCursor(getCursor().getPredefinedCursor(Cursor.DEFAULT_CURSOR));
          m_statusBar.setStatusText(m_res.getString("disconnectedStatus"));
          m_locale.requestFocus();
+         this.m_login.setEnabled(true);
          return;
       }
       
       m_statusBar.setStatusText(m_res.getString("connectingStatus"));
-      m_login.setEnabled(false);
 
       String protocol = null;
       String host = null;
@@ -440,6 +442,7 @@ public class PSContentExplorerLoginPanel extends JFrame
          JOptionPane.showMessageDialog(this,  Util.cropErrorMessage("Invalid URI. Please correct URI"),
                  m_res.getString("error"), JOptionPane.ERROR_MESSAGE);
          this.setCursor(getCursor().getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+         this.m_login.setEnabled(true);
         return;
       }
 
@@ -702,19 +705,29 @@ public class PSContentExplorerLoginPanel extends JFrame
          super.getListCellRendererComponent(list, value, index, isSelected,
                  cellHasFocus);
 
-         PSLocale item = (PSLocale) value;
+         if(value != null) {
+            PSLocale item = (PSLocale) value;
 
-         setText(item.getLabel());
-
+            setText(item.getLabel());
+         }
          return this;
       }
    }
    private JComboBox createLocaleComboBox(List<PSLocale> locs) {
       final JComboBox cbox = new JComboBox();
-      for (PSLocale l : locs) {
-         cbox.addItem(l);
-         if(l.getCode().equalsIgnoreCase("en-us")){
-            cbox.setSelectedItem(l);
+      if(locs.isEmpty()){
+         PSLocale t = new PSLocale();
+         t.setCode("en-us");
+         t.setEnabled(true);
+         t.setLabel("US English");
+         cbox.addItem(t);
+         cbox.setSelectedItem(t);
+      }else {
+         for (PSLocale l : locs) {
+            cbox.addItem(l);
+            if (l.getCode().equalsIgnoreCase("en-us")) {
+               cbox.setSelectedItem(l);
+            }
          }
       }
       cbox.setRenderer(new PSLocaleRenderer());
