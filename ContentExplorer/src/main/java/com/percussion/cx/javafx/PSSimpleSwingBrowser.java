@@ -490,6 +490,10 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
 
             String data = event.getData();
             log.debug("Alert: " + data);
+            if(data.equals("undefined")){
+               log.warn("Data Undefined returned.");
+               return;
+            }
             if (data.equals("WebKitTrigger"))
             {
                log.warn("Found WebKitTrigger alert from older version of Server.");
