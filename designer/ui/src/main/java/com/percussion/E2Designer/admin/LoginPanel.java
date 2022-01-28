@@ -112,17 +112,6 @@ public class LoginPanel extends JPanel
       p5.add(new UTMnemonicLabel(m_res, "useSSL", m_useSSL));
       p5.add(m_useSSL);
       p5.setBorder(new EmptyBorder(0, 10, 0, 0));
-      m_useSSL.addActionListener(new ActionListener()
-         {
-            public void actionPerformed(
-               @SuppressWarnings("unused") ActionEvent e)
-            {
-               //flip port
-               onUseSSL();
-            }
-         }
-      );
-
       m_server.setPreferredSize(m_port.getPreferredSize());
       m_server.setEditable(true);
 
@@ -217,8 +206,7 @@ public class LoginPanel extends JPanel
          File file = null;
          try
          {
-            file = PSProperties.getConfig(ENTRY_NAME, PROPERTIES_FILENAME,
-               ADMIN_DIR);
+            file = PSProperties.getConfig(LoginPanel.ENTRY_NAME,LoginPanel.PROPERTIES_FILENAME,  LoginPanel.ADMIN_DIR);
 
             if(file != null)
                m_adminProps = new PSProperties (file.getAbsolutePath());
@@ -280,14 +268,13 @@ public class LoginPanel extends JPanel
     */
    private void initServerField(String strServer)
    {
-      String allServers = m_adminProps.getProperty(LoginDialog.ALL_SERVERS);
-
-      if (allServers != null)
-      {
-         StringTokenizer tokens = new StringTokenizer(allServers, ";");
-         while(tokens.hasMoreTokens())
-         {
-            m_server.addItem(tokens.nextToken());
+      if(m_adminProps != null) {
+         String allServers = m_adminProps.getProperty(LoginDialog.ALL_SERVERS);
+         if (allServers != null) {
+            StringTokenizer tokens = new StringTokenizer(allServers, ";");
+            while (tokens.hasMoreTokens()) {
+               m_server.addItem(tokens.nextToken());
+            }
          }
       }
       if(strServer == null || strServer.trim().length() == 0)
@@ -319,33 +306,6 @@ public class LoginPanel extends JPanel
     panel.add(m_login);
 
     return panel;
-   }
-
-   /**
-    * Flips last used port number depending on whether useSSL is checked or not.
-    */
-   private void onUseSSL()
-   {
-      if (m_applet)
-         return;
-
-      boolean useSSL = m_useSSL.isSelected();
-      String curPort = m_port.getText();
-      Properties e2prop = m_adminProps;
-
-      //save port if already entered, so that user can switch back
-      if (curPort!=null && curPort.trim().length()>0)
-         e2prop.setProperty(useSSL ?
-            LoginDialog.LAST_PORT : LoginDialog.LAST_SSL_PORT, curPort);
-
-      //get the last one and then flip it
-      String lastPort = e2prop.getProperty(useSSL ?
-         LoginDialog.LAST_SSL_PORT : LoginDialog.LAST_PORT);
-
-      if (lastPort!=null && lastPort.trim().length()>0)
-         m_port.setText(lastPort);
-      else
-         m_port.setText(useSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT);
    }
 
    /**
@@ -682,7 +642,7 @@ public class LoginPanel extends JPanel
     * Constant for the directory containing admin client configs.
     * Assumed to be relative to the Rx directory.
     */
-    public static final String ADMIN_DIR = "rxconfig/Workbench";
+    public static final String ADMIN_DIR = "../rxconfig/Workbench";
 
     /**
      * Constant for default port number '9992'.

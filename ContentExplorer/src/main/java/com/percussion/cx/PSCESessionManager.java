@@ -123,8 +123,8 @@ public class PSCESessionManager implements Runnable
          catch (Exception e)
          {
             // Assume that countdown is continuing
-            log.warn("Failed to check session state server may be down or network connection lost");
-            log.debug("Failed to check session state server may be down or network connection lost", e);
+            log.warn("Failed to check session state server may be down or network connection lost :" + e.getLocalizedMessage());
+            log.debug("Failed to check session state server may be down or network connection lost:" + e.getLocalizedMessage(), e);
             long currTime = System.currentTimeMillis();
             expiry = expireTime - currTime;
             warning = warningTime - currTime;

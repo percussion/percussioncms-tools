@@ -278,8 +278,7 @@ public class AppletMainDialog extends JFrame
     {
       try
       {
-         File file = PSProperties.getConfig(LoginPanel.ENTRY_NAME,
-         LoginPanel.PROPERTIES_FILENAME, ".." +  File.separator + LoginPanel.ADMIN_DIR);
+         File file = PSProperties.getConfig(LoginPanel.ENTRY_NAME,LoginPanel.PROPERTIES_FILENAME,  LoginPanel.ADMIN_DIR);
 
          props = new PSProperties (file.getAbsolutePath());
 
