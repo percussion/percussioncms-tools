@@ -10,7 +10,27 @@
         <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/mars-respository-def/pom.xml" />
         <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/pom.xml" />
         <option value="$PROJECT_DIR$/perc-deployer-client/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/mars-repository-def/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ContentExplorer/pom.xml" />
+        <option value="$PROJECT_DIR$/ContentUI/pom.xml" />
+        <option value="$PROJECT_DIR$/Help/pom.xml" />
+        <option value="$PROJECT_DIR$/PackagerUI/pom.xml" />
+        <option value="$PROJECT_DIR$/ServerPropertiesEditor/pom.xml" />
+        <option value="$PROJECT_DIR$/ServerUIComponents/pom.xml" />
+        <option value="$PROJECT_DIR$/designer/core/pom.xml" />
+        <option value="$PROJECT_DIR$/designer/ui/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-devtools-distribution/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-eclipse/eclipse-maven-deps/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-eclipse/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/com.percussion.workbench.ui.feature/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/helios-repository-def/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/perc-eclipse-repository/pom.xml" />
+        <option value="$PROJECT_DIR$/perc-eclipse/tycho-root/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="Oracle 1.8 (161)" project-jdk-type="JavaSDK" />
