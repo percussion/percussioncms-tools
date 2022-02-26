@@ -5,7 +5,7 @@
     <packaging>eclipse-plugin</packaging>
     <parent>
         <groupId>com.percussion</groupId>
-        <version>8.0.3-SNAPSHOT</version>
+        <version>8.1.1-SNAPSHOT</version>
         <artifactId>tycho-root</artifactId>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
@@ -92,11 +92,6 @@
         </plugins>
     </build>
     <dependencies>
-        <dependency>
-            <groupId>org.htmlparser</groupId>
-            <artifactId>htmlparser</artifactId>
-            <version>1.6</version>
-        </dependency>
         <dependency>
             <groupId>net.sf.jtidy</groupId>
             <artifactId>jtidy</artifactId>

@@ -2,22 +2,31 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/designer/core/com.percussion.client.iml" filepath="$PROJECT_DIR$/designer/core/com.percussion.client.iml" />
       <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/com.percussion.doc.help.packagebuilder.iml" filepath="$PROJECT_DIR$/com.percussion.doc.help.packagebuilder/com.percussion.doc.help.packagebuilder.iml" />
       <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/com.percussion.doc.help.packageinstaller.iml" filepath="$PROJECT_DIR$/com.percussion.doc.help.packageinstaller/com.percussion.doc.help.packageinstaller.iml" />
       <module fileurl="file://$PROJECT_DIR$/com.percussion.doc.help.workbench/com.percussion.doc.help.workbench.iml" filepath="$PROJECT_DIR$/com.percussion.doc.help.workbench/com.percussion.doc.help.workbench.iml" />
+      <module fileurl="file://$PROJECT_DIR$/designer/ui/com.percussion.workbench.ui.iml" filepath="$PROJECT_DIR$/designer/ui/com.percussion.workbench.ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/vedit/vedit.ui/de.byteaction.velocity.vaulttec.ui.iml" filepath="$PROJECT_DIR$/vedit/vedit.ui/de.byteaction.velocity.vaulttec.ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/perc-eclipse/eclipse-maven-deps/eclipse-maven-deps.iml" filepath="$PROJECT_DIR$/perc-eclipse/eclipse-maven-deps/eclipse-maven-deps.iml" />
       <module fileurl="file://$PROJECT_DIR$/htmlconverter/htmlConverter.iml" filepath="$PROJECT_DIR$/htmlconverter/htmlConverter.iml" />
       <module fileurl="file://$PROJECT_DIR$/loader/loader.iml" filepath="$PROJECT_DIR$/loader/loader.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/mars-repository-def/mars-repository-def.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/mars-repository-def/mars-repository-def.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/neon-repository-def.iml" filepath="$PROJECT_DIR$/perc-eclipse/tycho-root/neon-repository-def/neon-repository-def.iml" />
       <module fileurl="file://$PROJECT_DIR$/ContentExplorer/perc-content-explorer.iml" filepath="$PROJECT_DIR$/ContentExplorer/perc-content-explorer.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-deployer-client/perc-deployer-client.iml" filepath="$PROJECT_DIR$/perc-deployer-client/perc-deployer-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/perc-devtools-distribution/perc-devtools-distribution.iml" filepath="$PROJECT_DIR$/perc-devtools-distribution/perc-devtools-distribution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/perc-eclipse/perc-eclipse.iml" filepath="$PROJECT_DIR$/perc-eclipse/perc-eclipse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Help/perc-help.iml" filepath="$PROJECT_DIR$/Help/perc-help.iml" />
       <module fileurl="file://$PROJECT_DIR$/htmlconverter/perc-html-converter.iml" filepath="$PROJECT_DIR$/htmlconverter/perc-html-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/loader/perc-loader.iml" filepath="$PROJECT_DIR$/loader/perc-loader.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-package-builder/perc-package-builder.iml" filepath="$PROJECT_DIR$/perc-package-builder/perc-package-builder.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-package-installer/perc-package-installer.iml" filepath="$PROJECT_DIR$/perc-package-installer/perc-package-installer.iml" />
       <module fileurl="file://$PROJECT_DIR$/PackagerUI/perc-packaging-client.iml" filepath="$PROJECT_DIR$/PackagerUI/perc-packaging-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/perc-server-admin/perc-server-admin.iml" filepath="$PROJECT_DIR$/perc-server-admin/perc-server-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServerPropertiesEditor/perc-server-properties-editor.iml" filepath="$PROJECT_DIR$/ServerPropertiesEditor/perc-server-properties-editor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp.iml" filepath="$PROJECT_DIR$/ServerUIComponents/perc-server-ui-cmp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ContentUI/perc-server-ui-content.iml" filepath="$PROJECT_DIR$/ContentUI/perc-server-ui-content.iml" />
       <module fileurl="file://$PROJECT_DIR$/percussioncms-tools.iml" filepath="$PROJECT_DIR$/percussioncms-tools.iml" />
     </modules>
   </component>

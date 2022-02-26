@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Percussion CMS Workbench Plug-in
 Bundle-SymbolicName: com.percussion.workbench.ui; singleton:=true
-Bundle-Version: 8.0.3.qualifier
+Bundle-Version: 8.1.1.qualifier
 Bundle-Activator: com.percussion.workbench.ui.PSWorkbenchPlugin
 Bundle-ActivationPolicy: lazy;exclude:="com.percussion.workbench.ui.PSWorkbenchPlugin"
 Bundle-Vendor: Percussion Software
