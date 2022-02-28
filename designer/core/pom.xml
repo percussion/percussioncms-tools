@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.percussion</groupId>
         <artifactId>tycho-root</artifactId>
-        <version>8.0.3-SNAPSHOT</version>
+        <version>8.1.1-SNAPSHOT</version>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
     <artifactId>com.percussion.client</artifactId>
@@ -188,12 +188,12 @@
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-deployer-client</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>8.1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-exceptions-spring</artifactId>
-            <version>8.0.3-SNAPSHOT</version>
+            <version>8.1.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
