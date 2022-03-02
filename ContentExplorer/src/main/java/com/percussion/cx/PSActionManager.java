@@ -4583,6 +4583,14 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
       {
          key = iter.next().toString();
          value = actionParams.getParameter(key);
+         //CMS-8722 : the psredirect parameter was giving malformed URL exception while redirecting
+         if(key.equalsIgnoreCase("psredirect")){
+            URL serverCodeBaseURL = m_applet.getCodeBase();
+            String protocol = serverCodeBaseURL.getProtocol();
+            String host = serverCodeBaseURL.getHost();
+            String port = String.valueOf(serverCodeBaseURL.getPort());
+            value = value.replaceFirst("../",protocol+"://"+host+":"+port+"/Rhythmyx/");
+         }
          if (value.startsWith("$")) // Dynamic value, already dealt with
             continue;
          if (PASS_THRU_PARAMS.contains(key))
