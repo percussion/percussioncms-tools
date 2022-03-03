@@ -4259,6 +4259,9 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
          throw new IllegalArgumentException("action must not be null");
 
       String actionUrl = action.getURL();
+
+      actionUrl = removeNewLineCharacterFromString(actionUrl);
+
       if (selection == null)
          return actionUrl;
 
@@ -4305,6 +4308,28 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
       m_applet.debugMessage("makeUrlForServerAction() = " + actionUrl);
 
       return actionUrl;
+   }
+
+   /**
+    * Method to remove new line characters from the action URL supplied.
+    * The currenlty supported new line characters are :
+    * {"\n", "\r", "\r\n"}
+    *
+    * @param actionUrl the action url to which the dynamic parameters are
+    *           appended, must not be <code>null</code>
+    *
+    * @return new url with new line characters removed from it
+    */
+   private String removeNewLineCharacterFromString(String actionURL){
+      String[] newLineCharArray = {"\n", "\r", "\r\n"};
+
+      for(int i = 0; i<newLineCharArray.length; i++){
+         if(actionURL.contains(newLineCharArray[i])){
+            actionURL = actionURL.replace(newLineCharArray[i], "");
+         }
+      }
+      actionURL = actionURL.trim();
+      return actionURL;
    }
 
    /**
@@ -4394,6 +4419,9 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
          throw new IllegalArgumentException("action must not be null");
 
       String actionUrl = action.getURL();
+
+      actionUrl = removeNewLineCharacterFromString(actionUrl);
+
       if (selection == null)
          return actionUrl;
 
@@ -4519,6 +4547,9 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
          throw new IllegalArgumentException("action must not be null");
 
       String actionUrl = action.getURL();
+
+      actionUrl = removeNewLineCharacterFromString(actionUrl);
+
       if (node == null)
          return actionUrl;
 
