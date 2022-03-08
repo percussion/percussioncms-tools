@@ -9,20 +9,20 @@
  ******************************************************************************/
 package com.percussion.packager.ui.model;
 
-import com.percussion.desktop.deployer.catalog.PSCatalogResult;
-import com.percussion.desktop.deployer.catalog.PSCatalogResultSet;
-import com.percussion.desktop.deployer.catalog.PSCataloger;
-import com.percussion.desktop.deployer.client.IPSDeployConstants;
-import com.percussion.desktop.deployer.client.IPSDeployJobControl;
-import com.percussion.desktop.deployer.client.PSDeploymentManager;
-import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
-import com.percussion.desktop.deployer.error.IPSDeploymentErrors;
-import com.percussion.desktop.deployer.error.PSDeployException;
-import com.percussion.desktop.deployer.objectstore.PSDependency;
-import com.percussion.desktop.deployer.objectstore.PSDeployableElement;
-import com.percussion.desktop.deployer.objectstore.PSDescriptor;
-import com.percussion.desktop.deployer.objectstore.PSExportDescriptor;
-import com.percussion.desktop.deployer.objectstore.PSUserDependency;
+import com.percussion.deployer.catalog.PSCatalogResult;
+import com.percussion.deployer.catalog.PSCatalogResultSet;
+import com.percussion.deployer.catalog.PSCataloger;
+import com.percussion.deployer.client.IPSDeployConstants;
+import com.percussion.deployer.client.IPSDeployJobControl;
+import com.percussion.deployer.client.PSDeploymentManager;
+import com.percussion.deployer.client.PSDeploymentServerConnection;
+import com.percussion.deployer.objectstore.PSDependency;
+import com.percussion.deployer.objectstore.PSDeployableElement;
+import com.percussion.deployer.objectstore.PSDescriptor;
+import com.percussion.deployer.objectstore.PSExportDescriptor;
+import com.percussion.deployer.objectstore.PSUserDependency;
+import com.percussion.error.IPSDeploymentErrors;
+import com.percussion.error.PSDeployException;
 import com.percussion.error.PSException;
 import com.percussion.packager.ui.PSPackagerClient;
 import com.percussion.packager.ui.PSResourceUtils;

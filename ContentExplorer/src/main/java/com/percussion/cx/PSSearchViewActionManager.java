@@ -25,11 +25,14 @@ import com.percussion.design.objectstore.PSSearchConfig;
 import com.percussion.error.PSException;
 import com.percussion.util.IPSHtmlParameters;
 import com.percussion.util.PSHtmlParamDocument;
-import com.percussion.util.PSHttpConnection;
-import com.percussion.util.PSIteratorUtils;
 import com.percussion.util.PSStringOperation;
+import com.percussion.utils.collections.PSIteratorUtils;
 import com.percussion.xml.PSXmlDocumentBuilder;
-import com.percussion.cx.PSExecutableSearch;
+import org.apache.log4j.Logger;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -41,12 +44,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  * Class that manges all search related actions. Executes and loads search

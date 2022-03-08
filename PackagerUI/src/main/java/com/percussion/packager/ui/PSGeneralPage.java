@@ -9,8 +9,8 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
-import com.percussion.desktop.deployer.objectstore.PSDescriptor;
+import com.percussion.deployer.client.PSDeploymentServerConnection;
+import com.percussion.deployer.objectstore.PSDescriptor;
 import com.percussion.packager.ui.data.PSPackageDependency;
 import com.percussion.packager.ui.data.PSPackageDescriptorMetaInfo;
 import com.percussion.packager.ui.managers.PSServerConnectionManager;

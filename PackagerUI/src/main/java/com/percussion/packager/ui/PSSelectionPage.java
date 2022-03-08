@@ -9,8 +9,8 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.desktop.deployer.client.PSDeploymentManager;
-import com.percussion.desktop.deployer.error.PSDeployException;
+import com.percussion.deployer.client.PSDeploymentManager;
+import com.percussion.error.PSDeployException;
 import com.percussion.packager.ui.data.PSElementFilter;
 import com.percussion.packager.ui.data.PSElementNode;
 import com.percussion.packager.ui.data.PSPackageDescriptorMetaInfo;

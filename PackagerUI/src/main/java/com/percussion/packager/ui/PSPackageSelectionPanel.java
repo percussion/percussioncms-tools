@@ -9,7 +9,7 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.desktop.deployer.error.PSDeployException;
+import com.percussion.error.PSDeployException;
 import com.percussion.guitools.PSTableSorter;
 import com.percussion.packager.ui.data.PSPackageDescriptorMetaInfo;
 import com.percussion.packager.ui.managers.PSServerConnectionManager;

@@ -90,11 +90,11 @@
   <dependency>
         <groupId>com.percussion</groupId>
         <artifactId>perc-system</artifactId>
-      <version>${cmsserver.version}</version>
+      <version>${project.parent.version}</version>
     </dependency>
     <dependency>
         <groupId>com.percussion</groupId>
-        <artifactId>perc-deployer-client</artifactId>
+        <artifactId>perc-deployer</artifactId>
         <version>${project.parent.version}</version>
     </dependency>
 

@@ -187,13 +187,13 @@
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
-            <artifactId>perc-deployer-client</artifactId>
-            <version>8.1.1-SNAPSHOT</version>
+            <artifactId>perc-deployer</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
             <artifactId>perc-exceptions-spring</artifactId>
-            <version>8.1.1-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

@@ -13,7 +13,7 @@ package com.percussion.cx;
 import com.percussion.cx.guitools.PSMouseAdapter;
 import com.percussion.cx.objectstore.PSMenuAction;
 import com.percussion.cx.objectstore.PSNode;
-import com.percussion.util.PSIteratorUtils;
+import com.percussion.utils.collections.PSIteratorUtils;
 import org.apache.log4j.Logger;
 
 import javax.accessibility.Accessible;

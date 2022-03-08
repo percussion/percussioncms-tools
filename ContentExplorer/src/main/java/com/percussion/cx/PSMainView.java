@@ -9,29 +9,12 @@
  *****************************************************************************/
 package com.percussion.cx;
 
+import com.percussion.cx.guitools.PSMouseAdapter;
 import com.percussion.cx.objectstore.PSMenuAction;
 import com.percussion.cx.objectstore.PSNode;
+import com.percussion.utils.collections.PSIteratorUtils;
 
-import com.percussion.cx.guitools.PSMouseAdapter;
-
-import com.percussion.util.PSIteratorUtils;
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.SystemColor;
-import java.awt.event.MouseEvent;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTree;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeExpansionEvent;
@@ -41,6 +24,11 @@ import javax.swing.event.TreeWillExpandListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.ExpandVetoException;
 import javax.swing.tree.TreePath;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**

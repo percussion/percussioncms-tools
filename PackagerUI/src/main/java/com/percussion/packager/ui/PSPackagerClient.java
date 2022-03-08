@@ -9,7 +9,7 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.desktop.deployer.client.IPSDeployConstants;
+import com.percussion.deployer.client.IPSDeployConstants;
 import com.percussion.guitools.ErrorDialogs;
 import com.percussion.tools.help.PSJavaHelp;
 import org.jvnet.substance.skin.SubstanceModerateLookAndFeel;

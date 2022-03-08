@@ -12,22 +12,16 @@ package com.percussion.cx;
 
 import com.percussion.cx.objectstore.PSNode;
 import com.percussion.cx.objectstore.PSProperties;
-import com.percussion.util.PSIteratorUtils;
+import com.percussion.utils.collections.PSIteratorUtils;
 
-import java.awt.BorderLayout;
+import javax.accessibility.AccessibleContext;
+import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.accessibility.AccessibleContext;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.SwingConstants;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 
 /**
  * The splitplane that displays ancestors and descends of a content item

@@ -9,18 +9,18 @@
  ******************************************************************************/
 package com.percussion.packageinstaller.ui;
 
-import com.percussion.desktop.deployer.client.IPSDeployJobControl;
-import com.percussion.desktop.deployer.client.PSDeploymentManager;
-import com.percussion.desktop.deployer.error.IPSDeploymentErrors;
-import com.percussion.desktop.deployer.error.PSDeployException;
-import com.percussion.desktop.deployer.objectstore.PSArchive;
-import com.percussion.desktop.deployer.objectstore.PSArchiveDetail;
-import com.percussion.desktop.deployer.objectstore.PSArchiveInfo;
-import com.percussion.desktop.deployer.objectstore.PSExportDescriptor;
-import com.percussion.desktop.deployer.objectstore.PSImportDescriptor;
-import com.percussion.desktop.deployer.objectstore.PSImportPackage;
-import com.percussion.desktop.deployer.objectstore.PSValidationResult;
-import com.percussion.desktop.deployer.objectstore.PSValidationResults;
+import com.percussion.deployer.client.IPSDeployJobControl;
+import com.percussion.deployer.client.PSDeploymentManager;
+import com.percussion.deployer.objectstore.PSArchive;
+import com.percussion.deployer.objectstore.PSArchiveDetail;
+import com.percussion.deployer.objectstore.PSArchiveInfo;
+import com.percussion.deployer.objectstore.PSExportDescriptor;
+import com.percussion.deployer.objectstore.PSImportDescriptor;
+import com.percussion.deployer.objectstore.PSImportPackage;
+import com.percussion.deployer.objectstore.PSValidationResult;
+import com.percussion.deployer.objectstore.PSValidationResults;
+import com.percussion.error.IPSDeploymentErrors;
+import com.percussion.error.PSDeployException;
 import com.percussion.packageinstaller.ui.managers.PSInstallerServerConnectionManager;
 import com.percussion.packager.ui.PSResourceUtils;
 import com.percussion.packager.ui.data.PSServerRegistration;

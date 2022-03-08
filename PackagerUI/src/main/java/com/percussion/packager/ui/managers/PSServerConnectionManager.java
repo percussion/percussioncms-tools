@@ -10,11 +10,11 @@
 package com.percussion.packager.ui.managers;
 
 import com.percussion.conn.PSServerException;
-import com.percussion.desktop.deployer.catalog.PSCataloger;
-import com.percussion.desktop.deployer.client.IPSDeployConstants;
-import com.percussion.desktop.deployer.client.PSDeploymentManager;
-import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
-import com.percussion.desktop.deployer.error.PSDeployException;
+import com.percussion.deployer.catalog.PSCataloger;
+import com.percussion.deployer.client.IPSDeployConstants;
+import com.percussion.deployer.client.PSDeploymentManager;
+import com.percussion.deployer.client.PSDeploymentServerConnection;
+import com.percussion.error.PSDeployException;
 import com.percussion.guitools.ErrorDialogs;
 import com.percussion.packager.ui.PSCredentialsDialog;
 import com.percussion.packager.ui.PSPackagerClient;
@@ -180,8 +180,7 @@ public class PSServerConnectionManager
     * registered listeners will be notified;
     * @throws PSDeployException 
     */
-   public void disconnect() throws PSDeployException
-   {
+   public void disconnect()  throws PSDeployException {
       if(m_conn != null)
       {
          PSServerRegistration server = getCurrentServerInfo();
@@ -222,10 +221,9 @@ public class PSServerConnectionManager
     * @throws PSAuthorizationException 
     * @throws PSAuthenticationFailedException 
     */
-   public boolean initConnection(PSServerRegistration server) 
-      throws PSAuthenticationFailedException, PSAuthorizationException,
-      PSServerException, PSDeployException
-   {
+   public boolean initConnection(PSServerRegistration server)
+           throws PSAuthenticationFailedException, PSAuthorizationException,
+           PSServerException, PSDeployException {
         return initConnection(server, true);  
    }   
    
@@ -246,10 +244,9 @@ public class PSServerConnectionManager
     * @throws PSAuthorizationException 
     * @throws PSAuthenticationFailedException 
     */
-   public boolean initConnection(PSServerRegistration server, boolean register) 
-      throws PSAuthenticationFailedException, PSAuthorizationException,
-      PSServerException, PSDeployException
-   {
+   public boolean initConnection(PSServerRegistration server, boolean register)
+           throws PSAuthenticationFailedException, PSAuthorizationException,
+           PSServerException, PSDeployException, PSDeployException {
       if(server == null)
          throw new IllegalArgumentException("server cannot be null.");
       if(m_conn != null && m_conn.isConnected())
@@ -285,7 +282,8 @@ public class PSServerConnectionManager
                  user,
                  pass,
                  false,
-                 true);
+                 true,
+                 IPSDeployConstants.OperatingMode.Packager);
 
          m_currentServer = server;
          m_deploymentManager = new PSDeploymentManager(m_conn);

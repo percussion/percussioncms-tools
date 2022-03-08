@@ -18,8 +18,8 @@ import com.percussion.cx.guitools.PSMouseAdapter;
 import com.percussion.cx.objectstore.PSMenuAction;
 import com.percussion.cx.objectstore.PSNode;
 import com.percussion.guitools.PSTableSorter;
-import com.percussion.util.PSIteratorUtils;
 import com.percussion.util.PSStringOperation;
+import com.percussion.utils.collections.PSIteratorUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 

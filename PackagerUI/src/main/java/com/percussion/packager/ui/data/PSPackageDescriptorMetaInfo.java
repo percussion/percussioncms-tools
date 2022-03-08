@@ -9,8 +9,8 @@
  ******************************************************************************/
 package com.percussion.packager.ui.data;
 
-import com.percussion.desktop.deployer.objectstore.PSDescriptor;
-import com.percussion.desktop.deployer.objectstore.PSExportDescriptor;
+import com.percussion.deployer.objectstore.PSDescriptor;
+import com.percussion.deployer.objectstore.PSExportDescriptor;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Date;

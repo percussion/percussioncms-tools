@@ -13,8 +13,7 @@ import com.percussion.extension.IPSExtensionParamDef;
 import com.percussion.extension.PSExtensionDef;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.util.PSCollection;
-import com.percussion.util.PSIteratorUtils;
-import com.percussion.UTComponents.UTFixedButton;
+import com.percussion.utils.collections.PSIteratorUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

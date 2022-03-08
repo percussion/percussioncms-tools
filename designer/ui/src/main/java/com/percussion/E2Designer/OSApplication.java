@@ -11,8 +11,13 @@ package com.percussion.E2Designer;
 
 
 import com.percussion.conn.PSServerException;
-import com.percussion.design.objectstore.*;
-import com.percussion.share.service.exception.PSValidationException;
+import com.percussion.design.objectstore.PSApplication;
+import com.percussion.design.objectstore.PSApplicationFile;
+import com.percussion.design.objectstore.PSNotFoundException;
+import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.design.objectstore.PSObjectStore;
+import com.percussion.design.objectstore.PSUnknownDocTypeException;
+import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.extension.IPSExtensionDef;
 import com.percussion.extension.IPSExtensionDefFactory;
@@ -21,8 +26,9 @@ import com.percussion.extension.PSExtensionException;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.util.PSCollection;
-import com.percussion.util.PSIteratorUtils;
+import com.percussion.utils.collections.PSIteratorUtils;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
 import org.apache.commons.io.IOUtils;

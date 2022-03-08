@@ -14,7 +14,7 @@ import com.percussion.design.objectstore.IPSBackEndMapping;
 import com.percussion.design.objectstore.PSField;
 import com.percussion.design.objectstore.PSFieldSet;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
-import com.percussion.util.PSIteratorUtils;
+import com.percussion.utils.collections.PSIteratorUtils;
 import com.percussion.workbench.ui.editors.form.ce.PSContentEditorDefinition;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import org.w3c.dom.Document;

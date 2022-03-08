@@ -40,11 +40,14 @@ import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.error.PSException;
 import com.percussion.services.error.PSNotFoundException;
 import com.percussion.util.IPSHtmlParameters;
-import com.percussion.util.PSIteratorUtils;
 import com.percussion.util.PSStringComparator;
 import com.percussion.util.PSUrlUtils;
 import com.percussion.util.PSXMLDomUtil;
+import com.percussion.utils.collections.PSIteratorUtils;
 import com.percussion.xml.PSXmlDocumentBuilder;
+import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.net.URL;
 import java.net.URLEncoder;
@@ -56,10 +59,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.lang.StringUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /**
  * Class that manges all folder related actions. Basically a mediator between

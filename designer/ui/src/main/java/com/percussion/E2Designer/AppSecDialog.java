@@ -25,8 +25,7 @@ import com.percussion.design.objectstore.PSServerConfiguration;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.util.PSCollection;
-import com.percussion.util.PSIteratorUtils;
-import com.percussion.UTComponents.UTFixedButton;
+import com.percussion.utils.collections.PSIteratorUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

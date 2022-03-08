@@ -9,8 +9,8 @@
  ******************************************************************************/
 package com.percussion.packager.ui;
 
-import com.percussion.desktop.deployer.client.PSDeploymentServerConnection;
-import com.percussion.desktop.deployer.error.PSDeployException;
+import com.percussion.deployer.client.PSDeploymentServerConnection;
+import com.percussion.error.PSDeployException;
 import com.percussion.guitools.PSAboutDialog;
 import com.percussion.packager.ui.data.PSPackageDescriptorMetaInfo;
 import com.percussion.packager.ui.data.PSProgressStatus;
