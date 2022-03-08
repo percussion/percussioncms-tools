@@ -98,7 +98,7 @@
         <myfaces.version>1.1.5</myfaces.version>
         <ehcache.version>2.10.5</ehcache.version>
         <stax.version>1.0.1</stax.version>
-        <poi.version>4.1.2</poi.version>
+        <poi.version>5.2.1</poi.version>
         <esapi.version>2.2.0.0-RC2</esapi.version>
         <esapi.encoder.version>1.2.2</esapi.encoder.version>
         <ant.version>1.10.11</ant.version>
