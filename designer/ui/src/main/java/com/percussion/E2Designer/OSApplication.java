@@ -16,6 +16,7 @@ import com.percussion.design.objectstore.PSApplicationFile;
 import com.percussion.design.objectstore.PSNotFoundException;
 import com.percussion.design.objectstore.PSNotLockedException;
 import com.percussion.design.objectstore.PSObjectStore;
+import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.design.objectstore.PSUnknownDocTypeException;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.error.PSIllegalStateException;

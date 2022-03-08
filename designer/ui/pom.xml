@@ -183,6 +183,13 @@
             <artifactId>perc-security-utils</artifactId>
             <version>${cmsserver.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.percussion</groupId>
+            <artifactId>perc-system</artifactId>
+            <version>${cmsserver.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
