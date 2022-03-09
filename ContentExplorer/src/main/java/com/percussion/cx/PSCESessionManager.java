@@ -254,7 +254,24 @@ public class PSCESessionManager implements Runnable
          long remainTime = expireTime - System.currentTimeMillis();
          SwingUtilities.invokeLater(() -> {
             String timeText = DurationFormatUtils.formatDuration(remainTime, "HH:mm:ss");
+            log.debug("Remaing Time : " + remainTime + " -- Time Text : " + timeText);
             timeLabel.setText(timeText);
+            if(remainTime<=0 || DurationFormatUtils.formatDuration(remainTime, "HH:mm:ss").equalsIgnoreCase("00:00:00")){
+               log.debug("Stopping timer and logging out after timeout.");
+               if (countdown != null){
+                  countdown.cancel(false);
+                  log.debug("Timer stopped.");
+               }
+
+               if (dialog != null && dialog.isVisible())
+               {
+                  dialog.dispose();
+               }
+               PSContentExplorerApplication.getBaseFrame().logout();
+               isLoggedIn=false;
+               shutdown();
+               return;
+            }
          });
       }
 
