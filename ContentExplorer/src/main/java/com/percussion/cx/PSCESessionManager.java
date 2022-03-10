@@ -170,14 +170,26 @@ public class PSCESessionManager implements Runnable
                   dialog.setVisible(true);
 
                   countdown.cancel(false);
-                  if (optionPane.getValue().equals(options[1]))
+                  if(optionPane.getValue() == null){
+                     log.debug("Close / Cross dialog button clicked. ");
+                     if (countdown != null) {
+                        countdown.cancel(false);
+                     }
+
+                     if (dialog != null && dialog.isVisible())
+                     {
+                        dialog.dispose();
+                     }
+                     return;
+                  }
+                  if (optionPane.getValue() != null && optionPane.getValue().equals(options[1]))
                   {
                      PSContentExplorerApplication.getBaseFrame().logout();
                      isLoggedIn=false;
                      shutdown();
                      return;
                   }
-                  else if (optionPane.getValue().equals(options[0]))
+                  else if (optionPane.getValue() != null && optionPane.getValue().equals(options[0]))
                   {
                      log.debug("Setting extendSession");
                      extendSession = true;
