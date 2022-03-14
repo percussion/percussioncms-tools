@@ -330,8 +330,7 @@ public class PSSelectionView extends JPanel implements DocumentListener
                {
                   m_portField.setText(String.valueOf(server.getPort()));
                   m_userField.setText(server.getUserName());
-                  m_passwordField.setText(PSDeploymentServerConnection.decryptPwd(
-                     server.getUserName(), server.getPassword()));
+                  m_passwordField.setText(server.getPassword());
                   m_useSSLBox.setSelected(server.isUseSSL());
                }
                

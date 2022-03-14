@@ -99,13 +99,7 @@ public class PSConnectionInfo
     */
    public String getPassword()
    {
-      String pwd;
-      if (m_password == null)
-         pwd = StringUtils.EMPTY;
-      else
-         pwd = m_password;
-      
-      return PSLegacyEncrypter.getInstance(null).encrypt(pwd, ENC_KEY);
+      return m_password;
    }
 
    /**
@@ -128,15 +122,6 @@ public class PSConnectionInfo
     */
    public void setPassword(String pwd)
    {
-      pwd = (pwd == null) ? StringUtils.EMPTY : pwd;
-      try
-      {
-         pwd = PSLegacyEncrypter.getInstance(null).decrypt(pwd, ENC_KEY,null);
-      }
-      catch (Exception e)
-      {
-         pwd = StringUtils.EMPTY;
-      }
       m_password = pwd;
    }
 
@@ -355,8 +340,6 @@ public class PSConnectionInfo
    private String m_userid = StringUtils.EMPTY;
 
    /**
-    * @see #getPassword()
-    * @see #setPassword(String)
     * @see #getClearTextPassword()
     * @see #setClearTextPassword(String)
     */
