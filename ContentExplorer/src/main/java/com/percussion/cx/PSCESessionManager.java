@@ -8,6 +8,7 @@ import com.percussion.webservices.security.SecuritySOAPStub;
 import com.percussion.webservices.security.data.PSLogin;
 
 import java.applet.Applet;
+import java.awt.*;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -279,6 +280,7 @@ public class PSCESessionManager implements Runnable
                {
                   dialog.dispose();
                }
+               closeAllDialog();
                PSContentExplorerApplication.getBaseFrame().logout();
                isLoggedIn=false;
                shutdown();
@@ -287,6 +289,18 @@ public class PSCESessionManager implements Runnable
          });
       }
 
+   }
+
+   private void closeAllDialog(){
+      Window[] windows = Window.getWindows();
+      for (Window window : windows) {
+         if (window instanceof JDialog) {
+            JDialog dialog = (JDialog) window;
+            if (dialog.getContentPane().getComponents().length>0 && dialog.getContentPane().getComponent(0) instanceof JOptionPane){
+               dialog.dispose();
+            }
+         }
+      }
    }
 
    public void stop()
