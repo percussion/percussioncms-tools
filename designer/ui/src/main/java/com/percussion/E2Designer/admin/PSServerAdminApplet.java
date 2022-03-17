@@ -49,14 +49,10 @@ public class PSServerAdminApplet extends JApplet
          m_frame = getFrame(this);
          this.setSize(ProjectConstants.APPLET_SIZE);
 
-         //Get the JavaHelp helpset file and attach the protocol based on its
-         //location.
-         if(m_applet)
-         {
             String helpFile = getParameter(HELPSETFILE);
             PSServerAdminApplet.m_helpSetURL = PSJavaHelp.getHelpSetURL(helpFile, true,
                getCodeBase().toString());
-         }
+
       }
       catch (Exception e)
       {
