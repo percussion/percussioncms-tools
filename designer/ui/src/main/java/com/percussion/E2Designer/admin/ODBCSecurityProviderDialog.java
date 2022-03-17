@@ -391,35 +391,4 @@ public class ODBCSecurityProviderDialog extends PSDialog
    private boolean m_validationInited = false;
 
 
-
-/*   static public void main(String args[])
-   {
-    final JFrame frame = new JFrame("Test ODBC Security Provider Dialog");
-      frame.addWindowListener(new BasicWindowMonitor());
-      try
-    {
-      String strLnFClass = UIManager.getSystemLookAndFeelClassName();
-         LookAndFeel lnf = (LookAndFeel) Class.forName(strLnFClass).newInstance();
-         UIManager.setLookAndFeel( lnf );
-         
-         JButton startButton = new JButton("Open Dialog");
-         frame.getContentPane().add(startButton);
-         startButton.addActionListener(new ActionListener()
-         {
-            public void actionPerformed(ActionEvent e)
-            {
- 
-               ODBCSecurityProviderDialog dialog = new ODBCSecurityProviderDialog(null, false, null);
-               dialog.setVisible(true);
-            }
-         });
-         frame.setLocation(350, 230);
-         frame.setSize(350, 180);
-         frame.setVisible(true);
-
-     }
-     catch (Exception e)
-     { System.out.println(e); }
-
-   }*/
 }

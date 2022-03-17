@@ -102,6 +102,7 @@ public class LoginPanel extends JPanel
 
       JPanel p3 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
       p3.add(new UTMnemonicLabel(m_res, "password", m_password));
+      m_password.enableInputMethods(true);
       p3.add(m_password);
 
       JPanel p4 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
