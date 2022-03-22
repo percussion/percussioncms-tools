@@ -99,6 +99,8 @@ public class PSConnectionInfo
     */
    public String getPassword()
    {
+      if (m_password == null)
+         return StringUtils.EMPTY;
       return m_password;
    }
 
@@ -122,6 +124,7 @@ public class PSConnectionInfo
     */
    public void setPassword(String pwd)
    {
+      pwd = (pwd == null) ? StringUtils.EMPTY : pwd;
       m_password = pwd;
    }
 

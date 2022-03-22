@@ -157,8 +157,8 @@ public class PSContentExplorerLoginPanel extends JFrame
       {
          @Override
          public void focusLost(FocusEvent e) {
-            m_locale.removeAllItems();
             List<PSLocale> locs = getLocaleList(m_url.getText());
+            m_locale.removeAllItems();
             if(locs.isEmpty()){
                PSLocale t = new PSLocale();
                t.setCode("en-us");
@@ -173,6 +173,7 @@ public class PSContentExplorerLoginPanel extends JFrame
                      m_locale.setSelectedItem(l);
                }
             }
+            PSContentExplorerLoginPanel.this.pack();
          }
       });
 
@@ -214,12 +215,6 @@ public class PSContentExplorerLoginPanel extends JFrame
       m_password.setFont(new Font("Arial", Font.PLAIN, 18));
       m_password.enableInputMethods(true);
 
-      String key="en-us";
-      List<PSLocale> psLocales = getLocaleList(m_url.getText());
-      if(!psLocales.isEmpty()){
-         key = psLocales.get(0).getCode();
-      }
-
       m_locale = createLocaleComboBox(getLocaleList(m_url.getText()));
       UTMnemonicLabel p4Label = new UTMnemonicLabel(m_res, "locale", m_locale);
       p4Label.setLabelFor(m_locale);
@@ -229,6 +224,7 @@ public class PSContentExplorerLoginPanel extends JFrame
       c.fill = 0;
       c.gridx = 0;
       c.gridy = 3;
+      c.fill = GridBagConstraints.NONE;
       c.insets = new Insets(5, 20, 0, 50); // top padding
       panel.add(p4Label, c);
       c.gridx = 1;
@@ -242,7 +238,7 @@ public class PSContentExplorerLoginPanel extends JFrame
 
       c.fill = GridBagConstraints.HORIZONTAL;
       c.gridx = 0;
-      c.gridy = 3;
+      c.gridy = 4;
       c.weighty = 1.0;
       c.gridwidth = 2;
       c.anchor = GridBagConstraints.SOUTH;
