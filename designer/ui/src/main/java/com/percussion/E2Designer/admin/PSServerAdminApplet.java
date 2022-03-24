@@ -50,8 +50,9 @@ public class PSServerAdminApplet extends JApplet
          this.setSize(ProjectConstants.APPLET_SIZE);
 
             String helpFile = getParameter(HELPSETFILE);
-            PSServerAdminApplet.m_helpSetURL = PSJavaHelp.getHelpSetURL(helpFile, true,
-               getCodeBase().toString());
+            if(getCodeBase() != null)
+                PSServerAdminApplet.m_helpSetURL = PSJavaHelp.getHelpSetURL(helpFile, true,
+                   getCodeBase().toString());
 
       }
       catch (Exception e)

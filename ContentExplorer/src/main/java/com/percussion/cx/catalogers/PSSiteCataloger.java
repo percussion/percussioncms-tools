@@ -15,15 +15,15 @@ import com.percussion.cx.error.IPSContentExplorerErrors;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.util.PSXMLDomUtil;
 import com.percussion.xml.PSXmlDocumentBuilder;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * This class catalogs all site definitions found in rhythmyx.
@@ -86,7 +86,12 @@ public class PSSiteCataloger
       for (int i=0; i<sites.getLength(); i++)
       {
          Element site = (Element) sites.item(i);
-         m_sites.add(new PSSite(site, null, null));
+
+            Attr isPageBased = site.getAttributeNode("isPageBased");
+            if(isPageBased != null && "T".equals(isPageBased.getValue())){
+               m_sites.add(new PSSite(site, null, null));
+            }
+
       }
    }
 
