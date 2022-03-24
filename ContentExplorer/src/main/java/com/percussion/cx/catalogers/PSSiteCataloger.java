@@ -86,12 +86,10 @@ public class PSSiteCataloger
       for (int i=0; i<sites.getLength(); i++)
       {
          Element site = (Element) sites.item(i);
-
             Attr isPageBased = site.getAttributeNode("isPageBased");
-            if(isPageBased != null && "T".equals(isPageBased.getValue())){
+            if(isPageBased != null && "F".equals(isPageBased.getValue())){
                m_sites.add(new PSSite(site, null, null));
             }
-
       }
    }
 
