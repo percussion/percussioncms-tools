@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
@@ -450,7 +449,11 @@ public class LoginPanel extends JPanel
       }
       catch (Exception e)
       {
-         Util.showStackTraceDialog(e,"Error","Connection to Server Failed. Invalid Server Configurations/Credentials" );
+         String message = "Connection to Server Failed. Invalid Server Configurations/Credentials";
+         if(e.getCause() != null && e.getCause().getMessage() != null){
+            message = e.getCause().getLocalizedMessage();
+         }
+         Util.showStackTraceDialog(e,"Error",message);
          m_connection.logout();
          m_login.setEnabled(true);
       }
