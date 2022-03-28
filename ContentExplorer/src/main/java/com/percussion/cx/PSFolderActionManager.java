@@ -286,6 +286,7 @@ public class PSFolderActionManager
       try
       {
          PSFolder f = nodeToFolder(node);
+
          Element[] els = m_componentProxy.load(f.getComponentType(),
                new PSLocator[] { f.getLocator() });
 
@@ -300,6 +301,17 @@ public class PSFolderActionManager
       {
          throw new PSContentExplorerException(
                IPSContentExplorerErrors.GENERAL_ERROR, unte.toString());
+      }
+   }
+
+   private void removeSystemFolder(List<PSNode> children){
+      if(children != null){
+         for (PSNode child:children){
+            if("$System$".equals(child.getName())){
+               children.remove(child);
+               break;
+            }
+         }
       }
    }
 
@@ -376,7 +388,7 @@ public class PSFolderActionManager
          PSDisplayFormat format = getDisplayFormatById(formatid, true);
          
          // now do item search and add resulting item nodes
-         List resList = new ArrayList();
+         List<PSNode> resList = new ArrayList();
          PSSearch search = new PSSearch();
          search.setMaximumNumber(PSSearch.UNLIMITED_MAX);
          String folderId = parentFolderNode.getContentId();
@@ -408,7 +420,7 @@ public class PSFolderActionManager
          Collections.sort(itemNodes, new PSStringComparator(
                PSStringComparator.SORT_CASE_INSENSITIVE_ASC));
          resList.addAll(itemNodes);
-
+         removeSystemFolder(resList);
          // set the children on the parent node
          parentFolderNode.setChildren(resList.iterator());
 

@@ -4315,7 +4315,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
     * The currenlty supported new line characters are :
     * {"\n", "\r", "\r\n"}
     *
-    * @param actionUrl the action url to which the dynamic parameters are
+    * @param actionURL the action url to which the dynamic parameters are
     *           appended, must not be <code>null</code>
     *
     * @return new url with new line characters removed from it
