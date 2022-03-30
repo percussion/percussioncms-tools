@@ -157,23 +157,15 @@ public class PSContentExplorerLoginPanel extends JFrame
       {
          @Override
          public void focusLost(FocusEvent e) {
-            List<PSLocale> locs = getLocaleList(m_url.getText());
-            m_locale.removeAllItems();
-            if(locs.isEmpty()){
-               PSLocale t = new PSLocale();
-               t.setCode("en-us");
-               t.setEnabled(true);
-               t.setLabel("US English");
-               m_locale.addItem(t);
-               m_locale.setSelectedItem(t);
-            }else {
-               for (PSLocale l : locs) {
-                  m_locale.addItem(l);
-                  if (l.getCode().equalsIgnoreCase("en-us"))
-                     m_locale.setSelectedItem(l);
+          SwingUtilities.invokeLater(new Runnable() {
+               @Override
+               public void run() {
+                 refreshLocalCombo();
                }
-            }
-            PSContentExplorerLoginPanel.this.pack();
+            });
+
+            m_locale.removeAllItems();
+
          }
       });
 
@@ -215,7 +207,8 @@ public class PSContentExplorerLoginPanel extends JFrame
       m_password.setFont(new Font("Arial", Font.PLAIN, 18));
       m_password.enableInputMethods(true);
 
-      m_locale = createLocaleComboBox(getLocaleList(m_url.getText()));
+      m_locale = createLocaleComboBox();
+      refreshLocalCombo();
       UTMnemonicLabel p4Label = new UTMnemonicLabel(m_res, "locale", m_locale);
       p4Label.setLabelFor(m_locale);
       p4Label.setMinimumSize(new Dimension(150, 60));
@@ -281,6 +274,7 @@ public class PSContentExplorerLoginPanel extends JFrame
 
      m_password.requestFocusInWindow();
    }
+
 
    private JButton createEditButton(String key, String value, ActionListener al)
    {
@@ -717,23 +711,9 @@ public class PSContentExplorerLoginPanel extends JFrame
          return this;
       }
    }
-   private JComboBox createLocaleComboBox(List<PSLocale> locs) {
+   private JComboBox createLocaleComboBox() {
       final JComboBox cbox = new JComboBox();
-      if(locs.isEmpty()){
-         PSLocale t = new PSLocale();
-         t.setCode("en-us");
-         t.setEnabled(true);
-         t.setLabel("US English");
-         cbox.addItem(t);
-         cbox.setSelectedItem(t);
-      }else {
-         for (PSLocale l : locs) {
-            cbox.addItem(l);
-            if (l.getCode().equalsIgnoreCase("en-us")) {
-               cbox.setSelectedItem(l);
-            }
-         }
-      }
+
       cbox.setRenderer(new PSLocaleRenderer());
 
       cbox.addActionListener(new ActionListener() {
@@ -744,6 +724,34 @@ public class PSContentExplorerLoginPanel extends JFrame
       });
 
       return cbox;
+   }
+
+
+   private void addDefaultLocale(){
+      Locale current = Locale.getDefault();
+      if(m_locale != null) {
+         m_locale.addItem(current);
+         m_locale.setSelectedItem(current);
+      }
+   }
+
+   private void refreshLocalCombo(){
+      String url = m_url.getText();
+      if(StringUtils.isEmpty(url)){
+         addDefaultLocale();
+      }else {
+         List<PSLocale> locs = getLocaleList(url);
+         if (locs.isEmpty()) {
+
+         } else {
+            for (PSLocale l : locs) {
+               m_locale.addItem(l);
+               if (l.getCode().equalsIgnoreCase("en-us"))
+                  m_locale.setSelectedItem(l);
+            }
+         }
+         PSContentExplorerLoginPanel.this.pack();
+      }
    }
    //////////////////////////////////////////////////////////////////////////////
    /**
