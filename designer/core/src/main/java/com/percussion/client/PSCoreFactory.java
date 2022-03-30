@@ -635,7 +635,7 @@ public class PSCoreFactory
          PSServerException exc = (PSServerException) error;
          PSException.setErrorManager(new PSErrorManagerDefaultImpl());
          if(IPSConnectionErrors.UNAUTHORIZED == exc.getErrorCode()){
-            return "Unauthorized User. Username/Password invalid!!";
+            return "Authentication failed. Invalid User Name and/or Password.";
          }else{
             return null;
          }
