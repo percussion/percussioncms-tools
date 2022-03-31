@@ -43,27 +43,27 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
    {
       m_workbench = wb;
       m_invalidConnectionListener = PSCoreFactory.getInstance()
-            .getInvalidConnectionListener();
+              .getInvalidConnectionListener();
       PSCoreFactory.getInstance().setInvalidConnectionListener(this);
    }
 
    /**
     * Convenience method that calls
-    * {@link #connect(PSConnectionInfo, Object, String) 
+    * {@link #connect(PSConnectionInfo, Object, String)
     * connect(null, null, closeButtonLabel}.
     */
    public PSConnectionInfo open(String closeButtonLabel)
    {
       return connect(null, null, closeButtonLabel, null);
    }
-   
-   
+
+
    //see interface
    public PSConnectionInfo correctConnection(PSConnectionInfo lastConn,
-         Object error, List<String> locales)
+                                             Object error, List<String> locales)
    {
       return connect(lastConn, error,
-            "PSWorkbenchPlugin.connectDialog.closeButton.label", locales);
+              "PSWorkbenchPlugin.connectDialog.closeButton.label", locales);
    }
 
 
@@ -71,7 +71,7 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
     * Let user choose an enabled locale from a list of MORE THAN ONE enabled.
     * This is *ONLY shown when en_us locale(the default locale) has been
     * disabled *AND* has more than one choice of enabled locales
-    * 
+    *
     * @param locList the list of enabled locales
     * @return an enabled locale, never <code>null</code> or empty
     */
@@ -85,7 +85,7 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
       }
 
       PSConnectionLocalesDialog dlg = new PSConnectionLocalesDialog(shell,
-            locList);
+              locList);
       dlg.open();
       return dlg.getLocaleSelection();
    }
@@ -93,7 +93,7 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
    /**
     * Launch the connection manager and return the connection info object
     * selected/created by the user.
-    * 
+    *
     * @param lastConn See param for
     * {@link #correctConnection(PSConnectionInfo, Object, List)}.
     * @param error See param for
@@ -106,7 +106,7 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
     * user cancels the dialog.
     */
    public PSConnectionInfo connect(PSConnectionInfo lastConn,
-         Object error, String closeButtonLabel, List<String> locales)
+                                   Object error, String closeButtonLabel, List<String> locales)
    {
       if (m_dlg == null)
       {
@@ -120,35 +120,20 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
       }
 
       String errorMsg = PSMessages
-            .getString("PSWorkbenchPlugin.msg.default.titlearea.choose_or_configure_connection");
+              .getString("PSWorkbenchPlugin.msg.default.titlearea.choose_or_configure_connection");
       if (lastConn != null)
          m_dlg.setLastConnection(lastConn);
 
       if (error != null)
       {
          errorMsg = PSCoreFactory.getInstance().getFaultMessage(error);
-         if(errorMsg != null && errorMsg.contains("com.percussion.conn.PSServerException: null")){
+         if(errorMsg == null || StringUtils.isBlank(errorMsg) || errorMsg.contains("com.percussion.conn.PSServerException: null")){
             errorMsg = "Connection to Server failed due to unknown reason.";
-         }
-         // if we still don't have a valid error message, show the default
-         if (StringUtils.isBlank(errorMsg))
-            errorMsg = PSMessages.getString(
-                  "PSWorkbenchPlugin.msg.default.titlearea.unknown_error",
-                  error.getClass().getName());
-         if (locales != null)
-         {
-            if (locales.size() > 0)
-               return correctConnectionForLocale(lastConn, locales);
-            else if (locales.size() == 0)
-               m_dlg
-                     .setErrorMsg(PSMessages
-                           .getString("PSWorkbenchPlugin.error."
-                                 + "nolocalesEnabled"));
          }
          m_dlg.setErrorMsg(errorMsg);
       }
       int dialogResponseCode = m_dlg.open();
-      
+
       // If the dialog box was cancelled
       if (dialogResponseCode != Dialog.OK)
          return null;
@@ -157,21 +142,21 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
 
    /**
     * Method to choose a locale from a list. If there is only one locale, use it
-    * implicitly. If there is more than one locale, but has only one english 
+    * implicitly. If there is more than one locale, but has only one english
     * based locale use it. If there are only non-english locales, let user
     * choose the locale
-    * @param conn the last connection that has failed, assumed never 
+    * @param conn the last connection that has failed, assumed never
     * <code>null</code>
-    * @param locales a list of valid locales returned by the server never 
+    * @param locales a list of valid locales returned by the server never
     * <code>null</code>
     * @return a connection that has valid locale information
     */
-   private PSConnectionInfo correctConnectionForLocale(PSConnectionInfo conn, 
-         List<String> locales)
+   private PSConnectionInfo correctConnectionForLocale(PSConnectionInfo conn,
+                                                       List<String> locales)
    {
       if ( conn == null )
          throw new IllegalArgumentException("connection may not be null");
-      
+
       String loc = PSI18nUtils.DEFAULT_LANG;
       if (locales.size() == 1)
          loc = locales.get(0);
@@ -199,30 +184,30 @@ public class PSConnectionDialogManager implements IPSinvalidConnectionListener
       return conn;
    }
 
-   
+
 
    /**
-    * Must be called by the caller when they have finished with this class. 
+    * Must be called by the caller when they have finished with this class.
     * Performs required cleanup.
     */
    public void dispose()
    {
       m_dlg = null;
       PSCoreFactory.getInstance().setInvalidConnectionListener(
-            m_invalidConnectionListener);
-   } 
+              m_invalidConnectionListener);
+   }
 
    /**
     * The value supplied in the ctor. May be <code>null</code>.
     */
    private final IWorkbench m_workbench;
-   
+
    /**
     * The listener present before we set us as the listener. It is used to
     * restore after this class is disposed. May be <code>null</code>.
     */
    private final IPSinvalidConnectionListener m_invalidConnectionListener;
-   
+
    /**
     * The connection manager dialog.
     */
