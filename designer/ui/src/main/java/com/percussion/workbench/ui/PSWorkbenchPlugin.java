@@ -590,6 +590,9 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
       if (str != null && str.length() > 0)
       {
          XStream xs = new XStream(new DomDriver());
+         xs.allowTypesByWildcard(new String[] {
+                 "com.percussion.**"
+         });
          try
          {
             Object obj = xs.fromXML(str);
@@ -630,6 +633,9 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
       if (str != null && str.length() > 0)
       {
          XStream xs = new XStream(new DomDriver());
+         xs.allowTypesByWildcard(new String[] {
+                 "com.percussion.**"
+         });
          try
          {
             Object obj = xs.fromXML(str);
@@ -709,6 +715,9 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
          throw new IllegalArgumentException("obj to serialize must not be null");
       }
       XStream xs = new XStream(new DomDriver());
+      xs.allowTypesByWildcard(new String[] {
+              "com.percussion.**"
+      });
       String str = xs.toXML(obj);
       getPreferenceStore().setValue(prefKey, str);
    }

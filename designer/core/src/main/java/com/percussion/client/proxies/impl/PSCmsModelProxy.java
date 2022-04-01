@@ -1777,6 +1777,9 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
          throw new IllegalArgumentException("source must not be null");
       }
       XStream xs = new XStream(new DomDriver());
+      xs.allowTypesByWildcard(new String[] {
+              "com.percussion.**"
+      });
       Object obj = xs.fromXML(xs.toXML(source));
       return obj;
    }
