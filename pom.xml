@@ -819,10 +819,6 @@
             <id>redhat</id>
             <url>https://maven.repository.redhat.com/ga/</url>
         </repository>
-        <repository>
-            <id>openmind</id>
-            <url>https://repository.openmindonline.it/</url>
-        </repository>
     </repositories>
 
 
