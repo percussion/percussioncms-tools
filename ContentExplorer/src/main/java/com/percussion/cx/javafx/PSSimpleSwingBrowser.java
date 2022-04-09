@@ -1,37 +1,8 @@
 package com.percussion.cx.javafx;
 
-import static javafx.concurrent.Worker.State.FAILED;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Rectangle;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Locale;
-import java.util.Optional;
-
-import javax.accessibility.AccessibleContext;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-
 import com.percussion.cx.PSContentExplorerApplication;
 import com.percussion.cx.PSSelection;
 import com.percussion.cx.objectstore.PSMenuAction;
-
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -50,7 +21,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -61,6 +31,20 @@ import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import netscape.javascript.JSObject;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import javax.accessibility.AccessibleContext;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Locale;
+import java.util.Optional;
+
+import static javafx.concurrent.Worker.State.FAILED;
 
 public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
 {
@@ -90,7 +74,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
    private final JButton btnDone = new JButton("Done");
    private final JTextField txtURL = new JTextField();
    private final JProgressBar progressBar = new JProgressBar();
-  
+
    
    public PSSimpleSwingBrowser()
    {
@@ -111,8 +95,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       
       this.getAccessibleContext().setAccessibleName("Embedded Browser Window");
       this.getAccessibleContext().setAccessibleDescription(CANNOT_READ_MESSAGE);
-    
- 
+
          setClosed(false);
          if (this.windowLoaded)
          { 
@@ -148,7 +131,17 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          public void windowClosing(WindowEvent e)
          {
             log.debug("window closing" + e);
-            managerClose();
+            Platform.runLater(new Runnable() {
+               @Override
+               public void run() {
+                  try {
+                     PSSimpleSwingBrowser.this.engine.executeScript("checkbeforeClose()");
+                  }catch (Exception e){
+                     //This dialog might not be Form related, thus will not have this method
+                  }
+                  managerClose();
+               }
+            });
          }
       });
       
@@ -209,7 +202,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       getContentPane().add(panel);
 
 
-      setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+      setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
       validate();
       pack();
       repaint();
@@ -247,18 +240,12 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       }
    }
 
-
-   private void createScene()
+ private void createScene()
    {
-    
-         
-
          String userAgent = PSSimpleSwingBrowser.this.engine.getUserAgent();
          userAgent += " PercussionDCE/0.0.0";
          PSSimpleSwingBrowser.this.engine.setUserAgent(userAgent);
          log.debug("User agent set to "+userAgent);
-
-         
 
          PSSimpleSwingBrowser.this.engine.titleProperty().addListener(
                (obs1, oldValue1, newValue1) -> 
@@ -452,7 +439,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          engine.getLoadWorker().workDoneProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) {
-           
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override 
                     public void run() {
@@ -461,7 +447,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                 });
             }
         });
-         
+
          PSSimpleSwingBrowser.this.engine.setOnVisibilityChanged(e1 -> {
             if (!e1.getData())
             {

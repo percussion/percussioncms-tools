@@ -2424,7 +2424,7 @@ public class PSCmsModel implements IPSCmsModel
       /* should only happen if client gets a ref, flushes, gets same ref and 
        * changes name
        */
-      if (mainInfo == null && !isHierarchyModel())
+      if (mainInfo == null & !isHierarchyModel())
          return;
      
       //no infos are stored for leaves in a hierarchy model
@@ -2435,6 +2435,7 @@ public class PSCmsModel implements IPSCmsModel
          {
             //make copy of children because it will be modified while we walk it
             Collection<IPSReference> tmp = new ArrayList<>(mainInfo.m_children);
+            tmp.addAll(mainInfo.m_children);
             for (IPSReference childRef : tmp)
                removeFromCache(childRef);
          }
