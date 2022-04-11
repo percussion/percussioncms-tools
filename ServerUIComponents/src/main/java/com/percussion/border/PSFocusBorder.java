@@ -284,7 +284,7 @@ public class PSFocusBorder extends AbstractBorder implements FocusListener
       {
          throw new IllegalArgumentException("c must never be null");
       }
-      if (c.isFocusTraversable())
+      if (c.isFocusable())
       {
          addToComponent(c, false);
       }
