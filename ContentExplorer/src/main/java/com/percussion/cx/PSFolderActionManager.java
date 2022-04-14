@@ -415,12 +415,17 @@ public class PSFolderActionManager
          
          List itemNodes = searchEx.executeSearch(parentFolderNode, true, 
                false);
+
+         removeSystemFolder(itemNodes);
+         if(parentFolderNode.getName().equals("Sites")) {
+            itemNodes = removeCM1SiteFolders(itemNodes);
+         }
          // sort this list before adding to the results - note that the
          // comparator will sort case insensitive (bad constant name).
          Collections.sort(itemNodes, new PSStringComparator(
                PSStringComparator.SORT_CASE_INSENSITIVE_ASC));
          resList.addAll(itemNodes);
-         removeSystemFolder(resList);
+
          // set the children on the parent node
          parentFolderNode.setChildren(resList.iterator());
 
@@ -1664,5 +1669,25 @@ public class PSFolderActionManager
    public static final String ms_folderCompType = PSFolder
          .getComponentType(PSFolder.class);
 
+   private static List<String> cm1SiteRootFolder = new ArrayList<>();
+
+   public static void addCM1SiteRootFolder(String folder){
+      if(folder != null && folder.startsWith("//Sites/")){
+         folder = folder.replace("//Sites/","");
+      }
+      if(!cm1SiteRootFolder.contains(folder)){
+         cm1SiteRootFolder.add(folder);
+      }
+   }
+
+   public static List<PSNode> removeCM1SiteFolders(List<PSNode> childrenNodes){
+      List newChildrenList = new ArrayList();
+      for(PSNode child:childrenNodes){
+         if(!cm1SiteRootFolder.contains(child.getName())){
+            newChildrenList.add(child);
+         }
+      }
+      return newChildrenList;
+   }
 
 }

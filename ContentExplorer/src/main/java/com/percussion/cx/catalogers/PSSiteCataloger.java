@@ -11,6 +11,7 @@ package com.percussion.cx.catalogers;
 
 import com.percussion.cms.PSCmsException;
 import com.percussion.cms.objectstore.PSSite;
+import com.percussion.cx.PSFolderActionManager;
 import com.percussion.cx.error.IPSContentExplorerErrors;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.util.PSXMLDomUtil;
@@ -87,8 +88,12 @@ public class PSSiteCataloger
       {
          Element site = (Element) sites.item(i);
             Attr isPageBased = site.getAttributeNode("isPageBased");
-            if(isPageBased != null && "F".equals(isPageBased.getValue())){
-               m_sites.add(new PSSite(site, null, null));
+            if(isPageBased != null ){
+               if("F".equals(isPageBased.getValue())) {
+                  m_sites.add(new PSSite(site, null, null));
+               }else{
+                  PSFolderActionManager.addCM1SiteRootFolder(site.getAttribute("folderRoot"));
+               }
             }
       }
    }
