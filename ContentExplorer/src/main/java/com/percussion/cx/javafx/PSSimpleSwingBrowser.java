@@ -138,6 +138,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                      PSSimpleSwingBrowser.this.engine.executeScript("checkbeforeClose()");
                   }catch (Exception e){
                      //This dialog might not be Form related, thus will not have this method
+
                   }
                   managerClose();
                }
@@ -153,7 +154,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       btnDone.addActionListener(e -> {
          SwingUtilities.invokeLater( () -> 
             PSContentExplorerApplication.getApplet().refresh("Selected"));
-         this.closeDceWindow();
+            this.closeDceWindow();
       });
       
       //txtURL.addActionListener(al);
@@ -202,7 +203,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       getContentPane().add(panel);
 
 
-      setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+      setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
       validate();
       pack();
       repaint();
@@ -248,7 +249,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          log.debug("User agent set to "+userAgent);
 
          PSSimpleSwingBrowser.this.engine.titleProperty().addListener(
-               (obs1, oldValue1, newValue1) -> 
+               (obs1, oldValue1, newValue1) ->
                {
                   setJavaBridge();
                   Platform.runLater(() -> PSSimpleSwingBrowser.this.setTitle(newValue1));
@@ -421,9 +422,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             else contextMenu.hide();
          };
       });
-         
 
-         
          engine.locationProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> ov, String oldValue, final String newValue) {
@@ -484,27 +483,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             {
                log.warn("Found WebKitTrigger alert from older version of Server.");
             }
-            if (data.equals("WebKitTrigger") || data.equals("PercussionDCE"))
-            {
-               // May not be needed anymore as we are able to pick up in document handler above
-               // Keep here for time being just in case
-               log.debug("Found Javascript Inject Trigger Alert");
-               setJavaBridge();
-               return;
-            }
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(event.getData());
-            try
-            {
-               alert.showAndWait();
-            }
-            catch (IllegalStateException e2)
-            {
-               // Don't display if wrong state;
-            }
-
          });
 
          
@@ -515,7 +493,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             {
                setJavaBridge();
             }
-            if (newValue2 == Worker.State.SUCCEEDED && !isClosed())
+            if (newValue2 == Worker.State.SUCCEEDED )
             {
                String location = engine.getLocation();
                log.debug("Loaded url "+location+ "to window "+this.target);
