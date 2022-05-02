@@ -135,33 +135,35 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                @Override
                public void run() {
                   try {
-                     PSSimpleSwingBrowser.this.engine.executeScript("checkbeforeClose()");
-                  }catch (Exception e){
+                     Object shouldClose = PSSimpleSwingBrowser.this.engine.executeScript("checkBeforeClose()");
+                     if(Boolean.TRUE.equals(shouldClose)){
+                        managerClose();
+                     }
+                  } catch (Exception e) {
                      //This dialog might not be Form related, thus will not have this method
-
+                     managerClose();
                   }
-                  managerClose();
                }
             });
          }
       });
-      
+
       btnGo.addActionListener(e -> {
          URL url = PSBrowserUtils.toURL(mi_actionurl);
          PSBrowserUtils.openWebpage(url);
-      });  
-      
+      });
+
       btnDone.addActionListener(e -> {
-         SwingUtilities.invokeLater( () -> 
+         SwingUtilities.invokeLater( () ->
             PSContentExplorerApplication.getApplet().refresh("Selected"));
             this.closeDceWindow();
       });
-      
+
       //txtURL.addActionListener(al);
       SwingUtilities.invokeLater( () -> {
       JPanel panel = new JPanel();
       panel.setLayout(new BorderLayout());
-    
+
       JButton openInBrowser = new JButton("Open in Browser");
       openInBrowser.requestFocusInWindow();
       openInBrowser.getAccessibleContext().setAccessibleDescription(CANNOT_READ_MESSAGE);
@@ -169,11 +171,11 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          log.debug("Open In browser pressed" + mi_actionurl);
          URL url = PSBrowserUtils.toURL(mi_actionurl);
          PSBrowserUtils.openWebpage(url);
-      });  
-      
+      });
+
       progressBar.setPreferredSize(new Dimension(150, 18));
       progressBar.setStringPainted(true);
-      
+
       topBar.setBorder(BorderFactory.createEmptyBorder(3, 5, 3, 5));
       //topBar.add(txtURL, BorderLayout.CENTER);
 
@@ -182,24 +184,24 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       topBar.setName("Accessibilty menu");
       topBar.getAccessibleContext().setAccessibleName("Accessibilty menu");
       topBar.setVisible(false);
-     
+
       JPanel statusBar = new JPanel(new BorderLayout(5, 0));
       statusBar.setBorder(BorderFactory.createEmptyBorder(3, 5, 3, 5));
       statusBar.add(lblStatus, BorderLayout.CENTER);
       statusBar.add(progressBar, BorderLayout.EAST);
-      
-      
-      
+
+
+
       panel.add(topBar, BorderLayout.NORTH);
-     
+
       this.jfxPanel.setSize(new Dimension(this.browserProps.getWidth(), this.browserProps.getHeight()));
       this.jfxPanel.setPreferredSize(new Dimension(this.browserProps.getWidth(), this.browserProps.getHeight()));
 
-      
+
       panel.add(jfxPanel, BorderLayout.CENTER);
       panel.add(statusBar, BorderLayout.SOUTH);
-      
-     
+
+
       getContentPane().add(panel);
 
 
@@ -207,14 +209,14 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       validate();
       pack();
       repaint();
-      
+
       });
 
    }
 
    public void loadURL(final String url)
    {
-     
+
          String tmp = toURL(url);
 
          if (tmp == null)
@@ -254,17 +256,17 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                   setJavaBridge();
                   Platform.runLater(() -> PSSimpleSwingBrowser.this.setTitle(newValue1));
                });
-  
-         
+
+
          PSSimpleSwingBrowser.this.engine.locationProperty().addListener(
-               (obs1, oldValue1, newValue1) -> 
+               (obs1, oldValue1, newValue1) ->
                {
                   log.debug("locationProperty:"+obs1+":"+oldValue1+":"+newValue1);
                   mi_actionurl = newValue1;
                });
-         
+
          PSSimpleSwingBrowser.this.engine.documentProperty().addListener(
-               (obs1, oldValue1, newValue1) -> 
+               (obs1, oldValue1, newValue1) ->
                {
                   log.debug("DocumentProperty:"+obs1+":"+oldValue1+":"+newValue1);
                   setJavaBridge();
@@ -279,24 +281,24 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
               log.debug("js size" +event.getData().getHeight()+ ":"+event.getData().getWidth());
               PSSimpleSwingBrowser.this.setSize((int)event.getData().getWidth(),(int)event.getData().getHeight());
             }
- 
+
          });
-         
+
 
          engine.setOnStatusChanged(new EventHandler<WebEvent<String>>() {
-            @Override 
+            @Override
             public void handle(final WebEvent<String> event) {
                 setJavaBridge();
                 SwingUtilities.invokeLater(new Runnable() {
-                    @Override 
+                    @Override
                     public void run() {
                         lblStatus.setText(event.getData());
                     }
                 });
             }
         });
-        
-    
+
+
       // Although Keyboard paste event is firing and being picked up by TinyMCE,
       // it
       // seems that each additionl copy to clipboard is appending to the
@@ -367,7 +369,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             }
          }
       });
-      
+
 
       final ContextMenu contextMenu = createContextMenu(webView);
 
@@ -427,19 +429,19 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             @Override
             public void changed(ObservableValue<? extends String> ov, String oldValue, final String newValue) {
                 SwingUtilities.invokeLater(new Runnable() {
-                    @Override 
+                    @Override
                     public void run() {
                         txtURL.setText(newValue);
                     }
                 });
             }
         });
-         
+
          engine.getLoadWorker().workDoneProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) {
                 SwingUtilities.invokeLater(new Runnable() {
-                    @Override 
+                    @Override
                     public void run() {
                         progressBar.setValue(newValue.intValue());
                     }
@@ -485,10 +487,10 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             }
          });
 
-         
+
          PSSimpleSwingBrowser.this.engine.getLoadWorker().stateProperty().addListener((obs2, oldValue2, newValue2) -> {
             log.debug("state changed from " + oldValue2.name() + " to " + newValue2.name());
-            
+
             if (oldValue2 == Worker.State.SCHEDULED && newValue2 == Worker.State.RUNNING)
             {
                setJavaBridge();
@@ -497,12 +499,12 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             {
                String location = engine.getLocation();
                log.debug("Loaded url "+location+ "to window "+this.target);
-               
+
                PSContentExplorerApplication.getApplet().refresh("Selected");
-               
-               
+
+
                checkAndShowAppletWarning(PSSimpleSwingBrowser.this.engine);
-              
+
                return;
             }
 
