@@ -135,10 +135,8 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                @Override
                public void run() {
                   try {
-                     Object shouldClose = PSSimpleSwingBrowser.this.engine.executeScript("checkBeforeClose()");
-                     if(Boolean.TRUE.equals(shouldClose)){
-                        managerClose();
-                     }
+                     PSSimpleSwingBrowser.this.engine.executeScript("checkBeforeClose()");
+                     managerClose();
                   } catch (Exception e) {
                      //This dialog might not be Form related, thus will not have this method
                      managerClose();

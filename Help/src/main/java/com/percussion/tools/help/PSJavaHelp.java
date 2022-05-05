@@ -61,7 +61,7 @@ public class PSJavaHelp
     * @return The one and only instance for this object. If it doesn't exist, it
     * will be created.
     **/
-   public static PSJavaHelp getInstance()
+   public static synchronized PSJavaHelp getInstance()
    {
       if ( null == ms_theInstance )
          ms_theInstance = new PSJavaHelp();
@@ -86,18 +86,19 @@ public class PSJavaHelp
     */
    public void setHelpSet(String helpSetURL, String helpMappingResourceFile)
    {
-      if(helpSetURL == null || helpSetURL.trim().length() == 0)
-         throw new IllegalArgumentException(
-            "helpSetURL may not be null or empty");
-
-      m_helpSetURL = helpSetURL;
-      if(helpMappingResourceFile != null)
-      {
-         if(helpMappingResourceFile.trim().length() != 0)
-            loadHelpTopicMappings(helpMappingResourceFile);
-         else
+      synchronized (ms_theInstance) {
+         if (helpSetURL == null || helpSetURL.trim().length() == 0)
             throw new IllegalArgumentException(
-               "helpMappingResourceFile may not be empty.");
+                    "helpSetURL may not be null or empty");
+
+         m_helpSetURL = helpSetURL;
+         if (helpMappingResourceFile != null) {
+            if (helpMappingResourceFile.trim().length() != 0)
+               loadHelpTopicMappings(helpMappingResourceFile);
+            else
+               throw new IllegalArgumentException(
+                       "helpMappingResourceFile may not be empty.");
+         }
       }
    }
 
@@ -132,14 +133,14 @@ public class PSJavaHelp
    public static String getHelpSetURL(String hsFilePath, boolean isApplet,
       String codeBase)
    {
-      if( isApplet && (codeBase == null || codeBase.trim().length() == 0) )
-         throw new IllegalArgumentException(
-            "applet codeBase may not be null or empty.");
+      synchronized (ms_theInstance) {
+         if (isApplet && (codeBase == null || codeBase.trim().length() == 0))
+            throw new IllegalArgumentException(
+                    "applet codeBase may not be null or empty.");
 
-      String helpSetURL = hsFilePath;
-      if(hsFilePath != null && hsFilePath.trim().length() != 0)
-      {
-         String prefix = "file:";
+         String helpSetURL = hsFilePath;
+         if (hsFilePath != null && hsFilePath.trim().length() != 0) {
+            String prefix = "file:";
 /*         if(isApplet)
             prefix = codeBase;
 
@@ -148,29 +149,23 @@ public class PSJavaHelp
          else
             helpSetURL = "jar:" + prefix + hsFilePath; */
 
-         if(hsFilePath.indexOf(".jar!/") == -1)
-         {
-            if(isApplet)
-            {
-               try
-               {
-                  helpSetURL = new URL(new URL(codeBase), hsFilePath).toString();
-               }
-               catch(MalformedURLException e)
-               {
-                  throw new IllegalArgumentException(
-                     "malformed url for helpset");
-               }
-            }
-            else
-               helpSetURL = prefix + hsFilePath;
+            if (hsFilePath.indexOf(".jar!/") == -1) {
+               if (isApplet) {
+                  try {
+                     helpSetURL = new URL(new URL(codeBase), hsFilePath).toString();
+                  } catch (MalformedURLException e) {
+                     throw new IllegalArgumentException(
+                             "malformed url for helpset");
+                  }
+               } else
+                  helpSetURL = prefix + hsFilePath;
+            } else
+               helpSetURL = "jar:" + prefix + hsFilePath;
+
          }
-         else
-            helpSetURL = "jar:" + prefix + hsFilePath;
 
+         return helpSetURL;
       }
-
-      return helpSetURL;
    }
 
    /**
@@ -180,7 +175,7 @@ public class PSJavaHelp
     */
    public static String getHelpSetURL(String hsFilePath)
    {
-      return getHelpSetURL(hsFilePath, false, null);
+      return getHelpSetURL(hsFilePath, true, null);
    }
 
    /**
@@ -219,74 +214,53 @@ public class PSJavaHelp
    public static void launchHelp( String helpID, boolean isTopicID, Window window)
    {
       PSJavaHelp helpInst = getInstance();
-      HelpBroker broker = helpInst.getHelpBroker();
-      if (null == broker)
-      {
-         showErrorDialog( getResourceString("noHelpSet"),
-            getResourceString("noHelpTitle"), JOptionPane.ERROR_MESSAGE );
-         return;
-      }
-
-      if ( null == helpID || 0 == helpID.trim().length())
-           helpID = MAIN_HELP_ID;
-
-      String helpTopicID = null;
-      try {
-         /* If the provided help id is topic id or there is no map file,
-          * provided id is considered as topic id.
-          */
-         if( helpInst.m_helpIDToFileMap == null || isTopicID)
-         {
-            System.out.println("using supplied help id as topic id " + helpID);
-            helpTopicID = helpID;
+      synchronized (ms_theInstance) {
+         HelpBroker broker = helpInst.getHelpBroker();
+         if (null == broker) {
+            showErrorDialog(getResourceString("noHelpSet"),
+                    getResourceString("noHelpTitle"), JOptionPane.ERROR_MESSAGE);
+            return;
          }
-         else
-         {
-            try {
-               helpTopicID = helpInst.m_helpIDToFileMap.getProperty( helpID );
+
+         if (null == helpID || 0 == helpID.trim().length())
+            helpID = MAIN_HELP_ID;
+
+         String helpTopicID = null;
+         try {
+            /* If the provided help id is topic id or there is no map file,
+             * provided id is considered as topic id.
+             */
+            if (helpInst.m_helpIDToFileMap == null || isTopicID) {
+               System.out.println("using supplied help id as topic id " + helpID);
+               helpTopicID = helpID;
+            } else {
+               try {
+                  helpTopicID = helpInst.m_helpIDToFileMap.getProperty(helpID);
+               } catch (MissingResourceException e) {
+                  //no key present with this help id, so we have to use main help.
+               }
+               if (null == helpTopicID) {
+                  System.out.println("Couldn't find help mapping for '" + helpID +
+                          "'. Trying default.");
+                  helpTopicID = helpInst.m_helpIDToFileMap.getProperty(
+                          MAIN_HELP_ID);
+               }
             }
-            catch(MissingResourceException e)
-            {
-               //no key present with this help id, so we have to use main help.
-            }
-            if ( null == helpTopicID )
-            {
-               System.out.println( "Couldn't find help mapping for '" + helpID +
-                  "'. Trying default." );
-               helpTopicID = helpInst.m_helpIDToFileMap.getProperty(
-                  MAIN_HELP_ID );
-            }
-         }
 
-         System.out.println("The help topic id to launch is " + helpTopicID);
-         broker.setCurrentID(helpTopicID);
-         ((DefaultHelpBroker) broker).setActivationWindow(window);
-         broker.setDisplayed(true);
-      }
-      catch(MissingResourceException e)
-      {
-         //Requested or main Help Id is not found in the map file
-         showErrorDialog( getResourceString("noHelp"),
-            getResourceString("noHelpTitle"), JOptionPane.ERROR_MESSAGE );
-      }
-      catch(BadIDException e)
-      {
-         System.out.println("Invalid ID " + e.getID());
-        java.util.Enumeration ids = e.getHelpSet().getCombinedMap().getAllIDs();
-         for (; ids.hasMoreElements(); )
-         {
-            System.out.println(ids.nextElement().toString());
+            System.out.println("The help topic id to launch is " + helpTopicID);
+            broker.setCurrentID(helpTopicID);
+            ((DefaultHelpBroker) broker).setActivationWindow(window);
+            broker.setDisplayed(true);
+         } catch (MissingResourceException e) {
+            //Requested or main Help Id is not found in the map file
+            showErrorDialog(getResourceString("noHelp"),
+                    getResourceString("noHelpTitle"), JOptionPane.ERROR_MESSAGE);
+         } catch (BadIDException e) {
+            System.out.println("Invalid ID " + e.getID());
+            //Requested Help Topic is not found in  helpset file
+            showErrorDialog(getResourceString("noHelp"),
+                    getResourceString("noHelpTitle"), JOptionPane.ERROR_MESSAGE);
          }
-
-         ids = e.getMap().getAllIDs();
-         for (; ids.hasMoreElements(); )
-         {
-            System.out.println("Map - " + ids.nextElement().toString());
-         }
-
-         //Requested Help Topic is not found in  helpset file
-         showErrorDialog( getResourceString("noHelp"),
-            getResourceString("noHelpTitle"), JOptionPane.ERROR_MESSAGE );
       }
    }
 
@@ -298,11 +272,13 @@ public class PSJavaHelp
     */
    public boolean isHelpDisplayed()
    {
-      HelpBroker broker = getHelpBroker();
-      if(broker != null)
-         return broker.isDisplayed();
-      else
-         return false;
+      synchronized (ms_theInstance) {
+         HelpBroker broker = getHelpBroker();
+         if (broker != null)
+            return broker.isDisplayed();
+         else
+            return false;
+      }
    }
 
    /**
@@ -321,11 +297,12 @@ public class PSJavaHelp
     */
    public void setParent(JDialog modal, boolean show)
    {
-      HelpBroker broker = getHelpBroker();
-      if(broker != null)
-      {
-         ((DefaultHelpBroker)broker).setActivationWindow(modal);
-         broker.setDisplayed(show);
+      synchronized (ms_theInstance) {
+         HelpBroker broker = getHelpBroker();
+         if (broker != null) {
+            ((DefaultHelpBroker) broker).setActivationWindow(modal);
+            broker.setDisplayed(show);
+         }
       }
    }
    
@@ -359,36 +336,27 @@ public class PSJavaHelp
     */
    private void loadHelpTopicMappings(String helpMappingResourceFile)
    {
-      InputStream stream = null;
-      helpMappingResourceFile = helpMappingResourceFile.replace('.', '/');
-      helpMappingResourceFile = "/" + helpMappingResourceFile + ".properties";
-      try
-      {
-         stream = this.getClass().getResourceAsStream(helpMappingResourceFile);
-         if (stream == null)
-            throw new FileNotFoundException("helpMappingResourceFile");
-         m_helpIDToFileMap = new Properties();
-         m_helpIDToFileMap.load(stream);
-      }
-      catch( IOException ioex )
-      {
-         System.out.println("DEBUG - disabled help loading errors");
-      }
-      finally
-      {
-         if (stream != null)
-         {
-            try
-            {
-               stream.close();
-            }
-            catch (Exception ex)
-            {
+      synchronized (ms_theInstance) {
+         InputStream stream = null;
+         helpMappingResourceFile = helpMappingResourceFile.replace('.', '/');
+         helpMappingResourceFile = "/" + helpMappingResourceFile + ".properties";
+         try {
+            stream = this.getClass().getResourceAsStream(helpMappingResourceFile);
+            if (stream == null)
+               throw new FileNotFoundException("helpMappingResourceFile");
+            m_helpIDToFileMap = new Properties();
+            m_helpIDToFileMap.load(stream);
+         } catch (IOException ioex) {
+            System.out.println("DEBUG - disabled help loading errors");
+         } finally {
+            if (stream != null) {
+               try {
+                  stream.close();
+               } catch (Exception ex) {
 
-            }
-            finally
-            {
+               } finally {
 
+               }
             }
          }
       }
@@ -401,14 +369,15 @@ public class PSJavaHelp
     */
    private HelpBroker getHelpBroker()
    {
-      // This may be called before initialization
-      if (m_helpSetURL == null) return null;
-      
-      if (m_hbroker == null || m_hbroker.getHelpSet()==null)
-      {
-         createHelpSet();
+      synchronized (ms_theInstance) {
+         // This may be called before initialization
+         if (m_helpSetURL == null) return null;
+
+         if (m_hbroker == null || m_hbroker.getHelpSet() == null) {
+            createHelpSet();
+         }
+         return m_hbroker;
       }
-      return m_hbroker;
    }
    
    
@@ -428,8 +397,8 @@ public class PSJavaHelp
          hs = new HelpSet(loader, url);
          System.out.println("Helpset URL is " + hs.getHelpSetURL());
         java.util.Enumeration ids = hs.getLocalMap().getAllIDs();
-         for (; ids.hasMoreElements(); )
-            System.out.println("Map - " + ids.nextElement().toString());
+         //for (; ids.hasMoreElements(); )
+           // System.out.println("Map - " + ids.nextElement().toString());
          m_hbroker = hs.createHelpBroker();
       }
       catch(MalformedURLException me)
