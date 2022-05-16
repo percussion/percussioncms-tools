@@ -86,6 +86,8 @@ public class PSJavaHelp
     */
    public void setHelpSet(String helpSetURL, String helpMappingResourceFile)
    {
+      if ( null == ms_theInstance )
+         ms_theInstance = new PSJavaHelp();
       synchronized (ms_theInstance) {
          if (helpSetURL == null || helpSetURL.trim().length() == 0)
             throw new IllegalArgumentException(
@@ -131,8 +133,10 @@ public class PSJavaHelp
     * </code> and <code>codeBase</code> is <code>null</code> or empty.
     */
    public static String getHelpSetURL(String hsFilePath, boolean isApplet,
-      String codeBase)
+                                      String codeBase)
    {
+      if ( null == ms_theInstance )
+         ms_theInstance = new PSJavaHelp();
       synchronized (ms_theInstance) {
          if (isApplet && (codeBase == null || codeBase.trim().length() == 0))
             throw new IllegalArgumentException(
@@ -210,10 +214,12 @@ public class PSJavaHelp
     * <code>null</code>. This should not be <code>null</code> if this is called
     * from a modal dialog because if the dialog is not set as parent to the help
     * viewer window, it won't be accessible.
-   **/
+    **/
    public static void launchHelp( String helpID, boolean isTopicID, Window window)
    {
       PSJavaHelp helpInst = getInstance();
+      if ( null == ms_theInstance )
+         ms_theInstance = new PSJavaHelp();
       synchronized (ms_theInstance) {
          HelpBroker broker = helpInst.getHelpBroker();
          if (null == broker) {
@@ -272,6 +278,8 @@ public class PSJavaHelp
     */
    public boolean isHelpDisplayed()
    {
+      if ( null == ms_theInstance )
+         ms_theInstance = new PSJavaHelp();
       synchronized (ms_theInstance) {
          HelpBroker broker = getHelpBroker();
          if (broker != null)
@@ -297,6 +305,8 @@ public class PSJavaHelp
     */
    public void setParent(JDialog modal, boolean show)
    {
+      if ( null == ms_theInstance )
+         ms_theInstance = new PSJavaHelp();
       synchronized (ms_theInstance) {
          HelpBroker broker = getHelpBroker();
          if (broker != null) {
@@ -305,9 +315,9 @@ public class PSJavaHelp
          }
       }
    }
-   
+
    /**
-    * Clear the help broker so that a new one gets instantiated 
+    * Clear the help broker so that a new one gets instantiated
     * the next time we try to get the help broker.
     */
    public void clearBroker()
@@ -320,7 +330,7 @@ public class PSJavaHelp
     * to get the single instance. <p/>
     * Attempts to load the resource that contains the help id mappings. If it
     * fails, a message is displayed to the user via a dialog.
-   **/
+    **/
    private PSJavaHelp()
    {
    }
@@ -336,6 +346,8 @@ public class PSJavaHelp
     */
    private void loadHelpTopicMappings(String helpMappingResourceFile)
    {
+      if ( null == ms_theInstance )
+         ms_theInstance = new PSJavaHelp();
       synchronized (ms_theInstance) {
          InputStream stream = null;
          helpMappingResourceFile = helpMappingResourceFile.replace('.', '/');
@@ -369,6 +381,8 @@ public class PSJavaHelp
     */
    private HelpBroker getHelpBroker()
    {
+      if ( null == ms_theInstance )
+         ms_theInstance = new PSJavaHelp();
       synchronized (ms_theInstance) {
          // This may be called before initialization
          if (m_helpSetURL == null) return null;
@@ -379,8 +393,8 @@ public class PSJavaHelp
          return m_hbroker;
       }
    }
-   
-   
+
+
    /**
     * Creates the JavaHelp Object broker and caches to launch the help later.
     * Displays an error message to the user if the supplied helpset url to this
@@ -396,9 +410,9 @@ public class PSJavaHelp
          url = new URL(m_helpSetURL);
          hs = new HelpSet(loader, url);
          System.out.println("Helpset URL is " + hs.getHelpSetURL());
-        java.util.Enumeration ids = hs.getLocalMap().getAllIDs();
+         java.util.Enumeration ids = hs.getLocalMap().getAllIDs();
          //for (; ids.hasMoreElements(); )
-           // System.out.println("Map - " + ids.nextElement().toString());
+         // System.out.println("Map - " + ids.nextElement().toString());
          m_hbroker = hs.createHelpBroker();
       }
       catch(MalformedURLException me)
@@ -408,10 +422,10 @@ public class PSJavaHelp
 
          Object[] params = { m_helpSetURL };
          String text = MessageFormat.format(getResourceString(
-            "malformedHelpSetURL" ) , params);
+                 "malformedHelpSetURL" ) , params);
          showErrorDialog( text,
-               getResourceString( "invalidHelpSetTitle" ),
-               JOptionPane.ERROR_MESSAGE );
+                 getResourceString( "invalidHelpSetTitle" ),
+                 JOptionPane.ERROR_MESSAGE );
       }
       catch (HelpSetException ee) {
          System.out.println ("Unable to parse HelpSetURL: " + m_helpSetURL);
@@ -419,10 +433,10 @@ public class PSJavaHelp
 
          Object[] params = { m_helpSetURL };
          String text = MessageFormat.format(
-            getResourceString( "invalidHelpSetFile" ),params);
+                 getResourceString( "invalidHelpSetFile" ),params);
          showErrorDialog( text,
-               getResourceString( "invalidHelpSetTitle" ),
-               JOptionPane.ERROR_MESSAGE );
+                 getResourceString( "invalidHelpSetTitle" ),
+                 JOptionPane.ERROR_MESSAGE );
       }
    }
 
@@ -439,8 +453,8 @@ public class PSJavaHelp
          if ( null == m_res )
          {
             m_res = ResourceBundle.getBundle(
-               "com.percussion.tools.help.PSJavaHelpErrorResources",
-               Locale.getDefault() );
+                    "com.percussion.tools.help.PSJavaHelpErrorResources",
+                    Locale.getDefault() );
          }
       }
       catch(MissingResourceException mre)
@@ -491,7 +505,7 @@ public class PSJavaHelp
     * </code> message types.
     */
    public static void showErrorDialog(
-      String errorBody, String errorTitle, int type)
+           String errorBody, String errorTitle, int type)
    {
       JTextArea textBox = new JTextArea(errorBody, 8, 20);
       textBox.setWrapStyleWord( true );
@@ -501,7 +515,7 @@ public class PSJavaHelp
       pane.setPreferredSize(new Dimension( 400, 125));
       JOptionPane.showMessageDialog(getPermanetFocusOwner(), pane, errorTitle, type );
    }
-   
+
    /**
     * Component currently keeping focus.
     */

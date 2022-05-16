@@ -17,6 +17,7 @@ import org.apache.axis.AxisFault;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -676,14 +677,18 @@ public class PSContentExplorerLoginPanel extends JFrame
                   if (!strCurrentLine.equalsIgnoreCase(""))
                      localeJsonString = strCurrentLine;
                }
-               JSONObject obj = new JSONObject(localeJsonString);
-               JSONArray activelocales = obj.getJSONArray("activelocales");
-               for (int i = 0; i < activelocales.length(); i++) {
-                  JSONObject activeLoale = activelocales.getJSONObject(i);
-                  PSLocale psl = new PSLocale();
-                  psl.setCode(activeLoale.getString("localecode"));
-                  psl.setLabel(activeLoale.getString("localedisplayname"));
-                  locales.add(psl);
+               try {
+                  JSONObject obj = new JSONObject(localeJsonString);
+                  JSONArray activelocales = obj.getJSONArray("activelocales");
+                  for (int i = 0; i < activelocales.length(); i++) {
+                     JSONObject activeLoale = activelocales.getJSONObject(i);
+                     PSLocale psl = new PSLocale();
+                     psl.setCode(activeLoale.getString("localecode"));
+                     psl.setLabel(activeLoale.getString("localedisplayname"));
+                     locales.add(psl);
+                  }
+               }catch (JSONException je){
+                  log.error(je);
                }
             } else {
                br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
