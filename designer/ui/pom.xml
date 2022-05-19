@@ -190,6 +190,12 @@
             <version>${cmsserver.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>org.eclipse.ui.views</artifactId>
+            <version>3.5.1.M20110202-0800</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

@@ -483,6 +483,27 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             {
                log.warn("Found WebKitTrigger alert from older version of Server.");
             }
+            if (data.equals("WebKitTrigger") || data.equals("PercussionDCE"))
+            {
+               // May not be needed anymore as we are able to pick up in document handler above
+               // Keep here for time being just in case
+               log.debug("Found Javascript Inject Trigger Alert");
+               setJavaBridge();
+               return;
+            }
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText(event.getData());
+            try
+            {
+               alert.showAndWait();
+            }
+            catch (IllegalStateException e2)
+            {
+               // Don't display if wrong state;
+            }
+
          });
 
 
@@ -493,7 +514,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             {
                setJavaBridge();
             }
-            if (newValue2 == Worker.State.SUCCEEDED )
+            if (newValue2 == Worker.State.SUCCEEDED && !isClosed())
             {
                String location = engine.getLocation();
                log.debug("Loaded url "+location+ "to window "+this.target);
