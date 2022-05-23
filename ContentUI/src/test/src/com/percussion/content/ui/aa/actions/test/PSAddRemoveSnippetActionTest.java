@@ -17,8 +17,6 @@ import com.percussion.content.ui.aa.actions.IPSAAClientAction;
 import com.percussion.content.ui.aa.actions.PSAAClientActionException;
 import com.percussion.content.ui.aa.actions.PSAAClientActionFactory;
 import com.percussion.content.ui.aa.actions.PSActionResponse;
-import com.percussion.content.ui.aa.actions.impl.PSAddSnippetAction;
-import com.percussion.content.ui.aa.actions.impl.PSRemoveSnippetAction;
 import com.percussion.design.objectstore.PSRelationshipConfig;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.content.data.PSItemStatus;

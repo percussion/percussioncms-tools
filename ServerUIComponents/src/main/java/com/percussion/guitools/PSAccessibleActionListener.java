@@ -35,8 +35,6 @@ public class PSAccessibleActionListener implements ActionListener
       m_prependStr = prependString;
    }
    /** Override to set the accessible name on selection change
-    * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-    * ActionEvent)
     */
    public void actionPerformed(ActionEvent e)
    {
@@ -62,7 +60,6 @@ public class PSAccessibleActionListener implements ActionListener
       return m_prependStr;
    }
    /**
-    * @param prepepend label for Accessibility to set.
     */
    public void setPrependStr(String str)
    {

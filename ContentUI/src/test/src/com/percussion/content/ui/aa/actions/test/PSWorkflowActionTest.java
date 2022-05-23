@@ -14,7 +14,6 @@ import com.percussion.content.ui.aa.PSAAObjectId;
 import com.percussion.content.ui.aa.actions.IPSAAClientAction;
 import com.percussion.content.ui.aa.actions.PSAAClientActionFactory;
 import com.percussion.content.ui.aa.actions.PSActionResponse;
-import com.percussion.content.ui.aa.actions.impl.PSWorkflowAction;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.guidmgr.IPSGuidManager;
 import com.percussion.services.guidmgr.PSGuidManagerLocator;

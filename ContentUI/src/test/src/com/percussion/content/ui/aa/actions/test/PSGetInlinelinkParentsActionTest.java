@@ -12,7 +12,6 @@ package com.percussion.content.ui.aa.actions.test;
 import com.percussion.content.ui.aa.actions.IPSAAClientAction;
 import com.percussion.content.ui.aa.actions.PSAAClientActionFactory;
 import com.percussion.content.ui.aa.actions.PSActionResponse;
-import com.percussion.content.ui.aa.actions.impl.PSGetInlinelinkParentsAction;
 import com.percussion.utils.testing.IntegrationTest;
 import junit.framework.TestCase;
 import org.json.JSONArray;

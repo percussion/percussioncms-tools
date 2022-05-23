@@ -12,7 +12,6 @@ package com.percussion.search.ui;
 import com.percussion.cms.objectstore.PSSearch;
 import com.percussion.guitools.PSPropertyPanel;
 import com.percussion.i18n.ui.PSI18NTranslationKeyValues;
-import com.percussion.search.PSCommonSearchUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -173,11 +172,11 @@ public class PSSearchAdvancedPanel
          {
             if(m_synonymExpansionCheckBox.isSelected())
             {
-               search.setProperty(PSCommonSearchUtils.PROP_SYNONYM_EXPANSION, PSCommonSearchUtils.BOOL_YES);
+               search.setProperty(PROP_SYNONYM_EXPANSION, BOOL_YES);
             }
             else
             {
-               search.setProperty(PSCommonSearchUtils.PROP_SYNONYM_EXPANSION, PSCommonSearchUtils.BOOL_NO);
+               search.setProperty(PROP_SYNONYM_EXPANSION, BOOL_NO);
             }
          }
          if (!m_isEngineAvailable && m_isDBCaseSensitive)
@@ -194,9 +193,9 @@ public class PSSearchAdvancedPanel
             //set the synonym expansion control, use search config default if
             //search does not have a valid setting
             boolean selected = m_isSynonymExpansionEnabled;
-            String synExpansion = search.getProperty(PSCommonSearchUtils.PROP_SYNONYM_EXPANSION);
+            String synExpansion = search.getProperty(PROP_SYNONYM_EXPANSION);
             if (synExpansion != null)
-               selected = synExpansion.equals(PSCommonSearchUtils.BOOL_YES);
+               selected = synExpansion.equals(BOOL_YES);
                         
             m_synonymExpansionCheckBox.setSelected(selected);
          }
@@ -224,11 +223,11 @@ public class PSSearchAdvancedPanel
       if (search == null)
          throw new IllegalArgumentException("search cannot be null");
 
-      String synonymExpansion = search.getProperty(PSCommonSearchUtils.PROP_SYNONYM_EXPANSION);
+      String synonymExpansion = search.getProperty(PROP_SYNONYM_EXPANSION);
       
-      if ((synonymExpansion == null) || !(synonymExpansion.equals(PSCommonSearchUtils.BOOL_YES) ||
-            synonymExpansion.equals(PSCommonSearchUtils.BOOL_NO)))
-         return PSCommonSearchUtils.BOOL_NO;
+      if ((synonymExpansion == null) || !(synonymExpansion.equals(BOOL_YES) ||
+            synonymExpansion.equals(BOOL_NO)))
+         return BOOL_NO;
       else
          return synonymExpansion;
    }
@@ -262,6 +261,22 @@ public class PSSearchAdvancedPanel
       return m_synonymExpansionCheckBox;
    }
    
+   /**
+    * This is the property name used to transfer the 'Expand query with
+    * synonyms' checkbox value.
+    */
+   public static final String PROP_SYNONYM_EXPANSION = "synonym_expansion";
+
+   /**
+    * Constant for the "yes" boolean value.
+    */
+   public static final String BOOL_YES = "yes";
+
+   /**
+    * Constant for the "no" boolean value.
+    */
+   public static final String BOOL_NO = "no";
+
    /**
     * A boolean flag to hold whether search engine is enabled
     * or not. <code>true</code> value indicates that search 

@@ -11,12 +11,13 @@
 package com.percussion.search.ui;
 
 import com.percussion.UTComponents.UTFixedHeightTextField;
+import com.percussion.cms.objectstore.PSSProperty;
 import com.percussion.cms.objectstore.PSSearch;
 import com.percussion.guitools.ErrorDialogs;
 import com.percussion.guitools.PSAccessibleActionListener;
 import com.percussion.guitools.PSPropertyPanel;
+import com.percussion.i18n.PSI18nUtils;
 import com.percussion.i18n.ui.PSI18NTranslationKeyValues;
-import com.percussion.search.PSCommonSearchUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -211,7 +212,7 @@ public class PSSearchSimplePanel
       if (m_isEngineAvailable)
       {
          String ftq = m_ftQuery.getText();
-         String msg = PSCommonSearchUtils.validateFTSSearchQuery(ftq,
+         String msg = validateFTSSearchQuery(ftq,
             PSI18NTranslationKeyValues.getInstance(), null);
          if (msg != null)
          {
@@ -362,6 +363,46 @@ public class PSSearchSimplePanel
       }
    }
    
+   /**
+    * Validates that the value supplied for the full text query.
+    *
+    * @param query The query, may be <code>null</code> or emtpy.
+    * @param translator the translator used to internationalize the error
+    * message, if <code>null</code> is supplied, <code>PSI18nUtils</code>
+    * will be used as translator along with the specified locale.
+    * @param locale the locale for which to internationalize the error message,
+    * may be <code>null</code> or empty in which case the default locale is
+    * used. Ignored if the <code>translator</code> is not <code>null</code>.
+    *
+    * @return <code>null</code> if the query is valid, otherwise a non-
+    * <code>null</code> internationalized error message.
+    */
+   public static String validateFTSSearchQuery(String query,
+      PSI18NTranslationKeyValues translator, String locale)
+   {
+      String msg = null;
+
+      if (query.length() > PSSProperty.VALUE_LENGTH)
+      {
+         String key = PSSearchSimplePanel.class.getName() +
+         "@Search query too long";
+         if (translator == null)
+         {
+            if (locale != null && locale.trim().length() > 0)
+               msg = PSI18nUtils.getString(key, locale);
+            else
+               msg = PSI18nUtils.getString(key);
+         }
+         else
+            msg = translator.getTranslationValue(key);
+
+         msg = MessageFormat.format(msg, new Object[] {String.valueOf(
+            PSSProperty.VALUE_LENGTH)});
+      }
+
+      return msg;
+   }
+
    // see interface for description
    public void actionPerformed(ActionEvent e)
    {

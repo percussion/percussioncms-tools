@@ -13,7 +13,6 @@ import com.percussion.content.ui.aa.actions.IPSAAClientAction;
 import com.percussion.content.ui.aa.actions.PSAAClientActionException;
 import com.percussion.content.ui.aa.actions.PSAAClientActionFactory;
 import com.percussion.content.ui.aa.actions.PSActionResponse;
-import com.percussion.content.ui.aa.actions.impl.PSGetUrlAction;
 import com.percussion.utils.testing.IntegrationTest;
 import org.json.JSONObject;
 import org.junit.experimental.categories.Category;
