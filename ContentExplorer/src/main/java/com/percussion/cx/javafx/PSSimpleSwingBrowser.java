@@ -21,7 +21,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -295,79 +294,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                 });
             }
         });
-
-
-      // Although Keyboard paste event is firing and being picked up by TinyMCE,
-      // it
-      // seems that each additionl copy to clipboard is appending to the
-      // DataTransfer.items
-      // and DataTransfer.types objects. This is causing previous html copied to
-      // be pasted
-      // in when text has more recently been copied. Instead we will capture the
-      // paste key
-      // event and will call the paste event ourselves and prevent the key form
-      // being passed down
-      webView.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
-      {
-
-         @Override
-         public void handle(KeyEvent event)
-         {
-            String op = null;
-
-            switch (event.getCode())
-            {
-               case V :
-                  op = "paste";
-                  break;
-               // calling copy does not work as element required to be in
-               // plcase.
-               // regular handler works for copy. cut event will use dummy event
-               // to set our object.
-               // case C:
-               // op = "copy";
-               // break;
-               case X :
-                  op = "cut";
-                  break;
-            }
-
-            // shortcut handles ctrl on windows and cmd on osx
-            if (op != null)
-            {
-
-               if ((isMac && event.isMetaDown()) || event.isControlDown())
-               {
-               Object tinymce = engine.executeScript(TINYMCE);
-               if (tinymce != null && tinymce instanceof JSObject )
-               {
-                     log.debug("Found tinymce");
-                  Object focusedEditor = engine.executeScript(TINYMCE + ".EditorManager.focusedEditor");
-                  if (focusedEditor != null && focusedEditor instanceof JSObject)
-                  {
-                        log.debug("Found focused tinymce");
-                        // Only paste if we are actually focused on the editor
-                        // body not another tinymce location
-                        Boolean active = (Boolean) engine.executeScript(
-                              "document.activeElement.contentDocument == tinymce.activeEditor.contentDocument");
-                     if (active)
-                     {
-                           log.debug("contentDocument is active in tinymce - sending " + op);
-                        //prevent key from being handled by tinymce
-
-                        event.consume();
-                        // fire fake clipboard event;
-
-                        engine.executeScript(
-                                 TINYMCE_EDITOR + ".fire('" + op + "',window.java.getClipboardDataEvent());");
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      });
-
 
       final ContextMenu contextMenu = createContextMenu(webView);
 
