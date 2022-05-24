@@ -179,7 +179,7 @@ public class PSJavaHelp
     */
    public static String getHelpSetURL(String hsFilePath)
    {
-      return getHelpSetURL(hsFilePath, true, null);
+      return getHelpSetURL(hsFilePath, false, null);
    }
 
    /**
