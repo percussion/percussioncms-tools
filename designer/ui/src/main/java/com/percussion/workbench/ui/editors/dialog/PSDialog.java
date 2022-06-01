@@ -64,7 +64,12 @@ public class PSDialog extends Dialog implements IPSHelpProvider
    {
      Control control = super.createContents(parent);
      m_helpManager = new PSHelpManager(this, control);
+      getShell().pack();
      return control;
+   }
+
+   protected boolean isResizable() {
+      return true;
    }
    
    /**

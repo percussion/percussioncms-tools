@@ -103,6 +103,7 @@ public class PSControlPropertiesDialog extends PSDialog
       GridData data = new GridData(GridData.FILL_HORIZONTAL
          | GridData.FILL_VERTICAL | GridData.VERTICAL_ALIGN_FILL);
       m_controlComp.setLayoutData(data);
+      m_controlComp.pack();
       return m_controlComp;
    }   
    

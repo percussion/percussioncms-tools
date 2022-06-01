@@ -346,9 +346,11 @@ public class PSFieldPropertiesDialog extends PSDialog
       GridData data = new GridData(GridData.FILL_VERTICAL
             | GridData.VERTICAL_ALIGN_FILL | GridData.HORIZONTAL_ALIGN_CENTER);
       mainComp.setLayoutData(data);
+
       // Load the control values
       loadControlValues();
       //
+      mainComp.pack();
       return mainComp;
    }
 
