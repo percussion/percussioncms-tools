@@ -1053,7 +1053,12 @@ public class PSGetUrlAction extends PSAAActionBase
       throws JSONException
    {
       JSONObject obj = new JSONObject();
-      obj.append("url", getRoot() + url);
+      String newurl = getRoot() + url;
+      if(newurl.startsWith("//")){
+        newurl = StringUtils.replace(newurl,"//","/Rhythmyx/");
+      }
+      obj.append("url", newurl);
+
       if(params != null)
       {
          Iterator<String> iter = params.keySet().iterator();
@@ -1207,7 +1212,7 @@ public class PSGetUrlAction extends PSAAActionBase
    /**
     * Assembly url constant.
     */
-   private static final String ASSEMBLY_URL = "/assembler/render";
+   private static final String ASSEMBLY_URL = "/Rhythmyx/assembler/render";
  
 //   /**
 //    * The partial URL that is used to launch an error page that reports that a
