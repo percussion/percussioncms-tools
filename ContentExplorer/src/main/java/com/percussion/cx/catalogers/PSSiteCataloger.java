@@ -88,12 +88,10 @@ public class PSSiteCataloger
       {
          Element site = (Element) sites.item(i);
             Attr isPageBased = site.getAttributeNode("isPageBased");
-            if(isPageBased != null ){
-               if("F".equals(isPageBased.getValue())) {
-                  m_sites.add(new PSSite(site, null, null));
-               }else{
-                  PSFolderActionManager.addCM1SiteRootFolder(site.getAttribute("folderRoot"));
-               }
+            if(isPageBased != null && "T".equals(isPageBased.getValue()) ){
+               PSFolderActionManager.addCM1SiteRootFolder(site.getAttribute("folderRoot"));
+            }else{
+               m_sites.add(new PSSite(site, null, null));
             }
       }
    }

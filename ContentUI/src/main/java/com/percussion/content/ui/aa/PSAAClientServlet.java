@@ -102,11 +102,13 @@ public class PSAAClientServlet extends HttpServlet
       byte[] respBytes = resp.getBytes("UTF-8");
       httpResponse.setContentLength(respBytes.length);
       httpResponse.setStatus(respCode);
-      if(respCode == 500)
+      if(respCode == 500) {
          httpResponse.sendError(respCode, resp);
-      OutputStream os = httpResponse.getOutputStream();
-      os.write(respBytes);
-      os.flush();      
+      }else {
+         OutputStream os = httpResponse.getOutputStream();
+         os.write(respBytes);
+         os.flush();
+      }
    }   
    
    /**
