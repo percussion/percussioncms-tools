@@ -208,7 +208,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
    {
       try
       {
-         m_visibilityContextsMap = new HashMap<String, PSActionVisibilityContexts>();
+         m_visibilityContextsMap = new HashMap<>();
 
          Document doc = getXMLDocument("../sys_cxSupport/ActionVisibilityContexts.html?compressedvc=yes");
          NodeList actions = doc.getElementsByTagName("Action");
