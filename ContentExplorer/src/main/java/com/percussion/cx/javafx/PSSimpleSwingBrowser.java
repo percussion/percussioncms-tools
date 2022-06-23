@@ -267,7 +267,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                {
                   log.debug("DocumentProperty:"+obs1+":"+oldValue1+":"+newValue1);
                   setJavaBridge();
-
                });
 
          PSSimpleSwingBrowser.this.engine.setOnResized(new EventHandler<WebEvent<Rectangle2D>>() {
@@ -301,17 +300,19 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       {
          public void handle(MouseEvent event)
          {
+
             if (event.getButton() == MouseButton.SECONDARY)
             {
-               Object tinyMCE = (Object)engine.executeScript(TINYMCE);
+                Object tinyMCE = (Object)engine.executeScript(TINYMCE);
                boolean hasTinyMCE = !(tinyMCE == null || tinyMCE.toString().equals("undefined"));
 
                if (hasTinyMCE)
                {
+
                   log.debug("Page uses tinymce checking context area");
                   JSObject jsObject = (JSObject) engine
                         .executeScript(TINYMCE_EDITOR + ".getContentAreaContainer().getBoundingClientRect()");
-
+                   engine.executeScript(TINYMCE_EDITOR + ".getDoc().activeElement.focus();");
                   int x = ((Number) jsObject.getMember("left")).intValue();
                   int y = ((Number) jsObject.getMember("top")).intValue();
                   int bottom = ((Number) jsObject.getMember("bottom")).intValue();
@@ -323,10 +324,18 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                      y = (int) (event.getY() - y) - 10;
                      x = (int) (event.getX() - x) - 10;
                      log.debug("Initiating TinyMCE context menu");
-                     engine.executeScript(TINYMCE_EDITOR + ".selection.placeCaretAt(" + x + "," + y + ");");
-                     String script = "var evt = document.createEvent('MouseEvents');evt.initMouseEvent('contextmenu', true, true, window, 1, 0, 0, "
-                           + x + ", " + y + ", false, false, false, false, 2, null);" + TINYMCE_EDITOR
-                           + ".getDoc().documentElement.dispatchEvent(evt);";
+
+                      String script = "var evt = new MouseEvent(\"contextmenu\", {\n" +
+                              "    bubbles: true,\n" +
+                              "    cancelable: false,\n" +
+                              "    view: window,\n" +
+                              "    button: 2,\n" +
+                              "    buttons: 0,\n" +
+                              "    clientX:" + x + ",\n" +
+                              "    clientY:" + y + ",\n" +
+                              "});\n" +
+                              TINYMCE_EDITOR
+                         + ".selection.getNode().dispatchEvent(evt);";
                      engine.executeScript(script);
 
                   }
@@ -462,7 +471,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
 
    }
 
-   
    private ContextMenu createContextMenu(WebView webView) {
       ContextMenu contextMenu = new ContextMenu();
       MenuItem reload = new MenuItem("Reload");
