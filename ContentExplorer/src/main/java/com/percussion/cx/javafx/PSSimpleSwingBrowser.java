@@ -74,6 +74,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
    private final JTextField txtURL = new JTextField();
    private final JProgressBar progressBar = new JProgressBar();
 
+
    
    public PSSimpleSwingBrowser()
    {
@@ -104,7 +105,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          }
          else
          {
-
             webView = new WebView();
             webView.setContextMenuEnabled(false);
             //createContextMenu(webView);
@@ -211,6 +211,23 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
 
    }
 
+    public static class WebViewAction {
+
+        private String urlToShow;
+
+        public WebViewAction(String url){
+            urlToShow = url;
+        }
+
+        public void showFileInBrowser(){
+            try {
+                PSBrowserUtils.openWebpage(new URL(urlToShow));
+            } catch (MalformedURLException e) {
+                log.error("Launching Browser Failed",e);
+            }
+        }
+    }
+
    public void loadURL(final String url)
    {
 
@@ -254,7 +271,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
                   Platform.runLater(() -> PSSimpleSwingBrowser.this.setTitle(newValue1));
                });
 
-
          PSSimpleSwingBrowser.this.engine.locationProperty().addListener(
                (obs1, oldValue1, newValue1) ->
                {
@@ -280,10 +296,13 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
 
          });
 
-
          engine.setOnStatusChanged(new EventHandler<WebEvent<String>>() {
             @Override
             public void handle(final WebEvent<String> event) {
+                JSObject window = (JSObject) engine.executeScript("window");
+                if(window != null) {
+                    window.setMember("webviewAction", new WebViewAction(event.getData()));
+                }
                 setJavaBridge();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
@@ -300,54 +319,52 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
       {
          public void handle(MouseEvent event)
          {
-
             if (event.getButton() == MouseButton.SECONDARY)
             {
                 Object tinyMCE = (Object)engine.executeScript(TINYMCE);
                boolean hasTinyMCE = !(tinyMCE == null || tinyMCE.toString().equals("undefined"));
 
-               if (hasTinyMCE)
-               {
-
-                  log.debug("Page uses tinymce checking context area");
-                  JSObject jsObject = (JSObject) engine
-                        .executeScript(TINYMCE_EDITOR + ".getContentAreaContainer().getBoundingClientRect()");
+               if (hasTinyMCE) {
+                    try{
+                   log.debug("Page uses tinymce checking context area");
+                   JSObject jsObject = (JSObject) engine
+                           .executeScript(TINYMCE_EDITOR + ".getContentAreaContainer().getBoundingClientRect()");
                    engine.executeScript(TINYMCE_EDITOR + ".getDoc().activeElement.focus();");
-                  int x = ((Number) jsObject.getMember("left")).intValue();
-                  int y = ((Number) jsObject.getMember("top")).intValue();
-                  int bottom = ((Number) jsObject.getMember("bottom")).intValue();
-                  int right = ((Number) jsObject.getMember("right")).intValue();
+                   int x = ((Number) jsObject.getMember("left")).intValue();
+                   int y = ((Number) jsObject.getMember("top")).intValue();
+                   int bottom = ((Number) jsObject.getMember("bottom")).intValue();
+                   int right = ((Number) jsObject.getMember("right")).intValue();
 
-                  if (event.getX() > x && event.getX() < right && event.getY() > y && event.getY() <= bottom)
-                  {
+                   if (event.getX() > x && event.getX() < right && event.getY() > y && event.getY() <= bottom) {
+                       y = (int) (event.getY() - y) - 10;
+                       x = (int) (event.getX() - x) - 10;
+                       log.debug("Initiating TinyMCE context menu");
 
-                     y = (int) (event.getY() - y) - 10;
-                     x = (int) (event.getX() - x) - 10;
-                     log.debug("Initiating TinyMCE context menu");
+                       String script = "var evt = new MouseEvent(\"contextmenu\", {\n" +
+                               "    bubbles: true,\n" +
+                               "    cancelable: false,\n" +
+                               "    view: window,\n" +
+                               "    button: 2,\n" +
+                               "    buttons: 0,\n" +
+                               "    clientX:" + x + ",\n" +
+                               "    clientY:" + y + ",\n" +
+                               "});\n" +
+                               TINYMCE_EDITOR
+                               + ".selection.getNode().dispatchEvent(evt);";
+                       engine.executeScript(script);
 
-                      String script = "var evt = new MouseEvent(\"contextmenu\", {\n" +
-                              "    bubbles: true,\n" +
-                              "    cancelable: false,\n" +
-                              "    view: window,\n" +
-                              "    button: 2,\n" +
-                              "    buttons: 0,\n" +
-                              "    clientX:" + x + ",\n" +
-                              "    clientY:" + y + ",\n" +
-                              "});\n" +
-                              TINYMCE_EDITOR
-                         + ".selection.getNode().dispatchEvent(evt);";
-                     engine.executeScript(script);
+                   } else {
+                       Platform.runLater(() -> {
+                           contextMenu.show(webView, event.getScreenX(), event.getScreenY());
+                       });
+                       log.debug("Initiating TinyMCE JavaFx context menu");
 
-                  }
-                  else
-                  {
-                     Platform.runLater(() -> {
+                   }
+                   event.consume();
+               }catch (Exception e){
+                        log.error("Tinymce Context Menu failed to load",e);
                         contextMenu.show(webView, event.getScreenX(), event.getScreenY());
-                     });
-                     log.debug("Initiating TinyMCE JavaFx context menu");
-
-                  }
-                  event.consume();
+                    }
                }
                else
                {
@@ -392,9 +409,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          PSSimpleSwingBrowser.this.engine.setConfirmHandler(message -> {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
-
             alert.setContentText(message);
-
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK)
             {
@@ -406,7 +421,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          });
 
          PSSimpleSwingBrowser.this.engine.setOnAlert(event -> {
-
 
             String data = event.getData();
             log.debug("Alert: " + data);
@@ -432,10 +446,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
             {
                String location = engine.getLocation();
                log.debug("Loaded url "+location+ "to window "+this.target);
-
                PSContentExplorerApplication.getApplet().refresh("Selected");
-
-
                checkAndShowAppletWarning(PSSimpleSwingBrowser.this.engine);
 
                return;
@@ -467,8 +478,6 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          Platform.runLater(() -> 
             PSSimpleSwingBrowser.this.engine.load(PSSimpleSwingBrowser.this.mi_actionurl)
          );
-
-
    }
 
    private ContextMenu createContextMenu(WebView webView) {
@@ -511,7 +520,7 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
 
       return contextMenu;
    }
-   
+
    /**
     * Check and show applet warning
     *
@@ -631,5 +640,4 @@ public class PSSimpleSwingBrowser extends PSDesktopExplorerWindow
          return super.getAccessibleName();
       }
   }
-   
 }
