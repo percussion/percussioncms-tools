@@ -19,10 +19,7 @@
     </dependencies>
     <packaging>pom</packaging>
     <modules>
-        <module>Help</module>
         <module>perc-deployer-client</module>
-        <module>ServerUIComponents</module>
-        <module>ContentUI</module>
         <module>perc-eclipse</module>
         <module>PackagerUI</module>
         <module>ServerPropertiesEditor</module>
