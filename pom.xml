@@ -92,7 +92,7 @@
         <commons-logging.version>1.2</commons-logging.version>
         <commons.lang.version>2.4</commons.lang.version>
         <lucene.version>8.7.0</lucene.version>
-        <myfaces.version>1.1.5</myfaces.version>
+        <myfaces.version>1.1.8</myfaces.version>
         <ehcache.version>2.10.5</ehcache.version>
         <stax.version>1.0.1</stax.version>
         <poi.version>5.2.1</poi.version>
