@@ -818,11 +818,13 @@ public class PSMainDisplayPanel extends JScrollPane
 
          PSMenuAction popupMenuAction = null;
          popupMenuAction = m_actManager.getContextMenu(selection);
-         PSContentExplorerMenu menu = new PSContentExplorerMenu(popupMenuAction, new PSMenuSource(selection),
-               m_actManager, false);
+         if( popupMenuAction !=null) {
+            PSContentExplorerMenu menu = new PSContentExplorerMenu(popupMenuAction, new PSMenuSource(selection),
+                    m_actManager, false);
 
-         backgroundMenu = new FutureTask<PSContentExplorerMenu>(menu);
-         backgroundService.execute(backgroundMenu);
+            backgroundMenu = new FutureTask<PSContentExplorerMenu>(menu);
+            backgroundService.execute(backgroundMenu);
+         }
       }
    }
    
