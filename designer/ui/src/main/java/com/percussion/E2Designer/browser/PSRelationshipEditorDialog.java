@@ -74,6 +74,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -406,10 +408,22 @@ public class PSRelationshipEditorDialog extends PSDialog implements
          (String)call.getExtensionDef().getInterfaces().next());
       final JavaExitsPropertyDialog dlg =
             new JavaExitsPropertyDialog((JFrame) null, callSet, false);
+     dlg.setFocusable(true);
+     dlg.setModal(true);
+     dlg.center();
+
+      dlg.addWindowFocusListener(new WindowFocusListener() {
+
+         @Override
+         public void windowLostFocus(WindowEvent arg0) {
+
+         }
+         @Override
+         public void windowGainedFocus(WindowEvent arg0) {
+            dlg.toFront();
+         }
+      });
       dlg.setVisible(true);
-      dlg.center();
-      dlg.setFocusable(true);
-      dlg.toFront();
       return dlg.wasOkExit() ? (OSExtensionCall) callSet.get(0) : null;
    }
 
