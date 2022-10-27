@@ -407,6 +407,9 @@ public class PSRelationshipEditorDialog extends PSDialog implements
       final JavaExitsPropertyDialog dlg =
             new JavaExitsPropertyDialog((JFrame) null, callSet, false);
       dlg.setVisible(true);
+      dlg.center();
+      dlg.setFocusable(true);
+      dlg.toFront();
       return dlg.wasOkExit() ? (OSExtensionCall) callSet.get(0) : null;
    }
 

@@ -129,9 +129,9 @@ public class PSContentEditorDefinition
          IPSContentTypeModel model = (IPSContentTypeModel) ms_factory
                .getModel(PSObjectTypes.CONTENT_TYPE);
          ms_controlList = model.getControls();
-         ms_fieldControls = new ArrayList();
-         ms_simpleChildFieldControls = new ArrayList();
-         ms_complexChildControls = new ArrayList();
+         ms_fieldControls = new ArrayList<>();
+         ms_simpleChildFieldControls = new ArrayList<>();
+         ms_complexChildControls = new ArrayList<>();
 
          Iterator iter = ms_controlList.iterator();
          while(iter.hasNext())
@@ -1808,27 +1808,17 @@ public class PSContentEditorDefinition
    public static List<String> fixDisplayMapperControlMeta(PSDisplayMapper dmapper)
          throws PSModelException
    {
-      List<String> ctrls = new ArrayList<String>();
-      Iterator mappings = dmapper.iterator();
-      while (mappings.hasNext())
-      {
-         Object mapp = mappings.next();
-         if (mapp instanceof PSDisplayMapper)
-         {
-            Iterator chmappings = ((PSDisplayMapper) mapp).iterator();
-            while (chmappings.hasNext())
-            {
-               PSDisplayMapping chmapp = (PSDisplayMapping) chmappings.next();
-               if (fixDisplayMappingControlMeta(chmapp))
-               {
+      List<String> ctrls = new ArrayList<>();
+      for (Object mapp : dmapper) {
+         if (mapp instanceof PSDisplayMapper) {
+            for (Object o : (PSDisplayMapper) mapp) {
+               PSDisplayMapping chmapp = (PSDisplayMapping) o;
+               if (fixDisplayMappingControlMeta(chmapp)) {
                   ctrls.add(chmapp.getFieldRef());
                }
             }
-         }
-         else
-         {
-            if (fixDisplayMappingControlMeta((PSDisplayMapping) mapp))
-            {
+         } else {
+            if (fixDisplayMappingControlMeta((PSDisplayMapping) mapp)) {
                ctrls.add(((PSDisplayMapping) mapp).getFieldRef());
             }
          }
