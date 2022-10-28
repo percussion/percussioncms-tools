@@ -39,15 +39,6 @@ import java.util.Vector;
  */
 public class JavaExitsPropertyDialog extends PSEditorDialog
 {
-   /**
-   *
-   *Construct the JavaExitsPropertyDialog
-    */
-   public JavaExitsPropertyDialog()
-   {
-      super();
-      initDialog();
-   }
 
    /**
     * Constructs <code>JavaExitsPropertyDialog</code> with given parent and
@@ -313,10 +304,9 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
       createControls();
       createParameterPanel();
       createCommandPanel();
-      setVisible(true);
-      setModal(true);
+
       center();
-      toFront();
+
    }
 
    /**
