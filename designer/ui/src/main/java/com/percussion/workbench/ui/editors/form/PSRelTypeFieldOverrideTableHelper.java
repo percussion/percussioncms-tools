@@ -403,7 +403,7 @@ public class PSRelTypeFieldOverrideTableHelper
       //get CE system fields
       //T O D O (Andriy: was in borrowed code):
       //currently this field list all search fields which need to be
-      //filtered to rstrict to writable fields.
+      //filtered to restrict to writable fields.
       PSRemoteRequester appReq =
          PSCoreFactory.getInstance().getRemoteRequester();
       PSRemoteCataloger remCatlg = new PSRemoteCataloger(appReq);
@@ -630,7 +630,7 @@ public class PSRelTypeFieldOverrideTableHelper
    }
 
    /**
-    * Have to edit asynchroniously because use existing Swing UI. 
+    * Have to edit asynchronously because use existing Swing UI.
     */
    private void asyncEditUdf(final Vector<Object> rowData,
          final OSExtensionCall udf)
@@ -639,6 +639,7 @@ public class PSRelTypeFieldOverrideTableHelper
       {
          public void run()
          {
+
             final OSExtensionCall editedUdf =
                PSRelationshipEditorDialog.editExitCall(udf);
             if (editedUdf != null)
@@ -651,7 +652,7 @@ public class PSRelTypeFieldOverrideTableHelper
    }
 
    /**
-    * Have to create asynchroniously because use existing Swing UI. 
+    * Have to create asynchronously because use existing Swing UI.
     */
    private void asyncCreateUdf(final Vector<Object> rowData,
          final IPSExtensionDef udfDef)
@@ -672,7 +673,7 @@ public class PSRelTypeFieldOverrideTableHelper
    }
    
    /**
-    * Refreshes {@link #m_fieldOverrideTable} asyncroniously after update.
+    * Refreshes {@link #m_fieldOverrideTable} asynchronously after update.
     * Also notifies the editor about the update.
     * Should be called from processing in other threads than SWT thread.
     */
@@ -792,7 +793,7 @@ public class PSRelTypeFieldOverrideTableHelper
                break;
             case COL_COND:
                // handled in the combo listener because Swing legacy UI is used
-               // for editing and it must run asynchroniously.
+               // for editing and it must run asynchronously.
                break;
             default:
                throw new AssertionError("Unrecognized column " + column); //$NON-NLS-1$
@@ -825,7 +826,7 @@ public class PSRelTypeFieldOverrideTableHelper
    private PSSortableTable m_fieldOverrideTable;
    
    /**
-    * Contains an ordered list of CE system fields. Initilized by
+    * Contains an ordered list of CE system fields. Initialized by
     * the ctor and never <code>null</code> after that.
     */
    private List<String> m_ceSystemFields;

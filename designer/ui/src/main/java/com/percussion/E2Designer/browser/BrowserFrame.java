@@ -30,6 +30,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -70,14 +71,8 @@ public class BrowserFrame extends JFrame
     * If a browser exists and the passed in server name doesn't match
     * (case insensitive compare), the existing browser is removed and a new
     * one is created.
-    *
-    * @param strServer name of an E2 server to connect to to perform cataloging
-    * @param strUserID name of the user trying to access the server
-    * @param strPassword password for the supplied user, may be null
-    *
-    * @returns the browser object
     */
-   static public BrowserFrame getBrowser(PSDesignerConnection connection,
+    public static BrowserFrame getBrowser(PSDesignerConnection connection,
                                         PSObjectStore os,
                                         String serverName)
    {
@@ -114,7 +109,7 @@ public class BrowserFrame extends JFrame
    /**
     * Same as above, except if the current browser is null, null is returned.
     */
-   static public BrowserFrame getBrowser( )
+    public static BrowserFrame getBrowser( )
    {
       return ms_theBrowser;
    }
@@ -171,7 +166,7 @@ public class BrowserFrame extends JFrame
       }
       else
       {
-         int iaPos[] = this.getBrowserWindowPosFromUserConfig();
+         int[] iaPos = this.getBrowserWindowPosFromUserConfig();
          if(iaPos == null || iaPos.length != 4)
          {
             this.setSize(screenSize.width / 5, screenSize.height * 4 / 5);
@@ -246,24 +241,20 @@ public class BrowserFrame extends JFrame
       return;
     }
 
-    if (replace == false)
+    if (!replace)
     {
-         for (int i=0; i<strNewValues.length; i++)
-         {
-            if(m_UC.isStringTokenPresent(strKey, strNewValues[i]) == false)
-            {
-//          System.out.println(strKey +"------"+strNewValues[i]);
-               m_UC.setValue(strKey, strNewValues[i], true);
+        for (String strNewValue : strNewValues) {
+            if (!m_UC.isStringTokenPresent(strKey, strNewValue)) {
+                m_UC.setValue(strKey, strNewValue, true);
             }
-         }
+        }
     }
     else  //replace the values
     {
       m_UC.deleteEntry(strKey);
-      for (int i=0; i<strNewValues.length; i++)
-         {
-        m_UC.setValue(strKey, strNewValues[i], true);
-         }
+        for (String strNewValue : strNewValues) {
+            m_UC.setValue(strKey, strNewValue, true);
+        }
     }
   }
 
@@ -274,7 +265,7 @@ public class BrowserFrame extends JFrame
    * A generic method to wrap the calls made to get the values from the user config.
    *
    *@param strKey is the name of the key.
-   *@returns an array of <code>String</code> values for the specified key.
+   *@return an array of <code>String</code> values for the specified key.
     */
   public String[] getValuesFromUserConfig(String strKey)
   {
@@ -344,8 +335,7 @@ public class BrowserFrame extends JFrame
       int iTabIndex = btp.getSelectedIndex();
       Vector v = btp.getTabData();
       BrowserPaneTabData bptd = (BrowserPaneTabData) v.elementAt(iTabIndex);
-      int iGroupID = bptd.getGroupID();
-      return iGroupID;
+      return bptd.getGroupID();
    }
 
    /**
@@ -427,9 +417,9 @@ public class BrowserFrame extends JFrame
       String requestName=
          CatalogExtensionCatalogHandler.JAVA_EXTENSION_HANDLER_NAME;
 
-      Vector vc = null;
-      Vector<IPSExtensionDef> preCategory = new Vector<IPSExtensionDef>();
-      Vector<IPSExtensionDef> postCategory = new Vector<IPSExtensionDef>();
+       java.util.List<IPSExtensionDef> vc = null;
+      java.util.List<IPSExtensionDef> preCategory = new ArrayList<>();
+       java.util.List<IPSExtensionDef> postCategory = new ArrayList<>();
 
       if( requestName != null )
       {
@@ -444,15 +434,13 @@ public class BrowserFrame extends JFrame
           * Split the exit vector into two vectors, one for pre-exits and
           * one for post exits.
           */
-         for (int k=0; k<vc.size(); k++)
-         {
-            IPSExtensionDef exit = (IPSExtensionDef) vc.get(k);
-            if (exit.implementsInterface(OSExitCallSet.EXT_TYPE_RESULT_DOC_PROC))
-               postCategory.addElement(exit);
-            if (exit.implementsInterface(OSExitCallSet.EXT_TYPE_REQUEST_PRE_PROC))
-               preCategory.addElement(exit);
+          for (IPSExtensionDef exit : vc) {
+              if (exit.implementsInterface(OSExitCallSet.EXT_TYPE_RESULT_DOC_PROC))
+                  postCategory.add(exit);
+              if (exit.implementsInterface(OSExitCallSet.EXT_TYPE_REQUEST_PRE_PROC))
+                  preCategory.add(exit);
 
-         }
+          }
 
 
          /*
@@ -587,7 +575,7 @@ public class BrowserFrame extends JFrame
          DefaultBrowserNode existingNode = null;
          boolean isFound = false;
 
-         for (int k=0; k<dtm.getChildCount(root) && isFound == false; k++)
+         for (int k = 0; k<dtm.getChildCount(root) && !isFound; k++)
          {
             existingNode = (DefaultBrowserNode) dtm.getChild(root, k);
             if(existingNode == null)
@@ -675,7 +663,7 @@ public class BrowserFrame extends JFrame
             DefaultBrowserNode node =
                (DefaultBrowserNode) categories.get(k);
             String nodePath =
-               (String) node.getFullPathName() + "/" + exitName;
+               node.getFullPathName() + "/" + exitName;
 
             if (path.equals(nodePath))
                dtm.insertNodeInto(addedNode, node, dtm.getChildCount(node));
@@ -705,7 +693,8 @@ public class BrowserFrame extends JFrame
             {
                 ServerNode subRoot =  new ServerNode(new CatalogEntry())
                {
-                  public boolean hasMenu()
+                  @Override
+                   public boolean hasMenu()
                   {
                      return(false);
                   }
@@ -829,7 +818,7 @@ public class BrowserFrame extends JFrame
       DefaultBrowserNode root = (DefaultBrowserNode) tree.getModel().getRoot();
     DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
 
-      Vector<Object> apps = new Vector<Object>();
+      Vector<Object> apps = new Vector<>();
     int count = model.getChildCount(root);
     for (int i=0; i<count; i++)
       apps.add(model.getChild(root, i));
@@ -942,6 +931,7 @@ public class BrowserFrame extends JFrame
 
    class BrowserWindowListener extends java.awt.event.WindowAdapter
    {
+       @Override
       public void windowClosing( java.awt.event.WindowEvent e )
       {
 //         System.out.println("In Browser Frame Window Listener ....");
@@ -1002,7 +992,7 @@ public class BrowserFrame extends JFrame
     * never <code>null</code>, may be empty
     */
    @SuppressWarnings("unchecked")
-   private Iterator getCategories( Vector vc)
+   private Iterator getCategories( java.util.List<IPSExtensionDef> vc)
    {
       if(vc == null)
          throw new IllegalArgumentException("UDF collection can not be null");
@@ -1014,20 +1004,18 @@ public class BrowserFrame extends JFrame
                   new PSStringComparator(
                         PSStringComparator.SORT_CASE_INSENSITIVE_ASC));
 
-      for(int i = 0; i < vc.size(); i++)
-      {
-         IPSExtensionDef exit = (IPSExtensionDef)vc.get( i );
-         String category = exit.getRef().getCategory();
+       for (IPSExtensionDef exit : vc) {
+           String category = exit.getRef().getCategory();
 
-         if (category.trim().length() != 0)
-            categories.put(category, category);
+           if (category.trim().length() != 0)
+               categories.put(category, category);
 
-      }
+       }
       return categories.values().iterator();
    }
 
    // storage
-   static private BrowserFrame ms_theBrowser = null;
+    private static BrowserFrame ms_theBrowser = null;
 
    private BrowserPane m_Pane = null;
 
@@ -1044,23 +1032,23 @@ public class BrowserFrame extends JFrame
     * Key associated with value for Browser Schema, maintains the Version of the
     * Browser.
     */
-   static public final String BROWSER_SCHEMA = "Br_BrowserSchema";
+    public static final String BROWSER_SCHEMA = "Br_BrowserSchema";
 
-   static public final String AUTO_REFRESH = "Br_AutoRefresh";
+    public static final String AUTO_REFRESH = "Br_AutoRefresh";
 
    /*
     * Names used as values for the auto refresh flag when it is stored in the
     * user config.
     */
-   static private final String AUTO_REFRESH_ON = "on";
+    private static final String AUTO_REFRESH_ON = "on";
 
-   static private final String AUTO_REFRESH_OFF = "off";
+    private static final String AUTO_REFRESH_OFF = "off";
 
    /**
     * The value associated with the Browser Schema, the Current Version of the
     * Browser. For Example V1.0
     */
-   static public final String BROWSER_CURRENT_SCHEMA_VALUE = "V1.0";
+    public static final String BROWSER_CURRENT_SCHEMA_VALUE = "V1.0";
 
    /**
     * Key associated with delimiter separated list of integers specifying the
@@ -1072,9 +1060,9 @@ public class BrowserFrame extends JFrame
     * coords and <code>&ltwidth&gt</code> and <code>&ltheight&gt</code> are
     * in pixels.
     */
-   static public final String BROWSER_WINDOW_POS = "Br_BrowserWindowPos";
+    public static final String BROWSER_WINDOW_POS = "Br_BrowserWindowPos";
 
-   static public final String UC_KEY_DELIM = ":";
+    public static final String UC_KEY_DELIM = ":";
 
    public BrowserTree m_setupTree = null;
 

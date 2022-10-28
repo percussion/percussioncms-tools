@@ -31,9 +31,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 
 /**
@@ -65,9 +66,9 @@ public class CatalogServerExits implements Serializable
     * @return A vector containing 1 IPSExtensionDef object for each entry in
     * the XML doc. The order of the returned values is indeterminate.
    **/
-   public static Vector getCatalog( File src, boolean bForce )
+   public static List<IPSExtensionDef> getCatalog(File src, boolean bForce )
    {
-      Vector catalog = null;
+      ArrayList<IPSExtensionDef> catalog;
 
       // try to get the vector from the map
       catalog = ms_catalogMap.get(src.getPath());
@@ -82,14 +83,11 @@ public class CatalogServerExits implements Serializable
          Reader in = PSContentFactory.getReader(content);
          xmlDoc = PSXmlDocumentBuilder.createXmlDocument(in, false);
       }
-      catch ( IOException e )
+      catch (IOException | SAXException e )
       {
          handleException( e );
       }
-      catch ( SAXException sax )
-      {
-         handleException( sax );
-      }
+
       catalog = doCatalog( xmlDoc );
       if ( null != catalog )
          ms_catalogMap.put( src.getPath(), catalog );
@@ -97,8 +95,8 @@ public class CatalogServerExits implements Serializable
    }
 
 
-   public static Vector getCatalog(PSDesignerConnection connection,
-      String scHandlerName, boolean forceCatalog)
+   public static List<IPSExtensionDef> getCatalog(PSDesignerConnection connection,
+                                      String scHandlerName, boolean forceCatalog)
    {
       return getCatalog(connection, scHandlerName, null, null, forceCatalog, false);
    }
@@ -130,11 +128,11 @@ public class CatalogServerExits implements Serializable
     * they will be excluded.
     */
    //////////////////////////////////////////////////////////////////////////////
-   public static Vector getCatalog(PSDesignerConnection connection,
+   public static List<IPSExtensionDef> getCatalog(PSDesignerConnection connection,
       String scHandlerName, String context, String ifacePattern,
       boolean forceCatalog, boolean includeDeprecated)
    {
-      Vector<Object> catalog = null;
+      ArrayList<IPSExtensionDef> catalog;
 
       // try to get the vector from the map
       String mapKey = scHandlerName + "/" + ifacePattern + "/" +
@@ -167,39 +165,22 @@ public class CatalogServerExits implements Serializable
             new PSCataloger( connection ), scHandlerName, context,
             ifacePattern );
 
-         catalog = new Vector();
-         for ( int i = 0; i < defs.length; ++i )
-         {
+         catalog = new ArrayList<>();
+         for (IPSExtensionDef def : defs) {
             // skip deprecated exits unless we've been told to include them
-            if (!includeDeprecated && defs[i].isDeprecated())
-            {
+            if (!includeDeprecated && def.isDeprecated()) {
                continue;
             }
-            catalog.add( defs[i] );
+            catalog.add(def);
          }
 
          if ( null != catalog )
             ms_catalogMap.put(mapKey, catalog );
       }
-      catch ( IllegalArgumentException iae )
+      catch (IllegalArgumentException | IOException | PSAuthorizationException | PSServerException |
+             PSAuthenticationFailedException iae )
       {
          handleException( iae );
-      }
-      catch (IOException ioe)
-      {
-         handleException( ioe );
-      }
-      catch ( PSAuthorizationException ae )
-      {
-         handleException( ae );
-      }
-      catch ( PSServerException se )
-      {
-         handleException( se );
-      }
-      catch ( PSAuthenticationFailedException afe )
-      {
-         handleException( afe );
       }
 
       return catalog;
@@ -213,11 +194,12 @@ public class CatalogServerExits implements Serializable
     *
     * @return A vector w/ 1 or more extension defs, or null or there are no defs.
    **/
-   private static Vector doCatalog( Document src )
+   private static ArrayList<IPSExtensionDef> doCatalog( Document src )
    {
+      ArrayList<IPSExtensionDef> catalog = new ArrayList<>();
       if ( null == src )
-         return null;
-      Vector<IPSExtensionDef> catalog = new Vector<IPSExtensionDef>(20);
+         return catalog;
+
 
       try
       {
@@ -238,7 +220,7 @@ public class CatalogServerExits implements Serializable
          handleException( ee );
       }
 
-      return catalog.size() > 0 ? catalog : null;
+      return !catalog.isEmpty() ? catalog : null;
    }
 
 
@@ -259,5 +241,5 @@ public class CatalogServerExits implements Serializable
    /**
    * hashmap to contain the cataloged java exits
    */
-   private static Map<String, Vector> ms_catalogMap = new HashMap<String, Vector>();
+   private static Map<String, ArrayList<IPSExtensionDef>> ms_catalogMap = new HashMap<>();
 }

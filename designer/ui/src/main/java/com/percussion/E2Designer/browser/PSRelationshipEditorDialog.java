@@ -1,7 +1,5 @@
 /******************************************************************************
- *
  * [ PSRelationshipEditorDialog.java ]
- *
  * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
  * All rights reserved. This material contains unpublished, copyrighted
  * work including confidential and proprietary information of Percussion.
@@ -290,6 +288,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
          /**
           * Display this node as folder always.
           */
+         @Override
          public boolean isLeaf()
          {
             return false;
@@ -301,6 +300,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
          /**
           * Display this node as folder always.
           */
+         @Override
          public boolean isLeaf()
          {
             return false;
@@ -391,6 +391,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * @param s the key to get the string resource
     * @return the resource string specified by the key passed in
     */
+   @Override
    public String getResourceString(String s)
    {
       return super.getResourceString(s);
@@ -407,7 +408,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
       callSet.add(call,
          (String)call.getExtensionDef().getInterfaces().next());
       final JavaExitsPropertyDialog dlg =
-            new JavaExitsPropertyDialog((JFrame) null, callSet, false);
+            new JavaExitsPropertyDialog(m_parentFrame, callSet, false);
      dlg.setFocusable(true);
      dlg.setModal(true);
      dlg.center();
@@ -441,7 +442,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
       if(def.getRuntimeParameterNames().hasNext())
       {
          final JavaExitsPropertyDialog dlg = new JavaExitsPropertyDialog(
-            (JFrame) null, callSet, false);
+            m_parentFrame, callSet, false);
          dlg.setVisible(true);
          return dlg.wasOkExit() ? (OSExtensionCall) callSet.get(0) : null;
       }
@@ -547,6 +548,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        }
 
        //see base class for details.
+       @Override
        public void updateViewFromData(PSRelationshipConfig cfg)
        {
           super.updateViewFromData(cfg);
@@ -708,6 +710,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
       /* (non-Javadoc)
        * @see com.percussion.E2Designer.browser.PSRelationshipEditorDialog.CfgPanel#updateViewFromData(com.percussion.design.objectstore.PSRelationshipConfig)
        */
+      @Override
       public void updateViewFromData(PSRelationshipConfig cfg)
       {
          super.updateViewFromData(cfg);
@@ -732,8 +735,8 @@ public class PSRelationshipEditorDialog extends PSDialog implements
          PropertiesTableModel model =
             (PropertiesTableModel) mi_userPropertiesTable.getModel();
 
-         final Set<String> dupUserProps = new HashSet<String>();
-         final Set<String> dupSysProps = new HashSet<String>();
+         final Set<String> dupUserProps = new HashSet<>();
+         final Set<String> dupSysProps = new HashSet<>();
          Map sysProps = mi_cfg.getSystemProperties();
          
          boolean isActiveAssemblyCategory = mi_cfg.getCategory().equals(
@@ -744,7 +747,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             requiredUserProps.putAll(ms_requiredUserProps);
 
          Iterator properties = model.getData();
-         List<String> userProps = new ArrayList<String>();
+         List<String> userProps = new ArrayList<>();
          while (properties.hasNext())
          {
             PSProperty prop = (PSProperty) properties.next();
@@ -854,6 +857,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
            /*
             * Display the property description.
             */
+            @Override
             public void focusGained(FocusEvent e)
             {
                String desc = "";
@@ -873,6 +877,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             /*
              * Set the property description empty.
              */
+            @Override
             public void focusLost(FocusEvent e)
             {
                mi_sharedDescription.setText("");
@@ -918,7 +923,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             COMMAND_NAME_CLONING_CONFIG_CONDITIONALS);
 
          PSCloningConfigModel model =
-            new PSCloningConfigModel((new ArrayList()).iterator(), m_chConfig);
+            new PSCloningConfigModel((new ArrayList<>()).iterator(), m_chConfig);
 
          mi_cloningConfigTable = new SpecialPropsTable(model,
             cellEditor, cellRenderer);
@@ -1028,6 +1033,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * @see PSRelationshipEditorDialog.CfgPanel#updateViewFromData(
        *    PSRelationshipConfig)
        */
+      @Override
       public void updateViewFromData(PSRelationshipConfig cfg)
       {
          super.updateViewFromData(cfg);
@@ -1478,6 +1484,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * Validates current view and updates data from current view panel to the
     * configuration. Closes dialog. Calls {@link #save()}
     */
+   @Override
    public void onOk()
    {
       if(!save())
@@ -1489,6 +1496,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * Validates current view and updates data from current view panel to the
     * configuration. Calls {@link #save()}
     */
+   @Override
    public void onApply()
    {
       if(!save())
@@ -1535,7 +1543,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             PSRelationshipConfig config = (PSRelationshipConfig) configs.next();
             
             final Map<String, PSProperty> requiredUserProps =
-                  new HashMap<String, PSProperty>(ms_requiredUserProps);
+                  new HashMap<>(ms_requiredUserProps);
             Iterator props = config.getUserDefProperties();
             while (props.hasNext())
             {
@@ -1585,7 +1593,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     */
    private void displayUserInfo(String relationshipName, Map missingUserProps)
    {
-      StringBuffer missing = new StringBuffer();
+      StringBuilder missing = new StringBuilder();
       Iterator names = missingUserProps.keySet().iterator();
       while (names.hasNext())
       {
@@ -1612,10 +1620,11 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * <code>null</code>.
     * @return the unique help key string
     */
+   @Override
    protected String subclassHelpId( String helpId )
    {
 
-      Map<String, String> helpKeys = new HashMap<String, String>();
+      Map<String, String> helpKeys = new HashMap<>();
       helpKeys.put(RELATIONSHIP,"Properties");
       helpKeys.put(getResourceString("userProps"),"UserProps");
       helpKeys.put(getResourceString("cloningProps"),"Cloning");
@@ -1728,8 +1737,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                         i < PSRelationshipConfig.CATEGORY_ENUM.length;
                         i++)
                      {
-                        PSEntry entry =
-                           (PSEntry) PSRelationshipConfig.CATEGORY_ENUM[i];
+                        PSEntry entry = PSRelationshipConfig.CATEGORY_ENUM[i];
                         //We do not allow create folder category of 
                         //relationships
                         if (!entry
@@ -1776,7 +1784,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     */
    public static Iterator cleanDisabledProcessChecks(Iterator checks)
    {
-      List<PSProcessCheck> list = new ArrayList<PSProcessCheck>();
+      List<PSProcessCheck> list = new ArrayList<>();
 
       if (checks != null)
       {
@@ -1790,7 +1798,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                if(rules.hasNext())
                {
                   PSRule rule = (PSRule)rules.next();
-                  List<PSRule> cleaned = new ArrayList<PSRule>(1);
+                  List<PSRule> cleaned = new ArrayList<>(1);
                   cleaned.add(rule);
                   check.setConditions(cleaned.iterator());
                }
@@ -1926,7 +1934,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                ErrorDialogs.showErrorMessage(
                   this, MessageFormat.format(
                   getResourceString("duplicateRelationship"),
-                  new Object[] {selectedValue.toString()}),
+                  new Object[] {selectedValue}),
                   getResourceString("error") );
             }
          }
@@ -2106,6 +2114,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * @return <code>true</code> if the cell is editable, otherwise <code>
        * false</code>
        */
+      @Override
       public boolean isCellEditable(int row, int col)
       {
          checkRow(row);
@@ -2136,6 +2145,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * @return <code>true</code> if the model represents 'User Propertis',
        * otherwise <code>false</code>
        */
+      @Override
       public boolean allowRemove()
       {
          return m_isUser;
@@ -2151,6 +2161,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        *
        * @return the value of cell, may be <code>null</code>
        */
+      @Override
       public Object getValueAt(int row, int col)
       {
          checkRow(row);
@@ -2168,7 +2179,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             else if( col == COL_PROPS_LOCKED )
                data = prop.isLocked() ? Boolean.TRUE : Boolean.FALSE;
             else if( col == COL_PROPS_TYPE )
-               data = m_propertyTypes.get(new Integer(prop.getType()));
+               data = m_propertyTypes.get(prop.getType());
          }
 
          return data;
@@ -2184,6 +2195,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * @param col the column index of value to get, must be >= 0 and less than
        * {@link #getColumnCount() columncount} of this model.
        */
+      @Override
       public void setValueAt(Object value, int row, int col)
       {
          checkRow(row);
@@ -2202,7 +2214,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
          {
             if(col == COL_PROPS_NAME)
             {
-               Vector<PSProperty> data = new Vector<PSProperty>();
+               Vector<PSProperty> data = new Vector<>();
                data.add(new PSProperty(value.toString()));
                getDataVector().setElementAt(data, row);
             }
@@ -2217,7 +2229,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             else if( col == COL_PROPS_VALUE )
                prop.setValue(value);
             else if( col == COL_PROPS_LOCKED )
-               prop.setLock( ((Boolean)value).booleanValue() );
+               prop.setLock((Boolean) value);
             else if( col == COL_PROPS_TYPE )
             {
                PropertyType type = (PropertyType)value;
@@ -2259,12 +2271,14 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * @return <code>true</code> if the model represents 'User Properties',
        * otherwise <code>false</code>
        */
+      @Override
       public boolean allowChangeDescription()
       {
          return m_isUser;
       }
 
       //implements IPSTableModel interface method.
+      @Override
       public void setDescription(int row, String desc)
       {
          checkRow(row);
@@ -2343,7 +2357,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
          while(extensions.hasNext())
          {
             Object obj = extensions.next();
-            Vector<Object> element = new Vector<Object>(getColumnNames().size());
+            Vector<Object> element = new Vector<>(getColumnNames().size());
             data.add(element);
 
             if(!(obj instanceof PSConditionalExtension))
@@ -2405,6 +2419,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * extension chosen in a new row. See super's description for parameter
        * description.
        */
+      @Override
       public void setValueAt(Object value, int row, int col)
       {
          if(value != null)
@@ -2435,6 +2450,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * @return <code>true</code> if the cell is editable, otherwise <code>
        * false</code>
        */
+      @Override
       public boolean isCellEditable(int row, int col)
       {
          if(col == COL_EXT_COND)
@@ -2458,6 +2474,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
       }
 
       //implements interface method.
+      @Override
       public String getDescription(int row)
       {
          String description = "";
@@ -2474,12 +2491,14 @@ public class PSRelationshipEditorDialog extends PSDialog implements
       }
 
       //overridden to return true always.
+      @Override
       public boolean allowRemove()
       {
          return true;
       }
 
       //overridden to return true always.
+      @Override
       public boolean allowMove()
       {
          return true;
@@ -2771,6 +2790,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
        * @return <code>true</code> if the cell is editable, otherwise <code>
        * false</code>
        */
+      @Override
       public boolean isCellEditable(EventObject event)
       {
          if (event instanceof MouseEvent)
@@ -2899,7 +2919,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                {
                   m_curEditorComponent = m_checkEditor;
                   if(value != null)
-                     m_checkEditor.setSelected(((Boolean)value).booleanValue());
+                     m_checkEditor.setSelected((Boolean) value);
                }
                else if(type == PSProperty.TYPE_DATE)
                {
@@ -2919,7 +2939,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             {
                m_curEditorComponent = m_checkEditor;
                if(value != null)
-                  m_checkEditor.setSelected(((Boolean)value).booleanValue());
+                  m_checkEditor.setSelected((Boolean) value);
             }
             else if(column == COL_PROPS_TYPE)
             {
@@ -2935,7 +2955,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
             {
                m_curEditorComponent = m_checkEditor;
                if(value != null)
-                  m_checkEditor.setSelected(((Boolean)value).booleanValue());
+                  m_checkEditor.setSelected((Boolean) value);
             }
             else if(column == PSCloningConfigModel.COL_CLONE_COND)
             {
@@ -2943,7 +2963,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                if(value != null)
                {
                   m_condEditor.getAction().putValue(
-                     DATA_OBJECT, (List)value);
+                     DATA_OBJECT, value);
                }
             }
          }
@@ -2962,12 +2982,9 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                m_extEditButton.getAction().putValue(DATA_OBJECT, value);
                if(value != null)
                {
-                  Iterator exits = exitDefs.iterator();
-                  while(exits.hasNext())
-                  {
-                     IPSExtensionDef def = (IPSExtensionDef)exits.next();
-                     if(def.equals(((OSExtensionCall)value).getExtensionDef()))
-                     {
+                  for (Object exitDef : exitDefs) {
+                     IPSExtensionDef def = (IPSExtensionDef) exitDef;
+                     if (def.equals(((OSExtensionCall) value).getExtensionDef())) {
                         m_extComboEditor.setSelectedItem(def);
                         break;
                      }
@@ -2982,7 +2999,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                if(value != null)
                {
                   m_condEditor.getAction().putValue(
-                     DATA_OBJECT, (List)value);
+                     DATA_OBJECT, value);
                }
             }
          }
@@ -3018,7 +3035,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                m_curEditorComponent = m_condEditor;
                if (value != null)
                {
-                  m_condEditor.getAction().putValue(DATA_OBJECT, (List) value);
+                  m_condEditor.getAction().putValue(DATA_OBJECT,  value);
                }
             }
          }
@@ -3038,12 +3055,9 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                m_extEditButton.getAction().putValue(DATA_OBJECT, value);
                if(value != null)
                {
-                  Iterator exits = exitDefs.iterator();
-                  while(exits.hasNext())
-                  {
-                     IPSExtensionDef def = (IPSExtensionDef)exits.next();
-                     if(def.equals(((OSExtensionCall)value).getExtensionDef()))
-                     {
+                  for (Object exitDef : exitDefs) {
+                     IPSExtensionDef def = (IPSExtensionDef) exitDef;
+                     if (def.equals(((OSExtensionCall) value).getExtensionDef())) {
                         m_extComboEditor.setSelectedItem(def);
                         break;
                      }
@@ -3058,7 +3072,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
                if(value != null)
                {
                   m_condEditor.getAction().putValue(
-                     DATA_OBJECT, (List)value);
+                     DATA_OBJECT, value);
                }
             }
          }
@@ -3157,7 +3171,6 @@ public class PSRelationshipEditorDialog extends PSDialog implements
 
    /**
     *
-    * @return
     */
    String getCurViewName()
    {
@@ -3445,14 +3458,14 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * <code>null</code> or modified after that. May be empty.
     */
    private List<IPSExtensionDef> m_preExtensions =
-         new ArrayList<IPSExtensionDef>();
+         new ArrayList<>();
 
    /**
     * The list of UDFs (<code>IPSUdfProcessor</code>) available to
     * associate with a relationship, initialized in the constructor and never
     * <code>null</code> or modified after that. May be empty.
     */
-   private List<IPSExtensionDef> m_udfs = new ArrayList<IPSExtensionDef>();
+   private List<IPSExtensionDef> m_udfs = new ArrayList<>();
 
    /**
     * The system clone handler configuration that defines the process checks
@@ -3521,7 +3534,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * class is loaded in <code>initDialog()</code> and never <code>null</code>
     * or modified after that.
     */
-   private static Vector<String> ms_propColumns = new Vector<String>();
+   private static Vector<String> ms_propColumns = new Vector<>();
 
    /**
     * The list of column names for cloning table model in the order specified
@@ -3529,7 +3542,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * class is loaded in <code>initDialog()</code> and never <code>null</code>
     * or modified after that.
     */
-   static Vector<String> ms_cloneColumns = new Vector<String>();
+   static Vector<String> ms_cloneColumns = new Vector<>();
 
    /**
     * The list of column names for cloning field override table
@@ -3539,7 +3552,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * or modified after that.
     */
    static Vector<String> ms_cloneFieldOverridesColumns =
-         new Vector<String>();
+         new Vector<>();
 
 
    /**
@@ -3549,7 +3562,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * <code>initDialog()</code> and never <code>null</code> or modified after
     * that.
     */
-   private static Vector<String> ms_extColumns = new Vector<String>();
+   private static Vector<String> ms_extColumns = new Vector<>();
 
    /**
     * The list of column names for extensions table model when it is used for
@@ -3557,7 +3570,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * and set with data when this class is loaded in <code>initDialog()</code>
     * and never <code>null</code> or modified after that.
     */
-   static Vector<String> ms_effColumns = new Vector<String>();
+   static Vector<String> ms_effColumns = new Vector<>();
 
    /**
     * The icon used to represent that the cell has some conditions, initialized
@@ -3589,16 +3602,16 @@ public class PSRelationshipEditorDialog extends PSDialog implements
    /**
     * Map that keeps all right panels. No order is preserved.
     */
-   private Map<String, PSCfgPanel> m_rightPanels = new HashMap<String, PSCfgPanel>();
+   private Map<String, PSCfgPanel> m_rightPanels = new HashMap<>();
 
    /**
     * Parent frame that can be used for error dialogs,
     * may be <code>null</code>.
     */
-   private Frame m_parentFrame;
+   private static Frame m_parentFrame;
 
    /**
-    * Contains an ordered set of CE system fields. Initilized by
+    * Contains an ordered set of CE system fields. Initialized by
     * the ctor and never <code>null</code> after that.
     */
    private Collection m_ceSystemFields;
@@ -3609,7 +3622,7 @@ public class PSRelationshipEditorDialog extends PSDialog implements
     * property definition as <code>PSProperty</code>.
     */
    private static final Map<String, PSProperty> ms_requiredUserProps =
-         new HashMap<String, PSProperty>();
+         new HashMap<>();
    static
    {
       ms_requiredUserProps.put(IPSHtmlParameters.SYS_SLOTID,
