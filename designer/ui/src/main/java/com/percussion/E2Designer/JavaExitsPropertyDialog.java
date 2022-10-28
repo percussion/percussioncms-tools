@@ -309,7 +309,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
    {
       getContentPane().setLayout(null);
       setSize(450, 575);
-
+      setAutoRequestFocus(true);
       createControls();
       createParameterPanel();
       createCommandPanel();
