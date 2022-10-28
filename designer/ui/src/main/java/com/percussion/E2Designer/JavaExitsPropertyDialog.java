@@ -313,8 +313,10 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
       createControls();
       createParameterPanel();
       createCommandPanel();
-
+      setVisible(true);
+      setModal(true);
       center();
+      toFront();
    }
 
    /**
