@@ -143,7 +143,7 @@ public abstract class UIFigureFrame extends JInternalFrame
          Bookable,
          Printable
 {
-   private final static Logger ms_log = LogManager.getLogger(UIFigureFrame.class);
+   private static final Logger ms_log = LogManager.getLogger(UIFigureFrame.class);
 
    public UIFigureFrame(String strTitle, Dimension d,
          final PSXmlApplicationEditor xmlApplicationEditor)
@@ -715,7 +715,7 @@ public abstract class UIFigureFrame extends JInternalFrame
    /**
     * This is a convenience method.
     * 
-    * @returns the E2 server that this application was created on
+    * @return the E2 server that this application was created on
     */
    public String getE2Server()
    {
@@ -740,7 +740,7 @@ public abstract class UIFigureFrame extends JInternalFrame
    /**
     * Returns the figure factory that is used by the derived class.
     */
-   abstract protected FigureFactory getFigureFactory();
+   protected abstract  FigureFactory getFigureFactory();
 
    /**
     * Returns the data object that is associated with this visual
@@ -787,7 +787,7 @@ public abstract class UIFigureFrame extends JInternalFrame
    public List<Action> getDynamicActionListeners()
    {
       // register for actions in the mainframe
-      List<Action> actionListeners = new ArrayList<Action>();
+      List<Action> actionListeners = new ArrayList<>();
       {
          final Action action = new Action()
          {
@@ -888,7 +888,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     * When inserting a figure, the insertion point is translated by this many
     * pixels in the x and y direction before insert.
     */
-   private final static int INSERT_OFFSET = 10;
+   private static final int INSERT_OFFSET = 10;
 
    /**
     * Inserts a new figure into the uuper left corner of the editing window's
@@ -956,7 +956,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     * 
     * @param uic the figure to add
     * 
-    * @returns the passed in figure
+    * @return the passed in figure
     */
    public UIConnectableFigure add(UIConnectableFigure uic)
    {
@@ -974,7 +974,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     * @param iIndex the position to insert the figure, -1 to insert at the
     *           end/bottom. 0 is the top of the z-order.
     * 
-    * @returns the passed in figure, or null if any errors occur
+    * @return the passed in figure, or null if any errors occur
     */
    public UIConnectableFigure add(UIConnectableFigure uic, int iIndex)
    {
@@ -1003,7 +1003,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     * Calls getSelectionSet and serializes this object and copies it to the
     * supplied clipboard.
     * 
-    * @returns true if successfully copied, false if any problems occur or there
+    * @return true if successfully copied, false if any problems occur or there
     *          is nothing to copy
     * 
     * @see #getSelectionSet
@@ -1019,7 +1019,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     * available, the object is deserialized and added to the upper left corner
     * of the window.
     * 
-    * @returns true if object successfully pasted, false otherwise
+    * @return true if object successfully pasted, false otherwise
     * 
     * @param cb a clipboard to paste from, may be the system clipboard
     */
@@ -1074,7 +1074,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     */
    public UIConnectableFigure[] getSelectedFigures()
    {
-      UIConnectableFigure aSelectedFigs[] = new UIConnectableFigure[1];
+      UIConnectableFigure[] aSelectedFigs = new UIConnectableFigure[1];
       aSelectedFigs[0] = null;
       return aSelectedFigs;
    }
@@ -1110,7 +1110,7 @@ public abstract class UIFigureFrame extends JInternalFrame
        * first loop, the item goes invisible, which doesn't look very good when
        * it's pasted :-)
        */
-      Vector<UIConnectableFigure> uics = new Vector<UIConnectableFigure>();
+      Vector<UIConnectableFigure> uics = new Vector<>();
       Vector<UIConnectableFigure> comps = getSelected();
       for (int index = comps.size() - 1; index >= 0; index--)
       {
@@ -1250,15 +1250,7 @@ public abstract class UIFigureFrame extends JInternalFrame
             }
          }
       }
-      catch (IOException e)
-      {
-         e.printStackTrace();
-      }
-      catch (UnsupportedFlavorException e)
-      {
-         e.printStackTrace();
-      }
-      catch (ClassNotFoundException e)
+      catch (IOException | UnsupportedFlavorException | ClassNotFoundException e)
       {
          e.printStackTrace();
       }
@@ -1369,7 +1361,7 @@ public abstract class UIFigureFrame extends JInternalFrame
 
    public Vector<UIConnectableFigure> getSelected()
    {
-      Vector<UIConnectableFigure> selected = new Vector<UIConnectableFigure>();
+      Vector<UIConnectableFigure> selected = new Vector<>();
       Component[] comps = m_drawingPane.getComponents();
       for (int index = comps.length - 1; index >= 0; index--)
       {
@@ -1385,7 +1377,7 @@ public abstract class UIFigureFrame extends JInternalFrame
 
    public Vector getAll()
    {
-      Vector<UIConnectableFigure> selected = new Vector<UIConnectableFigure>();
+      Vector<UIConnectableFigure> selected = new Vector<>();
       Component[] comps = m_drawingPane.getComponents();
       for (int index = comps.length - 1; index >= 0; index--)
       {
@@ -1430,7 +1422,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     * @param uic for use by derived classes to make a determination of what
     *           layer to use.
     * 
-    * @returns an int layer number wrapped as an object which can be passed as a
+    * @return an int layer number wrapped as an object which can be passed as a
     *          constraint to the container add method.
     */
    protected Integer getLayer(
@@ -1954,7 +1946,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     * Constructs transferable from dropped file.
     */
    private Transferable getTransferableFromFileDropEvent(DropTargetEvent dtde)
-         throws UnsupportedFlavorException, IOException, MalformedURLException,
+         throws UnsupportedFlavorException, IOException,
             FigureCreationException, PSIllegalArgumentException
    {
       final File file = getFilesFromDnD(dtde).get(0);
@@ -2206,7 +2198,7 @@ public abstract class UIFigureFrame extends JInternalFrame
    protected boolean isOverRigidConnection(Point pt)
    {
       UIConnectableFigure uic = getConnectable(pt);
-      final List<IConnectionConstraint> constraints = new ArrayList<IConnectionConstraint>();
+      final List<IConnectionConstraint> constraints = new ArrayList<>();
       constraints.add(new RigidConnectionConstraint());
 
       return null != uic
@@ -2519,7 +2511,7 @@ public abstract class UIFigureFrame extends JInternalFrame
             }
          };
       }
-      catch (IOException e)
+      catch (IOException | UnsupportedFlavorException e)
       {
          E2Designer.getApp().getMainFrame().clearWaitCursor();
          PSDlgUtil.showError(e, false, E2Designer.getResources().getString(
@@ -2529,19 +2521,7 @@ public abstract class UIFigureFrame extends JInternalFrame
          m_bInDrop = false;
 
          e.printStackTrace();
-      }
-      catch (UnsupportedFlavorException e)
-      {
-         E2Designer.getApp().getMainFrame().clearWaitCursor();
-         PSDlgUtil.showError(e, false, E2Designer.getResources().getString(
-               "OpErrorTitle"));
-
-         dtde.dropComplete(false);
-         m_bInDrop = false;
-
-         e.printStackTrace();
-      }
-      catch (Exception e)
+      } catch (Exception e)
       {
          E2Designer.getApp().getMainFrame().clearWaitCursor();
          dtde.dropComplete(false);
@@ -2694,7 +2674,7 @@ public abstract class UIFigureFrame extends JInternalFrame
     *           editors that report no user changes will not be included in the
     *           returned collection.
     * 
-    * @returns a Vector containing 0 or more IEditor objects that are currently
+    * @return a Vector containing 0 or more IEditor objects that are currently
     *          editing figures that belong to this window.
     * 
     * @throws IllegalArgumentException If c is null.
@@ -2704,7 +2684,7 @@ public abstract class UIFigureFrame extends JInternalFrame
       if (null == c)
          throw new IllegalArgumentException();
 
-      Vector<IEditor> editors = new Vector<IEditor>(5);
+      Vector<IEditor> editors = new Vector<>(5);
 
       Component[] comps = c.getComponents();
       for (int index = comps.length - 1; index >= 0; index--)
@@ -3084,7 +3064,7 @@ public abstract class UIFigureFrame extends JInternalFrame
       }
 
       /**
-       * @returns <code>true</code> if the rect is currently painted on the
+       * @return <code>true</code> if the rect is currently painted on the
        *          screen
        */
       public boolean isDrawn()
@@ -3093,7 +3073,7 @@ public abstract class UIFigureFrame extends JInternalFrame
       }
 
       /**
-       * @returns the pixel width of the line that is used to draw this rect
+       * @return the pixel width of the line that is used to draw this rect
        */
       public int getLineWidth()
       {
@@ -3196,15 +3176,7 @@ public abstract class UIFigureFrame extends JInternalFrame
                action.setFigure(uic);
                editPopup.add(action);
             }
-            catch (ClassNotFoundException ex)
-            {
-               handleActionLoadingFailure(actionClassName, ex);
-            }
-            catch (InstantiationException ex)
-            {
-               handleActionLoadingFailure(actionClassName, ex);
-            }
-            catch (IllegalAccessException ex)
+            catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex)
             {
                handleActionLoadingFailure(actionClassName, ex);
             }
@@ -3355,7 +3327,7 @@ public abstract class UIFigureFrame extends JInternalFrame
          Vector<String> vItems = new Vector<String>();
          for (int iConnection = 0; iConnection < connections.size(); ++iConnection)
          {
-            vItems.add("Link" + new Integer(iConnection + 1).toString());
+            vItems.add("Link" + (iConnection + 1));
          }
 
          m_list = new JList(vItems);

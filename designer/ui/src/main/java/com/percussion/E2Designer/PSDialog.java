@@ -85,7 +85,7 @@ public class PSDialog extends JDialog
    { return m_componentTest; }
 
    /**
-    * Reinitializes the ValidationFramework within the PSDialog.
+    * Reinitialized the ValidationFramework within the PSDialog.
     *
     * @param
     *           c an array of Component

@@ -96,4 +96,6 @@ abstract class PSEditorDialog extends PSDialog implements IEditor
    {
       return true;
    }
+
+
 }

@@ -754,11 +754,15 @@ public class UIFigure extends JPanel implements PageableAndPrintable
          final Class<?> editorClass =
             Class.forName("com.percussion.E2Designer." + m_strEditorClassName );
          final Constructor ctor = getConstructorWithXmlApp(editorClass);
+         final Constructor ctorWin = editorClass.getConstructor(
+                new Class[] {Window.class, OSExitCallSet.class});
+
          m_editor = (IEditor) (ctor == null
-               ? editorClass.newInstance()
+               ? ctorWin.newInstance((Window)this.getParent(),null )
                : ctor.newInstance(getFigureFrame().getXmlApplicationEditor()));
          //change icon now that we are being edited
          repaint();
+
          if ( !m_editor.isModal())
          {
             if ( m_editor instanceof JInternalFrame )
