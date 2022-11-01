@@ -758,13 +758,13 @@ public class UIFigure extends JPanel implements PageableAndPrintable
           if(ctor == null) {
               try {
                   ctorWin = editorClass.getConstructor(
-                          new Class[]{Window.class, OSExitCallSet.class});
+                          Window.class);
               } catch (NoSuchMethodException e) {
                   ctorWin = null;
               }
           }
          m_editor = (IEditor) (ctor == null
-               ? ctorWin.newInstance(SwingUtilities.getWindowAncestor(this),new OSExitCallSet() )
+               ? ctorWin.newInstance(SwingUtilities.getWindowAncestor(this))
                : ctor.newInstance(getFigureFrame().getXmlApplicationEditor()));
          //change icon now that we are being edited
          repaint();

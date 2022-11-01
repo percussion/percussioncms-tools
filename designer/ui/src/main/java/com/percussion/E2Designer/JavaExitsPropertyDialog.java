@@ -49,6 +49,12 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
       initDialog();
    }
 
+   public JavaExitsPropertyDialog(Window parent)
+   {
+      super(parent);
+      initDialog();
+   }
+
    /**
     * Constructs <code>JavaExitsPropertyDialog</code> with given parent and
     * exit call set.
