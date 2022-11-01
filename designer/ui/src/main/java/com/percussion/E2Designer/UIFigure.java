@@ -753,10 +753,16 @@ public class UIFigure extends JPanel implements PageableAndPrintable
       {
          final Class<?> editorClass =
             Class.forName("com.percussion.E2Designer." + m_strEditorClassName );
-         final Constructor ctor = getConstructorWithXmlApp(editorClass);
-         final Constructor ctorWin = editorClass.getConstructor(
-                new Class[] {Window.class, OSExitCallSet.class});
-
+         Constructor ctor = getConstructorWithXmlApp(editorClass);
+          Constructor ctorWin=null;
+          if(ctor == null) {
+              try {
+                  ctorWin = editorClass.getConstructor(
+                          new Class[]{Window.class, OSExitCallSet.class});
+              } catch (NoSuchMethodException e) {
+                  ctorWin = null;
+              }
+          }
          m_editor = (IEditor) (ctor == null
                ? ctorWin.newInstance(SwingUtilities.getWindowAncestor(this),new OSExitCallSet() )
                : ctor.newInstance(getFigureFrame().getXmlApplicationEditor()));
