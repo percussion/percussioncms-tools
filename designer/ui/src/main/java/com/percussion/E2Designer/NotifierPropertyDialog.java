@@ -40,6 +40,13 @@ public class NotifierPropertyDialog extends PSEditorDialog
     initDialog();
   }
 
+  public NotifierPropertyDialog(Window parent)
+  {
+    super(parent);
+
+    initDialog();
+  }
+
 //
 // PUBLIC METHODS
 //

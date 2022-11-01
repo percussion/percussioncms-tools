@@ -52,6 +52,12 @@ public class AppSecDialog
 
    public AppSecDialog()
    {
+      super();
+   }
+
+   public AppSecDialog(Window parent)
+   {
+      super(parent);
    }
 
    public AppSecDialog(PSApplication app)

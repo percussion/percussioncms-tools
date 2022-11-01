@@ -40,6 +40,12 @@ public class FlushTableMetaDataDialog extends PSEditorDialog
     */
    public FlushTableMetaDataDialog()
    {
+      super();
+   }
+
+   public FlushTableMetaDataDialog(Window parent)
+   {
+      super(parent);
    }
 
    // IEditor implementation

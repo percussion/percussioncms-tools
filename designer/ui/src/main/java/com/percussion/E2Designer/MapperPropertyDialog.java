@@ -49,6 +49,12 @@ public class MapperPropertyDialog extends PSEditorDialog implements
       initDialog();
    }
 
+   public MapperPropertyDialog(Window parent)
+   {
+      super(parent);
+      initDialog();
+   }
+
    /**
     * Construct the default mapper property dialog.
     */
