@@ -1589,6 +1589,12 @@ public class NotifierPropertyDialog extends PSEditorDialog
     c_array[0] = m_mailServerField;
 
     setValidationFramework(c_array, v_array);
+
+    center();
+    setModal(true);
+    toFront();
+    setVisible(true);
+    setAlwaysOnTop(true);
   }
   
 
