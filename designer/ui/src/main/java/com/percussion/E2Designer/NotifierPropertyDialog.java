@@ -55,6 +55,7 @@ public class NotifierPropertyDialog extends PSEditorDialog
 */
   public boolean onEdit( UIFigure figure, final Object data )
   {
+
     if ( null != figure.getData() && figure.getData() instanceof OSNotifier)
     {
       m_notifier = (OSNotifier)figure.getData();
