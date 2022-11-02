@@ -68,7 +68,7 @@ public class PSDialog extends JDialog
 
    public PSDialog(Window f)
    {
-      super((Frame)f, true);
+      super(f);
       init( true );
    }
 
