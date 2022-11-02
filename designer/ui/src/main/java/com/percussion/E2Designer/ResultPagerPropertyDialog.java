@@ -153,6 +153,12 @@ public class ResultPagerPropertyDialog extends PSEditorDialog
       initDialog();
    }
 
+   public ResultPagerPropertyDialog(Window parent)
+   {
+      super(parent);
+      initDialog();
+   }
+
    private void setMnemonicOnLabel(UTSpinTextField txtFld, String resId)
    {  
       JLabel lbl = txtFld.getLabel();

@@ -1333,7 +1333,11 @@ public class UIFigure extends JPanel implements PageableAndPrintable
          final String className = m_auxEditorMap.get(actionCommand);
          if (className != null)
          {
-            final Object editor = Class.forName(className).newInstance();
+             Class auxEditorclass = Class.forName(className);
+
+             Constructor ctor = auxEditorclass.getConstructor(auxEditorclass, Window.class);
+
+            final Object editor = ctor.newInstance(SwingUtilities.getWindowAncestor(this));
 
             // check that this is a legal editor
             if (!isValidEditor(editor))
