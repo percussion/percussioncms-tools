@@ -389,6 +389,8 @@ public class PSDialog extends JDialog
     */
    private void init( boolean bSetTitle )
    {
+      setAlwaysOnTop(true);
+      setAutoRequestFocus(true);
       setModal(true);
       setResizable(false);
       setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
