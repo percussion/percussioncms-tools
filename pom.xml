@@ -30,6 +30,7 @@
         <module>perc-server-admin</module>
         <module>perc-package-installer</module>
         <module>perc-package-builder</module>
+        <module>CheckboxTree</module>
     </modules>
 
     <properties>
