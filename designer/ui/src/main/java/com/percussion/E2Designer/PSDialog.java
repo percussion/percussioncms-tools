@@ -66,9 +66,9 @@ public class PSDialog extends JDialog
       init( false );
    }
 
-   public PSDialog(Frame f)
+   public PSDialog(Window f)
    {
-      super(f, true);
+      super(f);
       init( true );
    }
 
@@ -85,7 +85,7 @@ public class PSDialog extends JDialog
    { return m_componentTest; }
 
    /**
-    * Reinitializes the ValidationFramework within the PSDialog.
+    * Reinitialized the ValidationFramework within the PSDialog.
     *
     * @param
     *           c an array of Component
@@ -389,6 +389,8 @@ public class PSDialog extends JDialog
     */
    private void init( boolean bSetTitle )
    {
+      setAlwaysOnTop(true);
+      setAutoRequestFocus(true);
       setModal(true);
       setResizable(false);
       setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);

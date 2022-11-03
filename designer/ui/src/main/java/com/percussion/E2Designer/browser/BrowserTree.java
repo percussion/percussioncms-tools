@@ -44,6 +44,7 @@ import com.percussion.design.objectstore.PSObjectStore;
 import com.percussion.design.objectstore.PSRelationshipConfigSet;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
 import com.percussion.error.PSException;
+import com.percussion.extension.IPSExtensionDef;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.server.IPSServerErrors;
@@ -87,7 +88,6 @@ import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Vector;
 
 
 /**
@@ -628,11 +628,10 @@ public class BrowserTree extends JTree
             PSDbComponentCollection(PSAction.class);
          if (elems != null && elems.length != 0)
          {
-            for (int i=0; i<elems.length; i++)
-            {
-               PSAction s = new PSAction(elems[i]);
-               actionColl.add(s);
-            }
+             for (Element elem : elems) {
+                 PSAction s = new PSAction(elem);
+                 actionColl.add(s);
+             }
          }
          //get all the menumodes
          PSDbComponentCollection menuModeColl = new
@@ -664,7 +663,7 @@ public class BrowserTree extends JTree
          }
 
          // build the list of known context parameters
-         List<String> contextParameters = new ArrayList<String>();
+         List<String> contextParameters = new ArrayList<>();
          Iterator actions = actionColl.iterator();
          while (actions.hasNext())
          {
@@ -880,7 +879,7 @@ public class BrowserTree extends JTree
             PSCloneHandlerConfig sysCHConfig =
                   getCloneHandlerConfigSet(objStore, overrideSame, overrideDiff);
 
-            Vector exits = CatalogServerExits.getCatalog(
+            List<IPSExtensionDef> exits = CatalogServerExits.getCatalog(
                E2Designer.getDesignerConnection(),
                CatalogExtensionCatalogHandler.JAVA_EXTENSION_HANDLER_NAME,
                false);

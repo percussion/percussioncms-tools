@@ -9,6 +9,8 @@
 package com.percussion.E2Designer;
 
 
+import java.awt.*;
+
 /**
  * Defines a simple interface that can be implemented by dialogs or other
  * editing windows that provides polymorphic behavior for the data that will
@@ -129,5 +131,6 @@ public interface IEditor
     * gets title of window.
     */
    public String getTitle();
+
 }
 

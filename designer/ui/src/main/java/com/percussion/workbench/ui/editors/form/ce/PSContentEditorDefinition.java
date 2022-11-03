@@ -65,19 +65,20 @@ public class PSContentEditorDefinition
    public static PSTableLocator getSystemTableLocator() throws Exception
    {
       PSTableLocator sysTableLocator = null;
+      PSContainerLocator sysContainerLocator;
 
       PSContentEditorSystemDef definition = getSystemDef();
-      PSContainerLocator sysContainerLocator = definition.getContainerLocator();
+      if(definition !=null) {
+          sysContainerLocator = definition.getContainerLocator();
 
-      //get table set from system container locator
-      Iterator sysTableIter = sysContainerLocator.getTableSets();
-      while(sysTableIter.hasNext())
-      {
-         PSTableSet set = (PSTableSet)sysTableIter.next();
-         sysTableLocator = set.getTableLocation();
-         break;
+         //get table set from system container locator
+         Iterator sysTableIter = sysContainerLocator.getTableSets();
+         while (sysTableIter.hasNext()) {
+            PSTableSet set = (PSTableSet) sysTableIter.next();
+            sysTableLocator = set.getTableLocation();
+            break;
+         }
       }
-
       return sysTableLocator;
    }
 
@@ -129,9 +130,9 @@ public class PSContentEditorDefinition
          IPSContentTypeModel model = (IPSContentTypeModel) ms_factory
                .getModel(PSObjectTypes.CONTENT_TYPE);
          ms_controlList = model.getControls();
-         ms_fieldControls = new ArrayList();
-         ms_simpleChildFieldControls = new ArrayList();
-         ms_complexChildControls = new ArrayList();
+         ms_fieldControls = new ArrayList<>();
+         ms_simpleChildFieldControls = new ArrayList<>();
+         ms_complexChildControls = new ArrayList<>();
 
          Iterator iter = ms_controlList.iterator();
          while(iter.hasNext())
@@ -284,7 +285,7 @@ public class PSContentEditorDefinition
       if(name.trim().length() == 0)
          return newName;
       if(name.indexOf('_') != -1)
-         name.replace('_' , ' ');
+         name = name.replace('_' , ' ');
 
       StringTokenizer tokens = new StringTokenizer(name);
       int count = tokens.countTokens();
@@ -705,9 +706,8 @@ public class PSContentEditorDefinition
       List<IPSReference> sysref = (List<IPSReference>) model.catalog(false);
       if (sysref.isEmpty())
          return null;
-      PSContentEditorSystemDef systemDef = (PSContentEditorSystemDef) model
+      return  (PSContentEditorSystemDef) model
             .load(sysref.get(0), false, false);
-      return systemDef;
    }
 
    /**
@@ -1105,7 +1105,7 @@ public class PSContentEditorDefinition
     */
    public static String[] getControlNames(int options) throws PSModelException
    {
-      List<String> cn = new ArrayList<String>();
+      List<String> cn = new ArrayList<>();
       for (PSControlMeta cm : getControls(options))
          cn.add(cm.getName());
       Collections.sort(cn);
@@ -1193,7 +1193,7 @@ public class PSContentEditorDefinition
    public static List<PSFieldDefinition> getFieldDefinitions(
       PSDisplayMapper dmapper, PSFieldSet fieldSet)
    {
-      List<PSFieldDefinition> fieldDefs = new ArrayList<PSFieldDefinition>();
+      List<PSFieldDefinition> fieldDefs = new ArrayList<>();
       Iterator mappings = dmapper.iterator();
       while (mappings.hasNext())
       {
@@ -1253,7 +1253,6 @@ public class PSContentEditorDefinition
             else
             {
                fieldDefs.add(new PSFieldDefinition((PSFieldSet) o, mapping));
-               continue;
             }
          }
 
@@ -1271,7 +1270,7 @@ public class PSContentEditorDefinition
    public static List<PSFieldDefinition> getChildFieldDefinitions(
          PSItemDefinition itemDef, String fieldSetName) 
    {
-      List<PSFieldDefinition> fieldDefs = new ArrayList<PSFieldDefinition>();
+      List<PSFieldDefinition> fieldDefs = new ArrayList<>();
       PSContentEditorPipe pipe = (PSContentEditorPipe) itemDef
       .getContentEditor().getPipe();
       PSFieldSet fieldSet = pipe.getMapper().getFieldSet();
@@ -1303,7 +1302,7 @@ public class PSContentEditorDefinition
     * @throws PSValidationException
     */
    public static List<PSFieldDefinition> getSystemFieldDefinitions()
-         throws PSValidationException, Exception
+         throws Exception
    {
       PSDisplayMapper dmapper = getSystemDef().getUIDefinition()
             .getDisplayMapper();
@@ -1372,7 +1371,7 @@ public class PSContentEditorDefinition
     */
    public static String validateFieldName(String fieldName)
    {
-      String origFieldName = new String(fieldName);
+      String origFieldName = fieldName;
       
       if (StringUtils.isEmpty(fieldName))
       {
@@ -1438,7 +1437,7 @@ public class PSContentEditorDefinition
       {
          throw new IllegalArgumentException("group cannot be null");   //$NON-NLS-1$
       }
-      List<PSFieldDefinition> fieldDefs = new ArrayList<PSFieldDefinition>();
+      List<PSFieldDefinition> fieldDefs = new ArrayList<>();
       PSDisplayMapper dmapper = group.getUIDefinition()
             .getDisplayMapper();
       PSFieldSet fieldSet = group.getFieldSet();
@@ -1782,9 +1781,9 @@ public class PSContentEditorDefinition
                         PSMessages.getString("PSContentEditorDefinition.error.reservedwordsmissing.title"), //$NON-NLS-1$
                         PSMessages.getString("PSContentEditorDefinition.error.reservedwordsmissing.message"), //$NON-NLS-1$
                         e);
-            return new ArrayList<String>();
+            return new ArrayList<>();
          }
-         ms_reservedWords = new ArrayList<String>();
+         ms_reservedWords = new ArrayList<>();
          Enumeration keys = props.propertyNames();
          while(keys.hasMoreElements())
          {
@@ -1808,27 +1807,17 @@ public class PSContentEditorDefinition
    public static List<String> fixDisplayMapperControlMeta(PSDisplayMapper dmapper)
          throws PSModelException
    {
-      List<String> ctrls = new ArrayList<String>();
-      Iterator mappings = dmapper.iterator();
-      while (mappings.hasNext())
-      {
-         Object mapp = mappings.next();
-         if (mapp instanceof PSDisplayMapper)
-         {
-            Iterator chmappings = ((PSDisplayMapper) mapp).iterator();
-            while (chmappings.hasNext())
-            {
-               PSDisplayMapping chmapp = (PSDisplayMapping) chmappings.next();
-               if (fixDisplayMappingControlMeta(chmapp))
-               {
+      List<String> ctrls = new ArrayList<>();
+      for (Object mapp : dmapper) {
+         if (mapp instanceof PSDisplayMapper) {
+            for (Object o : (PSDisplayMapper) mapp) {
+               PSDisplayMapping chmapp = (PSDisplayMapping) o;
+               if (fixDisplayMappingControlMeta(chmapp)) {
                   ctrls.add(chmapp.getFieldRef());
                }
             }
-         }
-         else
-         {
-            if (fixDisplayMappingControlMeta((PSDisplayMapping) mapp))
-            {
+         } else {
+            if (fixDisplayMappingControlMeta((PSDisplayMapping) mapp)) {
                ctrls.add(((PSDisplayMapping) mapp).getFieldRef());
             }
          }
@@ -1989,7 +1978,7 @@ public class PSContentEditorDefinition
    public static List<String> getDefaultDataTypeAndFormat(
          String controlName)
    {
-      List<String> lst = new ArrayList<String>();
+      List<String> lst = new ArrayList<>();
       String dataType = PSField.DT_TEXT;
       String dataFormat = "50";
       if (StringUtils.isBlank(controlName))
@@ -2106,11 +2095,11 @@ public class PSContentEditorDefinition
     */
    static
    {
-      ms_sysColumns = new ArrayList<String>();
+      ms_sysColumns = new ArrayList<>();
       ms_sysColumns.add(IPSConstants.ITEM_PKEY_CONTENTID);
       ms_sysColumns.add(IPSConstants.ITEM_PKEY_REVISIONID);
 
-      ms_sysComplexChildColumns = new ArrayList<String>();
+      ms_sysComplexChildColumns = new ArrayList<>();
       ms_sysComplexChildColumns.addAll(ms_sysColumns);
       ms_sysComplexChildColumns.add(IPSConstants.CHILD_ITEM_PKEY);
    }
@@ -2183,7 +2172,7 @@ public class PSContentEditorDefinition
     * List of parameters to be preserved when switching between EditLive and
     * eWebEditPro controls.
     */
-   private static final List<String> ms_preserveList = new ArrayList<String>(5);
+   private static final List<String> ms_preserveList = new ArrayList<>();
    
    static
    {
@@ -2198,7 +2187,7 @@ public class PSContentEditorDefinition
     * List of wysiwyg controls. When switched between them, we need to preserve
     * certain properties.
     */
-   private static final List<String> ms_wysiwygControls = new ArrayList<String>();
+   private static final List<String> ms_wysiwygControls = new ArrayList<>();
 
    static
    {

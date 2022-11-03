@@ -9,6 +9,7 @@
 package com.percussion.E2Designer;
 
 import javax.swing.*;
+import javax.validation.constraints.NotNull;
 import java.awt.*;
 
 /**
@@ -22,14 +23,14 @@ abstract class PSEditorDialog extends PSDialog implements IEditor
      super();
   }
 
-  public PSEditorDialog(JDialog dialog)
+  public PSEditorDialog(@NotNull Window dialog)
   {
     super(dialog);
   }
 
-  protected PSEditorDialog(Frame f)
+  protected PSEditorDialog(@NotNull Frame f)
   {
-   super((JFrame)f);
+   super(f);
   }
 
   /*
@@ -95,4 +96,6 @@ abstract class PSEditorDialog extends PSDialog implements IEditor
    {
       return true;
    }
+
+
 }

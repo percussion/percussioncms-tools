@@ -75,6 +75,12 @@ public class DatasetInputConnectorPropertyDialog extends PSEditorDialog
         initDialog();
    }
 
+   public DatasetInputConnectorPropertyDialog(Window parent)
+   {
+      super(parent);
+      initDialog();
+   }
+
    /**
    * Construct the default dataset input connector property dialog.
    *

@@ -99,6 +99,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -711,12 +712,11 @@ public class PSUdfSet
          e.printStackTrace();
       }
 
-      Vector v = CatalogServerExits.getCatalog( m_conn, handlerName, context,
+      List<IPSExtensionDef> v = CatalogServerExits.getCatalog( m_conn, handlerName, context,
          "com.percussion.extension.IPSUdfProcessor", true,
          includeEmptyCategories);
-      Iterator iter = v.iterator();
-      while ( iter.hasNext())
-         udfs.add( iter.next());
+      if(udfs != null)
+         udfs.addAll(v);
 
       return udfs;
    }
@@ -845,8 +845,7 @@ public class PSUdfSet
 
    /**
     * A collection of global UDF's, initialized on the first call to 
-    * {@link getGlobalUdfs(boolean)}, updated on every further call to
-    * {@link getGlobalUdfs(true)}.
+    * , updated on every further call to.
     */
    private PSCollection m_globalUdfs;
    

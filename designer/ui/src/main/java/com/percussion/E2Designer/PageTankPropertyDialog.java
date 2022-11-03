@@ -40,6 +40,11 @@ public class PageTankPropertyDialog extends PSEditorDialog
       initDialog("", "");
   }
 
+  public PageTankPropertyDialog(Window parent){
+    super(parent);
+    initDialog("", "");
+  }
+
    /**
    * Get the schema source.
    *

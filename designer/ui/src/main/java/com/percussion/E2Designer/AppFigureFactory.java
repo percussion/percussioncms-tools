@@ -401,7 +401,7 @@ public class AppFigureFactory extends FigureFactory
             //only allow one java exit to a dataset connector at a time
             figure.addConnectionPoint(rcp);
 
-            // add auxilliary editor for table cache flushing
+            // add auxiliary editor for table cache flushing
             figure.addAuxEditor("flushTables",
                "com.percussion.E2Designer.FlushTableMetaDataDialog");
          }

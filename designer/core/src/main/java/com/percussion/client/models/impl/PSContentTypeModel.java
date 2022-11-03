@@ -89,12 +89,12 @@ public class PSContentTypeModel extends PSCmsModel implements
     */
    public List<PSControlMeta> getControls() throws PSModelException
    {
-      List<PSControlMeta> ctrlList = new ArrayList<PSControlMeta>();
+      List<PSControlMeta> ctrlList = new ArrayList<>();
       PSRemoteRequester rr = PSCoreFactory.getInstance().getRemoteRequester();
       Document controlXML;
       try
       {
-         controlXML = rr.getDocument(RESOURCE_NAME, new HashMap());
+         controlXML = rr.getDocument(RESOURCE_NAME, new HashMap<>());
          if (controlXML != null)
          {
             try
@@ -114,11 +114,7 @@ public class PSContentTypeModel extends PSCmsModel implements
             }
          }
       }
-      catch (IOException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (SAXException e)
+      catch (IOException | SAXException e)
       {
          throw new PSModelException(e);
       }

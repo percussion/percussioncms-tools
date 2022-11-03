@@ -40,6 +40,13 @@ public class NotifierPropertyDialog extends PSEditorDialog
     initDialog();
   }
 
+  public NotifierPropertyDialog(Window parent)
+  {
+    super(parent);
+
+    initDialog();
+  }
+
 //
 // PUBLIC METHODS
 //
@@ -48,6 +55,7 @@ public class NotifierPropertyDialog extends PSEditorDialog
 */
   public boolean onEdit( UIFigure figure, final Object data )
   {
+
     if ( null != figure.getData() && figure.getData() instanceof OSNotifier)
     {
       m_notifier = (OSNotifier)figure.getData();
@@ -1581,6 +1589,12 @@ public class NotifierPropertyDialog extends PSEditorDialog
     c_array[0] = m_mailServerField;
 
     setValidationFramework(c_array, v_array);
+
+    center();
+    setModal(true);
+    toFront();
+    setVisible(true);
+    setAlwaysOnTop(true);
   }
   
 

@@ -753,12 +753,22 @@ public class UIFigure extends JPanel implements PageableAndPrintable
       {
          final Class<?> editorClass =
             Class.forName("com.percussion.E2Designer." + m_strEditorClassName );
-         final Constructor ctor = getConstructorWithXmlApp(editorClass);
+         Constructor ctor = getConstructorWithXmlApp(editorClass);
+          Constructor ctorWin=null;
+          if(ctor == null) {
+              try {
+                  ctorWin = editorClass.getConstructor(
+                          Window.class);
+              } catch (NoSuchMethodException e) {
+                  ctorWin = null;
+              }
+          }
          m_editor = (IEditor) (ctor == null
-               ? editorClass.newInstance()
+               ? ctorWin.newInstance(SwingUtilities.getRoot(this))
                : ctor.newInstance(getFigureFrame().getXmlApplicationEditor()));
          //change icon now that we are being edited
          repaint();
+
          if ( !m_editor.isModal())
          {
             if ( m_editor instanceof JInternalFrame )
@@ -1323,7 +1333,11 @@ public class UIFigure extends JPanel implements PageableAndPrintable
          final String className = m_auxEditorMap.get(actionCommand);
          if (className != null)
          {
-            final Object editor = Class.forName(className).newInstance();
+             Class auxEditorclass = Class.forName(className);
+
+             Constructor ctor = auxEditorclass.getConstructor(auxEditorclass, Window.class);
+
+            final Object editor = ctor.newInstance(SwingUtilities.getWindowAncestor(this));
 
             // check that this is a legal editor
             if (!isValidEditor(editor))

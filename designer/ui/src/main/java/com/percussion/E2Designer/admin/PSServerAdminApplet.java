@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 public class PSServerAdminApplet extends JApplet
 {
     public static final String SERVER_ADMIN_LOG_CATEGORY = "Server Admin";
-    private static final Logger log = LogManager.getLogger(PSServerAdminApplet.class);
+    private static final Logger log = LogManager.getLogger(SERVER_ADMIN_LOG_CATEGORY);
 
    /**
     * Initialize the applet. This function will be called automatically by its
