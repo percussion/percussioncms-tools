@@ -162,6 +162,7 @@ public class StatusPropertyPanel extends JPanel implements ListSelectionListener
             StatusDetailsDialog details = new StatusDetailsDialog(m_parent,
                m_res.getString("detailsTitle"), m_console);
             details.setLocationRelativeTo(m_parent);
+             details.pack();
             details.setVisible(true);
          }
 

@@ -77,6 +77,8 @@ public class PSServerAdminApplet extends JApplet
       sm_frame = new PSServerAdminFrame(new PSServerAdminApplet(),
                                         ProjectConstants.APPLICATION_WIDTH,
                                         ProjectConstants.APPLICATION_HEIGHT);
+
+      sm_frame.pack();
       sm_frame.setVisible(true);
    }
 
