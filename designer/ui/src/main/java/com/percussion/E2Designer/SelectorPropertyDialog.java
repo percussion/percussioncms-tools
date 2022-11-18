@@ -338,6 +338,7 @@ public class SelectorPropertyDialog extends PSEditorDialog
    getContentPane().setLayout(new BorderLayout());
     getContentPane().add(panel);
     this.setSize(DIALOG_SIZE);
+    pack();
     m_distinctBox.setMnemonic(getResources().getString("mn_distinct").charAt(0));
     // initialize validation constraints
 //    m_validatedComponents[0] = this;

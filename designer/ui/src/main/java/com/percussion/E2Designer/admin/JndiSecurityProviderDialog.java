@@ -88,6 +88,7 @@ public class JndiSecurityProviderDialog extends PSDialog
 
       reset();
       setResizable( true );
+      pack();
       center();
    }
 

@@ -401,7 +401,7 @@ public class RequestLinkPropertyDialog extends PSEditorDialog //implements Actio
    /**
    * the target dataset
    */
-  private UTFixedTextField m_target = new UTFixedTextField("");
+  private UTFixedTextField m_target = new UTFixedTextField("",new Dimension(60,20));
    /**
    * the XML field for the Update URL
    */

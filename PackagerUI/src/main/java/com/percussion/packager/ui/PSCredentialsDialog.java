@@ -42,7 +42,7 @@ public class PSCredentialsDialog extends JDialog
    private void init(String hostport)
    {
       setModal(true);
-      setResizable(false);
+      setResizable(true);
       setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
       addWindowListener(new WindowAdapter()
       {

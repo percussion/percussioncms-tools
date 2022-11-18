@@ -133,7 +133,8 @@ public class ValidationTest extends PSDialog implements ActionListener
 
     v.setSize(150, 200);
 
-    v.setResizable(false);
+    v.setResizable(true);
+    v.pack();
     v.setVisible(true);
   }
 

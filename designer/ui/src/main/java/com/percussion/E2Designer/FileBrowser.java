@@ -330,7 +330,8 @@ public class FileBrowser extends PSDialog implements ItemListener, ActionListene
 
       getContentPane( ).add( panel );
       setSize( 440, 250 );
-      setResizable( false );
+      pack();
+      setResizable( true );
    }
 
    //

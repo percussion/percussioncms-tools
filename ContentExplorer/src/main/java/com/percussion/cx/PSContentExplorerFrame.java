@@ -1,5 +1,14 @@
 package com.percussion.cx;
 
+
+import com.percussion.cx.javafx.PSDesktopExplorerWindow;
+import com.percussion.cx.objectstore.PSMenuAction;
+import com.percussion.guitools.PSDialog;
+import javafx.application.Platform;
+import javafx.scene.web.WebEngine;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
 import java.applet.Applet;
 import java.applet.AppletContext;
 import java.applet.AppletStub;
@@ -113,7 +122,7 @@ public class PSContentExplorerFrame extends PSDesktopExplorerWindow implements A
             if (null != icon)
                PSContentExplorerFrame.this.setIconImage(icon.getImage()); // adding Rhythmyx icon to title
                // bar
- 
+             PSContentExplorerFrame.this.pack();
             PSContentExplorerFrame.this.setupAppletAndLogin();
          }
      });

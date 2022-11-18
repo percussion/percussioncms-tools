@@ -98,6 +98,7 @@ public class AppSecDialog
       getContentPane().add(panel);
       setResizable(true);
       this.setSize(DIALOG_SIZE);
+      pack();
       center();
    }
 

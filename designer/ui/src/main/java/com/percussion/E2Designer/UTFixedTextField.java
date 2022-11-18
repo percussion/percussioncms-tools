@@ -134,7 +134,7 @@ public class UTFixedTextField extends JTextField
   public static void main(String[] args)
   {
     JFrame f = new JFrame();
-    final UTFixedTextField test = new UTFixedTextField("");
+    final UTFixedTextField test = new UTFixedTextField("",new Dimension(60,20));
     test.setNumericDataOnly(true);
 
     JButton toggle = new JButton("Toggle");

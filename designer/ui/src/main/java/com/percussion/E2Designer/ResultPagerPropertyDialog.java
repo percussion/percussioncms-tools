@@ -380,6 +380,7 @@ public class ResultPagerPropertyDialog extends PSEditorDialog
       setValidationFramework(m_validatedComponents, m_validationConstraints);
 
       setSortKeyButtonState();
+      pack();
    }
 
    public boolean onEdit(UIFigure figure, final Object data)

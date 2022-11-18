@@ -132,7 +132,7 @@ public class LoginPanel extends JPanel
             show the 'useSSL' checkbox.
           */
       }
-      
+
       JPanel p6 = new JPanel(new BorderLayout());
       JPanel p7 = new JPanel(new BorderLayout());
       p7.add(createCommandPanel(), BorderLayout.EAST);

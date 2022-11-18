@@ -52,6 +52,7 @@ public class BinaryResourceDialog extends PSEditorDialog
   {
     initDialog();
     initListeners();
+    pack();
     setResizable( true );
   }
 

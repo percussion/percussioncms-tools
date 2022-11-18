@@ -58,6 +58,7 @@ public class SaveAsDialog extends PSDialog
 
     setSize(400, 300);
     setResizable(true);
+    pack();
     center();
   }
 

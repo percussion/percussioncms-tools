@@ -586,12 +586,11 @@ public class PSSearchDialog extends PSDialog
       bottomPanel.add(filler, BorderLayout.CENTER);
       bottomPanel.add(cmdButtonsPanel, BorderLayout.SOUTH);
       m_mainPanel.add(bottomPanel);
-      
       setContentPane(m_mainPanel);
+      border.addToAllNavigable(m_mainPanel);
       setResizable(true);
       pack();
-      center();  
-      border.addToAllNavigable(m_mainPanel);    
+      center();
    }
    
    /**

@@ -197,6 +197,7 @@ public class FlushTableMetaDataDialog extends PSEditorDialog
 
       // set the title
       setTitle(getResources().getString("title"));
+      pack();
    }
 
 

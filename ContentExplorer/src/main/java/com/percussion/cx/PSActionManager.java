@@ -2672,6 +2672,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
          final JDialog dlg = new JDialog(appletFrame, dlgtitle, true);
          dlg.setSize(width, height);
          dlg.setResizable(true);
+
          dlg.setLocationRelativeTo(appletFrame);
          dlg.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
          dlg.addWindowListener(new WindowAdapter()
@@ -2787,6 +2788,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
          }
          while (repeat);
 
+
          //
          // Assign to action the parameter (commenttext)
          //
@@ -2838,6 +2840,7 @@ public class PSActionManager implements IPSConstants, IPSSelectionListener
 
             PSDisplayOptionsDialog dlg = new PSDisplayOptionsDialog(m_applet.getDialogParentFrame(), userOptions,
                   defOptions, m_applet);
+            dlg.pack();
             dlg.setVisible(true);
 
             if (dlg.isOk())

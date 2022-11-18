@@ -82,6 +82,7 @@ public class  MultiTableDatatankPropertyDialog extends PSEditorDialog
     getContentPane().add(mainPanel);
     setSize(450, 440);
       setResizable(true);
+      pack();
     center();
   }
 

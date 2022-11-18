@@ -157,6 +157,7 @@ public class AppletMainDialog extends JFrame
       
       if (null != icon)
          setIconImage( icon.getImage( ) );
+      this.pack();
    }
 
    /**
