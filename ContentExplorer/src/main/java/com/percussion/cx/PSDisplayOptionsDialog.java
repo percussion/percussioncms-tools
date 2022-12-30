@@ -268,19 +268,20 @@ public class PSDisplayOptionsDialog extends PSDialog
       applyOptions(m_userOptions);
       m_systemDefaultCheck.setSelected(m_userOptions.getIsUseOSSettings());
             
-      pack();
+
       Dimension dim = getSize();
       // Not picking up size of bottom panel.
-      setSize(dim.width + 20, dim.height+(int)bottomPanel.getSize().getHeight()+20);
-      center();
-      setResizable(true);
-      
+
       // Add focus highlights
       PSDisplayOptions dispOptions =
          (PSDisplayOptions)UIManager.getDefaults().get(
             PSContentExplorerConstants.DISPLAY_OPTIONS);
       PSFocusBorder focusBorder = new PSFocusBorder(1, dispOptions);
       focusBorder.addToAllNavigable(panel);
+
+      pack();
+      center();
+      setResizable(true);
    }
 
    /**

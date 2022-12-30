@@ -28,6 +28,7 @@ public class LoggingDescriptionDialog extends PSDialog
       setSize(750, 550);
       setResizable(true);
       addTable(table);
+      pack();
       center();
 
    }

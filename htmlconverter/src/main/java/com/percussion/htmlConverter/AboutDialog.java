@@ -69,6 +69,7 @@ public class AboutDialog extends JDialog
       Dimension size = getSize();
       setLocation(( screenSize.width - size.width ) / 2,
             ( screenSize.height - size.height ) / 2 );
+
    }
 
    /**

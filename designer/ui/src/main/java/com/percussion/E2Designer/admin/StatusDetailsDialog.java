@@ -169,11 +169,10 @@ public class StatusDetailsDialog extends JDialog implements WindowListener
       m_refreshTimer.start();
 
     // add data
-    refreshData(m_application);
-
-      this.setResizable(false);
-    this.setSize(DIALOG_SIZE);
-   }
+        refreshData(m_application);
+        this.pack();
+        this.setResizable(true);
+    }
 
    /**
     * Create the event statistics panel.
@@ -193,6 +192,7 @@ public class StatusDetailsDialog extends JDialog implements WindowListener
       panel.add(createCounterPanel());
       panel.add(createTimerPanel());
     panel.add(createCommandPanel());
+    panel.revalidate();
 
     return panel;
    }
@@ -410,7 +410,7 @@ public class StatusDetailsDialog extends JDialog implements WindowListener
    /**
     * the uptime display text field
     */
-  private JTextField m_uptimeField = new UTFixedTextField("");
+  private JTextField m_uptimeField = new UTFixedTextField("",STATISTIC_FIELD_SIZE);
    /**
     * the number of events processed display text field
     */
@@ -438,7 +438,7 @@ public class StatusDetailsDialog extends JDialog implements WindowListener
    /**
     * the refresh data interval time edit field
     */
-  private JTextField m_intervalField = new UTFixedTextField("");
+  private JTextField m_intervalField = new UTFixedTextField("", STATISTIC_FIELD_SIZE);
    /**
     * the Cancel button
     */
@@ -454,7 +454,7 @@ public class StatusDetailsDialog extends JDialog implements WindowListener
    /**
    * the dialog size
    */
-  private final static Dimension DIALOG_SIZE = new Dimension(320, 315);
+  private final static Dimension DIALOG_SIZE = new Dimension(400, 350);
    /**
    * the preferred details chooser size
     */

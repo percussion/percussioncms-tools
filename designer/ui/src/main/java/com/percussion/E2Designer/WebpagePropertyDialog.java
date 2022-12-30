@@ -63,6 +63,7 @@ public class WebpagePropertyDialog extends PSEditorDialog
       initUI();
       initListeners();
       setSize( 450, 550 );
+      pack();
       center();
    }
 
@@ -74,6 +75,7 @@ public class WebpagePropertyDialog extends PSEditorDialog
       initUI();
       initListeners();
       setSize( 450, 550 );
+      pack();
       center();
    }
 

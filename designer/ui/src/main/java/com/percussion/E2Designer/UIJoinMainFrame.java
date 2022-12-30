@@ -123,6 +123,7 @@ class UIJoinMainFrame extends PSEditorDialog
 
          if (m_stack == null)
             m_stack = new Vector<PSComponent>();
+         pack();
 
       }
       catch (Exception e)
@@ -193,6 +194,8 @@ class UIJoinMainFrame extends PSEditorDialog
 
          if (m_stack == null)
             m_stack = new Vector<PSComponent>();
+
+         pack();
 
       }
       catch (Exception e)

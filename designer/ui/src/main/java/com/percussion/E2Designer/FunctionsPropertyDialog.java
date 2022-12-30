@@ -118,6 +118,7 @@ public class FunctionsPropertyDialog extends PSDialogAPI
       getContentPane().add(m_parameterPanel, BorderLayout.CENTER);
       getContentPane().add(cmdPanel, BorderLayout.SOUTH);
 
+      pack();
       center();
       setResizable(true);
       m_functions.addActionListener(new ActionListener()

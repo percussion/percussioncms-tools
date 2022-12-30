@@ -67,7 +67,7 @@ public class PSServerAdminFrame extends JFrame implements AppletStub,
     this.setSize(1000, 1000);
      this.pack();
      this.center();
-    this.setResizable(false);
+    this.setResizable(true);
    }
 
       /**

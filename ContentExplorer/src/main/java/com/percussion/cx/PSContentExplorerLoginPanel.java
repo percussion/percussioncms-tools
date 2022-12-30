@@ -773,7 +773,7 @@ public class PSContentExplorerLoginPanel extends JFrame
    /**
     * editable text field for user identification
     */
-   private JTextField m_userId = new UTFixedTextField("");
+   private JTextField m_userId = new UTFixedTextField("",new Dimension(60,20));
 
    /**
     * editable password field for user password

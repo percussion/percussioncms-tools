@@ -197,9 +197,10 @@ public class PSFileSelectorEditorPanel extends PSConfigPanel
          getContentPane().add(pane);
          pane.setPreferredSize(new Dimension(270, 120));
          setResizable(true);
+         pack();
          center();
          setModal(true);
-         pack();
+
       }
 
       /**

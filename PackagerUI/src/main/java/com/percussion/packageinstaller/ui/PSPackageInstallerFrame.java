@@ -73,9 +73,10 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
       JPanel mainPanel = createMainPanel();
       
       getContentPane().add(mainPanel);
-      displayView(Views.SELECTION);      
-      setSize(630, 700);
+      displayView(Views.SELECTION);
+      pack();
       PSUiUtils.center(this);
+
    }
    
    private JPanel createMainPanel()

@@ -113,6 +113,7 @@ public class PSDeploymentDependencyValidationsDialog  extends
 
       getContentPane().add(mainPane);
       setResizable(true);
+      pack();
    }
 
    /**

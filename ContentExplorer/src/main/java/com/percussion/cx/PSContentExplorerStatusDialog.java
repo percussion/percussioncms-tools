@@ -257,6 +257,7 @@ public class PSContentExplorerStatusDialog extends PSDialog
          JOptionPane.ERROR_MESSAGE,  JOptionPane.YES_NO_OPTION);
       JDialog dlg = optPane.createDialog(parent, title);
       dlg.setSize(new Dimension(600, 400));
+      dlg.pack();
       dlg.setResizable(true);
       dlg.show();
 

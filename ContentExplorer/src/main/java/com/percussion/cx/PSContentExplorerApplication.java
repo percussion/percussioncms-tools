@@ -167,7 +167,7 @@ public class PSContentExplorerApplication extends Application {
       System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
             "com.percussion.xml.PSDocumentBuilderFactoryImpl");
       System.setProperty("javax.xml.transform.TransformerFactory",
-            "org.apache.xalan.xsltc.trax.SmartTransformerFactoryImpl");
+            "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
       System.setProperty("javax.xml.xpath.XPathFactory", "com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl");
       System.setProperty("javax.xml.datatype.DatatypeFactory",
               "com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl");
