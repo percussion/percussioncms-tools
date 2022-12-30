@@ -19,7 +19,7 @@ import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSDataSet;
 import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNotFoundException;
+import com.percussion.error.PSNotFoundException;
 import com.percussion.design.objectstore.PSObjectStore;
 import com.percussion.design.objectstore.PSRequestor;
 import com.percussion.security.PSAuthenticationFailedException;

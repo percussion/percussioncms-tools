@@ -23,7 +23,7 @@ import com.percussion.client.PSObjectTypes;
 import com.percussion.client.impl.PSReference;
 import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.PSApplicationFile;
-import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.design.objectstore.PSObjectStore;
 import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.error.PSException;

@@ -23,6 +23,7 @@ import com.percussion.client.models.PSLockException;
 import com.percussion.client.proxies.IPSCmsModelProxy;
 import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.*;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.error.PSException;
 import com.percussion.error.PSIllegalStateException;

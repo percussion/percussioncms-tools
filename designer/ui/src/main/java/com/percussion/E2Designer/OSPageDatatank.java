@@ -13,7 +13,7 @@ package com.percussion.E2Designer;
 import com.percussion.conn.PSServerException;
 import com.percussion.content.IPSMimeContent;
 import com.percussion.content.PSContentFactory;
-import com.percussion.design.catalog.PSCatalogException;
+import com.percussion.error.PSCatalogException;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSBackEndJoin;
 import com.percussion.design.objectstore.PSBackEndTable;

@@ -10,7 +10,7 @@
 package com.percussion.E2Designer;
 
 import com.percussion.conn.PSServerException;
-import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;

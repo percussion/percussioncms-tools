@@ -175,7 +175,7 @@
         </dependency>
         <dependency>
             <groupId>com.percussion</groupId>
-            <artifactId>sitemanage</artifactId>
+            <artifactId>rxutils</artifactId>
             <version>${cmsserver.version}</version>
         </dependency>
         <dependency>

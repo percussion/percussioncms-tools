@@ -18,7 +18,7 @@ import com.percussion.client.PSObjectType;
 import com.percussion.client.PSObjectTypes.FileSubTypes;
 import com.percussion.client.models.PSLockException;
 import com.percussion.client.proxies.IPSCmsModelProxy;
-import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.services.security.IPSAcl;
 import com.percussion.services.system.data.PSMimeContentAdapter;
 import org.apache.commons.collections.list.TransformedList;

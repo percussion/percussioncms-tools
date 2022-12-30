@@ -9,10 +9,16 @@
 package com.percussion.E2Designer.browser;
 
 import com.percussion.conn.PSServerException;
-import com.percussion.design.objectstore.*;
+import com.percussion.design.objectstore.PSApplication;
+import com.percussion.design.objectstore.PSDataSet;
+import com.percussion.design.objectstore.PSLockedException;
+import com.percussion.design.objectstore.PSSystemValidationException;
+import com.percussion.design.objectstore.PSVersionConflictException;
+import com.percussion.error.PSNonUniqueException;
+import com.percussion.error.PSNotFoundException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
-import com.percussion.share.service.exception.PSValidationException;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
@@ -99,7 +105,8 @@ public class DatasetNode extends DefaultBrowserNode
             return true;
          }
       }
-      catch (PSServerException | PSVersionConflictException | PSAuthorizationException | PSAuthenticationFailedException | PSLockedException | PSNotFoundException | IllegalArgumentException | PSNonUniqueException | PSNotLockedException | PSSystemValidationException e )
+      catch (PSServerException | PSVersionConflictException | PSAuthorizationException | PSAuthenticationFailedException | PSLockedException |
+             PSNotFoundException | IllegalArgumentException | PSNonUniqueException | PSNotLockedException | PSSystemValidationException e )
       {
          e.printStackTrace();
 

@@ -11,7 +11,7 @@ package com.percussion.E2Designer;
 
 import com.percussion.ImageListControl.ImageListControl;
 import com.percussion.ImageListControl.ImageListItem;
-import com.percussion.design.objectstore.PSNotFoundException;
+import com.percussion.error.PSNotFoundException;
 import com.percussion.design.objectstore.PSObjectStore;
 import com.percussion.extension.IPSExtensionDef;
 import com.percussion.util.PSCollection;

@@ -20,7 +20,7 @@ import com.percussion.client.proxies.IPSHierarchyModelProxy.NodeId;
 import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNotFoundException;
+import com.percussion.error.PSNotFoundException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 

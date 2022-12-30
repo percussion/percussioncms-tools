@@ -39,7 +39,7 @@ import com.percussion.design.objectstore.PSCloneHandlerConfig;
 import com.percussion.design.objectstore.PSCloneHandlerConfigSet;
 import com.percussion.design.objectstore.PSConfigurationFactory;
 import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNotFoundException;
+import com.percussion.error.PSNotFoundException;
 import com.percussion.design.objectstore.PSObjectStore;
 import com.percussion.design.objectstore.PSRelationshipConfigSet;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;

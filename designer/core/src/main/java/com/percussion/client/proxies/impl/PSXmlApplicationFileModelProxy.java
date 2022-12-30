@@ -26,6 +26,7 @@ import com.percussion.content.IPSMimeContent;
 import com.percussion.content.PSMimeContentAdapter;
 import com.percussion.design.objectstore.*;
 import com.percussion.error.PSIllegalStateException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.share.service.exception.PSValidationException;

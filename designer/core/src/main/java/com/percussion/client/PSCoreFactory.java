@@ -28,7 +28,7 @@ import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.services.PSBaseServiceLocator;
-import com.percussion.services.PSMissingBeanConfigurationException;
+import com.percussion.error.PSMissingBeanConfigurationException;
 import com.percussion.services.security.PSTypedPrincipal;
 import com.percussion.util.PSFormatVersion;
 import com.percussion.util.PSProperties;

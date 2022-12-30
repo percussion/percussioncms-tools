@@ -10,6 +10,9 @@ package com.percussion.E2Designer.browser;
 
 import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.*;
+import com.percussion.error.PSNonUniqueException;
+import com.percussion.error.PSNotFoundException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 
@@ -98,7 +101,7 @@ public class RoleNode extends DefaultBrowserNode
             return true;
          }
       }
-      catch (PSServerException  | PSNotLockedException | PSNonUniqueException | PSNotFoundException | PSAuthenticationFailedException | PSLockedException | PSAuthorizationException | PSVersionConflictException | PSSystemValidationException e )
+      catch (PSServerException | PSNotLockedException | PSNonUniqueException | PSNotFoundException | PSAuthenticationFailedException | PSLockedException | PSAuthorizationException | PSVersionConflictException | PSSystemValidationException e )
       {
          e.printStackTrace();
 

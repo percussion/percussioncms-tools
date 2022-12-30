@@ -10,7 +10,7 @@
 
 package com.percussion.client.proxies;
 
-import com.percussion.services.PSMissingBeanConfigurationException;
+import com.percussion.error.PSMissingBeanConfigurationException;
 import com.percussion.services.security.data.PSBackEndRole;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.webservices.transformation.converter.PSCommunityConverter;

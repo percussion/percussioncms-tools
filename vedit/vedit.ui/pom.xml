@@ -24,6 +24,31 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>sign</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <alias>selfsigned</alias><!-- ${project.name} -->
+                    <keystore>selfsignkeys.store</keystore><!-- NOTE: you can also specify an absolute path here -->
+                    <storepass>123456</storepass>
+                    <keypass>123456</keypass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-toolchains-plugin</artifactId>
                 <version>${maven.toolchains.plugin.version}</version>
                 <executions>

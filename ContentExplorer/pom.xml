@@ -86,34 +86,15 @@
                 </execution>
             </executions>
         </plugin>
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                    <configuration>
-                        <mainClass>
-                            com.percussion.cx.PSContentExplorerApplication
-                        </mainClass>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+
+
     </plugins>
   </build>
   <dependencies>
-  <dependency>
-        <groupId>com.percussion</groupId>
-        <artifactId>rxutils</artifactId>
-        <version>${cmsserver.version}</version>
-    </dependency>
       <dependency>
           <groupId>com.percussion</groupId>
           <artifactId>perc-security-utils</artifactId>
-          <version>${cmsserver.version}</version>
+          <version>${project.parent.version}</version>
       </dependency>
       <dependency>
           <groupId>com.percussion</groupId>
