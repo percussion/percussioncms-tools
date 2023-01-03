@@ -105,13 +105,12 @@
                 <version>${tycho.version}</version>
 
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                        <encoding>UTF-8</encoding>
                         <showDeprecation>true</showDeprecation>
                         <showWarnings>true</showWarnings>
                         <source>1.8</source>
                         <target>1.8</target>
-                    <release>1.8</release>
-                    <useJDK>BREE</useJDK>
+                        <useJDK>BREE</useJDK>
                 </configuration>
             </plugin>
 
