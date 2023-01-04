@@ -27,3 +27,4 @@ Bundle-ClassPath: .,
  target/dependency/jtidy.jar,
  target/dependency/oro.jar,
  target/dependency/velocity.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

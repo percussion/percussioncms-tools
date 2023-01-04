@@ -13,9 +13,7 @@
     <orderEntry type="library" name="Maven: org.apache.velocity:velocity:1.7" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.win32.win32.x86:4.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.gtk.linux.x86:4.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.gtk.linux.x86_64:4.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:4.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:org.eclipse.ui.workbench:3.6.2.M20110210-1200" level="project" />

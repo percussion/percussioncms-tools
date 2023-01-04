@@ -22,10 +22,11 @@
         <sourceDirectory>${sourceDirectory}</sourceDirectory>
 
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jarsigner-plugin</artifactId>
-                <version>1.4</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>sign</id>
@@ -41,16 +42,30 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <alias>selfsigned</alias><!-- ${project.name} -->
-                    <keystore>selfsignkeys.store</keystore><!-- NOTE: you can also specify an absolute path here -->
+                    <alias>selfsigned</alias>
+                    <keystore>selfsignkeys.store</keystore>
                     <storepass>123456</storepass>
                     <keypass>123456</keypass>
+                </configuration>
+            </plugin> -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-compiler-plugin</artifactId>
+                <version>${tycho.version}</version>
+
+                <configuration>
+                    <encoding>ISO-8859-1</encoding>
+                    <showDeprecation>false</showDeprecation>
+                    <showWarnings>false</showWarnings>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <useJDK>BREE</useJDK>
+                    <fork>false</fork>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-toolchains-plugin</artifactId>
-                <version>${maven.toolchains.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -99,20 +114,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>tycho-compiler-plugin</artifactId>
-                <version>${tycho.version}</version>
 
-                <configuration>
-                        <encoding>UTF-8</encoding>
-                        <showDeprecation>true</showDeprecation>
-                        <showWarnings>true</showWarnings>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                        <useJDK>BREE</useJDK>
-                </configuration>
-            </plugin>
 
         </plugins>
     </build>
@@ -129,17 +131,7 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.swt</groupId>
-            <artifactId>org.eclipse.swt.win32.win32.x86</artifactId>
-            <version>${swt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.swt</groupId>
             <artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
-            <version>${swt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.swt</groupId>
-            <artifactId>org.eclipse.swt.gtk.linux.x86</artifactId>
             <version>${swt.version}</version>
         </dependency>
         <dependency>
