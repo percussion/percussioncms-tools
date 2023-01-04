@@ -35,8 +35,10 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-            <forceJavacCompilerUse>true</forceJavacCompilerUse>
-            <fork>true</fork>
+            <jdkToolchain>
+                <version>8</version>
+                <vendor>oracle</vendor>
+            </jdkToolchain>
             <verbose>true</verbose>
             <source>1.8</source>
             <target>1.8</target>
