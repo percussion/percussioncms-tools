@@ -24,7 +24,6 @@
         <module>PackagerUI</module>
         <module>ServerPropertiesEditor</module>
         <module>htmlconverter</module>
-        <module>ContentExplorer</module>
         <module>loader</module>
         <module>perc-devtools-distribution</module>
         <module>perc-server-admin</module>
@@ -46,7 +45,7 @@
         <java.source.version>1.8</java.source.version>
         <slf4j.version>1.7.26</slf4j.version>
         <maven.version>[3.6.0,)</maven.version>
-        <maven.toolchains.plugin.version>3.0.0</maven.toolchains.plugin.version>
+        <maven.toolchains.plugin.version>3.1.0</maven.toolchains.plugin.version>
         <maven.build.helper.version>3.0.0</maven.build.helper.version>
         <versions.maven.plugin.version>2.7</versions.maven.plugin.version>
         <maven.dependency.plugin.version>3.1.2</maven.dependency.plugin.version>

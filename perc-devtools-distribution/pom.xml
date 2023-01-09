@@ -143,6 +143,7 @@
                                 <overWrite>true</overWrite>
                                 <outputDirectory>${ant-installer}</outputDirectory>
                             </artifactItem>
+
                             <artifactItem>
                                 <groupId>com.percussion</groupId>
                                 <artifactId>perc-ant</artifactId>
@@ -180,7 +181,7 @@
                             </artifactItem>
                             <artifactItem>
                                 <groupId>com.percussion</groupId>
-                                <artifactId>perc-content-explorer</artifactId>
+                                <artifactId>DesktopContentExplorer</artifactId>
                                 <version>8.1.1-SNAPSHOT</version>
                                 <overWrite>true</overWrite>
                                 <outputDirectory>${lib-directory}</outputDirectory>
