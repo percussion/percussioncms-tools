@@ -181,7 +181,7 @@
                             </artifactItem>
                             <artifactItem>
                                 <groupId>com.percussion</groupId>
-                                <artifactId>DesktopContentExplorer</artifactId>
+                                <artifactId>ContentExplorer</artifactId>
                                 <version>8.1.1-SNAPSHOT</version>
                                 <overWrite>true</overWrite>
                                 <outputDirectory>${lib-directory}</outputDirectory>
