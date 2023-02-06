@@ -54,7 +54,7 @@ public class PSXslMerger
     *    stylesheet, not <code>null</code>.
     * @param html A stream to which the output HTML file will be written, 
     *    not <code>null</code>.
-    * @return the error message if ther were errors or <code>null</code>
+    * @return the error message if there were errors or <code>null</code>
     *    otherwise.
     */
    public static String merge(InputSource stylesheet, Reader xml, 
@@ -65,8 +65,7 @@ public class PSXslMerger
       StringWriter errorWriter = new StringWriter();
       try
       {
-         if (stylesheet == null || xml == null || html == null || 
-            errorWriter == null)
+         if (stylesheet == null || xml == null || html == null)
             throw new IllegalArgumentException("parameters cannot be null");
 
          PSTransformErrorListener errorListener = 
@@ -74,7 +73,7 @@ public class PSXslMerger
          TransformerFactory factory = TransformerFactory.newInstance();
          factory.setErrorListener(errorListener);
          
-         Transformer transformer = transformer = factory.newTransformer(
+         Transformer transformer = factory.newTransformer(
             new SAXSource(stylesheet));
          transformer.setErrorListener(errorListener);
          transformer.transform(new StreamSource(xml), new StreamResult(html));
