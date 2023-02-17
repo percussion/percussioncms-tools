@@ -42,24 +42,25 @@ public class ServerConfiguration
     */
   //////////////////////////////////////////////////////////////////////////////
    public ServerConfiguration(ServerConnection connection, boolean bEdit,
-         boolean bOverrideLock )
+         boolean bOverrideLock, PSObjectStore objectStore )
                       throws PSAuthorizationException,
                       PSAuthenticationFailedException,
                                PSIllegalArgumentException,
                                PSServerException,
                       PSLockedException
    {
-      m_connection = connection;
-      m_objectStore = new PSObjectStore(m_connection.getConnection());
-      // locks server configuration
+       synchronized (this) {
+           m_connection = connection;
+           m_objectStore = objectStore;
+           // locks server configuration
 
-      if ( bEdit )
-         m_serverConfiguration = m_objectStore.getServerConfiguration(true, bOverrideLock);
-      else
-      {
-         m_serverConfiguration = m_objectStore.getServerConfiguration();
-         m_bReadOnly = true;
-      }
+           if (bEdit)
+               m_serverConfiguration = m_objectStore.getServerConfiguration(true, bOverrideLock);
+           else {
+               m_serverConfiguration = m_objectStore.getServerConfiguration();
+               m_bReadOnly = true;
+           }
+       }
    }
 
 
@@ -97,7 +98,7 @@ public class ServerConfiguration
   /**
    * @return The server configuration object.
    */
-  public PSServerConfiguration getServerConfiguration()
+  public synchronized PSServerConfiguration getServerConfiguration()
   {
    return m_serverConfiguration;
   }

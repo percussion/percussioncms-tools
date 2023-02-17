@@ -11,6 +11,7 @@ package com.percussion.E2Designer.admin;
 
 import com.percussion.design.objectstore.PSAuthentication;
 import com.percussion.design.objectstore.PSServerConfiguration;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -52,7 +53,7 @@ public class AuthenticationsPanel extends DirectoryServiceBasePanel
          {
             PSAuthentication authentication = 
                (PSAuthentication) authentications.next();
-               
+               authentication.setEncryptPwd(false);
             config.addAuthentication(authentication);
          }
 
@@ -137,7 +138,7 @@ public class AuthenticationsPanel extends DirectoryServiceBasePanel
       if (editor.isOk())
       {
          PSAuthentication authentication = editor.getAuthentication();
-         
+         authentication.setEncryptPwd(false);
          m_data.addAuthentication(authentication);
          
          m_model.addRow(getRowData(authentication));
@@ -175,6 +176,7 @@ public class AuthenticationsPanel extends DirectoryServiceBasePanel
       int row = m_table.getSelectedRow();
       String name = (String) m_model.getValueAt(row, 0);
       PSAuthentication authentication = m_data.getAuthentication(name);
+      String orgPwd = authentication.getPassword();
       AuthenticationEditorDialog editor = new AuthenticationEditorDialog(
          m_parent, m_data, authentication);
       editor.show();
@@ -185,6 +187,15 @@ public class AuthenticationsPanel extends DirectoryServiceBasePanel
          m_data.removeAuthentication(authentication);
          
          authentication = editor.getAuthentication();
+         String currPwd = authentication.getPassword();
+         //If for some reason password load failed and thus pwd is set to empty, we should leave the original password
+         if(StringUtils.isEmpty(currPwd)){
+            authentication.setPassword(orgPwd);
+            // If password is changed by User to a new string, then that will be a plain text and thus need to encrypt it,
+            // so we change the flag PasswordEncrypted to false, so that server can encrypt it.
+         }else if(!authentication.getPassword().equals(orgPwd)){
+            authentication.setPasswordEncrypted(false);
+         }
          
          // add new authentication
          m_data.addAuthentication(authentication);

@@ -56,7 +56,7 @@ public class AuthenticationEditorDialog extends DirectoryServiceDialog
       PSAuthentication authentication)
    {
       super(parent, data);
-         
+      authentication.setEncryptPwd(false);
       setTitle(getResources().getString("dlg.title"));
       
       initDialog();
@@ -73,9 +73,9 @@ public class AuthenticationEditorDialog extends DirectoryServiceDialog
    {
       if (authentication == null)
          throw new IllegalArgumentException("authentication cannot be null");
-         
+         authentication.setEncryptPwd(false);
       m_currentName = authentication.getName();
-         
+      m_passwordEncrypted = authentication.isPasswordEncrypted();
       m_name.setText(authentication.getName());
       m_schema.setSelectedItem(AuthenticationsPanel.getSchemaDisplayString(
          authentication.getScheme()));
@@ -116,6 +116,8 @@ public class AuthenticationEditorDialog extends DirectoryServiceDialog
          
       PSAuthentication authentication = new PSAuthentication(name, schema, 
          user, userAttribute, pw, pwFilter);
+      authentication.setPasswordEncrypted(m_passwordEncrypted);
+      authentication.setEncryptPwd(false);
       authentication.setAppendBaseDn(m_appendBaseDn.isSelected());
       
       return authentication;
@@ -392,6 +394,8 @@ public class AuthenticationEditorDialog extends DirectoryServiceDialog
     * The password used to catalog a directory, it's value may be empty.
     */
    private JPasswordField m_password = new JPasswordField();
+
+   private boolean m_passwordEncrypted = false;
    
    /**
     * The password filter used to decode the password before sending it to
