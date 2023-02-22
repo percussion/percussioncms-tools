@@ -80,7 +80,7 @@ public class AppletMainDialog extends JFrame
    {
       super(title);
       ms_connection = connection;
-      ms_objectStore = new PSObjectStore( ms_connection.getConnection() );
+      ms_objectStore = new PSObjectStore( ms_connection.getConnection(),false );
 
       // initialize the security cataloging stuff
       m_singletons.add(
@@ -1163,7 +1163,7 @@ public class AppletMainDialog extends JFrame
       PSIllegalArgumentException, PSServerException, PSLockedException
    {
       m_serverConfiguration = new ServerConfiguration(ms_connection, locked,
-         overrideLock);
+         overrideLock,ms_objectStore);
       m_roleConfiguration = ms_objectStore.getRoleConfiguration(locked,
          overrideLock, false);
       m_jndiDatasources = ms_objectStore.getJndiDatasources(locked);

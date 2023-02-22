@@ -341,6 +341,7 @@ public class DirectoryEditorDialog extends DirectoryServiceDialog
       if (editor.isOk())
       {
          PSAuthentication authentication = editor.getAuthentication();
+         authentication.setEncryptPwd(false);
          m_newData.addAuthentication(authentication);
          
          int index = m_authentication.getItemCount()-1;
