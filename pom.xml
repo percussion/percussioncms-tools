@@ -128,7 +128,7 @@
         <awssdk.version>1.12.261</awssdk.version>
         <bc.version>1.64</bc.version>
         <jackson.version>2.13.2</jackson.version>
-        <jackson.databind.version>2.13.2.1</jackson.databind.version>
+        <jackson.databind.version>2.13.4.1</jackson.databind.version>
         <jsoup.version>1.14.2</jsoup.version>
         <json.version>20180813</json.version>
         <junit.version>4.13.1</junit.version>
