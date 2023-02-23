@@ -789,6 +789,15 @@
 </reporting>
     <repositories>
         <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <layout>default</layout>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>perc-release-repo</id>
             <url>https://mvn.percussion.com/repositories/releases/</url>
             <snapshots>
