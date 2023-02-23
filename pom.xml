@@ -48,18 +48,18 @@
         <module>ServerPropertiesEditor</module>
         <module>htmlconverter</module>
         <module>loader</module>
-        <module>perc-devtools-distribution</module>
         <module>perc-server-admin</module>
         <module>perc-package-installer</module>
         <module>perc-package-builder</module>
         <module>perc-checkboxtree</module>
+        <module>perc-devtools-distribution</module>
     </modules>
 
     <properties>
-        <COPYRIGHTYEAR>2022</COPYRIGHTYEAR>
+        <COPYRIGHTYEAR>2023</COPYRIGHTYEAR>
         <build.profile.id>dev</build.profile.id>
         <versionString>INTERNAL</versionString>
-        <jenkins.buildNumber>2022</jenkins.buildNumber>
+        <jenkins.buildNumber>2023</jenkins.buildNumber>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
         <buildNumber>${maven.build.timestamp}</buildNumber>
         <jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.it.execution.data.file>
