@@ -130,7 +130,7 @@
         <jackson.version>2.13.2</jackson.version>
         <jackson.databind.version>2.13.4.2</jackson.databind.version>
         <jsoup.version>1.15.3</jsoup.version>
-        <json.version>20180813</json.version>
+        <json.version>20230227</json.version>
         <junit.version>4.13.1</junit.version>
         <cactus.version>13-1.7.1</cactus.version>
         <cactus.sysproperties>cactus.contextURL</cactus.sysproperties>
