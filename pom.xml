@@ -151,7 +151,7 @@
         <xmpbox.version>2.0.17</xmpbox.version>
         <jbig2.version>3.0.2</jbig2.version>
         <pdfbox.version>2.0.24</pdfbox.version>
-        <sqlite.version>3.28.0</sqlite.version>
+        <sqlite.version>3.41.2.2</sqlite.version>
         <swagger.version>1.5.23</swagger.version>
         <commons.compress.version>1.21</commons.compress.version>
         <solr.version>8.5.0</solr.version>
