@@ -165,7 +165,7 @@
         <twelvemonkeys.version>3.6</twelvemonkeys.version>
         <javax.help.version>2.0.05</javax.help.version>
         <commons.httpclient.version>3.1</commons.httpclient.version>
-        <guava.version>30.0-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
         <eclipse-manifest-location>META-INF</eclipse-manifest-location>
     </properties>
     <profiles>
