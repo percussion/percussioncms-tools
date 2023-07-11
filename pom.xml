@@ -799,7 +799,7 @@
         </repository>
         <repository>
             <id>perc-release-repo</id>
-            <url>https://mvn.percussion.com/repositories/releases/</url>
+            <url>https://mvn.intsof.com/repositories/releases/</url>
             <snapshots>
                 <enabled>false</enabled>
                 <updatePolicy>never</updatePolicy>
@@ -809,7 +809,7 @@
         <repository>
             <id>perc-snapshots-repo</id>
             <name>Perc Snapshots</name>
-            <url>https://mvn.percussion.com/repositories/snapshots/</url>
+            <url>https://mvn.intsof.com/repositories/snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
@@ -818,7 +818,7 @@
         <repository>
             <id>perc-thirdparty-repo</id>
             <name>third party packages</name>
-            <url>https://mvn.percussion.com/repositories/thirdparty/</url>
+            <url>https://mvn.intsof.com/repositories/thirdparty/</url>
             <snapshots>
                 <enabled>false</enabled>
                 <updatePolicy>never</updatePolicy>
@@ -856,7 +856,7 @@
         <pluginRepository>
             <id>perc-release-repo</id>
             <name>Perc Plugin Repository</name>
-            <url>https://mvn.percussion.com/repositories/releases/</url>
+            <url>https://mvn.intsof.com/repositories/releases/</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>false</enabled>
@@ -868,7 +868,7 @@
         <pluginRepository>
             <id>perc-snapshots-repo</id>
             <name>Perc Plugin Repository</name>
-            <url>https://mvn.percussion.com/repositories/snapshots/</url>
+            <url>https://mvn.intsof.com/repositories/snapshots/</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>true</enabled>
@@ -880,7 +880,7 @@
         <pluginRepository>
             <id>perc-thirdparty-repo</id>
             <name>third party packages</name>
-            <url>https://mvn.percussion.com/repositories/thirdparty/</url>
+            <url>https://mvn.intsof.com/repositories/thirdparty/</url>
             <snapshots>
                 <enabled>false</enabled>
                 <updatePolicy>never</updatePolicy>
