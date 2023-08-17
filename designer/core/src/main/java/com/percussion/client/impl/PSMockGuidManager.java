@@ -50,6 +50,11 @@ public class PSMockGuidManager implements IPSGuidManager
       return new PSGuid(type, raw);
    }
 
+   @Override
+   public IPSGuid makeGuid(String s, PSTypeEnum psTypeEnum, boolean b) {
+      return makeGuid(s,psTypeEnum);
+   }
+
    /* 
     * @see com.percussion.services.guidmgr.IPSGuidManager#createGuids(
     * com.percussion.services.catalog.PSTypeEnum, int)
@@ -89,6 +94,11 @@ public class PSMockGuidManager implements IPSGuidManager
    public long getHostId()
    {
       return 0;
+   }
+
+   @Override
+   public IPSGuid makeGuid(long l, PSTypeEnum psTypeEnum, boolean b) {
+      return makeGuid(l,psTypeEnum);
    }
 
    public int createId(@SuppressWarnings("unused") String key)
