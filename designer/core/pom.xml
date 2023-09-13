@@ -20,7 +20,7 @@
     <parent>
         <groupId>com.percussion</groupId>
         <artifactId>tycho-root</artifactId>
-        <version>8.1.3-SNAPSHOT</version>
+        <version>8.1.3</version>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
     <artifactId>com.percussion.client</artifactId>

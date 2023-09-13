@@ -4,4 +4,4 @@ echo "Using Java version:"
 java -version
 call DevOptions.cmd
 echo Using JAVA_OPTS=%JAVA_OPTS%
-java %JAVA_OPTS% -jar lib/ContentExplorer-@project.version@.jar
+java %JAVA_OPTS% -jar lib/perc-content-explorer-@project.version@.jar
