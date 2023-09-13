@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -47,6 +48,12 @@ public class DataSynchronizerPropertyDialog extends PSEditorDialog
    public DataSynchronizerPropertyDialog()
    {
       super();
+      initDialog();
+   }
+
+   public DataSynchronizerPropertyDialog(Window parent)
+   {
+      super(parent);
       initDialog();
    }
 

@@ -57,11 +57,25 @@ public class WebpagePropertyDialog extends PSEditorDialog
    //////////////////////////////////////////////////////////////////////////////
    public WebpagePropertyDialog()
    {
+      super();
       setResizable( true );
       initDropLists();
       initUI();
       initListeners();
       setSize( 450, 550 );
+      pack();
+      center();
+   }
+
+   public WebpagePropertyDialog(Window parent)
+   {
+      super(parent);
+      setResizable( true );
+      initDropLists();
+      initUI();
+      initListeners();
+      setSize( 450, 550 );
+      pack();
       center();
    }
 

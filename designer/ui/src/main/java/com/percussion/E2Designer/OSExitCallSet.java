@@ -385,7 +385,7 @@ public class OSExitCallSet extends PSExtensionCallSet implements IGuiLink, IPers
     * Checks if the supplied interface name is one of the interfaces that
     * could be allowed into this set at some point in time.
     *
-    * @param The name of an extension interface. May be <code>null</code>.
+    * @param iface The name of an extension interface. May be <code>null</code>.
     *
     * @return <code>true</code> if the supplied interface name could be added
     * to this set, <code>false</code> otherwise. If <code>null</code> or
@@ -449,7 +449,7 @@ public class OSExitCallSet extends PSExtensionCallSet implements IGuiLink, IPers
     * is allowed. If any exits are present, then only the type of the currently
     * contained exits is allowed.
     *
-    * @param type One of the IPSExtensionDef.EXT_TYPE_... types.
+    * @param def One of the IPSExtensionDef.EXT_TYPE_... types.
     *
     * @return <code>true</code> if an exit that has the supplied type would be
     * allowed to be added to this set.
@@ -501,8 +501,7 @@ public class OSExitCallSet extends PSExtensionCallSet implements IGuiLink, IPers
 
    /**
     * Interface method unimplemented.
-    * @see com.percussion.E2Designer.IPersist#cleanup(com.percussion.
-    * E2Designer.OSApplication)
+    * @see com.percussion.E2Designer.IPersist#cleanup(com.percussion.E2Designer.OSApplication)
     */
    public void cleanup(OSApplication app)
    {

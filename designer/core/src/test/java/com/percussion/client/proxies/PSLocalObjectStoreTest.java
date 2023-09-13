@@ -15,8 +15,9 @@ import com.percussion.content.IPSMimeContent;
 import com.percussion.content.PSMimeContentAdapter;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSApplicationFile;
-import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.error.PSNotLockedException;
+import com.percussion.design.objectstore.PSSystemValidationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
@@ -590,10 +591,9 @@ public class PSLocalObjectStoreTest extends TestCase
    }
    
    public void test06RenameApplicationFile()
-         throws PSServerException, PSAuthorizationException,
-         PSAuthenticationFailedException, PSNotLockedException,
-         PSValidationException
-   {
+           throws PSServerException, PSAuthorizationException,
+           PSAuthenticationFailedException, PSNotLockedException,
+           PSValidationException, PSSystemValidationException {
       // make sure base class functionality calls overloaded moveApplicationFile 
       final PSLocalObjectStore store = new PSLocalObjectStore()
       {

@@ -25,8 +25,7 @@ import com.percussion.design.objectstore.PSServerConfiguration;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.util.PSCollection;
-import com.percussion.util.PSIteratorUtils;
-import com.percussion.UTComponents.UTFixedButton;
+import com.percussion.utils.collections.PSIteratorUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -53,16 +52,22 @@ public class AppSecDialog
 
    public AppSecDialog()
    {
+      super();
    }
 
-   public AppSecDialog(PSApplication app)
+   public AppSecDialog(Window parent)
+   {
+      super(parent);
+   }
+
+   public AppSecDialog(Window parent, PSApplication app)
       throws
          PSServerException,
          PSAuthorizationException,
          PSAuthenticationFailedException,
          PSLockedException
    {
-      super();
+      super(parent);
 
       m_data = app;
       PSObjectStore os = E2Designer.getApp().getMainFrame().getObjectStore();
@@ -93,6 +98,7 @@ public class AppSecDialog
       getContentPane().add(panel);
       setResizable(true);
       this.setSize(DIALOG_SIZE);
+      pack();
       center();
    }
 
@@ -996,7 +1002,9 @@ public class AppSecDialog
       {
          try
          {
-            AppSecDialog appSecDialog = new AppSecDialog((PSApplication) data);
+            AppSecDialog appSecDialog = new AppSecDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    (PSApplication) data);
             appSecDialog.setVisible(true);
             return (true);
          }

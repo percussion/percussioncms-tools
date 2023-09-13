@@ -16,6 +16,7 @@ import com.percussion.E2Designer.StringLengthConstraint;
 import com.percussion.E2Designer.ValidationConstraint;
 import com.percussion.design.objectstore.PSSecurityProviderInstance;
 import com.percussion.error.PSIllegalArgumentException;
+import com.percussion.security.PSSecurityProvider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -383,37 +384,4 @@ public class SimpleSecurityProviderDialog extends PSDialog
    private int m_type;
 
 
-
-
-
-/*   static public void main(String args[])
-   {
-    final JFrame frame = new JFrame("Test Web Server Security Provider Dialog");
-      frame.addWindowListener(new BasicWindowMonitor());
-      try
-    {
-      String strLnFClass = UIManager.getSystemLookAndFeelClassName();
-         LookAndFeel lnf = (LookAndFeel) Class.forName(strLnFClass).newInstance();
-         UIManager.setLookAndFeel( lnf );
-
-         JButton startButton = new JButton("Open Dialog");
-         frame.getContentPane().add(startButton);
-         startButton.addActionListener(new ActionListener()
-         {
-            public void actionPerformed(ActionEvent e)
-            {
-
-               WebServerSecurityProviderDialog dialog = new WebServerSecurityProviderDialog(null, false, null);
-               dialog.setVisible(true);
-            }
-         });
-         frame.setLocation(350, 230);
-         frame.setSize(350, 180);
-         frame.setVisible(true);
-
-     }
-     catch (Exception e)
-     { System.out.println(e); }
-
-   }*/
 }

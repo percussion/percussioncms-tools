@@ -32,9 +32,9 @@ import com.percussion.design.objectstore.PSDataSet;
 import com.percussion.design.objectstore.PSExtensionCall;
 import com.percussion.design.objectstore.PSExtensionCallSet;
 import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNonUniqueException;
-import com.percussion.design.objectstore.PSNotFoundException;
-import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.error.PSNonUniqueException;
+import com.percussion.error.PSNotFoundException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.design.objectstore.PSObjectStore;
 import com.percussion.design.objectstore.PSPipe;
 import com.percussion.design.objectstore.PSRequestLink;
@@ -42,7 +42,6 @@ import com.percussion.design.objectstore.PSResultPage;
 import com.percussion.design.objectstore.PSResultPageSet;
 import com.percussion.design.objectstore.PSUnknownDocTypeException;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
-import com.percussion.design.objectstore.PSValidationException;
 import com.percussion.design.objectstore.PSVersionConflictException;
 import com.percussion.extension.IPSExtensionDef;
 import com.percussion.extension.IPSExtensionParamDef;
@@ -50,6 +49,7 @@ import com.percussion.extension.PSExtensionDef;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.util.PSCollection;
 import com.percussion.workbench.ui.PSModelTracker;
 import com.percussion.workbench.ui.editors.form.PSXmlAppDebuggingAction;
@@ -162,7 +162,7 @@ public class UIAppFrame extends UIFigureFrame
     */
    private Vector<IAction> createInsertActions()
    {
-      final Vector<IAction> v = new Vector<IAction>();
+      final Vector<IAction> v = new Vector<>();
       final Enumeration eFigures =
          getFigureFactory().getFigureTypes(AppFigureFactory.INSERTABLE);
       while (eFigures.hasMoreElements( ))
@@ -578,7 +578,7 @@ public class UIAppFrame extends UIFigureFrame
     */
    public boolean saveApp(boolean close, boolean validate)
    {
-      if( checkExits() == false )
+      if(!checkExits())
       {
          return false;
       }
@@ -629,98 +629,85 @@ public class UIAppFrame extends UIFigureFrame
          parse the application into its pieces and restore it to the right
          application pane*/
          FigureFactory factory = getFigureFactory();
-         UIConnectableFigure uic = null;
+         UIConnectableFigure uic;
 
 
          PSCollection datasets = getApp().getDataSets();
          HashMap<Integer, UIConnectableFigure> mapResultPages =
-               new HashMap<Integer, UIConnectableFigure>();
-         Vector<UIConnectableFigure> vectorDatasets = new Vector<UIConnectableFigure>();
+               new HashMap<>();
+         Vector<UIConnectableFigure> vectorDatasets = new Vector<>();
          if (datasets != null)
          {
-            for (int i=0; i<datasets.size(); i++)
-            {
-               PSDataSet dataset = (PSDataSet) datasets.get(i);
-               if (null != dataset)
-               {
-                  int type = OSBinaryDataset.getType( dataset );
+            for (Object o : datasets) {
+               PSDataSet dataset = (PSDataSet) o;
+               if (null != dataset) {
+                  int type = OSBinaryDataset.getType(dataset);
 
-                  if (type == OSBinaryDataset.DST_BINARY)
-                  {
+                  if (type == OSBinaryDataset.DST_BINARY) {
                      uic = factory.createFigure(AppFigureFactory.BINARY_RESOURCE);
 
-                     if (((IPersist) uic.getData()).load(getApp(), dataset, config))
-                     {
+                     if (((IPersist) uic.getData()).load(getApp(), dataset, config)) {
                         add(uic);
                         OSLoadSaveHelper.nextAttached(config, uic);
                      }
-                  }
-                  else if(type != OSBinaryDataset.DST_BINARY)
-                  {
-                     if ( OSDataset.DST_UNKNOWN == type)
-                     {
+                  } else if (type != OSBinaryDataset.DST_BINARY) {
+                     if (OSDataset.DST_UNKNOWN == type) {
                         /* Datasets must have a type, so turn it into a query pipe */
-                        dataset.setPipe( new OSQueryPipe());
+                        dataset.setPipe(new OSQueryPipe());
                         type = OSDataset.DST_QUERY;
                      }
-                        uic = factory.createFigure( OSDataset.DST_QUERY == type
-                        ? AppFigureFactory.QUERY_DATASET
-                        : AppFigureFactory.UPDATE_DATASET );
+                     uic = factory.createFigure(OSDataset.DST_QUERY == type
+                             ? AppFigureFactory.QUERY_DATASET
+                             : AppFigureFactory.UPDATE_DATASET);
 
-                     if (((IPersist) uic.getData()).load(getApp(), dataset, config))
-                     {
+                     if (((IPersist) uic.getData()).load(getApp(), dataset, config)) {
                         add(uic);
                         OSLoadSaveHelper.nextAttached(config, uic);
                         vectorDatasets.addElement(uic);
                      }
 
-                       // load result pages
-                       PSResultPageSet resultPageSet = dataset.getOutputResultPages();
-                     if (resultPageSet != null)
-                     {
-                         PSCollection resultPages = resultPageSet.getResultPages();
-                         if (resultPages != null)
-                        {
-                           for (int j=0; j<resultPages.size(); j++)
-                           {
-                                PSResultPage resultPage = (PSResultPage) resultPages.get(j);
-                               Integer resultPageId = new Integer(resultPage.getId());
+                     // load result pages
+                     PSResultPageSet resultPageSet = dataset.getOutputResultPages();
+                     if (resultPageSet != null) {
+                        PSCollection resultPages = resultPageSet.getResultPages();
+                        if (resultPages != null) {
+                           for (Object page : resultPages) {
+                              PSResultPage resultPage = (PSResultPage) page;
+                              Integer resultPageId = resultPage.getId();
 
-                              UIConnectableFigure webpage = null;
+                              UIConnectableFigure webpage;
                               if (mapResultPages.containsKey(resultPageId))
-                                  webpage = mapResultPages.get(resultPageId);
-                                else
-                                  webpage = factory.createFigure(AppFigureFactory.RESULT_PAGE);
+                                 webpage = mapResultPages.get(resultPageId);
+                              else
+                                 webpage = factory.createFigure(AppFigureFactory.RESULT_PAGE);
 
-                               if (((IPersist) webpage.getData()).load(getApp(), resultPage, config))
-                                {
+                              if (((IPersist) webpage.getData()).load(getApp(), resultPage, config)) {
                                  // add the result page
-                                  if (!mapResultPages.containsKey(resultPageId))
-                                  {
+                                 if (!mapResultPages.containsKey(resultPageId)) {
                                     add(webpage);
-                                      OSLoadSaveHelper.nextAttached(config, webpage);
+                                    OSLoadSaveHelper.nextAttached(config, webpage);
 
-                                       // add the just loaded result page to the map
+                                    // add the just loaded result page to the map
                                     if (config.getProperty(UIAppFrame.SAVED_FROM_E2) != null ||
-                                        config.getProperty(UIAppFrame.SAVED_FROM_DESIGNER) != null)
-                                        mapResultPages.put(resultPageId, webpage);
+                                            config.getProperty(UIAppFrame.SAVED_FROM_DESIGNER) != null)
+                                       mapResultPages.put(resultPageId, webpage);
                                  }
 
-                                  // create and add connector
+                                 // create and add connector
                                  UIConnector connector = (UIConnector) factory.createFigure(AppFigureFactory.DIRECTED_CONNECTION);
                                  add(connector);
 
                                  // attach connector between dataset and result page
                                  UIConnectionPoint cp = uic.getConnectionPoint(UIConnectionPoint.CP_ID_RIGHT);
-                                  connector.createDynamicConnectionProgrammatic(cp, false);
-                                     cp = webpage.getConnectionPoint(UIConnectionPoint.CP_ID_LEFT);
-                                  connector.createDynamicConnectionProgrammatic(cp, true);
-                               }
-                             }
-                          }
-                      }
-                    }
-                }
+                                 connector.createDynamicConnectionProgrammatic(cp, false);
+                                 cp = webpage.getConnectionPoint(UIConnectionPoint.CP_ID_LEFT);
+                                 connector.createDynamicConnectionProgrammatic(cp, true);
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
             }
          }
 
@@ -728,39 +715,30 @@ public class UIAppFrame extends UIFigureFrame
          // WARNING: each DataSet can only have 1 outputRequestLink, so
          // additional connections from a DataSet will be lost after save/load!
            Component[] comps = m_drawingPane.getComponents();
-           for (int i=0; i<comps.length; i++)
-           {
-            UIConnectableFigure dataset = (UIConnectableFigure) comps[i];
-            if (dataset.getId() == AppFigureFactory.DATASET_ID)
-            {
+         for (Component comp : comps) {
+            UIConnectableFigure dataset = (UIConnectableFigure) comp;
+            if (dataset.getId() == AppFigureFactory.DATASET_ID) {
                OSDataset data = (OSDataset) dataset.getData();
-               if (data.getOutputRequestLink() != null)
-                 {
+               if (data.getOutputRequestLink() != null) {
                   PSRequestLink requestLink = data.getOutputRequestLink();
                   PSCollection cRequestLinks = null;
-                  try
-                  {
+                  try {
                      cRequestLinks = new PSCollection("com.percussion.design.objectstore.PSRequestLink");
-                  }
-                  catch(ClassNotFoundException e)
-                  {
+                  } catch (ClassNotFoundException e) {
                      e.printStackTrace();
                   }
 
                   cRequestLinks.add(requestLink);
 
                   // find our dataset
-                  for (int x=0; x<comps.length; x++)
-                  {
-                     UIConnectableFigure fig = (UIConnectableFigure) comps[x];
-                       if (fig.getId() == AppFigureFactory.DATASET_ID ||
-                         fig.getId() == AppFigureFactory.BINARY_RESOURCE_ID)
-                       {
-                          OSDataset inputdataset = (OSDataset) fig.getData();
+                  for (Component component : comps) {
+                     UIConnectableFigure fig = (UIConnectableFigure) component;
+                     if (fig.getId() == AppFigureFactory.DATASET_ID ||
+                             fig.getId() == AppFigureFactory.BINARY_RESOURCE_ID) {
+                        OSDataset inputdataset = (OSDataset) fig.getData();
 
-                        if (requestLink.getTargetDataSet().equals(inputdataset.getName()))
-                        {
-                            UIConnector connector = (UIConnector) factory.createFigure(AppFigureFactory.DIRECTED_CONNECTION);
+                        if (requestLink.getTargetDataSet().equals(inputdataset.getName())) {
+                           UIConnector connector = (UIConnector) factory.createFigure(AppFigureFactory.DIRECTED_CONNECTION);
                            add(connector);
 
                            // attach connector between dataset and result page
@@ -773,33 +751,25 @@ public class UIAppFrame extends UIFigureFrame
                         }
                      }
                   }
-                 }
-             }
-             else if (dataset.getId() == AppFigureFactory.RESULT_PAGE_ID)
-             {
-                UIConnectableFigure resultpage = dataset;
-               if (resultpage.getData() instanceof OSResultPage)
-               {
-                   OSResultPage resultPage = (OSResultPage) resultpage.getData();
+               }
+            } else if (dataset.getId() == AppFigureFactory.RESULT_PAGE_ID) {
+               UIConnectableFigure resultpage = dataset;
+               if (resultpage.getData() instanceof OSResultPage) {
+                  OSResultPage resultPage = (OSResultPage) resultpage.getData();
                   PSCollection requestLinks = resultPage.getRequestLinks();
-                  if (requestLinks != null)
-                  {
+                  if (requestLinks != null) {
                      // group request links with same target dataset name
                      Vector vLinkGroups = createRequestLinkGroups(requestLinks);
-                     for (int k=0; k<vLinkGroups.size(); k++)
-                     {
-                        PSCollection cLinks = (PSCollection) vLinkGroups.get(k);
-                        for (int x=0; x<comps.length; x++)
-                        {
-                           UIConnectableFigure fig = (UIConnectableFigure) comps[x];
-                             if (fig.getId() == AppFigureFactory.DATASET_ID ||
-                               fig.getId() == AppFigureFactory.BINARY_RESOURCE_ID)
-                             {
+                     for (Object vLinkGroup : vLinkGroups) {
+                        PSCollection cLinks = (PSCollection) vLinkGroup;
+                        for (Component component : comps) {
+                           UIConnectableFigure fig = (UIConnectableFigure) component;
+                           if (fig.getId() == AppFigureFactory.DATASET_ID ||
+                                   fig.getId() == AppFigureFactory.BINARY_RESOURCE_ID) {
                               OSDataset inputdataset = (OSDataset) fig.getData();
-                              PSRequestLink requestLink = (PSRequestLink)cLinks.get(0);
-                              if (requestLink.getTargetDataSet().equals(inputdataset.getName()))
-                              {
-                                   UIConnector connector = (UIConnector) factory.createFigure(AppFigureFactory.DIRECTED_CONNECTION);
+                              PSRequestLink requestLink = (PSRequestLink) cLinks.get(0);
+                              if (requestLink.getTargetDataSet().equals(inputdataset.getName())) {
+                                 UIConnector connector = (UIConnector) factory.createFigure(AppFigureFactory.DIRECTED_CONNECTION);
                                  add(connector);
 
                                  // attach connector between dataset and result page
@@ -827,7 +797,7 @@ public class UIAppFrame extends UIFigureFrame
             {
                // get all elements for this external interface
                String strKey = config.getProperty(key);
-               int iKey = (new Integer(strKey)).intValue();
+               int iKey = new Integer(strKey);
                String strConnectedFigures = config.getProperty(
                   OSExternalInterface.KEY_EXTERNAL_INTERFACE_FIGURES + strKey);
 
@@ -844,7 +814,7 @@ public class UIAppFrame extends UIFigureFrame
                boolean found = false;
                UIConnectableFigure dataset = null;
                Vector<UIConnectableFigure> vectorDatasetsCopy =
-                  new Vector<UIConnectableFigure>(vectorDatasets);
+                  new Vector<>(vectorDatasets);
                for (int i=0, n=externalInterface.getConnectedFigureCount(); i<n; i++)
                {
                   int instanceId = externalInterface.getConnectedFigureInstance(i);
@@ -880,7 +850,7 @@ public class UIAppFrame extends UIFigureFrame
             {
                // get all elements for this external interface
                String strKey = config.getProperty(key);
-               int iKey = (new Integer(strKey)).intValue();
+               int iKey = new Integer(strKey);
                String strInternalName = config.getProperty(
                   OSApplicationFile.KEY_APPLICATION_FILE_NAME + strKey);
 
@@ -900,15 +870,10 @@ public class UIAppFrame extends UIFigureFrame
          m_loadedUserConfig = config;
          getApp().setUserProperties(new Properties());
       }
-      catch (IllegalArgumentException e)
+      catch (IllegalArgumentException | FigureCreationException e)
       {
          PSDlgUtil.showError(e, true, getResources().getString("OpErrorTitle"));
-      }
-      catch (FigureCreationException e)
-      {
-         PSDlgUtil.showError(e, true, getResources().getString("OpErrorTitle"));
-      }
-      finally
+      } finally
       {
          E2Designer.getApp().getMainFrame().setCursor(restoreCursor);
       }
@@ -1004,14 +969,12 @@ public class UIAppFrame extends UIFigureFrame
             return false;
 
          // copy existing application files to the new location if necessary
-         for (int i=0, n=m_applicationFiles.size(); i<n; i++)
-         {
-            PSApplicationFile file = m_applicationFiles.get(i);
+         for (PSApplicationFile file : m_applicationFiles) {
             getObjectStore().saveApplicationFile(getApp(), file, true, true);
             OSLoadSaveHelper.logCopyApplicationFile(file.getFileName());
          }
 
-         m_applicationFiles = new Vector<PSApplicationFile>();
+         m_applicationFiles = new Vector<>();
 
          if ( !saveComponents(close))
             // editors wouldn't close possibly
@@ -1072,23 +1035,10 @@ public class UIAppFrame extends UIFigureFrame
             }
          }
       }
-      catch ( PSVersionConflictException e )
+      catch ( PSVersionConflictException | PSServerException | PSAuthorizationException | PSNotLockedException e )
       {
          PSDlgUtil.showError(e);
-      }
-      catch (PSServerException e)
-      {
-         PSDlgUtil.showError(e);
-      }
-      catch (PSAuthorizationException e)
-      {
-         PSDlgUtil.showError(e);
-      }
-      catch (PSNotLockedException e)
-      {
-         PSDlgUtil.showError(e);
-      }
-      catch (PSValidationException e)
+      } catch (PSValidationException e)
       {
          PSDlgUtil.showError(e,
                          false,
@@ -1469,17 +1419,11 @@ public class UIAppFrame extends UIFigureFrame
 
                BrowserFrame.getBrowser().addAppToAppsTab(getApp());
             }
-            catch (PSVersionConflictException e1)
+            catch (PSVersionConflictException | PSNonUniqueException e1)
             {
                // this should never happen
                PSDlgUtil.showError(e1);
-            }
-            catch (PSNonUniqueException e1)
-            {
-               // this should never happen
-               PSDlgUtil.showError(e1);
-            }
-            catch (PSValidationException e1)
+            } catch (Exception e1)
             {
                PSDlgUtil.showError(e1, false, getResources().getString("ExceptionTitle"));
                getApp().setEnabled(!getApp().isEnabled());
@@ -2162,7 +2106,7 @@ public class UIAppFrame extends UIFigureFrame
                                           {
                                              OSRequestLinkSet requestLinkSet = (OSRequestLinkSet) connector.getData();
                                              requestLinkSet.setTargetDataset(targetDataset.getName());
-                                             ((IPersist) requestLinkSet).save(getApp(), requestLinks, config);
+                                             ( requestLinkSet).save(getApp(), requestLinks, config);
                                              break;
                                           }
                                        }
@@ -2174,7 +2118,7 @@ public class UIAppFrame extends UIFigureFrame
                                           {
                                              OSRequestLinkSet requestLinkSet = (OSRequestLinkSet) connector.getData();
                                              requestLinkSet.setTargetDataset(targetDataset.getName());
-                                             ((IPersist) requestLinkSet).save(getApp(), requestLinks, config);
+                                             ( requestLinkSet).save(getApp(), requestLinks, config);
                                              break;
                                           }
                                        }

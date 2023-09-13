@@ -9,7 +9,7 @@
  *****************************************************************************/
 package com.percussion.workbench.ui.security;
 
-import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
+import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.utils.string.PSStringUtils;
 import com.percussion.workbench.ui.IPSUiConstants;
 import com.percussion.workbench.ui.PSMessages;

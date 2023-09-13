@@ -9,11 +9,16 @@
  *****************************************************************************/
 package com.percussion.E2Designer.admin;
 
+import com.percussion.error.PSExceptionUtils;
 import com.percussion.tools.help.PSJavaHelp;
-import org.apache.log4j.BasicConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
+import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -27,6 +32,9 @@ import java.util.ResourceBundle;
 ////////////////////////////////////////////////////////////////////////////////
 public class PSServerAdminApplet extends JApplet
 {
+    public static final String SERVER_ADMIN_LOG_CATEGORY = "Server Admin";
+    private static final Logger log = LogManager.getLogger(SERVER_ADMIN_LOG_CATEGORY);
+
    /**
     * Initialize the applet. This function will be called automatically by its
     * container.
@@ -41,14 +49,11 @@ public class PSServerAdminApplet extends JApplet
          m_frame = getFrame(this);
          this.setSize(ProjectConstants.APPLET_SIZE);
 
-         //Get the JavaHelp helpset file and attach the protocol based on its
-         //location.
-         if(m_applet)
-         {
             String helpFile = getParameter(HELPSETFILE);
-            m_helpSetURL = PSJavaHelp.getHelpSetURL(helpFile, true, 
-               getCodeBase().toString());
-         }
+            if(getCodeBase() != null)
+                PSServerAdminApplet.m_helpSetURL = PSJavaHelp.getHelpSetURL(helpFile, true,
+                   getCodeBase().toString());
+
       }
       catch (Exception e)
       {
@@ -65,13 +70,15 @@ public class PSServerAdminApplet extends JApplet
    //////////////////////////////////////////////////////////////////////////////
    public static void main(String[] args)
    {
-      BasicConfigurator.configure();
+
       // indicate we are running as an application
       m_applet = false;
 
       sm_frame = new PSServerAdminFrame(new PSServerAdminApplet(),
                                         ProjectConstants.APPLICATION_WIDTH,
                                         ProjectConstants.APPLICATION_HEIGHT);
+
+      sm_frame.pack();
       sm_frame.setVisible(true);
    }
 
@@ -88,7 +95,7 @@ public class PSServerAdminApplet extends JApplet
    public void start()
    {
       // we must set the look and feel each time we start the applet
-      String strLookAndFeel = new String(UIManager.getSystemLookAndFeelClassName());
+      String strLookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
       try
         {
            UIManager.setLookAndFeel(strLookAndFeel);
@@ -96,13 +103,29 @@ public class PSServerAdminApplet extends JApplet
       catch (UnsupportedLookAndFeelException e)
       {
          // if this fails we still want to proceed
-         System.err.println("Warning: UnsupportedLookAndFeel: " + strLookAndFeel);
+         log.error("Warning: UnsupportedLookAndFeel: {}. Error: {}" ,
+                 strLookAndFeel,
+                 PSExceptionUtils.getMessageForLog(e));
       }
       catch (Exception e)
       {
          // if this fails we still want to proceed
-         System.err.println("Error loading " + strLookAndFeel + ": " + e);
+        log.error("Error loading {}. Error: {}" , strLookAndFeel,
+                PSExceptionUtils.getMessageForLog(e));
       }
+
+       if (System.getProperty("os.name", "").toUpperCase().startsWith("MAC")) {
+           InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
+           im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK), DefaultEditorKit.copyAction);
+           im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK), DefaultEditorKit.pasteAction);
+           im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.META_DOWN_MASK), DefaultEditorKit.cutAction);
+
+           InputMap im2 = (InputMap) UIManager.get("PasswordField.focusInputMap");
+           im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK), DefaultEditorKit.copyAction);
+           im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK), DefaultEditorKit.pasteAction);
+           im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.META_DOWN_MASK), DefaultEditorKit.cutAction);
+       }
+
 
       try
       {
@@ -117,8 +140,8 @@ public class PSServerAdminApplet extends JApplet
 
             if (url.getPort() >= 0)
             {
-               Integer iPort = new Integer(url.getPort());
-               port = iPort.toString();
+               int iPort = url.getPort();
+               port = Integer.toString(iPort);
             }
          }
 
@@ -192,7 +215,7 @@ public class PSServerAdminApplet extends JApplet
   }
 
   /**
-   * @returns Frame The static instance of the main applet frame.
+   * The static instance of the main applet frame.
    */
   public static Frame getFrame()
   {
@@ -257,7 +280,7 @@ public class PSServerAdminApplet extends JApplet
     * The help set file url for this applet, gets initialized when the applet
     * is initialized.
     */
-   public static String m_helpSetURL = null;
+   protected static String m_helpSetURL = null;
 
    /**
     * The property which defines the helpset file to be used to display help for

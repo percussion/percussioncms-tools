@@ -23,6 +23,7 @@ import com.percussion.design.catalog.exit.PSExtensionCatalogHandler;
 import com.percussion.design.objectstore.PSObjectStore;
 import com.percussion.design.objectstore.PSSecurityProviderInstance;
 import com.percussion.design.objectstore.PSServerConfiguration;
+import com.percussion.error.PSExceptionUtils;
 import com.percussion.error.PSIllegalArgumentException;
 import com.percussion.extension.IPSExtensionDef;
 import com.percussion.extension.PSExtensionRef;
@@ -49,6 +50,8 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Vector;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Creates a dialog for editing or creating a back-end table
@@ -60,6 +63,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
    implements ISecurityProviderEditor
 {
    private static final long serialVersionUID = 1L;
+   private static final Logger log = LogManager.getLogger(PSServerAdminApplet.SERVER_ADMIN_LOG_CATEGORY);
 
    /**
     * The standard ctor for the dialog. Creates the dialog centered on the
@@ -124,15 +128,12 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
       // walk thru all columns and add the missing ones
       String uidCol = (String) m_userIdCol.getSelectedItem();
       String pwCol = (String) m_passwordCol.getSelectedItem();
-      Iterator iter = m_attribsCatalog.iterator();
-      while ( iter.hasNext())
-      {
-         String attrib = (String) iter.next();
-         if ( !attribMap.containsKey( attrib )
-            && !attrib.equals( uidCol )
-            && !attrib.equals( pwCol ))
-         {
-            m_userAttribs.addRowValue( attrib );
+      for (Object o : m_attribsCatalog) {
+         String attrib = (String) o;
+         if (!attribMap.containsKey(attrib)
+                 && !attrib.equals(uidCol)
+                 && !attrib.equals(pwCol)) {
+            m_userAttribs.addRowValue(attrib);
          }
       }
    }
@@ -151,6 +152,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
     * w/o re-allocating all of the peer components. If the designer wants to
     * free up resources, see {@link ISecurityProviderEditor#dispose() dispose}.
     */
+   @Override
    public void onOk()
    {
       initValidationFramework();
@@ -234,6 +236,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
     * of the peer components. If the designer wants to free up resources, see
     * {@link ISecurityProviderEditor#dispose() dispose}.
     */
+   @Override
    public void onCancel()
    {
       m_isModified = false;
@@ -385,19 +388,16 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
     */
    public void setInstanceNames( Collection names )
    {
-      if ( null == names || names.size() == 0 )
+      if ( null == names || names.isEmpty() )
       {
          m_existingProviders = null;
          return;
       }
 
-      Iterator iter = names.iterator();
-      while ( iter.hasNext())
-      {
-         Object o = iter.next();
-         if ( null == o || !( o instanceof String ))
+      for (Object o : names) {
+         if (!(o instanceof String))
             throw new IllegalArgumentException(
-               "Invalid entry in instance name list" );
+                    "Invalid entry in instance name list");
       }
       m_existingProviders = names;
 
@@ -438,6 +438,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
             DbmsTableSecurityProviderDialog.this.onOk();
          }
 
+         @Override
          public void onCancel()
          {
             DbmsTableSecurityProviderDialog.this.onCancel();
@@ -552,6 +553,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
       // add listener to catalog the drop down list
       m_userAttribs.getLeftButton().addFocusListener(new FocusAdapter()
       {
+         @Override
          public void focusGained(FocusEvent e)
          {
             DbmsTableSecurityProviderDialog.this.fillAttribsDropList();
@@ -612,6 +614,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
       m_userIdCol.getEditor().getEditorComponent().addFocusListener(
          new FocusAdapter()
       {
+         @Override
          public void focusGained( FocusEvent e )
          {
             m_userIdCatalog =
@@ -623,6 +626,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
       m_passwordCol.getEditor().getEditorComponent().addFocusListener(
          new FocusAdapter()
       {
+         @Override
          public void focusGained( FocusEvent e )
          {
             m_pwCatalog = DbmsTableSecurityProviderDialog.this.updateColumnList(
@@ -648,8 +652,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
                "%", null, "com.percussion.security.IPSPasswordFilter" );
             if ( filters.length > 0 )
             {
-               for ( int i = 0; i < filters.length; ++i )
-                  m_filterRef.addItem( filters[i].getRef());
+               for (IPSExtensionDef filter : filters) m_filterRef.addItem(filter.getRef());
             }
             else
                m_filterRef.addItem( getString( "NoFiltersFound" ));
@@ -693,11 +696,9 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
          // we need this check for a bug in 1.2
          if ( control.getItemCount() > 0 )
             control.removeAllItems();
-         Iterator iter = v.iterator();
-         while ( iter.hasNext())
-         {
-            String col = (String) iter.next();
-            control.addItem( col );
+         for (Object o : v) {
+            String col = (String) o;
+            control.addItem(col);
          }
       }
       return v;
@@ -854,7 +855,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
    {
       try
       {
-         String strLnFClass = UIManager.getSystemLookAndFeelClassName();
+         String strLnFClass = UIManager.getCrossPlatformLookAndFeelClassName();
          LookAndFeel lnf = (LookAndFeel) Class.forName(strLnFClass).newInstance();
          UIManager.setLookAndFeel( lnf );
          IConnectionSource cs = new IConnectionSource()
@@ -876,7 +877,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
                }
                catch ( Exception e )
                {
-                  System.out.println( e.getLocalizedMessage());
+                  log.error(PSExceptionUtils.getMessageForLog(e));
                }
 
                return ms_conn;
@@ -898,7 +899,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
             for ( int i = 0; i < size; ++i )
             {
                PSSecurityProviderInstance inst = (PSSecurityProviderInstance) providers.get(i);
-               System.out.println( "Found instance: " + inst.getName());
+               log.info( "Found instance: {}" , inst.getName());
                existingProviders.add( inst.getName());
                if ( inst.getName().equals( "foo" ) && inst.getType() == PSSecurityProvider.SP_TYPE_BETABLE )
                {
@@ -913,16 +914,16 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
          {
             if ( !editing )
                providers.add( dlg.getInstance());
-            System.out.println( "Provider ct = " + providers.size());
+            log.info( "Provider ct = {}" , providers.size());
             config.setSecurityProviderInstances( providers );
             os.saveServerConfiguration(config, true );
-            System.out.println( "Updated server" );
+            log.info( "Updated server" );
          }
          os.releaseServerConfigurationLock( config );
       }
       catch ( Exception e )
       {
-         e.printStackTrace();
+         log.error(PSExceptionUtils.getMessageForLog(e));
       }
    }
 
@@ -943,7 +944,7 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
 
    /**
     * The tabbed panel to hold the various TAB's for this editor. Initialized
-    * through {@link initUI()}, never changed after that.
+    * through {@link #initUI()}, never changed after that.
     */
    private JTabbedPane m_tabbedPane = new JTabbedPane();
 
@@ -1049,13 +1050,12 @@ public class DbmsTableSecurityProviderDialog extends PSDialog
 
    
    /**
-    * The attributes panel, initialized through {@link initUI()}, changed 
-    * through {@link swapView()}.
+    * The attributes panel, initialized through {@link #initUI()}
     */
    private JPanel m_attributesPanel = null;
 
    /**
-    * The backend attributes panel, initialized through {@link initUI()}, never
+    * The backend attributes panel, initialized through {@link #initUI()}, never
     * changed after that.
     */
    private JPanel m_backendPanel = null;

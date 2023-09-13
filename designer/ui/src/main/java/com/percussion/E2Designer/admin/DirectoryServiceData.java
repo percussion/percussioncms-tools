@@ -53,9 +53,11 @@ public class DirectoryServiceData
    
       // initialize authentications
       Iterator authentications = config.getAuthentications();
-      while (authentications.hasNext())
-         m_authentications.add(
-            ((PSAuthentication) authentications.next()).clone());
+      while (authentications.hasNext()) {
+         PSAuthentication auth = (PSAuthentication) authentications.next();
+         auth.setEncryptPwd(false);
+         m_authentications.add(auth.clone());
+      }
       
       // initialize directories
       Iterator directories = config.getDirectories();
@@ -133,6 +135,7 @@ public class DirectoryServiceData
       while (authentications.hasNext())
       {
          PSAuthentication authentication = (PSAuthentication) authentications.next();
+         authentication.setEncryptPwd(false);
          if (authentication.getName().equals(name))
             return authentication;
       }
@@ -156,7 +159,7 @@ public class DirectoryServiceData
       {
          PSAuthentication authentication = 
             (PSAuthentication) authentications.next();
-         
+         authentication.setEncryptPwd(false);
          names.add(authentication.getName());
       }
       
@@ -173,7 +176,7 @@ public class DirectoryServiceData
    {
       if (authentication == null)
          throw new IllegalArgumentException("authentication cannot be null");
-         
+         authentication.setEncryptPwd(false);
       m_authentications.add(authentication);
    }
    
@@ -187,8 +190,12 @@ public class DirectoryServiceData
    {
       if (authentications == null)
          throw new IllegalArgumentException("authentications cannot be null");
-         
-      m_authentications.addAll(authentications);
+      Iterator itr = authentications.iterator();
+      while (itr.hasNext()){
+         PSAuthentication auth  = (PSAuthentication) itr.next();
+         auth.setEncryptPwd(false);
+         m_authentications.add(auth);
+      }
    }
    
    /**

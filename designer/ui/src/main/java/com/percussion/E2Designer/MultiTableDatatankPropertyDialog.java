@@ -46,6 +46,12 @@ public class  MultiTableDatatankPropertyDialog extends PSEditorDialog
      initDialog();
    }
 
+    public MultiTableDatatankPropertyDialog(Window parent)
+    {
+        super(parent);
+        initDialog();
+    }
+
 /** Default initalizer for the constructors.
 */
   private void initDialog()
@@ -76,6 +82,7 @@ public class  MultiTableDatatankPropertyDialog extends PSEditorDialog
     getContentPane().add(mainPanel);
     setSize(450, 440);
       setResizable(true);
+      pack();
     center();
   }
 

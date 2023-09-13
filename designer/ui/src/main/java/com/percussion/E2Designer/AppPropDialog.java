@@ -96,6 +96,7 @@ public class AppPropDialog extends PSEditorDialog implements ActionListener,
       getContentPane().add(m_dialogPanel);
 
        setSize(DIALOG_SIZE);
+       pack();
        center();
        setResizable(true);
    }

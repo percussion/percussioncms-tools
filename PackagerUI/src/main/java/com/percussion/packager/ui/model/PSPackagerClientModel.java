@@ -16,13 +16,13 @@ import com.percussion.deployer.client.IPSDeployConstants;
 import com.percussion.deployer.client.IPSDeployJobControl;
 import com.percussion.deployer.client.PSDeploymentManager;
 import com.percussion.deployer.client.PSDeploymentServerConnection;
-import com.percussion.deployer.error.IPSDeploymentErrors;
-import com.percussion.deployer.error.PSDeployException;
 import com.percussion.deployer.objectstore.PSDependency;
 import com.percussion.deployer.objectstore.PSDeployableElement;
 import com.percussion.deployer.objectstore.PSDescriptor;
 import com.percussion.deployer.objectstore.PSExportDescriptor;
 import com.percussion.deployer.objectstore.PSUserDependency;
+import com.percussion.error.IPSDeploymentErrors;
+import com.percussion.error.PSDeployException;
 import com.percussion.error.PSException;
 import com.percussion.packager.ui.PSPackagerClient;
 import com.percussion.packager.ui.PSResourceUtils;
@@ -156,7 +156,9 @@ public class PSPackagerClientModel
                   if(m_cancelCurrentOperation)
                      job.cancelDeployJob();
                }
-               catch (InterruptedException ignore){}
+               catch (InterruptedException ignore){
+                  Thread.currentThread().interrupt();
+               }
             }
             if(job.getStatus() == -1)
             {
@@ -187,7 +189,9 @@ public class PSPackagerClientModel
                   if(m_cancelCurrentOperation)
                      job.cancelDeployJob();
                }
-               catch (InterruptedException ignore){}
+               catch (InterruptedException ignore){
+                  Thread.currentThread().interrupt();
+               }
             }
             if(job.getStatus() == -1)
             {
@@ -213,7 +217,9 @@ public class PSPackagerClientModel
                 if(m_cancelCurrentOperation)
                    exJob.cancelDeployJob();
              }
-             catch (InterruptedException ignore){}
+             catch (InterruptedException ignore){
+                Thread.currentThread().interrupt();
+             }
           }
           if(exJob.getStatus() == -1)
           {
@@ -244,7 +250,9 @@ public class PSPackagerClientModel
                    if(m_cancelCurrentOperation)
                       sJob.cancelDeployJob();
                 }
-                catch (InterruptedException ignore){}
+                catch (InterruptedException ignore){
+                   Thread.currentThread().interrupt();
+                }
              }
              if(sJob.getStatus() == -1)
              {
@@ -335,7 +343,9 @@ public class PSPackagerClientModel
          {
             Thread.sleep(250);
          }
-         catch (InterruptedException ignore){}
+         catch (InterruptedException ignore){
+            Thread.currentThread().interrupt();
+         }
       }
       if(job.getStatus() == -1)
       {
@@ -383,7 +393,9 @@ public class PSPackagerClientModel
          {
             Thread.sleep(250);
          }
-         catch (InterruptedException ignore){}
+         catch (InterruptedException ignore){
+            Thread.currentThread().interrupt();
+         }
       }
       if(job.getStatus() == -1)
       {
@@ -429,7 +441,9 @@ public class PSPackagerClientModel
          {
             Thread.sleep(250);
          }
-         catch (InterruptedException ignore){}
+         catch (InterruptedException ignore){
+            Thread.currentThread().interrupt();
+         }
       }
       if(job.getStatus() == -1)
       {
@@ -586,7 +600,7 @@ public class PSPackagerClientModel
    
    /**
     * Retrieves all elements for a specified category.
-    * @param categoryName cannot be <code>null</code>.
+    * @param category cannot be <code>null</code>.
     * @param force always go to server for info instead of cache.
     * @return
     * @throws PSDeployException
@@ -1297,7 +1311,6 @@ public class PSPackagerClientModel
     * @param dependency
     * @param dm
     * @param done
-    * @param recurse
     * @throws PSDeployException
     */
    private void handleChildDepends(PSDependency dependency,
@@ -1790,7 +1803,7 @@ public class PSPackagerClientModel
    
    /**
     * List of all dependencies for the descriptor. Calculated and
-    * set in {@link #calculateDependencies()}.
+    * set in {@link #calculateDependencies(boolean)}.
     */
    private List<PSDependency> m_dependencies;
    
@@ -1860,7 +1873,6 @@ public class PSPackagerClientModel
     * Cache of all dependency to deployable elements.The key is
     * the dependencyId concatenated to the objecttype with
     * an underscore separator.
-    * Initialized in {@link #createDependsToElementIndex()}.
     * May be <code>null</code> if no connection to server.
     */
    private Map<String, PSDeployableElement> m_dependsToElementsMap;

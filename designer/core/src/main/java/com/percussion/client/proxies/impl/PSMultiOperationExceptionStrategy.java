@@ -12,7 +12,7 @@ package com.percussion.client.proxies.impl;
 import com.percussion.client.PSModelException;
 import com.percussion.client.models.PSLockException;
 import com.percussion.conn.PSServerException;
-import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.error.PSNotLockedException;
 import org.apache.commons.collections.FunctorException;
 import org.apache.commons.collections.Transformer;
 

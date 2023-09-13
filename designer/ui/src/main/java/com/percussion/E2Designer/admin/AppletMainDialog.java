@@ -80,7 +80,7 @@ public class AppletMainDialog extends JFrame
    {
       super(title);
       ms_connection = connection;
-      ms_objectStore = new PSObjectStore( ms_connection.getConnection() );
+      ms_objectStore = new PSObjectStore( ms_connection.getConnection(),false );
 
       // initialize the security cataloging stuff
       m_singletons.add(
@@ -157,6 +157,7 @@ public class AppletMainDialog extends JFrame
       
       if (null != icon)
          setIconImage( icon.getImage( ) );
+      this.pack();
    }
 
    /**
@@ -278,8 +279,7 @@ public class AppletMainDialog extends JFrame
     {
       try
       {
-         File file = PSProperties.getConfig(LoginPanel.ENTRY_NAME,
-         LoginPanel.PROPERTIES_FILENAME, ".." +  File.separator + LoginPanel.ADMIN_DIR);
+         File file = PSProperties.getConfig(LoginPanel.ENTRY_NAME,LoginPanel.PROPERTIES_FILENAME,  LoginPanel.ADMIN_DIR);
 
          props = new PSProperties (file.getAbsolutePath());
 
@@ -1163,7 +1163,7 @@ public class AppletMainDialog extends JFrame
       PSIllegalArgumentException, PSServerException, PSLockedException
    {
       m_serverConfiguration = new ServerConfiguration(ms_connection, locked,
-         overrideLock);
+         overrideLock,ms_objectStore);
       m_roleConfiguration = ms_objectStore.getRoleConfiguration(locked,
          overrideLock, false);
       m_jndiDatasources = ms_objectStore.getJndiDatasources(locked);

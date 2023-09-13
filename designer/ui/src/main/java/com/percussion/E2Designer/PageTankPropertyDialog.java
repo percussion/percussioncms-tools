@@ -40,6 +40,11 @@ public class PageTankPropertyDialog extends PSEditorDialog
       initDialog("", "");
   }
 
+  public PageTankPropertyDialog(Window parent){
+    super(parent);
+    initDialog("", "");
+  }
+
    /**
    * Get the schema source.
    *
@@ -323,7 +328,7 @@ public class PageTankPropertyDialog extends PSEditorDialog
    /**
    * the edit field of the schema source
    */
-  private UTFixedTextField m_schemaSource = new UTFixedTextField("");
+  private UTFixedTextField m_schemaSource = new UTFixedTextField("",new Dimension(60,20));
   /**
    * browse schema source
    */

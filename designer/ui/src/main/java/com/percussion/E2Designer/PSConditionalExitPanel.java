@@ -1,7 +1,5 @@
 /******************************************************************************
- *
  * [ PSConditionalExitPanel.java ]
- *
  * COPYRIGHT (c) 1999 - 2005 by Percussion Software, Inc., Woburn, MA USA.
  * All rights reserved. This material contains unpublished, copyrighted
  * work including confidential and proprietary information of Percussion.
@@ -47,11 +45,7 @@ public class PSConditionalExitPanel extends JPanel
    implements KeyListener, ItemListener, ListSelectionListener
 {
    /**
-    * Constructs a new panel for the supplied parameters.
-    * 
-    * @see {@link PSConditionslExitPanel#PSConditionalExitPanel(JDialog,
-    *    Collection, Collection, int, Dimension, Dimension) for parameter
-    *    description.
+    * Constructs a new panel for the supplied parameters..
     */
    public PSConditionalExitPanel(JDialog parent, Collection exitDefinitions,
       Collection conditionalExits, int maxErrorsToStop)
@@ -134,7 +128,7 @@ public class PSConditionalExitPanel extends JPanel
     * Handles change events for the table cell editor used in the extensions
     * column.
     *
-    * @see {@link ItemListener#itemStateChanged(ItemEvent)}
+    * {@link ItemListener#itemStateChanged(ItemEvent)}
     */
    public void itemStateChanged(ItemEvent event)
    {
@@ -226,7 +220,7 @@ public class PSConditionalExitPanel extends JPanel
     * an <code>IllegalStateException</code> exception if this is used but the 
     * panel was constructed without requesting this field to be visible. Also 
     * throws an <code>IllegalStateException</code> exception if the user input 
-    * cannot be parsed into an integer and {@link validateData()} was not
+    * cannot be parsed into an integer and was not
     * called before.
     * 
     * @return the maximal number of errors allowed, always > 0.
@@ -360,7 +354,7 @@ public class PSConditionalExitPanel extends JPanel
    
    /**
     * Add an empty row to the table. The data elements are initialized to
-    * {@link getResource("exits.item.default")} and <code>null</code>.
+    * and <code>null</code>.
     */
    private void addEmptyRow()
    {
@@ -766,7 +760,7 @@ public class PSConditionalExitPanel extends JPanel
    
    /**
     * Overwrites the <code>DefaultCellEditor</code> to support an action and
-    * special {@link isCellEditable(EventObject)} handling.
+    * special {@link #isCellEditable(EventObject)} handling.
     */
    protected class PSComboBoxTableCellEditor extends DefaultCellEditor 
    {
@@ -856,7 +850,7 @@ public class PSConditionalExitPanel extends JPanel
 
    /**
     * Overwrites the <code>AbstractCellEditor</code> to support an action and
-    * special {@link isCellEditable(EventObject)} handling.
+    * special {@link #isCellEditable(EventObject)} handling.
     */
    protected class PSButtonTableCellEditor extends AbstractCellEditor 
       implements TableCellEditor
@@ -1006,7 +1000,7 @@ public class PSConditionalExitPanel extends JPanel
       
       /**
        * The number of clicks required to put this cell into edit mode, always
-       * >= 1. Can be modified through {@link setClickCount(int)}.
+       * >= 1. Can be modified through {@link #setClickCountToStart(int)}.
        */
       private int mi_clickCount = 1;
    }
@@ -1096,13 +1090,13 @@ public class PSConditionalExitPanel extends JPanel
 
       /**
        * Storage for the extension definition. Initialized to <code>null</code>,
-       * may be changed through {@link setExtensionDef(IPSExtensionDef)}.
+       * may be changed through {@link #setExtensionDef(IPSExtensionDef)}.
        */
       private IPSExtensionDef mi_extensionDef = null;
 
       /**
        * Storage for all extension calls. Initialized to <code>null</code>,
-       * may be changed through {@link setExtensionCalls(OSExitCallSet)}.
+       * may be changed through {@link #setExtensionCalls(OSExitCallSet)}.
        */
       private OSExitCallSet mi_extensionCalls = null;
    }
@@ -1149,7 +1143,7 @@ public class PSConditionalExitPanel extends JPanel
    
    /**
     * The table to show all selected extensions and conditions. Initialized 
-    * in {@link createTablePanel(Object[], int)}, never <code>null</code> 
+    * in {@link #createTablePanel(Object[], int)}, never <code>null</code>
     * after that.
     */
    protected JTable m_table = null;
@@ -1157,7 +1151,7 @@ public class PSConditionalExitPanel extends JPanel
    /**
     * The description panel which shows the description of the extension of 
     * the currently selecetd row. Initialized in 
-    * {@link createDescriptionPanel(}, never <code>null</code> after that. 
+    * {@link #createDescriptionPanel()}, never <code>null</code> after that.
     */   
    protected JTextArea m_description = new JTextArea();
    
@@ -1168,14 +1162,14 @@ public class PSConditionalExitPanel extends JPanel
    
    /**
     * The table editor used to edit extensions, initialized in 
-    * {@link initData(Collection, Collection}, never <code>null</code> or
+    * {@link #initData(Collection, Collection, int)}, never <code>null</code> or
     * changed after that.
     */
    private JComboBox m_extensionsEditor = new JComboBox();
    
    /**
     * The table editor used to edit conditionals, initialized in 
-    * {@link createTablePanel(Object[], int)}, never <code>null</code> or
+    * {@link #createTablePanel(Object[], int)}, never <code>null</code> or
     * changed after that.
     */
    private JButton m_conditionalsEditor = new JButton();

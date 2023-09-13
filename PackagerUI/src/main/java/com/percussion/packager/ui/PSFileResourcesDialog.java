@@ -12,10 +12,10 @@ package com.percussion.packager.ui;
 import com.percussion.deployer.catalog.PSCatalogResult;
 import com.percussion.deployer.catalog.PSCatalogResultSet;
 import com.percussion.deployer.client.IPSDeployConstants;
-import com.percussion.deployer.error.PSDeployException;
 import com.percussion.deployer.objectstore.PSDependency;
-import com.percussion.packager.ui.model.PSPackagerClientModel;
+import com.percussion.error.PSDeployException;
 import com.percussion.guitools.ErrorDialogs;
+import com.percussion.packager.ui.model.PSPackagerClientModel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

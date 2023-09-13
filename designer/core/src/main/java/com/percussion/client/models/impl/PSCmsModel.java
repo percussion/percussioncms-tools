@@ -21,7 +21,7 @@ import com.percussion.services.security.IPSAcl;
 import com.percussion.services.security.IPSAclEntry;
 import com.percussion.services.security.PSPermissions;
 import com.percussion.utils.guid.IPSGuid;
-import com.percussion.utils.security.IPSTypedPrincipal;
+import com.percussion.security.IPSTypedPrincipal;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -98,7 +98,7 @@ public class PSCmsModel implements IPSCmsModel
                {
                   String pattern = 
                      "Received server disconnect while ''{0}:{1} ({2})'' was still locked.";
-                  ms_logger.warn(MessageFormat.format(pattern, ref
+                  log.warn(MessageFormat.format(pattern, ref
                         .getObjectType(), ref.getName(), ref.getId()));
                }
                
@@ -372,7 +372,7 @@ public class PSCmsModel implements IPSCmsModel
       catch (PSModelException e)
       {
          //if we can't reach the server, do the best we can
-         ms_logger.info("Catalog failed while creating new objects.", e);
+         log.info("Catalog failed while creating new objects.", e);
          existingRefs = new ArrayList<>();
       }
       Object[] results = new Object[names.size()];
@@ -880,11 +880,11 @@ public class PSCmsModel implements IPSCmsModel
          return new IPSReference[0];
 
       boolean exceptionOccurred = false;
-      List<Object> results = new ArrayList<Object>();
-      Object[] moreResults = null;
+      List<Object> results = new ArrayList<>();
+      Object[] moreResults;
       try
       {
-         List<Object> query = new ArrayList<Object>();
+         List<Object> query = new ArrayList<>();
          for (IPSReference ref : refs)
          {
             if ((lock && isLocked(ref) && isDataCached(ref, false))
@@ -903,16 +903,16 @@ public class PSCmsModel implements IPSCmsModel
          IPSCmsModelProxy proxy = getProxy();
          IPSReference[] unloadedRefs = new IPSReference[query.size()];
          query.toArray(unloadedRefs);
-         if (ms_logger.isDebugEnabled())
+         if (log.isDebugEnabled())
          {
-            ms_logger.debug("Loading " + (refs.length - unloadedRefs.length) 
+            log.debug("Loading " + (refs.length - unloadedRefs.length)
                   + " " + m_primaryObjectType + " from cache. lock=" + lock);
          }
          if (unloadedRefs.length > 0)
          {
-            if (ms_logger.isDebugEnabled())
+            if (log.isDebugEnabled())
             {
-               ms_logger.debug("Loading " + unloadedRefs.length + " " 
+               log.debug("Loading " + unloadedRefs.length + " "
                      + m_primaryObjectType + " thru proxy. lock=" + lock);
             }
             moreResults = proxy.load(unloadedRefs, lock, overrideLock);
@@ -941,7 +941,7 @@ public class PSCmsModel implements IPSCmsModel
 
       if (lock)
       {
-         Collection<IPSReference> successfulRefs = new ArrayList<IPSReference>();
+         Collection<IPSReference> successfulRefs = new ArrayList<>();
          int i = 0;
          for (Object o : resultArray)
          {
@@ -981,9 +981,9 @@ public class PSCmsModel implements IPSCmsModel
          return new IPSReference[0];
 
       boolean errorOccurred = false;
-      List<Object> targets = new ArrayList<Object>();
-      List<IPSReference> targetRefs = new ArrayList<IPSReference>(); 
-      List<IPSReference> unpersistedRefs = new ArrayList<IPSReference>(); 
+      List<Object> targets = new ArrayList<>();
+      List<IPSReference> targetRefs = new ArrayList<>();
+      List<IPSReference> unpersistedRefs = new ArrayList<>();
       Object[] results = new Object[refs.length];
       System.arraycopy(refs, 0, results, 0, refs.length);
       for (int i = 0; i < refs.length; i++)
@@ -1005,7 +1005,7 @@ public class PSCmsModel implements IPSCmsModel
          }
       }
 
-      if (targets.size() == 0)
+      if (targets.isEmpty())
       {
          // none of the supplied refs was locked
          throw new PSMultiOperationException(results, refs);
@@ -1094,11 +1094,10 @@ public class PSCmsModel implements IPSCmsModel
          getProxy().delete(refs);
          //Delete the ACLs for only the persisted objects
          //Model would not have saved ACLs for non-persisted objects
-         List<IPSReference> persistedRefs = new ArrayList<IPSReference>();
-         for (int i = 0; i < refs.length; i++)
-         {
-            if (refs[i].isPersisted())
-               persistedRefs.add(refs[i]);
+         List<IPSReference> persistedRefs = new ArrayList<>();
+         for (IPSReference ref : refs) {
+            if (ref.isPersisted())
+               persistedRefs.add(ref);
          }
          // Transaction?? what if the object is deleted but the ACL was locked
          // for someone else.
@@ -1111,10 +1110,9 @@ public class PSCmsModel implements IPSCmsModel
          catch(PSMultiOperationException e)
          {
             Object[] obj = e.getResults();
-            for (int i = 0; i < obj.length; i++)
-            {
-               if(obj[i] instanceof Exception)
-                  ms_logger.error(obj[i]);
+            for (Object o : obj) {
+               if (o instanceof Exception)
+                  log.error(o);
             }
          }
          objectsDeleted(refs);
@@ -1200,7 +1198,7 @@ public class PSCmsModel implements IPSCmsModel
       throws PSMultiOperationException, PSModelException
    {
       Map<IPSHierarchyManager, List<IPSHierarchyNodeRef>> mgrs = 
-         new HashMap<IPSHierarchyManager, List<IPSHierarchyNodeRef>>();
+         new HashMap<>();
       
       //group refs with their mgr
       for (IPSReference ref : refs)
@@ -1210,7 +1208,7 @@ public class PSCmsModel implements IPSCmsModel
          List<IPSHierarchyNodeRef> nodes = mgrs.get(mgr); 
          if (nodes == null)
          {
-            nodes = new ArrayList<IPSHierarchyNodeRef>();
+            nodes = new ArrayList<>();
             mgrs.put(mgr, nodes);
          }
          nodes.add(node);
@@ -1301,7 +1299,7 @@ public class PSCmsModel implements IPSCmsModel
    // see interface
    public Collection<IPSReference> getLockedRefs()
    {
-      Collection<IPSReference> results = new ArrayList<IPSReference>();
+      Collection<IPSReference> results = new ArrayList<>();
       for (ManagerInfo mgrInfo : m_mgrInfos.values())
       {
          Collection<DataInfo> cache = mgrInfo.m_cache;
@@ -1450,7 +1448,7 @@ public class PSCmsModel implements IPSCmsModel
             {
                DataInfo info = getInfo(wrapper.getTreeName(), parent, true);
                if (info.m_children == null)
-                  info.m_children = new ArrayList<IPSReference>();
+                  info.m_children = new ArrayList<>();
                for (IPSReference catalogedEntry : catalogedRefs)
                {
                   boolean found = false;
@@ -1625,8 +1623,8 @@ public class PSCmsModel implements IPSCmsModel
                "at least 1 notification must be supplied");
       }
 
-      m_listeners.put(listener, new Integer(notifications
-            & possibleNotifications));
+      m_listeners.put(listener, notifications
+              & possibleNotifications);
    }
 
    // see interface
@@ -1706,7 +1704,7 @@ public class PSCmsModel implements IPSCmsModel
    // see interface
    public IPSHierarchyManager getHierarchyManager(IPSReference node)
    {
-      if ( null == node || !(node instanceof IPSHierarchyNodeRef))
+      if ( !(node instanceof IPSHierarchyNodeRef))
       {
          throw new IllegalArgumentException(
                "node cannot be null and must be instanceof IPSHierarchyNodeRef");  
@@ -1722,9 +1720,10 @@ public class PSCmsModel implements IPSCmsModel
          public Object process(ManagerInfo mgrInfo)
          {
             mgrInfo.m_cataloged = false;
-            assert (getProxy().getMetaData().isCacheable() ? true
-                  : mgrInfo.m_cache.size() == 0);
-            if (mgrInfo.m_cache.size() == 0)
+            if ((getProxy().getMetaData().isCacheable() ? false : mgrInfo.m_cache.size() != 0)) {
+               throw new AssertionError();
+            }
+            if (mgrInfo.m_cache.isEmpty())
                return null;
             recursiveFlush(mgrInfo.m_cache, ref);
 
@@ -1750,7 +1749,7 @@ public class PSCmsModel implements IPSCmsModel
    {
       if (!isHierarchyModel())
       {
-         Collection<IPSReference> toRemove = new ArrayList<IPSReference>();
+         Collection<IPSReference> toRemove = new ArrayList<>();
          for (DataInfo info : cache)
          {
             if (!info.m_locked)
@@ -1764,7 +1763,7 @@ public class PSCmsModel implements IPSCmsModel
       }
       
       // build list of all children
-      Set<IPSReference> children = new HashSet<IPSReference>();
+      Set<IPSReference> children = new HashSet<>();
       for (DataInfo info : cache)
       {
          IPSHierarchyNodeRef parent = ((IPSHierarchyNodeRef) info.m_ref)
@@ -1833,12 +1832,12 @@ public class PSCmsModel implements IPSCmsModel
          return new IPSAcl[0];
 
       boolean exceptionOccurred = false;
-      List<Object> results = new ArrayList<Object>();
+      List<Object> results = new ArrayList<>();
       Object[] loadedResults = new Object[0];
       IPSReference[] refsToLoadArray = null;
       try
       {
-         List<Object> refsToLoad = new ArrayList<Object>();
+         List<Object> refsToLoad = new ArrayList<>();
          for (IPSReference owner : owners)
          {
             if ((lock && isAclLocked(owner)) || (!lock && isDataCached(owner, true)))
@@ -1880,7 +1879,7 @@ public class PSCmsModel implements IPSCmsModel
 
       if (lock)
       {
-         Collection<IPSReference> successfulRefs = new ArrayList<IPSReference>();
+         Collection<IPSReference> successfulRefs = new ArrayList<>();
          int i = 0;
          for (Object o : resultArray)
          {
@@ -1925,12 +1924,10 @@ public class PSCmsModel implements IPSCmsModel
       List<Long> aclIds = null;
       try
       {
-         aclIds = new ArrayList<Long>();
-         for (int i = 0; i < refs.length; i++)
-         {
-            IPSReference ref = refs[i];
+         aclIds = new ArrayList<>();
+         for (IPSReference ref : refs) {
             //If the object is not persisted yet, dont release the ACL
-            if(!ref.isPersisted())
+            if (!ref.isPersisted())
                continue;
             IPSAcl acl = (IPSAcl) getDataFromCache(ref, true);
             // ACL is not in the cache, mostly the ACL is not locked or type
@@ -1981,8 +1978,8 @@ public class PSCmsModel implements IPSCmsModel
          return;
 
       boolean errorOccurred = false;
-      List<IPSReference> targetRefs = new ArrayList<IPSReference>();
-      List<IPSAcl> targets = new ArrayList<IPSAcl>();
+      List<IPSReference> targetRefs = new ArrayList<>();
+      List<IPSAcl> targets = new ArrayList<>();
       Object[] results = new Object[owners.length];
       System.arraycopy(owners, 0, results, 0, owners.length);
       for (int i = 0; i < owners.length; i++)
@@ -2055,11 +2052,11 @@ public class PSCmsModel implements IPSCmsModel
        * modification exceptions
        */
       Map<IPSModelListener, Integer> listeners = 
-         new HashMap<IPSModelListener, Integer>(m_listeners);
+         new HashMap<>(m_listeners);
       for (IPSModelListener listener : listeners.keySet())
       {
          Integer notifications = listeners.get(listener);
-         if ((notifications.intValue() & event.getEventType().getFlag()) > 0)
+         if ((notifications & event.getEventType().getFlag()) > 0)
             listener.modelChanged(event);
       }
    }
@@ -2106,12 +2103,12 @@ public class PSCmsModel implements IPSCmsModel
     */
    private void objectsUnlocked(Object[] refs, boolean withSave, boolean isAcl)
    {
-      Collection<IPSReference> unlockedSet = new ArrayList<IPSReference>();
-      Collection<IPSReference> modifiedSet = new ArrayList<IPSReference>();
-      Collection<IPSReference> neverPersistedSet = new ArrayList<IPSReference>();
+      Collection<IPSReference> unlockedSet = new ArrayList<>();
+      Collection<IPSReference> modifiedSet = new ArrayList<>();
+      Collection<IPSReference> neverPersistedSet = new ArrayList<>();
       for (Object obj : refs)
       {
-         if (obj != null && (obj instanceof IPSReference))
+         if ((obj instanceof IPSReference))
          {
             IPSReference ref = (IPSReference) obj;
             if (ref.isPersisted())
@@ -2173,7 +2170,7 @@ public class PSCmsModel implements IPSCmsModel
       if (refs == null)
          throw new IllegalArgumentException("refs cannot be null");
       
-      Collection<IPSReference> valid = new ArrayList<IPSReference>();
+      Collection<IPSReference> valid = new ArrayList<>();
       for (Object obj : refs)
       {
          if (obj == null || (obj instanceof Throwable))
@@ -2213,7 +2210,7 @@ public class PSCmsModel implements IPSCmsModel
       if (refs.length == 0)
          return;
       
-      Collection<IPSReference> validRefs = new ArrayList<IPSReference>();
+      Collection<IPSReference> validRefs = new ArrayList<>();
       for (int i = 0; i < refs.length; i++)
       {
          if (refs[i] != null)
@@ -2247,7 +2244,7 @@ public class PSCmsModel implements IPSCmsModel
    void objectsCreated(IPSReference[] refs, List<Object> data)
    {
       objectsCloned(refs, data);
-      Collection<IPSReference> notPersistedRefs = new ArrayList<IPSReference>();
+      Collection<IPSReference> notPersistedRefs = new ArrayList<>();
       for (IPSReference ref : refs)
       {
          if (!ref.isPersisted())
@@ -2295,10 +2292,10 @@ public class PSCmsModel implements IPSCmsModel
     */
    void objectsDeleted(Object[] refs)
    {
-      Collection<IPSReference> valid = new ArrayList<IPSReference>();
+      Collection<IPSReference> valid = new ArrayList<>();
       for (Object obj : refs)
       {
-         if (obj != null && (obj instanceof IPSReference))
+         if ( (obj instanceof IPSReference))
          {
             IPSReference ref = (IPSReference) obj;
             removeFromCache(ref);
@@ -2332,7 +2329,7 @@ public class PSCmsModel implements IPSCmsModel
          throw new IllegalArgumentException("refs cannot be null");  
       }
       
-      Collection<IPSReference> valid = new ArrayList<IPSReference>();
+      Collection<IPSReference> valid = new ArrayList<>();
       for (IPSReference ref : refs)
       {
          if (ref != null)
@@ -2384,12 +2381,11 @@ public class PSCmsModel implements IPSCmsModel
     * 
     * @return Never <code>null</code>, may be empty.
     */
-   @SuppressWarnings("unchecked")
    synchronized private Collection<IPSReference> getCachedRefs(
          final String treeName, final IPSReference parent)
    {
       ManagerInfo mgrInfo = getManagerInfo(treeName);
-      Collection<IPSReference> results = new ArrayList<IPSReference>();
+      Collection<IPSReference> results = new ArrayList<>();
       
       for (DataInfo info : mgrInfo.m_cache)
       {
@@ -2438,7 +2434,7 @@ public class PSCmsModel implements IPSCmsModel
          if (mainInfo.m_children != null)
          {
             //make copy of children because it will be modified while we walk it
-            Collection<IPSReference> tmp = new ArrayList<IPSReference>();
+            Collection<IPSReference> tmp = new ArrayList<>(mainInfo.m_children);
             tmp.addAll(mainInfo.m_children);
             for (IPSReference childRef : tmp)
                removeFromCache(childRef);
@@ -2525,8 +2521,8 @@ public class PSCmsModel implements IPSCmsModel
          if (node.getParent() != null)
          {
             DataInfo parentInfo = getInfo(node.getParent());
-            if (parentInfo.m_children == null)
-               parentInfo.m_children = new ArrayList<IPSReference>();
+            if (parentInfo!=null && parentInfo.m_children == null)
+               parentInfo.m_children = new ArrayList<>();
             for (IPSReference testRef : parentInfo.m_children)
             {
                if (testRef.equals(ref))
@@ -2709,7 +2705,7 @@ public class PSCmsModel implements IPSCmsModel
     * 
     * @param ref Assumed not <code>null</code>.
     */
-   synchronized private void addToLockList(IPSReference ref, boolean isAcl)
+   private synchronized  void addToLockList(IPSReference ref, boolean isAcl)
    {
       if (!isRefCached(ref))
          return;
@@ -2828,8 +2824,10 @@ public class PSCmsModel implements IPSCmsModel
          boolean found = false;
          for (String name : getHierarchyTreeNames())
          {
-            if (name.equalsIgnoreCase(treeName))
+            if (name.equalsIgnoreCase(treeName)) {
                found = true;
+               break;
+            }
          }
          if (!found)
             throw new IllegalArgumentException("Unknown tree name: " + treeName);
@@ -2970,7 +2968,7 @@ public class PSCmsModel implements IPSCmsModel
    /**
     * The name used as the cache id for a flat model.
     */
-   static private String FLAT_MODEL_TREENAME = ""; 
+   private String FLAT_MODEL_TREENAME = "";
 
    /**
     * The name assigned to this model during construction. Never
@@ -3001,7 +2999,7 @@ public class PSCmsModel implements IPSCmsModel
     * Their is a cache per tree. The key is the treeName. For a flat model, use
     * {@link #FLAT_MODEL_TREENAME} string as the key.
     */
-   Map<String, ManagerInfo> m_mgrInfos = new HashMap<String, ManagerInfo>();
+   Map<String, ManagerInfo> m_mgrInfos = new HashMap<>();
 
    /**
     * Stores all the notification listeners and what events they want to be
@@ -3010,11 +3008,11 @@ public class PSCmsModel implements IPSCmsModel
     * Never <code>null</code>, may be empty.
     */
    private Map<IPSModelListener, Integer> m_listeners = 
-      new HashMap<IPSModelListener, Integer>();
+      new HashMap<>();
    
    /**
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Logger ms_logger = LogManager.getLogger(PSCmsModel.class);
+   private static final Logger log = LogManager.getLogger(PSCmsModel.class);
 }

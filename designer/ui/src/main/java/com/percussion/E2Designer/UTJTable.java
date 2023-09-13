@@ -165,7 +165,7 @@ public class UTJTable extends PSJTable implements KeyListener
             new TableColumn(0, 18, new TableCERenderer(), null);
          newColumn.setMinWidth(18);
          newColumn.setMaxWidth(18);
-         newColumn.setResizable(false);
+         newColumn.setResizable(true);
          newColumn.setHeaderRenderer(new TableCERenderer());
          newColumn.setCellRenderer(new TableCERenderer());
          addColumn(newColumn);

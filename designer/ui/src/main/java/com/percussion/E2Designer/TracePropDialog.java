@@ -129,6 +129,7 @@ public class TracePropDialog extends PSEditorDialog
       contentPane.add(createCommandPanel());
 
       setSize(DIALOG_SIZE);
+      pack();
       center();
 
 
@@ -411,7 +412,7 @@ public class TracePropDialog extends PSEditorDialog
       TableColumn column1 = m_optionListTable.getColumnModel().getColumn(0);
       column1.setPreferredWidth(15);
       column1.setMaxWidth(15);
-      column1.setResizable(false);
+      column1.setResizable(true);
       UTCheckBoxCellEditor column1Editor = new UTCheckBoxCellEditor();
       column1.setCellEditor(column1Editor);
 

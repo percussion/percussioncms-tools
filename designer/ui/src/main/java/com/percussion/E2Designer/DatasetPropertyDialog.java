@@ -37,7 +37,13 @@ public class DatasetPropertyDialog extends PSEditorDialog
    initDialog();
    }
 
-   /**
+    public DatasetPropertyDialog(Window parent)
+    {
+        super(parent);
+        initDialog();
+    }
+
+    /**
    * Create the name panel
    *
    * @returns   JPanel      the name panel

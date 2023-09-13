@@ -183,7 +183,6 @@
   <classpathentry kind="var" path="M2_REPO/expectj/expectj/1.1/expectj-1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/percussion/psjniregistry/1.0.0/psjniregistry-1.0.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/jmock/jmock/1.0.1/jmock-1.0.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/yahoo/platform/yui/yuicompressor/2.4.8/yuicompressor-2.4.8.jar"/>
   <classpathentry kind="var" path="M2_REPO/rhino/js/1.7R2/js-1.7R2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/cactus/cactus.core.framework.wrapper.javaEE.14/1.8.1/cactus.core.framework.wrapper.javaEE.14-1.8.1.jar"/>

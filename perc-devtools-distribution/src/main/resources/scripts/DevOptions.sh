@@ -17,4 +17,4 @@
 # Add any additional command line options to be used when launching tools, enabling debugger etc
 # export PATH=/path/to/jre8/bin:$PATH
 # export JRE_HOME=/path/to/jre8
-# export JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8059
+export JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dhttps.protocols=TLSv1.2 -Djavax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl -Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl -Djavax.xml.datatype.DatatypeFactory=com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl -Djavax.xml.parsers.DocumentBuilderFactory=com.percussion.xml.PSDocumentBuilderFactoryImpl -Dxml.catalog.files=/PercussionXMLCatalog.xml"

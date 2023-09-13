@@ -79,6 +79,7 @@ class ExceptionDialog extends PSDialog
       getContentPane().add(panel);
       this.setSize(EX_DIALOG_SIZE);
       center();
+      pack();
       setVisible(true);
    }
 

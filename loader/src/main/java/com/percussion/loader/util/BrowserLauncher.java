@@ -508,6 +508,7 @@ public class BrowserLauncher {
                process.waitFor();
                process.exitValue();
             } catch (InterruptedException ie) {
+               Thread.currentThread().interrupt();
                throw new IOException("InterruptedException while launching browser: " + ie.getMessage());
             }
             break;
@@ -526,6 +527,7 @@ public class BrowserLauncher {
                   Runtime.getRuntime().exec(new String[] { (String) browser, url });
                }
             } catch (InterruptedException ie) {
+               Thread.currentThread().interrupt();
                throw new IOException("InterruptedException while launching browser: " + ie.getMessage());
             }
             break;

@@ -8,6 +8,7 @@
 
 package com.percussion.E2Designer;
 
+import com.percussion.design.objectstore.PSAuthentication;
 import com.percussion.design.objectstore.PSFeature;
 import com.percussion.design.objectstore.PSFeatureSet;
 import com.percussion.design.objectstore.PSObjectStore;

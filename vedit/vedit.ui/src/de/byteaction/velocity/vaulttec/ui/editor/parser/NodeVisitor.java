@@ -1,6 +1,26 @@
+/*
+ * Copyright 1999-2022 Percussion Software, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package de.byteaction.velocity.vaulttec.ui.editor.parser;
 
-import java.util.Stack;
+import de.byteaction.velocity.vaulttec.ui.editor.VelocityEditorEnvironment;
+import de.byteaction.velocity.vaulttec.ui.model.Directive;
+import de.byteaction.velocity.vaulttec.ui.model.IBlock;
+import de.byteaction.velocity.vaulttec.ui.model.ITreeNode;
+import de.byteaction.velocity.vaulttec.ui.model.Template;
 import org.apache.velocity.runtime.parser.node.ASTAddNode;
 import org.apache.velocity.runtime.parser.node.ASTAndNode;
 import org.apache.velocity.runtime.parser.node.ASTAssignment;
@@ -34,7 +54,6 @@ import org.apache.velocity.runtime.parser.node.ASTObjectArray;
 import org.apache.velocity.runtime.parser.node.ASTOrNode;
 import org.apache.velocity.runtime.parser.node.ASTReference;
 import org.apache.velocity.runtime.parser.node.ASTSetDirective;
-import org.apache.velocity.runtime.parser.node.ASTStop;
 import org.apache.velocity.runtime.parser.node.ASTStringLiteral;
 import org.apache.velocity.runtime.parser.node.ASTSubtractNode;
 import org.apache.velocity.runtime.parser.node.ASTText;
@@ -44,11 +63,8 @@ import org.apache.velocity.runtime.parser.node.ASTprocess;
 import org.apache.velocity.runtime.parser.node.Node;
 import org.apache.velocity.runtime.parser.node.ParserVisitor;
 import org.apache.velocity.runtime.parser.node.SimpleNode;
-import de.byteaction.velocity.vaulttec.ui.editor.VelocityEditorEnvironment;
-import de.byteaction.velocity.vaulttec.ui.model.Directive;
-import de.byteaction.velocity.vaulttec.ui.model.IBlock;
-import de.byteaction.velocity.vaulttec.ui.model.ITreeNode;
-import de.byteaction.velocity.vaulttec.ui.model.Template;
+
+import java.util.Stack;
 
 /**
  * DOCUMENT ME!
@@ -535,8 +551,4 @@ public class NodeVisitor implements ParserVisitor
       return null;
    }
 
-   public Object visit(ASTStop arg0, Object arg1)
-   {
-      return null;
-   }
 }

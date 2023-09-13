@@ -390,7 +390,7 @@ public class AclEntryDetailsDialog extends JDialog
    {
       try
       {
-         String strLnFClass = UIManager.getSystemLookAndFeelClassName();
+         String strLnFClass = UIManager.getCrossPlatformLookAndFeelClassName();
          LookAndFeel lnf = (LookAndFeel) Class.forName(
             strLnFClass).newInstance();
          UIManager.setLookAndFeel( lnf );

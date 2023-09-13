@@ -15,7 +15,6 @@ import com.percussion.services.filter.IPSItemFilter;
 import com.percussion.services.filter.IPSItemFilterRuleDef;
 import com.percussion.services.filter.data.PSItemFilter;
 import com.percussion.services.filter.data.PSItemFilterRuleDef;
-import com.percussion.services.guidmgr.PSGuidHelper;
 import com.percussion.services.guidmgr.data.PSDesignGuid;
 import com.percussion.webservices.system.PSFilterRule;
 import com.percussion.webservices.system.PSFilterRuleParam;
@@ -63,6 +62,8 @@ public class PSItemFilterConverter extends
       dest.setRuleDefs(destRules);
    }
 
+
+
    /**
     * Override to create a dummy item filter with correct id.
     * 
@@ -71,8 +72,8 @@ public class PSItemFilterConverter extends
    @Override
    protected IPSItemFilter loadFilter(long id)
    {
-      PSItemFilter filter = new PSItemFilter("dummy", "dummy"); //$NON-NLS-1$ //$NON-NLS-2$
-      filter.setGUID(new PSDesignGuid(PSTypeEnum.ITEM_FILTER, id));
+      PSDesignGuid guid = new PSDesignGuid(PSTypeEnum.ITEM_FILTER, id);
+      PSItemFilter filter = new PSItemFilter("dummy", "dummy",guid); //$NON-NLS-1$ //$NON-NLS-2$
       return filter;
    }
 
@@ -88,8 +89,7 @@ public class PSItemFilterConverter extends
       {
          throw new IllegalArgumentException("params may not be null");
       }
-      IPSItemFilterRuleDef rval = new PSItemFilterRuleDef();
-      rval.setGUID(PSGuidHelper.generateNext(PSTypeEnum.ITEM_FILTER_RULE_DEF));
+      IPSItemFilterRuleDef rval = new PSItemFilterRuleDef(true);
       rval.setRule(rule);
       for (Map.Entry<String, String> entry : params.entrySet())
       {

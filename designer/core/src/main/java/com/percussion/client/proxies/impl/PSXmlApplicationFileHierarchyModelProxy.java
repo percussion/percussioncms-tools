@@ -22,11 +22,9 @@ import com.percussion.client.impl.PSHierarchyNodeRef;
 import com.percussion.client.models.PSLockException;
 import com.percussion.client.proxies.IPSCmsModelProxy;
 import com.percussion.conn.PSServerException;
-import com.percussion.design.objectstore.PSApplication;
-import com.percussion.design.objectstore.PSApplicationFile;
-import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSObjectStore;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.*;
+import com.percussion.error.PSNotLockedException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.error.PSException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.security.PSAuthenticationFailedException;
@@ -103,7 +101,7 @@ public class PSXmlApplicationFileHierarchyModelProxy extends
       throws PSMultiOperationException, PSModelException
    {
       PSObjectType type = null;
-      List<String> actualNames = new ArrayList<String>();
+      List<String> actualNames = new ArrayList<>();
       for (int i=0; i < children.length; i++)
       {
          if (type == null)
@@ -435,10 +433,9 @@ public class PSXmlApplicationFileHierarchyModelProxy extends
 
       @Override
       protected Object doTransform(Object obj) throws PSServerException,
-         PSAuthorizationException, PSAuthenticationFailedException,
-         PSNotLockedException, PSValidationException, PSModelException,
-         PSDuplicateNameException
-      {
+              PSAuthorizationException, PSAuthenticationFailedException,
+              PSNotLockedException, PSValidationException, PSModelException,
+              PSDuplicateNameException, PSSystemValidationException {
          m_ref = (PSXmlApplicationFileHierarchyRef) obj;
          validateChildName(m_ref.getName(), m_ref.getObjectType());
          if (m_ref.isLocked())

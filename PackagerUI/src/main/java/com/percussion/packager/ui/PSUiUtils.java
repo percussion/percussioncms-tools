@@ -246,6 +246,7 @@ public class PSUiUtils
          dialog.setSize(new Dimension(maxWidth, dialog.getHeight()));
          setLocationRelativeTo(dialog, parentComponent);
       }
+      dialog.pack();
       dialog.setResizable(true);
       dialog.setVisible(true);
       dialog.dispose();

@@ -19,7 +19,7 @@
 <plugin
    id="com.percussion.doc.help.packageinstaller"
    name="Percussion Package Installer Help Plugin"
-   version="8.0.2.10"
+   version="8.1.3"
    provider-name="Percussion Software, Inc."
    class="com.percussion.doc.packageinstaller.PackageInstallerHelpPlugin">
 

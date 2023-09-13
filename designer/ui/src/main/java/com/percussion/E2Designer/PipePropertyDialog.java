@@ -251,11 +251,11 @@ public class PipePropertyDialog extends PSEditorDialog
    /**
    * the edit field of the pipes name
    */
-  private UTFixedTextField m_pipeName = new UTFixedTextField("");
+  private UTFixedTextField m_pipeName = new UTFixedTextField("",new Dimension(60,20));
    /**
    * the dieplay field of the pipes type
    */
-  private UTFixedTextField m_pipeType = new UTFixedTextField("");
+  private UTFixedTextField m_pipeType = new UTFixedTextField("",new Dimension(60,20));
    /**
    * the standard command panel
    */

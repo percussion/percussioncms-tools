@@ -17,19 +17,22 @@ import com.percussion.client.proxies.IPSHierarchyModelProxy;
 import com.percussion.client.proxies.PSProxyUtils;
 import com.percussion.client.proxies.PSUninitializedConnectionException;
 import com.percussion.client.webservices.PSWebServicesConnection;
+import com.percussion.conn.IPSConnectionErrors;
 import com.percussion.conn.PSDesignerConnection;
 import com.percussion.conn.PSServerException;
+import com.percussion.error.PSErrorManagerDefaultImpl;
+import com.percussion.error.PSException;
 import com.percussion.i18n.PSI18nUtils;
+import com.percussion.security.IPSTypedPrincipal;
+import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.services.PSBaseServiceLocator;
-import com.percussion.services.PSMissingBeanConfigurationException;
+import com.percussion.error.PSMissingBeanConfigurationException;
 import com.percussion.services.security.PSTypedPrincipal;
 import com.percussion.util.PSFormatVersion;
 import com.percussion.util.PSProperties;
 import com.percussion.util.PSRemoteRequester;
-import com.percussion.utils.security.IPSTypedPrincipal;
-import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.webservices.common.PSObjectSummary;
 import com.percussion.webservices.faults.Error;
 import com.percussion.webservices.faults.PSContractViolationFault;
@@ -53,7 +56,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -102,7 +116,7 @@ public class PSCoreFactory
       if (ms_instance == null)
       {
          ms_instance = new PSCoreFactory();
-         ms_instance.initSpringContext();
+      //   ms_instance.initSpringContext();
 
          // Initialize the singleton with the class registry from this package
          PSObjectSerializer.getInstance().registerBeanClasses(
@@ -617,6 +631,14 @@ public class PSCoreFactory
       {
          Error err = (Error) error;
          return err.getErrorMessage();
+      }else if(error instanceof PSServerException){
+         PSServerException exc = (PSServerException) error;
+         PSException.setErrorManager(new PSErrorManagerDefaultImpl());
+         if(IPSConnectionErrors.UNAUTHORIZED == exc.getErrorCode()){
+            return "Authentication failed. Invalid User Name and/or Password.";
+         }else{
+            return null;
+         }
       }
       String msg = ((Throwable) error).toString();
       if (msg.trim().length() > 0)

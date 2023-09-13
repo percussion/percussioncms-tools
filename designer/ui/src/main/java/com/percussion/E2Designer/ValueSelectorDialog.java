@@ -236,6 +236,7 @@ public class ValueSelectorDialog extends PSDialogAPI
       initControls();
       //Do not pack()!!! Give some size instead
       setSize(new Dimension(2*COMMON_CONTROL_WIDTH, 3*COMMON_CONTROL_WIDTH/2));
+      pack();
       center();
       setResizable(true);
    }

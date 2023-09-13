@@ -1,19 +1,29 @@
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package de.byteaction.velocity.vaulttec.ui.editor.actions;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import de.byteaction.velocity.editor.EditorsUtil;
+import de.byteaction.velocity.editor.VelocityEditor;
+import de.byteaction.velocity.editor.compare.VelocityCompare;
+import de.byteaction.velocity.editor.compare.VelocityInput;
+import de.byteaction.velocity.ui.editor.xml.VelocityAutoIndentStrategy;
+import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
+import de.byteaction.velocity.vaulttec.ui.editor.VelocityConfiguration;
+import de.byteaction.velocity.vaulttec.ui.model.Directive;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -40,14 +50,21 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
-import de.byteaction.velocity.editor.EditorsUtil;
-import de.byteaction.velocity.editor.VelocityEditor;
-import de.byteaction.velocity.editor.compare.VelocityCompare;
-import de.byteaction.velocity.editor.compare.VelocityInput;
-import de.byteaction.velocity.ui.editor.xml.VelocityAutoIndentStrategy;
-import de.byteaction.velocity.vaulttec.ui.VelocityPlugin;
-import de.byteaction.velocity.vaulttec.ui.editor.VelocityConfiguration;
-import de.byteaction.velocity.vaulttec.ui.model.Directive;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * DOCUMENT ME!
@@ -171,6 +188,7 @@ public class FormatResourceAction implements IObjectActionDelegate
         catch (InterruptedException e)
         {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
         return document;
     }

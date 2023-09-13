@@ -13,12 +13,12 @@ package com.percussion.E2Designer;
 import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSApplicationFile;
-import com.percussion.design.objectstore.PSNotFoundException;
-import com.percussion.design.objectstore.PSNotLockedException;
+import com.percussion.error.PSNotFoundException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.design.objectstore.PSObjectStore;
+import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.design.objectstore.PSUnknownDocTypeException;
 import com.percussion.design.objectstore.PSUnknownNodeTypeException;
-import com.percussion.design.objectstore.PSValidationException;
 import com.percussion.error.PSIllegalStateException;
 import com.percussion.extension.IPSExtensionDef;
 import com.percussion.extension.IPSExtensionDefFactory;
@@ -27,8 +27,9 @@ import com.percussion.extension.PSExtensionException;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.util.PSCollection;
-import com.percussion.util.PSIteratorUtils;
+import com.percussion.utils.collections.PSIteratorUtils;
 import com.percussion.xml.PSXmlDocumentBuilder;
 import com.percussion.xml.PSXmlTreeWalker;
 import org.apache.commons.io.IOUtils;
@@ -134,18 +135,11 @@ public class OSApplication extends PSApplication implements IDataCataloger
       }
       if ( null != getAppFileLocation() )
       {
-         OutputStream out = null;
-         try
+         try(OutputStream out = new FileOutputStream(
+                 new File(getAppFileLocation().getPath() + File.pathSeparator + filename)))
          {
-            out = new FileOutputStream(
-                  new File(getAppFileLocation().getPath() + File.pathSeparator + filename));
             IOUtils.copy(dataSrc, out);
             dataSrc.close();
-         }
-         finally
-         {
-            if ( null != out )
-               out.close();
          }
       }
       else
@@ -249,11 +243,10 @@ public class OSApplication extends PSApplication implements IDataCataloger
                os.removeApplicationFile(this, appFile, true);
             }
          }
-         catch (PSServerException e)
+         catch (PSServerException | PSSystemValidationException e)
          {
-            //It is ok if the file to be removed does not already exist
-            if (!(e.getOriginatingException() instanceof PSNotFoundException))
-               throw e;
+            //TODO: Handle the error, add logging
+            e.printStackTrace();
          }
       }
       m_appFilesToRemove.clear();
@@ -347,10 +340,10 @@ public class OSApplication extends PSApplication implements IDataCataloger
                input = appFile.getContent().getContent();
             }
          }
-         catch ( IllegalArgumentException e )
-         { /* ignore, we created the appFile so it can't be null */ }
-         catch ( PSIllegalStateException e )
-         { /* ignore, we know the stream has never been retrieved since we just loaded */ }
+         catch ( IllegalArgumentException |PSIllegalStateException e )
+         {  /* ignore, we know the stream has never been retrieved since we just loaded */ } catch (PSSystemValidationException e) {
+            e.printStackTrace();
+         }
       }
       return input;
    }
@@ -474,10 +467,9 @@ public class OSApplication extends PSApplication implements IDataCataloger
     * needed (e.g. dtd) so we don't do a lot of unnecessary work.
    **/
    public void saveAppFiles(PSObjectStore store)
-         throws PSServerException, PSAuthorizationException,
-            PSAuthenticationFailedException, PSNotLockedException,
-            PSValidationException
-   {
+           throws PSServerException, PSAuthorizationException,
+           PSAuthenticationFailedException, PSNotLockedException,
+           PSValidationException, PSSystemValidationException {
       if (store == null)
       {
          throw new IllegalArgumentException( "Param is null" );
@@ -506,14 +498,13 @@ public class OSApplication extends PSApplication implements IDataCataloger
     * the exceptions.
     */
    public void saveUdfs()
-      throws PSServerException,
-         PSAuthorizationException,
-         PSAuthenticationFailedException,
-         PSNotLockedException,
-         PSValidationException,
-         PSExtensionException,
-         PSNotFoundException
-   {
+           throws PSServerException,
+           PSAuthorizationException,
+           PSAuthenticationFailedException,
+           PSNotLockedException,
+           PSValidationException,
+           PSExtensionException,
+           PSNotFoundException, PSSystemValidationException {
       PSExtensionDefFactory factory = new PSExtensionDefFactory();
 
       Iterator udfs = m_udfSet.getSaveList();

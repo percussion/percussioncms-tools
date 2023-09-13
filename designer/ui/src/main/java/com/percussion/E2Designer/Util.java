@@ -614,6 +614,7 @@ public class Util
             setLocationRelativeTo(dialog, parentComponent);
         }
         dialog.setResizable(true);
+        dialog.pack();
         dialog.setVisible(true);
         dialog.dispose();
     }

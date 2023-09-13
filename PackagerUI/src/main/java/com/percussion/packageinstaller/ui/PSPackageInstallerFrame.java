@@ -11,7 +11,6 @@ package com.percussion.packageinstaller.ui;
 
 import com.percussion.deployer.client.IPSDeployJobControl;
 import com.percussion.deployer.client.PSDeploymentManager;
-import com.percussion.deployer.error.PSDeployException;
 import com.percussion.deployer.objectstore.PSArchive;
 import com.percussion.deployer.objectstore.PSArchiveDetail;
 import com.percussion.deployer.objectstore.PSArchiveInfo;
@@ -21,6 +20,7 @@ import com.percussion.deployer.objectstore.PSImportDescriptor;
 import com.percussion.deployer.objectstore.PSImportPackage;
 import com.percussion.deployer.objectstore.PSValidationResult;
 import com.percussion.deployer.objectstore.PSValidationResults;
+import com.percussion.error.PSDeployException;
 import com.percussion.packageinstaller.ui.managers.PSInstallerServerConnectionManager;
 import com.percussion.packager.ui.PSPackagerClient;
 import com.percussion.packager.ui.PSResourceUtils;
@@ -73,9 +73,10 @@ public class PSPackageInstallerFrame extends JFrame implements ActionListener
       JPanel mainPanel = createMainPanel();
       
       getContentPane().add(mainPanel);
-      displayView(Views.SELECTION);      
-      setSize(630, 700);
+      displayView(Views.SELECTION);
+      pack();
       PSUiUtils.center(this);
+
    }
    
    private JPanel createMainPanel()

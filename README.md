@@ -1,6 +1,6 @@
 # Percussion CMS Unified Development Tools
 
-This project contains the various desktop tools that can be used for working with Percussion CM1 5.4 and Rhythmyx 7.3.2.
+This project contains the various desktop tools that can be used for working with Percussion CM1 5.4 and Rhythmyx 7.3.2.  Please log any issues with the main Percussion CMS issue tracker: https://github.com/percussion/percussioncms/issues. 
 
 ## Maven Toolchain Configuration 
 These projects have been updated to compile at the java 1.8 target.  Currently, they cannot be run without an Oracle 1.8 JDK as OpenJDK 1.8 does not include JavaFX which many of the projects depend on.  
@@ -11,11 +11,17 @@ You will need to add an Oracle 1.8 to your ~/.m2/toolchains.xml file (C:\Users\<
 <toolchain>
     <type>jdk</type>
     <provides>
+      <id>JavaSE-1.8</id>
       <version>8</version>
       <vendor>oracle</vendor>
     </provides>
     <configuration>
-      <jdkHome>/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home/</jdkHome>
+        <jdkHome>/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home/</jdkHome>
+        <bootClassPath>
+            <includes>
+                <include>jre/lib/*.jar</include>
+            </includes>
+        </bootClassPath>
     </configuration>
   </toolchain>
 ```

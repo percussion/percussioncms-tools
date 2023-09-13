@@ -95,6 +95,8 @@ public class DirectoriesPanel extends DirectoryServiceBasePanel
                JOptionPane.ERROR_MESSAGE);
                   
             return false;
+         }else{
+            authentication.setEncryptPwd(false);
          }
       }
       

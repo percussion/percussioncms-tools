@@ -24,11 +24,11 @@ import com.percussion.design.objectstore.PSAclEntry;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSComponent;
 import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNonUniqueException;
-import com.percussion.design.objectstore.PSNotLockedException;
 import com.percussion.design.objectstore.PSObjectStore;
-import com.percussion.design.objectstore.PSValidationException;
 import com.percussion.design.objectstore.PSVersionConflictException;
+import com.percussion.error.PSNonUniqueException;
+import com.percussion.error.PSNotFoundException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 import com.percussion.tools.help.PSJavaHelp;
@@ -39,8 +39,8 @@ import com.percussion.workbench.ui.editors.form.PSXmlApplicationEditor;
 import com.percussion.workbench.ui.legacy.AwtSwtModalDialogBridge;
 import org.apache.commons.collections.map.ReferenceIdentityMap;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
@@ -497,30 +497,6 @@ public class UIMainFrame extends JFrame implements IConnectionSource
                MessageFormat.format(getResources().getString("StartStopApplicationException"), astrParams),
                getResources().getString("ApplicationErr"));
       }
-      catch (PSValidationException e)
-      {
-         PSDlgUtil.showErrorDialog( e.getLocalizedMessage(),
-         getResources().getString("ApplicationErr"));
-         localApp.setEnabled(!localApp.isEnabled());
-         String newRevision = "";
-         if (localApp.getRevisionHistory() != null)
-         newRevision = localApp.getRevisionHistory().getLatestVersion();
-         if (!oldRevision.equals(newRevision))
-         {
-            try
-            {
-               // if the version changed, we know that saving was o.k. but starting
-               // failed. in this case we disable the application again
-               getObjectStore().saveApplication(localApp, releaseLock, false,
-                     false);
-            }
-            catch (Exception e1)
-            {
-               PSDlgUtil.showErrorDialog(e1.getLocalizedMessage(),
-                     getResources().getString("ServerErr"));
-            }
-         }
-      }
       catch (PSNonUniqueException e)
       {
          Object[] astrParams =
@@ -532,10 +508,29 @@ public class UIMainFrame extends JFrame implements IConnectionSource
          PSDlgUtil.showErrorDialog(
                MessageFormat.format(getResources().getString("NotUniqueApplicationException"), astrParams),
                getResources().getString("ApplicationErr"));
-      }
-      catch (Exception e)
+      }   catch (Exception e)
       {
-         PSDlgUtil.showError(e);
+         PSDlgUtil.showErrorDialog( e.getLocalizedMessage(),
+                 getResources().getString("ApplicationErr"));
+         localApp.setEnabled(!localApp.isEnabled());
+         String newRevision = "";
+         if (localApp.getRevisionHistory() != null)
+            newRevision = localApp.getRevisionHistory().getLatestVersion();
+         if (!oldRevision.equals(newRevision))
+         {
+            try
+            {
+               // if the version changed, we know that saving was o.k. but starting
+               // failed. in this case we disable the application again
+               getObjectStore().saveApplication(localApp, releaseLock, false,
+                       false);
+            }
+            catch (Exception e1)
+            {
+               PSDlgUtil.showErrorDialog(e1.getLocalizedMessage(),
+                       getResources().getString("ServerErr"));
+            }
+         }
       }
       finally
       {
@@ -959,7 +954,7 @@ public class UIMainFrame extends JFrame implements IConnectionSource
          {
             getObjectStore().getApplication(appName, false);
          }
-         catch(com.percussion.design.objectstore.PSNotFoundException e)
+         catch(PSNotFoundException e)
          {
             exists = false;
          }

@@ -14,7 +14,7 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import org.apache.commons.lang3.time.FastDateFormat;
 import java.util.Date;
 
 public class DTDateLiteral extends AbstractDataTypeInfo
@@ -43,7 +43,7 @@ public class DTDateLiteral extends AbstractDataTypeInfo
          dates. It will be passed to the returned PSLiteralDate object. */
       int formatIndex = 1;
 
-      DateFormat [] formatters = new DateFormat[formats.length];
+      FastDateFormat [] formatters = new FastDateFormat[formats.length];
       Date date = null;
       int i = 0;
       String formatPatterns = "";
@@ -53,18 +53,17 @@ public class DTDateLiteral extends AbstractDataTypeInfo
       {
          try
          {
-            formatters[i] = DateFormat.getDateTimeInstance( formats[i], formats[i] );
-            formatters[i].setLenient( true );
-            if ( formatters[i] instanceof SimpleDateFormat )
-               System.out.println( ((SimpleDateFormat) formatters[i]).toLocalizedPattern());
+            formatters[i] = FastDateFormat.getDateTimeInstance( formats[i], formats[i] );
+            if ( formatters[i] !=null )
+               System.out.println( ( formatters[i]).getPattern());
             date = formatters[i].parse( strValue );
          }
          catch ( ParseException pe )
          {
             // ignore this and try next format
             // Buildup an error message while we go to return if we can't parse it
-            if ( formatters[i] instanceof SimpleDateFormat )
-               formatPatterns += "    " + ((SimpleDateFormat) formatters[i]).toLocalizedPattern() + "\n";
+            if ( formatters[i] instanceof FastDateFormat )
+               formatPatterns += "    " + (formatters[i]).getPattern() + "\n";
          }
       }
       if ( null == date )
@@ -74,11 +73,11 @@ public class DTDateLiteral extends AbstractDataTypeInfo
          {
             try
             {
-               formatters[i] = DateFormat.getDateInstance( formats[i] );
-               formatters[i].setLenient( true );
-               if ( formatters[i] instanceof SimpleDateFormat )
-                  System.out.println( ((SimpleDateFormat) formatters[i]).toLocalizedPattern());
-               date = formatters[i].parse( strValue );
+               formatters[i] = FastDateFormat.getDateInstance( formats[i] );
+               if ( formatters[i] !=null ) {
+                  System.out.println((formatters[i]).getPattern());
+                  date = formatters[i].parse(strValue);
+               }
             }
             catch ( ParseException pe )
             {
@@ -93,11 +92,12 @@ public class DTDateLiteral extends AbstractDataTypeInfo
          {
             try
             {
-               formatters[i] = DateFormat.getTimeInstance( formats[i] );
-               formatters[i].setLenient( true );
-               if ( formatters[i] instanceof SimpleDateFormat )
-                  System.out.println( ((SimpleDateFormat) formatters[i]).toLocalizedPattern());
-               date = formatters[i].parse( strValue );
+               formatters[i] = FastDateFormat.getTimeInstance( formats[i] );
+
+               if ( formatters[i] !=null ) {
+                  System.out.println(( formatters[i]).getPattern());
+                  date = formatters[i].parse(strValue);
+               }
             }
             catch ( ParseException pe )
             {
@@ -113,13 +113,13 @@ public class DTDateLiteral extends AbstractDataTypeInfo
          PSDateLiteral literal = null;
          try
          {
-            SimpleDateFormat sdf = null;
+            FastDateFormat sdf = null;
             /* Usually the formatter is a SimpleDateFormat object, but it is not
                guaranteed to be. */
-            if ( !(formatters[formatIndex] instanceof SimpleDateFormat ))
-               sdf = new SimpleDateFormat();
+            if ( !(formatters[formatIndex] instanceof FastDateFormat ))
+               sdf = FastDateFormat.getInstance();
             else
-               sdf = (SimpleDateFormat) formatters[formatIndex];
+               sdf =  formatters[formatIndex];
             literal = new PSDateLiteral( date, sdf );
          }
          catch ( IllegalArgumentException e)
@@ -132,7 +132,7 @@ public class DTDateLiteral extends AbstractDataTypeInfo
       {
          Object [] params =
          {
-            new Integer( errorOffset ),
+                 errorOffset,
             NumberFormat.getNumberInstance().format(0),
             formatPatterns
          };

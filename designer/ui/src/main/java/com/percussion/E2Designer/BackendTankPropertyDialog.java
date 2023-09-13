@@ -281,7 +281,7 @@ public class BackendTankPropertyDialog extends PSEditorDialog
    /**
     * the table name
     */
-   private UTFixedTextField m_table = new UTFixedTextField("");
+   private UTFixedTextField m_table = new UTFixedTextField("",new Dimension(60,20));
 
    /**
     * The datasource combo-box
@@ -291,7 +291,7 @@ public class BackendTankPropertyDialog extends PSEditorDialog
    /**
     * the alias name
     */
-   private UTFixedTextField m_alias = new UTFixedTextField("");
+   private UTFixedTextField m_alias = new UTFixedTextField("",new Dimension(60,20));
 
    /**
     * the standard command panel

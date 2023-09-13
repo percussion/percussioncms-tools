@@ -87,7 +87,7 @@ final class PSEnableDisableContentTypeAction
       }
       catch (Exception e)
       {
-         PSWorkbenchPlugin.getDefault().log(getText() + PSMessages.getString(
+         PSWorkbenchPlugin.getDefault().log(getText() + " " + PSMessages.getString(
                "PSEnableDisableContentTypeAction.error.actionfailed"),e); //$NON-NLS-1$
       }
       return super.updateSelection(selection);
@@ -110,12 +110,12 @@ final class PSEnableDisableContentTypeAction
          IPSReference appRef = getApplicationsReference(ref);
          if (appRef == null)
          {
-            String title = getText() + PSMessages.getString(
+            String title = getText() + " " + PSMessages.getString(
                   "PSEnableDisableContentTypeAction.error.actionfailed"); //$NON-NLS-1$
             String message = PSMessages.getString(
                   "PSEnableDisableContentTypeAction.error.couldnotfindapplication"); //$NON-NLS-1$
             PSWorkbenchPlugin.displayWarning(
-                  "Enable or disable editor action",title, message,null); //$NON-NLS-1$
+                  "Enable or disable editor action ",title, message,null); //$NON-NLS-1$
             return;
          }
          IPSCmsModel model = PSCoreFactory.getInstance().getModel(
@@ -130,15 +130,17 @@ final class PSEnableDisableContentTypeAction
       }
       catch (Exception e)
       {
-         String title = getText() + PSMessages.getString(
+         String title = getText() + " " + PSMessages.getString(
                "PSEnableDisableContentTypeAction.error.actionfailed"); //$NON-NLS-1$
          String message = PSMessages.getString(
                "PSEnableDisableContentTypeAction.error.failedto") //$NON-NLS-1$
-               + getText() 
-               + PSMessages.getString(
+                 + " "
+                 + getText()
+                 + " "
+                 + PSMessages.getString(
                "PSEnableDisableContentTypeAction.error.contenteditor"); //$NON-NLS-1$ 
          PSWorkbenchPlugin.handleException(
-               "Enable or disable editor action", title, //$NON-NLS-1$
+               "Enable or disable editor action ", title, //$NON-NLS-1$
                message, e);
       }
    }

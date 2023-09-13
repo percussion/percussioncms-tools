@@ -75,6 +75,12 @@ public class DatasetInputConnectorPropertyDialog extends PSEditorDialog
         initDialog();
    }
 
+   public DatasetInputConnectorPropertyDialog(Window parent)
+   {
+      super(parent);
+      initDialog();
+   }
+
    /**
    * Construct the default dataset input connector property dialog.
    *
@@ -676,6 +682,7 @@ public class DatasetInputConnectorPropertyDialog extends PSEditorDialog
       m_validatedComponents[0] = m_requestURL;
       m_validationConstraints[0] = new StringConstraint();
       setValidationFramework(m_validatedComponents, m_validationConstraints);
+      this.pack();
 
    }
 

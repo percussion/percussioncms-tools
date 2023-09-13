@@ -15,7 +15,7 @@ import com.percussion.design.objectstore.PSDisplayText;
 import com.percussion.design.objectstore.PSField;
 import com.percussion.design.objectstore.PSFieldValidationRules;
 import com.percussion.design.objectstore.PSRule;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.extension.IPSFieldValidator;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.rx.utils.PSContentTypeUtils;
@@ -174,13 +174,13 @@ public class PSFieldValidationsDialog extends PSDialog
       m_rulesComp.setRuleComposites();
 
       // validation failure message
-      final Label valFaillureLabel = new Label(topComp, SWT.WRAP);
+      final Label valFailureLabel = new Label(topComp, SWT.WRAP);
       final FormData fd12 = new FormData();
       fd12.top = new FormAttachment(m_rulesComp, LABEL_VSPACE_OFFSET
             + LABEL_ALIGN_WITH_CONTROL_TEXT_VSPACE_OFFSET, SWT.BOTTOM);
       fd12.left = new FormAttachment(0, 0);
-      valFaillureLabel.setLayoutData(fd12);
-      valFaillureLabel
+      valFailureLabel.setLayoutData(fd12);
+      valFailureLabel
             .setText(PSMessages
                   .getString("PSFieldValidationsDialog.label.validationfailuremessage")); //$NON-NLS-1$
 
@@ -188,7 +188,7 @@ public class PSFieldValidationsDialog extends PSDialog
       final FormData fd13 = new FormData();
       fd13.top = new FormAttachment(m_rulesComp, LABEL_VSPACE_OFFSET,
             SWT.BOTTOM);
-      fd13.left = new FormAttachment(valFaillureLabel, LABEL_HSPACE_OFFSET,
+      fd13.left = new FormAttachment(valFailureLabel, LABEL_HSPACE_OFFSET,
             SWT.RIGHT);
       fd13.right = new FormAttachment(100, 0);
       fd13.height = DESCRIPTION_FIELD_HEIGHT / 2;
@@ -289,7 +289,7 @@ public class PSFieldValidationsDialog extends PSDialog
          field.setValidationRules(valrules);
       }
       
-      Integer[] occSetsIds = field.getOccurenceSettingsTransitionIds();
+      Integer[] occSetsIds = field.getOccuranceSettingsTransitionIds();
       if (occSetsIds.length > 1
             || (occSetsIds.length == 1 && occSetsIds[0] != null))
       {
@@ -310,7 +310,7 @@ public class PSFieldValidationsDialog extends PSDialog
          field.clearOccurrenceSettings();
          field.setOccurrenceDimension(occur, null);
       }
-      catch (PSValidationException e)
+      catch ( PSSystemValidationException e)
       {
          // We can safely ignore this as we are setting a valid value here.
          e.printStackTrace();
@@ -336,7 +336,7 @@ public class PSFieldValidationsDialog extends PSDialog
          throw new IllegalArgumentException("fieldName must not be null");
       
       if(rules == null)
-         rules = new ArrayList<PSRule>();
+         rules = new ArrayList<>();
       if(PSContentTypeUtils.hasRequiredRule(rules))
          return;
 
@@ -350,12 +350,11 @@ public class PSFieldValidationsDialog extends PSDialog
    /**
     * Convenient method for loading the control values.
     */
-   @SuppressWarnings("unchecked")
    private void loadControlValues()
    {
       PSField fld = m_rowData.getField();
       PSFieldValidationRules valrules = fld.getValidationRules();
-      List<PSRule> rules = new ArrayList<PSRule>();
+      List<PSRule> rules = new ArrayList<>();
       if (valrules != null)
       {
          Iterator iter = valrules.getRules();
@@ -374,7 +373,7 @@ public class PSFieldValidationsDialog extends PSDialog
       }
       int occur = fld.getOccurrenceDimension(null);
 
-      // If occurence dimension is required or it has a required rule. Then
+      // If occurrence dimension is required or it has a required rule. Then
       // remove required rule if it has and set the required check box to
       // checked and skip validation check box to checked and disabled.
       if (occur == PSField.OCCURRENCE_DIMENSION_REQUIRED || 
@@ -424,34 +423,30 @@ public class PSFieldValidationsDialog extends PSDialog
       {
          final AwtSwtModalDialogBridge bridge = new AwtSwtModalDialogBridge(
                getShell());
-         SwingUtilities.invokeLater(new Runnable()
-         {
-            @SuppressWarnings("synthetic-access")//$NON-NLS-1$
-            public void run()
+         //$NON-NLS-1$
+         SwingUtilities.invokeLater(() -> {
+            try
             {
-               try
+               PSRuleEditorDialog dlg = new PSRuleEditorDialog((Frame)null);
+               if (m_applyWhen != null)
                {
-                  PSRuleEditorDialog dlg = new PSRuleEditorDialog((Frame)null);
-                  if (m_applyWhen != null)
-                  {
-                     dlg.onEdit(m_applyWhen.iterator());
-                  }
-                  bridge.registerModalSwingDialog(dlg);
-                  dlg.setVisible(true);
-                  PSCollection rules = dlg.getRules();
-                  if (rules != null)
-                  {
-                     if (m_applyWhen == null)
-                        m_applyWhen = new PSApplyWhen();
-                     m_applyWhen.clear();
-                     m_applyWhen.addAll(rules);
-                  }
+                  dlg.onEdit(m_applyWhen.iterator());
                }
-               catch (ClassNotFoundException ex)
+               bridge.registerModalSwingDialog(dlg);
+               dlg.setVisible(true);
+               PSCollection rules = dlg.getRules();
+               if (rules != null)
                {
-                  // this should not happen
-                  ex.printStackTrace();
+                  if (m_applyWhen == null)
+                     m_applyWhen = new PSApplyWhen();
+                  m_applyWhen.clear();
+                  m_applyWhen.addAll(rules);
                }
+            }
+            catch (ClassNotFoundException ex)
+            {
+               // this should not happen
+               ex.printStackTrace();
             }
          });
 
@@ -466,14 +461,7 @@ public class PSFieldValidationsDialog extends PSDialog
          else
          {
             m_skipValidation.setSelection(true);
-            if(m_rulesComp.getRules().isEmpty())
-            {
-               m_skipValidation.setEnabled(false);
-            }
-            else
-            {
-               m_skipValidation.setEnabled(true);
-            }
+            m_skipValidation.setEnabled(!m_rulesComp.getRules().isEmpty());
          }
       }
    }
@@ -489,7 +477,7 @@ public class PSFieldValidationsDialog extends PSDialog
    }
 
    /**
-    * A conveneint inner class to create the rule details area. Extends from
+    * A convenient inner class to create the rule details area. Extends from
     * PSFieldRulesComposite class and adds the additional functionality of
     * setting the rule composites for validation rules.
     * 
@@ -535,7 +523,7 @@ public class PSFieldValidationsDialog extends PSDialog
       @Override
       List<Composite> getRuleTypeComposites()
       {
-         List<Composite> ruleComps = new ArrayList<Composite>();
+         List<Composite> ruleComps = new ArrayList<>();
          m_defaultRuleComp = new PSFieldRuleDetailsComposites.NumberRangeRuleComposite(
                      m_ruleDetailsComp, SWT.NONE, null, this);
          ruleComps.add(m_defaultRuleComp);

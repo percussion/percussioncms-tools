@@ -23,6 +23,7 @@ import com.percussion.client.preferences.PSRhythmyxPreferences;
 import com.percussion.client.proxies.PSUninitializedConnectionException;
 import com.percussion.client.proxies.PSXmlApplicationConverterProvider;
 import com.percussion.design.objectstore.PSObjectStore;
+import com.percussion.security.xml.PSSecureXMLUtils;
 import com.percussion.services.security.IPSAcl;
 import com.percussion.util.IOTools;
 import com.percussion.utils.xml.PSEntityResolver;
@@ -35,12 +36,11 @@ import com.percussion.workbench.ui.util.PSResourceLoader;
 import com.percussion.workbench.ui.util.PSUiUtils;
 import com.percussion.xml.serialization.PSObjectSerializer;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -589,7 +589,7 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
             PSRhythmyxPreferencesPage.getPreferenceName());
       if (str != null && str.length() > 0)
       {
-         XStream xs = new XStream(new DomDriver());
+         XStream xs = PSSecureXMLUtils.getSecuredXStream();
          try
          {
             Object obj = xs.fromXML(str);
@@ -629,7 +629,7 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
          PSSecurityPreferencesPage.getPreferenceName());
       if (str != null && str.length() > 0)
       {
-         XStream xs = new XStream(new DomDriver());
+         XStream xs = PSSecureXMLUtils.getSecuredXStream();
          try
          {
             Object obj = xs.fromXML(str);
@@ -708,7 +708,7 @@ public class PSWorkbenchPlugin extends AbstractUIPlugin implements
       {
          throw new IllegalArgumentException("obj to serialize must not be null");
       }
-      XStream xs = new XStream(new DomDriver());
+      XStream xs = PSSecureXMLUtils.getSecuredXStream();
       String str = xs.toXML(obj);
       getPreferenceStore().setValue(prefKey, str);
    }

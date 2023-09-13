@@ -123,6 +123,79 @@ class UIJoinMainFrame extends PSEditorDialog
 
          if (m_stack == null)
             m_stack = new Vector<PSComponent>();
+         pack();
+
+      }
+      catch (Exception e)
+      {
+         e.printStackTrace();
+      }
+
+   }
+
+   public UIJoinMainFrame(Window parent) throws PSServerException, PSAuthorizationException
+   {
+      super(parent);
+
+      try
+      {
+         setResizable(true);
+         setDefaultCloseOperation(this.HIDE_ON_CLOSE);
+
+         // setup menu
+         setJMenuBar(new OptionsMenuBar(this));
+
+         // arbitrarily chosen size
+         Dimension d = new Dimension(2000, 2000);
+
+         // create and initialize the content pane
+         m_ContentPane = new JDesktopPane();
+         m_ContentPane.setPreferredSize(d);
+         m_ContentPane.setSize(d);
+         m_ContentPane.setBackground(Color.white);
+         m_ContentPane.setVisible(true);
+         m_ContentPane.setOpaque(true);
+         m_ContentPane.setLocation(0, 0);
+         m_ContentPane.putClientProperty("JDesktopPane.dragMode", "outline");
+         m_ContentPane.addMouseListener(new JoinFrameMouseAdapter());
+         m_ContentPane
+                 .addMouseMotionListener(new JoinFrameMouseMotionAdapter());
+         m_dndTarget = new DropTarget(m_ContentPane,
+                 DnDConstants.ACTION_COPY_OR_MOVE, this);
+
+         // create and initialize the table pane
+         m_TablePane = new JLayeredPane();
+         m_TablePane.setBackground(Color.black);
+         m_TablePane.setPreferredSize(d);
+         m_TablePane.setOpaque(true);
+         m_TablePane.setVisible(true);
+         m_TablePane.add(m_ContentPane, JLayeredPane.DEFAULT_LAYER);
+
+         JScrollPane content = new JScrollPane(m_TablePane);
+         content
+                 .setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+         setContentPane(content);
+
+         // set the frame size based on the previous session
+         Dimension size = new Dimension();
+         Point pos = new Point();
+         int[] windowPos = UserConfig.getConfig().getIntArray(JOIN_WINDOW_POS);
+         /*
+          * Make window ~60% of screen. This will create a good sized window
+          * without overlaying any toolbars/taskbar (for most cases). Then
+          * center the screen.
+          */
+         Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit()
+                 .getScreenSize());
+         size.setSize((screenSize.width * 3 / 5), screenSize.height * 3 / 5);
+         pos.setLocation((screenSize.width / 10), screenSize.height / 10);
+         setSize(size);
+         setLocation(pos);
+
+         if (m_stack == null)
+            m_stack = new Vector<PSComponent>();
+
+         pack();
 
       }
       catch (Exception e)

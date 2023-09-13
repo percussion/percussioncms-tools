@@ -29,6 +29,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -47,6 +49,12 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
       initDialog();
    }
 
+   public JavaExitsPropertyDialog(Window parent)
+   {
+      super(parent);
+      initDialog();
+   }
+
    /**
     * Constructs <code>JavaExitsPropertyDialog</code> with given parent and
     * exit call set.
@@ -56,7 +64,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
     *
     * @throws IllegalArgumentException if <code>c</code> is <code>null</code>
     */
-   public JavaExitsPropertyDialog(JFrame parent, OSExitCallSet c)
+   public JavaExitsPropertyDialog(Window parent, OSExitCallSet c)
    {
       super(parent);
       setLocationRelativeTo(parent);
@@ -84,7 +92,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
     * @throws IllegalArgumentException if <code>c</code> is <code>null</code>
     */
    public JavaExitsPropertyDialog(
-      JFrame parent,
+           Window parent,
       OSExitCallSet c,
       boolean modifySet)
    {
@@ -186,7 +194,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
       if (figure instanceof UIConnectableFigure)
       {
          UIConnectableFigure connection = (UIConnectableFigure) figure;
-         if (connection.isAttached() == false)
+         if (!connection.isAttached())
          {
             JOptionPane.showMessageDialog(
                this,
@@ -233,29 +241,27 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
     */
    private void initData()
    {
-      m_vData = new Vector<JavaExitsPropertyDialogData>();
-      for (int i = 0; i < m_collection.size(); i++)
-      {
-         OSExtensionCall exitCall = (OSExtensionCall) m_collection.get(i);
+      m_vData = new ArrayList<>();
+      for (Object o : m_collection) {
+         OSExtensionCall exitCall = (OSExtensionCall) o;
 
          // create the JavaExitsPropertyDialogData objects for
          // each item in the collection
          JavaExitsPropertyDialogData exitData =
-            new JavaExitsPropertyDialogData(exitCall);
+                 new JavaExitsPropertyDialogData(exitCall);
 
          // Has the extension param list changed since the exit was created?
-         if (exitData.hasParamValueMismatch())
-         {
+         if (exitData.hasParamValueMismatch()) {
             // display warning message
             String msg =
-               MessageFormat.format(
-                  E2Designer.getResources().getString("ParameterMismatch"),
-                  new Object[] {exitData.getName()});
+                    MessageFormat.format(
+                            E2Designer.getResources().getString("ParameterMismatch"),
+                            new Object[]{exitData.getName()});
             JOptionPane.showMessageDialog(
-               this,
-               Util.cropErrorMessage(msg),
-               E2Designer.getResources().getString("JavaExits"),
-               JOptionPane.WARNING_MESSAGE);
+                    this,
+                    Util.cropErrorMessage(msg),
+                    E2Designer.getResources().getString("JavaExits"),
+                    JOptionPane.WARNING_MESSAGE);
          }
          m_vData.add(exitData);
       }
@@ -267,6 +273,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
    /** Handles the ok buttons action. Overrides PSDialog onOk() method
     * implemenation.
     */
+   @Override
    public void onOk()
    {
       int iLimit = m_editableListBox.getItemCount();
@@ -308,7 +315,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
    {
       getContentPane().setLayout(null);
       setSize(450, 575);
-
+      setAutoRequestFocus(true);
       createControls();
       createParameterPanel();
       createCommandPanel();
@@ -552,7 +559,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
       for (int i = 0; i < m_vData.size(); i++)
       {
          JavaExitsPropertyDialogData dialogData =
-            (JavaExitsPropertyDialogData) m_vData.get(i);
+             m_vData.get(i);
          m_editableListBox.addRowValue(dialogData);
       }
    }
@@ -843,7 +850,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
       m_parameterPanel.setDescriptionText(desc);
 
       // fill in the parameters for the current selection
-      int size = 0;
+      int size;
       if (m_parameterDefs != null)
       {
          PSExtensionParamValue[] parameterVals;
@@ -851,8 +858,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
          size = m_parameterDefs.length;
          for (int i = 0; i < size; i++)
          {
-            IPSExtensionParamDef par =
-               (IPSExtensionParamDef) m_parameterDefs[i];
+            IPSExtensionParamDef par = m_parameterDefs[i];
 
             IPSReplacementValue value = null;
             if (parameterVals[i] != null)
@@ -886,15 +892,15 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
     * or all exits otherwise.
     *
     */
-   public Vector getServerExits(OSExitCallSet callSet)
+   public ArrayList getServerExits(OSExitCallSet callSet)
    {
       // CLR added to fix problem adding all EXITS
-      Vector<IPSExtensionDef> allowedExits = null;
+      ArrayList<IPSExtensionDef> allowedExits = null;
       // CLR added to fix problem adding all EXITS
       if (callSet != null) 
       {
 
-         Vector allExits =
+         List<IPSExtensionDef> allExits =
             CatalogServerExits.getCatalog(
                null,
                CatalogExtensionCatalogHandler.JAVA_EXTENSION_HANDLER_NAME,
@@ -902,7 +908,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
 
          if (allExits != null)
          {
-            allowedExits = new Vector<IPSExtensionDef>();
+            allowedExits = new ArrayList<IPSExtensionDef>();
             int size = allExits.size();
             for (int i = 0; i < size; i++)
             {
@@ -922,15 +928,13 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
     */
    private JavaExitsPropertyDialogData getData(String strExitName)
    {
-      //      System.out.println("Getting the IPSExtensionDef object that has the name "+strExitName);
-      if (strExitName == null || strExitName.trim().equals(""))
+       if (strExitName == null || strExitName.trim().equals(""))
          return null;
-      if (m_vData == null || m_vData.size() <= 0)
+      if (m_vData == null || m_vData.isEmpty())
          return null;
       for (int i = 0; i < m_vData.size(); i++)
       {
-         JavaExitsPropertyDialogData data =
-            (JavaExitsPropertyDialogData) m_vData.get(i);
+         JavaExitsPropertyDialogData data = m_vData.get(i);
          String strName = data.getName();
          if (strName.equals(strExitName))
          {
@@ -947,17 +951,14 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
     */
    private IPSExtensionDef getServerExit(String strExitName)
    {
-      //      System.out.println("Getting the IPSExtensionDef object that has the name "+strExitName);
-      if (strExitName == null || strExitName.trim().equals(""))
+       if (strExitName == null || strExitName.trim().equals(""))
          return null;
-      if (m_vServerExits == null || m_vServerExits.size() <= 0)
+      if (m_vServerExits == null || m_vServerExits.isEmpty())
          return null;
-      for (int i = 0; i < m_vServerExits.size(); i++)
-      {
-         IPSExtensionDef exit = (IPSExtensionDef) m_vServerExits.get(i);
+      for (Object m_vServerExit : m_vServerExits) {
+         IPSExtensionDef exit = (IPSExtensionDef) m_vServerExit;
          String strName = exit.getRef().getExtensionName();
-         if (strName.equals(strExitName))
-         {
+         if (strName.equals(strExitName)) {
             return exit;
          }
       }
@@ -966,16 +967,17 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
 
    /**
     * Flag to indicate whether this dialog was exited via OK button or not.
-    * Initialized to <code>false</code>, only changed in {@link onOk()} 
+    * Initialized to <code>false</code>, only changed in onOk.
     * after that.
     */
    private boolean m_okExit = false;
    
    private boolean m_bMove = false;
    private OSExitCallSet m_collection = null;
-   private Vector m_vServerExits = null;
+   private ArrayList m_vServerExits = null;
+
    // contains IPSExtensionDef objects in the Combo box of editable list box
-   private Vector<JavaExitsPropertyDialogData> m_vData;
+   private ArrayList<JavaExitsPropertyDialogData> m_vData;
    // contains vector of JavaExitsPropertyDialogData objects
 
    /**
@@ -988,7 +990,7 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
    /**
     * the current parameter definitions
     */
-   private IPSExtensionParamDef m_parameterDefs[] = null;
+   private IPSExtensionParamDef[] m_parameterDefs = null;
 
    private OSPageDatatank m_osPageDatatank = null;
 
@@ -1013,5 +1015,5 @@ public class JavaExitsPropertyDialog extends PSEditorDialog
    JLabel jLabelMove;
    JPanel jPanelCommand;
    JPanel jPanelParameter;
-   //}}
+
 }

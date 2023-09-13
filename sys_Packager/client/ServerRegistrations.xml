@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><PSXServerRegistrations recentConns="">
-  <PSXServerRegistration isDefault="no" name="percussioncm2.percussion.com" port="9992" useSSL="no"/>
-  <PSXServerRegistration isDefault="no" name="localhost" port="9992" useSSL="no"/>
+<?xml version="1.0" encoding="utf-8"?>
+<PSXServerRegistrations recentConns=",127.0.0.1:9992">
+   <PSXServerRegistration isDefault="no" name="percussioncm2.percussion.com" port="9992" useSSL="no"/>
+   <PSXServerRegistration isDefault="no" name="localhost" port="9992" useSSL="no"/>
+   <PSXServerRegistration isDefault="no" name="127.0.0.1" password="l$$7Y*0FsHQ7R88" port="9992" useSSL="no" username="Admin"/>
 </PSXServerRegistrations>

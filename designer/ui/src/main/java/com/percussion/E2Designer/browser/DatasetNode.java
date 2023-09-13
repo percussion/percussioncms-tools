@@ -12,11 +12,11 @@ import com.percussion.conn.PSServerException;
 import com.percussion.design.objectstore.PSApplication;
 import com.percussion.design.objectstore.PSDataSet;
 import com.percussion.design.objectstore.PSLockedException;
-import com.percussion.design.objectstore.PSNonUniqueException;
-import com.percussion.design.objectstore.PSNotFoundException;
-import com.percussion.design.objectstore.PSNotLockedException;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.design.objectstore.PSSystemValidationException;
 import com.percussion.design.objectstore.PSVersionConflictException;
+import com.percussion.error.PSNonUniqueException;
+import com.percussion.error.PSNotFoundException;
+import com.percussion.error.PSNotLockedException;
 import com.percussion.security.PSAuthenticationFailedException;
 import com.percussion.security.PSAuthorizationException;
 
@@ -105,48 +105,11 @@ public class DatasetNode extends DefaultBrowserNode
             return true;
          }
       }
-      catch ( PSServerException e )
+      catch (PSServerException | PSVersionConflictException | PSAuthorizationException | PSAuthenticationFailedException | PSLockedException |
+             PSNotFoundException | IllegalArgumentException | PSNonUniqueException | PSNotLockedException | PSSystemValidationException e )
       {
          e.printStackTrace();
 
-      }
-        catch ( PSVersionConflictException e )
-      {
-         e.printStackTrace();
-      }
-      catch ( PSAuthorizationException e )
-      {
-         e.printStackTrace();
-      }
-    catch (PSAuthenticationFailedException e)
-    {
-         e.printStackTrace();
-    }
-      catch ( PSLockedException e )
-      {
-         //todo
-         e.printStackTrace();
-      }
-      catch ( PSNotFoundException e )
-      {
-         //todo
-         e.printStackTrace();
-      }
-      catch(IllegalArgumentException e )
-      {
-         e.printStackTrace();
-      }
-      catch(PSNonUniqueException e )
-      {
-         e.printStackTrace();
-      }
-      catch(PSNotLockedException e )
-      {
-         e.printStackTrace();
-      }
-      catch(PSValidationException e )
-      {
-         e.printStackTrace();
       }
 
       return false;

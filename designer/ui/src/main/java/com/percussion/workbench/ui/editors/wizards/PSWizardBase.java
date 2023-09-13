@@ -23,7 +23,7 @@ import com.percussion.services.security.IPSAclEntry;
 import com.percussion.services.security.PSAclUtils;
 import com.percussion.services.security.PSPermissions;
 import com.percussion.services.security.PSTypedPrincipal;
-import com.percussion.utils.security.IPSTypedPrincipal.PrincipalTypes;
+import com.percussion.security.IPSTypedPrincipal.PrincipalTypes;
 import com.percussion.workbench.ui.IPSEditorFactory;
 import com.percussion.workbench.ui.PSEditorRegistry;
 import com.percussion.workbench.ui.PSMessages;

@@ -16,6 +16,7 @@ import com.percussion.E2Designer.CatalogServerExits;
 import com.percussion.conn.PSDesignerConnection;
 import com.percussion.design.objectstore.PSExtensionCall;
 import com.percussion.design.objectstore.PSSearchConfig;
+import com.percussion.extension.IPSExtensionDef;
 import com.percussion.extension.PSExtensionDef;
 import com.percussion.extension.PSExtensionRef;
 import com.percussion.util.PSStringComparator;
@@ -59,7 +60,6 @@ public class LuceneExtensionPanel extends JPanel implements ITabDataHelper
     * @param col2Title title to be used for the second column of the table
     * control, may not be <code>null</code> or empty.
     */
-   @SuppressWarnings("unchecked")
    public LuceneExtensionPanel(PSSearchConfig config, String iface, 
          String col1Title, String col2Title)
    {
@@ -91,7 +91,7 @@ public class LuceneExtensionPanel extends JPanel implements ITabDataHelper
       }
       else if (iface.equals(EXTRACTOR_INTERFACE_NAME))
       {
-         m_extensions = new HashMap<String, PSExtensionCall>(config.
+         m_extensions = new HashMap<>(config.
                getTextConverters());
          m_properties = catalogMimeTypeNames();
          m_interface = EXTRACTOR_INTERFACE_NAME; 
@@ -196,9 +196,7 @@ public class LuceneExtensionPanel extends JPanel implements ITabDataHelper
       if (col < 0 || col >= NUM_COLUMNS)
          throw new IllegalArgumentException("column index out of range");
 
-      boolean isValid = true;
-
-      return isValid;
+      return true;
    }
 
    /**
@@ -803,17 +801,17 @@ public class LuceneExtensionPanel extends JPanel implements ITabDataHelper
       if (m_extRefs == null)
       {
          m_extRefs = new HashMap<String, PSExtensionRef>();
-         
-         Vector exits = new Vector();
-         Vector javaExits = CatalogServerExits.getCatalog(
+
+         List<IPSExtensionDef> exits = new ArrayList<>();
+         List<IPSExtensionDef> javaExits = CatalogServerExits.getCatalog(
                ms_conn, 
                CatalogExtensionCatalogHandler.JAVA_EXTENSION_HANDLER_NAME,
                null,
                m_interface,
                true,
                true);
-         
-         Vector javaScriptExits = CatalogServerExits.getCatalog(
+
+         List<IPSExtensionDef> javaScriptExits = CatalogServerExits.getCatalog(
                ms_conn, 
                CatalogExtensionCatalogHandler.
                JAVA_SCRIPT_EXTENSION_HANDLER_NAME,
@@ -821,13 +819,17 @@ public class LuceneExtensionPanel extends JPanel implements ITabDataHelper
                m_interface,
                true,
                true);
-           
-         exits.addAll(javaExits);
-         exits.addAll(javaScriptExits);
-         
-         for (int i = 0; i < exits.size(); i++)
-         {
-            PSExtensionDef extDef = (PSExtensionDef) exits.elementAt(i);
+
+         if(javaExits != null) {
+            exits.addAll(javaExits);
+         }
+
+         if(javaScriptExits!= null) {
+            exits.addAll(javaScriptExits);
+         }
+
+         for (IPSExtensionDef exit : exits) {
+            PSExtensionDef extDef = (PSExtensionDef) exit;
             m_extRefs.put(extDef.toString(), extDef.getRef());
          }
       }
@@ -843,14 +845,8 @@ public class LuceneExtensionPanel extends JPanel implements ITabDataHelper
    @SuppressWarnings("unchecked")
    private List<String> getExtensionNames()
    {
-      List<String> extNames = new ArrayList<String>();
-      Iterator<String> iter = m_extRefs.keySet().iterator();
-      while (iter.hasNext())
-      {
-         extNames.add(iter.next());
-      }
-      
-      Collections.sort(extNames, new PSStringComparator(
+      List<String> extNames = new ArrayList<>(m_extRefs.keySet());
+      extNames.sort( new PSStringComparator(
             PSStringComparator.SORT_CASE_INSENSITIVE_ASC));
       
       return extNames;

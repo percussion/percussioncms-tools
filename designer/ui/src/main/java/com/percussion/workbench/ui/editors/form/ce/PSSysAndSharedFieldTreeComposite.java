@@ -14,7 +14,7 @@ import com.percussion.design.objectstore.PSContentEditorSharedDef;
 import com.percussion.design.objectstore.PSContentEditorSystemDef;
 import com.percussion.design.objectstore.PSFieldSet;
 import com.percussion.design.objectstore.PSSharedFieldGroup;
-import com.percussion.design.objectstore.PSValidationException;
+import com.percussion.share.service.exception.PSValidationException;
 import com.percussion.workbench.ui.IPSUiConstants;
 import com.percussion.workbench.ui.PSWorkbenchPlugin;
 import org.eclipse.jface.viewers.ITreeContentProvider;

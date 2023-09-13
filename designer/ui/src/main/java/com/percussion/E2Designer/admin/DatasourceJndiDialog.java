@@ -98,7 +98,7 @@ public class DatasourceJndiDialog extends PSDialog
          m_name.setText(JDBC_PREFIX);
          m_minConns.setText("5");
          m_maxConns.setText("100");
-         m_idleTimeout.setText("15");
+         m_idleTimeout.setText("59000");
       }
    }
    

@@ -31,7 +31,6 @@
 	<classpathentry kind="lib" path="/CMLite-Main/Tools/swtcalendar/swtcalendar-0.4.jar"/>
 	<classpathentry kind="lib" path="/CMLite-Main/Tools/xstream/xpp3.jar"/>
 	<classpathentry kind="lib" path="/CMLite-Main/Tools/xstream/xstream.jar"/>
-	<classpathentry kind="lib" path="/CMLite-Main/Tools/log4j/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="/CMLite-Main/Tools/Commons/commons-httpclient-3.1.jar"/>
 	<classpathentry kind="lib" path="/CMLite-Main/Tools/Commons/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="var" path="THIRD_PARTY_TOOLS_BASE/jaxb-2.1.9/lib/jaxb1-impl.jar"/>

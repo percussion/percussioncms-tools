@@ -10,7 +10,7 @@
 package com.percussion.client;
 
 import com.percussion.i18n.PSI18nUtils;
-import com.percussion.utils.security.deprecated.PSLegacyEncrypter;
+import com.percussion.legacy.security.deprecated.PSLegacyEncrypter;
 import org.apache.commons.lang.StringUtils;
 
 
@@ -99,13 +99,9 @@ public class PSConnectionInfo
     */
    public String getPassword()
    {
-      String pwd;
       if (m_password == null)
-         pwd = StringUtils.EMPTY;
-      else
-         pwd = m_password;
-      
-      return PSLegacyEncrypter.getInstance().encrypt(pwd, ENC_KEY);
+         return StringUtils.EMPTY;
+      return m_password;
    }
 
    /**
@@ -129,14 +125,6 @@ public class PSConnectionInfo
    public void setPassword(String pwd)
    {
       pwd = (pwd == null) ? StringUtils.EMPTY : pwd;
-      try
-      {
-         pwd = PSLegacyEncrypter.getInstance().decrypt(pwd, ENC_KEY);
-      }
-      catch (Exception e)
-      {
-         pwd = StringUtils.EMPTY;
-      }
       m_password = pwd;
    }
 
@@ -355,8 +343,6 @@ public class PSConnectionInfo
    private String m_userid = StringUtils.EMPTY;
 
    /**
-    * @see #getPassword()
-    * @see #setPassword(String)
     * @see #getClearTextPassword()
     * @see #setClearTextPassword(String)
     */

@@ -71,13 +71,13 @@ public class StartTutorialDialog extends PSDialog
                                      getResources().getString("typetitle")));
 
 
-      m_txtInitials = new UTFixedTextField(new String(""));
+      m_txtInitials = new UTFixedTextField("",new Dimension(60,20));
       
       String strInitials = UserConfig.getConfig().getValue(START_INITIALS);
       if(strInitials != null)
          m_txtInitials.setText(strInitials);
       
-      m_txtName = new UTFixedTextField(new String(""));
+      m_txtName = new UTFixedTextField("",new Dimension(60,20));
       m_txtName.setEnabled(false);
       JPanel paneInitials = new JPanel();
       JPanel paneName = new JPanel();

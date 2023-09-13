@@ -10,10 +10,10 @@
 package com.percussion.packager.ui;
 
 import com.percussion.deployer.client.PSDeploymentServerConnection;
+import com.percussion.guitools.PSDialog;
 import com.percussion.packager.ui.data.PSServerRegistration;
 import com.percussion.packager.ui.managers.PSServerConnectionManager;
 import com.percussion.packagerhelp.PSEclHelpManager;
-import com.percussion.guitools.PSDialog;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang.StringUtils;
 
@@ -486,8 +486,7 @@ public class PSServerManagerDialog extends PSDialog implements ActionListener,
       m_useSslCheckBox.setSelected(server.isUseSSL());
       m_userTextField.setText(
          StringUtils.defaultString(server.getUserName()));
-      m_passwordTextField.setText(StringUtils.isBlank(m_userTextField.getText()) ? "" :
-         PSDeploymentServerConnection.decryptPwd(server.getUserName(), server.getPassword()));
+      m_passwordTextField.setText(StringUtils.isBlank(m_userTextField.getText()) ? "" : server.getPassword());
       m_savePassCheckBox.setSelected(server.isSaveCredentials());
    }
    
