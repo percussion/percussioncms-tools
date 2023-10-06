@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSProxyUtils.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2007 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.percussion.client.proxies;
 
@@ -80,6 +87,8 @@ import java.util.Map;
  */
 public class PSProxyUtils
 {
+   private static final String FAULT_NOT_NULL = "fault cannot be null";
+
    /**
     * Convenience method that calls {@link #processAndThrowException(int, 
     * Throwable, Logger) processAndThrowException(-1, ex, log)}.
@@ -200,7 +209,7 @@ public class PSProxyUtils
       String msg = "";
       if (ex instanceof AxisFault)
       {
-         msg = ((AxisFault) ex).toString();
+         msg = ex.toString();
          log.error(msg, ex);
       }
       else if (ex instanceof PSMultiOperationException)
@@ -222,7 +231,7 @@ public class PSProxyUtils
             {
                if (o instanceof AxisFault)
                {
-                  msg = ((AxisFault) o).toString();
+                  msg =  o.toString();
                   log.error(msg, (AxisFault) o);
                }
                else
@@ -248,9 +257,7 @@ public class PSProxyUtils
     * must be touched and I wasn't able to track down exactly how it works, so I
     * left it for now
     */
-   @SuppressWarnings("unused")
-   public static Object convert(Class type, Object source)
-      throws PSTransformationException
+   public static Object convert(Class<?> type, Object source)
    {
       if (type == null)
       {
@@ -317,7 +324,7 @@ public class PSProxyUtils
     * @throws MalformedURLException
     * @throws ServiceException
     */
-   static public AssemblyDesignSOAPStub getAssemblyDesignStub()
+   public static AssemblyDesignSOAPStub getAssemblyDesignStub()
       throws MalformedURLException, ServiceException
    {
       AssemblyDesignSOAPStub binding = (AssemblyDesignSOAPStub) new AssemblyDesignLocator()
@@ -336,7 +343,7 @@ public class PSProxyUtils
     * @throws MalformedURLException
     * @throws ServiceException
     */
-   static public ContentDesignSOAPStub getContentDesignStub()
+   public static ContentDesignSOAPStub getContentDesignStub()
       throws MalformedURLException, ServiceException
    {
       ContentDesignSOAPStub binding = (ContentDesignSOAPStub) new ContentDesignLocator()
@@ -355,7 +362,7 @@ public class PSProxyUtils
     * @throws MalformedURLException
     * @throws ServiceException
     */
-   static public SecurityDesignSOAPStub getSecurityDesignStub()
+   public static SecurityDesignSOAPStub getSecurityDesignStub()
       throws MalformedURLException, ServiceException
    {
       SecurityDesignSOAPStub binding = (SecurityDesignSOAPStub) new SecurityDesignLocator()
@@ -374,7 +381,7 @@ public class PSProxyUtils
     * @throws MalformedURLException
     * @throws ServiceException
     */
-   static public SystemDesignSOAPStub getSystemDesignStub()
+   public static SystemDesignSOAPStub getSystemDesignStub()
       throws MalformedURLException, ServiceException
    {
       SystemDesignSOAPStub binding = (SystemDesignSOAPStub) new SystemDesignLocator()
@@ -393,7 +400,7 @@ public class PSProxyUtils
     * @throws MalformedURLException
     * @throws ServiceException
     */
-   static public SystemSOAPStub getSystemPublicStub()
+   public static SystemSOAPStub getSystemPublicStub()
       throws MalformedURLException, ServiceException
    {
       SystemSOAPStub binding = (SystemSOAPStub) new SystemLocator()
@@ -412,7 +419,7 @@ public class PSProxyUtils
     * @throws MalformedURLException
     * @throws ServiceException
     */
-   static public UiDesignSOAPStub getUiDesignStub()
+   public static UiDesignSOAPStub getUiDesignStub()
       throws MalformedURLException, ServiceException
    {
       UiDesignSOAPStub binding = (UiDesignSOAPStub) new UiDesignLocator()
@@ -431,7 +438,7 @@ public class PSProxyUtils
     * @throws MalformedURLException
     * @throws ServiceException
     */
-   static public UiSOAPStub getUiStub() throws MalformedURLException,
+   public static UiSOAPStub getUiStub() throws MalformedURLException,
       ServiceException
    {
       UiSOAPStub binding = (UiSOAPStub) new UiLocator()
@@ -450,7 +457,7 @@ public class PSProxyUtils
     * @return URL object built, never <code>null</code>.
     * @throws MalformedURLException
     */
-   static private URL makeUrl(String urlString) throws MalformedURLException
+   private static URL makeUrl(String urlString) throws MalformedURLException
    {
       /*
        * Do not use PSCoreFactory.getInstance().getConnectionInfo() since it can
@@ -472,7 +479,7 @@ public class PSProxyUtils
     * Convenience method that calls
     * {@link #getObjectStore(boolean) getObjectStore(<code>false</code>)}.
     */
-   static public PSObjectStore getObjectStore()
+   public static PSObjectStore getObjectStore()
       throws PSUninitializedConnectionException
    {
       return getObjectStore(false);
@@ -486,7 +493,7 @@ public class PSProxyUtils
     * @return reference to only objectstore object, may be <code>null</code>.
     * @throws PSUninitializedConnectionException
     */
-   static public PSObjectStore getObjectStore(boolean flushCache)
+   public static PSObjectStore getObjectStore(boolean flushCache)
       throws PSUninitializedConnectionException
    {
       if (flushCache)
@@ -501,7 +508,7 @@ public class PSProxyUtils
     * Flushes the current object store to make sure a new one will be created
     * with the next call to (@link #getObjectStore()}.
     */
-   static public void flushObjectStore()
+   public static void flushObjectStore()
    {
       m_objectStore = null;
    }
@@ -515,7 +522,7 @@ public class PSProxyUtils
     * @throws PSUninitializedConnectionException if creation of the remote
     * objectstore is attempted before the designer connection is initialized.
     */
-   static private PSObjectStore createObjectStore()
+   private static PSObjectStore createObjectStore()
       throws PSUninitializedConnectionException
    {
       if (PSCoreFactory.getInstance().isLocalMode())
@@ -567,10 +574,10 @@ public class PSProxyUtils
     * collection is assumed to be castable to {@link PSReference}.
     * @param summaries must not be <code>null</code>.
     */
-   static public void copyPermissions(List<IPSReference> targetRefs,
+   public static void copyPermissions(List<IPSReference> targetRefs,
       PSObjectSummary[] summaries)
    {
-      Map<Long, PSObjectSummary> actionMap = new HashMap<Long, PSObjectSummary>(
+      Map<Long, PSObjectSummary> actionMap = new HashMap<>(
          summaries.length);
       for (PSObjectSummary summary : summaries)
          actionMap.put(summary.getId(), summary);
@@ -595,7 +602,7 @@ public class PSProxyUtils
     * @param empty <code>true</code> to clear lock info, <code>false</code>
     * to set it on each of the supplied refs.
     */
-   static public void setLockInfo(IPSReference[] refs, boolean empty)
+   public static void setLockInfo(IPSReference[] refs, boolean empty)
    {
       if (refs == null)
       {
@@ -680,12 +687,12 @@ public class PSProxyUtils
     * @throws RuntimeException if the reference array size does not match with
     * the number of service calls in the error fault.
     */
-   static public Throwable extractMultiOperationException(IPSReference[] refs,
+   public static Throwable extractMultiOperationException(IPSReference[] refs,
       METHOD method, PSErrorResultsFault fault) throws RuntimeException
    {
       Throwable ex;
       PSErrorResultsFaultServiceCall[] sCalls = fault.getServiceCall();
-      assert refs.length == sCalls.length;
+
       if (refs.length != sCalls.length)
       {
          throw new RuntimeException("Something is seriously wrong: "
@@ -693,7 +700,7 @@ public class PSProxyUtils
             + "of objects.erros returned does not match");
       }
       
-      Map<Long, Object> callMap = new HashMap<Long, Object>(sCalls.length);
+      Map<Long, Object> callMap = new HashMap<>(sCalls.length);
       for (int i = 0; i < sCalls.length; i++)
       {
          PSErrorResultsFaultServiceCall sCall = sCalls[i];
@@ -750,20 +757,17 @@ public class PSProxyUtils
     * @throws RuntimeException if the reference array size does not match with
     * the number of service calls in the error fault.
     */
-   static public Throwable extractMultiOperationException(IPSReference[] refs,
+   public static Throwable extractMultiOperationException(IPSReference[] refs,
       METHOD method, PSErrorsFault fault) throws RuntimeException
    {
       Throwable ex;
       PSErrorsFaultServiceCall[] sCalls = fault.getServiceCall();
-      if (refs != null)
-      {
-         assert refs.length == sCalls.length;
-         if (refs.length != sCalls.length)
+      if (refs != null && (refs.length != sCalls.length))
          {
             throw new RuntimeException("Something is seriously wrong: "
                + "The number fo objects submitted and number "
                + "of objects.erros returned does not match");
-         }
+
       }
       
       Map<Long, Object> callMap = new HashMap<Long, Object>(sCalls.length);
@@ -793,11 +797,12 @@ public class PSProxyUtils
       // Put the results back in the proper order so they match up
       // with the refs passed in
       Object[] res = new Object[sCalls.length];
-      for(int i = 0; i < refs.length; i++)
-      {
-         res[i] = callMap.get(new PSDesignGuid(refs[i].getId()).getValue());
-         if(res[i] instanceof PSModelException)
-            ((PSModelException)res[i]).setDetail(refs[i]);
+      if(refs != null) {
+         for (int i = 0; i < refs.length; i++) {
+            res[i] = callMap.get(new PSDesignGuid(refs[i].getId()).getValue());
+            if (res[i] instanceof PSModelException)
+               ((PSModelException) res[i]).setDetail(refs[i]);
+         }
       }
       ex = new PSMultiOperationException(res, refs);
       return ex;
@@ -811,7 +816,7 @@ public class PSProxyUtils
     * 
     * @see #extractMultiOperationException(IPSReference[], METHOD, PSErrorsFault)
     */
-   static public Throwable extractMultiOperationException(IPSReference[] refs,
+   public static Throwable extractMultiOperationException(IPSReference[] refs,
       InvocationTargetException e, METHOD method) throws RuntimeException
    {
       Throwable ex = e.getTargetException();
@@ -839,11 +844,11 @@ public class PSProxyUtils
     * @return the first error found in the supplied fault converted into a
     *    <code>PSClientException</code>, never <code>null</code>.
     */
-   static public PSClientException createClientException(
+   public static PSClientException createClientException(
       PSErrorResultsFault fault, String operation, String type, String name)
    {
       if (null == fault)
-         throw new IllegalArgumentException("fault cannot be null");  
+         throw new IllegalArgumentException(FAULT_NOT_NULL);
 
       PSClientException ex = null;
       for (PSErrorResultsFaultServiceCall call : fault.getServiceCall())
@@ -878,10 +883,10 @@ public class PSProxyUtils
     * @return the fault converted into a model exception, never 
     *    <code>null</code>.
     */
-   static public PSModelException convertFault(PSError fault)
+   public static PSModelException convertFault(PSError fault)
    {
       if (fault == null)
-         throw new IllegalArgumentException("fault cannot be null");  
+         throw new IllegalArgumentException();
 
       /*
        * Override the axis fault so that we are able to show the original error
@@ -918,10 +923,10 @@ public class PSProxyUtils
     * @return the fault converted into a model exception, never 
     *    <code>null</code>.
     */
-   static public PSModelException convertFault(Error fault)
+   public static PSModelException convertFault(Error fault)
    {
       if (fault == null)
-         throw new IllegalArgumentException("fault cannot be null");  
+         throw new IllegalArgumentException(FAULT_NOT_NULL);
 
       /*
        * Override the axis fault so that we are able to show the original error
@@ -957,10 +962,10 @@ public class PSProxyUtils
     * @return the model exception, may be <code>null</code> if no conversion is
     *    supported for the cause of the supplied fault.
     */
-   static public PSModelException convertFault(AxisFault fault)
+   public static PSModelException convertFault(AxisFault fault)
    {
       if (fault == null)
-         throw new IllegalArgumentException("fault cannot be null");
+         throw new IllegalArgumentException(FAULT_NOT_NULL);
       
       PSModelException e = null;
       Throwable cause = fault.detail;
@@ -988,7 +993,7 @@ public class PSProxyUtils
     * @return the lock fault converted into a lock exception, never 
     *    <code>null</code>.
     */
-   static public PSLockException convertFault(PSLockFault fault, 
+   public static PSLockException convertFault(PSLockFault fault,
       String operation, String objectType, String objectName)
    {
       /*

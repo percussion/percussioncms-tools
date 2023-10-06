@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSObjectCollator.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2007 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.percussion.client.catalogers;
 
@@ -32,7 +39,7 @@ public class PSObjectCollator extends Collator
    {
       if ( null == delegate )
          throw new IllegalArgumentException();
-      m_delegate = delegate;
+      this.delegate = delegate;
    }
 
    @Override
@@ -44,19 +51,19 @@ public class PSObjectCollator extends Collator
    @Override
    public int compare( String s1, String s2 )
    {
-      return m_delegate.compare( s1, s2 );
+      return delegate.compare( s1, s2 );
    }
 
    @Override
    public CollationKey getCollationKey(String source)
    {
-      return m_delegate.getCollationKey( source );
+      return delegate.getCollationKey( source );
    }
 
    @Override
    public int hashCode()
    {
-      return m_delegate.hashCode();
+      return delegate.hashCode();
    }
 
    @Override
@@ -65,9 +72,9 @@ public class PSObjectCollator extends Collator
       if (!(o instanceof PSObjectCollator))
          return false;
       PSObjectCollator oc = (PSObjectCollator) o;
-      return m_delegate.equals(oc.m_delegate);
+      return delegate.equals(oc.delegate);
    }
    
    // storage
-   private Collator m_delegate = null;
+   private final Collator delegate;
 }

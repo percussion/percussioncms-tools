@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSContentTypeModel.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2008 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.models.impl;
 
 import com.percussion.client.IPSPrimaryObjectType;
@@ -26,6 +33,7 @@ import com.percussion.client.objectstore.PSUiItemDefinition;
 import com.percussion.client.proxies.IPSCmsModelProxy.METHOD;
 import com.percussion.client.proxies.PSProxyUtils;
 import com.percussion.cms.PSCmsException;
+import com.percussion.cms.objectstore.IPSFieldCataloger;
 import com.percussion.cms.objectstore.PSItemDefinition;
 import com.percussion.cms.objectstore.client.PSContentEditorFieldCataloger;
 import com.percussion.cms.objectstore.client.PSRemoteCataloger;
@@ -66,7 +74,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Implementes the interface.
+ * Implements the interface.
  * 
  * @see IPSContentTypeModel
  * 
@@ -136,11 +144,11 @@ public class PSContentTypeModel extends PSCmsModel implements
 
          try
          {
-            int options = PSRemoteCataloger.FLAG_INCLUDE_HIDDEN
-            | PSRemoteCataloger.FLAG_CTYPE_EXCLUDE_HIDDENFROMMENU;
+            int options = IPSFieldCataloger.FLAG_INCLUDE_HIDDEN
+            | IPSFieldCataloger.FLAG_CTYPE_EXCLUDE_HIDDENFROMMENU;
             if(forDisplayFormat)
-               options = PSRemoteCataloger.FLAG_INCLUDE_RESULTONLY;
-            options |= PSRemoteCataloger.FLAG_EXCLUDE_CHOICES;
+               options = IPSFieldCataloger.FLAG_INCLUDE_RESULTONLY;
+            options |= IPSFieldCataloger.FLAG_EXCLUDE_CHOICES;
             PSRemoteCataloger remCatlg = new PSRemoteCataloger(appReq);
             m_fieldCat[catalogIndex] = new PSContentEditorFieldCataloger(
                remCatlg, null, options);
@@ -183,10 +191,9 @@ public class PSContentTypeModel extends PSCmsModel implements
       try
       {
          Map<IPSReference, Collection<IPSReference>> results = 
-            new HashMap<IPSReference, Collection<IPSReference>>();
+            new HashMap<>();
          Collection<IPSReference> typeRefs = catalog();
-         List<IPSReference> orderedTypeRefs = new ArrayList<IPSReference>();
-         orderedTypeRefs.addAll(typeRefs);
+         List<IPSReference> orderedTypeRefs = new ArrayList<>(typeRefs);
          if (force)
          {
             PSCoreFactory.getInstance().getModel(PSObjectTypes.WORKFLOW)
@@ -194,9 +201,9 @@ public class PSContentTypeModel extends PSCmsModel implements
          }
 
          //we load all types in one shot so the getWorkflowAssociations call
-         // below does not cause a seperate server request for each type
+         // below does not cause a separate server request for each type
          load(orderedTypeRefs
-               .toArray(new IPSReference[orderedTypeRefs.size()]), false, false);
+               .toArray(new IPSReference[0]), false, false);
 
          for (IPSReference ref : orderedTypeRefs)
          {
@@ -207,12 +214,7 @@ public class PSContentTypeModel extends PSCmsModel implements
             {
                if (!workflowFilter.contains(wf))
                   continue;
-               Collection<IPSReference> linkedTypes = results.get(wf);
-               if (linkedTypes == null)
-               {
-                  linkedTypes = new ArrayList<IPSReference>();
-                  results.put(wf, linkedTypes);
-               }
+               Collection<IPSReference> linkedTypes = results.computeIfAbsent(wf, k -> new ArrayList<>());
                linkedTypes.add(ref);
             }
          }
@@ -242,7 +244,7 @@ public class PSContentTypeModel extends PSCmsModel implements
       {
          throw new PSModelException(e);
       }
-      Set<IPSReference> wfRefs = new HashSet<IPSReference>();
+      Set<IPSReference> wfRefs = new HashSet<>();
 
       IPSCmsModel wfModel = PSCoreFactory.getInstance().getModel(
             PSObjectTypes.WORKFLOW);
@@ -294,7 +296,7 @@ public class PSContentTypeModel extends PSCmsModel implements
     * @see #m_fullCache
     */
    final Map<IPSReference, Collection<IPSReference>> m_cache = 
-      new HashMap<IPSReference, Collection<IPSReference>>();
+      new HashMap<>();
 
    /**
     * A flag to indicate whether a query of all ctypes has been performed and
@@ -343,12 +345,7 @@ public class PSContentTypeModel extends PSCmsModel implements
                      {
                         continue;
                      }
-                     Collection<IPSReference> links = result.get(ctypeRef);
-                     if (links == null)
-                     {
-                        links = new ArrayList<IPSReference>();
-                        result.put(ctypeRef, links);
-                     }
+                     Collection<IPSReference> links = result.computeIfAbsent(ctypeRef, k -> new ArrayList<>());
                      links.add(templateRef);
                   }
                }
@@ -361,15 +358,10 @@ public class PSContentTypeModel extends PSCmsModel implements
       {
          throw e;
       }
-      catch (PSContractViolationFault e)
+      catch (PSContractViolationFault | PSNotAuthorizedFault | MalformedURLException e)
       {
          ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (PSErrorResultsFault e)
+      } catch (PSErrorResultsFault e)
       {
          ex = PSProxyUtils.createClientException(e, "getTemplateAssociations", 
                "Template Associations",
@@ -379,12 +371,7 @@ public class PSContentTypeModel extends PSCmsModel implements
             throw (PSModelException) ex;
          
          throw (PSLockException) ex;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
+      } catch (RemoteException e)
       {
          if (e instanceof PSLockFault)
          {
@@ -394,15 +381,10 @@ public class PSContentTypeModel extends PSCmsModel implements
          }
          else
             ex = e;
+      } catch (Exception e) {
+         throw new RuntimeException(e);
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (Exception e)
-      {
-         ex = e;
-      }
+
       if (ex != null)
       {
          throw new PSModelException(ex);
@@ -419,7 +401,7 @@ public class PSContentTypeModel extends PSCmsModel implements
    private void addNewContentTypeTemplates(
          Collection<IPSReference> contentTypeFilter,
          Map<IPSReference, Collection<IPSReference>> result)
-         throws PSModelException, Exception
+         throws PSModelException
    {
       final Collection<IPSReference> contentTypeRefs = catalog();
       for (final IPSReference contentTypeRef : contentTypeRefs)
@@ -433,8 +415,13 @@ public class PSContentTypeModel extends PSCmsModel implements
          {
             continue;
          }
-         final PSUiItemDefinition contentType =
-               (PSUiItemDefinition) load(contentTypeRef, false, false);
+
+         final PSUiItemDefinition contentType;
+         try {
+            contentType = (PSUiItemDefinition) load(contentTypeRef, false, false);
+         } catch (Exception e) {
+            throw new PSModelException(e);
+         }
          if (contentType.areNewTemplatesSpecified())
          {
             result.put(contentTypeRef, contentType.getNewTemplates());
@@ -508,14 +495,13 @@ public class PSContentTypeModel extends PSCmsModel implements
       
       //make a copy of the cache
       Map<IPSReference, Collection<IPSReference>> results = 
-         new HashMap<IPSReference, Collection<IPSReference>>();
+         new HashMap<>();
       for (IPSReference ctype : ctypeSource)
       {
          Collection<IPSReference> templateRefs = m_cache.get(ctype);
          if (templateRefs != null && !templateRefs.isEmpty())
          {
-            Collection<IPSReference> copy = new ArrayList<IPSReference>();
-            copy.addAll(templateRefs);
+            Collection<IPSReference> copy = new ArrayList<>(templateRefs);
             results.put(ctype, copy);
          }
       }
@@ -553,8 +539,8 @@ public class PSContentTypeModel extends PSCmsModel implements
          return;
       }
       
-      final Set<IPSGuid> missingTemplates = new HashSet<IPSGuid>();
-      final Set<IPSGuid> missingContentTypes = new HashSet<IPSGuid>();
+      final Set<IPSGuid> missingTemplates = new HashSet<>();
+      final Set<IPSGuid> missingContentTypes = new HashSet<>();
 
       loadTemplateAssociationsFromServer(ctypeRef, lock,
             missingTemplates, missingContentTypes);
@@ -612,7 +598,7 @@ public class PSContentTypeModel extends PSCmsModel implements
    {
       assert ids != null && !ids.isEmpty();
       final String separator = ", ";
-      final StringBuffer result = new StringBuffer();
+      final StringBuilder result = new StringBuilder();
       for (final IPSGuid id : ids)
       {
          result.append(id.toString());
@@ -764,7 +750,7 @@ public class PSContentTypeModel extends PSCmsModel implements
       Collection<IPSReference> templateRefColl = m_cache.get(contentTypeRef);
       if (null == templateRefColl)
       {
-         templateRefColl = new ArrayList<IPSReference>();
+         templateRefColl = new ArrayList<>();
          m_cache.put(contentTypeRef, templateRefColl);
       }
       templateRefColl.add(templateRef);
@@ -792,19 +778,19 @@ public class PSContentTypeModel extends PSCmsModel implements
       // init node update if not already done.
       getUpdater();
       
-      List<Object> results = new ArrayList<Object>();
-      List<IPSReference> details = new ArrayList<IPSReference>();
+      List<Object> results = new ArrayList<>();
+      List<IPSReference> details = new ArrayList<>();
       boolean hasErrors = false;
       
-      //remove unpersisted refs
+      //remove non-persisted refs
       Map<IPSReference, Collection<IPSReference>> validAssociations = 
-         new HashMap<IPSReference, Collection<IPSReference>>();
+         new HashMap<>();
       for (IPSReference ctype : associations.keySet())
       {
          if (!ctype.isPersisted())
             continue;
          Collection<IPSReference> templateRefs = associations.get(ctype);
-         Collection<IPSReference> validTemplateRefs = new ArrayList<IPSReference>();
+         Collection<IPSReference> validTemplateRefs = new ArrayList<>();
          for (IPSReference templateRef : templateRefs)
          {
             if (templateRef.isPersisted())
@@ -813,8 +799,8 @@ public class PSContentTypeModel extends PSCmsModel implements
          validAssociations.put(ctype, validTemplateRefs);
       }
       
-      Collection<IPSReference> additions = new ArrayList<IPSReference>();
-      Collection<IPSReference> deletions = new ArrayList<IPSReference>();
+      Collection<IPSReference> additions = new ArrayList<>();
+      Collection<IPSReference> deletions = new ArrayList<>();
       Exception ex = null;
       Collection<IPSReference> tRefColl = null; 
       
@@ -844,8 +830,7 @@ public class PSContentTypeModel extends PSCmsModel implements
                   computeChanges(cRef, tRefColl, deletions, additions);
                   
                   //update the cache
-                  Collection<IPSReference> tmp = new ArrayList<IPSReference>();
-                  tmp.addAll(validAssociations.get(cRef));
+                  Collection<IPSReference> tmp = new ArrayList<>(validAssociations.get(cRef));
                   m_cache.put(cRef, tmp);
                   
                   if (!additions.isEmpty())
@@ -1076,7 +1061,7 @@ public class PSContentTypeModel extends PSCmsModel implements
                   m_cache.entrySet())
                {
                   final Collection<IPSReference> validRefs =
-                        new ArrayList<IPSReference>();
+                        new ArrayList<>();
                   for (IPSReference test : entry.getValue())
                   {
                      if (!delRef.referencesSameObject(test))

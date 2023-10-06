@@ -1,23 +1,22 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSCmsModelProxy.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSPrimaryObjectType;
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSCoreUtils;
-import com.percussion.client.PSErrorCodes;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypeFactory;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.models.IPSCmsModel;
 import com.percussion.client.proxies.IPSCmsModelProxy;
@@ -34,18 +33,8 @@ import com.percussion.services.security.PSPermissions;
 import com.percussion.services.security.data.PSAclImpl;
 import com.percussion.webservices.common.PSObjectSummary;
 import com.percussion.webservices.common.PSObjectSummaryLocked;
-import com.percussion.webservices.faults.PSContractViolationFault;
-import com.percussion.webservices.faults.PSErrorResultsFault;
-import com.percussion.webservices.faults.PSErrorsFault;
-import com.percussion.webservices.faults.PSInvalidSessionFault;
-import com.percussion.webservices.faults.PSLockFault;
-import com.percussion.webservices.faults.PSNotAuthorizedFault;
-import com.percussion.webservices.systemdesign.DeleteAclsRequest;
-import com.percussion.webservices.systemdesign.LoadAclsRequest;
-import com.percussion.webservices.systemdesign.SaveAclsRequest;
-import com.percussion.webservices.systemdesign.SaveAclsResponsePermissions;
-import com.percussion.webservices.systemdesign.SystemDesignSOAPStub;
-import com.percussion.webservices.transformation.PSTransformationException;
+import com.percussion.webservices.faults.*;
+import com.percussion.webservices.systemdesign.*;
 import com.thoughtworks.xstream.XStream;
 import org.apache.axis.AxisFault;
 import org.apache.axis.client.Stub;
@@ -61,19 +50,22 @@ import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 /**
  * Abstract base class for classes implementing the interface
  * {@link com.percussion.client.proxies.IPSCmsModelProxy}. All object model
- * independent functionality is implemeneted in this class.
+ * independent functionality is implemented in this class.
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public abstract class PSCmsModelProxy implements IPSCmsModelProxy
 {
+   private static final String RESULTS_NOT_NULL = "results must not be null";
+
    /**
     * Default ctor used by test implementations.
     */
@@ -85,17 +77,17 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
     * Ctor taking the primary type of the object the services are required. A
     * model proxy is per primary object type and hence has a constructor that
     * takes the primary object type.
-    * 
+    *
     * @param objectType Enumeration value of <code>PSObjectType</code>. must
     * not be <code>null</code>.
     */
-   public PSCmsModelProxy(IPSPrimaryObjectType objectType)
+   protected PSCmsModelProxy(IPSPrimaryObjectType objectType)
    {
       m_objectPrimaryType = objectType;
    }
 
    /**
-    * The default implementation returns a meta data object that conforms to the
+    * The default implementation returns a metadata object that conforms to the
     * following table: <table>
     * <th>
     * <td>Method</td>
@@ -122,32 +114,31 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    }
 
    /**
-    * This is implemented here for Hierarchal models where this method throws
-    * the UnsuportedOperationException. See interface for supported
+    * This is implemented here for Hierarchical models where this method throws
+    * the UnsupportedOperationException. See interface for supported
     * implementation details.
     * <p>
     * If this method is overridden, the derived class must call the
     * {@link #configureReferenceSecurity(IPSReference[])} method.
-    * 
+    * </p>
     * @throws PSMultiOperationException
-    * 
+    *
     * @see IPSCmsModelProxy#create(PSObjectType, Collection, List)
     */
-   @SuppressWarnings("unchecked")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException
+      List<Object> results) throws PSMultiOperationException, PSModelException
    {
       if (objType == null)
       {
          throw new IllegalArgumentException("objType must not be null");
       }
-      if (names == null || names.size() == 0)
+      if (names == null || names.isEmpty())
       {
          throw new IllegalArgumentException("names must not be null or empty"); //$NON-NLS-1$
       }
       if (results == null)
       {
-         throw new IllegalArgumentException("results must not be null"); //$NON-NLS-1$
+         throw new IllegalArgumentException(RESULTS_NOT_NULL); //$NON-NLS-1$
       }
       Operation operation = PSWebServicesProxyConfig.getInstance()
          .getOperation(m_objectPrimaryType.toString(), "create");
@@ -157,10 +148,10 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             "create() method must be configured in the config file"); //$NON-NLS-1$
       }
       Throwable ex = null;
-      Class responseClass = operation.getResponse().loadClass();
+      Class<?> responseClass = operation.getResponse().loadClass();
       try
       {
-         boolean redo = false;
+         boolean redo;
          do
          {
             redo = false;
@@ -168,10 +159,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             {
                Stub bindingObj = getSoapBinding(METHOD.CREATE);
                Method create = bindingObj.getClass().getMethod(
-                  operation.getMethodName(), new Class[]
-                  {
-                     String[].class
-                  });
+                  operation.getMethodName(), String[].class);
                Object createdObjects = create.invoke(bindingObj, new Object[]
                {
                   names.toArray(new String[0])
@@ -179,8 +167,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                Object[] result = (Object[]) PSProxyUtils.convert(responseClass,
                   createdObjects);
                postCreate(objType, result);
-               for (int i = 0; i < result.length; i++)
-                  results.add(result[i]);
+               results.addAll(Arrays.asList(result));
       
                IPSReference[] refs = PSObjectFactory.objectToReference(result,
                   (IPSPrimaryObjectType) objType.getPrimaryType(), true);
@@ -199,7 +186,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                   else
                   {
                      ex = PSProxyUtils.extractMultiOperationException(
-                        (IPSReference[]) null, e, METHOD.CREATE);
+                         null, e, METHOD.CREATE);
                   }
                }
                catch (Exception e1)
@@ -209,40 +196,18 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             }
          } while (redo);
       }
-      catch (IllegalAccessException e)
+      catch (IllegalAccessException | ServiceException | IllegalArgumentException | MalformedURLException |
+             SecurityException | NoSuchMethodException e)
       {
          ex = e;
       }
-      catch (SecurityException e)
-      {
-         ex = e;
-      }
-      catch (NoSuchMethodException e)
-      {
-         ex = e;
-      }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      
+
+
       if (ex != null)
          processAndThrowException(names.size(), ex);
       
       // will never get here
-      return null;
+      return new IPSReference[0];
    }
 
 
@@ -266,7 +231,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
     * object has been created. It sets the lock info and permissions. All
     * permissions are given.
     * 
-    * @param refs The newly creasted references. Never <code>null</code>. Each
+    * @param refs The newly created references. Never <code>null</code>. Each
     * entry must be an instance of <code>PSReference</code>. Otherwise, the
     * caller must handle these configurations themselves.
     */
@@ -295,10 +260,10 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
       {
          throw new IllegalArgumentException("ex cannot be null");  
       }
-      String msg = "";
+      String msg;
       if (ex instanceof AxisFault)
       {
-         msg = ((AxisFault) ex).toString();
+         msg = ex.toString();
          ms_log.error(msg, ex);
       }
       else if (ex instanceof PSMultiOperationException)
@@ -320,7 +285,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             {
                if (o instanceof AxisFault)
                {
-                  msg = ((AxisFault) o).toString();
+                  msg = o.toString();
                   ms_log.error(msg, (AxisFault) o);
                }
                else
@@ -344,21 +309,19 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
       }
       if (results == null)
       {
-         throw new IllegalArgumentException("results must not be null");
+         throw new IllegalArgumentException(RESULTS_NOT_NULL);
       }
       
       results.clear();
-      for (int i = 0; i < sourceObjects.length; i++)
-      {
-         if (!(sourceObjects[i] instanceof IPSCloneTuner))
-         {
+      for (Object sourceObject : sourceObjects) {
+         if (!(sourceObject instanceof IPSCloneTuner)) {
             throw new UnsupportedOperationException(
-               "this object does not implement IPSCloneTuner interface");
+                    "this object does not implement IPSCloneTuner interface");
          }
       }
 
       // Returned results: references for good ones, exceptions for bad ones
-      // if there are any exceptions it whill be passed in multi-operation
+      // if there are any exceptions it will be passed in multi-operation
       // exception, otherwise it is returned as result.
       // Exceptions in this array should correspond to null elements in
       // results list
@@ -438,7 +401,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
     * @param results the clones to be returned.
     * @param refs the references to the clones. On input must contain only
     * references.
-    * On output the the references are updated with new information,
+    * On output the references are updated with new information,
     * some elements of the array with can be replaced with exceptions
     * if processing of the particular element failed.
     * @throws PSModelException If a problem occurs that prevents providing
@@ -451,13 +414,13 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
       Object[] newRefs;
       try
       {
-         final List<String> newNames = new ArrayList<String>();
+         final List<String> newNames = new ArrayList<>();
          for (final Object ref : refs)
          {
             newNames.add(((IPSReference) ref).getName());
          }
          newRefs = create(((IPSReference) refs[0]).getObjectType(), newNames,
-               new ArrayList()/* we ignore this anyway */);
+               new ArrayList<>()/* we ignore this anyway */);
       }
       catch (PSMultiOperationException e)
       {
@@ -495,7 +458,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    private void assignNewNames(String[] names, List<Object> results,
          final Object[] refs)
    {
-      final List<String> existingNames = new ArrayList<String>();
+      final List<String> existingNames = new ArrayList<>();
       try
       {
          final Collection<IPSReference> handles = getModel().catalog();
@@ -532,8 +495,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
          .getOperation(m_objectPrimaryType.toString(), "catalog");
       if (operation == null)
       {
-         // throw new PSModelException(PSErrorCodes.RAW);
-         return new ArrayList<IPSReference>(0);
+         return new ArrayList<>(0);
       }
       
       Throwable ex = null;
@@ -583,46 +545,23 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             }
          } while (redo);
       }
-      catch (InstantiationException e)
+      catch (InstantiationException | IllegalAccessException | SecurityException | IllegalArgumentException |
+             MalformedURLException | ServiceException | NoSuchMethodException e)
       {
          ex = e;
       }
-      catch (IllegalAccessException e)
-      {
-         ex = e;
-      }
-      catch (SecurityException e)
-      {
-         ex = e;
-      }
-      catch (NoSuchMethodException e)
-      {
-         ex = e;
-      }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
          processAndThrowException(ex);
       
       // will never get here
 
-      return new ArrayList<IPSReference>();
+      return new ArrayList<>();
    }
 
    /**
     * Helper method to convert an array of {@link PSObjectSummary} objects to a
-    * colletion of {@link IPSReference} objects.
+    * collection of {@link IPSReference} objects.
     * 
     * @param results array of {@link PSObjectSummary} objects to convert, may be
     * <code>null</code> or empty.
@@ -630,7 +569,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
     * must not be <code>null</code>
     * @return collection of {@link IPSReference} objects, never
     * <code>null</code> may be empty.
-    * @throws PSModelException if could not convert the summary object to
+    * @throws PSModelException if we could not convert the summary object to
     * appropriate object type.
     */
    protected Collection<IPSReference> objectSummaryArrayToReferenceCollection(
@@ -638,14 +577,14 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    {
       if (results == null)
       {
-         throw new IllegalArgumentException("results must not be null");
+         throw new IllegalArgumentException(RESULTS_NOT_NULL);
       }
       if (objType == null)
       {
          throw new IllegalArgumentException("objType must not be null");
       }
-      Collection<IPSReference> coll = new ArrayList<IPSReference>();
-      if (results != null && results.length > 0)
+      Collection<IPSReference> coll = new ArrayList<>();
+      if (results.length > 0)
       {
          for (PSObjectSummary result : results)
          {
@@ -678,7 +617,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    {
       if (reference == null || reference.length == 0)
       {
-         return null;
+         return new Object[0];
       }
 
       long[] ids = new long[reference.length];
@@ -699,14 +638,14 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
       Class responseClass = operation.getResponse().loadClass();
       try
       {
-         boolean redo = false;
+         boolean redo;
          do
          {
             redo = false;
             try
             {
                Stub bindingObj = getSoapBinding(METHOD.LOAD);
-               Object requestObj = requestClass.newInstance();
+               Object requestObj = requestClass.getDeclaredConstructor().newInstance();
       
                SetMethod[] setMethods = operation.getRequest().getSetMethods();
                Method setId = requestClass.getMethod(setMethods[0].getName(),
@@ -724,14 +663,14 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                   setMethods[1].getParamClasses());
                setLock.invoke(requestObj, new Object[]
                {
-                  Boolean.valueOf(lock)
+                       lock
                });
       
-               Method setOverideLock = requestClass.getMethod(
+               Method setOverrideLock = requestClass.getMethod(
                   setMethods[2].getName(), setMethods[2].getParamClasses());
-               setOverideLock.invoke(requestObj, new Object[]
+               setOverrideLock.invoke(requestObj, new Object[]
                {
-                  Boolean.valueOf(overrideLock)
+                       overrideLock
                });
       
                Method load = bindingObj.getClass().getMethod(
@@ -778,39 +717,12 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             }
          } while (redo);
       }
-      catch (InstantiationException e)
+      catch (InstantiationException | IllegalAccessException | SecurityException | NoSuchMethodException |
+             IllegalArgumentException | MalformedURLException | ServiceException e)
       {
          ex = e;
       }
-      catch (IllegalAccessException e)
-      {
-         ex = e;
-      }
-      catch (SecurityException e)
-      {
-         ex = e;
-      }
-      catch (NoSuchMethodException e)
-      {
-         ex = e;
-      }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
       {
          if (ex instanceof PSMultiOperationException)
@@ -857,7 +769,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
       Class requestClass = operation.getRequest().loadClass();
       try
       {
-         boolean redo = false;
+         boolean redo;
          do
          {
             redo = false;
@@ -867,10 +779,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                Object requestObj = requestClass.newInstance();
                SetMethod[] setMethods = operation.getRequest().getSetMethods();
                Method setId = requestClass.getMethod(setMethods[0].getName(),
-                  new Class[]
-                  {
-                     new long[0].getClass()
-                  });
+                       long[].class);
       
                setId.invoke(requestObj, new Object[]
                {
@@ -908,35 +817,12 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             }
          } while (redo);
       }
-      catch (InstantiationException e)
+      catch (InstantiationException | IllegalAccessException | SecurityException | NoSuchMethodException |
+             IllegalArgumentException | MalformedURLException | ServiceException e)
       {
          ex = e;
       }
-      catch (IllegalAccessException e)
-      {
-         ex = e;
-      }
-      catch (SecurityException e)
-      {
-         ex = e;
-      }
-      catch (NoSuchMethodException e)
-      {
-         ex = e;
-      }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
          processAndThrowException(reference.length, ex);
    }
@@ -991,7 +877,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                   setMethods[1].getName(), setMethods[1].getParamClasses());
                setReleaseLock.invoke(requestObj, new Object[]
                {
-                  Boolean.valueOf(releaseLock)
+                       releaseLock
                });
       
                Method save = bindingObj.getClass().getMethod(
@@ -1037,45 +923,18 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             }
          } while (redo);
       }
-      catch (InstantiationException e)
+      catch (InstantiationException | IllegalAccessException | SecurityException | NoSuchMethodException |
+             IllegalArgumentException | MalformedURLException | ServiceException e)
       {
          ex = e;
       }
-      catch (IllegalAccessException e)
-      {
-         ex = e;
-      }
-      catch (SecurityException e)
-      {
-         ex = e;
-      }
-      catch (NoSuchMethodException e)
-      {
-         ex = e;
-      }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
       {
          if (ex instanceof PSMultiOperationException)
          {
             Object[] errors = ((PSMultiOperationException) ex).getResults();
-            List<IPSReference> validRefs = new ArrayList<IPSReference>();
+            List<IPSReference> validRefs = new ArrayList<>();
             for (int i = 0; i < errors.length; i++)
             {
                if (!(errors[i] instanceof Throwable))
@@ -1100,7 +959,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
     * See {@link IPSCmsModelProxy#releaseLock(IPSReference[])} for 
     * documentation.
     * If a <code>PSModelException</code> is thrown the implementation 
-    * guarantees that non of the supplied objects were unlocked.
+    * guarantees that none of the supplied objects were unlocked.
     */
    @SuppressWarnings("unused")
    public void releaseLock(IPSReference[] references)
@@ -1142,24 +1001,11 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (MalformedURLException e)
+      } catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
          processAndThrowException(ex);
    }
@@ -1191,7 +1037,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
       Throwable ex = null;
       try
       {
-         boolean redo = false;
+         boolean redo;
          do
          {
             redo = false;
@@ -1216,24 +1062,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (PSErrorResultsFault e)
+      } catch (PSErrorResultsFault e)
       {
          ex = PSProxyUtils.extractMultiOperationException(refs, METHOD.LOAD, e);
       }
@@ -1242,21 +1071,15 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
          ex = PSProxyUtils.convertFault(e, METHOD.LOAD.toString(), 
             refs[0].getObjectType().getPrimaryType().toString(), 
             refs[0].getName());
-      }
-      catch (RemoteException e)
+      } catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
-         processAndThrowException(refs.length, ex);
+
+      processAndThrowException(refs.length, ex);
       
       // will never get here
-      return null;
+      return new Object[0];
    }
 
    /*
@@ -1321,41 +1144,12 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (ServiceException | MalformedURLException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (PSErrorsFault e)
-      {
-         ex = PSProxyUtils.extractMultiOperationException(null, METHOD.SAVE, e);
-      }
-      catch (PSLockFault e)
-      {
-         ex = PSProxyUtils.convertFault(e, METHOD.SAVE.toString(), 
-            ref[0].getObjectType().getPrimaryType().toString(), 
-            ref[0].getName());
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
+
+
       if (ex != null)
          processAndThrowException(ref.length, ex);
    }
@@ -1422,24 +1216,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (PSErrorResultsFault e)
+      } catch (PSErrorResultsFault e)
       {
          ex = PSProxyUtils.extractMultiOperationException(null, METHOD.DELETE,
             e);
@@ -1454,12 +1231,11 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
          ex = PSProxyUtils.convertFault(e, METHOD.DELETE.toString(), 
             owners[0].getObjectType().getPrimaryType().toString(), 
             owners[0].getName());
-      }
-      catch (RemoteException e)
+      } catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      
+
       if (ex != null)
          processAndThrowException(owners.length, ex);
    }
@@ -1477,8 +1253,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
          return;
 
       long[] ids = new long[aclIds.length];
-      for (int i = 0; i < ids.length; i++)
-         ids[i] = aclIds[i];
+      Arrays.setAll(ids, i -> aclIds[i]);
       Exception ex = null;
       try
       {
@@ -1505,24 +1280,11 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (MalformedURLException e)
+      } catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
          processAndThrowException(ex);
    }
@@ -1574,24 +1336,11 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (MalformedURLException e)
+      } catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
          processAndThrowException(ex);
 
@@ -1649,7 +1398,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             }
             catch (PSMultiOperationException ex)
             {
-               // ignore, we want to return the exception why the rename failed
+               // ignore, we want to return the exception so that they know why the rename operation failed
             }
          }
          
@@ -1697,23 +1446,10 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
             new Class[] { String.class });
          m.invoke(data, new Object[] { name });
       }
-      catch (SecurityException e)
+      catch (SecurityException | IllegalArgumentException | IllegalAccessException | NoSuchMethodException e)
       {
          ex = e;
-      }
-      catch (NoSuchMethodException e)
-      {
-         ex = e;
-      }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (IllegalAccessException e)
-      {
-         ex = e;
-      }
-      catch (InvocationTargetException e)
+      } catch (InvocationTargetException e)
       {
          ex = e.getTargetException();
       }
@@ -1779,12 +1515,12 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
    }
 
    /**
-    * Makes an exact clone of the suplied source. The fills only the serialzable
+    * Makes an exact clone of the supplied source. The fills only the serializable
     * properties defined in the .betwixt files for the object. The subclass must
     * do additional changes to the object to make it a valid clone or new copy.
     * 
     * @param source source object to clone, must not be <code>null</code>.
-    * @return cloned object whose every serializable property is the same as
+    * @return cloned object who's every serializable property is the same as
     * that of the source.
     */
    public Object clone(Object source)
@@ -1794,8 +1530,7 @@ public abstract class PSCmsModelProxy implements IPSCmsModelProxy
          throw new IllegalArgumentException("source must not be null");
       }
       XStream xs = PSSecureXMLUtils.getSecuredXStream();
-      Object obj = xs.fromXML(xs.toXML(source));
-      return obj;
+      return xs.fromXML(xs.toXML(source));
    }
 
    /**

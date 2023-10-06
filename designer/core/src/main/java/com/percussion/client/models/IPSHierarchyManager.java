@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ IPSHierarchyManager.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.models;
 
 import com.percussion.client.IPSHierarchyNodeRef;
@@ -38,7 +45,7 @@ public interface IPSHierarchyManager
     * @param targetParent The supplied children will be added to this node.
     * Supply <code>null</code> to add to the root.
     * 
-    * @param type The sub-type to create. Never <code>null</code>. Must be
+    * @param type The subtype to create. Never <code>null</code>. Must be
     * one of the types returned by {@link IPSCmsModel#getObjectTypes()}.
     * 
     * @param names The monikers for the newly created children. If
@@ -61,7 +68,7 @@ public interface IPSHierarchyManager
     * or because of a duplicate name 
     * ({@link com.percussion.client.PSDuplicateNameException}).
     */
-   public IPSHierarchyNodeRef[] createChildren(
+   IPSHierarchyNodeRef[] createChildren(
          IPSHierarchyNodeRef targetParent, PSObjectType type, List<String> names)
          throws PSMultiOperationException, PSModelException;
 
@@ -89,7 +96,7 @@ public interface IPSHierarchyManager
     * @throws PSMultiOperationException If any problems communicating with the
     * server or creating the objects. Any successes are in the exception.
     */
-   public IPSHierarchyNodeRef[] cloneChildren(
+   IPSHierarchyNodeRef[] cloneChildren(
          IPSHierarchyNodeRef targetParent, IPSHierarchyNodeRef[] sources,
          String[] names)
       throws PSMultiOperationException, PSModelException;   
@@ -115,10 +122,10 @@ public interface IPSHierarchyManager
     * could occur because some node is locked or because the caller doesn't have
     * sufficient privileges. Nodes that were successfully deleted will be
     * represented in the exception with <code>null</code> entries. Nodes that
-    * are not succesfull will contain a collection of exceptions for each leaf
+    * are not successful will contain a collection of exceptions for each leaf
     * under that node that could not be deleted.
     */
-   public void removeChildren(List<IPSHierarchyNodeRef> children)
+   void removeChildren(List<IPSHierarchyNodeRef> children)
          throws PSMultiOperationException, PSModelException;
 
    /**
@@ -149,7 +156,7 @@ public interface IPSHierarchyManager
     * @throws PSModelException If all children don't have the same parent or the
     * target parent is a leaf or a descendent of a source child.
     */
-   public void moveChildren(List<IPSHierarchyNodeRef> sourceChildren,
+   void moveChildren(List<IPSHierarchyNodeRef> sourceChildren,
          IPSHierarchyNodeRef targetParent) throws PSMultiOperationException,
          PSModelException;
 
@@ -158,7 +165,7 @@ public interface IPSHierarchyManager
     * {@link #getChildren(IPSHierarchyNodeRef, boolean) getChildren(parent,
     * <code>false</code>)}.
     */
-   public Collection<IPSHierarchyNodeRef> getChildren(IPSHierarchyNodeRef parent)
+   Collection<IPSHierarchyNodeRef> getChildren(IPSHierarchyNodeRef parent)
          throws PSModelException;
 
    /**
@@ -171,7 +178,7 @@ public interface IPSHierarchyManager
     * 
     * @throws PSModelException If any problems communicating w/ server.
     */
-   public IPSHierarchyNodeRef getReference(IPSGuid id) throws PSModelException;
+   IPSHierarchyNodeRef getReference(IPSGuid id) throws PSModelException;
 
    /**
     * Retrieves all children of the supplied node, optionally flushing the cache
@@ -188,7 +195,7 @@ public interface IPSHierarchyManager
     * 
     * @throws PSModelException If any problems communicating with server.
     */
-   public Collection<IPSHierarchyNodeRef> getChildren(
+   Collection<IPSHierarchyNodeRef> getChildren(
          IPSHierarchyNodeRef parent, boolean forceRefresh)
          throws PSModelException;
 
@@ -200,7 +207,7 @@ public interface IPSHierarchyManager
     * @return May be <code>null</code> if <code>child</code> is the root
     * node.
     */
-   public IPSHierarchyNodeRef getParent(IPSHierarchyNodeRef child);
+   IPSHierarchyNodeRef getParent(IPSHierarchyNodeRef child);
 
    /**
     * Convenience method that calls {@link IPSHierarchyNodeRef#getPath()
@@ -208,7 +215,7 @@ public interface IPSHierarchyManager
     * 
     * @param node Never <code>null</code>.
     */
-   public String getPath(IPSHierarchyNodeRef node);
+   String getPath(IPSHierarchyNodeRef node);
 
    /**
     * Allows retrieval of a node if the entire path is known. A path is a node
@@ -223,12 +230,12 @@ public interface IPSHierarchyManager
     * 
     * @throws PSModelException If any problems communicating with the server.
     */
-   public IPSHierarchyNodeRef getByPath(String path) throws PSModelException;
+   IPSHierarchyNodeRef getByPath(String path) throws PSModelException;
    
    /**
     * The name of the tree that this manager represents.
     * 
     * @return Never <code>null</code> or empty.
     */
-   public String getTreeName();
+   String getTreeName();
 }

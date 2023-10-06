@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSRoleCatalogFactory.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.workbench.ui.catalogs.security;
 
 import com.percussion.client.IPSReference;
@@ -23,7 +30,6 @@ import com.percussion.workbench.ui.views.hierarchy.PSHierarchyDefProcessor;
 import com.percussion.workbench.ui.views.hierarchy.PSHierarchyDefProcessor.InheritedProperties;
 import com.percussion.workbench.ui.views.hierarchy.xmlbind.Catalog;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -59,7 +65,7 @@ public class PSRoleCatalogFactory extends PSCatalogFactoryBase
          public List<PSUiReference> getEntries(boolean force)
             throws PSModelException
          {
-            Collection<IPSReference> refs = new ArrayList<IPSReference>();
+            Collection<IPSReference> refs;
             String category = PSRoleCatalogFactory.this
                .getContextProperty(CATEGORY_PROPNAME);
             if (category.equalsIgnoreCase(CATEGORY_COMMUNITY))
@@ -103,11 +109,11 @@ public class PSRoleCatalogFactory extends PSCatalogFactoryBase
             return allRoles;
          }
 
-         protected static final String CATEGORY_PROPNAME = "category";
+         private static final String CATEGORY_PROPNAME = "category";
 
-         protected static final String CATEGORY_COMMUNITY = "community";
+         private static final String CATEGORY_COMMUNITY = "community";
 
-         protected static final String CATEGORY_WORKFLOW = "workflow";
+         private static final String CATEGORY_WORKFLOW = "workflow";
 
       };
    }

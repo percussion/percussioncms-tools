@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSClientException.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.error;
 
 import com.percussion.client.PSErrorCodes;
@@ -25,7 +32,7 @@ import java.util.ResourceBundle;
  * {@link com.percussion.client.error.IPSErrorCode} interface is used as the
  * source of the error codes. The messages for a set of codes can be registered
  * with this class by calling the {@link #registerMessageBundle}. See that
- * method for futher details.
+ * method for further details.
  * 
  * @version 6.0
  * @author paulhoward
@@ -148,7 +155,7 @@ public class PSClientException extends Exception
     * Ctor for parameterized error messages.
     * 
     * @param code The error code, which is used as a key to find the associated
-    * text. The key will be used to lookup the optionally patterned message in
+    * text. The key will be used to look up the optionally patterned message in
     * the ErrorMessages resource bundle located in the impl package. If the
     * bundle or key cannot be found, the key is used as the message. May be
     * <code>null</code> or empty, in which case the class name is used as the
@@ -274,7 +281,7 @@ public class PSClientException extends Exception
 
       if (message == null)
       {
-         StringBuffer buf = new StringBuffer();
+         StringBuilder buf = new StringBuilder();
          buf.append("Error code: ");
          buf.append(code.getCodeAsString());
          if (args != null)
@@ -314,13 +321,12 @@ public class PSClientException extends Exception
    /**
     * Stores all registered information for error message handling.
     */
-   private static List<ErrorBundleInfo> ms_bundleInfo = new ArrayList<ErrorBundleInfo>();
+   private static final List<ErrorBundleInfo> ms_bundleInfo = new ArrayList<>();
    {
       // auto registration
       ErrorBundleInfo info = new ErrorBundleInfo();
-      ResourceBundle bundle = ResourceBundle.getBundle(
+      info.m_bundle = ResourceBundle.getBundle(
             "com.percussion.client.impl.ErrorMessages", Locale.getDefault());
-      info.m_bundle = bundle;
       info.m_classNameSuffix = "com.percussion.client";
       info.m_minErrorCode = 30000;
       info.m_maxErrorCode = 30399;

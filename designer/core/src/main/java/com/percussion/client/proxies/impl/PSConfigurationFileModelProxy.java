@@ -1,38 +1,34 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSConfigurationFileModelProxy.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSPrimaryObjectType;
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.proxies.IPSCmsModelProxy;
 import com.percussion.client.proxies.PSProxyUtils;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.guidmgr.data.PSDesignGuid;
 import com.percussion.services.system.data.PSConfigurationTypes;
-import com.percussion.webservices.faults.PSContractViolationFault;
-import com.percussion.webservices.faults.PSInvalidSessionFault;
-import com.percussion.webservices.faults.PSLockFault;
-import com.percussion.webservices.faults.PSNotAuthorizedFault;
-import com.percussion.webservices.faults.PSUnknownConfigurationFault;
+import com.percussion.webservices.faults.*;
 import com.percussion.webservices.system.PSMimeContentAdapter;
 import com.percussion.webservices.systemdesign.LoadConfigurationRequest;
 import com.percussion.webservices.systemdesign.LoadConfigurationResponse;
 import com.percussion.webservices.systemdesign.SaveConfigurationRequest;
 import com.percussion.webservices.systemdesign.SystemDesignSOAPStub;
-import com.percussion.webservices.transformation.PSTransformationException;
 import org.apache.axis.client.Stub;
 
 import javax.xml.rpc.ServiceException;
@@ -51,7 +47,7 @@ import java.util.List;
  * 
  * @version 6.0
  * 
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSConfigurationFileModelProxy extends PSCmsModelProxy
 {
@@ -80,23 +76,20 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
       boolean overrideLock) throws PSMultiOperationException, PSModelException
    {
       LoadConfigurationRequest loadReq = new LoadConfigurationRequest();
-      SystemDesignSOAPStub binding = null;
+      SystemDesignSOAPStub binding;
       try
       {
          binding = (SystemDesignSOAPStub) getSoapBinding(METHOD.LOAD);
       }
-      catch (MalformedURLException e)
+      catch (MalformedURLException | ServiceException e)
       {
          throw new RuntimeException(e);
       }
-      catch (ServiceException e)
-      {
-         throw new RuntimeException(e);
-      }
+
       loadReq.setLock(lock);
       loadReq.setOverrideLock(overrideLock);
       Object[] resultObj = new Object[reference.length];
-      boolean errorOccured = false;
+      boolean errorOccurred = false;
       for (int i = 0; i < reference.length; i++)
       {
          IPSReference ref = reference[i];
@@ -104,7 +97,7 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
          Exception ex = null;
          try
          {
-            boolean redo = false;
+            boolean redo;
             do
             {
                redo = false;
@@ -139,42 +132,24 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
                   }
                }
             } while (redo);
-         }
-         catch (PSContractViolationFault e)
-         {
-            ex = e;
-         }
-         catch (PSUnknownConfigurationFault e)
-         {
-            ex = e;
-         }
-         catch (PSLockFault e)
+         } catch (PSLockFault e)
          {
             ex = PSProxyUtils.convertFault(e, METHOD.LOAD.toString(), 
                ref.getObjectType().getPrimaryType().toString(), ref.getName());
-         }
-         catch (PSNotAuthorizedFault e)
+         } catch (RemoteException e)
          {
             ex = e;
          }
-         catch (RemoteException e)
-         {
-            ex = e;
-         }
-         catch (PSTransformationException e)
-         {
-            ex = e;
-         }
-         
+
          if (ex != null)
          {
             logError(ex);
-            errorOccured = true;
+            errorOccurred = true;
             resultObj[i] = ex;
          }
       }
       
-      if (errorOccured)
+      if (errorOccurred)
       {
          processAndThrowException(resultObj.length, 
             new PSMultiOperationException(resultObj, reference));
@@ -187,10 +162,8 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
    public Collection<IPSReference> catalog() throws PSModelException
    {
       PSConfigurationTypes[] array = PSConfigurationTypes.values();
-      List<IPSReference> refs = new ArrayList<IPSReference>(array.length);
-      for (int i = 0; i < array.length; i++)
-      {
-         PSConfigurationTypes type = array[i];
+      List<IPSReference> refs = new ArrayList<>(array.length);
+      for (PSConfigurationTypes type : array) {
          PSReference ref = new PSReference();
          ref.setName(type.getFileName());
          //if you change this, the load method must be modified
@@ -215,7 +188,7 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
    private PSObjectType serverToClientType(PSConfigurationTypes type)
    {
       IPSPrimaryObjectType pType = PSObjectTypes.CONFIGURATION_FILE;
-      Enum sType = null;
+      Enum<PSObjectTypes.ConfigurationFileSubTypes> sType;
       switch (type)
       {
          case LOG_CONFIG:
@@ -254,16 +227,12 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
       throws PSMultiOperationException, PSModelException
    {
       SaveConfigurationRequest saveReq = new SaveConfigurationRequest();
-      SystemDesignSOAPStub binding = null;
+      SystemDesignSOAPStub binding;
       try
       {
          binding = (SystemDesignSOAPStub) getSoapBinding(METHOD.LOAD);
       }
-      catch (MalformedURLException e)
-      {
-         throw new RuntimeException(e);
-      }
-      catch (ServiceException e)
+      catch (MalformedURLException | ServiceException e)
       {
          throw new RuntimeException(e);
       }
@@ -276,7 +245,7 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
          Exception ex = null;
          try
          {
-            boolean redo = false;
+            boolean redo;
             do
             {
                redo = false;
@@ -309,34 +278,16 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
                   }
                }
             } while (redo);
-         }
-         catch (PSContractViolationFault e)
-         {
-            ex = e;
-         }
-         catch (PSUnknownConfigurationFault e)
-         {
-            ex = e;
-         }
-         catch (PSLockFault e)
+         } catch (PSLockFault e)
          {
             ex = PSProxyUtils.convertFault(e, METHOD.SAVE.toString(), 
                refs[i].getObjectType().getPrimaryType().toString(), 
                refs[i].getName());
-         }
-         catch (PSNotAuthorizedFault e)
+         } catch (RemoteException e)
          {
             ex = e;
          }
-         catch (RemoteException e)
-         {
-            ex = e;
-         }
-         catch (PSTransformationException e)
-         {
-            ex = e;
-         }
-         
+
          if (ex != null)
          {
             logError(ex);
@@ -347,14 +298,14 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
       
       if (!errorOccurred || resultObj.length > 1)
       {
-         Collection<IPSReference> successful = new ArrayList<IPSReference>();
+         Collection<IPSReference> successful = new ArrayList<>();
          for (int i=0; i < resultObj.length; i++)
          {
             if (!(resultObj[i] instanceof Throwable))
                successful.add(refs[i]);
          }
          PSProxyUtils.setLockInfo(successful.toArray(
-            new IPSReference[successful.size()]), true);
+                 new IPSReference[0]), true);
       }
       
       if (errorOccurred)
@@ -400,7 +351,7 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
    @SuppressWarnings("unused")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       throw new UnsupportedOperationException(
          "create() is not supported by this proxy");
@@ -409,7 +360,7 @@ public class PSConfigurationFileModelProxy extends PSCmsModelProxy
    @SuppressWarnings("unused")
    @Override
    public IPSReference[] create(Object[] sourceObjects, String[] names,
-         List results)
+         List<Object> results)
    {
       throw new UnsupportedOperationException(
          "create() is not supported by this proxy");

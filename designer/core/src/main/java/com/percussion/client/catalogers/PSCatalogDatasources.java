@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSCatalogDatasources.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2008 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.catalogers;
 
 import com.percussion.client.PSCoreFactory;
@@ -19,13 +26,10 @@ import org.apache.commons.collections.map.UnmodifiableMap;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
- * Catalogs active datasources from the server and caches the results.
+ * Catalogs active data sources from the server and caches the results.
  */
 public class PSCatalogDatasources
 {
@@ -59,12 +63,12 @@ public class PSCatalogDatasources
    }
 
    /**
-    * Catalog the names of all active datsources from the server.
+    * Catalog the names of all active data sources from the server.
     * 
     * @param conn The connection to use, may be <code>null</code> to use the
     * one returned by {@link PSCoreFactory#getDesignerConnection()}.
     * @param forceCatalog <code>true</code> to force a request to the server,
-    * <code>false</code> to use cached data if datasources have already been
+    * <code>false</code> to use cached data if data sources have already been
     * cataloged.
     * @param includeDbPubOnlySources flag that indicates that database publishing
     * only sources should also be included in the returned results.
@@ -77,7 +81,7 @@ public class PSCatalogDatasources
    {
       List<Map<String, String>> sources = 
          getCatalogAllInfo(conn, forceCatalog, includeDbPubOnlySources);
-      List<String> names = new ArrayList<String>();
+      List<String> names = new ArrayList<>();
       for(Map<String, String> source : sources)
       {
          names.add(source.get(DATASOURCE_NAME));   
@@ -86,11 +90,11 @@ public class PSCatalogDatasources
    }
    
    /**
-    * Catalog all info for all active datsources from the server.
+    * Catalog all info for all active data sources from the server.
     * @param conn The connection to use, may be <code>null</code> to use the
     * one returned by {@link PSCoreFactory#getDesignerConnection()}.
     * @param forceCatalog <code>true</code> to force a request to the server,
-    * <code>false</code> to use cached data if datasources have already been
+    * <code>false</code> to use cached data if data sources have already been
     * cataloged.
     * @param includeDbPubOnlySources flag that indicates that database publishing
     * only sources should also be included in the returned results.
@@ -106,10 +110,10 @@ public class PSCatalogDatasources
       {
          conn = PSCoreFactory.getInstance().getDesignerConnection();
       }
-      if (ms_datasourceCache == null || forceCatalog)
+      if (datasourceCache == null || forceCatalog)
       {
-         ms_datasourceCache = new ArrayList<Map<String, String>>();
-         ms_repositoryDatasource = "";
+         datasourceCache = new ArrayList<>();
+         repositoryDatasource = "";
 
          PSSqlCataloger cataloger = new PSSqlCataloger();
          if(includeDbPubOnlySources)
@@ -121,7 +125,7 @@ public class PSCatalogDatasources
             PSCatalogResultsWalker walker = cataloger.getWalker();
             while (walker.nextResultObject("datasource"))
             {
-               Map<String, String> info = new HashMap<String, String>();
+               Map<String, String> info = new HashMap<>();
                info.put(DATASOURCE_NAME, walker.getResultData(DATASOURCE_NAME));
                info.put(JNDI_DATASOURCE_NAME, 
                   walker.getResultData(JNDI_DATASOURCE_NAME));
@@ -131,33 +135,21 @@ public class PSCatalogDatasources
                info.put(ORIGIN, walker.getResultData(ORIGIN));
                info.put(DRIVER, walker.getResultData(DRIVER));
                info.put(IS_DB_PUBONLY, walker.getResultData(IS_DB_PUBONLY));
-               ms_datasourceCache.add(UnmodifiableMap.decorate(info));
+               datasourceCache.add(UnmodifiableMap.decorate(info));
                if (isRepository(walker))
-                  ms_repositoryDatasource = info.get(DATASOURCE_NAME);
+                  repositoryDatasource = info.get(DATASOURCE_NAME);
             }
          }
-         catch (IOException ioe)
+         catch (IOException | PSAuthorizationException | PSAuthenticationFailedException | PSServerException ioe)
          {
             PSSqlCataloger.handleException(ioe);
          }
-         catch (PSAuthorizationException ae)
-         {
-            PSSqlCataloger.handleException(ae);
-         }
-         catch (PSAuthenticationFailedException ae)
-         {
-            PSSqlCataloger.handleException(ae);
-         }
-         catch (PSServerException se)
-         {
-            PSSqlCataloger.handleException(se);
-         }
       }
       List<Map<String, String>> results = 
-         new ArrayList<Map<String, String>>();
-      for(Map<String, String> entry : ms_datasourceCache)
+         new ArrayList<>();
+      for(Map<String, String> entry : datasourceCache)
       {
-         String isPubOnly = entry.get("isDbPubOnly");
+         String isPubOnly = entry.get(IS_DB_PUBONLY);
          if(!includeDbPubOnlySources && isPubOnly.equalsIgnoreCase("yes"))
             continue;
          results.add(entry);
@@ -170,7 +162,7 @@ public class PSCatalogDatasources
     * @param name the name of the datasource to retrieve, cannot be
     * <code>null</code> or empty.
     * @param forceCatalog <code>true</code> to force a request to the server,
-    * <code>false</code> to use cached data if datasources have already been
+    * <code>false</code> to use cached data if data sources have already been
     * cataloged.
     * @return the source map or <code>null</code> if not found.
     */
@@ -187,7 +179,7 @@ public class PSCatalogDatasources
             return source;   
          }
       }      
-      return null;
+      return Collections.emptyMap();
    }
 
    /**
@@ -206,7 +198,7 @@ public class PSCatalogDatasources
       if (StringUtils.isBlank(dsName))
          throw new IllegalArgumentException("dsName may not be null or empty");
 
-      return dsName.equals(ms_repositoryDatasource);
+      return dsName.equals(repositoryDatasource);
    }
 
    /**
@@ -227,7 +219,7 @@ public class PSCatalogDatasources
     * 
     * @param dsName The name, may not be <code>null</code> or empty.
     * 
-    * @return The display name. For datasources other than the repository, it is
+    * @return The display name. For data sources other than the repository, it is
     * the supplied name. For the repository datasource, it is a generic
     * identifier such as "<CMS Repository>".
     */
@@ -236,7 +228,7 @@ public class PSCatalogDatasources
       if (StringUtils.isBlank(dsName))
          throw new IllegalArgumentException("dsName may not be null or empty");
 
-      if (dsName.equalsIgnoreCase(ms_repositoryDatasource))
+      if (dsName.equalsIgnoreCase(repositoryDatasource))
          dsName = REPOSITORY_LABEL;
 
       return dsName;
@@ -246,13 +238,13 @@ public class PSCatalogDatasources
     * Map of datasource info, <code>null</code> until first call to
     * {@link #getCatalog(boolean)}, never <code>null</code> after that.
     */
-   private static List<Map<String, String>> ms_datasourceCache = null;
+   private static List<Map<String, String>> datasourceCache = null;
 
    /**
     * Name of the repository datasource, set by each call to
     * {@link #getCatalog(boolean)} that does not use the cached data.
     */
-   private static String ms_repositoryDatasource;
+   private static String repositoryDatasource;
 
    /**
     * Constant for the display name to use for the repository datasource.
