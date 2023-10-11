@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ IPSExtensionModel.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2008 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.models;
 
 import com.percussion.client.PSModelException;
@@ -32,7 +39,7 @@ public interface IPSExtensionModel extends IPSCmsModel
     * @throws PSModelException when information retrieval fails. 
     * @see IPSExtensionDef#INIT_PARAM_ASSEMBLY_FILE_SUFFIX 
     */
-   public String getAssemblerSourceExt(final String assembler)
+   String getAssemblerSourceExt(final String assembler)
          throws PSModelException;
    
    /**
@@ -41,7 +48,7 @@ public interface IPSExtensionModel extends IPSCmsModel
     *
     * @author paulhoward
     */
-   public enum Handlers 
+   enum Handlers
    {
       JAVA
       {
@@ -73,14 +80,14 @@ public interface IPSExtensionModel extends IPSCmsModel
        */
       public static List<String> getNames()
       {
-         final List<String> names = new ArrayList<String>();
+         final List<String> names = new ArrayList<>();
          for (final Handlers handler : values())
          {
             names.add(handler.getName());
          }
          return names;
       }
-   };
+   }
 
    /**
     * Contains an enumeration for each known extension interface. Only
@@ -89,7 +96,7 @@ public interface IPSExtensionModel extends IPSCmsModel
     * 
     * @author paulhoward
     */
-   public enum Interfaces
+   enum Interfaces
    {
       ASSEMBLER
       {
@@ -339,7 +346,7 @@ public interface IPSExtensionModel extends IPSCmsModel
        */
       public static List<String> getClassNames()
       {
-         final List<String> names = new ArrayList<String>();
+         final List<String> names = new ArrayList<>();
          for (final Interfaces type : values())
          {
             names.add(type.getClassName());
@@ -367,5 +374,5 @@ public interface IPSExtensionModel extends IPSCmsModel
          }
          return null;
       }
-   };
+   }
 }

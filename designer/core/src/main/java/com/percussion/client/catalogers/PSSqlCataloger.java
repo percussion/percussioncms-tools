@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSSqlCataloger.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2008 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.percussion.client.catalogers;
 
@@ -21,14 +28,13 @@ import org.w3c.dom.Document;
 
 import java.io.IOException;
 import java.text.Collator;
-import java.util.Collections;
 import java.util.Properties;
 import java.util.Vector;
 
 /**
  * Supports cataloging the different levels of grouping including:
  * <ul>
- * <li>datasources</li>
+ * <li>data sources</li>
  * <li>tables</li>
  * <li>columns</li>
  * </ul>
@@ -45,12 +51,12 @@ import java.util.Vector;
 public class PSSqlCataloger
 {
    /**
-    * Creates a cataloger for datasources. The only element data type supported
+    * Creates a cataloger for data sources. The only element data type supported
     * is "name"
     */
    public PSSqlCataloger()
    {
-      m_properties = initProperties("Datasource", null, null, false);
+      properties = initProperties("Datasource", null, null, false);
    }
 
    /**
@@ -63,8 +69,8 @@ public class PSSqlCataloger
    public PSSqlCataloger(String datasource, 
          @SuppressWarnings("unused") boolean bTableTypes)
    {
-      m_properties = initProperties("TableTypes", datasource, null, true);
-      m_reqType = "TableType";
+      properties = initProperties("TableTypes", datasource, null, true);
+      reqType = "TableType";
    }
 
    /**
@@ -73,7 +79,7 @@ public class PSSqlCataloger
     */
    public PSSqlCataloger(String datasource)
    {
-      m_properties = initProperties("Table", datasource, null, true);
+      properties = initProperties("Table", datasource, null, true);
    }
 
    /**
@@ -82,7 +88,7 @@ public class PSSqlCataloger
     */
    public PSSqlCataloger(String datasource, String table)
    {
-      m_properties = initProperties("Column", datasource, table, true);
+      properties = initProperties("Column", datasource, table, true);
    }
 
    /**
@@ -91,7 +97,7 @@ public class PSSqlCataloger
     */
    public PSSqlCataloger(String reqType, String datasource, String table)
    {
-      m_properties = initProperties(reqType, datasource, table, true);
+      properties = initProperties(reqType, datasource, table, true);
    }
 
    /**
@@ -123,14 +129,14 @@ public class PSSqlCataloger
    private Properties initProperties(String reqType, String datasource,
       String table, @SuppressWarnings("unused") boolean bRequireCred)
    {
-      Properties properties = new Properties();
-      properties.put("RequestCategory", "data");
-      properties.put("RequestType", reqType);
+      Properties props = new Properties();
+      props.put("RequestCategory", "data");
+      props.put(REQUEST_TYPE, reqType);
       if (null != datasource)
-         properties.put("Datasource", datasource);
+         props.put("Datasource", datasource);
       if (null != table && table.trim().length() > 0)
-         properties.put("TableName", table);
-      return properties;
+         props.put("TableName", table);
+      return props;
    }
    
    /**
@@ -140,11 +146,12 @@ public class PSSqlCataloger
     */
    public void addProperty(String name, String value)
    {
-      if(StringUtils.isBlank(name))
+      if(StringUtils.isBlank(name)) {
          throw new IllegalArgumentException("name cannot be null or empty.");
-         if(m_properties != null)
-      {
-         m_properties.put(name, value);
+      }
+
+      if(properties != null) {
+         properties.put(name, value);
       }
    }
 
@@ -153,7 +160,7 @@ public class PSSqlCataloger
     * specified by the constructor. The element types supported are specified in
     * the description of each constructor. Filtering of the data is done if a
     * filter is set using {@link #setFilter(String, String)} method. The
-    * comparison for filtering will be case sensitive.
+    * comparison for filtering will be case-sensitive.
     * 
     * @param elementDataType The name of the element in the xml document that
     * contains the catalog data. The supported types for each catalog type are
@@ -175,11 +182,11 @@ public class PSSqlCataloger
       throws IOException, PSAuthorizationException,
       PSAuthenticationFailedException, PSServerException
    {
-      Vector<String> catalog = new Vector<String>();
+      Vector<String> catalog = new Vector<>();
       PSCatalogResultsWalker names = getWalker();
-      String reqType = null == m_reqType ? (String) m_properties
-         .get(REQUEST_TYPE) : m_reqType;
-      while (names.nextResultObject(reqType))
+      String theReqType = null == this.reqType ? (String) properties
+         .get(REQUEST_TYPE) : this.reqType;
+      while (names.nextResultObject(theReqType))
       {
          if (m_filterName != null)
          {
@@ -196,7 +203,7 @@ public class PSSqlCataloger
          Collator c = Collator.getInstance();
          c.setStrength(Collator.PRIMARY);
          PSObjectCollator oc = new PSObjectCollator(c);
-         Collections.sort(catalog, oc);
+         catalog.sort(oc);
       }
       return catalog;
    }
@@ -215,7 +222,7 @@ public class PSSqlCataloger
    /**
     * If you want to process the catalog document yourself, (perhaps to get
     * multiple element types in a single pass) this method returns a catalog
-    * walker that can be used to do this. Typically getCatalog() will be called
+    * walker that can be used to do this. Typically, getCatalog() will be called
     * instead.
     * 
     * @return A catalog walker that can be used to read the catalog document and
@@ -257,11 +264,11 @@ public class PSSqlCataloger
       PSServerException
    {
       PSCataloger cataloger = new PSCataloger(m_connection);
-      return cataloger.catalog(m_properties);
+      return cataloger.catalog(properties);
    }
 
    /**
-    * Wraps the supplie exception in a runtimeexception and throws again.
+    * Wraps the supplied exception in a RuntimeException and throws again.
     */
    public static void handleException(Exception e)
    {
@@ -273,7 +280,7 @@ public class PSSqlCataloger
     * 
     * @param name this can be the name of the child element or attribute (in
     * which case it must start with '@') holding the value that will be compared
-    * to the value suppied via second parameter. Must not be <code>null</code>
+    * to the value supplied via second parameter. Must not be <code>null</code>
     * or empty.
     * @param value the value that must match with data for the child
     * element/attribute supplied via the first parameter. Must not be
@@ -296,13 +303,13 @@ public class PSSqlCataloger
    private static final String REQUEST_TYPE = "RequestType";
 
    /* Properties used for cataloging. */
-   private Properties m_properties = null;
+   private final Properties properties;
 
    /*
     * This is used to specify a non-standard request type. If this is null, the
     * request type is taken from the properties object.
     */
-   private String m_reqType = null;
+   private String reqType = null;
 
    private PSDesignerConnection m_connection = null;
 

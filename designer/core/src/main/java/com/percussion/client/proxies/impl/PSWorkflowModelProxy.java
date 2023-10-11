@@ -1,29 +1,28 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSWorkflowModelProxy.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.proxies.PSProxyUtils;
 import com.percussion.services.guidmgr.data.PSDesignGuid;
 import com.percussion.utils.guid.IPSGuid;
 import com.percussion.webservices.common.PSObjectSummary;
 import com.percussion.webservices.common.PSObjectSummaryLocked;
-import com.percussion.webservices.faults.PSContractViolationFault;
-import com.percussion.webservices.faults.PSInvalidSessionFault;
-import com.percussion.webservices.faults.PSNotAuthorizedFault;
 import com.percussion.webservices.system.LoadWorkflowsRequest;
 import com.percussion.webservices.system.PSWorkflow;
 import com.percussion.webservices.system.PSWorkflowRole;
@@ -46,15 +45,14 @@ import java.util.Set;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since  03-Sep-2005 4:39:27 PM
  */
 public class PSWorkflowModelProxy extends PSReadOnlyModelProxy
 {
    /**
     * Ctor. Invokes base class version with the object type
     * {@link PSObjectTypes#WORKFLOW} and for main type and
-    * <code>null</code> sub type since this object type does not have any sub
-    * types.
+    * <code>null</code> subtype since this object type does not have any subtypes.
     */
    public PSWorkflowModelProxy()
    {
@@ -64,30 +62,30 @@ public class PSWorkflowModelProxy extends PSReadOnlyModelProxy
    /**
     * Get the {@link IPSGuid}s for the roles that is member of the workflow
     * with supplied workflow reference. If the supplied workflow reference is
-    * <code>null</code> all workflows are catalogged from the server and a set
+    * <code>null</code> all workflows are cataloged from the server and a set
     * of all workflow roles is returned.
     * 
     * @param wfRef Reference of the workflow whose member roles are asked for.
-    * If <code>null</code> all workflows are cataloged and and set of all
+    * If <code>null</code> all workflows are cataloged and set of all
     * roles from all workflows is returned.
     * @return set of workflow roles as explained above. Never <code>null</code>
     * may be empty.
-    * @throws PSModelException 
+    * @throws PSModelException When an exception occurs.
     */
    public Collection<String> getWorkflowRoles(IPSReference wfRef)
       throws PSModelException
    {
-      Set<String> result = new HashSet<String>();
+      Set<String> result = new HashSet<>();
       try
       {
-         Collection<IPSReference> wfRefs = null;
+         Collection<IPSReference> wfRefs;
          if (wfRef == null)
          {
             wfRefs = catalog();
          }
          else
          {
-            wfRefs = new ArrayList<IPSReference>(1);
+            wfRefs = new ArrayList<>(1);
             wfRefs.add(wfRef);
          }
          PSWorkflow[] wfs = (PSWorkflow[]) load(wfRefs
@@ -120,7 +118,7 @@ public class PSWorkflowModelProxy extends PSReadOnlyModelProxy
       Exception ex = null;
       try
       {
-         boolean redo = false;
+         boolean redo;
          do
          {
             redo = false;
@@ -129,11 +127,9 @@ public class PSWorkflowModelProxy extends PSReadOnlyModelProxy
                SystemSOAPStub binding = 
                   (SystemSOAPStub) getSoapBinding(METHOD.LOAD);
                LoadWorkflowsRequest req = new LoadWorkflowsRequest();
-               com.percussion.webservices.system.PSWorkflow[] wfs = 
-                  binding.loadWorkflows(req);
-               return wfs;
+               return binding.loadWorkflows(req);
             }
-            catch (PSInvalidSessionFault e)
+            catch (RemoteException e)
             {
                try
                {
@@ -147,29 +143,12 @@ public class PSWorkflowModelProxy extends PSReadOnlyModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (MalformedURLException | ServiceException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
-         processAndThrowException(reference.length, ex);
+
+      processAndThrowException(reference.length, ex);
       
       // will never get here
       return new Object[0];
@@ -193,8 +172,8 @@ public class PSWorkflowModelProxy extends PSReadOnlyModelProxy
       {
          throw new IllegalArgumentException("objType must not be null");
       }
-      Collection<IPSReference> coll = new ArrayList<IPSReference>();
-      if (results != null && results.length > 0)
+      Collection<IPSReference> coll = new ArrayList<>();
+      if (results.length > 0)
       {
          for (PSObjectSummary result : results)
          {

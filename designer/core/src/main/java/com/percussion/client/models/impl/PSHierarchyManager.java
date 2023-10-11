@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSHierarchyManager.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.models.impl;
 
 import com.percussion.client.*;
@@ -131,7 +138,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
       
       boolean error = false;
       List<IPSHierarchyNodeRef> availableRefs = 
-         new ArrayList<IPSHierarchyNodeRef>();
+         new ArrayList<>();
       /* The refs are stored in results[0], the data are stored in results[1].
        * Each ref can either be an exception or a valid ref, each data can 
        * be null (for exceptions) or a valid data object.
@@ -196,8 +203,8 @@ public class PSHierarchyManager implements IPSHierarchyManager
       }
 
       Collection<IPSHierarchyNodeRef> validRefs = 
-         new ArrayList<IPSHierarchyNodeRef>();
-      Collection<Object> validData = new ArrayList<Object>();
+         new ArrayList<>();
+      Collection<Object> validData = new ArrayList<>();
       for (int j=0; j < results[REFS].length; j++)
       {
          if (results[REFS][j] instanceof IPSHierarchyNodeRef)
@@ -208,7 +215,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
       }
       
       IPSHierarchyNodeRef[] validRefsArray = 
-         validRefs.toArray(new IPSHierarchyNodeRef[validRefs.size()]);
+         validRefs.toArray(new IPSHierarchyNodeRef[0]);
       m_model.objectsCloned(validRefsArray, Arrays.asList(results[DATA]));
 
       if (error)
@@ -225,10 +232,10 @@ public class PSHierarchyManager implements IPSHierarchyManager
       throws PSMultiOperationException, PSModelException
    {
       m_model.checkObjectType(type, true);
-      if (null == names || names.size() == 0)
+      if (null == names || names.isEmpty())
          return new IPSHierarchyNodeRef[0];
       
-      Set<String> usedNames = new HashSet<String>();
+      Set<String> usedNames = new HashSet<>();
       try
       {
          Collection<IPSHierarchyNodeRef> currentChildren = 
@@ -244,7 +251,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
       }
       
       boolean error = false;
-      List<String> desiredNames = new ArrayList<String>();
+      List<String> desiredNames = new ArrayList<>();
       /* The refs are stored in results[0], the data are stored in results[1].
        * Each ref can either be an exception or a valid ref, each data can 
        * be null (for exceptions) or a valid data object.
@@ -298,8 +305,8 @@ public class PSHierarchyManager implements IPSHierarchyManager
       }
 
       Collection<IPSHierarchyNodeRef> validRefs = 
-         new ArrayList<IPSHierarchyNodeRef>();
-      Collection<Object> validData = new ArrayList<Object>();
+         new ArrayList<>();
+      Collection<Object> validData = new ArrayList<>();
       for (int j=0; j < results[REFS].length; j++)
       {
          if (results[REFS][j] instanceof IPSHierarchyNodeRef)
@@ -310,7 +317,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
       }
       
       IPSHierarchyNodeRef[] validRefsArray = 
-         validRefs.toArray(new IPSHierarchyNodeRef[validRefs.size()]);
+         validRefs.toArray(new IPSHierarchyNodeRef[0]);
       m_model.objectsCreated(validRefsArray, Arrays.asList(results[DATA]));
 
       if (error)
@@ -368,8 +375,8 @@ public class PSHierarchyManager implements IPSHierarchyManager
    {
       try
       {
-         Collection<IPSReference> folderRefs = new ArrayList<IPSReference>(); 
-         Collection<Object> folderData = new ArrayList<Object>(); 
+         Collection<IPSReference> folderRefs = new ArrayList<>();
+         Collection<Object> folderData = new ArrayList<>();
          int i=0;
          for (Object o : refs)
          {
@@ -386,7 +393,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
             return;
          //go directly to proxy, don't use our model layer
          m_model.getProxy().save(
-               folderRefs.toArray(new IPSReference[folderRefs.size()]),
+               folderRefs.toArray(new IPSReference[0]),
                folderData.toArray(), true);
       }
       catch (PSMultiOperationException e)
@@ -430,40 +437,38 @@ public class PSHierarchyManager implements IPSHierarchyManager
    public void removeChildren(List<IPSHierarchyNodeRef> children)
       throws PSMultiOperationException, PSModelException
    {
-      if (children == null || children.size() == 0)
+      if (children == null || children.isEmpty())
          return;
       
       try
       {
-         List<IPSHierarchyNodeRef> delete = new ArrayList<IPSHierarchyNodeRef>();
-         for (int i = 0; i < children.size(); i++)
-         {
-            IPSHierarchyNodeRef hRef = children.get(i);
+         List<IPSHierarchyNodeRef> delete = new ArrayList<>();
+         for (IPSHierarchyNodeRef hRef : children) {
             if (hRef.isPersisted())
                delete.add(hRef);
          }
          if (!delete.isEmpty())
          {
             IPSHierarchyNodeRef[] childRefs = delete
-               .toArray(new IPSHierarchyNodeRef[delete.size()]);
+               .toArray(new IPSHierarchyNodeRef[0]);
             getProxy().removeChildren(childRefs);
          }
          m_model.objectsDeleted(children
-            .toArray(new IPSHierarchyNodeRef[children.size()]));
+            .toArray(new IPSHierarchyNodeRef[0]));
       }
       catch (PSMultiOperationException e)
       {
          Object[] resultRefs = e.getResults();
-         assert( children.size() == resultRefs.length);
-         IPSReference[] goodRefs = new IPSReference[resultRefs.length];
-         int i=0;
-         for (Object o : resultRefs)
-         {
-            if (o instanceof IPSReference)
-               goodRefs[i] = (IPSReference) o;
-            i++;
+         if( children.size() == resultRefs.length) {
+            IPSReference[] goodRefs = new IPSReference[resultRefs.length];
+            int i = 0;
+            for (Object o : resultRefs) {
+               if (o instanceof IPSReference)
+                  goodRefs[i] = (IPSReference) o;
+               i++;
+            }
+            m_model.objectsDeleted(goodRefs);
          }
-         m_model.objectsDeleted(goodRefs);
          throw e;
       }
    }
@@ -473,7 +478,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
          IPSHierarchyNodeRef targetParent) 
       throws PSMultiOperationException, PSModelException
    {
-      if (sourceChildren == null || sourceChildren.size() == 0)
+      if (sourceChildren == null || sourceChildren.isEmpty())
          return;
       
       assureAllHaveSameParent(sourceChildren);
@@ -485,7 +490,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
       {
          return;
       }
-      Set<String> usedNames = new HashSet<String>();
+      Set<String> usedNames = new HashSet<>();
       try
       {
          Collection<IPSHierarchyNodeRef> currentChildren = 
@@ -500,9 +505,9 @@ public class PSHierarchyManager implements IPSHierarchyManager
          //ignore, just let the proxy level deal with it
       }
 
-      Map<IPSGuid, Object> resultMap = new HashMap<IPSGuid, Object>(
+      Map<IPSGuid, Object> resultMap = new HashMap<>(
          sourceChildren.size());
-      List<IPSHierarchyNodeRef> goodList =new ArrayList<IPSHierarchyNodeRef>();
+      List<IPSHierarchyNodeRef> goodList =new ArrayList<>();
       for (IPSHierarchyNodeRef ref : sourceChildren)
       {
          if(usedNames.contains(ref.getName().toLowerCase()))
@@ -516,22 +521,22 @@ public class PSHierarchyManager implements IPSHierarchyManager
             goodList.add(ref);
          }
       }
-      if (goodList.size() > 0)
+      if (!goodList.isEmpty())
       {
          try
          {
             getProxy().moveChildren(
-               goodList.toArray(new IPSHierarchyNodeRef[goodList.size()]),
+               goodList.toArray(new IPSHierarchyNodeRef[0]),
                createId(targetParent));
             m_model
                .objectsMoved(sourceParent, goodList
-                  .toArray(new IPSHierarchyNodeRef[goodList.size()]),
+                  .toArray(new IPSHierarchyNodeRef[0]),
                   targetParent);
          }
          catch (PSMultiOperationException e)
          {
             Object[] resultRefs = e.getResults();
-            List<IPSHierarchyNodeRef> goodRefs = new ArrayList<IPSHierarchyNodeRef>();
+            List<IPSHierarchyNodeRef> goodRefs = new ArrayList<>();
             for (int i = 0; i < resultRefs.length; i++)
             {
                Object o = resultRefs[i];
@@ -541,7 +546,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
                }
                resultMap.put(goodList.get(i).getId(), o);
             }
-            if (goodRefs.size() > 0)
+            if (!goodRefs.isEmpty())
             {
                m_model.objectsMoved(sourceParent, goodRefs
                   .toArray(new IPSHierarchyNodeRef[0]), targetParent);
@@ -572,7 +577,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
    private void assureAllHaveSameParent(List<IPSHierarchyNodeRef> nodes)
          throws PSModelException
    {
-      if (nodes.size() > 0)
+      if (!nodes.isEmpty())
       {
          IPSHierarchyNodeRef currentParent = null;
          
@@ -604,13 +609,13 @@ public class PSHierarchyManager implements IPSHierarchyManager
    /**
     * Makes sure targetParent is not under any of source nodes.
     * @throws IllegalArgumentException if any of source nodes is or is above
-    * provided parent in the nodes hierarchy.  
+    * provided parent in the node's hierarchy.
     */
    private void assureNotMovedIntoItself(List<IPSHierarchyNodeRef> sourceChildren,
          IPSHierarchyNodeRef targetParent)
          throws PSModelException
    {
-      final Set<IPSHierarchyNodeRef> parents = new HashSet<IPSHierarchyNodeRef>();
+      final Set<IPSHierarchyNodeRef> parents = new HashSet<>();
       {
          IPSHierarchyNodeRef ref = targetParent;
          while (ref != null)
@@ -625,7 +630,10 @@ public class PSHierarchyManager implements IPSHierarchyManager
          {
             final Object[] errorArgs = new Object[2];
             errorArgs[0] = child.getName();
-            errorArgs[1] = targetParent.getName();
+            //noinspection ConstantConditions
+            if(targetParent!=null) {
+               errorArgs[1] = targetParent.getName();
+            }
             
             throw new PSModelException(PSErrorCodes.CANT_MOVE_NODE_UNDER_ITSELF,
                   errorArgs);
@@ -640,8 +648,8 @@ public class PSHierarchyManager implements IPSHierarchyManager
    }
    
    /**
-    * Implements {@link #getReference(IPSGuid)} using recursion. Uses breadth-
-    * first searching at each level to minimize cataloging.
+    * Implements {@link #getReference(IPSGuid)} using recursion.
+    * Uses breadth-first searching at each level to minimize cataloging.
     * 
     * @param parent May be <code>null</code>.
     * 
@@ -658,7 +666,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
       IPSHierarchyNodeRef result = null;
       Collection<IPSHierarchyNodeRef> children = getChildren(parent);
       Collection<IPSHierarchyNodeRef> folders = 
-         new ArrayList<IPSHierarchyNodeRef>();
+         new ArrayList<>();
       for (IPSHierarchyNodeRef node : children)
       {
          if (node.getId() != null && node.getId().equals(id))
@@ -716,7 +724,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
             }
          });
       Collection<IPSHierarchyNodeRef> results = 
-         new ArrayList<IPSHierarchyNodeRef>();
+         new ArrayList<>();
       for (IPSReference ref : refs)
       {
          results.add((IPSHierarchyNodeRef) ref);
@@ -740,10 +748,10 @@ public class PSHierarchyManager implements IPSHierarchyManager
    {
       final IPSHierarchyNodeRef[] refs;
       if (ms_logger.isDebugEnabled())
-         ms_logger.debug("Calling proxy to get children for " + parent);
+         ms_logger.debug("Calling proxy to get children for {}" , parent);
       refs = getProxy().getChildren(createId((IPSHierarchyNodeRef) parent));
       fixupRefs(refs);
-      return new ArrayList<IPSReference>(Arrays.asList(refs));
+      return new ArrayList<>(Arrays.asList(refs));
    }
    
    // see interface
@@ -812,7 +820,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
    /**
     * Sets this manager as the manager for all nodes in the supplied array.
     * 
-    * @param refs Assumed not <code>null</code>. Sets the this as the manager
+    * @param refs Assumed not <code>null</code>. Sets this as the manager
     * on every entry that is an <code>PSHierarchyNodeRef</code>.
     */
    private void fixupRefs(Object[] refs)
@@ -867,5 +875,5 @@ public class PSHierarchyManager implements IPSHierarchyManager
     * The logging target for all instances of this class. Never
     * <code>null</code>.
     */
-   private static Logger ms_logger = LogManager.getLogger(PSHierarchyManager.class);
+   private static final Logger ms_logger = LogManager.getLogger(PSHierarchyManager.class);
 }

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Help Plug-in
 Bundle-SymbolicName: com.percussion.doc.help.packagebuilder; singleton:=true
-Bundle-Version: 8.1.3
+Bundle-Version: 8.1.4.qualifier
 Bundle-Activator: com.percussion.doc.packagebuilder.PackageBuilderHelpPlugin
 Bundle-Vendor: Percussion Software
 Bundle-Localization: plugin

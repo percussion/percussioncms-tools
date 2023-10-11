@@ -21,7 +21,7 @@
     <parent>
         <groupId>com.percussion</groupId>
         <artifactId>percussioncms-tools</artifactId>
-        <version>8.1.3</version>
+        <version>8.1.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>perc-server-properties-editor</artifactId>

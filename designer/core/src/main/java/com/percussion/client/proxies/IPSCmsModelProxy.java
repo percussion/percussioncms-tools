@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ IPSCmsModelProxy.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.proxies;
 
 import com.percussion.client.IPSReference;
@@ -37,7 +44,7 @@ public interface IPSCmsModelProxy
     * 
     * @author paulhoward
     */
-   public interface IModelInfo
+    interface IModelInfo
    {
       /**
        * Higher levels should honor this flag and not cache any returned values
@@ -47,7 +54,7 @@ public interface IPSCmsModelProxy
        * data returned by this proxy, they should always re-query when
        * cataloging.
        */
-      public boolean isCacheable();
+       boolean isCacheable();
    }
 
    /**
@@ -57,7 +64,7 @@ public interface IPSCmsModelProxy
     * 
     * @return Never <code>null</code>.
     */
-   public IModelInfo getMetaData();
+    IModelInfo getMetaData();
 
    /**
     * Change the name of a design object. A name change is persisted immediately
@@ -78,7 +85,7 @@ public interface IPSCmsModelProxy
     * @throws PSModelException If the object is locked or the caller doesn't
     * have proper access or any other reason from the server.
     */
-   public void rename(IPSReference ref, String name, Object data)
+    void rename(IPSReference ref, String name, Object data)
       throws PSModelException;
 
    /**
@@ -92,19 +99,19 @@ public interface IPSCmsModelProxy
     * 
     * @see #rename(IPSReference, String, Object)
     */
-   public void renameLocal(IPSReference ref, String name, Object data);
+    void renameLocal(IPSReference ref, String name, Object data);
 
    /**
     * Catalog all objects of the type this proxy supports. If the objects are
-    * Heirarchal use getChildren using the Heirarchal proxie
+    * Hierarchical use getChildren using the Hierarchical proxy
     * 
     * @return Each entry is an {@link IPSReference}. Never <code>null</code>,
     * may be empty.
     * @throws PSModelException if there is any error from server while
     * cataloging.
-    * @throws UnsupportedOperationException if called on a Hierarchal object.
+    * @throws UnsupportedOperationException if called on a Hierarchical object.
     */
-   public Collection<IPSReference> catalog() throws PSModelException;
+    Collection<IPSReference> catalog() throws PSModelException;
 
    /**
     * Instantiates a new instance and adds it to the model. To save them
@@ -132,7 +139,7 @@ public interface IPSCmsModelProxy
     * reference are found in the same position in the <code>results</code>
     * list.
     * @throws PSMultiOperationException If one or more of the objects failed the
-    * create, this exception will contain information about the entire
+    * creation, this exception will contain information about the entire
     * operation, including what was successful and what failed. The result entry
     * for success in the exception results will be <code>null</code>. Only
     * those objects that created successfully will possibly be modified.
@@ -141,13 +148,13 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException;
+    IPSReference[] create(PSObjectType objType, Collection<String> names,
+      List<Object> results) throws PSMultiOperationException, PSModelException;
 
    /**
     * Creates clones of supplied objects changing properties that would conflict
     * if it were saved. For example, the name is always changed by prepending
-    * "Copy N" onto the name and the id is always cleared. Other properties may
+    * "Copy N" onto the name and the id will always be cleared. Other properties may
     * be changed as well, depending on the object.
     * <p>
     * The object is created in memory, but not persisted. Call
@@ -177,17 +184,17 @@ public interface IPSCmsModelProxy
     * <code>results</code> list.
     * 
     * @throws PSMultiOperationException If one or more of the objects failed the
-    * create, this exception will contain information about the entire
+    * creation, this exception will contain information about the entire
     * operation, including what was successful and what failed. The result entry
     * for success in the exception results will be {@link IPSReference} and that
-    * for a failure will be the {@link Throwable}. The enrty in the
+    * for a failure will be the {@link Throwable}. The entry in the
     * <code>results</code> for a failure will be <code>null</code>.
     * 
     * @throws PSModelException If a problem occurs that prevents providing
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public IPSReference[] create(Object[] sourceObjects, String[] names, 
+    IPSReference[] create(Object[] sourceObjects, String[] names,
          List<Object> results)
       throws PSMultiOperationException, PSModelException;
 
@@ -223,7 +230,7 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public Object[] load(IPSReference[] refs, boolean lockForEdit,
+   Object[] load(IPSReference[] refs, boolean lockForEdit,
       boolean overrideLock) throws PSMultiOperationException, PSModelException;
 
    /**
@@ -256,19 +263,19 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void save(IPSReference[] refs, Object[] data, boolean releaseLock)
+   void save(IPSReference[] refs, Object[] data, boolean releaseLock)
       throws PSMultiOperationException, PSModelException;
 
    /**
     * Removes the object with the supplied reference from persistent storage on
-    * the server. The delete of any object may fail because it is locked by
+    * the server. The deletion of any object may fail because it is locked by
     * someone else or the caller does not have the necessary permissions.
     * 
     * @param refs Reference of the object to be deleted, must not be
     * <code>null</code> or empty.
     * 
     * @throws PSMultiOperationException If one or more of the objects failed the
-    * delete, this exception will contain information about the entire
+    * deletion, this exception will contain information about the entire
     * operation, including what was successful and what failed. The result entry
     * for success in the exception results will be <code>null</code>.
     * 
@@ -276,12 +283,12 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void delete(IPSReference[] refs) throws PSMultiOperationException, 
+   void delete(IPSReference[] refs) throws PSMultiOperationException,
       PSModelException;
 
    /**
     * Removes the object ACLs with the supplied reference from persistent
-    * storage on the server. The delete of any object ACL may fail because it is
+    * storage on the server. The deletion of any object ACL may fail because it is
     * locked by someone else or the caller does not have the necessary
     * permissions.
     * 
@@ -289,7 +296,7 @@ public interface IPSCmsModelProxy
     * be <code>null</code> or empty.
     * 
     * @throws PSMultiOperationException If one or more of the ACL objects failed
-    * the delete, this exception will contain information about the entire
+    * the deletion, this exception will contain information about the entire
     * operation, including what was successful and what failed. The result entry
     * for success in the exception results will be <code>null</code>.
     * 
@@ -297,12 +304,12 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void deleteAcl(IPSReference[] owners)
+   void deleteAcl(IPSReference[] owners)
       throws PSMultiOperationException, PSModelException;
 
    /**
     * Checks whether the referenced object is locked. The locking information in
-    * the supplied reference will updated so that the caller can further see if
+    * the supplied reference will be updated so that the caller can further see if
     * it is locked to current user in current session or otherwise.
     * 
     * @param ref Never <code>null</code>.
@@ -316,10 +323,10 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public boolean isLocked(IPSReference ref) throws PSModelException;
+   boolean isLocked(IPSReference ref) throws PSModelException;
 
    /**
-    * Relase lock for the objects specified by their references.
+    * Release lock for the objects specified by their references.
     * 
     * @param refs Array of references to release lock, must not be
     * <code>null</code> or empty.
@@ -333,7 +340,7 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void releaseLock(IPSReference[] refs)
+   void releaseLock(IPSReference[] refs)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -348,7 +355,7 @@ public interface IPSCmsModelProxy
     * flushed. Otherwise, all catalog and object cache references are flushed,
     * except if the object is locked.
     */
-   public void flush(IPSReference ref);
+   void flush(IPSReference ref);
 
    /**
     * Load ACLs for an array of design objects specified. To make changes to an
@@ -362,7 +369,7 @@ public interface IPSCmsModelProxy
     * locked before changes can be persisted.
     * 
     * @return The current ACLs for the referenced objects. Each entry in the
-    * array corresponds to the ACL corresponding the object indentified by the
+    * array corresponds to the ACL corresponding the object identified by the
     * array of references supplied. If an object does not have one, then the
     * corresponding entry will be created with default entries.
     * 
@@ -379,7 +386,7 @@ public interface IPSCmsModelProxy
     * @throws UnsupportedOperationException If the object type of the refs
     * does not support ACLs.
     */
-   public Object[] loadAcl(IPSReference[] refs, boolean lock)
+   Object[] loadAcl(IPSReference[] refs, boolean lock)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -405,7 +412,7 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void saveAcl(IPSReference[] ref, IPSAcl[] acl, boolean releaseLock)
+   void saveAcl(IPSReference[] ref, IPSAcl[] acl, boolean releaseLock)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -423,13 +430,13 @@ public interface IPSCmsModelProxy
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void releaseAclLock(Long[] aclIds) throws PSMultiOperationException,
+   void releaseAclLock(Long[] aclIds) throws PSMultiOperationException,
       PSModelException;
 
    /**
     * Enumeration for the method names/indices in this interface
     */
-   public enum METHOD
+   enum METHOD
    {
       /**
        * 'catalog' method name of the interface
@@ -466,7 +473,7 @@ public interface IPSCmsModelProxy
        */
       SAVE(7);
 
-      private METHOD(int ord)
+      METHOD(int ord)
       {
          if (ord > Short.MAX_VALUE)
          {
@@ -482,12 +489,12 @@ public interface IPSCmsModelProxy
 
       /**
        * Returns the ordinal value for the enumeration. This ordinal is used as
-       * an part of the {@link com.percussion.utils.guid.IPSGuid} id, and can be
+       * part of the {@link com.percussion.utils.guid.IPSGuid} id, and can be
        * used as part of the cataloging process
        * 
        * @return the ordinal
        */
-      public short getOrdinal()
+      short getOrdinal()
       {
          return mi_ordinal;
       }

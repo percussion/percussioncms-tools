@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ PSModelException.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2007 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client;
 
 import com.percussion.client.error.IPSErrorCode;
@@ -127,7 +134,7 @@ public class PSModelException extends PSClientException
     * Ctor for parameterized error messages.
     * 
     * @param code The error code, which is used as a key to find the associated
-    * text. The key will be used to lookup the optionally patterned message in
+    * text. The key will be used to look up the optionally patterned message in
     * the ErrorMessages resource bundle located in the impl package. If the
     * bundle or key cannot be found, the key is used as the message. May be
     * <code>null</code> or empty, in which case the class name is used as the
@@ -150,7 +157,7 @@ public class PSModelException extends PSClientException
       Object detail)
    {
       super(code, args, cause);
-      m_detail = detail;
+      this.detail = detail;
    }
    
    /**
@@ -167,7 +174,7 @@ public class PSModelException extends PSClientException
          throw new IllegalArgumentException("Exception detail object must be an"
             + "instance of String or IPSReference or null.");
       }      
-      m_detail = obj;
+      this.detail = obj;
    }
    
    /**
@@ -179,14 +186,14 @@ public class PSModelException extends PSClientException
     */
    public Object getDetail()
    {
-      return m_detail;   
+      return detail;
    }
    
    /**
     * The exception details object. Either <code>String</code> or
     * <code>IPSReference</code> or <code>null</code>.
     */
-   private Object m_detail;
+   private transient Object detail;
 
    /**
     * To support serialization. 

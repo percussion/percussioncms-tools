@@ -181,7 +181,7 @@ public class CatalogServerExits
       }
 
       // make sure that this is a valid request
-      if (!CatalogExtensionCatalogHandler.isCatalogHandlerInstaled(connection,
+      if (!CatalogExtensionCatalogHandler.isCatalogHandlerInstalled(connection,
          scHandlerName))
       {
          return null; // no return

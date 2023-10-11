@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ CatalogExtensionCatalogHandler.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.percussion.client.catalogers;
 
@@ -30,7 +37,7 @@ public class CatalogExtensionCatalogHandler
 
    }
 
-   public static Vector getCatalog(PSDesignerConnection connection,
+   public static Vector<PSExtensionRef> getCatalog(PSDesignerConnection connection,
       boolean forceCatalog)
    {
       return getCatalog(connection, false, forceCatalog);
@@ -46,21 +53,21 @@ public class CatalogExtensionCatalogHandler
     * @param scriptableOnly If <code>true</code>, only handlers that are
     * scriptable are returned. Otherwise, all handlers are returned.
     * 
-    * @param forceCatalog if <code>true</code> recatalog the data, else use
-    * catched data
+    * @param forceCatalog if <code>true</code> re-catalog the data, else use
+    * cached data
     * 
     * @return A collection containing 0 or more names of the installed
-    * extensions as PSExtensionRefs.
+    * extensions as PSExtensionRef instances.
     */
-   public static Vector getCatalog(PSDesignerConnection connection,
+   public static Vector<PSExtensionRef> getCatalog(PSDesignerConnection connection,
       boolean scriptableOnly, boolean forceCatalog)
    {
       String key = scriptableOnly ? "s" : "ns";
       Vector<PSExtensionRef> catalog = m_data.get(key);
       if (null == catalog)
-         catalog = new Vector<PSExtensionRef>(5);
+         catalog = new Vector<>(5);
 
-      if (catalog.size() == 0 || forceCatalog)
+      if (catalog.isEmpty() || forceCatalog)
       {
          try
          {
@@ -68,15 +75,13 @@ public class CatalogExtensionCatalogHandler
             IPSExtensionDef[] defs = PSExtensionHandlerCatalogHandler
                .getCatalog(new PSCataloger(connection));
 
-            for (int i = 0; i < defs.length; ++i)
-            {
-               String scriptableValue = defs[i]
-                  .getInitParameter(IPSExtensionDef.INIT_PARAM_SCRIPTABLE);
+            for (IPSExtensionDef def : defs) {
+               String scriptableValue = def
+                       .getInitParameter(IPSExtensionDef.INIT_PARAM_SCRIPTABLE);
                if (!scriptableOnly
-                  || (null != scriptableValue && scriptableValue
-                     .equalsIgnoreCase("yes")))
-               {
-                  catalog.add(defs[i].getRef());
+                       || (null != scriptableValue && scriptableValue
+                       .equalsIgnoreCase("yes"))) {
+                  catalog.add(def.getRef());
                }
             }
          }
@@ -94,30 +99,24 @@ public class CatalogExtensionCatalogHandler
     * 
     * @param connection the server to query
     * 
-    * @param Key the name to search for
+    * @param key the name to search for
     * 
     * @return <code> true </code> if extension is installed <code> false </code>
     * if not
     * 
     */
 
-   public static boolean isCatalogHandlerInstaled(
-      PSDesignerConnection connection, String Key)
+   public static boolean isCatalogHandlerInstalled(
+      PSDesignerConnection connection, String key)
    {
       boolean bFound = false;
-      Vector vc = getCatalog(connection, false);
-      if (vc != null)
-      {
-         int limit = vc.size();
-         for (int count = 0; count < limit; count++)
-         {
-            if (((PSExtensionRef) vc.get(count)).getExtensionName().equals(Key))
-            {
+      Vector<PSExtensionRef> vc = getCatalog(connection, false);
+         for (PSExtensionRef psExtensionRef : vc) {
+            if (psExtensionRef.getExtensionName().equals(key)) {
                bFound = true;
                break;
             }
          }
-      }
       return bFound;
    }
 
@@ -127,11 +126,11 @@ public class CatalogExtensionCatalogHandler
    public static final String JAVA_EXTENSION_HANDLER_NAME = "Java";
 
    /**
-    * The name of the standard extension handler that processes Java script
+    * The name of the standard extension handler that processes JavaScript
     * extensions.
     */
    public static final String JAVA_SCRIPT_EXTENSION_HANDLER_NAME = "JavaScript";
 
-   private static Map<String, Vector<PSExtensionRef>> m_data = 
-      new HashMap<String, Vector<PSExtensionRef>>();
+   private static final Map<String, Vector<PSExtensionRef>> m_data =
+      new HashMap<>();
 }

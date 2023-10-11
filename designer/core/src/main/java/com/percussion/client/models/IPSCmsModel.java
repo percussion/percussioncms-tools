@@ -1,12 +1,19 @@
-/******************************************************************************
+/*
+ * Copyright 1999-2023 Percussion Software, Inc.
  *
- * [ IPSCmsModel.java ]
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * COPYRIGHT (c) 1999 - 2006 by Percussion Software, Inc., Woburn, MA USA.
- * All rights reserved. This material contains unpublished, copyrighted
- * work including confidential and proprietary information of Percussion.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *****************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.percussion.client.models;
 
 import com.percussion.client.IPSPrimaryObjectType;
@@ -26,7 +33,7 @@ import java.util.Set;
 /**
  * A model presents the operations that can be performed on a small, closely
  * related set of objects. Generally, a model represents a single object.
- * However, if the objects are related in a hierarchal manner, it may represent
+ * However, if the objects are related in a hierarchical manner, it may represent
  * multiple objects that are part of such a graph. Or if objects are generally
  * the same but have different content, such as a set of configuration files.
  * <p>
@@ -105,7 +112,7 @@ public interface IPSCmsModel
     * 
     * @return Never <code>null</code> or empty.
     */
-   public String getName();
+   String getName();
 
    /**
     * Change the name of a design object. A name change is persisted
@@ -131,7 +138,7 @@ public interface IPSCmsModel
     * @throws PSLockException If the object is locked by someone else.
     * @throws PSModelException If any problems communicating with the server.
     */
-   public void rename(IPSReference ref, String name)
+   void rename(IPSReference ref, String name)
       throws PSAuthorizationException, PSDuplicateNameException,
       PSLockException, PSModelException;
 
@@ -141,7 +148,7 @@ public interface IPSCmsModel
     * 
     * @return May be empty, never <code>null</code>.
     */
-   public String getDescription();
+   String getDescription();
 
    /**
     * Instantiates a new instance identified by the supplied object type and
@@ -160,17 +167,17 @@ public interface IPSCmsModel
     * 
     * @param names How many new instances to create and what each should be
     * called. The names must be unique among all objects in this model of a
-    * given sub-type. If <code>null</code> or empty, a single object with an
+    * given subtype. If <code>null</code> or empty, a single object with an
     * auto-generated name is returned. Each entry must be non-<code>null</code>
     * and non-empty.
     * 
-    * @param defaulter If provided, each generated object will be passed thru
-    * this class before a create notification
+    * @param defaulter If provided, each generated object will be passed through
+    * this class before a creation notification
     * @return An array with <code>names.size()</code> elements, each one non-
     * <code>null</code>.
     * 
     * @throws UnsupportedOperationException If this model uses a hierarchy
-    * manager or it does not support creation of new objects. See object type
+    * manager, or it does not support creation of new objects. See object type
     * enum to determine which objects support creation.
     * 
     * @throws PSMultiOperationException If one or more of the creations fail.
@@ -182,7 +189,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public IPSReference[] create(PSObjectType objectType, List<String> names,
+   IPSReference[] create(PSObjectType objectType, List<String> names,
          IPSObjectDefaulter defaulter)
       throws PSMultiOperationException, PSModelException;
 
@@ -191,7 +198,7 @@ public interface IPSCmsModel
     * {@link #create(PSObjectType, List, IPSObjectDefaulter) create(objectType,
     * names, null)}.
     */
-   public IPSReference[] create(PSObjectType objectType, List<String> names)
+   IPSReference[] create(PSObjectType objectType, List<String> names)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -204,7 +211,7 @@ public interface IPSCmsModel
     * 
     * @throws PSModelException If any problems communicating with the server.
     */
-   public IPSReference create(PSObjectType objectType, String name)
+   IPSReference create(PSObjectType objectType, String name)
       throws PSDuplicateNameException, PSModelException;
    
    /**
@@ -215,7 +222,7 @@ public interface IPSCmsModel
     * @throws PSDuplicateNameException If an object in this model already has
     * the supplied name, case-insensitive.
     */
-   public IPSReference create(PSObjectType objectType, String name,
+   IPSReference create(PSObjectType objectType, String name,
       IPSObjectDefaulter defaulter)
       throws PSDuplicateNameException, PSModelException;
 
@@ -223,7 +230,7 @@ public interface IPSCmsModel
     * Creates a clone of the object(s) referenced by the supplied param,
     * changing properties that would conflict if it were saved. For example, the
     * name is always changed, by default, prepending "Copy N" onto the name and
-    * the id is always cleared. Other properties may be changed as well,
+    * the id are always cleared. Other properties may be changed as well,
     * depending on the object.
     * <p>
     * The object is created in memory, but not persisted. Call {@link
@@ -253,7 +260,7 @@ public interface IPSCmsModel
     * Where N is a number that makes the name unique.
     * 
     * @throws UnsupportedOperationException If this model uses a hierarchy
-    * manager or it does not support creation of new objects. See object type
+    * manager, or it does not support creation of new objects. See object type
     * enum to determine which objects support creation.
     * 
     * @throws PSMultiOperationException If the data for the source reference
@@ -264,7 +271,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public IPSReference[] create(IPSReference[] sources, String[] names)
+   IPSReference[] create(IPSReference[] sources, String[] names)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -275,7 +282,7 @@ public interface IPSCmsModel
     * @throws Exception The exception thrown by the referenced load method,
     * extracted from the <code>PSMultiOperationException</code>.
     */
-   public Object load(IPSReference ref, boolean lock, boolean overrideLock)
+   Object load(IPSReference ref, boolean lock, boolean overrideLock)
       throws Exception;
 
    /**
@@ -331,7 +338,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public Object[] load(IPSReference[] refs, boolean lock, boolean overrideLock)
+   Object[] load(IPSReference[] refs, boolean lock, boolean overrideLock)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -344,7 +351,7 @@ public interface IPSCmsModel
     * @throws Exception The exception thrown by the referenced load method,
     * extracted from the <code>PSMultiOperationException</code>.
     */
-   public IPSReference save(IPSReference ref, boolean releaseLock)
+   IPSReference save(IPSReference ref, boolean releaseLock)
       throws Exception;
 
    /**
@@ -385,7 +392,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public IPSReference[] save(IPSReference[] refs, boolean releaseLock)
+   IPSReference[] save(IPSReference[] refs, boolean releaseLock)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -398,10 +405,10 @@ public interface IPSCmsModel
     * @throws Exception The exception thrown by the referenced load method,
     * extracted from the <code>PSMultiOperationException</code>.
     */
-   public void delete(IPSReference ref) throws Exception;
+   void delete(IPSReference ref) throws Exception;
 
    /**
-    * Removes the object from persistent storage. The delete of any object may
+    * Removes the object from persistent storage. The deletion of any object may
     * fail because it is locked by someone else or the caller does not have the
     * necessary permissions. If the object is not locked by the caller, an
     * attempt will be made to acquire the lock automatically.
@@ -432,7 +439,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void delete(IPSReference[] refs) throws PSMultiOperationException, 
+   void delete(IPSReference[] refs) throws PSMultiOperationException, 
       PSModelException;
 
    /**
@@ -443,16 +450,16 @@ public interface IPSCmsModel
     * @throws Exception The exception thrown by the referenced load method,
     * extracted from the <code>PSMultiOperationException</code>.
     */
-   public void deleteAcl(IPSReference owner) throws Exception;
+   void deleteAcl(IPSReference owner) throws Exception;
 
    /**
-    * Removes the ACL objects for the object references from persistent storage. The delete of any ACL object may
+    * Removes the ACL objects for the object references from persistent storage. The deletion of any ACL object may
     * fail because it is locked by someone else or the caller does not have the
     * necessary permissions. If the object is not locked by the caller, an
     * attempt will be made to acquire the lock automatically.
     * <p>
     * 
-    * @param references to the object whose ACLs to be deleteed Never <code>null</code> and each entry cannot be
+    * @param references to the object whose ACLs to be deleted Never <code>null</code> and each entry cannot be
     * <code>null</code>. If empty, returns immediately.
     * 
     * @throws PSMultiOperationException If one or more of the objects failed the
@@ -473,7 +480,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void deleteAcl(IPSReference[] references)
+   void deleteAcl(IPSReference[] references)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -485,7 +492,7 @@ public interface IPSCmsModel
     * @throws Exception The exception thrown by the referenced load method,
     * extracted from the <code>PSMultiOperationException</code>.
     */
-   public void releaseLock(IPSReference ref) throws Exception;
+   void releaseLock(IPSReference ref) throws Exception;
 
    /**
     * Unlocks an object without having to save it.
@@ -502,7 +509,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void releaseLock(IPSReference[] refs)
+   void releaseLock(IPSReference[] refs)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -513,7 +520,7 @@ public interface IPSCmsModel
     * @return <code>true</code> if it is locked by the caller in this session
     * of the workbench, <code>false</code> otherwise.
     */
-   public boolean isLockedInThisSession(IPSReference ref);
+   boolean isLockedInThisSession(IPSReference ref);
 
    /**
     * Indicates whether this model contains a hierarchy.
@@ -521,7 +528,7 @@ public interface IPSCmsModel
     * @return <code>true</code> if {@link #getHierarchyManager(IPSReference)}
     * can return a valid manager, <code>false</code> otherwise.
     */
-   public boolean isHierarchyModel();
+   boolean isHierarchyModel();
 
    /**
     * Checks whether the referenced object is available for editing.
@@ -531,7 +538,7 @@ public interface IPSCmsModel
     * @return <code>true</code> if it is locked by anyone, including the
     * caller, <code>false</code> otherwise.
     */
-   public boolean isLocked(IPSReference ref);
+   boolean isLocked(IPSReference ref);
 
    /**
     * Returns all references that have been locked and not released during this
@@ -539,7 +546,7 @@ public interface IPSCmsModel
     * 
     * @return Never <code>null</code>, may be empty.
     */
-   public Collection<IPSReference> getLockedRefs();
+   Collection<IPSReference> getLockedRefs();
    
    /**
     * Returns a set of enumerations that identify the data objects associated
@@ -550,19 +557,19 @@ public interface IPSCmsModel
     * 
     * @return An unmodifiable set. Never <code>null</code> or empty.
     */
-   public Set<PSObjectType> getObjectTypes();
+   Set<PSObjectType> getObjectTypes();
 
    /**
     * Convenience method that calls {@link #catalog(boolean, PSObjectType)
     * catalog(<code>false</code>, (PSObjectType[]) <code>null</code>)}.
     */
-   public Collection<IPSReference> catalog() throws PSModelException;
+   Collection<IPSReference> catalog() throws PSModelException;
 
    /**
     * Convenience method that calls {@link #catalog(boolean, PSObjectType)
     * catalog(forceRefresh, (PSObjectType[]) <code>null</code>)}.
     */
-   public Collection<IPSReference> catalog(boolean forceRefresh)
+   Collection<IPSReference> catalog(boolean forceRefresh)
       throws PSModelException;
 
    /**
@@ -570,7 +577,7 @@ public interface IPSCmsModel
     * catalog(forceRefresh, new PSObjectType[] &#123;filter&#125;)} (handling
     * <code>null</code> properly).
     */
-   public Collection<IPSReference> catalog(boolean forceRefresh, 
+   Collection<IPSReference> catalog(boolean forceRefresh,
          PSObjectType filter)
       throws PSModelException;
 
@@ -590,21 +597,21 @@ public interface IPSCmsModel
     * equivalent to calling {@link #flush(IPSReference)} first.
     * 
     * @param filter If provided, all results will be of one of these types. This
-    * is useful if the model supports sub-types.
+    * is useful if the model supports subtypes.
     * 
     * @return Never <code>null</code>, may be empty. Caller takes ownership
     * of the collection.
     * 
     * @throws PSModelException If any problems occur on the server side.
     */
-   public Collection<IPSReference> catalog(boolean forceRefresh,
+   Collection<IPSReference> catalog(boolean forceRefresh,
          PSObjectType[] filter) throws PSModelException;
 
    /**
     * Catalogs all objects and scans them looking for a matching id. If one is
     * found, it is returned. Otherwise, <code>null</code> is returned. If this
     * model is hierarchical, this model throws an exception. In that case, the
-    * hiearchy manager should be used.
+    * hierarchy manager should be used.
     * 
     * @param id The id of the persisted object. Never <code>null</code>.
     * 
@@ -614,7 +621,7 @@ public interface IPSCmsModel
     * 
     * @throws UnsupportedOperationException If this model is hierarchical.
     */
-   public IPSReference getReference(IPSGuid id) throws PSModelException;
+   IPSReference getReference(IPSGuid id) throws PSModelException;
 
    /**
     * Like {@link IPSReference#getName()}, except if the data is cached
@@ -626,7 +633,7 @@ public interface IPSCmsModel
     * @return Never <code>null</code> or empty. This value could differ from the
     * value returned by the ref.
     */
-   public String getName(IPSReference ref);
+   String getName(IPSReference ref);
 
    /**
     * Like {@link IPSReference#getLabelKey()}, except if the data is cached
@@ -638,7 +645,7 @@ public interface IPSCmsModel
     * @return Never <code>null</code> or empty. This value could differ from the
     * value returned by the ref.
     */
-   public String getLabelKey(IPSReference ref);
+   String getLabelKey(IPSReference ref);
 
    /**
     * Like {@link IPSReference#getDescription()}, except if the data is
@@ -650,7 +657,7 @@ public interface IPSCmsModel
     * @return Never <code>null</code> or empty. This value could differ from the
     * value returned by the ref.
     */
-   public String getDescription(IPSReference ref);
+   String getDescription(IPSReference ref);
 
    /**
     * Like {@link IPSReference#getObjectType()}, except if the data is cached
@@ -662,13 +669,13 @@ public interface IPSCmsModel
     * 
     * @return Never <code>null</code> or empty.
     */
-   public PSObjectType getObjectType(IPSReference ref);
+   PSObjectType getObjectType(IPSReference ref);
    
    /**
     * Catalogs all objects and scans them looking for a matching name. If one is
     * found, it is returned. Otherwise, <code>null</code> is returned. If this
     * model is hierarchical, this model throws an exception. In that case, the
-    * hiearchy manager should be used.
+    * hierarchy manager should be used.
     *
     * @return A matching reference, if found, or <code>null</code>.
     * 
@@ -676,7 +683,7 @@ public interface IPSCmsModel
     * 
     * @throws UnsupportedOperationException If this model is hierarchical.
     */
-   public IPSReference getReference(String name) throws PSModelException;
+   IPSReference getReference(String name) throws PSModelException;
 
    /**
     * Allows callers to register for various notifications. Notifications can be
@@ -691,7 +698,7 @@ public interface IPSCmsModel
     * {@link com.percussion.client.PSModelChangedEvent} events. Supply
     * 0xffffffff to get all notifications.
     */
-   public void addListener(IPSModelListener listener, int notifications);
+   void addListener(IPSModelListener listener, int notifications);
 
    /**
     * Removes <code>listener</code> from the notification list so that it
@@ -700,7 +707,7 @@ public interface IPSCmsModel
     * @param listener If <code>null</code> or not registered, returns
     * silently.
     */
-   public void removeListener(IPSModelListener listener);
+   void removeListener(IPSModelListener listener);
 
    /**
     * This method must be called every time a property in an object is changed.
@@ -712,11 +719,11 @@ public interface IPSCmsModel
     * 
     * @throws PSLockException If the object is not locked for editing.
     */
-   public void propertyChanged(IPSReference ref, Map<String, String> hint)
+   void propertyChanged(IPSReference ref, Map<String, String> hint)
       throws PSLockException;
 
    /**
-    * If this is a hierarchical model, this method will return all of the tree
+    * If this is a hierarchical model, this method will return all the tree
     * names known to the hierarchy manager.
     * 
     * @return All the names, which may be empty. An empty list does not
@@ -726,11 +733,11 @@ public interface IPSCmsModel
     * 
     * @throws UnsupportedOperationException If this is not a hierarchical model.
     */
-   public Collection<String> getHierarchyTreeNames();
+   Collection<String> getHierarchyTreeNames();
 
    /**
     * If the underlying model is organized in a hierarchy, this method will
-    * return an object that can be used to manage the reltionships between the
+    * return an object that can be used to manage the relationships between the
     * nodes. The data associated with a node should be managed by the other
     * methods in this interface.
     * 
@@ -740,11 +747,11 @@ public interface IPSCmsModel
     * @return A valid manager if this model is represented by a tree, otherwise
     * <code>null</code> is returned.
     */
-   public IPSHierarchyManager getHierarchyManager(String treeName);
+   IPSHierarchyManager getHierarchyManager(String treeName);
 
    /**
     * If the underlying model is organized in a hierarchy, this method will
-    * return an object that can be used to manage the reltionships between the
+    * return an object that can be used to manage the relationships between the
     * nodes. The data associated with a node should be managed by the other
     * methods in this interface.
     * 
@@ -753,7 +760,7 @@ public interface IPSCmsModel
     * @return A valid manager if this model is represented by a tree, otherwise
     * <code>null</code> is returned.
     */
-   public IPSHierarchyManager getHierarchyManager(IPSReference node);
+   IPSHierarchyManager getHierarchyManager(IPSReference node);
 
    /**
     * Marks cache entries as dirty except for objects that are locked. This
@@ -764,7 +771,7 @@ public interface IPSCmsModel
     * flushed. Otherwise, all catalog and object cache references are flushed,
     * except if the object is locked.
     */
-   public void flush(IPSReference ref);
+   void flush(IPSReference ref);
 
    /**
     * Convenience method that calls
@@ -780,7 +787,7 @@ public interface IPSCmsModel
     * the object does not an ACL set yet.
     * @throws PSModelException
     */
-   public Object loadAcl(IPSReference owner, boolean lock)
+   Object loadAcl(IPSReference owner, boolean lock)
       throws PSModelException;
 
    /**
@@ -812,7 +819,7 @@ public interface IPSCmsModel
     * @throws UnsupportedOperationException If the object type of the refs
     * does not support ACLs.
     */
-   public Object[] loadAcl(IPSReference[] owners, boolean lock)
+   Object[] loadAcl(IPSReference[] owners, boolean lock)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -825,7 +832,7 @@ public interface IPSCmsModel
     * @throws PSModelException The exception thrown by the referenced load method,
     * extracted from the <code>PSMultiOperationException</code>.
     */
-   public void releaseAclLock(IPSReference owner) throws PSModelException;
+   void releaseAclLock(IPSReference owner) throws PSModelException;
 
    /**
     * Unlocks an Acl without having to save it. The object is retrieved from the
@@ -843,7 +850,7 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void releaseAclLock(IPSReference[] owners)
+   void releaseAclLock(IPSReference[] owners)
       throws PSMultiOperationException, PSModelException;
 
    /**
@@ -858,11 +865,11 @@ public interface IPSCmsModel
     * <code>false</code> otherwise.
     * @throws PSModelException
     */
-   public void saveAcl(IPSReference owner, boolean releaseLock)
+   void saveAcl(IPSReference owner, boolean releaseLock)
       throws PSModelException;
 
    /**
-    * The behavior depends on whether the associated object has ever peristed.
+    * The behavior depends on whether the associated object has ever persisted.
     * If it has, the ACL is immediately persisted to the server. If not, the
     * save is queued until the object is saved, at which point the ACL is
     * immediately saved. In that case, any exceptions would be returned as part
@@ -886,6 +893,6 @@ public interface IPSCmsModel
     * information about the individuals. For example, the server can no longer
     * be reached.
     */
-   public void saveAcl(IPSReference[] owners, boolean releaseLock)
+   void saveAcl(IPSReference[] owners, boolean releaseLock)
       throws PSMultiOperationException, PSModelException;
 }
