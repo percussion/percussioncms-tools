@@ -22,7 +22,7 @@ import java.util.List;
  * like this to be used by other proxies if not required by the user.
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 @SuppressWarnings("unused")
 public class PSSharedPropertyModelProxy extends PSCmsModelProxy
@@ -37,7 +37,7 @@ public class PSSharedPropertyModelProxy extends PSCmsModelProxy
 
    @Override
    public IPSReference[] create(PSObjectType objType,
-         Collection<String> names, List results)
+         Collection<String> names, List<Object> results)
    {
       // TODO Auto-generated method stub
       return null;

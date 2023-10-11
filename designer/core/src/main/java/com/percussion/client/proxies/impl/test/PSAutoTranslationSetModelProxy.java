@@ -9,12 +9,7 @@
  *****************************************************************************/
 package com.percussion.client.proxies.impl.test;
 
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSErrorCodes;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.models.PSLockException;
 import com.percussion.services.content.data.PSAutoTranslation;
@@ -24,14 +19,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.nio.file.Files;
+import java.util.*;
 
 public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
 {
@@ -57,11 +47,11 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
    @Override
    public Collection<IPSReference> catalog() throws PSModelException
    {
-      Collection<IPSReference> results = new ArrayList<IPSReference>();
+      Collection<IPSReference> results = new ArrayList<>();
 
       if (!m_set.isEmpty())
       {
-         PSReference pRef = (PSReference) objectToReference(new HashSet());
+         PSReference pRef = (PSReference) objectToReference(new HashSet<>());
          pRef.setPersisted();
          results.add(pRef);
       }
@@ -202,7 +192,7 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
    @SuppressWarnings("unused")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       throw new UnsupportedOperationException();
    }
@@ -277,10 +267,9 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
    @SuppressWarnings("unchecked")
    private void saveSet() throws PSProxyTestException
    {
-      FileWriter writer = null;
-      try
+
+      try(FileWriter writer = new FileWriter(ms_repository))
       {
-         writer = new FileWriter(ms_repository);
          writer.write(PSXmlDocumentBuilder.toString(toXml(m_set)));
          writer.flush();
       }
@@ -288,21 +277,7 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
       {
          throw new PSProxyTestException(e);
       }
-      finally
-      {
-         if (writer != null)
-         {
-            try
-            {
-               writer.close();
-               writer = null;
-            }
-            catch (IOException ignore)
-            {
-            }
-         }
 
-      }
    }
 
    private void loadSet() throws PSProxyTestException
@@ -310,7 +285,7 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
       try
       {
          Document doc = PSXmlDocumentBuilder.createXmlDocument(
-            new FileInputStream(ms_repository), false);
+                 Files.newInputStream(ms_repository.toPath()), false);
          m_set = fromXml(doc.getDocumentElement());
       }
       catch (Exception e)
@@ -346,7 +321,7 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
 
    private Set<PSAutoTranslation> fromXml(Element root)
    {
-      Set<PSAutoTranslation> set = new HashSet<PSAutoTranslation>();
+      Set<PSAutoTranslation> set = new HashSet<>();
       NodeList nl = root.getElementsByTagName(ELEM_AUTO_TRANS);
       int len = nl.getLength();
       for (int i = 0; i < len; i++)
@@ -354,8 +329,8 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
          Element node = (Element) nl.item(i);
          PSAutoTranslation trans = new PSAutoTranslation();
          trans
-            .setCommunityId(Long.valueOf(node.getAttribute(ATTR_COMMUNITYID)));
-         trans.setContentTypeId(Long.valueOf(node
+            .setCommunityId(Long.parseLong(node.getAttribute(ATTR_COMMUNITYID)));
+         trans.setContentTypeId(Long.parseLong(node
             .getAttribute(ATTR_CONTENTTYPEID)));
          trans.setLocale(node.getAttribute(ATTR_LOCALE));
          try
@@ -366,7 +341,7 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
          {
 
          }
-         trans.setWorkflowId(Long.valueOf(node.getAttribute(ATTR_WORKFLOWID)));
+         trans.setWorkflowId(Long.parseLong(node.getAttribute(ATTR_WORKFLOWID)));
          set.add(trans);
       }
       return set;
@@ -402,7 +377,7 @@ public class PSAutoTranslationSetModelProxy extends PSTestModelProxy
     * root directory for the workbench if one does not exist. It will use the
     * existing one if one exists.
     */
-   static private File ms_repository = new File(REPOSITORY_XML);
+    private static File ms_repository = new File(REPOSITORY_XML);
 
    /**
     * Set of auto translation objects

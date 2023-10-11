@@ -164,10 +164,9 @@ public class PSCommunityModelProxy extends PSTestModelProxy
     * @see com.percussion.client.proxies.impl.PSCmsModelProxy#create(
     * com.percussion.client.PSObjectType, java.util.Collection, java.util.List)
     */
-   @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       if (objType == null
          || !objType.getPrimaryType().equals(m_objectPrimaryType))
@@ -193,7 +192,6 @@ public class PSCommunityModelProxy extends PSTestModelProxy
     * 
     * @throws PSProxyTestException
     */
-   @SuppressWarnings("unchecked")
    private void loadFromRepository() throws PSProxyTestException
    {
       m_repositoryMap.clear();
@@ -215,7 +213,7 @@ public class PSCommunityModelProxy extends PSTestModelProxy
 
             if (i == 2)
             {
-               Collection<IPSGuid> roles = new ArrayList<IPSGuid>();
+               Collection<IPSGuid> roles = new ArrayList<>();
 
                roles.add(new PSGuid(PSTypeEnum.ROLE, 10));
                roles.add(new PSGuid(PSTypeEnum.ROLE, 70));
@@ -259,7 +257,7 @@ public class PSCommunityModelProxy extends PSTestModelProxy
    // see interface
    public Collection<IPSGuid> getCommunityRoleIds(IPSReference commRef)
    {
-      Set<IPSGuid> result = new HashSet<IPSGuid>();
+      Set<IPSGuid> result = new HashSet<>();
       try
       {
          Collection<IPSReference> commRefs = null;
@@ -269,7 +267,7 @@ public class PSCommunityModelProxy extends PSTestModelProxy
          }
          else
          {
-            commRefs = new ArrayList<IPSReference>(1);
+            commRefs = new ArrayList<>(1);
             commRefs.add(commRef);
          }
          Object[] comms = load(commRefs.toArray(new IPSReference[0]), false,
@@ -280,15 +278,11 @@ public class PSCommunityModelProxy extends PSTestModelProxy
             result.addAll(comm.getRoleAssociations());
          }
       }
-      catch (PSMultiOperationException e)
+      catch (PSMultiOperationException | PSModelException e)
       {
          logError(e);
       }
-      catch (PSModelException e)
-      {
-         logError(e);
-      }
-      return result;
+       return result;
    }
 
    /*
@@ -321,7 +315,7 @@ public class PSCommunityModelProxy extends PSTestModelProxy
     * root directory for the workbench if one does not exist. It will use the
     * existing one if one exists.
     */
-   static private File ms_repository = new File(REPOSITORY_XML);
+   private static  File ms_repository = new File(REPOSITORY_XML);
 
    /**
     * Map of all object from the repository. Filled during initialization of the

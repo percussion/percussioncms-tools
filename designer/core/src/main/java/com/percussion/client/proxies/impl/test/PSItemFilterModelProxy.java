@@ -36,7 +36,7 @@ import java.util.Set;
 
 /**
  * This is an implementation of the proxy for offline testing, i.e. when the
- * server is not running. Most of the funcionality is simulated here except for
+ * server is not running. Most of the functionality is simulated here except for
  * user level locking and persistence of the locks.
  */
 public class PSItemFilterModelProxy extends PSTestModelProxy
@@ -111,7 +111,7 @@ public class PSItemFilterModelProxy extends PSTestModelProxy
    @Override
    @SuppressWarnings("unchecked")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       if (results == null)
          throw new IllegalArgumentException("results cannot be null");
@@ -149,7 +149,7 @@ public class PSItemFilterModelProxy extends PSTestModelProxy
       else
          results.clear();
       IPSReference[] refs = new PSReference[sourceObjects.length];
-      Collection<String> existingNames = new ArrayList<String>();
+      Collection<String> existingNames = new ArrayList<>();
       for (Object o : getRepositoryMap().values())
       {
          existingNames.add(((PSItemFilter) o).getName().toLowerCase());
@@ -216,6 +216,7 @@ public class PSItemFilterModelProxy extends PSTestModelProxy
    }
 
    // see interface for details
+   @Override
    public void renameLocal(IPSReference ref, String name, Object data)
    {
       ((PSReference) ref).setName(name);
@@ -255,7 +256,7 @@ public class PSItemFilterModelProxy extends PSTestModelProxy
       // rDef.setRule("Rule1");
       rDef.setParam("param1", "value1");
       rDef.setParam("param2", "value2");
-      Set<IPSItemFilterRuleDef> rDefSet = new HashSet<IPSItemFilterRuleDef>();
+      Set<IPSItemFilterRuleDef> rDefSet = new HashSet<>();
       rDefSet.add(rDef);
       itemFilter.setRuleDefs(rDefSet);
 
@@ -292,7 +293,7 @@ public class PSItemFilterModelProxy extends PSTestModelProxy
     * created in the root directory for the workbench if one does not exist. It
     * will use the existing one if one exists.
     */
-   static private File ms_repository = new File(REPOSITORY_XML);
+    private static File ms_repository = new File(REPOSITORY_XML);
 
    /**
     * Map of all slots from the repository. Filled during initialization of the

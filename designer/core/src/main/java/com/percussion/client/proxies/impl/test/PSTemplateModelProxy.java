@@ -178,7 +178,7 @@ public class PSTemplateModelProxy extends PSTestModelProxy
     */
    @SuppressWarnings("unchecked")
    @Override
-   public IPSReference[] create(PSObjectType objType, Collection<String> names, List results)
+   public IPSReference[] create(PSObjectType objType, Collection<String> names, List<Object> results)
    {
       if (objType == null
          || !objType.getPrimaryType().equals(m_objectPrimaryType)
@@ -206,7 +206,6 @@ public class PSTemplateModelProxy extends PSTestModelProxy
     * Load the existing objects from the repository.
     * @throws PSProxyTestException  
     */
-   @SuppressWarnings("unchecked")
    private void loadFromRepository() throws PSProxyTestException 
    {
       m_repositoryMap.clear();
@@ -270,7 +269,7 @@ public class PSTemplateModelProxy extends PSTestModelProxy
          temp.setStyleSheetPath("global1.xsl");
          temp.setTemplateType(TemplateType.Shared);
          {
-            final List<PSTemplateBinding> bindings = new ArrayList<PSTemplateBinding>();
+            final List<PSTemplateBinding> bindings = new ArrayList<>();
             bindings.add(new PSTemplateBinding(10, "var10", "$user"));
             bindings.add(new PSTemplateBinding(5,  "var5", "$rx"));
             bindings.add(new PSTemplateBinding(15, "var15", "$sys.template"));
@@ -350,8 +349,7 @@ public class PSTemplateModelProxy extends PSTestModelProxy
       {
          IPSCmsModel slotModel = PSCoreFactory.getInstance().getModel(PSObjectTypes.SLOT);
          IPSReference slotRef = slotModel.getReference(new PSGuid(1L, PSTypeEnum.SLOT, 2));
-         IPSTemplateSlot slot = (IPSTemplateSlot) slotModel.load(slotRef, false, false);
-         return slot;
+         return (IPSTemplateSlot) slotModel.load(slotRef, false, false);
       }
       catch (Exception e)
       {

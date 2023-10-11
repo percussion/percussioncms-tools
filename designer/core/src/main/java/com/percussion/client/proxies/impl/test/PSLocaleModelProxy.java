@@ -202,10 +202,9 @@ public class PSLocaleModelProxy extends PSTestModelProxy
     * @see com.percussion.client.proxies.impl.PSCmsModelProxy#create(
     * com.percussion.client.PSObjectType, java.util.Collection, java.util.List)
     */
-   @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       if (objType == null
          || !objType.getPrimaryType().equals(m_objectPrimaryType))

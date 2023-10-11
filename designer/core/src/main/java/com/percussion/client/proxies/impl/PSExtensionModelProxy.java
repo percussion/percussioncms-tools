@@ -57,7 +57,7 @@ import java.util.Vector;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSExtensionModelProxy extends PSLegacyModelProxy
 {
@@ -77,7 +77,7 @@ public class PSExtensionModelProxy extends PSLegacyModelProxy
     */
    public Collection<IPSReference> catalog() throws PSModelException
    {
-      Collection<IPSReference> extRefs = new ArrayList<IPSReference>();
+      Collection<IPSReference> extRefs = new ArrayList<>();
 
       if (m_extensions == null)
          m_extensions = load();
@@ -126,7 +126,7 @@ public class PSExtensionModelProxy extends PSLegacyModelProxy
       throws PSModelException
    {
       Map<String, IPSExtensionDef> extensions = 
-         new HashMap<String, IPSExtensionDef>();
+         new HashMap<>();
       Vector exitVector = null;
       Exception ex = null;
       try
@@ -138,7 +138,7 @@ public class PSExtensionModelProxy extends PSLegacyModelProxy
          if (jScript != null)
             exitVector.addAll(jScript);
 
-         if (exitVector != null && exitVector.size() > 0)
+         if (exitVector != null && !exitVector.isEmpty())
          {
             Iterator iter = exitVector.iterator();
             while (iter.hasNext())
@@ -148,24 +148,12 @@ public class PSExtensionModelProxy extends PSLegacyModelProxy
             }
          }
       }
-      catch (PSServerException e)
+      catch (PSServerException | PSAuthenticationFailedException | PSAuthorizationException | IOException e)
       {
          ex = e;
       }
-      catch (PSAuthenticationFailedException e)
-      {
-         ex = e;
-      }
-      catch (PSAuthorizationException e)
-      {
-         ex = e;
-      }
-      catch (IOException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          throw new PSModelException(ex);
       
       return extensions;
@@ -179,7 +167,7 @@ public class PSExtensionModelProxy extends PSLegacyModelProxy
     */
    @SuppressWarnings("unchecked")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException
+      List<Object> results) throws PSMultiOperationException
    {
       if (objType != null
          && objType.getPrimaryType() != PSObjectTypes.EXTENSION)

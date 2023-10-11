@@ -81,7 +81,7 @@ public class PSContentTypeSystemConfigModelProxy extends PSTestModelProxy
     */
    @SuppressWarnings("unused")
    public IPSReference[] create(final PSObjectType objType,
-      final Collection<String> names, final List results)
+      final Collection<String> names, final List<Object> results)
    {
       throw new UnsupportedOperationException();
    }

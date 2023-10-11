@@ -35,7 +35,7 @@ import java.util.List;
 
 /**
  * This is an implementation of the proxy for offline testing, i.e. when the
- * server is not running. Most of the funcionality is simulated here except for
+ * server is not running. Most of the functionality is simulated here except for
  * user level locking and persistence of the locks.
  */
 public class PSSlotModelProxy extends PSTestModelProxy
@@ -82,8 +82,8 @@ public class PSSlotModelProxy extends PSTestModelProxy
             if (i==2)
             {
                Collection<PSPair<IPSGuid, IPSGuid>> associations = 
-                  new ArrayList<PSPair<IPSGuid, IPSGuid>>();
-               associations.add(new PSPair<IPSGuid, IPSGuid>(
+                  new ArrayList<>();
+               associations.add(new PSPair<>(
                      new PSGuid(0L, PSTypeEnum.NODEDEF, 10),
                      new PSGuid(1L, PSTypeEnum.TEMPLATE, 200)));
                slot.setSlotAssociations(associations);
@@ -91,13 +91,13 @@ public class PSSlotModelProxy extends PSTestModelProxy
             if (i==3)
             {
                Collection<PSPair<IPSGuid, IPSGuid>> associations = 
-                  new ArrayList<PSPair<IPSGuid, IPSGuid>>();
-               associations.add(new PSPair<IPSGuid, IPSGuid>(
+                  new ArrayList<>();
+               associations.add(new PSPair<>(
                      new PSGuid(0L, PSTypeEnum.NODEDEF, 30), 
                      new PSGuid(1L, PSTypeEnum.TEMPLATE, 200)));
                slot.setSlotAssociations(associations);
 
-               associations.add(new PSPair<IPSGuid, IPSGuid>(
+               associations.add(new PSPair<>(
                      new PSGuid(0L, PSTypeEnum.NODEDEF, 30), 
                      new PSGuid(1L, PSTypeEnum.TEMPLATE, 110)));
                slot.setSlotAssociations(associations);
@@ -105,8 +105,8 @@ public class PSSlotModelProxy extends PSTestModelProxy
             if (i==4)
             {
                Collection<PSPair<IPSGuid, IPSGuid>> associations = 
-                  new ArrayList<PSPair<IPSGuid, IPSGuid>>();
-               associations.add(new PSPair<IPSGuid, IPSGuid>(
+                  new ArrayList<>();
+               associations.add(new PSPair<>(
                      new PSGuid(0L, PSTypeEnum.NODEDEF, 30), 
                      new PSGuid(1L, PSTypeEnum.TEMPLATE, 100)));
                slot.setSlotAssociations(associations);
@@ -133,9 +133,8 @@ public class PSSlotModelProxy extends PSTestModelProxy
     * com.percussion.client.PSObjectType, java.util.Collection, java.util.List)
     */
    @Override
-   @SuppressWarnings("unchecked")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       if (results == null)
          throw new IllegalArgumentException("results cannot be null");
@@ -240,6 +239,7 @@ public class PSSlotModelProxy extends PSTestModelProxy
    }
 
    // see interface for details
+   @Override
    public void renameLocal(IPSReference ref, String name, Object data)
    {
       ((PSReference) ref).setName(name);
@@ -311,7 +311,7 @@ public class PSSlotModelProxy extends PSTestModelProxy
     * in the root directory for the workbench if one does not exist. It will use
     * the existing one if one exists.
     */
-   static private File ms_repository = new File(REPOSITORY_XML);
+   private static  File ms_repository = new File(REPOSITORY_XML);
 
    /**
     * Map of all slots from the repository. Filled during initialization of the

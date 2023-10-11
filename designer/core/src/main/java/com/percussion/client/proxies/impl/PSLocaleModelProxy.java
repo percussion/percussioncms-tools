@@ -49,8 +49,8 @@ public class PSLocaleModelProxy extends PSCmsModelProxy
 {
    /**
     * Ctor. Invokes base class version with the object type
-    * {@link PSObjectTypes#LOCALE} and for main type and <code>null</code> sub
-    * type since this object type does not have any sub types.
+    * {@link PSObjectTypes#LOCALE} and for main type and <code>null</code> subtype
+    * since this object type does not have any subtypes.
     */
    public PSLocaleModelProxy()
    {
@@ -66,9 +66,9 @@ public class PSLocaleModelProxy extends PSCmsModelProxy
    @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException
+      List<Object> results) throws PSMultiOperationException, PSModelException
    {
-      if (names == null || names.size() == 0)
+      if (names == null || names.isEmpty())
       {
          throw new IllegalArgumentException("names must not be null or empty");
       }
@@ -122,11 +122,10 @@ public class PSLocaleModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (SecurityException e)
+      catch (SecurityException | ServiceException | RemoteException e)
       {
          ex = e;
-      }
-      catch (IllegalArgumentException e)
+      } catch (IllegalArgumentException e)
       {
          ex = e;
       }
@@ -134,28 +133,8 @@ public class PSLocaleModelProxy extends PSCmsModelProxy
       {
          ex = e;
       }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          processAndThrowException(names.size(), ex);
       
       // will never get here

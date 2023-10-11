@@ -51,7 +51,7 @@ import java.util.Map;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSContentTypeModelProxy extends PSComponentTestModelProxy
 {
@@ -76,11 +76,12 @@ public class PSContentTypeModelProxy extends PSComponentTestModelProxy
    /* 
     * @see com.percussion.client.proxies.IPSCmsModelProxy#create(
     * com.percussion.client.PSObjectType, java.util.Collection, java.util.List)
-    */   
-   @SuppressWarnings("unchecked") //$NON-NLS-1$
+    */
+
+   @Override
    public IPSReference[] create(
       final PSObjectType objType, final Collection<String> names,
-      final List results)
+      final List<Object> results)
    {
       if (objType == null
          || !objType.getPrimaryType().equals(m_objectPrimaryType))
@@ -209,7 +210,6 @@ public class PSContentTypeModelProxy extends PSComponentTestModelProxy
     * Load the existing objects from the repository.
     * @throws PSProxyTestException  
     */
-   @SuppressWarnings("unchecked")
    private void loadFromRepository() throws PSProxyTestException 
    {
       m_repositoryMap.clear();
@@ -220,7 +220,7 @@ public class PSContentTypeModelProxy extends PSComponentTestModelProxy
          String[] names = new String[]{
                "Brief", "File", "Generic", "Image", "Press_Release"};
          int[] ids = new int[] {10, 20, 30, 40, 50};
-         final List<IPSReference> refs = new ArrayList<IPSReference>();
+         final List<IPSReference> refs = new ArrayList<>();
          // If repository does not exist
          // create a few to start with
          for (int i = 0; i < names.length; i++)
@@ -242,7 +242,7 @@ public class PSContentTypeModelProxy extends PSComponentTestModelProxy
             
             final IPSContentTypeModel model = (IPSContentTypeModel) getModel();
             final Map<IPSReference, Collection<IPSReference>> associations =
-                  new HashMap<IPSReference, Collection<IPSReference>>();
+                  new HashMap<>();
             associations.put(refs.get(briefIdx), templateRefs);
             associations.put(refs.get(fileIdx), templateRefs);
             model.setTemplateAssociations(associations);
@@ -298,16 +298,13 @@ public class PSContentTypeModelProxy extends PSComponentTestModelProxy
       }
       if (name.equalsIgnoreCase("Press_Release"))
       {
-         List<Integer> workflows = new ArrayList<Integer>();
-         workflows.add(new Integer(4));
+         List<Integer> workflows = new ArrayList<>();
+         workflows.add(4);
          PSWorkflowInfo info = new PSWorkflowInfo(PSWorkflowInfo.TYPE_INCLUSIONARY,
                workflows);
          editor.setWorkflowInfo(info);
       }
-      PSUiItemDefinition def = 
-         new PSUiItemDefinition(appname, typedef, editor);      
-      
-      return def;      
+      return new PSUiItemDefinition(appname, typedef, editor);
    }
   
    
@@ -342,7 +339,7 @@ public class PSContentTypeModelProxy extends PSComponentTestModelProxy
     * in the root directory for the workbench if one does not exist. It will use
     * the existing one if one exists.
     */
-   static private File ms_repository = new File(REPOSITORY_XML);
+    private static File ms_repository = new File(REPOSITORY_XML);
 
    /**
     * Map of all object from the repository. Filled during initialization of the

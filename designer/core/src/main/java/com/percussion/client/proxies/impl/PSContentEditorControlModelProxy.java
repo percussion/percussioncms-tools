@@ -94,36 +94,18 @@ public class PSContentEditorControlModelProxy extends PSLegacyModelProxy
             rxStylesheets, RX_TEMPLATES, objType, false);
          rxTemplates.setPersisted();
 
-         Collection<IPSReference> refColl = new ArrayList<IPSReference>(2);
+         Collection<IPSReference> refColl = new ArrayList<>(2);
          refColl.add(sysTemplates);
          refColl.add(rxTemplates);
 
          return refColl;
       }
-      catch (PSServerException e)
+      catch (PSServerException | PSAuthenticationFailedException | PSLockedException | PSNotFoundException |
+             PSAuthorizationException | PSModelException e)
       {
          throw new PSModelException(e);
       }
-      catch (PSAuthorizationException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSAuthenticationFailedException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSLockedException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSNotFoundException e)
-      {
-         throw new PSModelException(e);
-      }
-      catch (PSModelException e)
-      {
-         throw new PSModelException(e);
-      }
+
    }
 
    /*
@@ -214,7 +196,7 @@ public class PSContentEditorControlModelProxy extends PSLegacyModelProxy
     */
    @SuppressWarnings("unused")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       throw new UnsupportedOperationException(
          "Create is not supported for this type of object");

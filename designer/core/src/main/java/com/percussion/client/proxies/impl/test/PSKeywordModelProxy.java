@@ -49,10 +49,9 @@ public class PSKeywordModelProxy extends PSTestModelProxy
     * create(com.percussion.client.PSObjectType, java.util.Collection, java.util.List)
     */
    @Override
-   @SuppressWarnings("unchecked")
    public IPSReference[] create(
       final PSObjectType objType, final Collection<String> names,
-      final List results)
+      final List<Object> results)
    {
       if (objType == null
          || !objType.getPrimaryType().equals(m_objectPrimaryType))
@@ -176,7 +175,6 @@ public class PSKeywordModelProxy extends PSTestModelProxy
     * Load the existing objects from the repository.
     * @throws PSProxyTestException  
     */
-   @SuppressWarnings("unchecked")
    private void loadFromRepository() throws PSProxyTestException 
    {
       m_repositoryMap.clear();
@@ -207,7 +205,7 @@ public class PSKeywordModelProxy extends PSTestModelProxy
             
             if (i == 5)
             {
-               List<PSKeywordChoice> choices = new ArrayList<PSKeywordChoice>();
+               List<PSKeywordChoice> choices = new ArrayList<>();
                choices.add(choice1);
                choices.add(choice2);
                keyword.setChoices(choices);
@@ -274,7 +272,7 @@ public class PSKeywordModelProxy extends PSTestModelProxy
     * in the root directory for the workbench if one does not exist. It will use
     * the existing one if one exists.
     */
-   static private File ms_repository = new File(REPOSITORY_XML);
+    private static File ms_repository = new File(REPOSITORY_XML);
 
    /**
     * Map of all object from the repository. Filled during initialization of the

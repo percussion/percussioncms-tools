@@ -9,14 +9,7 @@
  *****************************************************************************/
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSPrimaryObjectType;
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypeFactory;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.PSObjectTypes.TemplateSubTypes;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.models.IPSTemplateModel;
@@ -32,23 +25,14 @@ import com.percussion.webservices.assembly.data.PSAssemblyTemplate;
 import com.percussion.webservices.assemblydesign.AssemblyDesignSOAPStub;
 import com.percussion.webservices.assemblydesign.FindAssemblyTemplatesRequest;
 import com.percussion.webservices.common.PSObjectSummary;
-import com.percussion.webservices.faults.PSContractViolationFault;
 import com.percussion.webservices.faults.PSInvalidSessionFault;
-import com.percussion.webservices.faults.PSNotAuthorizedFault;
-import com.percussion.webservices.transformation.PSTransformationException;
 import com.percussion.webservices.transformation.impl.PSTransformerFactory;
 import org.apache.axis.client.Stub;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Provides CRUD and cataloging services for the object type
@@ -58,7 +42,7 @@ import java.util.Map;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSTemplateModelProxy extends PSCmsModelProxy implements
    PSTemplateContentTypeUpdater.UpdaterClient
@@ -82,10 +66,9 @@ public class PSTemplateModelProxy extends PSCmsModelProxy implements
     * @see com.percussion.client.proxies.impl.PSCmsModelProxy#create(com.percussion.client.PSObjectType,
     * java.util.Collection, java.util.List)
     */
-   @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException
+      List<Object> results) throws PSMultiOperationException, PSModelException
    {
       if (objType == null)
       {
@@ -96,7 +79,7 @@ public class PSTemplateModelProxy extends PSCmsModelProxy implements
          throw new IllegalArgumentException(
                "Unrecognized object type:" + objType);
       }
-      if (names == null || names.size() == 0)
+      if (names == null || names.isEmpty())
       {
          throw new IllegalArgumentException("names must not be null or empty"); //$NON-NLS-1$
       }
@@ -146,37 +129,17 @@ public class PSTemplateModelProxy extends PSCmsModelProxy implements
                {
                   ex = e1;
                }
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
             }
          } while (redo);
       }
-      catch (SecurityException e)
+      catch (SecurityException | ServiceException | MalformedURLException e)
       {
          ex = e;
       }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
+
+
 
       if (ex != null)
          processAndThrowException(names.size(), ex);
@@ -201,7 +164,7 @@ public class PSTemplateModelProxy extends PSCmsModelProxy implements
             final PSReference ref = (PSReference)
                   PSObjectFactory.objectToReference(sourceObjects[i],
                         m_objectPrimaryType, true);
-            template.setNewContentTypes(new HashSet<IPSReference>(
+            template.setNewContentTypes(new HashSet<>(
                   templateModel.getContentTypes(ref, false)));
          }
          catch (PSModelException e)

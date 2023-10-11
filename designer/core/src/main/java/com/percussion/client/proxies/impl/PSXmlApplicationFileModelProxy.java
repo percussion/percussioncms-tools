@@ -83,7 +83,7 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
    // see base class
    @SuppressWarnings("unused")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
       throws PSMultiOperationException, PSModelException
    {
       throw new UnsupportedOperationException("This model handles a hierarchy");
@@ -582,27 +582,20 @@ public class PSXmlApplicationFileModelProxy extends PSLegacyModelProxy
          byte[] sha1hash = new byte[40];
          md.update(s.getBytes(encoding), 0, s.length());
          sha1hash = md.digest();
-         Formatter formatter = new Formatter();
-         for (byte b : md.digest(sha1hash))
-         {
-            formatter.format("%02x", b);
+         try(Formatter formatter = new Formatter()) {
+            for (byte b : md.digest(sha1hash)) {
+               formatter.format("%02x", b);
+            }
+            return formatter.toString();
          }
-         return formatter.toString();
       }
-      catch (NoSuchAlgorithmException e)
+      catch (NoSuchAlgorithmException | IOException e)
       {
          //shouldn't happen
          throw new RuntimeException(e);
       }
-      catch (UnsupportedEncodingException e)
-      {
-         //shouldn't happen
-         throw new RuntimeException(e);
-      }
-      catch (IOException e)
-      {
-         throw new RuntimeException(e);
-      }
+
+
    }
 
    /**

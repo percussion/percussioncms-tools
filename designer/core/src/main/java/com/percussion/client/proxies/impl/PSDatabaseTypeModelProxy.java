@@ -51,7 +51,7 @@ public class PSDatabaseTypeModelProxy extends PSLegacyModelProxy
    public Collection<IPSReference> catalog() 
       throws PSModelException
    {
-      final Collection<IPSReference> result = new ArrayList<IPSReference>();
+      final Collection<IPSReference> result = new ArrayList<>();
       final PSObjectType dsType = PSObjectTypeFactory.getType(
             PSObjectTypes.DB_TYPE, DataBaseObjectSubTypes.DATASOURCE);
       for (String name : PSCatalogDatasources.getCatalog(true))
@@ -64,14 +64,13 @@ public class PSDatabaseTypeModelProxy extends PSLegacyModelProxy
    }
 
    //see interface
-   @SuppressWarnings("unchecked")
    public Collection<IPSReference> catalog(IPSHierarchyNodeRef ref)
    {
       if (ref == null)
       {
          throw new IllegalArgumentException("ref must not be null");
       }
-      Collection<IPSReference> result = new ArrayList<IPSReference>();
+      Collection<IPSReference> result = new ArrayList<>();
       PSObjectType oType = ref.getObjectType();
       Enum sType = oType.getSecondaryType();
       Enum childType = null;
@@ -110,7 +109,7 @@ public class PSDatabaseTypeModelProxy extends PSLegacyModelProxy
     */
    @SuppressWarnings("unused")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object>results)
    {
       throw new UnsupportedOperationException(
          "Create not supported by this object");

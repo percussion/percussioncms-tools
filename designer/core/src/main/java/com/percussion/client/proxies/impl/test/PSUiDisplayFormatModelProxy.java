@@ -162,9 +162,8 @@ public class PSUiDisplayFormatModelProxy extends PSComponentTestModelProxy
     * @see com.percussion.client.proxies.impl.PSCmsModelProxy#create(
     * com.percussion.client.PSObjectType, java.util.Collection, java.util.List)
     */
-   @SuppressWarnings("unchecked")
    @Override
-   public IPSReference[] create(PSObjectType objType, Collection<String> names, List results)
+   public IPSReference[] create(PSObjectType objType, Collection<String> names, List<Object> results)
    {
       if (objType == null
          || !objType.getPrimaryType().equals(m_objectPrimaryType))
@@ -189,7 +188,6 @@ public class PSUiDisplayFormatModelProxy extends PSComponentTestModelProxy
     * Load the existing objects from the repository.
     * @throws PSProxyTestException  
     */
-   @SuppressWarnings("unchecked")
    protected void loadFromRepository() throws PSProxyTestException 
    {
       m_repositoryMap.clear();
@@ -287,7 +285,7 @@ public class PSUiDisplayFormatModelProxy extends PSComponentTestModelProxy
     * in the root directory for the workbench if one does not exist. It will use
     * the existing one if one exists.
     */
-   static private File ms_repository = new File(REPOSITORY_XML);
+    private static File ms_repository = new File(REPOSITORY_XML);
 
    /**
     * Map of all object from the repository. Filled during initialization of the

@@ -18,6 +18,6 @@ public class PSSlotModelProxyTest extends TestCase
    public void testBasics() throws PSProxyException, PSModelException
    {
       final PSSlotModelProxy proxy = new PSSlotModelProxy();
-      assertTrue(proxy.catalog().size() > 0);
+       assertFalse(proxy.catalog().isEmpty());
    }
 }

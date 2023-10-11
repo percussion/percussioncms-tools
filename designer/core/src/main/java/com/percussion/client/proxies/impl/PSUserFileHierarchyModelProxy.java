@@ -9,21 +9,12 @@
  *****************************************************************************/
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSHierarchyNodeRef;
-import com.percussion.client.IPSPrimaryObjectType;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSHierarchyNodeRef;
 import com.percussion.client.proxies.PSProxyUtils;
 import com.percussion.services.catalog.PSTypeEnum;
 import com.percussion.services.guidmgr.data.PSDesignGuid;
-import com.percussion.webservices.faults.PSContractViolationFault;
 import com.percussion.webservices.faults.PSInvalidSessionFault;
-import com.percussion.webservices.faults.PSNotAuthorizedFault;
-import com.percussion.webservices.transformation.PSTransformationException;
 import com.percussion.webservices.transformation.impl.PSTransformerFactory;
 import com.percussion.webservices.ui.data.PSHierarchyNode;
 import com.percussion.webservices.uidesign.*;
@@ -78,7 +69,7 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
          throw new IllegalArgumentException("Results Array to small"); //$NON-NLS-1$
       }
 
-      if (names == null || names.size() == 0)
+      if (names == null || names.isEmpty())
       {
          return (new IPSHierarchyNodeRef[0]);
       }
@@ -173,36 +164,12 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (ServiceException | MalformedURLException | PSModelException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (PSModelException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          PSProxyUtils.processAndThrowException(names.size(), ex, ms_log);
       
       return resArray;
@@ -248,8 +215,7 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
    {
       if (m_rootNodeMap == null)
       {
-         m_rootNodeMap = 
-            new HashMap<String, com.percussion.services.ui.data.PSHierarchyNode>();
+         m_rootNodeMap = new HashMap<>();
          Exception ex = null;
          try
          {
@@ -294,22 +260,6 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
                   }
                }
             } while (redo);
-         }
-         catch (MalformedURLException e)
-         {
-            ex = e;
-         }
-         catch (ServiceException e)
-         {
-            ex = e;
-         }
-         catch (PSContractViolationFault e)
-         {
-            ex = e;
-         }
-         catch (RemoteException e)
-         {
-            ex = e;
          }
          catch (Exception e)
          {
@@ -373,7 +323,7 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
                for (int i = 0; i < nodes.length; i++)
                {
                   com.percussion.services.ui.data.PSHierarchyNode converted = 
-                     (com.percussion.services.ui.data.PSHierarchyNode) converter
+                      converter
                         .convert(
                            com.percussion.services.ui.data.PSHierarchyNode.class, 
                            nodes[i]);
@@ -403,24 +353,12 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          PSProxyUtils.processAndThrowException(ex, ms_log);
       
       return result;
@@ -435,7 +373,7 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
       UiDesignSOAPStub binding;
       PSHierarchyNode[] nodes = null;
       Collection<com.percussion.services.ui.data.PSHierarchyNode> result = 
-         new ArrayList<com.percussion.services.ui.data.PSHierarchyNode>();
+         new ArrayList<>();
       Exception ex = null;
       try
       {
@@ -471,7 +409,7 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
                for (int i = 0; i < nodes.length; i++)
                {
                   com.percussion.services.ui.data.PSHierarchyNode converted = 
-                     (com.percussion.services.ui.data.PSHierarchyNode) converter
+                    converter
                         .convert(
                            com.percussion.services.ui.data.PSHierarchyNode.class, 
                            nodes[i]);
@@ -492,24 +430,12 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (ServiceException | MalformedURLException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          PSProxyUtils.processAndThrowException(ex, ms_log);
 
       return result;
@@ -532,7 +458,7 @@ public class PSUserFileHierarchyModelProxy extends PSHierarchyModelProxy
    /**
     * Root node map initially <code>null</code> constructed and cached when
     * {@link #getRoots()} is called for the first time. This cache is not
-    * cleared or dirtied during the life time of this class assuming the root
+    * cleared or dirtied during the lifetime of this class assuming the root
     * nodes are not added during that time.
     * 
     * @see #getRoots()

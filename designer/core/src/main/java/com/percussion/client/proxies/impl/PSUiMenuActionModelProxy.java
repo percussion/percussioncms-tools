@@ -114,24 +114,18 @@ public class PSUiMenuActionModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
+
+
       
       if (ex != null)
          processAndThrowException(ex);
       
       // will never get here
-      return new ArrayList<IPSReference>();
+      return new ArrayList<>();
    }
 
    /**
@@ -249,10 +243,9 @@ public class PSUiMenuActionModelProxy extends PSCmsModelProxy
     * @see com.percussion.client.proxies.impl.PSCmsModelProxy#create(com.percussion.client.PSObjectType,
     * java.util.Collection, java.util.List)
     */
-   @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException
+      List<Object> results) throws PSMultiOperationException, PSModelException
    {
       if (objType == null)
       {
@@ -333,40 +326,13 @@ public class PSUiMenuActionModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (SecurityException e)
+      catch (ServiceException | MalformedURLException | IllegalArgumentException | SecurityException | RemoteException e)
       {
          ex = e;
       }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+
+       if (ex != null)
          processAndThrowException(names.size(), ex);
       
       // will never get here

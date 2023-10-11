@@ -166,7 +166,7 @@ public class PSRoleModelProxy extends PSTestModelProxy
    @SuppressWarnings("unused")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       throw new UnsupportedOperationException();
    }

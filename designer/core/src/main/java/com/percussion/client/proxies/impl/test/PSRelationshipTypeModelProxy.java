@@ -38,7 +38,7 @@ import java.util.List;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSRelationshipTypeModelProxy extends PSComponentTestModelProxy
 {
@@ -64,11 +64,11 @@ public class PSRelationshipTypeModelProxy extends PSComponentTestModelProxy
    /* 
     * @see com.percussion.client.proxies.IPSCmsModelProxy#create(
     * com.percussion.client.PSObjectType, java.util.Collection, java.util.List)
-    */   
-   @SuppressWarnings("unchecked") //$NON-NLS-1$
+    */
+   @Override
    public IPSReference[] create(
       final PSObjectType objType, final Collection<String> names,
-      final List results)
+      final List<Object> results)
    {
       if (objType == null
          || !objType.getPrimaryType().equals(m_objectPrimaryType))
@@ -220,7 +220,7 @@ public class PSRelationshipTypeModelProxy extends PSComponentTestModelProxy
    }
 
    /**
-    * Convienence to return a <code>PSRelationshipConfig</code> object for
+    * Convenience to return a <code>PSRelationshipConfig</code> object for
     * testing purposes only. A dummy guid will be generated instead
     * of a real one from the database. The value will be used as the
     * label and in the description.

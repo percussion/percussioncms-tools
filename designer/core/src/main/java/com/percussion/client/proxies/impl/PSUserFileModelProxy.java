@@ -78,7 +78,7 @@ public class PSUserFileModelProxy extends PSCmsModelProxy
    @Override
    @SuppressWarnings("unchecked")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException
+      List<Object> results) throws PSMultiOperationException, PSModelException
    {
       if (objType == null)
       {
@@ -153,40 +153,13 @@ public class PSUserFileModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (SecurityException e)
+      catch (SecurityException  | ServiceException | RemoteException |
+             MalformedURLException | IllegalArgumentException e)
       {
          ex = e;
       }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          processAndThrowException(names.size(), ex);
       
       // will never get here

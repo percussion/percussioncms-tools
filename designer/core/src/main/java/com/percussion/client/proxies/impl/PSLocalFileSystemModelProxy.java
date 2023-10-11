@@ -45,7 +45,7 @@ import static com.percussion.client.proxies.impl.PSLocalFileSystemHierarchyNodeR
 public class PSLocalFileSystemModelProxy implements IPSCmsModelProxy
 {
    /**
-    * The default implementation returns a meta data object that conforms to the 
+    * The default implementation returns a metadata object that conforms to the
     * following table:
     * <table>
     *   <th>
@@ -79,7 +79,7 @@ public class PSLocalFileSystemModelProxy implements IPSCmsModelProxy
    
    @SuppressWarnings("unused")
    public IPSReference[] create(PSObjectType objType,
-         Collection<String> names, List results)
+         Collection<String> names, List<Object> results)
    {
       throw new UnsupportedOperationException("This model handles a hierarchy");
    }
@@ -190,13 +190,17 @@ public class PSLocalFileSystemModelProxy implements IPSCmsModelProxy
     * Does nothing.
     */
    @SuppressWarnings("unused")
-   public void releaseLock(IPSReference[] refs) {}
+   public void releaseLock(IPSReference[] refs) {
+      throw new UnsupportedOperationException();
+   }
 
    /**
     * Does nothing.
     */
    @SuppressWarnings("unused")
-   public void flush(IPSReference ref) {}
+   public void flush(IPSReference ref) {
+      throw new UnsupportedOperationException();
+   }
 
    /**
     * Returns <code>null</code> ACL for each ref.
@@ -213,6 +217,7 @@ public class PSLocalFileSystemModelProxy implements IPSCmsModelProxy
    @SuppressWarnings("unused")
    public void saveAcl(IPSReference[] ref, IPSAcl[] acl, boolean releaseLock)
    {
+      throw new UnsupportedOperationException();
    }
    
    /**
@@ -332,15 +337,12 @@ public class PSLocalFileSystemModelProxy implements IPSCmsModelProxy
          {
             final PSMimeContentAdapter content =
                   (PSMimeContentAdapter) mi_data[mi_refIdx];
-            final FileOutputStream out = new FileOutputStream(file);
-            try
+
+            try(final FileOutputStream out = new FileOutputStream(file))
             {
                IOUtils.copy(content.getContent(), out);
             }
-            finally
-            {
-               out.close();
-            }
+
             if (!file.exists() || !file.isFile())
             {
                throw new PSModelException(PSErrorCodes.SAVE_FAILED,
@@ -380,7 +382,7 @@ public class PSLocalFileSystemModelProxy implements IPSCmsModelProxy
    @SuppressWarnings("unused")
    public void deleteAcl(IPSReference[] refs) throws PSMultiOperationException
    {
-      //does nothing
+      throw new PSMultiOperationException("Not Implemented");
    }
 
    /* (non-Javadoc)

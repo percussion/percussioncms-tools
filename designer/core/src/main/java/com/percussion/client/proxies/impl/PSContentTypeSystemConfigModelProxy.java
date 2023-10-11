@@ -61,7 +61,7 @@ public class PSContentTypeSystemConfigModelProxy extends PSCmsModelProxy
    @SuppressWarnings("unused")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       throw new UnsupportedOperationException(
          "create is not supported for this object");
@@ -190,11 +190,7 @@ public class PSContentTypeSystemConfigModelProxy extends PSCmsModelProxy
       {
          ex = e;
       }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      
+
       if (ex != null)
          processAndThrowException(reference.length, ex);
       
@@ -251,39 +247,18 @@ public class PSContentTypeSystemConfigModelProxy extends PSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSLockFault e)
+      } catch (PSLockFault e)
       {
          ex = PSProxyUtils.convertFault(e, METHOD.SAVE.toString(), 
             refs[0].getObjectType().getPrimaryType().toString(), 
             refs[0].getName());
       }
-      catch (PSNotAuthorizedFault e)
+      catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          processAndThrowException(refs.length, ex);
    }
 

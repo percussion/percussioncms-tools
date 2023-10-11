@@ -701,7 +701,7 @@ public class PSHierarchyManager implements IPSHierarchyManager
       throws PSModelException
    {
       if (parent != null && !parent.isContainer())
-         return new ArrayList<IPSHierarchyNodeRef>();
+         return new ArrayList<>();
       
       if (forceRefresh)
          m_model.flush(parent);

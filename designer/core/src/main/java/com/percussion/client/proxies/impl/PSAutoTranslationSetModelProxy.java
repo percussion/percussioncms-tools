@@ -9,14 +9,7 @@
  *****************************************************************************/
 package com.percussion.client.proxies.impl;
 
-import com.percussion.client.IPSReference;
-import com.percussion.client.PSCoreFactory;
-import com.percussion.client.PSCoreUtils;
-import com.percussion.client.PSModelException;
-import com.percussion.client.PSMultiOperationException;
-import com.percussion.client.PSObjectType;
-import com.percussion.client.PSObjectTypeFactory;
-import com.percussion.client.PSObjectTypes;
+import com.percussion.client.*;
 import com.percussion.client.impl.PSReference;
 import com.percussion.client.proxies.IPSCmsModelProxy;
 import com.percussion.client.proxies.PSProxyUtils;
@@ -25,11 +18,7 @@ import com.percussion.services.security.PSPermissions;
 import com.percussion.webservices.contentdesign.ContentDesignSOAPStub;
 import com.percussion.webservices.contentdesign.LoadTranslationSettingsRequest;
 import com.percussion.webservices.contentdesign.SaveTranslationSettingsRequest;
-import com.percussion.webservices.faults.PSContractViolationFault;
 import com.percussion.webservices.faults.PSInvalidSessionFault;
-import com.percussion.webservices.faults.PSLockFault;
-import com.percussion.webservices.faults.PSNotAuthorizedFault;
-import com.percussion.webservices.transformation.PSTransformationException;
 import org.apache.axis.client.Stub;
 
 import javax.xml.rpc.ServiceException;
@@ -48,7 +37,7 @@ import java.util.Set;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSAutoTranslationSetModelProxy extends PSCmsModelProxy
 {
@@ -143,33 +132,12 @@ public class PSAutoTranslationSetModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (ServiceException | MalformedURLException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (PSLockFault e)
-      {
-         ex = PSProxyUtils.convertFault(e, METHOD.LOAD.toString(), 
-            reference[0].getObjectType().getPrimaryType().toString(), 
-            reference[0].getName());
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
+
+
       if (ex != null)
          processAndThrowException(reference.length, ex);
       
@@ -233,38 +201,12 @@ public class PSAutoTranslationSetModelProxy extends PSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (PSTransformationException e)
+      } catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (PSLockFault e)
-      {
-         ex = PSProxyUtils.convertFault(e, METHOD.SAVE.toString(), 
-            refs[0].getObjectType().getPrimaryType().toString(), 
-            refs[0].getName());
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
+
+
       if (ex != null)
          processAndThrowException(refs.length, ex);
    }
@@ -272,7 +214,7 @@ public class PSAutoTranslationSetModelProxy extends PSCmsModelProxy
    @Override
    @SuppressWarnings("unused") 
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       throw new UnsupportedOperationException();
    }

@@ -49,7 +49,7 @@ import java.util.Map;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSSharedFieldsModelProxy extends PSTestModelProxy
 {
@@ -79,7 +79,7 @@ public class PSSharedFieldsModelProxy extends PSTestModelProxy
    @SuppressWarnings("unchecked") //$NON-NLS-1$
    public IPSReference[] create(
       final PSObjectType objType, final Collection<String> names,
-      final List results)
+      final List<Object> results)
    {
       if(objType == null || !objType.equals(m_objectPrimaryType))
          throw new IllegalArgumentException("objType is invalid."); //$NON-NLS-1$

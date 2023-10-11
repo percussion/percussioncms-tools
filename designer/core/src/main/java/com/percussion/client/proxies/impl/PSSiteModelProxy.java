@@ -88,19 +88,11 @@ public class PSSiteModelProxy extends PSLegacyModelProxy
             siteList.add(summaryToReference(summary));
          }
       }
-      catch (IOException e)
+      catch (IOException | PSObjectSerializerException | SAXException e)
       {
          ex = e;
       }
-      catch (SAXException e)
-      {
-         ex = e;
-      }
-      catch (PSObjectSerializerException e)
-      {
-         ex = e;
-      }
-      if (ex != null)
+       if (ex != null)
       {
          throw new PSModelException(ex);
       }
@@ -155,7 +147,7 @@ public class PSSiteModelProxy extends PSLegacyModelProxy
     */
    @SuppressWarnings("unused")
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       throw new UnsupportedOperationException(DOES_NOT_SUPPORT_THIS_METHOD);
    }

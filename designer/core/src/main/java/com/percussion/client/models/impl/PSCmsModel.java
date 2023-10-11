@@ -1399,10 +1399,10 @@ public class PSCmsModel implements IPSCmsModel
     */
    interface IProxyWrapper
    {
-      public Collection<IPSReference> catalog(IPSReference parent)
+       Collection<IPSReference> catalog(IPSReference parent)
          throws PSProxyException, PSModelException;
       
-      public String getTreeName();
+       String getTreeName();
    }
    
    /**

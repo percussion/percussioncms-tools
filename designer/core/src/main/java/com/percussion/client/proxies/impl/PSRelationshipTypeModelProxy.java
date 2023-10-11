@@ -66,7 +66,7 @@ public class PSRelationshipTypeModelProxy extends PSCmsModelProxy
    @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException
+      List<Object> results) throws PSMultiOperationException, PSModelException
    {
       if (objType == null)
       {
@@ -127,43 +127,18 @@ public class PSRelationshipTypeModelProxy extends PSCmsModelProxy
                {
                   ex = e1;
                }
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
             }
          } while (redo);
       }
-      catch (SecurityException e)
+      catch (SecurityException | ServiceException | RemoteException | IllegalArgumentException e)
       {
          ex = e;
       }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+
+       if (ex != null)
          processAndThrowException(names.size(), ex);
       
       // will never get here

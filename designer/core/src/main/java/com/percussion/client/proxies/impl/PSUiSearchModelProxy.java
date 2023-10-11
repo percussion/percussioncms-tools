@@ -90,7 +90,7 @@ public class PSUiSearchModelProxy extends PSCmsModelProxy
                LoadSearchesRequest req = new LoadSearchesRequest();
                PSSearchDef[] allSearches = bindingObj.loadSearches(req);
       
-               List<IPSReference> result = new ArrayList<IPSReference>(
+               List<IPSReference> result = new ArrayList<>(
                   allSearches.length);
                for (PSSearchDef search : allSearches)
                {
@@ -113,24 +113,18 @@ public class PSUiSearchModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (MalformedURLException e)
+      catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
+
+
       
       if (ex != null)
          processAndThrowException(ex);
       
       // will never get here
-      return new ArrayList<IPSReference>();
+      return new ArrayList<>();
    }
 
    /**
@@ -176,20 +170,12 @@ public class PSUiSearchModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (RemoteException e)
+      catch (RemoteException | MalformedURLException | ServiceException e)
       {
          ex = e;
       }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          processAndThrowException(ex);
       
       PSProxyUtils.copyPermissions(targetRefs, summaries);
@@ -223,16 +209,15 @@ public class PSUiSearchModelProxy extends PSCmsModelProxy
     * @see com.percussion.client.proxies.impl.PSCmsModelProxy#create(com.percussion.client.PSObjectType,
     * java.util.Collection, java.util.List)
     */
-   @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results) throws PSMultiOperationException, PSModelException
+      List<Object> results) throws PSMultiOperationException, PSModelException
    {
       if (objType == null)
       {
          throw new IllegalArgumentException("objType must not be null");
       }
-      if (names == null || names.size() == 0)
+      if (names == null || names.isEmpty())
       {
          throw new IllegalArgumentException("names must not be null or empty"); //$NON-NLS-1$
       }
@@ -286,40 +271,12 @@ public class PSUiSearchModelProxy extends PSCmsModelProxy
             }
          } while (redo);
       }
-      catch (SecurityException e)
+      catch (ServiceException | MalformedURLException | IllegalArgumentException | SecurityException | RemoteException e)
       {
          ex = e;
       }
-      catch (IllegalArgumentException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSNotAuthorizedFault e)
-      {
-         ex = e;
-      }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      
-      if (ex != null)
+
+       if (ex != null)
          processAndThrowException(names.size(), ex);
       
       // will never get here

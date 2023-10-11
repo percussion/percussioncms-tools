@@ -42,7 +42,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @see com.percussion.client.proxies.impl.PSCmsModelProxy
  * 
  * @version 6.0
- * @created 03-Sep-2005 4:39:27 PM
+ * @since 03-Sep-2005 4:39:27 PM
  */
 public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
 {
@@ -96,15 +96,15 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
       return coll;
    }
 
-   @SuppressWarnings("unchecked")
+
    public IPSReference[] create(PSObjectType objType, Collection<String> names,
-      List results)
+      List<Object> results)
    {
       if (results == null)
-         results = new ArrayList<PSApplication>();
+         results = new ArrayList<>();
       else
          results.clear();
-      List<IPSReference> refs = new ArrayList<>();// PSReference[count];
+      List<IPSReference> refs = new ArrayList<>();
       for (String name : names)
       {
          try
@@ -216,7 +216,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
          }
          catch (PSUnknownDocTypeException | PSUnknownNodeTypeException e)
          {
-            // this cannot happen theoretically since we roundtripped
+            // this cannot happen theoretically since we round-tripped
             // (toXml and fromXml) right here to create the application object
             throw new RuntimeException(e.getLocalizedMessage());
          } catch (PSException e)
@@ -413,7 +413,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
       {
          throw new IllegalArgumentException("ref must not be null");
       }
-      if (name == null || name.trim().length() == 0)
+      if (name == null || name.trim().isEmpty())
       {
          throw new IllegalArgumentException("name must not be null or empty");
       }
@@ -436,10 +436,10 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
    }
 
    /**
-    * Extends locks for the application with given refernces. If extending lock
+    * Extends locks for the application with given references. If extending lock
     * fails for any reason it throws exception.
     * 
-    * @param references app references to extend the lockd for, must not be
+    * @param references app references to extend the locked for, must not be
     * <code>null</code> or empty.
     * @throws PSMultiOperationException if operation fails. Each entry in the
     * object will be <code>null</code> for success and the exception for
@@ -590,7 +590,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
      * on the returned enumeration.)
     * @throws PSModelException if data retrieval from the server fails
      *
-     *@returns true if the application is running (has been started) on the
+     *@return true if the application is running (has been started) on the
      * server.
      */
    public boolean isAppRunningOnServer(IPSReference ref) throws PSModelException
@@ -650,7 +650,7 @@ public class PSXmlApplicationModelProxy extends PSLegacyModelProxy
             final PSApplication loadedApp = (PSApplication) results[0];
             
             // if app failed to start or was abnormally terminated, the enabled
-            // state of the application object may be out of synch with the actual
+            // state of the application object may be out of sync with the actual
             // running state of the app.  Fix it before calling the toggle method.
             loadedApp.setEnabled(currentEnabled);
             loadedApp.setEnabled(!currentEnabled);

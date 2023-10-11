@@ -138,9 +138,9 @@ public class PSSharedFieldsModelProxy extends PSCmsModelProxy
    @SuppressWarnings("unchecked")
    @Override
    public IPSReference[] create(@SuppressWarnings("unused")
-   PSObjectType objType, Collection<String> names, List results)
+   PSObjectType objType, Collection<String> names, List<Object> results)
    {
-      if (names == null || names.size() == 0)
+      if (names == null || names.isEmpty())
       {
          throw new IllegalArgumentException("names must not be null or empty");
       }
@@ -504,37 +504,16 @@ public class PSSharedFieldsModelProxy extends PSCmsModelProxy
                }
             }
          } while (redo);
-      }
-      catch (PSTransformationException e)
-      {
-         ex = e;
-      }
-      catch (MalformedURLException e)
-      {
-         ex = e;
-      }
-      catch (ServiceException e)
-      {
-         ex = e;
-      }
-      catch (PSContractViolationFault e)
-      {
-         ex = e;
-      }
-      catch (PSLockFault e)
+      } catch (PSLockFault e)
       {
          ex = PSProxyUtils.convertFault(e, METHOD.SAVE.toString(), 
             "sharedFieldDefinition", "sharedFields");
       }
-      catch (PSNotAuthorizedFault e)
+      catch (MalformedURLException | ServiceException | RemoteException e)
       {
          ex = e;
       }
-      catch (RemoteException e)
-      {
-         ex = e;
-      }
-      if (ex != null)
+       if (ex != null)
       {
          throw new PSMultiOperationException(ex);
       }
@@ -543,7 +522,7 @@ public class PSSharedFieldsModelProxy extends PSCmsModelProxy
    @SuppressWarnings("unused")
    @Override
    public IPSReference[] create(Object[] sourceObjects, String[] names, 
-         List results)
+         List<Object> results)
    {
       throw new UnsupportedOperationException(
          "Create is not supported by this object");
