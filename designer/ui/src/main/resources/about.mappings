@@ -1,5 +1,5 @@
-0=201611R01
-1=0
-2=8.1.1
+0=${buildNumber}
+1=${jenkins.buildNumber}
+2=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
 3=
-4=2022
+4=${current.year}
