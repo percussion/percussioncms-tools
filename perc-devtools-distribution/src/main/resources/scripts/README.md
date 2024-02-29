@@ -161,7 +161,7 @@ C:\Java\JDK\1.8\bin\javaw.exe
 This can be helpful to configure if security has mandated a particular location / version of the JRE on developer systems. 
 
 ## Inactive / Incomplete Development Tools
-The following tools are present in code but are not currently targeted for inclusion in the Development Tools distribution for lack of maintainer / user interest.  If you have a need for these tools in your deployment please raise an issue on [GitHub](https://www.github.com/percussion/percussioncms-tools/issues), the [Percussion community](https://community.percussion.com), or if you are an active Percussion customer, via the [support portal] (https://support.percussion.com)
+The following tools are present in code but are not currently targeted for inclusion in the Development Tools distribution for lack of maintainer / user interest.  If you have a need for these tools in your deployment please raise an issue on [GitHub](https://www.github.com/percussion/percussioncms-tools/issues), the [Percussion community](https://percussioncmscommunity.intsof.com), or if you are an active Percussion customer, via the [support portal] (https://percussionsupport.intsof.com)
 
 * Multi Server Manager - MSM
 * Loader - Enterprise Content Connector
