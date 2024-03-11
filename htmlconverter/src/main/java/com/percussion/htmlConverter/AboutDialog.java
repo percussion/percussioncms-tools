@@ -177,7 +177,7 @@ public class AboutDialog extends JDialog
     */
    JLabel m_labelUrl = null;
 
-   public static final String sPERCUSSION_URL = "https://www.percussion.com";
+   public static final String sPERCUSSION_URL = "https://percussionsupport.intsof.com";
 
    // about dialog size
    private ImageIcon m_icon = new ImageIcon(getClass().getResource(("images/aboutrhythmyxXsplit.gif")));
