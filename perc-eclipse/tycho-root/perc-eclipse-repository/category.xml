@@ -16,7 +16,7 @@
   -->
 
 <site>
-   <feature url="features/com.percussion.workbench.ui.feature_8.1.4.qualifier.jar" id="com.percussion.workbench.ui.feature" version="8.1.4.qualifier">
+   <feature url="features/com.percussion.workbench.ui.feature_8.1.4.jar" id="com.percussion.workbench.ui.feature" version="8.1.4">
       <category name="percussion_category_id"/>
    </feature>
 

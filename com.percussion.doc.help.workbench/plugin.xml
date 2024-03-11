@@ -19,7 +19,7 @@
 <plugin
    id="com.percussion.doc.help.workbench"
    name="Percussion Workbench Help Plugin"
-   version="8.1.4.qualifier"
+   version="8.1.4"
    provider-name="Percussion Software, Inc."
    class="com.percussion.doc.workbench.WorkbenchHelpPlugin">
 

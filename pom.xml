@@ -1,26 +1,10 @@
-<!--
-  ~ Copyright 1999-2023 Percussion Software, Inc.
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.percussion</groupId>
     <artifactId>percussioncms-tools</artifactId>
-    <version>8.1.4-SNAPSHOT</version>
+    <version>8.1.4</version>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -107,7 +91,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>5.3.27</spring.version>
-        <cmsserver.version>8.1.4-SNAPSHOT</cmsserver.version>
+        <cmsserver.version>8.1.4</cmsserver.version>
         <gson.version>2.8.5</gson.version>
         <cxf.version>3.3.5</cxf.version>
         <servlet.spec>3.1.0</servlet.spec>
@@ -130,7 +114,7 @@
         <jackson.version>2.13.2</jackson.version>
         <jackson.databind.version>2.13.4.2</jackson.databind.version>
         <jsoup.version>1.15.3</jsoup.version>
-        <json.version>20231013</json.version>
+        <json.version>20240303</json.version>
         <junit.version>4.13.1</junit.version>
         <cactus.version>13-1.7.1</cactus.version>
         <cactus.sysproperties>cactus.contextURL</cactus.sysproperties>
@@ -153,7 +137,7 @@
         <pdfbox.version>2.0.24</pdfbox.version>
         <sqlite.version>3.41.2.2</sqlite.version>
         <swagger.version>1.5.23</swagger.version>
-        <commons.compress.version>1.26.0</commons.compress.version>
+        <commons.compress.version>1.21</commons.compress.version>
         <solr.version>8.5.0</solr.version>
         <nettyall.version>4.1.45.Final</nettyall.version>
         <hikari.version>3.4.1</hikari.version>
@@ -1385,13 +1369,6 @@
                 <artifactId>jsch</artifactId>
                 <version>0.1.54</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.json/json -->
-            <dependency>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>${json.version}</version>
-            </dependency>
-
             <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
                 Note, current version unknown -->
             <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
@@ -1764,7 +1741,7 @@
             <dependency>
                 <groupId>org.owasp.esapi</groupId>
                 <artifactId>esapi</artifactId>
-                <version>2.5.2.0</version>
+                <version>2.3.0.0</version>
                 <exclusions>
                     <exclusion>
                         <groupId>log4j</groupId>

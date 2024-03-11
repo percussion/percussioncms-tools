@@ -16,7 +16,7 @@ Contributors:
 	<parent>
 		<groupId>com.percussion</groupId>
 		<artifactId>tycho-root</artifactId>
-		<version>8.1.4-SNAPSHOT</version>
+		<version>8.1.4</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>perc-eclipse-repository</artifactId>

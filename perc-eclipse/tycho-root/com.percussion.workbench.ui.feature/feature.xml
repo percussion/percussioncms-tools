@@ -18,7 +18,7 @@
 <feature
       id="com.percussion.workbench.ui.feature"
       label="%featureName"
-      version="8.1.4.qualifier"
+      version="8.1.4"
       provider-name="%providerName">
 
    <description>
@@ -44,34 +44,34 @@
            id="com.percussion.client"
            download-size="0"
            install-size="0"
-           version="8.1.4.qualifier"
+           version="8.1.4"
            unpack="true"/>
    <plugin
            id="com.percussion.workbench.ui"
            download-size="0"
            install-size="0"
-           version="8.1.4.qualifier"
+           version="8.1.4"
            unpack="true"/>
 
    <plugin
            id="com.percussion.doc.help.workbench"
            download-size="0"
            install-size="0"
-           version="8.1.4.qualifier"
+           version="8.1.4"
            unpack="true"/>
 
    <plugin
            id="com.percussion.doc.help.packageinstaller"
            download-size="0"
            install-size="0"
-           version="8.1.4.qualifier"
+           version="8.1.4"
            unpack="true"/>
 
    <plugin
            id="com.percussion.doc.help.packagebuilder"
            download-size="0"
            install-size="0"
-           version="8.1.4.qualifier"
+           version="8.1.4"
            unpack="true"/>
 
 
