@@ -137,7 +137,7 @@
         <pdfbox.version>2.0.24</pdfbox.version>
         <sqlite.version>3.41.2.2</sqlite.version>
         <swagger.version>1.5.23</swagger.version>
-        <commons.compress.version>1.21</commons.compress.version>
+        <commons.compress.version>1.26.0</commons.compress.version>
         <solr.version>8.5.0</solr.version>
         <nettyall.version>4.1.45.Final</nettyall.version>
         <hikari.version>3.4.1</hikari.version>
