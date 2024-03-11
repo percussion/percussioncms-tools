@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Velocity Editor
 Bundle-SymbolicName: de.byteaction.velocity.vaulttec.ui; singleton:=true
-Bundle-Version: 8.1.4.qualifier
+Bundle-Version: 8.1.4
 Bundle-Vendor: Percussion Software
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui.views,

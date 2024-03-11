@@ -21,7 +21,7 @@
     <packaging>eclipse-plugin</packaging>
     <parent>
         <groupId>com.percussion</groupId>
-        <version>8.1.4-SNAPSHOT</version>
+        <version>8.1.4</version>
         <artifactId>tycho-root</artifactId>
         <relativePath>../../perc-eclipse/tycho-root/pom.xml</relativePath>
     </parent>
