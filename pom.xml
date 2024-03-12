@@ -138,7 +138,6 @@
         <sqlite.version>3.41.2.2</sqlite.version>
         <swagger.version>1.5.23</swagger.version>
         <commons.compress.version>1.26.0</commons.compress.version>
-        <solr.version>8.5.0</solr.version>
         <nettyall.version>4.1.45.Final</nettyall.version>
         <hikari.version>3.4.1</hikari.version>
         <commons-email.version>1.5</commons-email.version>
@@ -1407,37 +1406,6 @@
                 <groupId>saxon</groupId>
                 <artifactId>saxon</artifactId>
                 <version>6.5.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.solr</groupId>
-                <artifactId>solr-solrj</artifactId>
-                <version>${solr.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-alpn-client</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-alpn-java-client</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-client</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-http</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-io</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-util</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <dependency>
