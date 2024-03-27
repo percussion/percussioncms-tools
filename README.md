@@ -12,11 +12,11 @@ You will need to add an Oracle 1.8 to your ~/.m2/toolchains.xml file (C:\Users\<
     <type>jdk</type>
     <provides>
       <id>JavaSE-1.8</id>
-      <version>8</version>
+      <version>1.8</version>
       <vendor>oracle</vendor>
     </provides>
     <configuration>
-        <jdkHome>/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home/</jdkHome>
+        <jdkHome>/Library/Java/JavaVirtualMachines/jdk1.8.jdk/Contents/Home/</jdkHome>
         <bootClassPath>
             <includes>
                 <include>jre/lib/*.jar</include>
