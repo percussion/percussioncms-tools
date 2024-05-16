@@ -19,7 +19,7 @@
 <plugin
    id="de.byteaction.velocity.ui"
    name="%pluginName"
-   version="8.1.5"
+   version="8.1.6.qualifier"
    provider-name="%providerName"
    class="de.byteaction.velocity.vaulttec.ui.VelocityPlugin">
 
